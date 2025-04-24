@@ -8,6 +8,11 @@ desktop.ini
 .env.local
 .env.*.local
 
+# --- Obsidian ---
+.obsidian/workspace.json
+.obsidian/workspace
+.obsidian/plugins/*/data.json
+
 # --- Python ---
 __pycache__/
 *.pyc
