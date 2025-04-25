@@ -8,25 +8,22 @@ This document describes our AI project planning methodology and structure.
 - Technical Fellow (AI) : A “senior” AI model (e.g., GPT-4.5) providing high-level strategy, architecture ideas, brainstorming support.
 - Researcher (AI): A thinking or deep research AI (o3, o1 pro, Claude 3.7 Thinking, Grok3).
 - Senior AI (Agents): Specialized AI agents or tools (e.g., Claude Code, Windsurf Cascade) capable of advanced tasks—code generation, advanced logic, or system design.
-- Junior AI: Examples: ChatGPT o3-mini-high, 4-o, Claude 3.7 Sonnet, Grok3, DeepSeek (US-based). These can still be top-tier AIs in terms of capabilities, but in this context they do not make product decisions and are managed by the agents (Senior AI or Project Manager).
+- Junior AI: Examples: ChatGPT o4-mini-high, 4-o, Claude 3.7 Sonnet, Grok3, DeepSeek (US-based). These can still be top-tier AIs in terms of capabilities, but in this context they do not make product decisions and are managed by the agents (Senior AI or Project Manager).
 - Reviewer: Human (typically the Project Manager)  
   Ensures quality control via code/design reviews and alignment with project goals.
 
 Note: Multiple roles can be combined in a single contributor (human or AI), and there can also be multiple contributors in a given role. The Project Manager will assign roles.
 
 ---
-
 #### Project Phases
 Each project phase must be approved by Project Manager & Tech Lead before moving on to the next phase. When working on project phases, ensure you have all required information first. If in doubt, request and obtain the required information from the Project Manager before proceeding. Do not guess or make assumptions.
 
 1. Phase 1: Concept
-
    - Project Manager provides an initial product concept in plain language.
    - Collaborate with the Technical Fellow (AI) to refine the vision, identify challenges, and define the core product concept.
    - Outcome: _A short doc describing the problem, target users, and overall solution approach._
 
 2. Phase 2: Spec Creation
-
    - The Project Manager and Technical Fellow (AI) iterate on the core features.
    - The Project Manager will provide a project-customized version of AI Project Spec Guide.
    - Produce a Spec Doc outlining:
@@ -68,8 +65,8 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
    - Project Manager will assign sections and we should only perform them as assigned. Do not just go looping through them all.
    - Success: All tasks in our assigned section have been processed and either output as is, or enhanced and divided into further subtasks.
    - Outcome: _raw markdown containing the task expansions and enhancements for our assigned section_.
-5. Phase 5: Execution (AI/Human Collaboration)
 
+5. Phase 5: Execution (AI/Human Collaboration)
    - Tasks are assigned to the Senior AI or human developers. They will delegate tasks to the Junior AIs or junior human developers.
    - The Project Manager or Senior AI (in a reviewer capacity) perform:
    - Code reviews
@@ -83,18 +80,57 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
    - Re-prioritize the backlog to reflect the latest changes.
    - Outcome: _An agile, iterative development flow that stays organized while adapting to evolving requirements._
 
+
 ---
 
-### Resources
-Resources directory structure (approximate).
-{project-root}/project-documents: knowledge resources. supports at least the following subdirectories:
-our-project: project files tailored to the current project, task lists, maintenance updates, etc
-our-project/ui: ui mockups
+### Resource Structure
+The following structure should be present in every project.  
+###### Project and Tool Process Folders
+```markdown
+{project-root}/: top-level project directory.  subdirectories follow.
+project-guides/: overall project guides, not customized per project.
+tool-guides/:    information and guidance on 3rd party tools.
+tool-guides/{tool}: information and guides specific to {tool}.
+tool-guides/{tool}: documentation: collected documentation from the tool authors.
+tool-guides/{tool}/research-crumbs: additional specialized knowledge on {tool}.
+our-project/: information customized to our current project.
+our-project/code-reviews: code review findings, task lists, and resolutions.
+our-project/maintenance:  maintenance item issue and resolution tracking.
+our-project/ui: UI specific designs, tasks, and guidance for our project.
+our-project/ui/screenshots: supporting images for UI information.
+```
+###### Project Guide Files
+```markdown
+These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.
 
-### Specific Guide Notes:
-- AI Project Guide: this document. provides information on roles and project phases, including phase details.
-- AI Project Prompt Templates: templatized message prompts useful for interacting with the project phases.
-- AI Project Concept Guide: guide to assist in creation of project concept documents tailored to individual projects.
-- AI Project Spec Guide: describes our methods for creating detailed project specifications (spec)
-- AI Project Task Expansion Guide: describes our methods for expanding and enhancing task lists.
-- AI Tool Guide - {toolname}: gives overview on use of {toolname} and where to look for additional information.
+* AI Project Guide: this document.  Describes roles and project phases.  Always 
+  start here.
+* AI Project Concept Guide: details on creating Project Concept documents.
+* AI Spec Guide: details on creating Project Specification (Spec) documents.
+* AI Task Expansion Guide: specific guidance on task expansion (described in
+  general in the AI Project Guide).
+* AI Development Guide - UI: specific guidance pertaining to UI/UX tasks.
+* AI Notes for Humans: notes to help humans onboard to projects
+* AI Project Prompt Templates: parameterized prompts to assist in creating and
+  completing projects using the AI Project Guide.  Usable by humans or AIs.
+* AI Code Review Guide: specific guidance for performing and responding to code
+  reviews.
+
+Additional Files in this Directory:
+* coderules: specify general code rules.  Copied to IDE or agent-specific files (.windsurfrules, Claude.md, etc) as needed.  
+* file-naming-conventions: describes our file-naming conventions
+```
+
+###### Tool Guide Files
+```markdown
+These files provide knowledge on use of 3rd party tools, both in general and in specific {tool} subdirectories.  Always start with AI Tool Overview.  If you do not see one, ensure that you can locate {tool}/AI Tool Overview - {tool}, specific to {tool} in use.
+
+* AI Tool Overview - {tool}: Overall guidance for {tool}.  Always start here.
+* AI Tool Setup - {tool}: Information on installing and configuring {tool}.
+* {tool}-{description}-guide: our guides and indices built from review of
+  documentation files.
+* {tool}/documentation: documentation by tool authors, from web or download.
+  May be in alternate formats such as PDF.
+* {tool}/research-crumbs: specific knowledge items for {tool}.  often used to
+  provide additional detail for a complex {tool} task.
+```

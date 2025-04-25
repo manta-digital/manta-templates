@@ -1,7 +1,6 @@
 
 ### Overview
 If you have not consulted the `AI Tool Overview - scichart.md`, start there first.  If indicated and you are installing or configuring scichart in an application, this guide applies.   
-document contradicts these notes, these notes take precedence. 
 
 #### Reference
 Generate reference urls for SciChart-React.
