@@ -3,11 +3,12 @@
 This document describes our AI project planning methodology and structure.
 
 #### Roles
-
 - Project Manager & Tech Lead: Typically a human. Oversees overall project direction, coordinates tasks, and makes key decisions.
-- Technical Fellow (AI) : A “senior” AI model (e.g., GPT-4.5) providing high-level strategy, architecture ideas, brainstorming support.
+- Technical Fellow (AI) : A “senior” AI model (e.g., GPT-4.5) providing high-level
+  strategy, architecture ideas, brainstorming support.
 - Researcher (AI): A thinking or deep research AI (o3, o1 pro, Claude 3.7 Thinking, Grok3).
-- Senior AI (Agents): Specialized AI agents or tools (e.g., Claude Code, Windsurf Cascade) capable of advanced tasks—code generation, advanced logic, or system design.
+- Senior AI (Agents): Specialized AI agents or tools (e.g., Claude Code,
+  Windsurf Cascade) capable of advanced tasks—code generation, advanced logic, or system design.
 - Junior AI: Examples: ChatGPT o4-mini-high, 4-o, Claude 3.7 Sonnet, Grok3, DeepSeek (US-based). These can still be top-tier AIs in terms of capabilities, but in this context they do not make product decisions and are managed by the agents (Senior AI or Project Manager).
 - Reviewer: Human (typically the Project Manager)  
   Ensures quality control via code/design reviews and alignment with project goals.
