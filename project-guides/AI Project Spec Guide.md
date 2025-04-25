@@ -30,7 +30,3 @@ We will use this as a guide for creating a project spec.  We generally will not 
 - References to similar solutions or inspiration for design.
 - Supporting materials like diagrams, mockups, or interactive prototypes.
 
-
-start making some posts
-Excalidraw
-Uthana maybe

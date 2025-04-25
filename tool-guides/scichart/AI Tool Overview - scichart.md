@@ -23,8 +23,9 @@ tool-guides is the top-level directory for 3rd-party tool knowledge. Specific to
 Additional markdown files were created by us in previous steps of the project. Always use these first when searching for specific information. Consult the documentation/ directory for additional documentation as needed.
 
 - Start with: `AI Tool Overview - {tool}.md` (this file)
-- Use `AI Tool Quickstart - {tool}.md` only for initial setup and configuration.
+- Use `AI Tool Setup - {tool}.md` only for initial setup and configuration.
 - `scichart-js-api-reference-guide.md`: condensed notes and examples covering `documentation/scichart-js-api.pdf`. Use for answering detailed API questions.
 - `scichart-react-setup-linechart-guide.md`: Additional information on setup with React, and configuration of basic line charts.
 - `scichart-react-customization-guide.md`: Additional customization and more advanced features for scichart react charts.
 - `scichart-react-realtime-groups-guide.md`: Information and chart groups, combinations, and synchronization.
+- `research-crumbs`: These provide you with additional specialized knowledge for performing specific tasks with SciChart.

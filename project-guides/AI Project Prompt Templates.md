@@ -1,4 +1,4 @@
-This document contains prompt templates considered useful in applying the AI Project Guide.
+This document contains prompt templates considered useful in applying the AI Project Guide and performing additional supplemental tasks.
 
 ##### Project Object Model and Parameters
 ```python
@@ -155,14 +155,15 @@ Once confirmed, implement the task items.  Check off items once completed *and* 
 You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
 
 1. Consult Overview: Start with the specific `AI Tool Overview 
-   [toolname].md` in the `project-documents/tool-guides` directory.
-2. Locate Docs: Scan the Overview for references to more detailed documentation
-   (like local API files under `/documentation`, notes in 'research-crumbs' or
-   official web links).
-3. Search Docs: Search within those specific documentation sources first
-   using `grep_search` or `codebase_search`.
-4. Web Search Fallback: If the targeted search doesn't yield results, then
-   perform a `search_web`.
+   [toolname].md` in the `project-documents/tool-
+   guides/{tool}` directory.
+2. Locate Docs: Scan the Overview for references to more detailed 
+   documentation (like local API files under `/documentation`, 
+   notes in `research-crumbs` or official web links).
+3. Search Docs: Search within those specific documentation sources 
+   first using `grep_search` or `codebase_search`.
+4. Web Search Fallback: If the targeted search doesn't yield 
+   results, then perform a `search_web`.
 ```
 
 ##### Implement Tasks from Code Review Results
@@ -170,7 +171,7 @@ Interestingly we do not in general need this.  Once the tasks are processed into
 
 ##### Perform Routine Maintenance
 ```markdown
-Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
+Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/our-project/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
 ```
 
 ##### Add and Implement Maintenance Item
@@ -212,23 +213,6 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ```markdown
 The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
 
-Refer to the following structure:
-project-documents/: top level documentation and guidance directory.
-project-guides: subdir for project process and guideance documents
-our-project: information specific to our project
-our-project/ui: ui specific information.
-tool-guides/{tool}: notes on {tool}
-tool-guides/{tool}/documentation: official or semi-official docs on {tool}
-tool-guides/{tool}/research-crumbs: additional relevant specific {tool} info
-
-Within this structure, start with the following documents.  Follow information and links in them as relevant but always refer to these top level documents:
-project/guides/...
-...AI Project Guide: overall project process.  Parse for details.
-...AI Project Concept Guide: specific guide to create concept documents
-...AI Project Spec Guide: specific guide to create project spec
-...AI Project Task Expansion Guide: instructions for expanding tasks
-...AI Development Guide UI: special supplement for UI/UX tasks
-
-If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+Refer to the Resource Structure in the AI Project Guide for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 

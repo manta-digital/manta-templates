@@ -45,13 +45,14 @@ Note: do use the markdown multiline codeblocks as we described.  I couldn't embe
 ```markdown
 ### Project Setup & Initialization
 - [ ] Set up Next.js TypeScript project  
-  - [ ] Initialize a new Next.js app with TypeScript (create-next-app@latest 
-        with --typescript).  
-  - [ ] Install Tailwind CSS and configure it (including dark mode support via
-        the class strategy in tailwind.config.js).  
+  - [ ] Initialize a new Next.js app with TypeScript (create-next-
+        app@latest with --typescript).  
+  - [ ] Install Tailwind CSS and configure it (including dark mode 
+        support via the class strategy in tailwind.config.js).  
   - [ ] Verify the dev server runs without errors.  
-  - [ ] Success: Next.js boilerplate launches at localhost:3000 and Tailwind 
-        styles are being applied (e.g. test a Tailwind class on the index page). 
+  - [ ] Success: Next.js boilerplate launches at localhost:3000 and 
+        Tailwind styles are being applied (e.g. test a Tailwind 
+        class on the index page). 
 ```
 
 ##### Example of Expansion
@@ -67,10 +68,12 @@ This is provided as an example of expansion.  Use this in addition to the additi
         npx create-next-app@latest manta-trading-mvp --typescript
        
 - [ ] Confirm `.ts` and `.tsx` files are used throughout
-- [ ] Open project in your editor (e.g. VSCode) and verify it compiles and runs
+- [ ] Open project in your editor (e.g. VSCode) and verify it 
+      compiles and runs
   - [ ] Run the dev server  
     1. Start with: `npm run dev`
-    2. Visit `http://localhost:3000` and confirm the default Next.js page renders
+    2. Visit `http://localhost:3000` and confirm the default 
+       Next.js page renders
 
 #### Install and Configure Tailwind CSS with Dark Mode
 - [ ] Install Tailwind CSS, PostCSS, and Autoprefixer
@@ -97,15 +100,17 @@ This is provided as an example of expansion.  Use this in addition to the additi
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-- [ ] Apply a Tailwind class (e.g. `text-red-500`) in `index.tsx` to verify 
-      styles
+- [ ] Apply a Tailwind class (e.g. `text-red-500`) in `index.tsx` 
+      to verify styles
 - [ ] Confirm Tailwind styles render correctly in the browser
 
 #### Organize Project Folder Structure
 - [ ] Create `/components` for reusable React components
 - [ ] Create `/styles` for global and utility CSS
-- [ ] Create `/lib` for utility functions (e.g. data loaders, indicators)
-- [ ] Create `/types` for TypeScript interfaces (e.g. OHLCV bar definition)
+- [ ] Create `/lib` for utility functions (e.g. data loaders, 
+      indicators)
+- [ ] Create `/types` for TypeScript interfaces (e.g. OHLCV bar 
+      definition)
 ```
 
 Tasks expansions continue with similar levels of details, and should conclude with something such as the following:
@@ -119,6 +124,7 @@ Tasks expansions continue with similar levels of details, and should conclude wi
 ```
 
 ##### Additional Rules for UI Tasks
+When working with UI/UX tasks, always consult the AI Development Guide - UI.
 Mockups should be provided to cover all UI tasks.  Mockups should be interpreted as layout and design guides.  Ensure that controls or placeholders are present, in 1:1 correspondence with the UI.  Placeholders are only acceptable if specifically indicated and for the specific elements referenced.  UI elements should be laid out and positioned as specified by the mockup.  
 
 If requested, generate a color scheme from a base color and a description, and apply this theme to the UI.
