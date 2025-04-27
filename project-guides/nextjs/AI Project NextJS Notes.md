@@ -1,4 +1,4 @@
-This document contains additional notes and tips that may be used as-is or inserted into created project documents.
+This document contains additional notes specific to the project target {nextjs} (NextJS).
 
 ##### NextJS Setup NonEmpty
 ```markdown

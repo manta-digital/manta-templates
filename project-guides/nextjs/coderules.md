@@ -1,13 +1,11 @@
-Code rules.  Apply when working with any project tasks involving code, it's analysis, or its design.  General rules (`project-documents/project-guides/coderules/`) apply unless superseded by a more detailed ruleset (`project-documents/project-guides/{target-platform}/coderules`) is present.
+Code rules for {target-platform: nextjs}.  Apply when working with any project tasks involving code, it's analysis, or its design.  General rules (`project-documents/project-guides/coderules/`) apply unless superseded by a more detailed ruleset (`project-documents/project-guides/{target-platform}/coderules`) is present.
 
 Project Structure
 - If the first item in a list or sublist is `enabled: false`, ignore that section.
 - Always refer to the `AI Project Guide` and follow links as appropriate.
 - For UI/UX tasks, always refer to the `AI Development Guide - UI`.
-- React, Tailwind, and Shadcn are all available as needed.
-- General Project guidance is in `/project-documents/project-guides`
-- Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
-- Information and tasks specific to our project in `project-documents/our-project`.
+* These rules apply to NextJS projects ({target-platform: nextjs}).
+- React, Tailwind, and ShadCN+Radix are all available as needed.
 
 Components & Naming
 - Use functional components with `"use client"` if needed.
@@ -88,4 +86,3 @@ Additional
 IMPORTANT:
 - Always add a one-sentence summary of changes to `.windsurf-updates` file in markdown format only after completing a task *and verifying it with the project manager*.
 - Finally, update git with `git add . && git commit -m "..."`. Don't push.
-	
