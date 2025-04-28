@@ -47,8 +47,8 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
      - Clearly defined scope (precise and narrow)
      - Actionable, unambiguous instructions for junior AI or human developer
      - Success criteria clearly defined (what done looks like)
-   * Example 1-point task format:
 
+   * Example 1-point task format:
    - [ ] **Create Next.js app skeleton**
      - Initialize new Next.js project with React and TypeScript support
      - Verify it runs on local environment without errors
@@ -57,6 +57,10 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
      - Install and configure SciChart React Community edition
      - Create a sample candlestick chart component to display provided dummy tick data
      - Success: Component renders properly with dummy data on web app page
+
+   - Common Task Considerations:
+	   - If this project contains package.json, ensure a project setup task is created add the scripts contained in `snippets/npm-scripts.ai-support.json` to its scripts block.  This also applies when creating package.json.
+
    - Outcome: _A detailed task list in raw markdown format that can be used for delegating tasks to junior AIs._
 
 4. Phase 4: Task enhancement and expansion by section.

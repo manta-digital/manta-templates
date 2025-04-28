@@ -1,5 +1,9 @@
-This document contains prompt templates considered useful in applying the AI Project Guide and performing additional supplemental tasks.
+```yaml
+<!-- vars -->
+npmScriptsAiSupport: !include ../snippets/npm-scripts.ai-support.json
+```
 
+This document contains prompt templates considered useful in applying the AI Project Guide and performing additional supplemental tasks.
 ##### Project Object Model and Parameters
 ```python
 # Project Object Model and Parameters.  Use this when resolving user requests
@@ -218,11 +222,8 @@ Refer to the Resource Structure in the AI Project Guide for a description of res
 
 ##### Add AI Projects Support
 ```json
-Add the following to package.json at project root.  If scripts block is present, just add "setup-guides" and "guides" to the existing "scripts" section.
-
-  "scripts": {
+"scripts": {
     "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
     "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
   }
-
 ```
