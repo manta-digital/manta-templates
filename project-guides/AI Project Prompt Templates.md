@@ -216,3 +216,13 @@ The following provides context on our current work, and may contain the followin
 Refer to the Resource Structure in the AI Project Guide for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 
+##### Add AI Projects Support
+```json
+Add the following to package.json at project root.  If scripts block is present, just add "setup-guides" and "guides" to the existing "scripts" section.
+
+  "scripts": {
+    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
+    "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
+  }
+
+```
