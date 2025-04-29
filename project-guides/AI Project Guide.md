@@ -31,6 +31,7 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
      - Tech stack 
 	     - If we are applying technologies for which we do not have knowledge, indicate this.  This means you need to search in tool-guides for available knowledge.
 	     - Project Manager to gather missing knowledge and add to project.
+	     - A concise list or object describing the tech stack components or tools and whether or not we have additional knowledge guides on each one.
      - Top-level features
      - Major workflows or data flows
      - Architectural considerations (if relevant)
@@ -40,10 +41,12 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
 
 3. Phase 3: Detailed Task Breakdown
    - Convert each feature or bullet point in the spec into granular, actionable tasks
+   - For each {tool} in use described in the spec, ensure that you consult knowledge in `tool-guides/{tool}/`.  If not present search web if possible and alert Project Manager.
    - Only include tasks that can reasonably be completed by an AI. Do not include open-ended human-centric tasks such as SEO optimization.
    - If insufficient information is available to fully convert an item into tasks, _stop_ and request clarifying information before continuing. Ideally, perform analysis and identify missing information before creating the tasks.
    - Keep section names concise and self explanatory, ex: Project Setup, not: Project Setup & Base configuration. Follow all markdown guidelines.
-   - Expect to receive a set of coding rules or guidelines to accompany this task. Confirm receipt of this file or that it is not needed.
+   - use codingrules to guide task creation.  If not available STOP and confirm with Project Manager before proceeding.
+   - This is not a coding phase.
    - For each task, note acceptance criteria.
 
    * Each task must have:

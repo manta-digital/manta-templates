@@ -15,6 +15,7 @@ We will use this as a guide for creating a project spec.  We generally will not 
 - Usability Guidelines: User interface design principles and accessibility considerations.
 ##### 4. Technical Specifications
 - Technology Stack: Programming languages, frameworks, and tools to be used.
+- For any {tool} indicate whether specific knowledge is present in `tool-guides/{tool}`.
 - Integration Requirements: APIs or third-party systems that need to be integrated.
 - Hosting and Architecture: Details about server setup, hosting platforms, or cloud solutions.
 - Compatibility: Supported operating systems, browsers, or devices.
