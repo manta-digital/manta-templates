@@ -15,11 +15,15 @@ Code Structure
 * Avoid hard-coded and duplicated values -- factor them into common object(s).
 * Provide meaningful but concise comments in *relevant* places.
 
+Code Style
+* Use `eslint` unless directed otherwise.
+* Use `prettier` if working in languages it supports.
+
 Components & Naming
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind, and Shadcn are all available as needed.
+- React, Tailwind, and ShadCN are all available as needed.
 - Use Tailwind for common UI components like textarea, button, etc.
 - If we are using ShadCN in the project already, use it.
 

@@ -21,6 +21,7 @@ Introduction and setup guide for Astro.  Includes React and ShadCN UI options.  
 
 Before you begin, ensure you have:
 - **Node.js ≥ 18.17.1** and **npm**, **pnpm**, or **Yarn** installed on your machine ([Install Astro - Docs](https://docs.astro.build/en/install-and-setup/?utm_source=chatgpt.com)).
+- Confirm use of React, ShadCN, Radix, and Auth or database with Project Manager *before* starting.
 
 ## 0. Installation Methods
 Select an install method below.  It is suggested to use a template and install from CLI.  If you are an AI and not installing with a template, confirm with Project Manager before choosing this method.
