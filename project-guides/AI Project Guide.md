@@ -25,9 +25,12 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
    - Outcome: _A short doc describing the problem, target users, and overall solution approach._
 
 2. Phase 2: Spec Creation
-   - The Project Manager and Technical Fellow (AI) iterate on the core features.
-   - The Project Manager will provide a project-customized version of AI Project Spec Guide.
+   - The Project Manager will provide project-specific information relevant to the spec including proposed technical stack (including 3rd party tools), and additional specific requirements.
+   - The Project Manager and Technical Fellow (AI) iterate on the core features and technical stack.
    - Produce a Spec Doc outlining:
+     - Tech stack 
+	     - If we are applying technologies for which we do not have knowledge, indicate this.  This means you need to search in tool-guides for available knowledge.
+	     - Project Manager to gather missing knowledge and add to project.
      - Top-level features
      - Major workflows or data flows
      - Architectural considerations (if relevant)
@@ -59,7 +62,7 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
      - Success: Component renders properly with dummy data on web app page
 
    - Common Task Considerations:
-	   - If this project contains package.json, ensure a project setup task is created add the scripts contained in `snippets/npm-scripts.ai-support.json` to its scripts block.  This also applies when creating package.json.
+	   - If this project contains package.json, ensure a project setup task is created and add the scripts contained in `snippets/npm-scripts.ai-support.json` to its scripts block.  This also applies when creating package.json.
 
    - Outcome: _A detailed task list in raw markdown format that can be used for delegating tasks to junior AIs._
 

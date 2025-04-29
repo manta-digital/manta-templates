@@ -4,17 +4,29 @@ Project Structure
 - If the first item in a list or sublist is `enabled: false`, ignore that section.
 - Always refer to the `AI Project Guide` and follow links as appropriate.
 - For UI/UX tasks, always refer to the `AI Development Guide - UI`.
-- React, Tailwind, and Shadcn are all available as needed.
 - General Project guidance is in `/project-documents/project-guides`
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
 - Information and tasks specific to our project in `project-documents/our-project`.
+
+Code Structure
+* Keep source files to max 300 lines (excluding whitespace) when possible.
+* Keep functions & methods to max 50 lines (excluding whitespace) when possible.
+* Avoid hard-coded constants - declare a constant.
+* Avoid hard-coded and duplicated values -- factor them into common object(s).
+* Provide meaningful but concise comments in *relevant* places.
 
 Components & Naming
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
+- React, Tailwind, and Shadcn are all available as needed.
 - Use Tailwind for common UI components like textarea, button, etc.
 - If we are using ShadCN in the project already, use it.
+
+Next.js Structure
+- Use App Router in `app/`. Server components by default, `"use client"` for client logic.
+- NextAuth + Prisma for auth. `.env` for secrets.
+- Skip auth unless and until it is needed.
 
 Prisma
 - enabled: as needed only (default: false)
@@ -29,11 +41,6 @@ Icons
 Toast Notifications
 - Use `react-toastify` in client components.
 - `toast.success()`, `toast.error()`, etc.
-
-Next.js Structure
-- Use App Router in `app/`. Server components by default, `"use client"` for client logic.
-- NextAuth + Prisma for auth. `.env` for secrets.
-- Skip auth unless and until it is needed.
 
 tRPC Routers
 - enabled: as needed
