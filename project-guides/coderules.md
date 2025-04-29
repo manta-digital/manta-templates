@@ -96,4 +96,4 @@ Additional
 IMPORTANT:
 - Always add a one-sentence summary of changes to `.windsurf-updates` file in markdown format only after completing a task *and verifying it with the project manager*.
 - Finally, update git with `git add . && git commit -m "..."`. Don't push.
-	
+
