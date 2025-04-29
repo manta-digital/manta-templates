@@ -1,4 +1,3 @@
-# AI Tool Overview - scichart
 
 This file provides an overview of available knowledge on the tool: scichart.
 SciChart (scichart) is an advanced and customizable charting library. Available for many platforms, this guide concerns the Javascript version, specifically React.
@@ -8,7 +7,6 @@ SciChart (scichart) is an advanced and customizable charting library. Available 
 ### File and Directory Structure
 
 ##### Directory Structure
-
 ###### top-level 3rd-party tool knowledge
 
 tool-guides is the top-level directory for 3rd-party tool knowledge. Specific tool knowledge is contained in /{tool}, and /{tool}/documentation subdirectories, for example:
