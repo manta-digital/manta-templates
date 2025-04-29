@@ -100,7 +100,7 @@ git init && git add . && git commit -m "chore: bootstrap Next.js app"
 ---
 
 ## 3  Common Add‑Ons
-Confirm usage with Project Manager before adding.
+Common add-ons.  Confirm usage with Project Manager before adding.
 
 ### 3.1 ShadCN UI (React + Tailwind component library)
 ```bash
