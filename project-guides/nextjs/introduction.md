@@ -18,7 +18,6 @@ purpose: Quickstart guide for non‑interactive, CLI‑driven Next.js projects
 A concise, copy‑pasteable guide that spins up a TypeScript‑flavoured **Next.js 14** app (App Router) with Tailwind CSS, ESLint, Turbopack, `src/` directory layout and aliasing, then hints at optional extras like ShadCN UI, Prisma and NextAuth. All steps assume **Node ≥ 18** and **npm ≥ 9** (or `pnpm` / `yarn`) are preinstalled.
 
 ## Prerequisites
-
 - **Node ≥ 18.18** (LTS recommended) and npm / pnpm / yarn
 - Git (initialise repo _after_ scaffold or pass `--git`)
 - Bash / POSIX‑shell environment (commands use `\` for line continuations)
