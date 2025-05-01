@@ -1,9 +1,17 @@
-```yaml
-<!-- vars -->
-npmScriptsAiSupport: !include ../snippets/npm-scripts.ai-support.json
-```
+---
+layer: snippet
+docType: template
+purpose: reusable-llm-prompts
+audience:
+  - human
+  - ai
+description: Parameterised prompt library mapped to each project phase.
+dependsOn:
+  - guide.ai-project.process.md
+npmScriptsAiSupport: "!include ../snippets/npm-scripts.ai-support.json"
+---
 
-This document contains prompt templates considered useful in applying the AI Project Guide and performing additional supplemental tasks.
+This document contains prompt templates considered useful in applying the `guide.ai-project.process` and performing additional supplemental tasks.
 ##### Project Object Model and Parameters
 ```python
 # Project Object Model and Parameters.  Use this when resolving user requests
@@ -24,13 +32,13 @@ phase: phase;
 
 ##### Project Kickoff
 ```markdown
-input: {project, project concept description} = {ai-scichart, }
+input: {project, project concept description} = { , }
 
-We're starting work on a new project {project}.  We will use our curated AI Project Creation methods to assist us in designing and performing the work.  Your role as described in the AI Project Guide is 'Technical Fellow'.
+We're starting work on a new project {project}.  We will use our curated AI Project Creation methods to assist us in designing and performing the work.  Your role as described in `guide.ai-project.process` is 'Technical Fellow'.
 
-The first thing we need to do is to use our AI Project Guide to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
+The first thing we need to do is to use our AI Project Guide (`guide.ai-project.process`) to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
-First we need to use the `AI Project Concept Guide` together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
+To do this, we need to use the `guide.ai-project.process` together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
 
 When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager (me)..
 ```
@@ -41,27 +49,27 @@ input: {project, n, phase, optional: guide}
 
 {if n>1} Phase {n-1} is approved!{end-if}
 
-Now let's work together to create the {phase.name} for {project}.  Refer to our concept document ({projectname} - concept) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `AI Project Guide` for our specific phase {if guide != null, add the following}: combined with additional information tailored to {project} in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
+Now let's work together to create the {phase.name} for {project}.  Refer to our concept document ({projectname} - concept) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information tailored to {project} in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
 
 When creating project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.
 ```
 
 ##### Task Creation
 ```markdown
-{project, section, goal} = {nextjs-ai-lab, pricing-page, }
+{project, section, goal} = { , }
 Note: If goal is not input, request it.
 
 Generate detailed tasks required to accomplish {goal} granular enough to be delegated to a junior AI.  Do not include any tasks that could not be completed by an AI or agent.  These should be very small tasks, think subtasks in a 1-point story.  
 
-This is a variation of Phase 4 in the AI Project Guide.  Please request if you don't have it.  In general, do not write code.  Our goal is to create detailed enough tasks that our junior team members can write the code.  Do not deviate from {goal}.
+This is a variation of Phase 4 in `guide.ai-project.process`.  Please request if you don't have it.  In general, do not write code.  Our goal is to create detailed enough tasks that our junior team members can write the code.  Do not deviate from {goal}.
 
-Make sure to follow our rules in .windsurfrules.  Additionally reference `AI Development Guide - UI.md` if this is a UI goal.  If you do not know if this is a UI goal, ask.  If your user gives you a UI goal that does not include UI in it, give them a good natured hard time because it is good for them and they will appreciate it.
+Make sure to follow our rules in .windsurfrules.  Additionally reference `guide.ui-development.ai.md` if this is a UI goal.  If you do not know if this is a UI goal, ask.  If your user gives you a UI goal that does not include UI in it, give them a good natured hard time because it is good for them and they will appreciate it.
 ```
 
 ##### Task Expansion
 ```markdown
-{project, section} = {nextjs-ai-lab, Project Setup}
-We're working in our AI Planning Guide, Phase 4: Task expansion and Enhancement by section.  Use the AI Project Task Expansion Guide with {project, section} as above.
+{project, section} = { , }
+We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 ```
@@ -76,15 +84,15 @@ Hello. Our input {
     notes (optional)
 } is 
 { 
-    manta trading MVP, 
-    review - chartanalysis, 
-    Configuration Improvements (Remove Hard-coded Data Range),
+    example-project-name, 
+    example-section ex: review - chartanalysis, 
+    example-subsection ex: configuration improvements
     scichart,
-}.
+}
 
-We are working on the {project, section} tasks in phase 4 of the /project-documents/project-guides/AI Project Guide.  If tool is specified, refer additionally to project-documents/tool-guides/{tool}/AI Tool Overview - {tool}.md.
+We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If tool is specified, refer additionally to project-documents/tool-guides/{tool}/AI Tool Overview - {tool}.md.
 
-Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/{project} - tasks - {section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
+Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
 Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
 
@@ -103,7 +111,7 @@ Hello.  Please ensure that you have {project, section, issue, tool} inputs befor
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.
 
-Start by examining the tasks in light of Phase 3 and Phase 4 of our AI Project Guide.  For Phase 4, additionally refer to the "AI Project Task Guide" and follow its links as needed.  Expand detail as needed according to the guide.
+Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
@@ -122,7 +130,7 @@ Hello.  Please ensure that you have input as described above in input before pro
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
 
-Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in the AI Project Guide), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
+Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  We will implement the task in code, but STOP and confirm the tasks are represented effectively before starting to write code. 
 
@@ -139,7 +147,7 @@ input {
 
 Continue to operate in the "Senior AI" role.  Continue using {project, section, issue, tool} that we have been working with. Ensure that you have needed documentation for {tool}.  Our goal is to add a new {subtask} into an existing issue or update section.
 
-Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in our AI Project Guide.
+Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in `guide.ai-project.process`.
 
 Here is an example of a subtask to add a button in an element:
 - [ ] Subtask 2: Implement AutoScale Button in ChartCanvas
@@ -182,7 +190,7 @@ Let's perform routine maintenance tasks such as resolving warnings.  Examine fil
 *Assumes an existing chat providing additional context. Add if this is not the case.*
 ```markdown
 Continue operating in your role as Senior AI.  Add {item} to 
-maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the 'AI Project Guide' and 'AI Task Expansion Guide', you may proceed to implementation after any necessary confirmation with Project Manager.
+maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.process` and `guide.ai-project.task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
 
 If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
 ```
@@ -217,7 +225,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ```markdown
 The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
 
-Refer to the Resource Structure in the AI Project Guide for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 
 ##### Add AI Projects Support

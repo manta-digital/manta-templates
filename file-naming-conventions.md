@@ -31,6 +31,8 @@ Common document type prefixes:
 - `guide` - Technical or process guidance
 - `spec` - Technical specifications
 - `notes` - Meeting notes or research findings
+- `template` - Prompt or other templates, organized with project-guides.
+- `maintenance` - maintenance tasks or actions, in `our-project/maintenance`.
 
 ### Date Format
 

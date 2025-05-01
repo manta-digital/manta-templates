@@ -1,3 +1,15 @@
+---
+layer: process
+phase: 5
+phaseName: execution
+guideRole: support
+audience:
+  - human
+  - ai
+description: UI-specific playbook for Phases 4-5 (component naming, states, tests).
+dependsOn:
+  - guide.ai-project.spec.md
+---
 This document provides specialized knowledge and techniques useful in completion of UI/UX tasks.
 ##### Mockups and Wireframes
 All tasks involving new views, forms, or pages, as well as any task requiring sophisticated layout should include a mockup or reference image.  Mockup may be wireframe or rendered UI elements.  Mockups should be present in the directory `our-project/ui` and 'our-project/ui/screenshots' in the `{project-root}/project-documents/our-project/` folder.

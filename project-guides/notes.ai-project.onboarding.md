@@ -1,3 +1,12 @@
+---
+layer: process
+phase: 0          # onboarding applies before Phase 1 begins
+phaseName: meta
+guideRole: onboarding   # new role distinct from primary/support
+audience: [human]       # adjust if AI agents will parse it too
+description: What a new contributor should read & set up before Phase 1.
+dependsOn: [guide.ai-project.process.md]
+---
 Collection of notes I found useful as a human working with AIs.  AIs are free to read this too.
 
 #### Placement In Roles

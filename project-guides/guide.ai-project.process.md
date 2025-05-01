@@ -1,5 +1,14 @@
-#### Overview
+---
+layer: process
+phase: 0               # 0 = meta-guide that defines all phases
+phaseName: meta
+guideRole: primary
+audience: [human, ai]
+description: Master process guide describing roles and the 6-phase workflow.
+dependsOn: []
+---
 
+#### Overview
 This document describes our AI project planning methodology and structure.
 
 #### Roles
@@ -72,7 +81,7 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
 4. Phase 4: Task enhancement and expansion by section.
    - For each section in the Detailed Task Breakdown, examine the tasks to see if we can enhance or expand/subdivide them to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
    - If a task would not benefit from expansion, output it verbatim.
-   - Use the AI Project Task Expansion Guide to guide this phase.
+   - Use `guide.ai-project.task-expansion`the guide this phase.
    - Project Manager will assign sections and we should only perform them as assigned. Do not just go looping through them all.
    - Success: All tasks in our assigned section have been processed and either output as is, or enhanced and divided into further subtasks.
    - Outcome: _raw markdown containing the task expansions and enhancements for our assigned section_.
@@ -96,18 +105,19 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
 
 ### Resource Structure
 The following structure should be present in every project.  
-###### Project and Tool Process Folders
+### Resource Structure  (updated 2025-05-01)
+
+{project-root}/
+└── project-documents/
+    ├── project-guides/    # process & methodology (start here)
+    ├── framework-guides/  # app-level platforms (Next.js, Astro …)
+    ├── tool-guides/       # importable libs (SciChart, Three.js …)
+    ├── api-guides/        # external data endpoints (USGS, ArcGIS …)
+    ├── domain-guides/     # cross-cutting subject matter (hydrology …)
+    ├── snippets/          # reusable templates / code fragments
+    └── our-project/       # project-specific artefacts (tasks, UI mocks, reviews)
+###### our-project subolders
 ```markdown
-* {project-root}/: top-level project directory.  subdirectories 
-  follow.
-* project-guides/: overall project guides, not customized per 
-  project.
-* tool-guides/:    information and guidance on 3rd party tools.
-* tool-guides/{tool}: information and guides specific to {tool}.
-* tool-guides/{tool}: documentation: collected documentation from 
-  the tool authors.
-* tool-guides/{tool}/research-crumbs: additional specialized 
-  knowledge on {tool}.
 * our-project/: information customized to our current project.
 * our-project/code-reviews: code review findings, task lists, and 
   resolutions.
@@ -117,6 +127,9 @@ The following structure should be present in every project.
   project.
 * our-project/ui/screenshots: supporting images for UI information.
 ```
+
+> Each folder has its own `README.md` or `introduction.md` with deeper context.  
+> Attachments live in `project-documents/z-attachments/`.
 
 ###### Project Guide Files
 ```markdown

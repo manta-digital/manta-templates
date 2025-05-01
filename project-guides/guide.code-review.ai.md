@@ -1,3 +1,14 @@
+---
+layer: process
+phase: 5
+phaseName: execution
+guideRole: support
+audience: [human, ai]
+description: Checklist and tips for Phase 5 code reviews (human ↔ AI pair).
+dependsOn:
+  - guide.ai-project.spec.md
+  - guide.ai-project.task-expansion.md
+---
 ## Code Review Process
 
 ### Overview
@@ -48,6 +59,14 @@ When reviewing code, answer these core questions:
 
 ### Step 1: Create Review Document
 Create a review document following the naming convention `review.{filename}.MMDD.md` in the `project-documents/our-project/code-reviews` directory.
+##### YAML Block
+This should be placed at the beginning of all created code-review files:
+```yaml
+---
+layer: project
+docType: review
+---
+```
 
 ### Step 2: Conduct Review
 Analyze the file systematically using the code review questionnaire. Group findings by category for clarity.
@@ -56,7 +75,7 @@ Analyze the file systematically using the code review questionnaire. Group findi
 Transform review findings into actionable tasks in a separate file named `tasks.code-review.{filename}.MMDD.md` in the `project-documents/code-reviews` directory.
 
 ### Step 4: Task Processing
-Process the task list according to Phase 3 and Phase 4 of the AI Project Guide:
+Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.process`:
 
 1. **Phase 3: Granularity and Clarity**
    - Convert each review finding into clear, actionable tasks

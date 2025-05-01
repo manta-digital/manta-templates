@@ -1,9 +1,20 @@
+---
+layer: process
+phase: 4
+phaseName: task-expansion
+guideRole: primary
+audience: [human, ai]
+description: Phase 4 playbook for turning breakdowns into atomic subtasks.
+dependsOn:
+  - guide.ai-project.process.md
+  - guide.ai-project.spec.md
+---
 #### Summary
-This guide provides instructions and methodology for expanding and enhancing sections of our Detailed Task Breakdown in order to create manageable lists to give to an (AI) working as a developer.  This assignment is Phase 4 in the AI Project Guide, and will not be received (and cannot be started) until confirmation that the Detailed Task Breakdown (Phase 3 Output) is available and and approved by the Project Manager.
+This guide provides instructions and methodology for expanding and enhancing sections of our Detailed Task Breakdown in order to create manageable lists to give to an (AI) working as a developer.  This assignment is Phase 4 in `guide.ai-projects.process`, and will not be received (and cannot be started) until confirmation that the Detailed Task Breakdown (Phase 3 Output) is available and and approved by the Project Manager.
 #### Inputs and Outputs
 The inputs to this task are as follows:
-* AI Project Guide
-* AI Project Task Expansion Guide (this document)
+* guide.ai-project.process
+* guide.ai-project.task-expansion (this document)
 * {project} - spec (phase 2 output)
 * {project} - tasks (this is the detailed task breakdown, phase 3 output)
 * coderules - file containing specific coding rules and guidelines.

@@ -1,11 +1,6 @@
 ---
 docType: repository-overview
 ---
-```
----
-docType: repository-overview
----
-```
 # Manta Knowledge & Guide Repository
 
 Welcome!  
@@ -14,14 +9,14 @@ This repo is the single source of truth for every guide, playbook, and reference
 ---
 ## 🔑 What lives where?
 
-| Folder | Look here when you need… |
-|--------|-------------------------|
-| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., AI Project Guide, Spec Guide, Code Rules). |
-| **`framework-guides/`** | App-level runtimes or platforms that own the entire build/runtime cycle (Next.js, Astro, Flutter, Qt…). |
-| **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (SciChart, Three.js, Tailwind…). |
-| **`api-guides/`** | External data or service endpoints accessed over HTTP/gRPC (USGS Water Services, ArcGIS, Alpha Vantage…). |
-| **`domain-guides/`** | Cross-cutting subject knowledge useful across many projects (game-development, hydrology, financial-visualisation…). |
-| **`snippets/`** | Language-agnostic code fragments and quick copy-paste helpers. |
+| Folder | Look here when you need…                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.process, guide.ai-project.spec, Code Rules). |
+| **`framework-guides/`** | App-level runtimes or platforms that own the entire build/runtime cycle (Next.js, Astro, Flutter, Qt…).                       |
+| **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (SciChart, Three.js, Tailwind…).                                       |
+| **`api-guides/`** | External data or service endpoints accessed over HTTP/gRPC (USGS Water Services, ArcGIS, Alpha Vantage…).                     |
+| **`domain-guides/`** | Cross-cutting subject knowledge useful across many projects (game-development, hydrology, financial-visualisation…).          |
+| **`snippets/`** | Language-agnostic code fragments and quick copy-paste helpers.                                                                |
 
 *Full details and rationale live in [`project-documents/directory-structure.md`](project-documents/directory-structure.md).* directory-structure.md](file-service://file-7qir1sE13SRFYrvctFhnsb)
 
