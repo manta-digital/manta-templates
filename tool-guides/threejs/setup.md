@@ -1,4 +1,3 @@
-````markdown
 ---
 docType: tool-guide
 platform: threejs
@@ -8,27 +7,27 @@ audience:
 purpose: installation & project setup
 ---
 
-# Three.js Setup Guide
+## Three.js Setup Guide
 
 This guide walks you through scaffolding a modern Three.js project with **Vite**, applying a default background colour, registering a resize handler, and preparing the project for deployment to **GitHub Pages**.
 
 ---
 
-## Prerequisites
+### Prerequisites
 - **Node.js ≥ 18** (ensure `npm`, `pnpm`, or `yarn` is available)
 - A GitHub account (for Pages deployment)
 - Basic familiarity with JavaScript & the command line
 
 ---
 
-## 1 · Scaffold with Vite
+### 1 · Scaffold with Vite
 
 Create a fresh project folder and initialise Vite (Vanilla TS template recommended):
 
 ```bash
 npm create vite@latest threejs-app -- --template vanilla-ts
 cd threejs-app
-````
+```
 
 Install Three.js:
 
@@ -36,7 +35,7 @@ Install Three.js:
 npm i three
 ```
 
-### 1.1 Update `vite.config.js`
+#### 1.1 Update `vite.config.js`
 
 Ensure the project can be served from a sub-path when hosted on GitHub Pages.  
 Replace `{repo-name}` with your repository name (e.g. `threejs-app`).
@@ -54,7 +53,7 @@ export default defineConfig({
 
 ---
 
-## 2 · Project Structure
+### 2 · Project Structure
 
 ```
 threejs-app/
@@ -69,7 +68,7 @@ threejs-app/
 
 ---
 
-## 3 · HTML Boilerplate (`public/index.html`)
+### 3 · HTML Boilerplate (`public/index.html`)
 
 ```html
 <!DOCTYPE html>
@@ -89,7 +88,7 @@ threejs-app/
 
 ---
 
-## 4 · Styling (`src/styles.css`)
+### 4 · Styling (`src/styles.css`)
 
 Set a visible default background colour on **both** the `body` and the `canvas` so the colour is obvious before Three.js initialises.
 
@@ -116,7 +115,7 @@ body {
 
 ---
 
-## 5 · Scene Boilerplate (`src/main.ts`)
+### 5 · Scene Boilerplate (`src/main.ts`)
 
 ```ts
 import * as THREE from 'three';
@@ -173,7 +172,7 @@ window.addEventListener('resize', () => {
 
 ---
 
-## 6 · Local Development
+### 6 · Local Development
 
 ```bash
 npm run dev
@@ -190,7 +189,7 @@ Visit the printed localhost URL and verify:
 
 ---
 
-## 7 · Deploy to GitHub Pages
+### 7 · Deploy to GitHub Pages
 
 This guide intentionally keeps deployment details concise; see **`deployment.github-pages.md`** in the same folder for full instructions. Key steps:
 

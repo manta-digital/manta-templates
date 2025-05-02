@@ -1,4 +1,3 @@
-```yaml
 ---
 docType: tool-guide 
 platform: threejs
@@ -8,7 +7,7 @@ audience:
 features:
 purpose: 3d graphics and animation
 ---
-```
+
 ## Essential Three.js Knowledge for Developers
 
 Creating robust and efficient Three.js applications requires understanding both the fundamentals and the common pitfalls. Below is a structured guide covering configuration, best practices, performance tips, and common challenges.

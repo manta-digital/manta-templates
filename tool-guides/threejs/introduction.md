@@ -1,13 +1,10 @@
-```yaml
 ---
 docType: tool-guide
 platform: threejs
-audience:
-  - human
-  - ai
+audience: human, ai
 purpose: 3d graphics and animation
 ---
-```
+
 
 # Introduction to Three.js
 
