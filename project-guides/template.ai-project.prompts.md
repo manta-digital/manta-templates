@@ -69,9 +69,11 @@ Make sure to follow our rules in .windsurfrules.  Additionally reference `guide.
 ##### Task Expansion
 ```markdown
 {project, section} = { , }
-We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.
+We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
+
+Output results into a new file our-project/tasks.{section}.phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
 ##### Task Implementation
