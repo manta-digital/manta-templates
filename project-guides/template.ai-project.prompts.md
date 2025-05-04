@@ -32,15 +32,15 @@ phase: phase;
 
 ##### Project Kickoff
 ```markdown
-input: {project, project concept description} = { , }
+input template: {project, project concept description} = { , }
 
-We're starting work on a new project {project}.  We will use our curated AI Project Creation methods to assist us in designing and performing the work.  Your role as described in `guide.ai-project.process` is 'Technical Fellow'.
+We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.a-project.process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
-The first thing we need to do is to use our AI Project Guide (`guide.ai-project.process`) to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
+The actual concept description as well as additional concept will be provided by project manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
-To do this, we need to use the `guide.ai-project.process` together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
+To do this, we need to use the Project Guide together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
 
-When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager (me)..
+When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager (me).
 ```
 
 ##### Project Phase
@@ -49,7 +49,7 @@ input: {project, n, phase, optional: guide}
 
 {if n>1} Phase {n-1} is approved!{end-if}
 
-Now let's work together to create the {phase.name} for {project}.  Refer to our concept document ({projectname} - concept) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information tailored to {project} in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
+Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (project-concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
 
 When creating project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.
 ```
@@ -229,7 +229,11 @@ Refer to the Resource Structure in `guide.ai-project.process` for a description 
 ```
 
 ##### Add AI Projects Support
-```json
+Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
+
+```markdown
+Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
+
 "scripts": {
     "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
     "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
