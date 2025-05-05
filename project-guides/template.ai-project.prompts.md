@@ -92,7 +92,7 @@ Hello. Our input {
     scichart,
 }
 
-We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If tool is specified, refer additionally to project-documents/tool-guides/{tool}/AI Tool Overview - {tool}.md.
+We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, refer additionally to project-documents/tool-guides/{tool}/AI Tool Overview - {tool}.md, for each tool or referenced.
 
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
