@@ -72,8 +72,6 @@ CI=true npx create-next-app@latest {project} \
 
 #### 1.3 Handling Non‑Empty Directories 
 
-^4cce9a
-
 If the target folder already contains docs (e.g. `project-documents/`, `.windsurfrules`, `package.json`, etc), scaffold in a temp directory then move back.  Note that this is the expected and usual case, and a side-effect of the current method of incorporating the AI Project process.
 
 ```sh
@@ -89,10 +87,10 @@ npx create-next-app@latest . \
   --use-npm \
   --import-alias "@/*"
 
-rsync -av --exclude='project-documents/' --exclude='README.md' ./ ../{project}/
+rsync -av --exclude='project-documents/' --exclude='README.md' ./ ../
 
-cd ../project
-rm -rf ../next-temp
+cd ..
+rm -rf next-temp
 npm install
 npm run dev
 ```
