@@ -38,25 +38,13 @@ A concise, copy‑pasteable guide that spins up a TypeScript‑flavoured **Next.
 
 ### 1  Create Your Next.js Project (Scripted CLI)
 
-#### 1.0 Handling Non‑Empty Directories 
-If the target folder already contains docs (e.g. `project-documents/`, `.windsurfrules`, `package.json, etc), scaffold in a temp directory then move back:
-```
-todo: update this make sure it can scaffold in a temp subdir then move back then clean up anything it did.
-```
-
-```bash
-mv project-documents /tmp/
-CI=true npx create-next-app@latest . --[flags…]
-mv /tmp/project-documents ./
-```
-
-
-
 #### 1.1 One‑liner (no prompts)
 
+The following shows the general form we need for the create-next-app.  Note that you will usually need the additional information in 1.3 Handling Non-Empty Directories.
+
 ```bash
-# {projectname} ⇒ replace with snake‑case or kebab‑case repo name
-CI=true npx create-next-app@latest {projectname} \
+# {project} ⇒ replace with snake‑case or kebab‑case repo name
+CI=true npx create-next-app@latest {project} \
   --typescript \
   --tailwind \
   --eslint \
@@ -75,12 +63,49 @@ CI=true npx create-next-app@latest {projectname} \
 
 > **Tip:** For Yarn 2+/pnpm swap `--use-npm` with `--use-yarn` or `--use-pnpm`.
 
-#### 1.3 Optional Flags
+#### 1.2 Optional Flags
 
 |Flag|Purpose|
 |---|---|
 |`--no-tailwind`|Skip Tailwind if styling handled elsewhere.|
 |`--example "https://github.com/vercel/examples/tree/..."`|Start from example.|
+
+#### 1.3 Handling Non‑Empty Directories 
+
+^4cce9a
+
+If the target folder already contains docs (e.g. `project-documents/`, `.windsurfrules`, `package.json`, etc), scaffold in a temp directory then move back.  Note that this is the expected and usual case, and a side-effect of the current method of incorporating the AI Project process.
+
+```sh
+mkdir next-temp && cd next-temp
+
+npx create-next-app@latest . \
+  --typescript \
+  --tailwind \
+  --eslint \
+  --app \
+  --turbo \
+  --src-dir \
+  --use-npm \
+  --import-alias "@/*"
+
+rsync -av --exclude='project-documents/' --exclude='README.md' ./ ../{project}/
+
+cd ../project
+rm -rf ../next-temp
+npm install
+npm run dev
+```
+
+##### 1.3.1 Guides Scripts
+If `package.json` already exists, the rsync above will overwrite, which is exactly what we need.  In general, the only thing the original `package.json` contains that we care about are the guides setup scripts, included here.  In general you can just add these to the `package.json` script block and be done.
+
+```json
+"scripts": {
+    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
+    "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
+  }
+```
 
 ---
 

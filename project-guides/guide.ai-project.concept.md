@@ -13,7 +13,7 @@ This guide will assist us in creating a project concept, allowing us to describe
 What are we making?  What makes it unique i.e. why are we making it?  Tell everyone why it's going to be great.  Where does it run?  Who uses it and how do they access it?  Are we creating the whole thing now, or does this concept apply to a particular component, layer, front-end/back-end, etc?
 
 If application or project characteristics lend themselves to a bullet list, add it here.  For example: 
-* *This is NextJS application for an email management SaaS product*
+* *This is a NextJS application for an email management SaaS product*
 * *Minimal but effective and attractive UI*
 * *Subscription based, with 3 tiers the 1st being free.*
 
@@ -24,7 +24,7 @@ If application or project characteristics lend themselves to a bullet list, add 
 Include information on the target users for the application?  Will this change as the product develops?
 
 ##### Proposed Technical Stack
-Describe the technical stack as much is known.  What frameworks, languages, or platforms will we use to develop it?  Where does it run?  Does it need any 3rd-party components (ex: SciChart)?  
+Describe the technical stack as much is known.  What frameworks, languages, or platforms will we use to develop it?  Where does it run?  Does it need any 3rd-party components (ex: SciChart)?  Start by identifying the proposed platform.
 
 ##### Proposed Development Methodology
 Also include proposed development methodology here.  TDD?  DDD?  Speed or ironclad reliability (rarely both)?  
