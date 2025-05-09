@@ -81,6 +81,11 @@ This approach is widely recommended, including in the official Next.js documenta
 **Bottom line:**  
 If you just want markdown to drive content and don’t need JSX in your posts, gray-matter + remark is the best, simplest solution for Next.js.
 
+### Important
+NextJS will not apply any styles to your markdown by default (Astro does).  You will need to add them yourself.  The easiest way is to 
+
+
+
 ---[1] https://bionicjulia.com/blog/setting-up-nextjs-markdown-blog-with-typescript[2] https://css-tricks.com/responsible-markdown-in-next-js/[3] https://tina.io/blog/simple-markdown-blog-nextjs[5] https://nextjs.org/learn/pages-router/dynamic-routes-render-markdown
 
 Sources
