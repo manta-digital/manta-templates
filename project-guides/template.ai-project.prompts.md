@@ -111,7 +111,7 @@ Notes:
 ```markdown
 Hello.  Please ensure that you have {project, section, issue, tool} inputs before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
 
-Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.
+Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/tasks.{section}.md or optionally tasks.{section}.phase-{n}.md.
 
 Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
