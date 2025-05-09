@@ -1,4 +1,3 @@
-```yaml
 ---
 docType: intro-guide
 platform: astro
@@ -10,7 +9,6 @@ features:
   - Option for zero-JS static setup
 purpose: Quickstart guide for Astro projects with and without React
 ---
-```
 
 
 ## Summary

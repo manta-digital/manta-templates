@@ -1,4 +1,4 @@
-You’re on the right track-if you don’t need JSX or React components inside your markdown, the **gray-matter + remark** method is the simplest, fastest, and most maintainable approach for a markdown-driven Next.js blog.
+Simplified guide to using markdown in nextJS.  Simple markdown, no unnecessary MDX or React in Markdown noise.
 
 ## How It Works
 
