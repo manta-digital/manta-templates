@@ -1,6 +1,6 @@
 
 ### Overview
-If you have not consulted the `AI Tool Overview - scichart.md`, start there first.  If indicated and you are installing or configuring scichart in an application, this guide applies.   
+If you have not consulted the introduction.md` for this tool (scichart), start there first.  If indicated and you are installing or configuring scichart in an application, this guide applies.   
 
 #### Reference
 Generate reference urls for SciChart-React.
@@ -67,7 +67,7 @@ The following should be created as {project-root}/copy-files-from-to.json:
 
 ##### NextJS Config
 
-This is a sample next.config.js for copying the SciChart files to the correct location. You'll find these files in the 'pack' folder that should be available to you, but you can also use the code blocks here.
+This is a sample `next.config.js` for copying the SciChart files to the correct location. You'll find these files in the 'pack' folder that should be available to you, but you can also use the code blocks here.  Note that if TypeScript is in use (which it normally will be) the file will be present as `next.config.ts` instead of `next.config.js`.  If one is present, modify the existing file do not include both a `.ts` and a `.js` NextJS config in the same project.
 
 NextJS config example 1:
 

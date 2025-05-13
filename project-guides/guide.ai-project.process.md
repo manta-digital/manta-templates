@@ -104,9 +104,10 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
 ---
 
 ### Resource Structure
-The following structure should be present in every project.  
+The following structure should be present in every project.  Assume files are in markdown format (.md) unless otherwise specified.  Tool documentation may also be present as .pdf.
 ### Resource Structure  (updated 2025-05-01)
 
+```
 {project-root}/
 └── project-documents/
     ├── project-guides/    # process & methodology (start here)
@@ -115,8 +116,10 @@ The following structure should be present in every project.
     ├── api-guides/        # external data endpoints (USGS, ArcGIS …)
     ├── domain-guides/     # cross-cutting subject matter (hydrology …)
     ├── snippets/          # reusable templates / code fragments
-    └── our-project/       # project-specific artefacts (tasks, UI mocks, reviews)
-###### our-project subolders
+    └── our-project/       # project-specific artifacts (tasks, UI, reviews)
+```
+
+###### our-project subfolders
 ```markdown
 * our-project/: information customized to our current project.
 * our-project/code-reviews: code review findings, task lists, and 
@@ -133,43 +136,43 @@ The following structure should be present in every project.
 
 ###### Project Guide Files
 ```markdown
-These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.
+These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.  Synonyms (syn, aka (for also known as)) are provided as some older documentation may still reference by these names.
 
-* AI Project Guide: this document.  Describes roles and project 
-  phases.  Always start here.
-* AI Project Concept Guide: details on creating Project Concept 
-  documents.
-* AI Spec Guide: details on creating Project Specification (Spec) 
-  documents.
-* AI Task Expansion Guide: specific guidance on task expansion 
-  (described in general in the AI Project Guide).
-* AI Development Guide - UI: specific guidance pertaining to UI/UX 
-  tasks.
-* AI Notes for Humans: notes to help humans onboard to projects
-* AI Project Prompt Templates: parameterized prompts to assist in
-  creating and completing projects using the AI Project Guide.
-  Usable by humans or AIs.
-* AI Code Review Guide: specific guidance for performing and
-  responding to code reviews.
-
-Additional Files in this Directory:
+* guide.ai-project.process (aka: AI Project Guide): this document.  Describes 
+  roles and project phases.  Always start here.
+* guide.ai-project.concept (aka: AI Project Concept Guide): details on creating 
+  Project Concept documents.
+* guide.ai-project.spec (aka: AI Spec Guide): details on creating Project 
+  Specification (Spec) documents.
+* guide.ai-project.task-expandion (aka: AI Task Expansion Guide): specific 
+  guidance on task expansion (described in general in the AI Project Guide).
+* guide.ui-development.ai (aka: AI Development Guide - UI): specific guidance 
+  pertaining to UI/UX tasks.
+* guide.code-review.ai (aka: AI Code Review Guide): specific guidance for 
+  performing and responding to code reviews.
+* template.ai-project.prompts (aka: AI Project Prompt Templates): parameterized 
+  prompts to assist in creating and completing projects using the AI Project 
+  Guide. Usable by humans or AIs.
 * coderules: specify general code rules.  Copied to IDE or agent-
   specific files (.windsurfrules, Claude.md, etc) as needed.  
+
+Additional Relevant in `project-documents/` Directory:
+* directory-structure: defines our `project-documents` directory structure
 * file-naming-conventions: describes our file-naming conventions
 ```
 
 ###### Tool Guide Files
 ```markdown
-These files provide knowledge on use of 3rd party tools, both in general and in specific {tool} subdirectories.  Always start with AI Tool Overview.  If you do not see one, ensure that you can locate {tool}/AI Tool Overview - {tool}, specific to {tool} in use.
+These files provide knowledge on use of 3rd party tools, both in general and in specific {tool} subdirectories.  All documents for {tool} will be in the `tool-guides/{tool}/` subdirectory.  Always start with tool's introduction, which should be located at `tool-guides/{tool}/introduction.md`.  If you cannot locate this, confirm usage of the tool and presence of its documentation with the Project Manager before starting work.
 
-* AI Tool Overview - {tool}: Overall guidance for {tool}.  Always 
-  start here.
-* AI Tool Setup - {tool}: Information on installing and configuring 
-  {tool}.
-* {tool}-{description}-guide: our guides and indices built from 
-  review of documentation files.
-* {tool}/documentation: documentation by tool authors, from web or 
-  download.  May be in alternate formats such as PDF.
-* {tool}/research-crumbs: specific knowledge items for {tool}.  
-  often used to provide additional detail for a complex {tool} task.
+* introduction (aka: AI Tool Overview - {tool}): Overall guidance for 
+  {tool}.  Always start here.
+* setup: Information on installing and configuring {tool}.
+* guide.{descriptions}: our specific guides and indices.  If `documentation` 
+  subdirectory is present, these guides may be built from review of 
+  documentation files.
+* {tool}/documentation: documentation by tool authors, from web or download.  
+  May be in alternate formats such as PDF.
+* {tool}/research-crumbs: specific knowledge items for {tool}.  often used to 
+  provide additional detail for a complex {tool} task.
 ```

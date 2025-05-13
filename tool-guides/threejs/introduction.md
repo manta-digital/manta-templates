@@ -31,5 +31,5 @@ Three.js is an open-source JavaScript library that makes WebGL-powered 3D graphi
 - `introduction.md` — this file  
 - `setup.md`        — installation & project setup  
 - `overview.md`     — in-depth fundamentals (rename of your current file)  
-- `lighting.md`     — lighting patterns and helpers  
-- `performance.md`  — optimization tips and pitfalls  
+- `guide.lighting.md`     — lighting patterns and helpers  
+- guide.{description}.md -- additional guides for specific subtopics

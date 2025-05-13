@@ -17,6 +17,10 @@ You are encountering this error because **Next.js 15 introduced a breaking chang
 Upgrade Guide: https://nextjs.org/docs/app/guides/upgrading/version-15
 Dynamic APIs: https://nextjs.org/docs/messages/sync-dynamic-apis
 
+### Codemod
+A codemod is available to automatically fix many issues related to upgrade from NextJS 14 to NextJS 15.  
+Codemod: https://nextjs.org/docs/app/guides/upgrading/codemods#150
+
 
 ---
 
