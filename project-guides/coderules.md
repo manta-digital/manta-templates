@@ -89,7 +89,7 @@ Builds
 - After all changes are made, ALWAYS build the project with `npm run build`. allow warnings, fix errors.
 * If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `npm run build`
 - Always run typescript check to ensure no typescript errors.
-- Log warnings to `/project-documents/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point.
+- Log warnings to `/project-documents/our-project/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point.
 
 Additional
 - Keep code short; commits semantic.
