@@ -24,27 +24,27 @@ When reviewing code, answer these core questions:
    - Are there race conditions or memory leaks?
    - Are subscriptions and event listeners properly cleaned up?
 
-1. **Hard-coded Elements**
+2. **Hard-coded Elements**
    - Is anything hard-coded that should be configurable?
    - Are there magic numbers or strings that should be constants or settings?
    - Are date ranges, timeouts, or numeric thresholds hard-coded?
 
-1. **Artificial Constraints**
+3. **Artificial Constraints**
    - Are there assumptions that will limit future expansion?
    - Does the code artificially restrict functionality?
    - Are there fixed array sizes, limited input ranges, or hardcoded limits?
 
-1. **Code Duplication & Reuse**
+4. **Code Duplication & Reuse**
    - Is there repeated code that should be factored into functions?
    - Are there patterns that could be abstracted?
    - Could utility functions improve readability?
 
-1. **Component Structure**
+5. **Component Structure**
    - Are there monolithic pieces that should be split?
    - Does the component have a single responsibility?
    - Could the code benefit from being broken into smaller components?
 
-1. **Design Patterns & Best Practices**
+6. **Design Patterns & Best Practices**
    - Are there opportunities to use better patterns?
    - Is the code following React/TypeScript best practices?
    - Could performance be improved with memoization or other techniques?
@@ -54,6 +54,10 @@ When reviewing code, answer these core questions:
    - Is the code properly typed?
    - Are there any `any` types that could be more specific?
    - Is the code well-documented with comments?
+ 
+7. Platform: NextJS
+   * cn should be used instead of string operations for parameterized className strings.
+   * ensure no deprecated expressions are present
 
 ## Code Review Process
 

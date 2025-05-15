@@ -49,7 +49,7 @@ input: {project, n, phase, optional: guide}
 
 {if n>1} Phase {n-1} is approved!{end-if}
 
-Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (project-concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
+Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (guide.ai-project.concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
 
 When creating project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.
 ```
@@ -203,23 +203,42 @@ If {item} does not provide sufficient detail, expand according to the project an
 Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
 ###### General
-* Document your findings in the project-documents/our-project/codebase-analysis.md. You will probably need to create this file.
-* Write in markdown format, following our rules for markdown output.  If you cannot find these rules, STOP and do not proceed until you request and receive them fro the Project Manager.
-* Document the codebase structure.  Also note presence of any project-documents or similar folders which probably contain information for us.
-* Document presence or average of tests, and an estimate of coverage if tests are present.
-* Identify technologies and frameworks in use.  If this is a JS app, does it use React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it use TailWind?  ShadCN?  Something else?
+* Document your findings in the project-documents/our-project/codebase-
+  analysis.md. You will probably need to create this file.
+* Write in markdown format, following our rules for markdown output.  If you 
+  cannot find these rules, STOP and do not proceed until you request and receive 
+  them fro the Project Manager.
+* Document the codebase structure.  Also note presence of any project-documents 
+  or similar folders which probably contain information for us.
+* Document presence or average of tests, and an estimate of coverage if tests 
+  are present.
+* Identify technologies and frameworks in use.  If this is a JS app, does it use 
+  React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it 
+  use TailWind?  ShadCN?  Something else?
 * What package managers are in use?
 * Is there a DevOps pipeline indicated?
 * Analysis should be concise and relevant - no pontificating.
-* Add note in README as follows: Claude: please find code analysis details in {file mentioned above}.
+* Add note in README as follows: Claude: please find code analysis details in 
+  {file mentioned above}.
 
 ###### NextJS
-* Perform standard analysis and identify basic environment -- confirm NextJS, identify common packages in use (Tailwind, ShadCN, etc) and any unusual packages or features.  
-* If auth is present, attempt to determine its structure and describe its methodology
+* Perform standard analysis and identify basic environment -- confirm NextJS, 
+  identify common packages in use (Tailwind, ShadCN, etc) and any unusual 
+  packages or features.  
+* If auth is present, attempt to determine its structure and describe its 
+  methodology
 * Is the project containerized?
-* If special scripts (ex: 'docker: {command}') are present, document them in the README.
+* If special scripts (ex: 'docker: {command}') are present, document them in the 
+  README.
 * Provide a description of the UI style, interactivity, etc
 * Document page structure.
+  
+###### Tailwind
+* Is cn used instead of string operations with parameterized or variable   
+  classNames?
+* Prefer Tailwind classes, there should not be custom CSS classes.
+* If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
+  use tailwind.config.ts/.js. 
 ```
 
 ##### Model Change or Context Review
