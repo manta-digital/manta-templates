@@ -1,0 +1,3 @@
+- [ ] In `src/app/blog/[slug]/page.tsx` (around line 39): Consider replacing `<img>` with `next/image`'s `<Image />` component for better performance and optimization. (Warning: Using `<img>` could result in slower LCP and higher bandwidth.)
+- [ ] Refactor all instances of string template literals (e.g., `className={`...${...}`}`) for CSS class assignments to use the `cn` utility for improved clarity, consistency, and to leverage `tailwind-merge` capabilities.
+- [ ] Document the new `autoFlow` prop (values: 'row', 'column', default: 'row') in the `BentoLayout` component. Explain how it maps to `grid-auto-flow` and its impact on item placement.

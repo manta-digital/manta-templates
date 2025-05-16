@@ -1,0 +1,7 @@
+- Removed legacy TwoColumnLayout component and cleaned up all related exports in index files; all layouts now use GridLayout or BentoLayout for greater flexibility.
+- Corrected blog page layout by conditionally applying `row-start-1` to the first post, ensuring proper alignment with the sidebar content.
+- Resolved Next.js 15 type errors for page params and addressed multiple ESLint issues for a successful build, and refined Markdown heading styles.
+- Document content creation process in README and update content management checklist
+- Created detailed task breakdown for 'examples-update' section to replicate blog layout in `app/examples/blog/page.tsx`.
+- Refactored example pages (blog, gridlayout) to consistently use BaseCard within BentoLayout or apply similar structural patterns, ensuring clean responsive behavior and `cn` utility for class names.
+- Enhanced blog card components with new variants (BlogCardWide, BlogCardImage) and image height controls, improved GridItem/BentoLayout flexibility, and resolved build issues.

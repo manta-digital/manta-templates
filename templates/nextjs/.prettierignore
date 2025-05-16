@@ -1,0 +1,6 @@
+# Ignore build artifacts and dependencies
+node_modules
+.next
+
+# Ignore Obsidian vault config/plugins
+project-documents/.obsidian/
