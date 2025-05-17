@@ -17,7 +17,7 @@ The following subtasks expand the Detailed Task Breakdown for the Interactive Fe
   - Check Next.js 15 and React 19 support for R3F
   - Acceptance: Supported versions documented
 - [ ] Install R3F dependencies
-  - Run: `npm install three @react-three/fiber @react-three/drei`
+  - Run: `pnpm install three @react-three/fiber @react-three/drei`
   - Acceptance: Packages in `dependencies`
 - [ ] Create `ThreeCanvas` component
   - File: `src/components/ThreeCanvas.tsx` using `<Canvas>`
@@ -35,7 +35,7 @@ The following subtasks expand the Detailed Task Breakdown for the Interactive Fe
 ## Framer Motion Animation System
 
 - [ ] Install Framer Motion
-  - Run: `npm install framer-motion`
+  - Run: `pnpm install framer-motion`
   - Acceptance: Package in `dependencies`
 - [ ] Configure layout transitions
   - Wrap pages with `<AnimatePresence>` in `app/layout.tsx`

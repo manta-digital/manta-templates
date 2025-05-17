@@ -29,7 +29,7 @@ The following subtasks expand the Detailed Task Breakdown for the Automated Qual
 ## Set up Jest & React Testing Library
 
 - [ ] **Install testing dependencies**
-  - Run: `npm install -D jest @types/jest ts-jest @testing-library/react @testing-library/jest-dom`
+  - Run: `pnpm install -D jest @types/jest ts-jest @testing-library/react @testing-library/jest-dom`
   - Acceptance: Packages appear in `devDependencies`
 - [ ] **Configure Jest**
   - Create `jest.config.cjs`:
@@ -47,16 +47,16 @@ The following subtasks expand the Detailed Task Breakdown for the Automated Qual
   - Acceptance: Jest runs without configuration errors
 - [ ] **Add test script**
   - In `package.json` scripts: `"test": "jest --passWithNoTests"`
-  - Acceptance: `npm test` completes without errors
+  - Acceptance: `pnpm test` completes without errors
 - [ ] **Write smoke test for BaseCard**
   - File: `src/components/ui/BaseCard.test.tsx`
   - Test: Renders child text and matches snapshot
-  - Acceptance: `npm test` exits 0 and passes all tests
+  - Acceptance: `pnpm test` exits 0 and passes all tests
 
 ## Add Lighthouse-CI GitHub Action
 
 - [ ] **Install LHCI CLI**
-  - Run: `npm install -D @lhci/cli`
+  - Run: `pnpm install -D @lhci/cli`
   - Acceptance: `@lhci/cli` appears in `devDependencies`
 - [ ] **Configure Lighthouse CI**
   - Create `lighthouserc.json`:

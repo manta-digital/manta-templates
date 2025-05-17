@@ -15,7 +15,7 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
 
 - [x] Verify Node.js and npm versions
 
-  - Run `node -v` and `npm -v`
+  - Run `node -v` and `pnpm -v`
   - Acceptance: Node ≥ 18.18 and npm ≥ 9 installed
 
 - [x] Handle existing project documents if non-empty
@@ -44,11 +44,11 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
 
 - [x] Install project dependencies
 
-  - Run `npm install` in project directory
+  - Run `pnpm install` in project directory
   - Acceptance: `node_modules` folder exists and installs without errors
 
 - [x] Start development server
-  - Run `npm run dev`
+  - Run `pnpm run dev`
   - Visit `http://localhost:3000`
   - Acceptance: Default Next.js welcome page loads and Tailwind styles apply
 
@@ -56,12 +56,12 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
 
 - [x] Install Tailwind dependencies
 
-  - Run `npm install -D tailwindcss postcss autoprefixer`
+  - Run `pnpm install -D tailwindcss postcss autoprefixer`
   - Acceptance: Packages appear in `devDependencies`
 
 - [x] Generate Tailwind config
 
-  - Run `npx tailwindcss init -p`
+  - Run `pnpm exec tailwindcss init -p`
   - Acceptance: `tailwind.config.js` and `postcss.config.js` exist
 
 - [x] Update `tailwind.config.js`
@@ -92,12 +92,12 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
 
 - [x] Install ShadCN CLI
 
-  - Run `npx shadcn@latest init`
+  - Run ` pnpm exec shadcn@latest init`
   - Acceptance: `shadcn.config.json` generated
 
 - [x] Generate base UI components
 
-  - Run `npx shadcn@latest add button`
+  - Run `pnpm exec shadcn@latest add button`
   - Acceptance: Button component files in `src/components/ui/button`
 
 - [x] Integrate Radix primitives
@@ -142,7 +142,7 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
 
 - [x] Install ESLint and Prettier
 
-  - Run `npm install -D eslint prettier eslint-config-prettier`
+  - Run `pnpm install -D eslint prettier eslint-config-prettier`
   - Acceptance: Packages appear in `devDependencies`
 
 - [x] Create ESLint and Prettier config files
@@ -170,7 +170,7 @@ The following subtasks expand the Detailed Task Breakdown for the Project Setup 
   - Acceptance: Variables load via `process.env`
 
 - [x] Test production build
-  - Run `npm run build && npm start`
+  - Run `pnpm run build && pnpm start`
   - Visit `http://localhost:3000`
   - Acceptance: Production build serves correctly
 

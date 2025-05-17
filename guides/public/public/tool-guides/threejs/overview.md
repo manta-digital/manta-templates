@@ -15,7 +15,7 @@ Creating robust and efficient Three.js applications requires understanding both 
 ---
 ### **Initial Setup and Configuration**
 
-- **Install and Import**: Use npm to install Three.js and import it at the top of your JavaScript files[5].
+- **Install and Import**: Use pnpm to install Three.js and import it at the top of your JavaScript files[5].
 - **Scene Basics**: Always start by creating a scene, camera, and renderer. Set the renderer size and append it to your HTML[5].
 - **Check for WebGL Support**: Use feature detection to ensure the user's browser supports WebGL, providing fallbacks if necessary[7].
 

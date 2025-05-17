@@ -135,7 +135,7 @@ This document provides a granular breakdown of tasks for rebuilding erikcorkran.
 - [ ] **Set up Jest + React Testing Library**
 
   - Write smoke test for BaseCard rendering
-  - Success: `npm test` exits 0
+  - Success: `pnpm test` exits 0
 
 - [ ] **Add Lighthouse‑CI GitHub Action**
   - Budget: perf ≥ 90, a11y ≥ 95
