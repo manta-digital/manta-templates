@@ -1,154 +1,128 @@
+Below is a complete, deduplicated **`README.md`** for the **manta-templates** monorepo. It embeds the improved **`sync-guides`** script so users never have to manually add the remote:
+
+````markdown
 # manta-templates
 
-> A unified monorepo for shipping opinionated frontend templates and shared UI packages at manta.digital.
+> Monorepo of opinionated starter templates (Next.js, Astro, React-Native soon!), plus shared UI components and curated project guides.
+
+---
+
+## 🚀 Quickstart
+
+### Standalone Template usage
+```bash
+# 1. Grab only the Next.js starter
+pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-app
+cd my-app
+
+# 2. Install & pull public docs
+pnpm install
+pnpm run setup-guides
+
+# 3. Spin up the dev server
+pnpm dev
+```
+
+### Using the monorepo
+```bash
+# 1. Clone the monorepo
+git clone https://github.com/manta-digital/manta-templates.git
+cd manta-templates
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Import public guides (auto-adds remote & handles first-time import)
+pnpm run sync-guides
+
+# 4. Bootstrap the Next.js starter
+cd templates/nextjs
+pnpm install
+pnpm run setup-guides    # copies public guides into project-documents
+pnpm dev                 # launches the dev server
+````
+
+*Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
 
 ---
 
 ## 📂 Repository structure
 
-```text
-manta-templates/                # Monorepo root
-├─ guides/                      # Curated public and private guides
-│  ├─ public/                   # Public docs shipped with templates
-│  └─ private/                  # (Optional) Private docs, pulled on demand
-├─ packages/                    # Shared utilities & UI kits
-│  └─ ui/                       # @manta/ui package (BentoGrid, MasonryGrid, BlogCard)
-├─ templates/                   # Opinionated project starters
-│  ├─ nextjs/                   # Next.js 15 + Tailwind 4 + ShadCN starter
-│  ├─ astro/                    # (Future) Astro static site with Islands pattern (coming soon)
-│  └─ react-native/             # (Future) React Native starter
-├─ pnpm-workspace.yaml          # pnpm workspace definition
-├─ turbo.json                   # Turborepo pipeline config
-└─ package.json                 # Root metadata & scripts
+```
+manta-templates/
+├─ guides/                 # Your curated project guides
+│   ├─ public/             # Public docs (shipped in this repo)
+│   └─ private/            # Private docs (pulled only by you)
+│
+├─ templates/              # Application & site starter templates
+│   ├─ nextjs/             # Next.js 15 + Tailwind 4 + ShadCN
+│   └─ astro/              # (future) Astro Islands
+│
+├─ packages/               # Workspace packages
+│   └─ ui/                 # @manta/ui: shared React components (BentoGrid, etc.)
+│
+├─ pnpm-workspace.yaml     # pnpm workspace config
+├─ turbo.json              # Turborepo pipeline (build/lint/dev)
+└─ package.json            # Root scripts & dependencies
 ```
 
 ---
 
-## 🛠 Prerequisites
+## 🔧 Project Guides
 
-* **Node.js** v18+ (or your preferred LTS)
-* **pnpm** v8+ (preferred) or install via `npm install -g pnpm`
-
-## 🚀 Getting started
-
-1. **Clone the repo**
-
-   ```bash
-   git clone git@github.com:manta-digital/manta-templates.git
-   cd manta-templates
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Sync public guides**
-
-   ```bash
-   pnpm sync-guides
-   ```
-
-4. **Bootstrap a template** (Next.js example)
-
-   ```bash
-   # from the monorepo root
-   cd templates/nextjs
-   pnpm install       # installs workspace packages
-   pnpm run setup-guides        # copy public docs → project-documents
-   pnpm dev            # start the dev server
-   ```
-
-> **Tip:** To include your private guides, run `pnpm run setup-guides:private` before `pnpm run setup-guides`.
-
----
-
-## 📝 Guides workflow
-
-* **Source of truth** lives in the private `ai-project-guide` repo:
-
-  * The `public-only` branch maps to `guides/public/` via `git subtree`.
-  * Private docs remain in `guides/private/` and are pulled on demand.
-
-* **Sync public docs** anytime with:
-
-  ```bash
-  pnpm sync-guides
-  ```
-
-* **Update guides** in `ai-project-guide`, then sync into this monorepo.
-
----
-
-## 🔧 Setup project-documents
-
-This template ships with a curated set of **public** guides. To pull them into your project:
+This monorepo ships **public** guides under `guides/public`. To copy them into *any* template’s `project-documents/` folder, run in the template folder:
 
 ```bash
-# Copy public guides (works offline, no Git required)
 pnpm run setup-guides
 ```
 
-If you have your own private guide repo (e.g. for internal checklists, proprietary docs, client-only content), you can layer that on top:
+If you maintain your own **private** guide repo, you can layer it on top:
 
 ```bash
-# Fetch your private guides, then public ones
 pnpm run setup-guides:private
 ```
 
-**Under the hood:**
+Under the hood:
 
-* `setup-guides` does an rsync from `guides/public/` into `project-documents/`.
-* `setup-guides:private` clones your private repo (SSH), copies everything under `private/` into `project-documents/`, then reruns `setup-guides` to ensure public files stay in sync.
+* **`sync-guides`** (root) uses Git subtree to import or update `guides/public` automatically (no manual remote setup).
+* **`setup-guides`** (template) uses `rsync` to copy `guides/public/` → `project-documents/`.
+* **`setup-guides:private`** clones your private repo, rsyncs its `private/` folder, then re-runs `setup-guides`.
 
-**Why this pattern?**
+---
 
-* **Offline-first:** public docs live in the monorepo—no extra auth needed.
-* **Private layers:** you decide which docs stay behind your firewall.
-* **Trust & clarity:** everyone sees exactly what’s in their `project-documents` folder.
+## 📦 Publishing & Consumption
 
-Feel free to rename the scripts or adjust paths to match your workflow.
-
-## 📚 Demo Project Docs
-
-See the `examples/our-project/` folder for examples of customized product documents and task lists created and implemented based on the `ai-project-guide`.
-
-## 📦 Publishing & packages
-
-* **Root** is marked `private: true` to prevent accidental `npm publish`.
-
-* **@manta/ui** (in `packages/ui`) is a reusable component library:
+* **Templates**:
 
   ```bash
-  cd packages/ui
-  pnpm publish --access public      # when you’re ready to release
+  pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-app
   ```
+* **UI Kit** (`@manta/ui`):
 
-* Future templates and packages can be added under `templates/` and `packages/` respectively.
-
----
-
-## 💡 Contributing
-
-> **Note:** This repository is primarily maintained by Erik Corkran. External contributions are welcome but please be aware that pull requests may not receive immediate attention.
-
-1. **Create an issue** describing the new template or guide.
-2. **Branch** off `main`, add your code or docs under the appropriate folder.
-3. **Sync** public guides (if updating docs): `pnpm sync-guides`.
-4. **Commit & PR** your changes to `manta-digital/manta-templates`.
-
-> All templates should follow the [coderules.md](project-documents/project-guides/coderules.md) and [directory-structure.md](project-documents/project-guides/directory-structure.md).
+  * Lives in `packages/ui`.
+  * To publish to npm: in `packages/ui/package.json` set `"private": false`, then `cd packages/ui && npm publish --access public`.
 
 ---
 
-## ⚙️ CI / Automation
+## 🤝 Contributing
 
-* **sync-guides** script automates pulling in the latest public docs.
-* You may add GitHub Actions in `.github/workflows` to run `pnpm sync-guides` on a schedule.
+This repo is **solo-maintained**, primarily as a consumable starting point.
+Feel free to open issues if you find bugs or have suggestions—PRs are welcome but may be merged at my discretion.
 
 ---
 
-## 🛡️ License
+## ⚙️ Root `package.json` scripts
 
-[MIT](LICENSE) © 2025 Erik Corkran
+```jsonc
+"scripts": {
+  // First-time or recurring import of public guides:
+  "sync-guides": "git remote get-url ai-guides > /dev/null 2>&1 || git remote add ai-guides git@github.com:ecorkran/ai-project-guide.git; git fetch ai-guides; git subtree add --prefix guides/public ai-guides public-only --squash -m \"docs: import public guides\" || git subtree pull --prefix guides/public ai-guides public-only --squash -m \"docs: sync public guides\""
+}
+```
+
+---
+
+## 📝 License
+
+MIT © 2025 Erik Corkran
+
