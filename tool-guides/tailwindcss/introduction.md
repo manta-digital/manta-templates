@@ -190,7 +190,7 @@ For advanced configuration, refer to Tailwind's official documentation[1][2][6][
 - **Upgrade tool:**  
   For existing projects, run:
   ```bash
-  npx @tailwindcss/upgrade@next
+  pnpm dlx @tailwindcss/upgrade@next
   ```
   This automates most migration steps (requires Node.js 20+)[2][6][9].
 
