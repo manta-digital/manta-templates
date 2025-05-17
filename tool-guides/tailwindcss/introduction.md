@@ -141,10 +141,10 @@ Next.js uses PostCSS for Tailwind integration.
 
 | Framework  | Install Command                                         | Config File(s)             | Import CSS Directive      | Plugin/Loader Config                 |
 |------------|---------------------------------------------------------|----------------------------|--------------------------|--------------------------------------|
-| Next.js    | `pnpm install -D tailwindcss @tailwindcss/postcss postcss` | `postcss.config.mjs`       | `@import "tailwindcss";` | `@tailwindcss/postcss` in PostCSS     |
-| Vite       | `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` plugin           |
-| Astro      | `pnpm install tailwindcss @tailwindcss/vite`             | `astro.config.mjs`         | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config    |
-| SvelteKit  | `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config    |
+| Next.js    | `pnpm install -D tailwindcss @tailwindcss/postcss postcss` | `postcss.config.mjs`       | `@import "tailwindcss";` | `@tailwindcss/postcss` in PostCSS    |
+| Vite       |  `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` plugin           |
+| Astro      | `pnpm install tailwindcss @tailwindcss/vite`             | `astro.config.mjs`         | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config   |
+| SvelteKit  | `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config   |
 
 ---
 

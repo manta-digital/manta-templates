@@ -20,7 +20,7 @@ Tailwind CSS v4 introduces major changes that break compatibility with v3, but a
 1. **Update Node.js**: You need Node.js 20 or later[2][4].
 2. **Use the Official Upgrade Tool**:
    ```bash
-   npx @tailwindcss/upgrade
+   pnpm dlx @tailwindcss/upgrade
    ```
    - This tool updates dependencies, migrates your config from JS to CSS, and adapts your template files[2][4].
    - Run it in a new Git branch to easily review and test changes[2][4].
@@ -33,11 +33,11 @@ Tailwind CSS v4 introduces major changes that break compatibility with v3, but a
 
 1. **Install Tailwind CSS v4**:
    ```bash
-   npm install tailwindcss@latest @tailwindcss/cli@latest
+   pnpm install tailwindcss@latest @tailwindcss/cli@latest
    ```
    Or with Vite:
    ```bash
-   npm install tailwindcss@latest @tailwindcss/vite@latest
+   pnpm install tailwindcss@latest @tailwindcss/vite@latest
    ```
 
 2. **Create Your CSS File** (e.g., `styles.css`):

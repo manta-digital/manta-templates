@@ -34,7 +34,7 @@ Specify template when using the CLI.  Following are a list of templates.  The Pr
 In an empty folder, run:
 ```sh
 # where {template} is an entry such as dansholds/astro-shadcn-starter.
-npm create astro@latest my-site \
+pnpm create astro@latest my-site \
   -- --template {template}
 ```
 
@@ -52,12 +52,12 @@ The following list of templates is useful in case none is provided in the spec. 
 
 1. Create `package.json` if you don’t have one:
     ```bash
-    npm init --yes
+    pnpm init --yes
     ```
 
 2. Install Astro locally (global installs are discouraged):
     ```bash
-    npm install astro
+    pnpm install astro
     ```
 
 3. Update `package.json` scripts:
@@ -90,7 +90,7 @@ To hydrate interactive components only where needed (Astro’s “islands archit
 
 1. Install the React integration:
     ```bash
-    npm install @astrojs/react react react-dom
+    pnpm install @astrojs/react react react-dom
     ```
 
 2. In `astro.config.mjs`, add:
@@ -108,8 +108,8 @@ To hydrate interactive components only where needed (Astro’s “islands archit
 ### 2.2 — Install Tailwind CSS
 1. Install Tailwind and its peer deps:
     ```bash
-    npm install -D tailwindcss postcss autoprefixer
-    npx tailwindcss init -p
+    pnpm install -D tailwindcss postcss autoprefixer
+    pnpm tailwindcss init -p
     ```
     
 2. Configure `tailwind.config.cjs`:
@@ -125,7 +125,7 @@ To hydrate interactive components only where needed (Astro’s “islands archit
 
 1. From your project root, run:
     ```bash
-    npx shadcn-ui@latest init
+    pnpm shadcn-ui@latest init
     ```
     
     This creates `src/components/ui`, updates your Tailwind config, and installs required deps ([Installation - shadcn/ui](https://ui.shadcn.com/docs/installation?utm_source=chatgpt.com), [How to install shadcn component library using yarn or npm?](https://stackoverflow.com/questions/77934605/how-to-install-shadcn-component-library-using-yarn-or-npm?utm_source=chatgpt.com)).
@@ -133,7 +133,7 @@ To hydrate interactive components only where needed (Astro’s “islands archit
 2. Generate any components you need, e.g.:
     
     ```bash
-    npx shadcn-ui@latest add button
+    pnpm shadcn-ui@latest add button
     ```
     
 3. Import and hydrate in an Astro page or MDX:
