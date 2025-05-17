@@ -17,7 +17,7 @@ Three.js is an open-source JavaScript library that makes WebGL-powered 3D graphi
 
 ## Prerequisites
 - A modern browser with WebGL support  
-- Node.js ≥ 14.x and npm/yarn  
+- Node.js ≥ 14.x and pnpm/yarn  
 - Basic familiarity with JavaScript and ES modules  
 
 ## What you’ll learn

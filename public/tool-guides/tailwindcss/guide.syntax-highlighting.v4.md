@@ -51,7 +51,7 @@
 
 1. **Install dependencies:**
    ```bash
-   npm install shiki rehype-shiki
+   pnpm install shiki rehype-shiki
    ```
 
 2. **Configure your Markdown/MDX pipeline:**
@@ -85,7 +85,7 @@
 
 1. **Install Dependencies**
    ```bash
-   npm install rehype-pretty-code shiki
+   pnpm install rehype-pretty-code shiki
    ```
 
 2. **Set Up Your Markdown Pipeline**
