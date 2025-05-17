@@ -28,3 +28,10 @@ git fetch ai-guides
 git subtree pull --prefix guides/public ai-guides main --squash
 git commit -m "docs: sync public guides"
 ```
+
+This needs to go into package.json, and we need to automate it.
+```json
+"srcipts": {
+  "setup-guides:private": "git clone --depth 1 git@github.com:ecorkran/ai-project-guides.git tmp-guides && rsync -a --delete tmp-guides/private/ ./project-documents && rm -rf tmp-guides && pnpm setup-guides"
+}
+```
