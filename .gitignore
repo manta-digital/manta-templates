@@ -1,2 +1,7 @@
 # Ignore any generated project-documents in templates
 templates/*/project-documents/
+
+# misc
+.DS_Store
+*.pem
+
