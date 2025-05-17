@@ -124,14 +124,14 @@ That’s it—drop layouts, and feed them GridItems.
 
 ⸻
 
-🎨 Customising the theme
+## 🎨 Customising the theme
 
 All colours run through CSS custom properties defined in styles/theme.css.
 Edit the file (or generate a new palette with your own script) and both Tailwind classes and ShadCN components update instantly.
 
 ⸻
 
-🔧 Script reference
+## 🔧 Script reference
 
 Script	Purpose
 pnpm dev	Run dev server with Turbopack
@@ -142,6 +142,8 @@ pnpm format:write	Prettier auto-format
 pnpm ai-typecheck	TS type check (no emit)
 pnpm guides	Pull the latest ai-project-guide subtree
 
+## 📚 Demo Project Docs
+See `examples/our-project/` for examples of customized product documents and task lists created and implemented based on the ai-project-guide.
 
 ⸻
 
