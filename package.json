@@ -2,7 +2,7 @@
     "name": "manta-templates",
     "private": true,
     "scripts": {
-        "sync-guides": "git fetch ai-guides && git subtree pull --prefix guides/public ai-guides public-only --squash -m \"docs: sync public guides\" || echo \"No changes to merge\""
+        "sync-guides": "bash ./scripts/sync-guides.sh"
     },
     "version": "1.0.0",
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",
