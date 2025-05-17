@@ -15,7 +15,7 @@ git push origin public-only
 
 ### inside manta-templates
 ```sh
-git remote add ai-guides git@github.com:ecorkran/ai-project-guides.git
+git remote add ai-guides git@github.com:ecorkran/ai-project-guide.git
 git fetch ai-guides
 
 git subtree add --prefix guides/public ai-guides main --squash
