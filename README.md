@@ -6,14 +6,14 @@ This template ships with a curated set of **public** guides. To pull them into y
 
 ```bash
 # Copy public guides (works offline, no Git required)
-npm run setup-guides
+pnpm run setup-guides
 ```
 
 If you have your own private guide repo (e.g. for internal checklists, proprietary docs, client-only content), you can layer that on top:
 
 ```sh
 # Fetch your private guides, then public ones
-npm run setup-guides:private
+pnpm run setup-guides:private
 ```
 
 Under the hood:

@@ -1,0 +1,10 @@
+packages:
+  - templates/*
+  - packages/*
+  - guides/*
+ignoredBuiltDependencies:
+  - chromedriver
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - sharp
+  - unrs-resolver

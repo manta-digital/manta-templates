@@ -20,9 +20,9 @@ The following subtasks expand the Detailed Task Breakdown for the Automated Qual
     1. `actions/checkout@v3`
     2. `actions/setup-node@v4` with `node-version: 18`
     3. `npm ci`
-    4. `npm run lint`
-    5. `npm test`
-    6. `npm run build`
+    4. `pnpm lint`
+    5. `pnpm test`
+    6. `pnpm build`
     7. `actions/upload-artifact@v3` to upload `.next`
   - Acceptance: CI passes on commits and blocks PR merges on failure
 
@@ -64,7 +64,7 @@ The following subtasks expand the Detailed Task Breakdown for the Automated Qual
     {
       "ci": {
         "collect": {
-          "startServerCommand": "npm run dev",
+          "startServerCommand": "pnpm dev",
           "url": ["http://localhost:3000"]
         },
         "assert": {
@@ -76,16 +76,16 @@ The following subtasks expand the Detailed Task Breakdown for the Automated Qual
       }
     }
     ```
-  - Acceptance: `npx lhci autorun --config=lighthouserc.json` runs without errors
+  - Acceptance: `pnpm exec lhci autorun --config=lighthouserc.json` runs without errors
 - [ ] **Create Lighthouse CI workflow**
   - File: `.github/workflows/lighthouse-ci.yml`
   - Trigger: `pull_request`
   - Steps:
     1. `actions/checkout@v3`
     2. `actions/setup-node@v4` with `node-version: 18`
-    3. `npm ci`
-    4. `npm run dev -- --port 3000 &`
-    5. `paambaati/lighthouse-action@v4` with `urls: http://localhost:3000`, `configPath: lighthouserc.json`
+    3. `pnpm ci`
+    4. `pnpm dev -- --port 3000 &`
+    5. `pnpm exec lhci autorun --config=lighthouserc.json`
   - Acceptance: PR status comment shows green scores and blocks merge on failure
 
 ---

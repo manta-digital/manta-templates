@@ -113,9 +113,9 @@
 
 ### 7. Project Maintenance and Documentation
 - [x] **Run Build and Lint Checks**
-  - [x] Execute `npm run lint` to check for any code style issues. Address any errors.
-  - [x] Execute `npm run build` to ensure the project builds without errors.
-  - [x] Run `npx tsc --noEmit` to check for TypeScript errors.
+  - [x] Execute `pnpm lint` to check for any code style issues. Address any errors.
+  - [x] Execute `pnpm build` to ensure the project builds without errors.
+  - [x] Run `pnpm tsc --noEmit` to check for TypeScript errors.
   - [x] Log any warnings encountered during the build to `/project-documents/maintenance/maintenance-tasks.md`.
   - [x] Success: Project lints, type-checks, and builds successfully.
 

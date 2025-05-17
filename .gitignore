@@ -5,3 +5,18 @@ templates/*/project-documents/
 .DS_Store
 *.pem
 
+node_modules
+
+# JetBrains IDEs – share only the useful bits
+.idea/*
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/*.iml
+!.idea/encodings.xml
+!.idea/codeStyles/**
+!.idea/inspectionProfiles/**
+!.idea/runConfigurations/**
+# Explicitly ignore user-specific noise
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/

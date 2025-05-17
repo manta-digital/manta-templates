@@ -41,6 +41,8 @@ export default defineConfig({
 ```
 
 **Relevant GitHub Actions Workflow (`.github/workflows/deploy.yml`):**
+Note: uses npm as not known if pnpm is supported here (admittedly haven't looked).
+
 ```yaml
 name: Deploy static site to Pages
 

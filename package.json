@@ -4,11 +4,6 @@
     "scripts": {
         "sync-guides": "git fetch ai-guides && git subtree pull --prefix guides/public ai-guides main --squash -m \"docs: sync public guides\" || echo \"No changes to merge\""
     },
-    "workspaces": [
-        "templates/*",
-        "packages/*",
-        "guides/*"
-    ],
     "version": "1.0.0",
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",
     "main": "index.js",

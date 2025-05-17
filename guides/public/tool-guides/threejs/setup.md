@@ -175,7 +175,7 @@ window.addEventListener('resize', () => {
 ### 6 · Local Development
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Visit the printed localhost URL and verify:
