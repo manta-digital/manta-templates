@@ -76,26 +76,25 @@ If the target folder already contains docs (e.g. `project-documents/`, `.windsur
 ```sh
 mkdir next-temp && cd next-temp
 
-npx create-next-app@latest . \
+pnpm create next-app@latest . \
   --typescript \
   --tailwind \
   --eslint \
   --app \
   --turbo \
   --src-dir \
-  --use-npm \
-  --import-alias "@/*"
+  --import-alias="@/*"
 
 rsync -av --exclude='project-documents/' --exclude='README.md' ./ ../
 
 cd ..
 rm -rf next-temp
-npm install
+pnpm install
 
-npm pkg set scripts.setup-guides="git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists-run npm run guides to update.'"
-npm pkg set scripts.guides="git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
-npm run setup-guides
-npm run dev
+pnpm pkg set scripts.setup-guides="git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists-run pnpm guides to update.'"
+pnpm pkg set scripts.guides="git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
+pnpm run setup-guides
+pnpm run dev
 ```
 
 ##### 1.3.1 Guides Scripts
@@ -104,7 +103,7 @@ If `package.json` already exists, the rsync above will overwrite, which is exact
 
 ```json
 "scripts": {
-    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists-run npm run guides to update.'",
+    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists-run pnpm guides to update.'",
     "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
   }
 ```
@@ -120,7 +119,7 @@ If `package.json` already exists, the rsync above will overwrite, which is exact
 #### 2.1 Install Tailwind v4 and PostCSS Plugin
 
 ```bash
-npm install -D tailwindcss@latest @tailwindcss/postcss postcss
+pnpm install -D tailwindcss@latest @tailwindcss/postcss postcss
 ```
 
 #### 2.2 Update PostCSS Config
@@ -174,12 +173,12 @@ If you need advanced customization, see the [Tailwind v4 docs](https://tailwindc
 
 ```bash
 cd {projectname}
-npm run dev  # → http://localhost:3000
+pnpm run dev  # → http://localhost:3000
 ```
 
 Verify the default Next.js welcome page loads and Tailwind classes style the page (inspect with DevTools).
 
-#### 3.2 Git Initialise & First Commit (optional)
+#### 3.2 Git Initialise & First Commit (optional)
 
 ```bash
 git init && git add . && git commit -m "chore: bootstrap Next.js app"
@@ -209,14 +208,14 @@ export default function Page() {
 }
 ```
 
-#### 4.2 Prisma + PostgreSQL
+#### 4.2 Prisma + PostgreSQL
 
 ```bash
-npm install prisma --save-dev
-npm install @prisma/client
-npx prisma init --datasource-provider postgresql
+pnpm install prisma --save-dev
+pnpm install @prisma/client
+pnpx prisma init --datasource-provider postgresql
 # define schema, then
-npx prisma migrate dev
+pnpx prisma migrate dev
 ```
 
 #### 4.3 Auth (NextAuth.js)

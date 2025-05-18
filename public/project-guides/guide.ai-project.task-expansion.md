@@ -33,7 +33,7 @@ Code blocks should use the multi-line code block syntax tagged with their langua
 {code block here}
 ```
 
-Very simple code statements (ex: npm run dev) can use inline: `npm run dev` (etc).
+Very simple code statements (ex: pnpm dev) can use inline: `pnpm dev` (etc).
 
 Document may begin with a 1-line title in H1 format.  No other H1 should be present.  In general, start at H3 or H3 and prefer H3, H4, H5.  Avoid any emoji in this document.  This is designed to be efficient, streamlined, and fast -- no distractions.
 
@@ -76,13 +76,13 @@ This is provided as an example of expansion.  Use this in addition to the additi
   - [ ] Use the `--typescript` flag to enable TypeScript support  
     1. Run:
 	   (multi-line code block)
-        npx create-next-app@latest manta-trading-mvp --typescript
+       pnpm create-next-app@latest manta-trading-mvp --typescript
        
 - [ ] Confirm `.ts` and `.tsx` files are used throughout
 - [ ] Open project in your editor (e.g. VSCode) and verify it 
       compiles and runs
   - [ ] Run the dev server  
-    1. Start with: `npm run dev`
+    1. Start with: `pnpm dev`
     2. Visit `http://localhost:3000` and confirm the default 
        Next.js page renders
 
@@ -91,8 +91,8 @@ This is provided as an example of expansion.  Use this in addition to the additi
   - [ ] Initialize Tailwind  
     1. Run:
        (multi-line code block) bash
-       npm install -D tailwindcss postcss autoprefixer
-       npx tailwindcss init -p
+       pnpm install -D tailwindcss postcss autoprefixer
+       pnpm tailwindcss init -p
        
 - [ ] Update `tailwind.config.js`
   - [ ] Set dark mode strategy to `'class'`

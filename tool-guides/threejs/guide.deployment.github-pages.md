@@ -41,7 +41,7 @@ export default defineConfig({
 ```
 
 **Relevant GitHub Actions Workflow (`.github/workflows/deploy.yml`):**
-Note: uses pnpm as not known if pnpm is supported here (admittedly haven't looked).
+Note: uses npm as not known if pnpm is supported here (admittedly haven't looked).
 
 ```yaml
 name: Deploy static site to Pages
@@ -68,9 +68,9 @@ jobs:
 	    with:
 		  node-version: 20
 	  - name: Install dependencies
-  	    run: pnpm ci
+  	    run: npm ci
 	  - name: Build site
-	    run: pnpm run build
+	    run: npm run build
 	  - uses: actions/upload-pages-artifact@v3
 	    with:
 	      path: dist
