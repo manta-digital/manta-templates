@@ -63,7 +63,8 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   return (
     <BaseCard 
       className={cn(
-        'relative overflow-hidden h-full w-full min-h-[280px] md:min-h-[360px]', // Ensure it has some height
+        'relative overflow-hidden h-full w-full',
+        imageMaxHeight ? imageMaxHeight : 'min-h-[280px] md:min-h-[360px]',
         className
       )}
       // We don't pass variant or size to BaseCard from here, as this card has a very specific style

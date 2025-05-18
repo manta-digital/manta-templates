@@ -55,7 +55,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
   );
 
   return (
-    <BaseCard className={cn('overflow-hidden', className)}> 
+    <BaseCard
+      className={cn('overflow-hidden', className)}
+      {...baseCardProps}
+    >
       {cardContent}
     </BaseCard>
   );
