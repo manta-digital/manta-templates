@@ -246,7 +246,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ```markdown
 The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
 
-Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 
 ##### Add AI Projects Support
