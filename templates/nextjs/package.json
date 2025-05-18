@@ -22,7 +22,7 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "setup-guides": "bash scripts/setup-guides.sh",
-    "setup-guides:private": "sh -c \"mkdir -p project-documents && git clone --depth 1 git@github.com:ecorkran/ai-project-guide.git tmp && rsync -a --delete tmp/private/ project-documents/ && rm -rf tmp && bash scripts/setup-guides.sh\"",
+    "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
     "guides": "pnpm setup-guides",
     "ai-assisted-build": "pnpm ai-typecheck && pnpm lint && pnpm format:check && pnpm build",
     "ai-typecheck": "tsc --noEmit --skipLibCheck",
