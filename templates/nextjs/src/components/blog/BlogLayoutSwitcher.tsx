@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 
 /**
  * BlogLayoutSwitcher provides buttons to toggle between layout variants via URL query.

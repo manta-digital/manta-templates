@@ -1,2 +1,8 @@
-export { BentoLayout } from './bento-layout';
-export * from './grid-layout';
+export {
+  BentoLayout,
+  GridLayout,
+  GridContainer,
+  GridItem,
+  useBreakpoint,
+  cn
+} from '@manta/ui';

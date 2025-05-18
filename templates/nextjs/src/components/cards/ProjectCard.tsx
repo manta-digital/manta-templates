@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 import BaseCard from './BaseCard';
 // Consider adding icons later (e.g., from lucide-react)
 // import { Github, ExternalLink } from 'lucide-react';
@@ -15,7 +15,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
+  title,  
   description,
   techStack = [], // Default to empty array
   repoUrl,

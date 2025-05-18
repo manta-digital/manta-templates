@@ -1,6 +1,7 @@
+'use client';
 import { useEffect, useState } from 'react';
 // Import breakpoints from the single source of truth
-import breakpoints from '../styles/breakpoints.js';
+import breakpoints from '../styles/breakpoints';
 
 // Converts px string to number
 function pxToNum(px: string) {

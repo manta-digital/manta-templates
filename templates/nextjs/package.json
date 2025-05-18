@@ -42,7 +42,8 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
-    "tailwind-merge": "^3.2.0"
+    "tailwind-merge": "^3.2.0",
+    "@manta/ui": "workspace:*"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.10.1",

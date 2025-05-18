@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image'; 
 import Link from 'next/link'; 
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils'; 
+import { cn } from '@manta/ui';
+import { formatDate } from '@manta/ui'; 
 import BaseCard, { BaseCardProps } from './BaseCard';
 
 // Define props for the BlogCardWide, similar to BlogCardProps

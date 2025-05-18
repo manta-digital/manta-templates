@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { BentoLayout } from '@/components/layouts/bento-layout';
-import GridItem from '@/components/layouts/grid-layout/grid-item';
+import { BentoLayout, GridItem, cn } from '@manta/ui';
 import BaseCard from '@/components/cards/BaseCard';
 
 export interface BlogPost {

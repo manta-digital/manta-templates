@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils'; // Assuming shadcn/ui setup includes this utility
+import { cn } from '@manta/ui';
 
 type MaxWidth = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | string; // Allow standard sizes or arbitrary Tailwind class
 

@@ -1,6 +1,6 @@
-import { BentoLayout } from '@/components/layouts/bento-layout';
+import { BentoLayout } from '@manta/ui';
 import BaseCard from '@/components/cards/BaseCard';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 
 const cardColors = [
   'bg-sky-200',

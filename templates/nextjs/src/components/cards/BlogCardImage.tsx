@@ -1,8 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@manta/ui';
 import BaseCard, { BaseCardProps } from './BaseCard'; // Assuming BaseCard provides base styling like rounded corners
 
 export interface BlogCardImageProps extends Omit<BaseCardProps, 'children' | 'variant' | 'size'> {
@@ -29,7 +28,7 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   author,
   textColorClassName = 'text-white', // Default to white text
   overlayClassName = 'bg-gradient-to-t from-black/70 via-black/50 to-transparent',
-  imageMaxHeight, // Destructured, not used by this component directly
+  imageMaxHeight, // Max height for image container
   className,
   ...baseCardProps
 }) => {
@@ -63,7 +62,8 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   return (
     <BaseCard 
       className={cn(
-        'relative overflow-hidden h-full w-full min-h-[280px] md:min-h-[360px]', // Ensure it has some height
+        'relative overflow-hidden h-full w-full',
+        imageMaxHeight ? imageMaxHeight : 'min-h-[280px] md:min-h-[360px]',
         className
       )}
       // We don't pass variant or size to BaseCard from here, as this card has a very specific style

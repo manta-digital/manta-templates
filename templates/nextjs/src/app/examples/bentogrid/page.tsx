@@ -1,5 +1,5 @@
 import React from "react";
-import { BentoLayout } from "@/components/layouts/bento-layout";
+import { BentoLayout } from "@manta/ui";
 import BaseCard from "@/components/cards/BaseCard";
 
 export default function BentoGridExample() {

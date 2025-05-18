@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import GridLayout from '@/components/layouts/grid-layout/grid-layout';
+import { GridLayout } from '@manta/ui';
 
 const gridData = {
   default: [

@@ -1,7 +1,7 @@
-             import React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 import BaseCard from './BaseCard';
 // import { PlayCircle } from 'lucide-react'; // Icon for later
 

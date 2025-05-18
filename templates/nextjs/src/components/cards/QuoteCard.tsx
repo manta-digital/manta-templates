@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 import BaseCard from './BaseCard';
 
 interface QuoteCardProps {
@@ -12,7 +12,7 @@ interface QuoteCardProps {
  * A card component specifically for displaying quotes with attribution.
  */
 const QuoteCard: React.FC<QuoteCardProps> = ({
-  quote,
+  quote,  
   author,
   className,
 }) => {

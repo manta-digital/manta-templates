@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 import BaseCard from './BaseCard'; // Assuming BaseCard is defined in a separate file
 
 interface SidebarPostCardProps {

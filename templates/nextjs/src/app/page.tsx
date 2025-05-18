@@ -6,7 +6,7 @@ import {
   Container,
   GridContainer, 
   GridItem,
-  BlogCard,
+  BlogCard, 
   ProjectCard,
   VideoCard,
   QuoteCard,

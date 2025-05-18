@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image'; 
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils'; 
+import { cn, formatDate } from '@manta/ui'; 
 import BaseCard from './BaseCard'; 
 
 interface BlogCardProps {
@@ -55,7 +54,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   );
 
   return (
-    <BaseCard className={cn('overflow-hidden', className)}> 
+    <BaseCard className={cn('overflow-hidden', className)} {...baseCardProps}> 
       {cardContent}
     </BaseCard>
   );

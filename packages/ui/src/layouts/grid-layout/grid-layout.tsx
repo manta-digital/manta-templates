@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 
 /**
  * GridLayout component for data-driven bento layouts.

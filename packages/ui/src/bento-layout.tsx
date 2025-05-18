@@ -1,7 +1,7 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
-import GridContainer from '@/components/layouts/grid-layout/grid-container';
-import type { GridContainerProps } from '@/components/layouts/grid-layout/grid-container';
+import { cn } from './lib/utils';
+import GridContainer from './layouts/grid-layout/grid-container';
+import type { GridContainerProps } from './layouts/grid-layout/grid-container';
 
 interface BentoLayoutProps extends Omit<GridContainerProps, 'children'> {
   children: React.ReactNode;
@@ -50,6 +50,8 @@ const BentoLayout: React.FC<BentoLayoutProps> = ({
     </GridContainer>
   );
 };
+
+export default BentoLayout;
 
 export { BentoLayout };
 export type { BentoLayoutProps };

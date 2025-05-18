@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 /**
  * GridItem provides a flexible, responsive cell for grid layouts using Tailwind CSS.

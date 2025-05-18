@@ -2,7 +2,7 @@
 
 import React from 'react'; // Remove useState, useEffect
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from '@manta/ui';
 import { useTheme } from '@/context/themecontext'; // Import the useTheme hook
 // import { Button } from '@/components/ui/button'; // Assuming Button from shadcn/ui
 import { Sun, Moon } from 'lucide-react'; // Import icons
