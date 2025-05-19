@@ -1,16 +1,10 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/themetoggle";
 import Layout from '@/components/layout';
 import {
   Container,
-  GridContainer,  
   GridLayout,
   GridItem,
   BlogCardImage,
   ProjectCard,
-  VideoCard,
-  QuoteCard,
   BentoLayout,
 } from "@/components"; 
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";

@@ -44,7 +44,7 @@ export function ThemeProvider({
         setTheme(stored);
       }
     } catch {}
-  }, []);
+  }, [storageKey]);
 
   // Apply selected theme and persist
   useEffect(() => {
@@ -54,7 +54,7 @@ export function ThemeProvider({
     try {
       localStorage.setItem(storageKey, theme);
     } catch {}
-  }, [theme]);
+  }, [theme, storageKey]);
 
   const value = {
     theme,
