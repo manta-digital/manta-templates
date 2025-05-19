@@ -73,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const overlayContent = (
       <BaseCard tabIndex={0} className={cn('relative overflow-hidden h-full p-4', className)}>
         {/* background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           {children}
         </div>
         {/* overlay text */}
