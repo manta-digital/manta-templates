@@ -31,7 +31,7 @@
 ### Testing and Validation
 - [x] Validate page layout at common viewport sizes  
 - [x] Test all links navigate correctly in the dev server  
-- [ ] Confirm page content renders above-the-fold without errors
+- [x] Confirm page content renders above-the-fold without errors
 
 ### Stretch Goals (Optional)
 - [ ] Add footer “Powered by manta-templates” beneath all sections  

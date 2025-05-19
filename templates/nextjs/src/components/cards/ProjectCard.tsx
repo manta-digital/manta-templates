@@ -17,20 +17,18 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
-  techStack = [], // Default to empty array
+  techStack = [],
   repoUrl,
   demoUrl,
   className,
 }) => {
-  return (
-    <BaseCard className={cn('h-full', className)}> {/* Ensure card fills GridItem height */}
-      <div className="flex flex-col grow p-4"> {/* Content wrapper */}
-        <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
+  const cardContent = (
+    <BaseCard tabIndex={0} className={cn('h-full group cursor-pointer focus:ring-2 focus:ring-ring focus:outline-none', className)}>
+      <div className="flex flex-col grow p-4">
+        <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:underline">{title}</h3>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-3 grow">
           {description}
         </p>
-
-        {/* Tech Stack Chips */}
         <div className="flex flex-wrap gap-2 mb-4">
           {techStack.map((tech) => (
             <span
@@ -41,25 +39,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </span>
           ))}
         </div>
-
-        {/* Links */}
-        <div className="mt-auto flex justify-end gap-3 pt-2"> {/* Push links to bottom */}
+        <div className="mt-auto flex justify-end gap-3 pt-2">
           {repoUrl && (
             <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {/* <Github className="h-4 w-4 mr-1 inline" /> */}
               Code
             </Link>
           )}
           {demoUrl && (
-            <Link href={demoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {/* <ExternalLink className="h-4 w-4 mr-1 inline" /> */}
-              Demo
-            </Link>
+            <span className="text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors">Demo</span>
           )}
         </div>
       </div>
     </BaseCard>
   );
+
+  // If demoUrl is set, wrap the card in a Link
+  return demoUrl ? (
+    <Link href={demoUrl} className="block h-full" tabIndex={-1} aria-label={title}>
+      {cardContent}
+    </Link>
+  ) : cardContent;
 };
 
 export default ProjectCard;
