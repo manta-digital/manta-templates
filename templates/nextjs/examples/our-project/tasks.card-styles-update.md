@@ -25,10 +25,24 @@
    - [x] If not practical, document blockers and suggest alternatives (e.g. static image, SVG, or placeholder blocks).
 
 3. **Extract shared PortfolioGrid component**
-   - [ ] Create `PortfolioGrid.tsx` under `/templates/nextjs/src/app/examples/portfolio` that encapsulates the `<GridLayout>` logic and styles for the portfolio demo.
-   - [ ] Update `/templates/nextjs/src/app/examples/portfolio/page.tsx` to import and render `PortfolioGrid` instead of inline grid code.
-   - [ ] Replace `MiniGridPreview` in `/templates/nextjs/src/app/page.tsx` to import and render `PortfolioGrid` with a `mini` or scaled mode prop.
-   - [ ] Add a `mini` or `card` prop to `PortfolioGrid` to adjust row heights, gap, and card size when used as a preview, forcing the grid to always use the `lg` (or `xl`) breakpoint configuration regardless of container width.
-   - [ ] Validate that the portfolio example page and the mini preview in the card both render correctly and responsively.
+   - [x] Create `PortfolioGrid.tsx` under `/templates/nextjs/src/app/examples/portfolio` that encapsulates the `<GridLayout>` logic and styles for the portfolio demo.
+   - [x] Update `/templates/nextjs/src/app/examples/portfolio/page.tsx` to import and render `PortfolioGrid` instead of inline grid code.
+   - [x] Replace `MiniGridPreview` in `/templates/nextjs/src/app/page.tsx` to import and render `PortfolioGrid` with a `mini` or scaled mode prop.
+   - [x] Add a `mini` or `card` prop to `PortfolioGrid` to adjust row heights, gap, and card size when used as a preview, forcing the grid to always use the `lg` (or `xl`) breakpoint configuration regardless of container width.
+   - [x] Validate that the portfolio example page and the mini preview in the card both render correctly and responsively.
+
+#### Extract shared grid components for remaining layout examples
+   - [x] Create `BentoGrid.tsx` under `/templates/nextjs/src/app/examples/bentogrid` that encapsulates `<GridLayout>` logic and styles for the BentoGrid demo.
+   - [x] Update `/templates/nextjs/src/app/examples/bentogrid/page.tsx` to import and render `BentoGrid.tsx` instead of inline grid code.
+   - [x] Replace the BentoGrid card in the landing page (`/src/app/page.tsx`) with `<BentoGrid mini />` for a miniature preview.
+   - [x] Create `BlogGrid.tsx` under `/templates/nextjs/src/app/examples/blog` to encapsulate blog-grid demo layout.
+   - [x] Update `/templates/nextjs/src/app/examples/blog/page.tsx` to import and render `BlogGrid.tsx` instead of inline grid code.
+   - [ ] Create `GridLayoutExample.tsx` under `/templates/nextjs/src/app/examples/gridlayout` to extract grid code and styles.
+   - [ ] Update `/templates/nextjs/src/app/examples/gridlayout/page.tsx` to import and render `GridLayoutExample.tsx`.
+   - [ ] Replace the GridLayout Example card in the landing page with `<GridLayoutExample mini />`.
+   - [ ] Create `MasonryGrid.tsx` under `/templates/nextjs/src/app/examples/masonrygrid` to encapsulate layout and styles.
+   - [ ] Update `/templates/nextjs/src/app/examples/masonrygrid/page.tsx` to import and render `MasonryGrid.tsx`.
+   - [ ] Replace the MasonryGrid Example card in the landing page with `<MasonryGrid mini />`.
+   - [ ] Consider extracting the list layout under `/templates/nextjs/src/app/blog` into `BlogListGrid.tsx` and update `/src/app/blog/page.tsx` for consistency and test keyboard navigation.
 
 #### (Add additional card style updates below as needed)

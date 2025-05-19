@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
+import useRowHeight from '@/hooks/useRowHeight';
 import GridLayout, { GridData } from '@/components/layouts/grid-layout/grid-layout';
 
 // Shared grid configuration for the portfolio demo
@@ -52,33 +53,7 @@ interface PortfolioGridProps {
 const PortfolioGrid: React.FC<PortfolioGridProps> = ({ mini = false, className = '' }) => {
   const effectiveGridData = mini ? { default: gridData.lg } : gridData;
   const rowsCount = effectiveGridData.default.length;
-  const [rowHeight, setRowHeight] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Measure container height and compute per-row height
-  useEffect(() => {
-    function updateHeight() {
-      if (containerRef.current) {
-        const wrapper = containerRef.current;
-        const styleWrapper = window.getComputedStyle(wrapper);
-        const padTop = parseFloat(styleWrapper.paddingTop) || 0;
-        const padBottom = parseFloat(styleWrapper.paddingBottom) || 0;
-        const totalWrapperPadding = padTop + padBottom;
-        const innerHeight = wrapper.clientHeight - totalWrapperPadding;
-        const gridEl = wrapper.firstElementChild as HTMLElement;
-        const computedGrid = window.getComputedStyle(gridEl);
-        const rowGapPx = parseFloat(computedGrid.rowGap || computedGrid.gap || '0') || 0;
-        const totalGapPx = rowGapPx * (rowsCount - 1);
-        const available = innerHeight - totalGapPx;
-        if (available > 0) {
-          setRowHeight(available / rowsCount);
-        }
-      }
-    }
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, [rowsCount]);
+  const { ref: containerRef, rowHeight } = useRowHeight(rowsCount);
   const gap = mini ? '0.5em' : defaultGap;
   const minRowHeight = mini && rowHeight > 0 ? `${rowHeight}px` : defaultMinRowHeight;
 
@@ -101,7 +76,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ mini = false, className =
   );
 
   return mini ? (
-    <div ref={containerRef} className={`w-full h-full overflow-hidden p-4 ${className}`}>
+    <div ref={containerRef} className={`w-full h-full overflow-hidden px-4 pt-4 pb-4 ${className}`}>
       {grid}
     </div>
   ) : (

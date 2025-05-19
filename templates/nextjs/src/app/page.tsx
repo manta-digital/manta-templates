@@ -5,8 +5,9 @@ import {
   GridItem,
   BlogCardImage,
   ProjectCard,
-  BentoLayout,
 } from "@/components"; 
+import { BentoLayout } from "@/components/layouts/bento-layout";
+import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
 
 export default function Home() {
@@ -91,12 +92,15 @@ export default function Home() {
             description="BentoGrid layout showcase"
             techStack={[]}
             demoUrl="/examples/bentogrid"
-          />
+            overlay
+          >
+            <BentoGrid mini />
+          </ProjectCard>
           <ProjectCard
-            title="Blog Example"
-            description="Example blog layout"
+            title="GridLayout Example"
+            description="Example container-driven layout"
             techStack={[]}
-            demoUrl="/examples/blog"
+            demoUrl="/examples/gridlayout"
           />
           <ProjectCard
             title="MasonryGrid Example"
