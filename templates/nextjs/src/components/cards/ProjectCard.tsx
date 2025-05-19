@@ -71,14 +71,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // overlay mode: children as background, text overlaid
   if (overlay) {
     const overlayContent = (
-      <BaseCard tabIndex={0} className={cn('relative overflow-hidden h-full', className)}>
+      <BaseCard tabIndex={0} className={cn('relative overflow-hidden h-full p-4', className)}>
         {/* background */}
         <div className="absolute inset-0 z-0">
           {children}
         </div>
         {/* overlay text */}
         <ProjectCardBody
-          wrapperClassName="relative z-10 flex flex-col justify-end h-full p-6 pt-4 pb-0 rounded-[0.5rem] bg-black/10"
+          wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10"
           h3ClassName="text-lg font-semibold mb-2 text-white"
           pClassName="text-sm text-white mb-4"
           title={title}
