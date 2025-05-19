@@ -4,6 +4,7 @@
     "scripts": {
         "sync-guides": "bash ./scripts/sync-guides.sh"
     },
+    "workspaces": ["templates/nextjs"],
     "version": "1.0.0",
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",
     "main": "index.js",
