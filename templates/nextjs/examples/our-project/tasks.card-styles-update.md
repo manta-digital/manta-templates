@@ -37,9 +37,9 @@
    - [x] Replace the BentoGrid card in the landing page (`/src/app/page.tsx`) with `<BentoGrid mini />` for a miniature preview.
    - [x] Create `BlogGrid.tsx` under `/templates/nextjs/src/app/examples/blog` to encapsulate blog-grid demo layout.
    - [x] Update `/templates/nextjs/src/app/examples/blog/page.tsx` to import and render `BlogGrid.tsx` instead of inline grid code.
-   - [ ] Create `GridLayoutExample.tsx` under `/templates/nextjs/src/app/examples/gridlayout` to extract grid code and styles.
-   - [ ] Update `/templates/nextjs/src/app/examples/gridlayout/page.tsx` to import and render `GridLayoutExample.tsx`.
-   - [ ] Replace the GridLayout Example card in the landing page with `<GridLayoutExample mini />`.
+   - [x] Create `GridLayoutExample.tsx` under `/templates/nextjs/src/app/examples/gridlayout` to extract grid code and styles.
+   - [x] Update `/templates/nextjs/src/app/examples/gridlayout/page.tsx` to import and render `GridLayoutExample.tsx`.
+   - [x] Replace the GridLayout Example card in the landing page with `<GridLayoutExample mini />`.
    - [ ] Create `MasonryGrid.tsx` under `/templates/nextjs/src/app/examples/masonrygrid` to encapsulate layout and styles.
    - [ ] Update `/templates/nextjs/src/app/examples/masonrygrid/page.tsx` to import and render `MasonryGrid.tsx`.
    - [ ] Replace the MasonryGrid Example card in the landing page with `<MasonryGrid mini />`.

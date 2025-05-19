@@ -19,8 +19,10 @@ interface GridLayoutProps {
   gridData: GridData;
   children: React.JSX.Element[];
   className?: string;
-  gap?: string; // CSS gap (e.g., '1rem', '1.5rem')
-  minRowHeight?: string; // CSS min row height
+  /** CSS gap value e.g. '1rem' or '0.5rem'. Optional, omit to use CSS classes for gap. */
+  gap?: string;
+  /** CSS grid-auto-rows value e.g. '150px' */
+  minRowHeight?: string;
 }
 
 const DEFAULT_TOTAL_COLS = 6;
@@ -39,7 +41,7 @@ const DEFAULT_TOTAL_COLS = 6;
  * @param {string} [props.gap] - Optional CSS gap value (e.g., '1rem').
  * @param {string} [props.minRowHeight] - Optional CSS minimum row height (e.g., '150px').
  */
-export const GridLayout: React.FC<GridLayoutProps> = ({ gridData, children, className, gap = '1rem', minRowHeight }) => {
+export const GridLayout: React.FC<GridLayoutProps> = ({ gridData, children, className = '', gap, minRowHeight }) => {
   const breakpoint = useBreakpoint();
   
   // Determine layout by falling back through breakpoints to the nearest defined gridData key
@@ -57,15 +59,15 @@ export const GridLayout: React.FC<GridLayoutProps> = ({ gridData, children, clas
 
   let childIndex = 0;
 
+  // Build inline styles only for provided values
+  const styles: React.CSSProperties = {
+    gridTemplateColumns: `repeat(${totalCols}, minmax(0, 1fr))`,
+    ...(gap ? { columnGap: gap, rowGap: gap } : {}),
+    ...(minRowHeight ? { gridAutoRows: minRowHeight } : {}),
+  };
+
   return (
-    <div
-      className={`grid ${className || ''}`}
-      style={{
-        gridTemplateColumns: `repeat(${totalCols}, minmax(0, 1fr))`,
-        gap,
-        ...(minRowHeight && { gridAutoRows: minRowHeight })
-      }}
-    >
+    <div className={`grid ${className}`} style={styles}>
       {layout.map((row, rowIdx) => (
         <React.Fragment key={rowIdx}>
           {row.map((span, colIdx) => {

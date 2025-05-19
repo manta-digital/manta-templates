@@ -9,6 +9,7 @@ import {
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
+import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 
 export default function Home() {
   return (
@@ -101,7 +102,10 @@ export default function Home() {
             description="Example container-driven layout"
             techStack={[]}
             demoUrl="/examples/gridlayout"
-          />
+            overlay
+          >
+            <GridLayoutExample mini />
+          </ProjectCard>
           <ProjectCard
             title="MasonryGrid Example"
             description="Masonry grid showcase"
