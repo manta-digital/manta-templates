@@ -7,7 +7,7 @@ import {
   GridContainer,  
   GridLayout,
   GridItem,
-  BlogCard,
+  BlogCardImage,
   ProjectCard,
   VideoCard,
   QuoteCard,
@@ -84,11 +84,13 @@ export default function Home() {
           gap="1rem"
           minRowHeight="200px"
         >
-          <ProjectCard
-            title="Blog"
-            description="MDX-driven content, blog layout"
-            techStack={[]}
-            demoUrl="/blog"
+          <BlogCardImage
+            title="Blog Example"
+            excerpt="MDX-driven content, blog layout"
+            coverImageUrl="/image/blog-sample-image.png"
+            slug="/blog"
+            className="h-full"
+            imageMaxHeight="max-h-52"
           />
           <ProjectCard
             title="BentoGrid Example"
