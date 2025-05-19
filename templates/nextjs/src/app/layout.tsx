@@ -25,11 +25,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
+              try {
+                var stored = localStorage.getItem('ui-theme');
+                if (stored) {
+                  document.documentElement.classList.add(stored);
+                } else {
+                  var media = window.matchMedia('(prefers-color-scheme: dark)');
+                  document.documentElement.classList.add(media.matches ? 'dark' : 'light');
+                }
+              } catch (e) {}
+            })();`,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-200 ease-in-out`}
       >
         <ThemeProvider
-          defaultTheme="dark" // Or "dark" if you prefer dark by default
+          defaultTheme="dark" 
           storageKey="ui-theme"
         >
           {children}

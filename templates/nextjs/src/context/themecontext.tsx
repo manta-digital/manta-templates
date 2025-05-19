@@ -35,37 +35,26 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
-  const [mounted, setMounted] = useState(false);
 
+  // Initialize theme from localStorage on mount
   useEffect(() => {
-    setMounted(true);
-
-    // Read persisted theme from storage only after mount
-    let storedTheme: Theme | null = null;
     try {
-      storedTheme = localStorage.getItem(storageKey) as Theme;
-    } catch (e) {
-      console.error("Error reading localStorage for theme", e);
-    }
+      const stored = localStorage.getItem(storageKey) as Theme;
+      if (stored === "light" || stored === "dark") {
+        setTheme(stored);
+      }
+    } catch {}
+  }, []);
 
-    // Set the theme based on storage or default, only if different from current
-    const effectiveTheme = storedTheme || defaultTheme;
-    if (effectiveTheme !== theme) {
-      setTheme(effectiveTheme);
-    }
-  }, [storageKey, defaultTheme, theme, setMounted]); // Run only once on mount
-
+  // Apply selected theme and persist
   useEffect(() => {
-    // This effect now only runs when theme state changes *after* initial mount sync
-    if (!mounted) return; // Don't run before mount check completes
-
-    const root = window.document.documentElement;
-
+    const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
-
-    localStorage.setItem(storageKey, theme);
-  }, [theme, storageKey, mounted]); // Depend on theme, storageKey, and mounted
+    try {
+      localStorage.setItem(storageKey, theme);
+    } catch {}
+  }, [theme]);
 
   const value = {
     theme,
@@ -73,11 +62,6 @@ export function ThemeProvider({
       setTheme(newTheme);
     },
   };
-
-  // To prevent flash of unstyled content or incorrect theme, ensure children are
-  // only rendered after mount or provide a mechanism for initial styling (like the
-  // removed inline script or specific CSS targeting :root[data-theme=...])
-  // For now, relying on suppressHydrationWarning and the component-level mount checks.
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
