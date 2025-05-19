@@ -12,8 +12,8 @@ import {
   VideoCard,
   QuoteCard,
   BentoLayout,
-
 } from "@/components"; 
+import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
 
 export default function Home() {
   return (
@@ -115,7 +115,10 @@ export default function Home() {
             description="Portfolio layout showcase"
             techStack={[]}
             demoUrl="/examples/portfolio"
-          />
+            overlay
+          >
+            <PortfolioGrid mini />
+          </ProjectCard>
         </GridLayout>
       </Container>
     </Layout>
