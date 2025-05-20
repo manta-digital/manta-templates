@@ -6,7 +6,8 @@ import {
   BlogCardImage,
   ProjectCard,
   ProjectFeatureCard,
-  ComingSoonFeatureCard
+  ComingSoonFeatureCard,
+  GuidesFeatureCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
@@ -37,29 +38,27 @@ export default function Home() {
           </p>
         </div>
         <BentoLayout gap={8} columns="grid-cols-6">
-        <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-          <ProjectFeatureCard
-            title="Next.js Starter"
-            description="Modern full-stack starter with responsive grid layouts."
-            techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
-            repoUrl="/templates/nextjs"
-            demoUrl="https://github.com/manta-digital/manta-templates/tree/main/nextjs"
-          />
-        </GridItem>
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+            <ProjectFeatureCard
+              title="Next.js Starter"
+              description="Modern full-stack starter with responsive grid layouts."
+              techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
+              repoUrl="/templates/nextjs"
+              demoUrl="https://github.com/manta-digital/manta-templates/tree/main/nextjs"
+            />
+          </GridItem>
+          <GridItem 
+            colSpan="col-span-full md:col-span-2 lg:col-span-4"
+            className="md:row-start-2"
+          >
             <ComingSoonFeatureCard />
           </GridItem>
           <GridItem 
-            colSpan="col-span-full md:col-span-2 lg:col-span-2" 
-            rowSpan="lg:row-span-2"
-            className="lg:row-start-1 lg:col-start-5"
+            colSpan="col-span-full md:col-span-4 lg:col-span-2" 
+            rowSpan="md:row-span-2 lg:row-span-3"
+            className="lg:row-start-1 md:col-start-3 lg:col-start-5"
           >
-            <ProjectCard
-              title="Guides & Docs"
-              description="Comprehensive usage guides and documentation"
-              techStack={[]}
-              demoUrl="/project-documents"
-            />
+            <GuidesFeatureCard />
           </GridItem>
         </BentoLayout>
       </Container>

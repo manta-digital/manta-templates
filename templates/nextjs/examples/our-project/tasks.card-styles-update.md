@@ -62,17 +62,19 @@
 - [x] Write a simple smoke test or Storybook story for the component
 
 #### Add Guides & Docs Card
-- [ ] Create `GuidesFeatureCard.tsx` under `src/components/cards` with the provided reference layout and styles.
-- [ ] Import `FileText`, `BookOpen`, `Code`, `Terminal`, `ExternalLink`, `Search`, `GitBranch`, and `Cpu` from `lucide-react` in the new component.
-- [ ] Wrap the card content in `FeatureCardWrapper` (rounded-[0.5em], bg-gradient-to-br from-slate-900 to-slate-800, border border-slate-700, hover:border-purple-500, hover:shadow-purple-900/20).
-- [ ] Implement the header section with title "Guides & Docs", description, and `BookOpen` icon.
-- [ ] Implement the main content area with two columns: key guides (AI Project Guide quick start, links to Monorepo Structure, CLI Commands, Custom Configuration) and documentation resources grid (Getting Started, Templates, API Reference, Examples).
-- [ ] Implement the footer with search icon and label, and a "View All Documentation" button with `ExternalLink` icon.
-- [ ] Export `GuidesFeatureCard` in `src/components/cards/index.ts`.
-- [ ] Import and render `GuidesFeatureCard` in `/src/app/page.tsx` landing page in the Templates grid.
-- [ ] Write a smoke test or Storybook story for `GuidesFeatureCard` to verify layout and interactions.
+- [x] Create `GuidesFeatureCard.tsx` under `src/components/cards` with the provided reference layout and styles.
+- [x] Import `FileText`, `BookOpen`, `Code`, `Terminal`, `ExternalLink`, `Search`, `GitBranch`, and `Cpu` from `lucide-react` in the new component.
+- [x] Wrap the card content in `FeatureCardWrapper` (rounded-[0.5em], bg-gradient-to-br from-slate-900 to-slate-800, border border-slate-700, hover:border-purple-500, hover:shadow-purple-900/20).
+- [x] Implement the header section with title "Guides & Docs", description, and `BookOpen` icon.
+- [x] Implement the main content area with two columns: key guides (AI Project Guide quick start, links to Monorepo Structure, CLI Commands, Custom Configuration) and documentation resources grid (Getting Started, Templates, API Reference, Examples).
+- [x] Implement the footer with search icon and label, and a "View All Documentation" button with `ExternalLink` icon.
+- [x] Export `GuidesFeatureCard` in `src/components/cards/index.ts`.
+- [x] Import and render `GuidesFeatureCard` in `/src/app/page.tsx` landing page in the Templates grid.
 
 #### Maintenance Items
+- [ ] Factor out hard-coded content from `BlogIndexLayout.tsx` to support dynamic data.
 - [ ] Factor out hard-coded content from project, coming soon, and guides feature cards to support dynamic data.
+- [ ] Write a smoke test or Storybook story for `GuidesFeatureCard` to verify layout and interactions.
+
 
 #### (Add additional card style updates below as needed)

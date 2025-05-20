@@ -33,6 +33,11 @@ export default function ComingSoonFeatureCard() {
             </div>
           </div>
         </div>
+        
+        {/* Divider */}
+        <div className="hidden lg:block w-0.5 bg-slate-700/70 h-full mx-0" />
+        <div className="block lg:hidden h-0.5 bg-slate-700/70 w-full mx-0" />
+
         {/* Content section */}
         <div className="p-6 lg:w-1/2 lg:flex lg:flex-col lg:justify-center">
           <div className="mb-4 text-slate-300 flex items-center">
