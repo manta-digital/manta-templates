@@ -40,9 +40,19 @@
    - [x] Create `GridLayoutExample.tsx` under `/templates/nextjs/src/app/examples/gridlayout` to extract grid code and styles.
    - [x] Update `/templates/nextjs/src/app/examples/gridlayout/page.tsx` to import and render `GridLayoutExample.tsx`.
    - [x] Replace the GridLayout Example card in the landing page with `<GridLayoutExample mini />`.
-   - [ ] Create `MasonryGrid.tsx` under `/templates/nextjs/src/app/examples/masonrygrid` to encapsulate layout and styles.
-   - [ ] Update `/templates/nextjs/src/app/examples/masonrygrid/page.tsx` to import and render `MasonryGrid.tsx`.
-   - [ ] Replace the MasonryGrid Example card in the landing page with `<MasonryGrid mini />`.
+   - [x] Create `MasonryGrid.tsx` under `/templates/nextjs/src/app/examples/masonrygrid` to encapsulate layout and styles.
+   - [x] Update `/templates/nextjs/src/app/examples/masonrygrid/page.tsx` to import and render `MasonryGrid.tsx`.
+   - [x] Replace the MasonryGrid Example card in the landing page with `<MasonryGrid mini />`.
    - [ ] Consider extracting the list layout under `/templates/nextjs/src/app/blog` into `BlogListGrid.tsx` and update `/src/app/blog/page.tsx` for consistency and test keyboard navigation.
+
+#### Update Project Feature Card
+
+- [x] Make border match the border on the 2nd card in the example image (`bg-teal-500`, thin appearing style)
+- [x] Move the buttons for the different techs into the content section, reduce corner rounding, and tone down the colors.
+- [x] Increase left padding in content section (pl-10).
+- [x] Make vertical divider extend the height of the card it is dividing.
+- [x] Increasing padding for text in title section.  Increase all, but increase top more than the others.
+
+
 
 #### (Add additional card style updates below as needed)

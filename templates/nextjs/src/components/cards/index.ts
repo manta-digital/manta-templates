@@ -8,3 +8,4 @@ export { default as QuoteCard } from './QuoteCard';
 export { default as BlogHeroCard } from './BlogHeroCard';
 export { default as SidebarPostCard } from './SidebarPostCard';
 export { BlogCardImage } from './BlogCardImage';
+export { default as ProjectFeatureCard } from './ProjectFeatureCard';

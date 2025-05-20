@@ -5,6 +5,7 @@ import {
   GridItem,
   BlogCardImage,
   ProjectCard,
+  ProjectFeatureCard,
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
@@ -34,14 +35,15 @@ export default function Home() {
           </p>
         </div>
         <BentoLayout gap={8} columns="grid-cols-6">
-          <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-            <ProjectCard
-              title="Next.js Starter"
-              description="Next.js 15 + Tailwind 4 + shadcn/radix"
-              techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
-              repoUrl="/templates/nextjs"
-            />
-          </GridItem>
+        <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+          <ProjectFeatureCard
+            title="Next.js Starter"
+            description="Next.js 15 + Tailwind 4 + shadcn/radix"
+            techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
+            repoUrl="/templates/nextjs"
+            demoUrl="https://github.com/manta-digital/manta-templates/tree/main/nextjs"
+          />
+        </GridItem>
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
             <ProjectCard
               title="Astro Starter"
