@@ -12,6 +12,7 @@ import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
 import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
+import { FileText } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -38,17 +39,18 @@ export default function Home() {
         <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
           <ProjectFeatureCard
             title="Next.js Starter"
-            description="Next.js 15 + Tailwind 4 + shadcn/radix"
+            description="Modern full-stack starter with responsive grid layouts."
             techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
             repoUrl="/templates/nextjs"
             demoUrl="https://github.com/manta-digital/manta-templates/tree/main/nextjs"
           />
         </GridItem>
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-            <ProjectCard
+            <ProjectFeatureCard
               title="Astro Starter"
               description="Astro-based template (coming soon)"
               techStack={[]}
+              features={[{ icon: <FileText size={14} className="mr-2 text-slate-400" />, label: 'Coming Soon!' }]}
             />
           </GridItem>
           <GridItem 

@@ -53,6 +53,12 @@
 - [x] Make vertical divider extend the height of the card it is dividing.
 - [x] Increasing padding for text in title section.  Increase all, but increase top more than the others.
 
+#### Add Coming Soon Feature Card
 
+- [ ] Create `ComingSoonFeatureCard.tsx` under `src/components/cards` with the Astro template layout (stars animation, status badge, action buttons)
+- [ ] Import `FileText`, `Rocket`, `Star`, `Box`, and `Globe` from `lucide-react` in the new component
+- [ ] Add `ComingSoonFeatureCard` to `/src/app/page.tsx`, replacing the Astro Starter card
+- [ ] Ensure responsive layout and hover animations match design
+- [ ] Write a simple smoke test or Storybook story for the component
 
 #### (Add additional card style updates below as needed)

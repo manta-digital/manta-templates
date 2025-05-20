@@ -1,12 +1,13 @@
 import React from 'react';
 import { Code, Layers, Zap, FileText } from 'lucide-react';
+import FeatureCardWrapper from './FeatureCardWrapper';
 
 const techColors = [
-  { bg: 'bg-mintteal-500/80', text: 'text-slate-100', border: 'border-teal-500/80' },
-  { bg: 'bg-purple-500/80', text: 'text-slate-100', border: 'border-purple-400/80' },
-  { bg: 'bg-blue-500/80', text: 'text-slate-100', border: 'border-blue-400/80' },
-  { bg: 'bg-cyan-500/80', text: 'text-slate-100', border: 'border-cyan-400/80' },
-  { bg: 'bg-emerald-500/80', text: 'text-slate-100', border: 'border-emerald-400/80' },
+  { bg: 'bg-mintteal-600/80', text: 'text-slate-100', border: 'border-teal-600/80' },
+  { bg: 'bg-purple-600/80', text: 'text-slate-100', border: 'border-purple-500/80' },
+  { bg: 'bg-blue-600/80', text: 'text-slate-100', border: 'border-blue-500/80' },
+  { bg: 'bg-cyan-600/80', text: 'text-slate-100', border: 'border-cyan-500/80' },
+  { bg: 'bg-emerald-600/80', text: 'text-slate-100', border: 'border-emerald-500/80' },
 ];
 
 interface ProjectFeatureCardProps {
@@ -34,7 +35,7 @@ export default function ProjectFeatureCard({
     ];
 
   return (
-    <div className="w-full max-w-6xl overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg border border-teal-500 hover:border-teal-600 hover:scale-[1.02] transition-all duration-300 hover:shadow-teal-900/20 hover:shadow-xl">
+    <FeatureCardWrapper>
       <div className="flex flex-col lg:flex-row lg:h-64">
         {/* Title section */}
         <div className="relative lg:w-1/4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 overflow-hidden flex flex-col justify-center p-8">
@@ -47,7 +48,7 @@ export default function ProjectFeatureCard({
           </div>
           <div className="relative z-10 flex flex-col items-start">
             <h2 className="text-3xl font-bold text-white tracking-tight text-balance break-words leading-tight mb-2">{title}</h2>
-            <p className="text-base text-slate-200 mb-4">{description}</p>
+            <p className="text-base text-slate-200 mb-4">{techStack.join(' + ')}</p>
           </div>
         </div>
         {/* Divider */}
@@ -57,7 +58,7 @@ export default function ProjectFeatureCard({
         <div className="p-6 lg:pl-10 lg:w-1/2 lg:flex lg:flex-col lg:justify-center">
           <div className="mb-4 text-slate-300 flex items-center">
             <Code size={16} className="mr-2 text-cyan-400" />
-            <span className="text-sm">{techStack.join(', ')}</span>
+            <span className="text-sm">{description}</span>
           </div>
           <div className="flex flex-wrap gap-2 mb-4">
             {techStack.map((tech, i) => {
@@ -118,6 +119,6 @@ export default function ProjectFeatureCard({
           )}
         </div>
       </div>
-    </div>
+    </FeatureCardWrapper>
   );
 }
