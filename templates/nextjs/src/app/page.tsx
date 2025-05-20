@@ -6,6 +6,7 @@ import {
   BlogCardImage,
   ProjectCard,
   ProjectFeatureCard,
+  ComingSoonFeatureCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
@@ -46,12 +47,7 @@ export default function Home() {
           />
         </GridItem>
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-            <ProjectFeatureCard
-              title="Astro Starter"
-              description="Astro-based template (coming soon)"
-              techStack={[]}
-              features={[{ icon: <FileText size={14} className="mr-2 text-slate-400" />, label: 'Coming Soon!' }]}
-            />
+            <ComingSoonFeatureCard />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-2 lg:col-span-2" 

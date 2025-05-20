@@ -55,10 +55,24 @@
 
 #### Add Coming Soon Feature Card
 
-- [ ] Create `ComingSoonFeatureCard.tsx` under `src/components/cards` with the Astro template layout (stars animation, status badge, action buttons)
-- [ ] Import `FileText`, `Rocket`, `Star`, `Box`, and `Globe` from `lucide-react` in the new component
-- [ ] Add `ComingSoonFeatureCard` to `/src/app/page.tsx`, replacing the Astro Starter card
-- [ ] Ensure responsive layout and hover animations match design
-- [ ] Write a simple smoke test or Storybook story for the component
+- [x] Create `ComingSoonFeatureCard.tsx` under `src/components/cards` with the Astro template layout (stars animation, status badge, action buttons)
+- [x] Import `FileText`, `Rocket`, `Star`, `Box`, and `Globe` from `lucide-react` in the new component
+- [x] Add `ComingSoonFeatureCard` to `/src/app/page.tsx`, replacing the Astro Starter card
+- [x] Ensure responsive layout and hover animations match design
+- [x] Write a simple smoke test or Storybook story for the component
+
+#### Add Guides & Docs Card
+- [ ] Create `GuidesFeatureCard.tsx` under `src/components/cards` with the provided reference layout and styles.
+- [ ] Import `FileText`, `BookOpen`, `Code`, `Terminal`, `ExternalLink`, `Search`, `GitBranch`, and `Cpu` from `lucide-react` in the new component.
+- [ ] Wrap the card content in `FeatureCardWrapper` (rounded-[0.5em], bg-gradient-to-br from-slate-900 to-slate-800, border border-slate-700, hover:border-purple-500, hover:shadow-purple-900/20).
+- [ ] Implement the header section with title "Guides & Docs", description, and `BookOpen` icon.
+- [ ] Implement the main content area with two columns: key guides (AI Project Guide quick start, links to Monorepo Structure, CLI Commands, Custom Configuration) and documentation resources grid (Getting Started, Templates, API Reference, Examples).
+- [ ] Implement the footer with search icon and label, and a "View All Documentation" button with `ExternalLink` icon.
+- [ ] Export `GuidesFeatureCard` in `src/components/cards/index.ts`.
+- [ ] Import and render `GuidesFeatureCard` in `/src/app/page.tsx` landing page in the Templates grid.
+- [ ] Write a smoke test or Storybook story for `GuidesFeatureCard` to verify layout and interactions.
+
+#### Maintenance Items
+- [ ] Factor out hard-coded content from project, coming soon, and guides feature cards to support dynamic data.
 
 #### (Add additional card style updates below as needed)
