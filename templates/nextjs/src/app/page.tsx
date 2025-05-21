@@ -7,20 +7,20 @@ import {
   ProjectCard,
   ProjectFeatureCard,
   ComingSoonFeatureCard,
-  GuidesFeatureCard
+  GuidesFeatureCard,
+  QuoteCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
 import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
-import { FileText } from 'lucide-react';
 
 export default function Home() {
   return (
     <Layout>
       {/* Hero */}
-      <Container className="pt-20 pb-16">
+      <Container className="pt-20 pb-6">
         <div className="max-w-2xl mx-auto text-center space-y-4">
           <h1 className="text-5xl font-bold">manta-templates</h1>
           <p className="text-lg text-muted-foreground">
@@ -43,8 +43,8 @@ export default function Home() {
               title="Next.js Starter"
               description="Modern full-stack starter with responsive grid layouts."
               techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
-              repoUrl="/templates/nextjs"
-              demoUrl="https://github.com/manta-digital/manta-templates/tree/main/nextjs"
+              repoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
+              demoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
             />
           </GridItem>
           <GridItem 
@@ -59,6 +59,19 @@ export default function Home() {
             className="lg:row-start-1 md:col-start-3 lg:col-start-5"
           >
             <GuidesFeatureCard />
+          </GridItem>
+          <GridItem 
+            colSpan="col-span-full md:col-span-2 lg:col-span-4"
+            className="h-full"
+          >
+            <div className="h-full">
+              <QuoteCard 
+                quote="The art of programming is the skill of controlling complexity. The great program is subdued — made simple in its complexity."
+                author="Rich Hickey"
+                variant="primary"
+                className="h-full"
+              />
+            </div>
           </GridItem>
         </BentoLayout>
       </Container>

@@ -1,31 +1,104 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
+import { useTheme } from '@/context/themecontext';
 
 interface QuoteCardProps {
+  /** The quote text to display */
   quote: string;
-  author: string;
+  /** Optional author attribution */
+  author?: string;
+  /** Additional class names */
   className?: string;
+  /** Visual style variant */
+  variant?: 'primary' | 'secondary';
 }
 
 /**
- * A card component specifically for displaying quotes with attribution.
+ * A visually appealing quote card with gradient borders and shimmer effect
  */
 const QuoteCard: React.FC<QuoteCardProps> = ({
   quote,
   author,
   className,
+  variant = 'primary',
 }) => {
+  const { theme } = useTheme();
+  const [shimmerPosition, setShimmerPosition] = useState(0);
+  
+  // Shimmer animation effect
+  useEffect(() => {
+    const animateShimmer = () => {
+      setShimmerPosition(prev => (prev >= 100 ? 0 : prev + 0.5));
+    };
+    
+    const interval = setInterval(animateShimmer, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Define gradient classes based on variant
+  const gradientClasses = {
+    primary: 'from-purple-600 via-indigo-600 to-blue-600',
+    secondary: 'from-purple-600 via-blue-600 to-indigo-600'
+  };
+  
+  // Define accent color classes based on variant
+  const accentColors = {
+    primary: 'text-purple-400',
+    secondary: 'text-blue-400'
+  };
+
   return (
-    <BaseCard className={cn('justify-center p-6', className)}>
-      <figure>
-        <blockquote className="italic text-lg md:text-xl leading-snug">
-          <p>&quot;{quote}&quot;</p>
-        </blockquote>
-        <figcaption className="mt-4 text-sm text-muted-foreground text-right">
-          — {author}
-        </figcaption>
-      </figure>
+    <BaseCard className={
+      cn('relative rounded-lg overflow-hidden p-0', 
+        'bg-white dark:bg-gray-800',
+        className)}
+    >
+      {/* Outer container with border gradient and shimmer effect */}
+      <div className="relative overflow-hidden rounded-lg">
+        
+        {/* Inner card content with radial gradient */}
+        <div 
+          className={cn(
+            'relative rounded-lg p-16',
+            'bg-white dark:bg-gray-800',
+            'text-gray-800 dark:text-gray-300',
+            'transition-colors duration-200'
+          )}
+        >
+          {/* Quote with quotation marks */}
+          <div className="relative">
+            <p 
+              className={cn(
+                'text-lg italic font-normal text-center',
+                'text-gray-700 dark:text-gray-300',
+                'transition-colors duration-200',
+                theme === 'dark' ? 'opacity-90' : 'opacity-95'
+              )}
+              style={{
+                textShadow: theme === 'dark'
+                  ? '0 0 1px rgba(139, 92, 246, 0.1)'
+                  : '0 0 1px rgba(0,0,0,0.05)'
+              }}
+            >
+              <span className={cn('text-2xl mr-1', accentColors[variant])}>
+                &ldquo;
+              </span>
+              {quote}
+              <span className={cn('text-2xl ml-1', accentColors[variant])}>
+                &rdquo;
+              </span>
+            </p>
+            {author && (
+              <figcaption className="mt-4 text-right text-sm text-muted-foreground">
+                — {author}
+              </figcaption>
+            )}
+          </div>
+        </div>
+      </div>
     </BaseCard>
   );
 };
