@@ -71,6 +71,47 @@
 - [x] Export `GuidesFeatureCard` in `src/components/cards/index.ts`.
 - [x] Import and render `GuidesFeatureCard` in `/src/app/page.tsx` landing page in the Templates grid.
 
+#### Add Coming Soon Overlay Component
+
+- [ ] **Design & Plan Coming Soon Overlay**
+  - [ ] Review `guide.ai-project.process` Phases 3 & 4 for design system/componentization and UX polish requirements.
+  - [ ] Reference `guide.ai-project.task-expansion` for detail expansion and process linkage.
+  - [ ] Define overlay requirements: themeable (color prop), badge label prop, blur/opacity customization, pattern density, accessibility, and composability.
+  - [ ] Draft component API signature and prop types.
+  - [ ] Create initial Tailwind style map for gradients, blur, and badges.
+  - [ ] Confirm icon library imports and dependencies (e.g., lucide-react).
+  - [ ] Specify accessibility attributes (aria-disabled, role).
+  - [ ] Write design spec section in documentation for overlay behavior and theming.
+
+- [ ] **Implement Universal Coming Soon Overlay**
+  - [ ] Create a reusable `ComingSoonOverlay` component under `src/components/overlays/`.
+  - [ ] Accept props: `color` (teal, purple, etc.), `label`, `blurAmount`, `patternLines`, `children`, and `className`.
+  - [ ] Implement diagonal pattern and badge, using color map for theme alignment.
+  - [ ] Ensure overlay is accessible (aria-disabled, role="presentation").
+  - [ ] Write Storybook story or smoke test for the overlay.
+
+- [ ] **Integrate Overlay with GuidesFeatureCard**
+  - [ ] Apply `ComingSoonOverlay` to the API documentation card in `src/components/cards/GuidesFeatureCard.tsx`.
+  - [ ] Use purple theme for API docs overlay, teal for greenish items, etc.
+  - [ ] Adjust blur and opacity for optimal UX focus.
+  - [ ] Ensure underlying card content is blurred and interaction is blocked.
+
+- [ ] **Polish & Document**
+  - [ ] Confirm overlay works across all supported themes and screen sizes.
+  - [ ] Update documentation for overlay usage and theming.
+  - [ ] Review accessibility and keyboard navigation.
+  - [ ] Solicit feedback from project manager before rollout to other cards.
+
+---
+
+##### Notes
+
+- Project: manta-templates
+- Framework: nextjs
+- Tools: tailwindcss (4), shadcn
+- Initial integration target: API documentation card in `GuidesFeatureCard.tsx`
+- All design and process expansions should follow project guides and .windsurfrules.
+
 #### Maintenance Items
 - [ ] Factor out hard-coded content from `BlogIndexLayout.tsx` to support dynamic data.
 - [ ] Factor out hard-coded content from project, coming soon, and guides feature cards to support dynamic data.

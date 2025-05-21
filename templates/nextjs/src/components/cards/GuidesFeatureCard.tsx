@@ -2,6 +2,7 @@ import React from 'react';
 import FeatureCardWrapper from './FeatureCardWrapper';
 import { FileText, BookOpen, Code, Terminal, ExternalLink, Search, GitBranch, Cpu } from 'lucide-react';
 import GridLayout from '@/components/layouts/grid-layout/grid-layout';
+import { ComingSoonOverlay } from '../overlays/ComingSoonOverlay';
 
 export default function GuidesFeatureCard() {
   return (
@@ -21,12 +22,15 @@ export default function GuidesFeatureCard() {
               <Cpu size={18} className="mr-2 text-purple-400" />
               AI Project Guide
             </h3>
+            <ComingSoonOverlay color="purple" blurAmount="sm">
             <div className="bg-slate-800/50 rounded-[0.5em] p-4 pt-2 pb-4 border border-slate-700">
               <div className="text-xs text-slate-400 mb-2">Quick start</div>
               <div className="font-mono text-sm text-slate-300 bg-slate-900/70 p-3 pb-4 rounded overflow-x-auto">
                 <span className="text-emerald-400">npx</span> <span className="text-purple-400">create-manta-app</span> <span className="text-blue-400">my-ai-project</span>
               </div>
             </div>
+            </ComingSoonOverlay>
+            
             <div className="space-y-2">
               <a href="#" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
                 <GitBranch size={14} className="mr-2 text-purple-400" />
@@ -65,6 +69,7 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
+                <ComingSoonOverlay color="purple" blurAmount="sm">
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">API Reference</div>
                     <p className="text-xs text-slate-400 flex-grow">Complete API documentation</p>
@@ -73,6 +78,7 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
+                </ComingSoonOverlay>
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">Examples</div>
                     <p className="text-xs text-slate-400 flex-grow">Sample projects and demos</p>
