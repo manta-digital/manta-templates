@@ -1,6 +1,6 @@
 import React from 'react';
 import FeatureCardWrapper from './FeatureCardWrapper';
-import { FileText, BookOpen, Code, Terminal, ExternalLink, Search, GitBranch, Cpu } from 'lucide-react';
+import { FileText, BookOpen, Code, Terminal, ExternalLink, GitBranch, Cpu } from 'lucide-react';
 import GridLayout from '@/components/layouts/grid-layout/grid-layout';
 import { ComingSoonOverlay } from '../overlays/ComingSoonOverlay';
 

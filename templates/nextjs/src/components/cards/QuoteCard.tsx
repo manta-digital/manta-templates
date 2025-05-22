@@ -26,7 +26,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
   variant = 'primary',
 }) => {
   const { theme } = useTheme();
-  const [shimmerPosition, setShimmerPosition] = useState(0);
+  const setShimmerPosition = useState(0)[1];
   
   // Shimmer animation effect
   useEffect(() => {
@@ -36,13 +36,15 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
     
     const interval = setInterval(animateShimmer, 50);
     return () => clearInterval(interval);
-  }, []);
+  }, [setShimmerPosition]);
 
   // Define gradient classes based on variant
+  {/* 
   const gradientClasses = {
     primary: 'from-purple-600 via-indigo-600 to-blue-600',
     secondary: 'from-purple-600 via-blue-600 to-indigo-600'
   };
+  */}
   
   // Define accent color classes based on variant
   const accentColors = {
