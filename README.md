@@ -4,6 +4,41 @@
 
 ---
 
+# manta-templates 🏄‍♂️ v0.4
+
+A **Next.js 15 starter** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
+
+> **Note:** This project is in active development (v0.4). Expect breaking changes.
+
+
+---
+
+## Why it Exists and Where it's Going
+
+### Why it exists  
+I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows:
+
+* **ai-project-guide** ↔️ pre-wired: generate detailed task lists, docs, or next steps with parameterized prompts.
+* **Tailwind 4** grid **Cards**: drop-in components for text, code, metrics, images—ready to customize.  
+* Clean Markdown content pipeline, Shiki code-highlighting, image optimization, dark/light theme toggle.
+
+### Where it's Going
+
+🎞️ Video, 3D, and chart cards (embed YouTube, Three.js, SciChart)
+🎨 Radix color themes & preset palettes
+📚 Astro static template
+
+Status · Early-Access (v0.4)
+Heads-up: v0.4 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
+
+Known gaps: limited card types, no Radix theme switcher, inconsistent lint rules, limited support for markdown-driven content.
+
+Interfaces may change between minor versions.
+
+Bug reports are welcome; expect some rough edges as we stabilize toward v1.0.
+
+
+
 ## 🚀 Quickstart
 
 ### Standalone Template usage
