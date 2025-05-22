@@ -1,6 +1,3 @@
-Below is a complete, deduplicated **`README.md`** for the **manta-templates** monorepo. It embeds the improved **`sync-guides`** script so users never have to manually add the remote:
-
-````markdown
 # manta-templates
 
 > Monorepo of opinionated starter templates (Next.js, Astro, React-Native soon!), plus shared UI components and curated project guides.
@@ -40,7 +37,7 @@ cd templates/nextjs
 pnpm install
 pnpm run setup-guides    # copies public guides into project-documents
 pnpm dev                 # launches the dev server
-````
+```
 
 *Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
 

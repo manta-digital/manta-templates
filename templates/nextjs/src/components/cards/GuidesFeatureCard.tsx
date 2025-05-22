@@ -32,15 +32,15 @@ export default function GuidesFeatureCard() {
             </ComingSoonOverlay>
             
             <div className="space-y-2">
-              <a href="#" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
+              <a href="https://github.com/manta-digital/manta-templates" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
                 <GitBranch size={14} className="mr-2 text-purple-400" />
                 <span className="text-sm">Monorepo Structure</span>
               </a>
-              <a href="#" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
+              <a href="https://github.com/manta-digital/manta-templates" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
                 <Terminal size={14} className="mr-2 text-purple-400" />
                 <span className="text-sm">CLI Commands Reference</span>
               </a>
-              <a href="#" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
+              <a href="https://github.com/manta-digital/manta-templates" className="flex items-center text-slate-300 hover:text-purple-400 transition-colors">
                 <Code size={14} className="mr-2 text-purple-400" />
                 <span className="text-sm">Custom Configuration</span>
               </a>
@@ -53,6 +53,13 @@ export default function GuidesFeatureCard() {
               Documentation
             </h3>
             <GridLayout gridData={{ default: [[1,1],[1,1]] }} gap="0.75rem">
+              <a
+                href="https://github.com/manta-digital/manta-templates"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+                aria-label="Getting Started: Quick installation guide and first steps"
+              >
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">Getting Started</div>
                     <p className="text-xs text-slate-400 flex-grow">Quick installation guide and first steps</p>
@@ -61,6 +68,14 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
+              </a>
+              <a
+                href="https://github.com/manta-digital/manta-templates"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+                aria-label="Templates: Available project templates and usage"
+              >
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">Templates</div>
                     <p className="text-xs text-slate-400 flex-grow">Available project templates and usage</p>
@@ -69,7 +84,14 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
-                <ComingSoonOverlay color="purple" blurAmount="sm">
+              </a>              
+              <a
+                href="https://github.com/manta-digital/manta-templates"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+                aria-label="API Reference: Complete API documentation"
+              >
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">API Reference</div>
                     <p className="text-xs text-slate-400 flex-grow">Complete API documentation</p>
@@ -78,7 +100,14 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
-                </ComingSoonOverlay>
+              </a>
+              <a
+                href="https://github.com/manta-digital/manta-templates"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+                aria-label="Examples: Sample projects and demos"
+              >
                 <div className="bg-slate-800/50 hover:bg-slate-800 p-4 rounded-[0.5em] border border-slate-700 transition-colors group cursor-pointer">
                     <div className="text-purple-400 mb-2 group-hover:text-purple-300">Examples</div>
                     <p className="text-xs text-slate-400 flex-grow">Sample projects and demos</p>
@@ -87,20 +116,29 @@ export default function GuidesFeatureCard() {
                       <ExternalLink size={10} className="ml-1" />
                     </div>
                 </div>
-              </GridLayout>
+              </a>
+            </GridLayout>
         </div>
 
         {/* Footer */}
         <div className="border-t border-slate-700/50 h-full p-6 flex flex-col items-center justify-between">
+            {/*
             <div className="h-full flex items-center pb-3">
                 <Search size={16} className="text-slate-400 mr-2" />
                 <span className="text-sm text-slate-400">Search documentation</span>
             </div>
+            */}
             <div className="h-full">
-                <button className="py-2 px-4 bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 rounded-[0.5em] transition-colors flex items-center">
-                    <span>View All Documentation</span>
-                    <ExternalLink size={14} className="ml-2" />
-                </button>
+              <a
+                href="https://github.com/manta-digital/manta-templates"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2 px-4 bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 rounded-[0.5em] transition-colors flex items-center"
+                aria-label="View All Documentation"
+              >
+                <span>View All Documentation</span>
+                <ExternalLink size={14} className="ml-2" />
+              </a>
             </div>
         </div>
       </div>
