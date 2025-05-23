@@ -6,6 +6,8 @@
 
 # manta-templates 🏄‍♂️ v0.4
 
+https://templates.manta.digital
+
 A **Next.js 15 starter** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
 
 > **Note:** This project is in active development (v0.4). Expect breaking changes.
@@ -16,7 +18,7 @@ A **Next.js 15 starter** that lets you spin up modern, AI-assisted project sites
 ## Why it Exists and Where it's Going
 
 ### Why it exists  
-I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows:
+I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows.  
 
 * **ai-project-guide** ↔️ pre-wired: generate detailed task lists, docs, or next steps with parameterized prompts.
 * **Tailwind 4** grid **Cards**: drop-in components for text, code, metrics, images—ready to customize.  
