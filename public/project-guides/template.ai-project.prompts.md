@@ -108,12 +108,30 @@ Notes:
 ```
 
 ##### Impromptu or Task Detail Processing
+
+*Background or Context*
 ```markdown
 Hello.  Please ensure that you have {project, section, issue, tool} inputs before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/tasks.{section}.md or optionally tasks.{section}.phase-{n}.md.
+```
 
+*Implementation Section*
+```
 Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
+
+All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
+
+If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
+```
+
+##### Impromptu Task
+```markdown
+Hello.  We need to complete this additional goal.  We may be working in {project}, and multiple {framework} and {tool} items may be in use, or {goal} may be a standalone target.  
+
+Always start with `guide.ai-project.process` unless a customized version is available in our-project/ when performing project tasks.  Your role is "Senior AI".  Always use .windsurfrules (or coderules if specific file is not present) when performing code-related tasks, and guide.ui-development.ai when working with UI-related tasks.
+
+Start by examining {goal} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
@@ -244,9 +262,11 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ##### Model Change or Context Review
 *Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
 ```markdown
-The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
+We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
 
-Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
+
+If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 
 ##### Add AI Projects Support
