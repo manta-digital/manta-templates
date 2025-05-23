@@ -1,4 +1,5 @@
-import Layout from '@/components/layout';
+"use client";
+
 import {
   Container,
   GridLayout,
@@ -15,8 +16,12 @@ import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
 import PortfolioGrid from "@/app/examples/portfolio/PortfolioGrid";
 import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
+import { useTheme } from "@/context/themecontext";
+import Layout from '@/components/layout';
 
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
     <Layout>
       {/* Hero */}
@@ -45,20 +50,21 @@ export default function Home() {
               techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
               repoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
               demoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
+              mode={theme}
             />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-2 lg:col-span-4"
             className="md:row-start-2"
           >
-            <ComingSoonFeatureCard />
+            <ComingSoonFeatureCard mode={theme} />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-4 lg:col-span-2" 
             rowSpan="md:row-span-2 lg:row-span-3"
             className="lg:row-start-1 md:col-start-3 lg:col-start-5"
           >
-            <GuidesFeatureCard />
+            <GuidesFeatureCard mode={theme} />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-2 lg:col-span-4"
