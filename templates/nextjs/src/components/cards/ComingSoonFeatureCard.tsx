@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import FeatureCardWrapper from './FeatureCardWrapper';
 import { FileText, Rocket, Star, Box, Globe } from 'lucide-react';
 
@@ -7,6 +8,19 @@ interface ComingSoonFeatureCardProps {
 }
 
 export default function ComingSoonFeatureCard({ mode = 'dark' }: ComingSoonFeatureCardProps) {
+  const [dots, setDots] = useState<React.CSSProperties[]>([]);
+  useEffect(() => {
+    const newDots = Array.from({ length: 20 }).map(() => ({
+      width: `${Math.random() * 3 + 1}px`,
+      height: `${Math.random() * 3 + 1}px`,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 4}s`,
+      animationDuration: `${Math.random() * 3 + 2}s`,
+    }));
+    setDots(newDots);
+  }, []);
+
   const textClasses = mode === 'light' ? {
     title: 'text-slate-900',
     description: 'text-slate-700',
@@ -37,19 +51,8 @@ export default function ComingSoonFeatureCard({ mode = 'dark' }: ComingSoonFeatu
         {/* Title section */}
         <div className={`relative h-32 lg:h-auto lg:w-1/4 ${textClasses.backgroundGradient} overflow-hidden`}>
           <div className="absolute inset-0 flex items-center justify-center">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className={`absolute rounded-full ${textClasses.animatedDots} animate-pulse`}
-                style={{
-                  width: `${Math.random() * 3 + 1}px`,
-                  height: `${Math.random() * 3 + 1}px`,
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 4}s`,
-                  animationDuration: `${Math.random() * 3 + 2}s`,
-                }}
-              ></div>
+            {dots.map((style, i) => (
+              <div key={i} className={`absolute rounded-full ${textClasses.animatedDots} animate-pulse`} style={style}></div>
             ))}
           </div>
           <div className="absolute inset-0 flex flex-col justify-center p-8">

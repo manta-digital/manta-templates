@@ -44,7 +44,7 @@ export default function GuidesFeatureCard({ mode = 'dark' }: GuidesFeatureCardPr
   };
 
   return (
-    <FeatureCardWrapper mode={mode} className={`h-full rounded-lg border ${mode === 'light' ? 'border-teal-300 hover:border-purple-300 hover:shadow-purple-200/20' : 'border-teal-500 hover:border-purple-500 hover:shadow-purple-900/20'} hover:scale-[1.01]`}>
+    <FeatureCardWrapper mode={mode} className={`h-full rounded-lg border ${mode === 'light' ? 'border-teal-400 hover:border-purple-300 hover:shadow-purple-200/20' : 'border-teal-500 hover:border-purple-500 hover:shadow-purple-900/20'} hover:scale-[1.01]`}>
       <div className="flex flex-col h-full p-6">
         {/* Header */}
         <div className={`relative border-b ${textClasses.divider} pb-4`}>

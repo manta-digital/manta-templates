@@ -9,7 +9,8 @@ import {
   ProjectFeatureCard,
   ComingSoonFeatureCard,
   GuidesFeatureCard,
-  QuoteCard
+  QuoteCard,
+  ThreeJSCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
 import BentoGrid from "@/app/examples/bentogrid/BentoGrid";
@@ -18,6 +19,7 @@ import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
 import { useTheme } from "@/context/themecontext";
 import Layout from '@/components/layout';
+import FeatureCardWrapper from "@/components/cards/FeatureCardWrapper";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -92,9 +94,9 @@ export default function Home() {
         </div>
         <GridLayout
           gridData={{
-            default: [[6], [6], [6], [6], [6]],
-            md: [[6], [3,3], [3,3]],
-            lg: [[4,2], [2,2,2]],
+            default: [[6], [6], [6], [6], [3,3]],
+            md: [[6], [3,3], [3,3], [3,3]],
+            lg: [[4,2], [2,2,2], [2,2,2]],
           }}
           gap="1rem"
           minRowHeight="200px"
@@ -143,6 +145,11 @@ export default function Home() {
           >
             <PortfolioGrid mini />
           </ProjectCard>
+          <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+            <FeatureCardWrapper mode={theme} className={`h-full ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
+              <ThreeJSCard className="w-full h-full" />
+            </FeatureCardWrapper>
+          </GridItem>
         </GridLayout>
       </Container>
     </Layout>
