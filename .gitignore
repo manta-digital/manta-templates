@@ -1,3 +1,7 @@
+
+# Local environment secrets
+**/.env
+
 # Ignore any generated project-documents in templates
 templates/*/project-documents/
 
