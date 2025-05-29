@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import MotionArticle from '@/components/MotionArticle';
 import { getAllPostSlugs, getPostData, PostData } from '@/lib/content';
 import { notFound } from 'next/navigation'; // For handling not found posts
@@ -36,10 +37,13 @@ export default async function Page(props: PageProps) { // Component receives a s
     <MotionArticle initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mt-8 mb-8 prose prose-lg max-w-[70ch] dark:prose-invert mx-auto p-6 pt-6 md:p-8 border border-slate-200 dark:border-slate-700 rounded-4xl transition-colors duration-300 ease-in-out hover:border-slate-300 dark:hover:border-slate-600 [&_img]:rounded-2xl [&_img]:mb-0 [&_p:last-child]:mb-0">
       {post.image && (
         <div className="mb-8 h-[300px] rounded-3xl shadow-lg not-prose overflow-clip">
-          <img
+          <Image
             src={post.image}
             alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 700px"
             className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+            priority
           />
         </div>
       )}

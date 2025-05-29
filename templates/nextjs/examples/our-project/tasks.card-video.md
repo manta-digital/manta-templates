@@ -295,7 +295,7 @@
   - [x] success: card displays video background with readable overlay content
 
 - [x] **create video player card component**
-  - [ ] create `src/components/cards/video-card.tsx` file
+  - [x] create `src/components/cards/video-card.tsx` file
   - [x] integrate video-player component within shadcn card layout
   - [x] add card header, content area, and optional footer sections
   - [x] implement responsive card sizing with video aspect ratio preservation
