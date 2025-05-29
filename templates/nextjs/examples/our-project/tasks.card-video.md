@@ -111,41 +111,41 @@
   - [x] test video positioning stays behind content on mobile and desktop
   - [x] success: video scales properly on all breakpoints without layout shifts
 
-- [ ] **add background video error handling**
-  - [ ] **implement error state management**
-    - [ ] add error state using useState hook
+- [x] **add background video error handling**
+  - [x] **implement error state management**
+    - [x] add error state using useState hook
       ```typescript
       const [hasError, setHasError] = useState(false);
       const [isLoading, setIsLoading] = useState(true);
       ```
-    - [ ] create onError event handler
+    - [x] create onError event handler
       ```typescript
       const handleError = () => {
         setHasError(true);
         setIsLoading(false);
       };
       ```
-    - [ ] create onLoadedData handler
+    - [x] create onLoadedData handler
       ```typescript
       const handleLoadedData = () => {
         setIsLoading(false);
       };
       ```
-  - [ ] **implement fallback content**
-    - [ ] create fallback component for error state
+  - [x] **implement fallback content**
+    - [x] create fallback component for error state
       1. display poster image if available
       2. show error message if no poster
       3. maintain same dimensions as video
-    - [ ] add loading state with optional poster image
-    - [ ] add browser compatibility checks for video format support
+    - [x] add loading state with optional poster image
+    - [x] add browser compatibility checks for video format support
       ```typescript
       const canPlayVideo = document.createElement('video').canPlayType('video/mp4');
       ```
-  - [ ] **integrate error handling into component**
-    - [ ] add error and loading handlers to video element
-    - [ ] conditionally render video or fallback based on error state
-    - [ ] ensure fallback maintains same styling as video
-    - [ ] success: component handles video load failures gracefully with fallback content
+  - [x] **integrate error handling into component**
+    - [x] add error and loading handlers to video element
+    - [x] conditionally render video or fallback based on error state
+    - [x] ensure fallback maintains same styling as video
+    - [x] success: component handles video load failures gracefully with fallback content
 
 ## video player component
 
