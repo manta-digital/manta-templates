@@ -245,11 +245,9 @@ This document provides a granular breakdown of tasks for rebuilding erikcorkran.
 ### Security Hardening
 
 - [ ] **Enforce CSP via next‑secure‑headers**
-
   - Success: No CSP errors in browser console
 
 - [ ] **Configure `@next/eslint‑plugin‑security`**
-
   - Success: Lint passes in CI
 
 - [ ] **Enable CSRF protection for contact form**
@@ -258,7 +256,6 @@ This document provides a granular breakdown of tasks for rebuilding erikcorkran.
 ## Performance Optimization
 
 - [ ] **Implement image optimization**
-
   - Configure Next.js image component for optimal performance
   - Create responsive image loading strategies
   - Implement lazy loading for offscreen images
@@ -266,7 +263,6 @@ This document provides a granular breakdown of tasks for rebuilding erikcorkran.
   - Success: Images load efficiently with appropriate sizes for different devices
 
 - [ ] **Optimize ThreeJS/R3F performance**
-
   - Implement conditional loading based on device capabilities
   - Create performance monitoring system
   - Optimize 3D models and textures
@@ -274,7 +270,6 @@ This document provides a granular breakdown of tasks for rebuilding erikcorkran.
   - Success: 3D elements load and render efficiently without impacting page performance
 
 - [ ] **Implement performance monitoring**
-
   - Set up Core Web Vitals measurement
   - Create performance budget tracking
   - Implement runtime performance monitoring

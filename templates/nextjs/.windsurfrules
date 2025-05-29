@@ -9,6 +9,12 @@ Project Structure
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
 - Information and tasks specific to our project in `project-documents/our-project`.
 
+MCP (Model Context Protocol)
+- always use context7 to locate current relevant documentation for specific 
+  technologies or tools in use.  
+- do not use smithery Toolbox (toolbox) for general tasks.  project manager will guide
+  its use.
+
 Code Structure
 
 - Keep source files to max 300 lines (excluding whitespace) when possible.
