@@ -153,11 +153,13 @@ export default function Home() {
             </FeatureCardWrapper>
           </GridItem>
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-            <FeatureCardWrapper mode={theme} className={`h-full ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
+            <FeatureCardWrapper mode={theme} className={`h-full video-card-wrapper ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
               <BackgroundVideo
+                key="background-video-component"
                 src="https://www.w3schools.com/html/mov_bbb.mp4"
                 poster="/image/blog-sample-image.png"
                 className="w-full h-full"
+                autoplay={true}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <h3 className="text-white text-xl font-semibold">Background Video Demo</h3>

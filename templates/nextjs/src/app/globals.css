@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Custom classes */
+.video-card-wrapper {
+  transform: none !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
 @theme {
   /* Green palette */
   --color-green-50:  #f0fdf4;
