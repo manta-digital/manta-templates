@@ -20,6 +20,7 @@ import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
 import { useTheme } from "@/context/themecontext";
 import Layout from '@/components/layout';
 import FeatureCardWrapper from "@/components/cards/FeatureCardWrapper";
+import BackgroundVideo from "@/components/ui/background-video";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -69,7 +70,7 @@ export default function Home() {
             <GuidesFeatureCard mode={theme} />
           </GridItem>
           <GridItem 
-            colSpan="col-span-full md:col-span-2 lg:col-span-4"
+            colSpan="col-span-full md:col-span-6 lg:col-span-4"
             className="h-full"
           >
             <div className="h-full">
@@ -148,6 +149,19 @@ export default function Home() {
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
             <FeatureCardWrapper mode={theme} className={`h-full ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
               <ThreeJSCard className="w-full h-full" />
+            </FeatureCardWrapper>
+          </GridItem>
+          <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+            <FeatureCardWrapper mode={theme} className={`h-full ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
+              <BackgroundVideo
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                poster="/image/blog-sample-image.png"
+                className="w-full h-full"
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-white text-xl font-semibold">Background Video Demo</h3>
+                </div>
+              </BackgroundVideo>
             </FeatureCardWrapper>
           </GridItem>
         </GridLayout>

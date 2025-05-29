@@ -3,3 +3,4 @@
 - [ ] Document the new `autoFlow` prop (values: 'row', 'column', default: 'row') in the `BentoLayout` component. Explain how it maps to `grid-auto-flow` and its impact on item placement.
 - [x] Connect all monorepo links in `src/components/cards/GuidesFeatureCard.tsx` to https://github.com/manta-digital/manta-templates so they will at least resolve somewhere.
 - [ ] Resolve inconsistent styles between cards.  BaseCard appears to use darker border than FeatureCardWrapper.
+- [ ] Make background video autoplay without hover
