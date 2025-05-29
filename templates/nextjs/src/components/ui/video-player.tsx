@@ -16,7 +16,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width =
   const [hasError, setHasError] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [loadTime, setLoadTime] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const loadStartTime = useRef<number>(0);
 
@@ -73,7 +72,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width =
             config={{ file: { attributes: { preload: preload ?? 'metadata' } } }}
             onReady={(player) => {
               const duration = performance.now() - loadStartTime.current;
-              setLoadTime(duration);
               console.log(`[VideoPlayer] Load time: ${duration.toFixed(2)}ms`);
               onReady?.(player);
             }}

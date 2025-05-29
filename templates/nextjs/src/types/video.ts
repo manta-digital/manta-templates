@@ -13,6 +13,8 @@ export interface BackgroundVideoProps {
   className?: string;
   /** Overlay content element */
   children?: ReactNode;
+  /** Autoplay toggle; when true, video plays immediately */
+  autoplay?: boolean;
 }
 
 export interface VideoPlayerProps {
@@ -23,9 +25,9 @@ export interface VideoPlayerProps {
   width?: string | number;
   height?: string | number;
   className?: string;
-  onReady?: (player: any) => void;
+  onReady?: (player: unknown) => void;
   /** Called on playback error */
-  onError?: (error: any) => void;
+  onError?: (error: unknown) => void;
   /** Optional accessible title for aria-label */
   title?: string;
   /** Preload attribute for video ('metadata', 'auto', 'none') */

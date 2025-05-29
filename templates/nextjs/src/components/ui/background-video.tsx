@@ -1,28 +1,36 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import type { BackgroundVideoProps } from '@/types/video';
 
 /**
  * BackgroundVideo component skeleton
  */
-const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, className, children }) => {
+const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, className, children, autoplay = true }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const handleMouseEnter = () => videoRef.current?.play();
   const handleMouseLeave = () => videoRef.current?.pause();
-  const handleError = () => { setHasError(true); setIsLoading(false); };
-  const handleLoadedData = () => { setIsLoading(false); };
+  const handleError = () => { setHasError(true); };
+  const handleLoadedData = () => { if (autoplay && videoRef.current) { videoRef.current.play().catch(error => { console.warn('Autoplay failed:', error); }); } };
+
+  useEffect(() => {
+    if (autoplay && videoRef.current && !hasError) {
+      videoRef.current.play().catch((error) => {
+        console.warn('Autoplay failed:', error);
+      });
+    }
+  }, [autoplay, hasError]);
 
   return (
     <div
       className={cn('relative overflow-hidden aspect-video', className)}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={!autoplay ? handleMouseEnter : undefined}
+      onMouseLeave={!autoplay ? handleMouseLeave : undefined}
     >
       { !hasError && (
         <video
+          autoPlay={autoplay}
           ref={videoRef}
           src={src}
           poster={poster}
