@@ -243,8 +243,8 @@
   - [x] success: video player meets wcag accessibility standards and works with screen readers
 
 - [ ] **add video player performance optimizations**
-  - [ ] **implement lazy loading**
-    - [ ] use intersection observer to detect when video enters viewport
+  - [x] **implement lazy loading**
+    - [x] use intersection observer to detect when video enters viewport
       ```typescript
       const [shouldLoad, setShouldLoad] = useState(false);
       const videoRef = useRef<HTMLDivElement>(null);
@@ -267,23 +267,23 @@
         return () => observer.disconnect();
       }, []);
       ```
-    - [ ] conditionally render ReactPlayer only when in viewport
-    - [ ] show placeholder/thumbnail until video loads
-  - [ ] **optimize react-player imports**
-    - [ ] import only needed players to reduce bundle size
+    - [x] conditionally render ReactPlayer only when in viewport
+    - [x] show placeholder/thumbnail until video loads
+  - [x] **optimize react-player imports**
+    - [x] import only needed players to reduce bundle size
       ```typescript
       import ReactPlayer from 'react-player/lazy';
       ```
-    - [ ] configure webpack to exclude unused players
-  - [ ] **add preload configuration**
-    - [ ] set preload to 'metadata' by default
-    - [ ] allow override for specific use cases
-    - [ ] implement progressive loading strategies
-  - [ ] **implement performance monitoring**
-    - [ ] add loading time tracking
-    - [ ] monitor video performance metrics
-    - [ ] log performance data for optimization
-  - [ ] success: video player loads efficiently and doesn't impact initial page load performance
+    - [x] configure webpack to exclude unused players
+  - [x] **add preload configuration**
+    - [x] set preload to 'metadata' by default
+    - [x] allow override for specific use cases
+    - [x] implement progressive loading strategies
+  - [x] **implement performance monitoring**
+    - [x] add loading time tracking
+    - [x] monitor video performance metrics
+    - [x] log performance data for optimization
+  - [x] success: video player loads efficiently and doesn't impact initial page load performance
 
 ## video card compositions
 

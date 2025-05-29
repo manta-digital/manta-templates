@@ -28,6 +28,8 @@ export interface VideoPlayerProps {
   onError?: (error: any) => void;
   /** Optional accessible title for aria-label */
   title?: string;
+  /** Preload attribute for video ('metadata', 'auto', 'none') */
+  preload?: string;
 }
 
 export interface VideoCardProps {

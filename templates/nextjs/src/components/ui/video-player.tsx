@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 import type { VideoPlayerProps } from '@/types/video';
 
 // Dynamically load ReactPlayer for client-side only
-const ReactPlayer = dynamic(() => import('react-player'), {
+const ReactPlayer = dynamic(() => import('react-player/lazy'), {
   ssr: false,
   loading: () => <div className="animate-pulse bg-gray-200 w-full h-full" />
 });
@@ -12,9 +12,13 @@ const ReactPlayer = dynamic(() => import('react-player'), {
 /**
  * VideoPlayer wrapper component
  */
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width = '100%', height = '100%', className, onReady, onError, title }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width = '100%', height = '100%', className, onReady, onError, title, preload }) => {
   const [hasError, setHasError] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [loadTime, setLoadTime] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const loadStartTime = useRef<number>(0);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -24,8 +28,26 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width =
     return () => mq.removeEventListener('change', handler);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          loadStartTime.current = performance.now();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       role="region"
       tabIndex={0}
       aria-label={title || 'Video player'}
@@ -38,7 +60,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width =
       <div aria-live="polite" className="sr-only">
         {hasError ? 'Video failed to load.' : 'Video loaded successfully.'}
       </div>
-      {!reducedMotion ? (
+      {!shouldLoad ? (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+      ) : !reducedMotion ? (
         !hasError ? (
           <ReactPlayer
             className="absolute inset-0"
@@ -46,7 +70,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, controls = true, width =
             controls={controls}
             width={width}
             height={height}
-            onReady={onReady}
+            config={{ file: { attributes: { preload: preload ?? 'metadata' } } }}
+            onReady={(player) => {
+              const duration = performance.now() - loadStartTime.current;
+              setLoadTime(duration);
+              console.log(`[VideoPlayer] Load time: ${duration.toFixed(2)}ms`);
+              onReady?.(player);
+            }}
             onError={(e) => { setHasError(true); onError?.(e); }}
           />
         ) : (
