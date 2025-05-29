@@ -150,29 +150,29 @@
 ## video player component
 
 - [ ] **create video player wrapper component**
-  - [ ] **create component file and imports**
-    - [ ] create new file `src/components/ui/video-player.tsx`
-    - [ ] add required imports
+  - [x] **create component file and imports**
+    - [x] create new file `src/components/ui/video-player.tsx`
+    - [x] add required imports
       ```typescript
       import React, { useState } from 'react';
       import dynamic from 'next/dynamic';
       import { cn } from '@/lib/utils';
       import type { VideoPlayerProps } from '@/types/video';
       ```
-    - [ ] add dynamic import for react-player
+    - [x] add dynamic import for react-player
       ```typescript
       const ReactPlayer = dynamic(() => import('react-player'), {
         ssr: false,
         loading: () => <div className="animate-pulse bg-gray-200 w-full h-full" />
       });
       ```
-  - [ ] **implement wrapper component**
-    - [ ] create component function with typescript interface
-    - [ ] add error boundary state management
+  - [x] **implement wrapper component**
+    - [x] create component function with typescript interface
+    - [x] add error boundary state management
       ```typescript
       const [hasError, setHasError] = useState(false);
       ```
-    - [ ] implement ReactPlayer with proper configuration
+    - [x] implement ReactPlayer with proper configuration
       ```typescript
       <ReactPlayer
         url={url}
@@ -189,16 +189,16 @@
         }}
       />
       ```
-    - [ ] add responsive container wrapper
-    - [ ] implement error fallback UI
-    - [ ] success: component renders react-player with proper props and typescript support
+    - [x] add responsive container wrapper
+    - [x] implement error fallback UI
+    - [x] success: component renders react-player with proper props and typescript support
 
-- [ ] **add video player responsive design**
-  - [ ] implement aspect-ratio utilities for consistent video dimensions
-  - [ ] ensure player scales properly across mobile, tablet, and desktop breakpoints
-  - [ ] add touch-friendly controls for mobile devices
-  - [ ] test video player maintains proportions during window resize
-  - [ ] success: video player is fully responsive with appropriate controls for each device
+- [x] **add video player responsive design**
+  - [x] implement aspect-ratio utilities for consistent video dimensions
+  - [x] ensure player scales properly across mobile, tablet, and desktop breakpoints
+  - [x] add touch-friendly controls for mobile devices
+  - [x] test video player maintains proportions during window resize
+  - [x] success: video player is fully responsive with appropriate controls for each device
 
 - [ ] **implement video player accessibility features**
   - [ ] **add keyboard navigation support**

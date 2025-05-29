@@ -21,6 +21,7 @@ import { useTheme } from "@/context/themecontext";
 import Layout from '@/components/layout';
 import FeatureCardWrapper from "@/components/cards/FeatureCardWrapper";
 import BackgroundVideo from "@/components/ui/background-video";
+import VideoPlayer from "@/components/ui/video-player";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -95,8 +96,8 @@ export default function Home() {
         </div>
         <GridLayout
           gridData={{
-            default: [[6], [6], [6], [6], [3,3]],
-            md: [[6], [3,3], [3,3], [3,3]],
+            default: [[6], [6], [6], [6], [3,3], [3,3]],
+            md: [[6], [3,3], [3,3], [3,3], [6]],
             lg: [[4,2], [2,2,2], [2,2,2]],
           }}
           gap="1rem"
@@ -162,6 +163,17 @@ export default function Home() {
                   <h3 className="text-white text-xl font-semibold">Background Video Demo</h3>
                 </div>
               </BackgroundVideo>
+            </FeatureCardWrapper>
+          </GridItem>
+          <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+            <FeatureCardWrapper mode={theme} className={`h-full ${theme === 'dark' ? 'bg-black bg-none' : ''}`}>
+              <VideoPlayer
+                url="https://www.w3schools.com/html/mov_bbb.mp4"
+                controls
+                width="100%"
+                height="100%"
+                className="w-full h-full"
+              />
             </FeatureCardWrapper>
           </GridItem>
         </GridLayout>
