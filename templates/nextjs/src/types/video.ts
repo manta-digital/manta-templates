@@ -20,16 +20,14 @@ export interface VideoPlayerProps {
   url: string;
   /** Show native player controls */
   controls?: boolean;
-  /** Width of the player */
   width?: string | number;
-  /** Height of the player */
   height?: string | number;
-  /** Additional CSS classes */
   className?: string;
-  /** Called when player is ready */
   onReady?: (player: any) => void;
   /** Called on playback error */
   onError?: (error: any) => void;
+  /** Optional accessible title for aria-label */
+  title?: string;
 }
 
 export interface VideoCardProps {
