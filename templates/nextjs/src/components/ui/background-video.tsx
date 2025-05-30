@@ -63,7 +63,10 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, classNam
 
   return (
     <div
-      className={cn('relative overflow-hidden aspect-video', className)}
+      className={cn(
+        'relative overflow-hidden aspect-video',
+        className
+      )}
       onMouseEnter={autoplay ? undefined : handleMouseEnter}
       onMouseLeave={autoplay ? undefined : handleMouseLeave}
     >
