@@ -1,14 +1,26 @@
 import React from 'react';
 import FeatureCardWrapper from './FeatureCardWrapper';
-import { FileText, BookOpen, Code, Terminal, ExternalLink, GitBranch, Cpu } from 'lucide-react';
+import { FileText, BookOpen, ExternalLink, GitBranch, Cpu, Code, Terminal } from 'lucide-react';
 import GridLayout from '@/components/layouts/grid-layout/grid-layout';
 import { ComingSoonOverlay } from '../overlays/ComingSoonOverlay';
+import { FeatureContent } from '@/lib/content-api.client';
 
 interface GuidesFeatureCardProps {
   mode?: 'dark' | 'light';
+  content?: FeatureContent;
 }
 
-export default function GuidesFeatureCard({ mode = 'dark' }: GuidesFeatureCardProps) {
+export default function GuidesFeatureCard({ mode = 'dark', content }: GuidesFeatureCardProps) {
+  // Use content prop if provided, otherwise fall back to defaults
+  const cardTitle = content?.title || 'Guides & Docs';
+  const cardDescription = content?.description || 'Comprehensive guides and documentation';
+  const cardFeatures = content?.features || [
+    { icon: 'GitBranch', label: 'Monorepo Structure' },
+    { icon: 'Code', label: 'Component Library' },
+    { icon: 'Terminal', label: 'CLI Tools' }
+  ];
+  const cardRepoUrl = content?.repoUrl || 'https://github.com/manta-digital/manta-templates';
+
   const textClasses = mode === 'light' ? {
     title: 'text-slate-900',
     subtitle: 'text-slate-600',
@@ -44,18 +56,18 @@ export default function GuidesFeatureCard({ mode = 'dark' }: GuidesFeatureCardPr
   };
 
   return (
-    <FeatureCardWrapper mode={mode} className={`h-full rounded-lg border ${mode === 'light' ? 'border-teal-400 hover:border-purple-300 hover:shadow-purple-200/20' : 'border-teal-500 hover:border-purple-500 hover:shadow-purple-900/20'} hover:scale-[1.01]`}>
-      <div className="flex flex-col h-full p-6">
+    <FeatureCardWrapper mode={mode}>
+      <div className="flex flex-col h-full p-6 overflow-hidden">
         {/* Header */}
-        <div className={`relative border-b ${textClasses.divider} pb-4`}>
+        <div className={`relative border-b ${textClasses.divider} pb-4 flex-none`}>
           <div className="flex items-center justify-between h-10">
-            <h2 className={`text-2xl md:text-3xl font-bold ${textClasses.title} tracking-tight`}>Guides & Docs</h2>
+            <h2 className={`text-2xl md:text-3xl font-bold ${textClasses.title} tracking-tight`}>{cardTitle}</h2>
             <BookOpen size={20} className={textClasses.icons} />
           </div>
-          <p className={`${textClasses.subtitle} mt-1 text-sm`}>Comprehensive guides and documentation</p>
+          <p className={`${textClasses.subtitle} mt-1 text-sm`}>{cardDescription}</p>
         </div>
         {/* Main content */}
-        <div className="space-y-4 justify-between pt-4 pb-2">
+        <div className="space-y-4 justify-between pt-4 pb-2 flex-shrink-0">
             <h3 className={`text-xl font-semibold ${textClasses.sectionTitle} flex items-center`}>
               <Cpu size={18} className={`mr-2 ${textClasses.icons}`} />
               AI Project Guide
@@ -70,99 +82,103 @@ export default function GuidesFeatureCard({ mode = 'dark' }: GuidesFeatureCardPr
             </ComingSoonOverlay>
             
             <div className="space-y-2">
-              <a href="https://github.com/manta-digital/manta-templates" className={`flex items-center ${textClasses.links} transition-colors`}>
-                <GitBranch size={14} className={`mr-2 ${textClasses.icons}`} />
-                <span className="text-sm">Monorepo Structure</span>
-              </a>
-              <a href="https://github.com/manta-digital/manta-templates" className={`flex items-center ${textClasses.links} transition-colors`}>
-                <Terminal size={14} className={`mr-2 ${textClasses.icons}`} />
-                <span className="text-sm">CLI Commands Reference</span>
-              </a>
-              <a href="https://github.com/manta-digital/manta-templates" className={`flex items-center ${textClasses.links} transition-colors`}>
-                <Code size={14} className={`mr-2 ${textClasses.icons}`} />
-                <span className="text-sm">Custom Configuration</span>
-              </a>
+              {cardFeatures.map((feature, index) => {
+                let IconComponent;
+                switch (feature.icon) {
+                  case 'Code': IconComponent = Code; break;
+                  case 'Terminal': IconComponent = Terminal; break;
+                  default: IconComponent = GitBranch;
+                }
+                return (
+                  <div key={index} className="flex items-center">
+                    <IconComponent size={14} className={`mr-2 ${textClasses.icons}`} />
+                    <span className={`text-sm ${textClasses.description}`}>{feature.label}</span>
+                  </div>
+                );
+              })}
             </div>
         </div>
 
-        <div className="flex flex-col pt-4 pb-4 gap-2 md:gap-4 h-full">
+        <div className="flex flex-col pt-4 pb-4 gap-2 md:gap-4 flex-1 min-h-0">
             <h3 className={`text-xl font-semibold ${textClasses.sectionTitle} flex pb-2`}>
               <FileText size={18} className={`mr-2 mt-1 ${textClasses.icons}`} />
               Documentation
             </h3>
-            <GridLayout gridData={{ default: [[1,1],[1,1]] }} gap="0.75rem">
-              <a
-                href="https://github.com/manta-digital/manta-templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-                aria-label="Getting Started: Quick installation guide and first steps"
-              >
-                <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
-                    <div className={`${textClasses.cardText} mb-2`}>Getting Started</div>
-                    <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Quick installation guide and first steps</p>
-                    <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
-                      <span>Read</span>
-                      <ExternalLink size={10} className="ml-1" />
-                    </div>
-                </div>
-              </a>
-              <a
-                href="https://github.com/manta-digital/manta-templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-                aria-label="Templates: Available project templates and usage"
-              >
-                <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
-                    <div className={`${textClasses.cardText} mb-2`}>Templates</div>
-                    <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Available project templates and usage</p>
-                    <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
-                      <span>Browse</span>
-                      <ExternalLink size={10} className="ml-1" />
-                    </div>
-                </div>
-              </a>              
-              <a
-                href="https://github.com/manta-digital/manta-templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-                aria-label="API Reference: Complete API documentation"
-              >
-                <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
-                    <div className={`${textClasses.cardText} mb-2`}>API Reference</div>
-                    <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Complete API documentation</p>
-                    <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
-                      <span>Explore</span>
-                      <ExternalLink size={10} className="ml-1" />
-                    </div>
-                </div>
-              </a>
-              <a
-                href="https://github.com/manta-digital/manta-templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-                aria-label="Examples: Sample projects and demos"
-              >
-                <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
-                    <div className={`${textClasses.cardText} mb-2`}>Examples</div>
-                    <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Sample projects and demos</p>
-                    <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
-                      <span>View</span>
-                      <ExternalLink size={10} className="ml-1" />
-                    </div>
-                </div>
-              </a>
-            </GridLayout>
+            <div className="flex-1 min-h-0">
+              <GridLayout gridData={{ default: [[1,1],[1,1]] }} gap="0.75rem">
+                <a
+                  href={cardRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  aria-label="Getting Started: Quick installation guide and first steps"
+                >
+                  <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
+                      <div className={`${textClasses.cardText} mb-2`}>Getting Started</div>
+                      <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Quick installation guide and first steps</p>
+                      <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
+                        <span>Read</span>
+                        <ExternalLink size={10} className="ml-1" />
+                      </div>
+                  </div>
+                </a>
+                <a
+                  href={cardRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  aria-label="Templates: Available project templates and usage"
+                >
+                  <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
+                      <div className={`${textClasses.cardText} mb-2`}>Templates</div>
+                      <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Available project templates and usage</p>
+                      <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
+                        <span>Browse</span>
+                        <ExternalLink size={10} className="ml-1" />
+                      </div>
+                  </div>
+                </a>              
+                <a
+                  href={cardRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  aria-label="API Reference: Complete API documentation"
+                >
+                  <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
+                      <div className={`${textClasses.cardText} mb-2`}>API Reference</div>
+                      <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Complete API documentation</p>
+                      <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
+                        <span>Explore</span>
+                        <ExternalLink size={10} className="ml-1" />
+                      </div>
+                  </div>
+                </a>
+                <a
+                  href={cardRepoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  aria-label="Examples: Sample projects and demos"
+                >
+                  <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
+                      <div className={`${textClasses.cardText} mb-2`}>Examples</div>
+                      <p className={`text-xs ${textClasses.cardDescription} flex-grow`}>Sample projects and demos</p>
+                      <div className={`mt-3 text-xs ${textClasses.cardAction} flex items-center`}>
+                        <span>View</span>
+                        <ExternalLink size={10} className="ml-1" />
+                      </div>
+                  </div>
+                </a>
+              </GridLayout>
+            </div>
         </div>
 
         {/* Footer */}
-        <div className={`border-t ${textClasses.divider} h-full p-6 flex flex-col items-center justify-between`}>
+        <div className={`border-t ${textClasses.divider} p-6 flex flex-col items-center justify-between flex-none`}>
             <div className="h-full">
               <a
-                href="https://github.com/manta-digital/manta-templates"
+                href={cardRepoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`py-2 px-4 ${textClasses.footerButton} rounded-[0.5em] transition-colors flex items-center`}

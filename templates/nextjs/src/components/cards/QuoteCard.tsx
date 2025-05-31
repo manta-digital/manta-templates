@@ -62,7 +62,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
 
   return (
     <BaseCard className={
-      cn('relative rounded-lg overflow-hidden p-0', 
+      cn('relative rounded-lg overflow-hidden p-4', 
         'bg-white dark:bg-gray-800',
         className)}
     >

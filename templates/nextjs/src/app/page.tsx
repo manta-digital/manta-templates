@@ -6,8 +6,6 @@ import {
   GridItem,
   BlogCardImage,
   ProjectCard,
-  ComingSoonFeatureCard,
-  GuidesFeatureCard,
   ThreeJSCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
@@ -17,6 +15,7 @@ import GridLayoutExample from "@/app/examples/gridlayout/GridLayoutExample";
 import MasonryGrid from "@/app/examples/masonrygrid/MasonryGrid";
 import { useTheme } from "@/context/themecontext";
 import Layout from '@/components/layout';
+import FeatureCardContainer from "@/components/cards/FeatureCardContainer";
 import FeatureCardWrapper from "@/components/cards/FeatureCardWrapper";
 import BackgroundVideo from "@/components/ui/background-video";
 import VideoPlayer from "@/components/ui/video-player";
@@ -64,14 +63,14 @@ export default function Home() {
             colSpan="col-span-full md:col-span-2 lg:col-span-4"
             className="md:row-start-2"
           >
-            <ComingSoonFeatureCard mode={theme} />
+            <FeatureCardContainer slug="astro-starter" mode={theme} />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-4 lg:col-span-2" 
             rowSpan="md:row-span-2 lg:row-span-3"
             className="lg:row-start-1 md:col-start-3 lg:col-start-5"
           >
-            <GuidesFeatureCard mode={theme} />
+            <FeatureCardContainer slug="guides-docs" mode={theme} />
           </GridItem>
           <GridItem 
             colSpan="col-span-full md:col-span-6 lg:col-span-4"

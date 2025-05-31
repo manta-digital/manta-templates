@@ -26,10 +26,12 @@
   - [x] Create `ProjectCardContainer.tsx`
   - [x] Add sample markdown `src/content/projects/sample-project.md`
   - Success criteria: 📦 `ProjectCard` displays data from markdown file
-- [ ] Implement VideoCard integration
-  - [ ] Modify `VideoCard.tsx` to support `displayMode` logic with `BackgroundVideo` & `VideoPlayer`
-  - [ ] Add markdown samples: `src/content/videos/player-example.md`, `background-example.md`
-  - Success criteria: 🎥 `VideoCard` shows player and background modes correctly
+- [x] Implement VideoCard integration
+  - [x] Modify `VideoCard.tsx` to support `displayMode` logic with `BackgroundVideo` & `VideoPlayer`
+  - [x] Create `VideoCardContainer.tsx` for markdown-driven video content
+  - [x] Add markdown samples: `src/content/videos/player-example.md`, `background-example.md`
+  - [x] Update content API with `VideoContent` interface and functions
+  - Success criteria: 🎥 `VideoCard` shows player and background modes correctly ✅
 - [ ] Create content templates script
   - [ ] Add `scripts/create-content.sh` to scaffold new markdown files
   - [ ] Test template for `quotes`, `projects`, `videos`
@@ -41,9 +43,9 @@
   - [ ] Add integration tests for `QuoteCard` and `VideoCard` in `__tests__/components`
 
 ## Phase 3: Completion
-- [ ] Integrate FeatureCard variants
-  - [ ] Update `GuidesFeatureCard.tsx`, `ProjectFeatureCard.tsx`, `ComingSoonFeatureCard.tsx`, `FeatureCardWrapper.tsx` to use `FeatureContent`
-  - [ ] Add sample markdown in `src/content/features/guides`, `projects`, `coming-soon`
+- [x] Integrate FeatureCard variants
+  - [x] Update `GuidesFeatureCard.tsx`, `ProjectFeatureCard.tsx`, `ComingSoonFeatureCard.tsx`, `FeatureCardWrapper.tsx` to use `FeatureContent`
+  - [x] Add sample markdown in `src/content/features/guides`, `projects`, `coming-soon`
 - [ ] Implement ThreeJSCard configuration
   - [ ] Extend `ThreeJSCard.tsx` to parse frontmatter for R3F scene parameters
   - [ ] Create example markdown `src/content/demos/threejs-example.md`
