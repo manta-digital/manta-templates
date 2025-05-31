@@ -7,7 +7,7 @@
     "workspaces": [
         "templates/nextjs"
     ],
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",
     "main": "index.js",
     "repository": {
