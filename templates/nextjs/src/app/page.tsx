@@ -6,10 +6,8 @@ import {
   GridItem,
   BlogCardImage,
   ProjectCard,
-  ProjectFeatureCard,
   ComingSoonFeatureCard,
   GuidesFeatureCard,
-  QuoteCard,
   ThreeJSCard
 } from "@/components"; 
 import { BentoLayout } from "@/components/layouts/bento-layout";
@@ -22,6 +20,8 @@ import Layout from '@/components/layout';
 import FeatureCardWrapper from "@/components/cards/FeatureCardWrapper";
 import BackgroundVideo from "@/components/ui/background-video";
 import VideoPlayer from "@/components/ui/video-player";
+import QuoteCardContainer from "@/components/cards/QuoteCardContainer";
+import ProjectCardContainer from "@/components/cards/ProjectCardContainer";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -55,12 +55,8 @@ export default function Home() {
         </div>
         <BentoLayout gap={8} columns="grid-cols-6">
           <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
-            <ProjectFeatureCard
-              title="Next.js Starter"
-              description="Modern full-stack starter with responsive grid layouts."
-              techStack={["Next.js 15", "Tailwind 4", "shadcn/radix"]}
-              repoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
-              demoUrl="https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs"
+            <ProjectCardContainer
+              slug="nextjs-starter"
               mode={theme}
             />
           </GridItem>
@@ -82,12 +78,7 @@ export default function Home() {
             className="h-full"
           >
             <div className="h-full">
-              <QuoteCard 
-                quote="The art of programming is the skill of controlling complexity. The great program is subdued — made simple in its complexity."
-                author="Rich Hickey"
-                variant="primary"
-                className="h-full"
-              />
+              <QuoteCardContainer slug="art-of-programming" />
             </div>
           </GridItem>
         </BentoLayout>

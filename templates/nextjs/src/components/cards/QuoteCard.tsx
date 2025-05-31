@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import type { QuoteContent } from '@/lib/content-api.client';
 import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
 import { useTheme } from '@/context/themecontext';
 
 interface QuoteCardProps {
-  /** The quote text to display */
-  quote: string;
-  /** Optional author attribution */
+  /** Content-driven props */
+  content?: QuoteContent;
+  /** Fallback quote text */
+  quote?: string;
+  /** Fallback author attribution */
   author?: string;
   /** Additional class names */
   className?: string;
@@ -20,6 +23,7 @@ interface QuoteCardProps {
  * A visually appealing quote card with gradient borders and shimmer effect
  */
 const QuoteCard: React.FC<QuoteCardProps> = ({
+  content,
   quote,
   author,
   className,
@@ -51,6 +55,10 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
     primary: 'text-purple-400',
     secondary: 'text-blue-400'
   };
+
+  const displayQuote = content?.quote ?? quote;
+  const displayAuthor = content?.author ?? author;
+  if (!displayQuote) return null;
 
   return (
     <BaseCard className={
@@ -88,14 +96,14 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
               <span className={cn('text-2xl mr-1', accentColors[variant])}>
                 &ldquo;
               </span>
-              {quote}
+              {displayQuote}
               <span className={cn('text-2xl ml-1', accentColors[variant])}>
                 &rdquo;
               </span>
             </p>
-            {author && (
+            {displayAuthor && (
               <figcaption className="mt-4 text-right text-sm text-muted-foreground">
-                — {author}
+                — {displayAuthor}
               </figcaption>
             )}
           </div>

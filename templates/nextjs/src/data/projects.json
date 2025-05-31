@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "nextjs-starter",
+    "type": "projects",
+    "title": "Next.js Starter",
+    "description": "Modern full-stack starter with responsive grid layouts.",
+    "techStack": ["Next.js 15", "Tailwind 4", "shadcn/radix"],
+    "repoUrl": "https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs",
+    "demoUrl": "https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs",
+    "features": [
+      { "label": "Fast & modern React framework" },
+      { "label": "Production-ready components" }
+    ],
+    "featured": true,
+    "order": 1,
+    "displayMode": "feature"
+  },
+  {
+    "slug": "sample-project",
+    "type": "projects",
+    "title": "Sample Project",
+    "description": "A demonstration project showcasing modern web development practices with React and TypeScript.",
+    "techStack": ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+    "repoUrl": "https://github.com/example/sample-project",
+    "demoUrl": "https://sample-project.demo.com",
+    "featured": true,
+    "order": 2,
+    "displayMode": "standard"
+  }
+]

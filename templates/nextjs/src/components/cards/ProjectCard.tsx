@@ -2,22 +2,24 @@ import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
+import type { ProjectContent } from '@/lib/content-api.client';
 
 interface ProjectCardProps {
-  title: string;
+  title?: string;
   description?: string;
-  techStack: string[];
+  techStack?: string[];
   repoUrl?: string;
   demoUrl?: string;
+  content?: ProjectContent;
   className?: string;
   children?: React.ReactNode;
   overlay?: boolean; // render children as background overlay
 }
 
 interface ProjectCardBodyProps {
-  title: string;
+  title?: string;
   description?: string;
-  techStack: string[];
+  techStack?: string[];
   repoUrl?: string;
   demoUrl?: string;
   wrapperClassName?: string;
@@ -36,7 +38,7 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
   pClassName,
 }) => (
   <div className={wrapperClassName}>
-    <h3 className={h3ClassName}>{title}</h3>
+    <h3 className={h3ClassName}>{title || 'Untitled Project'}</h3>
     {description && <p className={pClassName}>{description}</p>}
     <div className="flex flex-wrap gap-2 mb-4">
       {techStack.map((tech) => (
@@ -64,6 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   techStack = [],
   repoUrl,
   demoUrl,
+  content,
   className,
   children,
   overlay = false,
@@ -81,11 +84,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10"
           h3ClassName="text-lg font-semibold mb-2 text-white"
           pClassName="text-sm text-white mb-4"
-          title={title}
-          description={description}
-          techStack={techStack}
-          repoUrl={repoUrl}
-          demoUrl={demoUrl}
+          title={title || content?.title}
+          description={description || content?.description}
+          techStack={techStack || content?.techStack}
+          repoUrl={repoUrl || content?.repoUrl}
+          demoUrl={demoUrl || content?.demoUrl}
         />
       </BaseCard>
     );
@@ -106,11 +109,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           wrapperClassName="flex flex-col p-6 pt-4 pb-6 mt-auto"
           h3ClassName="text-lg font-semibold mb-2 line-clamp-2 group-hover:underline"
           pClassName="text-sm text-muted-foreground mb-4 line-clamp-3 grow"
-          title={title}
-          description={description}
-          techStack={techStack}
-          repoUrl={repoUrl}
-          demoUrl={demoUrl}
+          title={title || content?.title}
+          description={description || content?.description}
+          techStack={techStack || content?.techStack}
+          repoUrl={repoUrl || content?.repoUrl}
+          demoUrl={demoUrl || content?.demoUrl}
         />
       </div>
     </BaseCard>
