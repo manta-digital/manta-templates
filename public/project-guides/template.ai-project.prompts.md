@@ -138,6 +138,7 @@ All output should be in raw markdown code format using guidelines (including che
 If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
 ```
 
+
 ##### Add Subtask to Existing Item
 *Use when directly adding subtasks to existing item.*
 
@@ -178,6 +179,27 @@ Here is an example of a subtask to add a button in an element:
 STOP and confirm the {subtask} is acceptable to the Project Manager and okay to proceed.  
 
 Once confirmed, implement the task items.  Check off items once completed *and* verified.  Do not proceed to add other tasks.
+```
+
+##### Design Feature
+```markdown
+We will be working in { project, section } and will document our feature design in feature.{section}.md (the guide), in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `coderules.md` to guide tasks.
+
+Act as a Technical Fellow as defined in `guide.ai-process.md` and create a low-lecel design.  Use the { goal } as described in the feature file unless a more specific goal is described here.
+
+We continue to work in { project }, so there is no need to describe the overall project here.  Concentrate only on the functionality needed to accomplish { goal }.  
+
+This is a design and specification task *not* a coding task.  Address feature overview, any technical requirement or issue adding feature into current stack.  Address main sections or components of feature with sufficient detail for us to use this feature document in order to create and expand tasks according to the guide.  You do not need to create the detailed task breakdown yet.
+```
+
+##### Split Feature into Tasks
+```markdown
+Continuing to work in { project, section }, we will now split our feature described in feature.{section}.md into tasks as described in Phase 3 and Phase 4 of our `guide.ai-project.process.md`.  We are more concerned with creating detailed tasks than a strict Phase 3 / Phase 4 adherance.  We will create our tasks in tasks.{section}.md.
+```
+
+##### Monorepo Template
+```
+We are working in { project, template }, where project is a monorepo.  For directories such as /project-documents, we use the path /project/{template}/project-documents.  This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example.  For the our-project directory, we use /examples/our-project. 
 ```
 
 ##### Use 3rd Party Tool
@@ -262,7 +284,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ##### Model Change or Context Review
 *Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
 ```markdown
-We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
+We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`, unless otherwise specified.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
 
 You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
 
