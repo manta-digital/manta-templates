@@ -41,6 +41,12 @@
 - [ ] Extend testing coverage
   - [ ] Write unit tests for `getContentByType` in `__tests__/content-api.test.ts`
   - [ ] Add integration tests for `QuoteCard` and `VideoCard` in `__tests__/components`
+- [ ] Implement homepage content management
+  - [ ] Create `PageContent` interface for homepage sections
+  - [ ] Add `src/content/pages/homepage.md` with hero and showcase sections
+  - [ ] Update `page.tsx` to fetch and render content from markdown
+  - [ ] Create `PageContentContainer` for page-level content management
+  - Success criteria: 🏠 Homepage content is markdown-driven and editable
 
 ## Phase 3: Completion
 - [x] Integrate FeatureCard variants

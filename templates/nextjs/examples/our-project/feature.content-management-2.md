@@ -50,34 +50,38 @@ This feature extends the existing markdown content system to support all card co
    - Compact blog post display for sidebars
    - Uses same content source, optimized for small spaces
 
-### Currently Hard-Coded Components (Priority Order)
+### Components Requiring Markdown Integration
 
-#### Quick Win Components (Phase 1)
-1. **QuoteCard** (`/src/components/cards/QuoteCard.tsx`)
-   - Simple structure: quote text, author, role/title
-   - Minimal frontmatter requirements
-   - High visual impact with low implementation effort
+1. **Homepage Content** (`/src/app/page.tsx`)
+   - Current: Hard-coded hero section title, description, feature bullets
+   - Current: Hard-coded "Templates Showcase" section heading and description
+   - Target: Frontmatter-driven homepage sections with configurable content
+   - Content source: `/src/content/pages/homepage.md`
+   - Benefits: Easy content updates without code changes, better content management
 
-2. **ProjectCard** (`/src/components/cards/ProjectCard.tsx`)
+2. **QuoteCard** (`/src/components/cards/QuoteCard.tsx`)
+   - Current: Hard-coded quote text, author, role
+   - Target: Frontmatter with quote, author, role, source, date
+   - Content source: `/src/content/quotes/*.md`
+
+3. **ProjectCard** (`/src/components/cards/ProjectCard.tsx`)
    - Moderate complexity: title, description, tech stack, links
    - Clear content structure
    - Reusable across portfolio sections
 
-#### Medium Complexity Components (Phase 2)
-3. **VideoCard** (`/src/components/cards/VideoCard.tsx`)
+4. **VideoCard** (`/src/components/cards/VideoCard.tsx`)
    - Requires: title, thumbnailUrl, videoUrl
    - May need video metadata (duration, type)
    - Integration with video components (BackgroundVideo, VideoPlayer)
 
-4. **FeatureCard** variants
+5. **FeatureCard** variants
    - **GuidesFeatureCard**: Tutorial/guide content
    - **ProjectFeatureCard**: Project highlights
    - **ComingSoonFeatureCard**: Placeholder content
    - **FeatureCardWrapper**: Container component for feature cards
    - Similar structure but different content types
 
-#### Complex Components (Phase 3)
-5. **ThreeJSCard** (`/src/components/cards/ThreeJSCard.tsx`)
+6. **ThreeJSCard** (`/src/components/cards/ThreeJSCard.tsx`)
    - Requires scene configuration data
    - May need custom JSON/YAML for 3D parameters
    - Support R3F
@@ -96,6 +100,8 @@ src/content/
 │   ├── guides/
 │   ├── projects/
 │   └── coming-soon/
+├── pages/          # Homepage and other page content
+│   └── homepage.md
 └── demos/          # ThreeJS demos configuration
 ```
 
