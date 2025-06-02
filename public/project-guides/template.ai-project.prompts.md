@@ -76,6 +76,19 @@ If you have all required inputs and sufficient information, go ahead and perform
 Output results into a new file our-project/tasks.{section}.phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
+##### Task Evaluation (v0.2)
+Use to process a proposed Phase 3 task list, expanding tasks as needed.
+
+```markdown
+Analyze the file tasks.{project}.md in the `our-project` directory.  If you cannot locate or read this file or other inputs, stop and request from Project Manager.  Do not proceed without them.  This is a Project and Process work order, *not* a coding one.  Your role as defined in `guide.ai-project.process` is Technical Fellow.
+
+Review the tasks in the file.  Is granularity and level sufficient to allow a Junior AI or human programmer to implement the task?  If splitting into additional detail or subtasks would increase chances for success, do so according to `guide.ai-project.task-expansion`.
+
+Remember, do not include any subjective or other tasks that could not realistically be accomplished by an AI acting as a Junior Developer.
+
+For any section with tasks benefitting from expansion as described above, record the Phase 3 *and* Phase 4 tasks in a file `our-project/tasks.{section}.md` where {section} will be the relevant section from the main tasks file.  Create the new expande task files if they don't exist.  If you encounter errors creating or editing the reuquisite file, stop and wait for the Project Manager.
+```
+
 ##### Task Implementation
 ```markdown
 Hello. Our input {
@@ -290,6 +303,22 @@ You should receive information on { issue | goal } and preferably some idea of i
 
 If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
+
+##### Model Onboarding (v0.2)
+Use to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.
+```markdown
+Welcome.  Use the following input for the remainder of this conversation.  
+{
+  project,
+  section (optional),
+  framework(s),
+  tool(s),
+  api(s)
+}
+
+We are working on {project}.  If {section} is not specified, assume this is a project-wide request.  Always anchor to `guide.ai-project.process`.  You should know your role and where our task(s) fit in to the process guide.  In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s).  If any of this is missing, stop and request from Project Manager.  Do not proceed without it. You should receive additional message(s) describing current task and goal details.
+```
+
 
 ##### Add AI Projects Support
 Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
