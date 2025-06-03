@@ -89,23 +89,10 @@ Remember, do not include any subjective or other tasks that could not realistica
 For any section with tasks benefitting from expansion as described above, record the Phase 3 *and* Phase 4 tasks in a file `our-project/tasks.{section}.md` where {section} will be the relevant section from the main tasks file.  Create the new expande task files if they don't exist.  If you encounter errors creating or editing the reuquisite file, stop and wait for the Project Manager.
 ```
 
-##### Task Implementation
-```markdown
-Hello. Our input {
-    project (required), 
-    section (required), 
-    subsection,
-    tool,
-    notes (optional)
-} is 
-{ 
-    example-project-name, 
-    example-section ex: review - chartanalysis, 
-    example-subsection ex: configuration improvements
-    scichart,
-}
+##### Task Implementation (v0.2)
 
-We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
+```markdown
+We are working on the {project, section} tasks in phase 4 of `guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.  If no documentation is available or additional documentation is needed, use the "context7" tool in your toolbox.  
 
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
@@ -219,17 +206,18 @@ We are working in { project, template }, where project is a monorepo.  For direc
 
 *Add the following to existing prompt when working with {tool}.*
 ```markdown
-You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
+You will need to consult specific knowledge for {tool(s)}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
 
-1. Consult Overview: Start with the specific `AI Tool Overview 
-   [toolname].md` in the `project-documents/tool-
-   guides/{tool}` directory.
+1. Start with the `introduction` or `setup` file (if no introduction) 
+   in the `project-documents/tool-guides/{tool}` directory.
 2. Locate Docs: Scan the Overview for references to more detailed 
    documentation (like local API files under `/documentation`, 
    notes in `research-crumbs` or official web links).
 3. Search Docs: Search within those specific documentation sources 
    first using `grep_search` or `codebase_search`.
-4. Web Search Fallback: If the targeted search doesn't yield 
+4. Use context7 to locate additional documentation, and to verify that you are
+   using the most current documentation for {tool}.
+5. Web Search Fallback: If the targeted search doesn't yield 
    results, then perform a `search_web`.
 ```
 
@@ -306,7 +294,9 @@ If {tool(s)} is in use, you should receive an additional note (ideally along wit
 
 ##### Model Onboarding (v0.2)
 Use to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.
-```markdown
+
+*Properties*
+```markown
 Welcome.  Use the following input for the remainder of this conversation.  
 {
   project,
@@ -315,7 +305,10 @@ Welcome.  Use the following input for the remainder of this conversation.
   tool(s),
   api(s)
 }
+```
 
+*Prompt*
+```markdown
 We are working on {project}.  If {section} is not specified, assume this is a project-wide request.  Always anchor to `guide.ai-project.process`.  You should know your role and where our task(s) fit in to the process guide.  In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s).  If any of this is missing, stop and request from Project Manager.  Do not proceed without it. You should receive additional message(s) describing current task and goal details.
 ```
 
