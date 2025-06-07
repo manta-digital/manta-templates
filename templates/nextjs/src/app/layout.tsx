@@ -13,10 +13,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.digital';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://templates.manta.digital'),
+  metadataBase: new URL(siteUrl),
   title: 'manta.digital Templates',
   description: 'Templates, layouts, and UI components created with the included AI Project Guides',
+  openGraph: {
+    title: 'manta.digital Templates',
+    description: 'Templates, layouts, and UI components created with the included AI Project Guides',
+    url: '/',
+    siteName: 'manta.digital Templates',
+    images: [
+      {
+        url: 'https://templates.manta.digital/image/opengraph-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'manta.digital Templates OG Image',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

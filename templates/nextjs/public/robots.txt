@@ -1,0 +1,7 @@
+# Allow Facebook crawler for OG images
+User-agent: facebookexternalhit
+Allow: /
+
+# Default rule for all bots (allow everything)
+User-agent: *
+Disallow:
