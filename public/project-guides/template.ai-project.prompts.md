@@ -73,20 +73,22 @@ We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhan
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 
-Output results into a new file our-project/tasks.{section}.phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
+Output results into a new file our-project/tasks.{section}.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
-##### Task Evaluation (v0.2)
+##### Task Evaluation and Expansion (v0.2)
 Use to process a proposed Phase 3 task list, expanding tasks as needed.
 
 ```markdown
-Analyze the file tasks.{project}.md in the `our-project` directory.  If you cannot locate or read this file or other inputs, stop and request from Project Manager.  Do not proceed without them.  This is a Project and Process work order, *not* a coding one.  Your role as defined in `guide.ai-project.process` is Technical Fellow.
+Analyze the file tasks.{project}.md in the `our-project` directory.  If {section} is specified, confine your analysis only tasks for {section}.  If you cannot locate or read this file or other inputs, stop and request from Project Manager.  Do not proceed without them.  This is a Project and Process work order, *not* a coding one.  Your role as defined in `guide.ai-project.process` is Technical Fellow.
 
 Review the tasks in the file.  Is granularity and level sufficient to allow a Junior AI or human programmer to implement the task?  If splitting into additional detail or subtasks would increase chances for success, do so according to `guide.ai-project.task-expansion`.
 
 Remember, do not include any subjective or other tasks that could not realistically be accomplished by an AI acting as a Junior Developer.
 
 For any section with tasks benefitting from expansion as described above, record the Phase 3 *and* Phase 4 tasks in a file `our-project/tasks.{section}.md` where {section} will be the relevant section from the main tasks file.  Create the new expande task files if they don't exist.  If you encounter errors creating or editing the reuquisite file, stop and wait for the Project Manager.
+
+In the output filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
 ##### Task Implementation (v0.2)
@@ -116,7 +118,7 @@ Hello.  Please ensure that you have {project, section, issue, tool} inputs befor
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/tasks.{section}.md or optionally tasks.{section}.phase-{n}.md.
 ```
 
-*Implementation Section*
+*Task Creation Section*
 ```
 Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
@@ -125,13 +127,11 @@ All output should be in raw markdown code format using guidelines (including che
 If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
 ```
 
-##### Impromptu Task
+##### Impromptu Task (v0.2)
 ```markdown
-Hello.  We need to complete this additional goal.  We may be working in {project}, and multiple {framework} and {tool} items may be in use, or {goal} may be a standalone target.  
+Hello.  We need to add {feature} to {project, section}.
 
-Always start with `guide.ai-project.process` unless a customized version is available in our-project/ when performing project tasks.  Your role is "Senior AI".  Always use .windsurfrules (or coderules if specific file is not present) when performing code-related tasks, and guide.ui-development.ai when working with UI-related tasks.
-
-Start by examining {goal} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
+Start by examining {feature} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
@@ -183,9 +183,9 @@ Once confirmed, implement the task items.  Check off items once completed *and* 
 
 ##### Design Feature
 ```markdown
-We will be working in { project, section } and will document our feature design in feature.{section}.md (the guide), in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `coderules.md` to guide tasks.
+We will be working in { project, section } and will document our feature design in feature.{section}.md, in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `coderules.md` to guide tasks.
 
-Act as a Technical Fellow as defined in `guide.ai-process.md` and create a low-lecel design.  Use the { goal } as described in the feature file unless a more specific goal is described here.
+Act as a Technical Fellow as defined in `guide.ai-process.md` and create a low-level design.  Use the { goal } as described in the feature file unless a more specific goal is described here.
 
 We continue to work in { project }, so there is no need to describe the overall project here.  Concentrate only on the functionality needed to accomplish { goal }.  
 
@@ -199,7 +199,7 @@ Continuing to work in { project, section }, we will now split our feature descri
 
 ##### Monorepo Template
 ```
-We are working in { project, template }, where project is a monorepo.  For directories such as /project-documents, we use the path /project/{template}/project-documents.  This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example.  For the our-project directory, we use /examples/our-project. 
+We are working in { project, template }, where { project } is a monorepo.  For directories such as /project-documents, we use the path /project/{template}/project-documents.  This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example.  For anything that would normally be in /project/{template}/project-documents/our-project, we use /project/{template}/examples/our-project. 
 ```
 
 ##### Use 3rd Party Tool
@@ -282,18 +282,9 @@ Let's analyze the following existing codebase and document our findings.  We wan
   use tailwind.config.ts/.js. 
 ```
 
-##### Model Change or Context Review
-*Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
-```markdown
-We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`, unless otherwise specified.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
-
-You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
-
-If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
-```
 
 ##### Model Onboarding (v0.2)
-Use to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.
+Use when starting a new chat, or to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.  This replaces "Model Change or Context Review"
 
 *Properties*
 ```markown
@@ -314,8 +305,6 @@ We are working on {project}.  If {section} is not specified, assume this is a pr
 
 
 ##### Add AI Projects Support
-Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
-
 ```markdown
 Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
 
@@ -323,4 +312,19 @@ Add the following scripts to package.json.  If no package.json exists, run `npm 
     "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
     "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
   }
+```
+
+
+***
+#### Deprecated
+
+##### Model Change or Context Review (deprecated)
+*Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
+
+```markdown
+We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`, unless otherwise specified.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
+
+You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
+
+If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
