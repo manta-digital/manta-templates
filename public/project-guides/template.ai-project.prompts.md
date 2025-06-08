@@ -202,23 +202,21 @@ Continuing to work in { project, section }, we will now split our feature descri
 We are working in { project, template }, where { project } is a monorepo.  For directories such as /project-documents, we use the path /project/{template}/project-documents.  This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example.  For anything that would normally be in /project/{template}/project-documents/our-project, we use /project/{template}/examples/our-project. 
 ```
 
-##### Use 3rd Party Tool
-
-*Add the following to existing prompt when working with {tool}.*
+##### Use 3rd Party Tool (v0.2)
+*Add the following to existing prompt when working with {tool}, {framework}, or {api}.*
 ```markdown
-You will need to consult specific knowledge for {tool(s)}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
+You will need to consult specific knowledge for {tool}, {framework}, and/or {api}.  These should be available to you in the tool-guides/{tool}, framework-guides/{framework}, and api-guides/{api} directories for our curated knowledge.  Follow these steps when working with {tool}, {framework}, or {api}:
 
-1. Start with the `introduction` or `setup` file (if no introduction) 
-   in the `project-documents/tool-guides/{tool}` directory.
-2. Locate Docs: Scan the Overview for references to more detailed 
-   documentation (like local API files under `/documentation`, 
-   notes in `research-crumbs` or official web links).
-3. Search Docs: Search within those specific documentation sources 
-   first using `grep_search` or `codebase_search`.
-4. Use context7 to locate additional documentation, and to verify that you are
-   using the most current documentation for {tool}.
-5. Web Search Fallback: If the targeted search doesn't yield 
-   results, then perform a `search_web`.
+1. Start with the `introduction` or `setup` file (if no introduction) in the 
+   directory as described above.
+2. Locate additional documentation: scan the initial guide for references to 
+   more detailed documentation, for example in a {tool}/documentation/ directory,
+   specific notes or tips in `research-crumbs`.
+3. Search within these specific documentation sources first using `grep_search` 
+   or `codebase_search`.
+4. Use context7 to locate additional documentation, and to verify that you are 
+   using the most current documentation for {tool}, {framework}, or {api}.
+5. Web search may be used as an additional fallback.
 ```
 
 ##### Implement Tasks from Code Review Results
