@@ -1,5 +1,6 @@
 packages:
   - templates/*
+  - landing
   - packages/*
   - guides/*
 ignoredBuiltDependencies:
