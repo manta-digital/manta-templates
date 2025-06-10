@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "guides-docs",
+    "type": "feature",
+    "title": "Guides & Docs",
+    "description": "Comprehensive guides and documentation",
+    "category": "guides",
+    "status": "available",
+    "features": [
+      { "icon": "GitBranch", "label": "Monorepo Structure" },
+      { "icon": "Code", "label": "Component Library" },
+      { "icon": "Terminal", "label": "CLI Tools" }
+    ],
+    "links": [
+      { "label": "Getting Started", "url": "https://github.com/manta-digital/manta-templates", "type": "primary" },
+      { "label": "Templates", "url": "https://github.com/manta-digital/manta-templates", "type": "secondary" },
+      { "label": "API Reference", "url": "https://github.com/manta-digital/manta-templates", "type": "secondary" },
+      { "label": "Examples", "url": "https://github.com/manta-digital/manta-templates", "type": "secondary" }
+    ],
+    "quickStart": "npx create-manta-app my-ai-project",
+    "repoUrl": "https://github.com/manta-digital/manta-templates",
+    "featured": true,
+    "order": 1
+  },
+  {
+    "slug": "astro-starter",
+    "type": "feature", 
+    "title": "Astro Starter",
+    "description": "Lightning-fast static site generation",
+    "category": "coming-soon",
+    "status": "coming-soon",
+    "features": [
+      { "icon": "Globe", "label": "Content-focused with zero JS by default" },
+      { "icon": "Box", "label": "Use any UI framework or none at all" }
+    ],
+    "links": [
+      { "label": "Join Waitlist", "url": "#", "type": "primary" },
+      { "label": "View Readme", "url": "https://github.com/manta-digital/manta-templates", "type": "secondary" }
+    ],
+    "techStack": ["Astro", "TypeScript", "Tailwind CSS"],
+    "waitlistUrl": "#",
+    "repoUrl": "https://github.com/manta-digital/manta-templates",
+    "featured": true,
+    "order": 2
+  }
+]

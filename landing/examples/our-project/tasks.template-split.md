@@ -5,7 +5,7 @@
   - Run `pnpm install` and verify no errors
   - Success: `pnpm --filter templates-nextjs dev` and `pnpm --filter landing dev` start respective servers
 
-- [ ] **Set up `landing` project skeleton**
+- [x] **Set up `landing` project skeleton**
   - Create `landing/package.json` based on `templates/nextjs/package.json`, keeping all dependencies
   - Copy current `templates/nextjs/src/` directory into `landing/src/`
   - Configure `dev`, `build`, and `start` scripts in `landing/package.json`
