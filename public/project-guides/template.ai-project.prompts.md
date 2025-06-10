@@ -47,8 +47,6 @@ When creating these project documents, do not guess.  If information is missing
 ```markdown
 input: {project, n, phase, optional: guide}
 
-{if n>1} Phase {n-1} is approved!{end-if}
-
 Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (guide.ai-project.concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
 
 When creating project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.
@@ -129,9 +127,9 @@ If you are missing any information, STOP and obtain from project manager.  Do no
 
 ##### Impromptu Task (v0.2)
 ```markdown
-Hello.  We need to add {feature} to {project, section}.
+Hello.  We need to add {task} to {project, section}.
 
-Start by examining {feature} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
+Start by examining {task} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
@@ -139,47 +137,6 @@ If you are missing any information, STOP and obtain from project manager.  Do no
 ```
 
 
-##### Add Subtask to Existing Item
-*Use when directly adding subtasks to existing item.*
-
-```markdown
-input {
-  project, section, issue, subtask, tool
-}
-
-Hello.  Please ensure that you have input as described above in input before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
-
-Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
-
-Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
-
-All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  We will implement the task in code, but STOP and confirm the tasks are represented effectively before starting to write code. 
-
-If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
-```
-
-##### Subtask Continuation
-*Use when continuing to add subtasks in order to minimize redundant prompt.*
-```markdown
-input {
-  issue/update,
-  subtask,
-}
-
-Continue to operate in the "Senior AI" role.  Continue using {project, section, issue, tool} that we have been working with. Ensure that you have needed documentation for {tool}.  Our goal is to add a new {subtask} into an existing issue or update section.
-
-Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in `guide.ai-project.process`.
-
-Here is an example of a subtask to add a button in an element:
-- [ ] Subtask 2: Implement AutoScale Button in ChartCanvas
-  - [ ] Add the button as a React element within `ChartCanvas.tsx`
-  - [ ] Use absolute/fixed positioning relative to the chart container.
-- **Success:** Button renders in correct position and is accessible.
-
-STOP and confirm the {subtask} is acceptable to the Project Manager and okay to proceed.  
-
-Once confirmed, implement the task items.  Check off items once completed *and* verified.  Do not proceed to add other tasks.
-```
 
 ##### Design Feature
 ```markdown
@@ -236,6 +193,68 @@ maintenance-tasks.md, following existing file format and markdown rules.  If ite
 If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
 ```
 
+##### Model Onboarding (v0.2)
+Use when starting a new chat, or to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.  This replaces "Model Change or Context Review"
+
+*Properties*
+```markown
+Welcome.  Use the following input for the remainder of this conversation.  
+{
+  project,
+  section (optional),
+  framework(s),
+  tool(s),
+  api(s)
+}
+```
+
+*Prompt*
+```markdown
+We are working on {project}.  If {section} is not specified, assume this is a project-wide request.  Always anchor to `guide.ai-project.process`.  You should know your role and where our task(s) fit in to the process guide.  In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s).  If any of this is missing, stop and request from Project Manager.  Do not proceed without it. You should receive additional message(s) describing current task and goal details.
+```
+
+##### Add Subtask to Existing Item
+*Use when directly adding subtasks to existing item.*
+
+```markdown
+input {
+  project, section, issue, subtask, tool
+}
+
+Hello.  Please ensure that you have input as described above in input before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
+
+Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
+
+Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
+
+All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  We will implement the task in code, but STOP and confirm the tasks are represented effectively before starting to write code. 
+
+If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
+```
+
+##### Subtask Continuation
+*Use when continuing to add subtasks in order to minimize redundant prompt.*
+```markdown
+input {
+  issue/update,
+  subtask,
+}
+
+Continue to operate in the "Senior AI" role.  Continue using {project, section, issue, tool} that we have been working with. Ensure that you have needed documentation for {tool}.  Our goal is to add a new {subtask} into an existing issue or update section.
+
+Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in `guide.ai-project.process`.
+
+Here is an example of a subtask to add a button in an element:
+- [ ] Subtask 2: Implement AutoScale Button in ChartCanvas
+  - [ ] Add the button as a React element within `ChartCanvas.tsx`
+  - [ ] Use absolute/fixed positioning relative to the chart container.
+- **Success:** Button renders in correct position and is accessible.
+
+STOP and confirm the {subtask} is acceptable to the Project Manager and okay to proceed.  
+
+Once confirmed, implement the task items.  Check off items once completed *and* verified.  Do not proceed to add other tasks.
+```
+
 
 ##### Analyze Codebase
 ```markdown
@@ -278,27 +297,6 @@ Let's analyze the following existing codebase and document our findings.  We wan
 * Prefer Tailwind classes, there should not be custom CSS classes.
 * If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
   use tailwind.config.ts/.js. 
-```
-
-
-##### Model Onboarding (v0.2)
-Use when starting a new chat, or to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.  This replaces "Model Change or Context Review"
-
-*Properties*
-```markown
-Welcome.  Use the following input for the remainder of this conversation.  
-{
-  project,
-  section (optional),
-  framework(s),
-  tool(s),
-  api(s)
-}
-```
-
-*Prompt*
-```markdown
-We are working on {project}.  If {section} is not specified, assume this is a project-wide request.  Always anchor to `guide.ai-project.process`.  You should know your role and where our task(s) fit in to the process guide.  In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s).  If any of this is missing, stop and request from Project Manager.  Do not proceed without it. You should receive additional message(s) describing current task and goal details.
 ```
 
 
