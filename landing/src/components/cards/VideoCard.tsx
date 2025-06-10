@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
 import BackgroundVideo from '@/components/ui/background-video';
 import VideoPlayer from '@/components/ui/video-player';
-import { VideoContent } from '@/lib/content-api.client';
+import { VideoContent } from '@/types/content';
 // import { PlayCircle } from 'lucide-react'; // Icon for later
 
 interface VideoCardProps {

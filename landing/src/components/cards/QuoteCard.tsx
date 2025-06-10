@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import type { QuoteContent } from '@/lib/content-api.client';
+import type { QuoteContent } from '@/types/content';
 import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
 import { useTheme } from '@/context/themecontext';

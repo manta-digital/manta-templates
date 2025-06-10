@@ -1,7 +1,6 @@
-'use client';
-
 import VideoCard from './VideoCard';
-import { getVideoBySlug } from '@/lib/content-api.client';
+import { getContentBySlug } from '@/lib/content';
+import type { VideoContent } from '@/types/content';
 
 interface VideoCardContainerProps {
   slug: string;
@@ -10,22 +9,26 @@ interface VideoCardContainerProps {
   overlay?: boolean;
 }
 
-export default function VideoCardContainer({ 
+export default async function VideoCardContainer({ 
   slug, 
   className,
   children,
   overlay = false
 }: VideoCardContainerProps) {
-  const content = getVideoBySlug(slug);
-  if (!content) return null;
-  
-  return (
-    <VideoCard 
-      content={content} 
-      className={className}
-      overlay={overlay}
-    >
-      {children}
-    </VideoCard>
-  );
+  try {
+    const { frontmatter: content } = await getContentBySlug<VideoContent>('videos', slug);
+    
+    return (
+      <VideoCard 
+        content={content} 
+        className={className}
+        overlay={overlay}
+      >
+        {children}
+      </VideoCard>
+    );
+  } catch (error) {
+    console.error(`Error loading video content for slug "${slug}":`, error);
+    return null;
+  }
 }

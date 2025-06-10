@@ -1,12 +1,17 @@
 import QuoteCard from './QuoteCard';
-import { getQuoteBySlug } from '@/lib/content-api.client';
+import { getContentBySlug } from '@/lib/content';
+import type { QuoteContent } from '@/types/content';
 
 interface QuoteCardContainerProps {
   slug: string;
 }
 
-export default function QuoteCardContainer({ slug }: QuoteCardContainerProps) {
-  const content = getQuoteBySlug(slug);
-  if (!content) return null;
-  return <QuoteCard content={content} />;
+export default async function QuoteCardContainer({ slug }: QuoteCardContainerProps) {
+  try {
+    const { frontmatter: content } = await getContentBySlug<QuoteContent>('quotes', slug);
+    return <QuoteCard content={content} />;
+  } catch (error) {
+    console.error(`Error loading quote content for slug "${slug}":`, error);
+    return null;
+  }
 }

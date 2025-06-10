@@ -8,119 +8,137 @@ import rehypeStringify from 'rehype-stringify';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
-const postsDirectory = path.join(process.cwd(), 'src/content/blog');
+// Defines the base directory for all content
+const contentRoot = path.join(process.cwd(), 'src', 'content');
 
-export interface PostFrontmatter {
-  title: string;
-  description: string;
-  image?: string;
-  pubDate: string; // Dates are strings in YAML, convert for sorting
-  contentType: string;
-  cardSize: string;
-  tags?: string[];
-}
-
-export interface PostData extends PostFrontmatter {
+/**
+ * Represents the processed content data returned for a single item.
+ * @template T The type of the frontmatter data.
+ */
+export interface ContentData<T extends object> {
   slug: string;
   contentHtml: string;
+  frontmatter: T;
 }
 
-export interface SortedPostInfo {
+/**
+ * Represents the metadata for a single content item, used in listings.
+ * @template T The type of the frontmatter data.
+ */
+export interface ContentMeta<T extends object> {
   slug: string;
-  frontmatter: PostFrontmatter;
+  frontmatter: T;
 }
 
-// Function to get all post slugs for static generation
-export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
-      return {
-        params: {
-          slug: fileName.replace(/\.md$/, ''),
-        },
-      };
-    });
-}
-
-// Function to get sorted post data (frontmatter only) for listings
-export function getSortedPostsData(): SortedPostInfo[] {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '');
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data } = matter(fileContents);
-
-      return {
-        slug,
-        frontmatter: data as PostFrontmatter,
-      };
-    });
-
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    const dateA = new Date(a.frontmatter.pubDate);
-    const dateB = new Date(b.frontmatter.pubDate);
-    return dateB.getTime() - dateA.getTime(); // Descending order
-  });
-}
-
-// Define a custom schema for rehype-sanitize
+// Define a custom schema for rehype-sanitize to allow styles from rehype-pretty-code
 const customSanitizeSchema: typeof defaultSchema = {
   ...defaultSchema,
   attributes: {
     ...defaultSchema.attributes,
     pre: [
       ...(defaultSchema.attributes?.pre || []),
-      'style', // Allow style attribute for background color, etc.
-      'tabindex', // Allow tabindex
-      ['dataLanguage', 'data-language'], // Allow data-language (rehype-pretty-code uses this)
-      ['dataTheme', 'data-theme'], // Allow data-theme
+      'style',
+      'tabindex',
+      ['dataLanguage', 'data-language'],
+      ['dataTheme', 'data-theme'],
     ],
     code: [
       ...(defaultSchema.attributes?.code || []),
-      'style', // Allow style attribute for display: grid, etc.
+      'style',
       ['dataLanguage', 'data-language'],
       ['dataTheme', 'data-theme'],
     ],
     span: [
       ...(defaultSchema.attributes?.span || []),
-      'style', // Allow style attribute for token colors
-      ['dataLine', 'data-line'], // Allow data-line
+      'style',
+      ['dataLine', 'data-line'],
     ],
     figure: [
       ...(defaultSchema.attributes?.figure || []),
       ['dataRehypePrettyCodeFigure', 'data-rehype-pretty-code-figure'],
     ],
   },
-  tagNames: [...(defaultSchema.tagNames || []), 'figure'], // Ensure figure tag is allowed if not by default
+  tagNames: [...(defaultSchema.tagNames || []), 'figure'],
 };
 
-// Function to get individual post data (frontmatter + HTML content)
-export async function getPostData(slug: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+/**
+ * Retrieves and processes a single markdown file by its content type and slug.
+ *
+ * @template T The expected type of the frontmatter.
+ * @param {string} contentType - The subdirectory within `src/content` (e.g., 'projects', 'blog').
+ * @param {string} slug - The name of the markdown file without the .md extension.
+ * @returns {Promise<ContentData<T>>} The processed content, including frontmatter and HTML.
+ */
+export async function getContentBySlug<T extends object>(
+  contentType: string,
+  slug: string,
+): Promise<ContentData<T>> {
+  const contentDir = path.join(contentRoot, contentType);
+  const fullPath = path.join(contentDir, `${slug}.md`);
+
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Content not found: ${fullPath}`);
+  }
+
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
   const processedContent = await remark()
-    .use(gfm) // GitHub Flavored Markdown
-    .use(remarkRehype, { allowDangerousHtml: true }) // Convert mdast to hast
-    .use(rehypePrettyCode, {
-      theme: 'github-dark', // Shiki theme for syntax highlighting
-      // TODO: Add options for line numbers, custom titles, etc. if needed later
-    })
-    .use(rehypeSanitize, customSanitizeSchema) // Sanitize HTML content with custom schema
-    .use(rehypeStringify) // Convert hast to HTML string
+    .use(gfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypePrettyCode, { theme: 'github-dark' })
+    .use(rehypeSanitize, customSanitizeSchema)
+    .use(rehypeStringify)
     .process(matterResult.content);
+
   const contentHtml = processedContent.toString();
 
   return {
     slug,
     contentHtml,
-    ...(matterResult.data as PostFrontmatter),
+    frontmatter: matterResult.data as T,
   };
+}
+
+/**
+ * Retrieves the metadata (frontmatter) for all content of a specific type.
+ * This is optimized for listing pages as it doesn't process the markdown body.
+ *
+ * @template T The expected type of the frontmatter.
+ * @param {string} contentType - The subdirectory within `src/content`.
+ * @returns {ContentMeta<T>[]} An array of content metadata, sorted by date if available.
+ */
+export function getAllContent<T extends object>(contentType: string): ContentMeta<T>[] {
+  const contentDir = path.join(contentRoot, contentType);
+  
+  if (!fs.existsSync(contentDir)) {
+    console.warn(`Content directory not found: ${contentDir}`);
+    return [];
+  }
+
+  const fileNames = fs.readdirSync(contentDir);
+  const allContentData = fileNames
+    .filter((fileName) => fileName.endsWith('.md'))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.md$/, '');
+      const fullPath = path.join(contentDir, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data } = matter(fileContents);
+
+      return {
+        slug,
+        frontmatter: data as T,
+      };
+    });
+
+  // Sort by 'pubDate' in descending order if the property exists
+  if (allContentData.length > 0 && 'pubDate' in allContentData[0].frontmatter) {
+    return allContentData.sort((a, b) => {
+      const dateA = new Date((a.frontmatter as { pubDate: string }).pubDate);
+      const dateB = new Date((b.frontmatter as { pubDate: string }).pubDate);
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  return allContentData;
 }
