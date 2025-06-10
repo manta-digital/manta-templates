@@ -32,9 +32,6 @@
   - [x] Add markdown samples: `src/content/videos/player-example.md`, `background-example.md`
   - [x] Update content API with `VideoContent` interface and functions
   - Success criteria: 🎥 `VideoCard` shows player and background modes correctly ✅
-- [ ] Create content templates script
-  - [ ] Add `scripts/create-content.sh` to scaffold new markdown files
-  - [ ] Test template for `quotes`, `projects`, `videos`
 - [ ] Add development workflow enhancements
   - [ ] Update `next.config.js` to watch content directories for hot reload
   - Success criteria: 🔄 Editing markdown triggers UI update without full restart
