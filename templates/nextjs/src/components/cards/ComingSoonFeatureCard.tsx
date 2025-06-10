@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import FeatureCardWrapper from './FeatureCardWrapper';
 import { FileText, Rocket, Star, Globe } from 'lucide-react';
-import { FeatureContent } from '@/lib/content-api.client';
+import { FeatureContent } from '@/types/content';
 
 interface ComingSoonFeatureCardProps {
   mode?: 'dark' | 'light';
@@ -17,7 +17,10 @@ export default function ComingSoonFeatureCard({ mode = 'dark', content }: Coming
     { label: 'Content-focused with zero JS by default' },
     { label: 'Use any UI framework or none at all' }
   ];
-  const cardLinks = content?.links || [
+  const cardLinks = content?.links ? [
+    { label: content.links.primary.label, url: content.links.primary.href, type: 'primary' },
+    ...(content.links.secondary ? [{ label: content.links.secondary.label, url: content.links.secondary.href, type: 'secondary' }] : [])
+  ] : [
     { label: 'Join Waitlist', url: '#', type: 'primary' },
     { label: 'View Readme', url: 'https://github.com/manta-digital/manta-templates', type: 'secondary' }
   ];

@@ -2,7 +2,8 @@
     "name": "manta-templates",
     "private": true,
     "scripts": {
-        "sync-guides": "bash ./scripts/sync-guides.sh"
+        "sync-guides": "bash ./scripts/sync-guides.sh",
+        "build": "pnpm -r build"
     },
     "workspaces": [
         "templates/nextjs"

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import BaseCard from './BaseCard';
-import type { ProjectContent } from '@/lib/content-api.client';
+import type { ProjectContent } from '@/types/content';
 
 interface ProjectCardProps {
   title?: string;

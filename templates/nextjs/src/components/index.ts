@@ -1,7 +1,6 @@
 // This file exports reusable components for easier imports
 
-// Card Components (assuming they are in a 'cards' subdirectory)
-export * from './cards'; // Export all cards
+
 
 // Layout Components
 export * from './layouts'; // Export all layouts

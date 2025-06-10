@@ -3,7 +3,7 @@ import FeatureCardWrapper from './FeatureCardWrapper';
 import { FileText, BookOpen, ExternalLink, GitBranch, Cpu, Code, Terminal } from 'lucide-react';
 import GridLayout from '@/components/layouts/grid-layout/grid-layout';
 import { ComingSoonOverlay } from '../overlays/ComingSoonOverlay';
-import { FeatureContent } from '@/lib/content-api.client';
+import { FeatureContent } from '@/types/content';
 
 interface GuidesFeatureCardProps {
   mode?: 'dark' | 'light';
@@ -84,10 +84,15 @@ export default function GuidesFeatureCard({ mode = 'dark', content }: GuidesFeat
             <div className="space-y-2">
               {cardFeatures.map((feature, index) => {
                 let IconComponent;
-                switch (feature.icon) {
-                  case 'Code': IconComponent = Code; break;
-                  case 'Terminal': IconComponent = Terminal; break;
-                  default: IconComponent = GitBranch;
+                if (feature.icon) {
+                  switch (feature.icon) {
+                    case 'Code': IconComponent = Code; break;
+                    case 'Terminal': IconComponent = Terminal; break;
+                    case 'GitBranch': IconComponent = GitBranch; break;
+                    default: IconComponent = GitBranch;
+                  }
+                } else {
+                  IconComponent = GitBranch;
                 }
                 return (
                   <div key={index} className="flex items-center">
