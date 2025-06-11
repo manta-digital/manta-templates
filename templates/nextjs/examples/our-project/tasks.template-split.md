@@ -31,9 +31,7 @@
   -  Success criteria:
     - Manual checklists/screenshots captured in `/project-documents/our-project/ui/screenshots`.
 
-[ ] **Documentation & cleanup**
+[x] **Documentation & cleanup**
   - [x] Add short note to `templates/nextjs/README.md` explaining difference between starter template and landing showcase and how to run each workspace.
-  - [ ] Update changelog entry for template-split completion.
   -  Success criteria:
     - README changes merged.
-    - Changelog entry present under “Unreleased”.
