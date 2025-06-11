@@ -35,7 +35,19 @@ pnpm install
 pnpm dev
 
 Open http://localhost:3000 and start editing files under app/.
+
+### Using inside the manta-templates monorepo
+
+This template lives alongside a richer **landing** showcase in the root monorepo.  When working from the repo root you can run:
+
+```bash
+pnpm dev:template   # minimal starter (this workspace)
+pnpm dev:landing    # full showcase landing site
+pnpm build:template # production build of the starter
+pnpm build:landing  # production build of the landing site
 ```
+
+The two workspaces share code but keep their pages independent—use the starter for a clean beginning and the landing app as a component reference.
 
 ⸻
 
@@ -153,4 +165,3 @@ Inspired by Kevin Leneway’s next-ai-starter and his video on prompt-driven tas
 📜 License
 
 MIT © 2025 Erik Corkran
-

@@ -3,6 +3,10 @@
     "private": true,
     "scripts": {
         "sync-guides": "bash ./scripts/sync-guides.sh",
+        "dev:template": "pnpm --filter \"./templates/nextjs\" dev",
+        "dev:landing": "pnpm --filter manta-template-next dev",
+        "build:template": "pnpm --filter \"./templates/nextjs\" build",
+        "build:landing": "pnpm --filter manta-template-next build",
         "build": "pnpm -r build"
     },
     "workspaces": [

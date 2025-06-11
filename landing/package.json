@@ -15,7 +15,7 @@
     "url": "https://github.com/manta-digital/manta-templates/issues"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
