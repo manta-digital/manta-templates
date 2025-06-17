@@ -26,5 +26,10 @@
     "bugs": {
         "url": "https://github.com/manta-digital/manta-templates/issues"
     },
-    "homepage": "https://github.com/manta-digital/manta-templates#readme"
+    "homepage": "https://github.com/manta-digital/manta-templates#readme",
+    "pnpm": {
+        "overrides": {
+            "brace-expansion": "^2.0.1"
+        }
+    }
 }
