@@ -29,7 +29,7 @@
     "homepage": "https://github.com/manta-digital/manta-templates#readme",
     "pnpm": {
         "overrides": {
-            "brace-expansion": "^2.0.1"
+            "brace-expansion": "^2.0.2"
         }
     }
 }
