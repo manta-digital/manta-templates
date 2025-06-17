@@ -36,7 +36,7 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   const formattedDate = date ? formatDate(date) : null;
 
   const cardContent = (
-    <div className={cn('relative h-full w-full flex flex-col justify-end p-6 md:p-8', textColorClassName)}>
+    <div className={cn('relative h-full w-full flex flex-col justify-center py-8 px-6 md:px-8 gap-y-4', textColorClassName)}>
       {/* Overlay for text readability */}
       <div className={cn('absolute inset-0 z-0', overlayClassName)} />
 
