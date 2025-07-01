@@ -59,11 +59,7 @@ Install and configure ShadCN Card components as the foundation for card standard
   - Verify visual parity between old and new implementations
   - Success: Both cards appear visually identical with same spacing, colors, and typography
 
-- [ ] **Performance benchmark comparison**
-  - Measure bundle size impact of ShadCN Card integration
-  - Document any performance differences
-  - Success: Performance metrics documented and within acceptable thresholds
-
+## Section 99: Enhancements (keep this section last)
 - [ ] **Create migration utility functions**
   - Create `src/lib/cardMigration.ts` with helper functions
   - Implement prop mapping utilities for BaseCard → EnhancedBaseCard

@@ -1,7 +1,7 @@
 import BaseCard from '@/components/cards/BaseCard';
 import BlogCard from '@/components/cards/BlogCard';
 import BlogCardV2 from '@/components/cards/BlogCardV2';
-import { BaseCardV2, CardContent, CardHeader, CardTitle } from '@/components/cards/BaseCardV2';
+import { BaseCardV2 } from '@/components/cards/BaseCardV2';
 import { BlogCardWide } from '@/components/cards/BlogCardWide';
 import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
 import { BlogCardImage } from '@/components/cards/BlogCardImage';
@@ -39,13 +39,13 @@ export default function CardTestPage() {
         <h2 className="text-xl font-semibold mb-4 border-b pb-2">2. Verification: `size` Prop</h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            <h3 className="mb-2 font-semibold">Original: `size="sm"`</h3>
+            <h3 className="mb-2 font-semibold">Original: `size=&quot;sm&quot;`</h3>
             <BaseCard size="sm" className="w-full max-w-[400px]">
-              <p>This card uses the `size="sm"` prop for `p-4` padding.</p>
+              <p>This card uses the `size=&quot;sm&quot;` prop for `p-4` padding.</p>
             </BaseCard>
           </div>
           <div>
-            <h3 className="mb-2 font-semibold">New: `className="p-4"`</h3>
+            <h3 className="mb-2 font-semibold">New: `className=&quot;p-4&quot;`</h3>
             <BaseCardV2 className="w-full max-w-[400px] p-4">
               <p>This card uses the `p-4` utility class for padding.</p>
             </BaseCardV2>
@@ -57,13 +57,13 @@ export default function CardTestPage() {
         <h2 className="text-xl font-semibold mb-4 border-b pb-2">3. Verification: `variant` Prop</h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            <h3 className="mb-2 font-semibold">Original: `variant="outlined"`</h3>
+            <h3 className="mb-2 font-semibold">Original: `variant=&quot;outlined&quot;`</h3>
             <BaseCard variant="outlined" className="w-full max-w-[400px]">
-              <p>This card uses `variant="outlined"` for a transparent background.</p>
+              <p>This card uses `variant=&quot;outlined&quot;` for a transparent background.</p>
             </BaseCard>
           </div>
           <div>
-            <h3 className="mb-2 font-semibold">New: `className="bg-transparent"`</h3>
+            <h3 className="mb-2 font-semibold">New: `className=&quot;bg-transparent&quot;`</h3>
             <BaseCardV2 className="w-full max-w-[400px] bg-transparent">
               <p>This card uses the `bg-transparent` utility class.</p>
             </BaseCardV2>
