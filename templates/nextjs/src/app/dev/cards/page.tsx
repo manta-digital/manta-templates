@@ -4,6 +4,8 @@ import BlogCardV2 from '@/components/cards/BlogCardV2';
 import { BaseCardV2, CardContent, CardHeader, CardTitle } from '@/components/cards/BaseCardV2';
 import { BlogCardWide } from '@/components/cards/BlogCardWide';
 import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
+import { BlogCardImage } from '@/components/cards/BlogCardImage';
+import BlogCardImageV2 from '@/components/cards/BlogCardImageV2';
 
 const samplePost = {
   title: 'The Power of Component-Based Architecture',
@@ -79,6 +81,20 @@ export default function CardTestPage() {
           <div>
             <h3 className="mb-2 font-semibold">New BlogCardWideV2</h3>
             <BlogCardWideV2 {...samplePost} />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-4 border-b pb-2">5. BlogCardImage Migration</h2>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div>
+            <h3 className="mb-2 font-semibold">Original BlogCardImage</h3>
+            <BlogCardImage {...samplePost} />
+          </div>
+          <div>
+            <h3 className="mb-2 font-semibold">New BlogCardImageV2</h3>
+            <BlogCardImageV2 {...samplePost} />
           </div>
         </div>
       </section>
