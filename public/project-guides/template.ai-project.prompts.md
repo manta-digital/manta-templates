@@ -136,11 +136,9 @@ All output should be in raw markdown code format using guidelines (including che
 If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
 ```
 
-
-
 ##### Design Feature
 ```markdown
-We will be working in { project, section } and will document our feature design in feature.{section}.md, in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `coderules.md` to guide tasks.
+We will be working in { project, section } and will document our feature design in feature.{section}.md, in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `.windsurfrules` to guide tasks, with `coderules.md` as a backup if the more specific rules file is not present.
 
 Act as a Technical Fellow as defined in `guide.ai-process.md` and create a low-level design.  Use the { goal } as described in the feature file unless a more specific goal is described here.
 
@@ -151,7 +149,9 @@ This is a design and specification task *not* a coding task.  Address feature ov
 
 ##### Split Feature into Tasks
 ```markdown
-Continuing to work in { project, section }, we will now split our feature described in feature.{section}.md into tasks as described in Phase 3 and Phase 4 of our `guide.ai-project.process.md`.  We are more concerned with creating detailed tasks than a strict Phase 3 / Phase 4 adherance.  We will create our tasks in tasks.{section}.md.
+Continuing to work in { project, section } as a Technical Fellow, we will now split our feature described in feature.{section}.md into tasks as described in Phase 3 and Phase 4 of our `guide.ai-project.process.md`.  We are more concerned with creating detailed tasks than a strict Phase 3 / Phase 4 adherance.  We will create our tasks in tasks.{section}.md.
+
+If tasks.{section}.md already exists, you should be given a current subsection or phase of the {feature} document for which we will create tasks.  Insert our tasks into the existing document, keeping subsections in numerical order.
 ```
 
 ##### Monorepo Template
