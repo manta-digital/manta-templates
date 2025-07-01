@@ -91,9 +91,14 @@ In the output filename, convert {section} to lowercase, drop any special charact
 
 ##### Task Implementation (v0.2)
 
+###### Setup
+Generally this paragraph is no longer needed as these guidelines should be provided by initial setup prompts, and a separate one should no longer be retired here.  Retained until confirmed no longer needed.
 ```markdown
 We are working on the {project, section} tasks in phase 4 of `guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.  If no documentation is available or additional documentation is needed, use the "context7" tool in your toolbox.  
+```
 
+###### Implementation
+```markdown
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
 Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
@@ -117,13 +122,6 @@ Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} whi
 ```
 
 *Task Creation Section*
-```
-Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
-
-All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
-
-If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
-```
 
 ##### Impromptu Task (v0.2)
 ```markdown
@@ -323,4 +321,17 @@ We are working on {project} and you may receive additional input data such as { 
 You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
 
 If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+```
+
+##### Examine Tasks (deprecated)
+
+*In general use Design Feature or Split Feature Into Tasks instead.*
+```markdown
+Hello.  We need to add {task} to {project, section}.
+
+Start by examining {task} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
+
+All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
+
+If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
 ```
