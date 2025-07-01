@@ -59,6 +59,143 @@ Install and configure ShadCN Card components as the foundation for card standard
   - Verify visual parity between old and new implementations
   - Success: Both cards appear visually identical with same spacing, colors, and typography
 
+## Section 2: Enhanced Card Variants
+
+### Overview
+Create enhanced card variants that combine ShadCN structure with advanced features from existing card components, establishing the foundation for specialized card migration.
+
+### Tasks
+
+- [ ] **Create enhanced card variant system**
+  - [ ] Design variant architecture with base + enhancement pattern
+    1. Create `src/types/cardVariants.ts` with variant definitions
+    2. Define variant types: `base`, `elevated`, `bordered`, `gradient`, `interactive`
+    3. Add size variants: `sm`, `md`, `lg`, `xl` with responsive breakpoints
+    4. Include state variants: `default`, `hover`, `active`, `disabled`
+  - [ ] Implement variant composition utilities
+    1. Create `src/lib/cardVariants.ts` with variant class builders
+    2. Use class-variance-authority (cva) for variant management
+    3. Support compound variants (size + visual style combinations)
+    4. Add runtime variant validation with proper TypeScript types
+  - [ ] Success: Variant system supports flexible card customization with type safety
+
+- [ ] **Implement elevated card variant**
+  - [ ] Create enhanced elevation system
+    1. Create `src/components/cards/variants/ElevatedCard.tsx`
+    2. Extend ShadCN Card with enhanced shadow and hover effects
+    3. Add elevation levels: `none`, `sm`, `md`, `lg`, `xl` using CSS custom properties
+    4. Include smooth elevation transitions on hover and focus states
+  - [ ] Add interactive elevation behaviors
+    1. Implement hover elevation increase for better user feedback
+    2. Add focus-visible elevation for keyboard navigation accessibility
+    3. Include pressed/active state with reduced elevation
+    4. Support reduced-motion preference for accessibility
+  - [ ] Success: ElevatedCard provides sophisticated depth effects while maintaining accessibility
+
+- [ ] **Create bordered card variant**
+  - [ ] Implement advanced border styling
+    1. Create `src/components/cards/variants/BorderedCard.tsx`
+    2. Extend ShadCN Card with customizable border patterns
+    3. Support border styles: `solid`, `dashed`, `dotted`, `gradient`
+    4. Add border width variants: `thin`, `medium`, `thick` with responsive adjustments
+  - [ ] Add teal-500 accent integration
+    1. Implement teal-500 border accents for primary actions/states
+    2. Add border color animation on hover and focus
+    3. Support theme-aware border colors (light/dark mode compatibility)
+    4. Include high contrast mode support for accessibility
+  - [ ] Success: BorderedCard maintains teal-500 design system while adding versatile border options
+
+- [ ] **Develop gradient card variant**
+  - [ ] Create sophisticated gradient system
+    1. Create `src/components/cards/variants/GradientCard.tsx`
+    2. Implement gradient background with ShadCN Card structure
+    3. Add gradient presets: `teal`, `blue`, `purple`, `sunset`, `ocean`
+    4. Support custom gradient definitions via CSS custom properties
+  - [ ] Optimize gradient accessibility
+    1. Ensure sufficient contrast ratios for text readability
+    2. Add overlay system for content readability on gradients
+    3. Support reduced-motion preference for animated gradients
+    4. Include high contrast mode alternatives
+  - [ ] Success: GradientCard provides visually appealing backgrounds without compromising accessibility
+
+- [ ] **Build interactive card variant**
+  - [ ] Implement advanced interaction patterns
+    1. Create `src/components/cards/variants/InteractiveCard.tsx`
+    2. Add click, hover, and focus interaction states
+    3. Support keyboard navigation with proper ARIA attributes
+    4. Include ripple effect animations for touch interactions
+  - [ ] Add gesture support for enhanced UX
+    1. Implement swipe gestures for mobile card interactions
+    2. Add long-press actions for contextual menus
+    3. Support drag and drop capabilities for reorderable cards
+    4. Include haptic feedback integration for supported devices
+  - [ ] Success: InteractiveCard provides rich user interactions while maintaining web standards
+
+- [ ] **Create card composition system**
+  - [ ] Design flexible card layout patterns
+    1. Create `src/components/cards/layouts/CardComposition.tsx`
+    2. Support nested card layouts (card-in-card patterns)
+    3. Add flexible grid and flex layout options
+    4. Include responsive card sizing and spacing utilities
+  - [ ] Implement advanced layout features
+    1. Add card stacking and overlapping layout patterns
+    2. Support masonry-style card grids with proper accessibility
+    3. Include card carousel and slider components
+    4. Add virtual scrolling for large card collections
+  - [ ] Success: CardComposition enables complex card layouts with optimal performance
+
+- [ ] **Develop card animation system**
+  - [ ] Create smooth card animations
+    1. Create `src/components/cards/animations/CardAnimations.tsx`
+    2. Implement entrance animations: `fade-in`, `slide-up`, `scale-in`
+    3. Add exit animations with proper cleanup for React transitions
+    4. Support staggered animations for card collections
+  - [ ] Add micro-interactions
+    1. Implement card hover micro-animations (subtle scale, glow effects)
+    2. Add loading state animations with skeleton patterns
+    3. Support success/error state animations for form cards
+    4. Include accessibility controls for motion preferences
+  - [ ] Success: Card animations enhance UX while respecting accessibility and performance
+
+- [ ] **Build card theming system**
+  - [ ] Create comprehensive theme support
+    1. Create `src/styles/cardThemes.css` with theme-specific variables
+    2. Extend existing teal-500 theme with card-specific color schemes
+    3. Add light/dark mode automatic switching for all card variants
+    4. Support high contrast and reduced color themes for accessibility
+  - [ ] Implement dynamic theme switching
+    1. Add runtime theme switching capabilities for card collections
+    2. Support user preference persistence for theme choices
+    3. Include theme preview system for development and testing
+    4. Add theme validation to ensure proper contrast ratios
+  - [ ] Success: Card theming system maintains design consistency across all variants and modes
+
+- [ ] **Create card variant testing suite**
+  - [ ] Implement comprehensive testing
+    1. Create `src/components/cards/__tests__/CardVariants.test.tsx`
+    2. Add unit tests for all variant combinations and props
+    3. Include accessibility testing with jest-axe
+    4. Test responsive behavior at different viewport sizes
+  - [ ] Add visual regression testing
+    1. Set up Playwright tests for card variant visual consistency
+    2. Test all variants in both light and dark themes
+    3. Include interaction state testing (hover, focus, active)
+    4. Add cross-browser compatibility tests
+  - [ ] Success: All card variants pass comprehensive testing suite with 100% coverage
+
+- [ ] **Build card variant documentation**
+  - [ ] Create comprehensive documentation
+    1. Create `src/components/cards/variants/README.md` with usage examples
+    2. Document all variant props and their effects
+    3. Add migration guide from existing cards to enhanced variants
+    4. Include accessibility guidelines and best practices
+  - [ ] Add interactive documentation
+    1. Create Storybook stories for all card variants
+    2. Add interactive playground for testing variant combinations
+    3. Include code examples and copy-paste snippets
+    4. Add performance notes and optimization recommendations
+  - [ ] Success: Documentation enables easy adoption and understanding of card variant system
+
 ## Section 99: Enhancements (keep this section last)
 - [ ] **Create migration utility functions**
   - Create `src/lib/cardMigration.ts` with helper functions
