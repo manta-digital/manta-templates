@@ -2,13 +2,17 @@ import BaseCard from '@/components/cards/BaseCard';
 import BlogCard from '@/components/cards/BlogCard';
 import BlogCardV2 from '@/components/cards/BlogCardV2';
 import { BaseCardV2, CardContent, CardHeader, CardTitle } from '@/components/cards/BaseCardV2';
+import { BlogCardWide } from '@/components/cards/BlogCardWide';
+import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
 
 const samplePost = {
   title: 'The Power of Component-Based Architecture',
   date: '2024-05-21',
-  excerpt: 'Discover how breaking down UIs into reusable components can streamline your development process.',
+  excerpt: 'Discover how breaking down UIs into reusable components can streamline your development process, improve maintainability, and lead to more consistent user experiences across your applications.',
   coverImageUrl: '/image/blog-sample-image.png',
   author: 'Jane Doe',
+  category: 'Web Development',
+  slug: '/blog/sample-post',
 };
 
 export default function CardTestPage() {
@@ -61,6 +65,20 @@ export default function CardTestPage() {
             <BaseCardV2 className="w-full max-w-[400px] bg-transparent">
               <p>This card uses the `bg-transparent` utility class.</p>
             </BaseCardV2>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-4 border-b pb-2">4. BlogCardWide Migration</h2>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div>
+            <h3 className="mb-2 font-semibold">Original BlogCardWide</h3>
+            <BlogCardWide {...samplePost} />
+          </div>
+          <div>
+            <h3 className="mb-2 font-semibold">New BlogCardWideV2</h3>
+            <BlogCardWideV2 {...samplePost} />
           </div>
         </div>
       </section>
