@@ -287,7 +287,7 @@ export function CardCarousel({
       <div className="relative overflow-hidden">
         <div
           ref={containerRef}
-          className="flex transition-transform duration-300 ease-in-out cursor-grab active:cursor-grabbing"
+          className="flex items-stretch transition-transform duration-300 ease-in-out cursor-grab active:cursor-grabbing"
           style={{
             transform: `translateX(${translateX})`,
             gap: `${gap}px`,
@@ -311,7 +311,7 @@ export function CardCarousel({
           {(infinite ? [...children, ...children] : children).map((child, index) => (
             <div
               key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
-              className={cn('flex-shrink-0 select-none', itemClassName)}
+              className={cn('flex-shrink-0 select-none flex flex-col h-full', itemClassName)}
               style={{ 
                 width: cardWidth,
                 ...(minHeight && { minHeight })
