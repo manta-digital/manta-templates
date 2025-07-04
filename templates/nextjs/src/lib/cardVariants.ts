@@ -7,6 +7,7 @@ export const cardVariants = cva(
     variants: {
       // Defines the visual style of the card
       variant: {
+    primary: 'bg-card-bg-primary text-card-fg-primary border-card-border-primary',
         base: 'bg-card text-card-foreground border shadow-sm',
         elevated: 'bg-card text-card-foreground shadow-xl hover:shadow-2xl transform translate-y-0 hover:-translate-y-1 dark:shadow-[0_15px_35px_-12px_rgba(255,255,255,0.1)] dark:hover:shadow-[0_25px_40px_-12px_rgba(255,255,255,0.1)]',
         bordered:

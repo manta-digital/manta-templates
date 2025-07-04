@@ -1,0 +1,32 @@
+/* Card Theming System */
+/* Define card-specific color variables for light, dark, high-contrast, and reduced-motion */
+
+:root {
+  /* Primary card theme */
+  --card-bg-primary: var(--color-teal-500);
+  --card-fg-primary: var(--color-background);
+  --card-border-primary: var(--color-teal-500);
+}
+
+.dark {
+  --card-bg-primary: var(--color-teal-400);
+  --card-fg-primary: var(--color-background);
+  --card-border-primary: var(--color-teal-400);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --card-bg-primary: var(--color-teal-600);
+    --card-fg-primary: var(--color-background);
+    --card-border-primary: var(--color-teal-600);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  .dark {
+    /* Fallback to static colors when reduced motion is preferred */
+    --card-bg-primary: var(--color-teal-500);
+    --card-border-primary: var(--color-teal-500);
+  }
+}
