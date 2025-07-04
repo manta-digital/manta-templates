@@ -170,4 +170,51 @@
   /* } */
 }
 
+/* Card size semantic classes for grid systems */
+.card-size-sm {
+  /* Small card hint - grid systems can interpret this */
+}
+
+.card-size-md {
+  /* Medium card hint - grid systems can interpret this */
+}
+
+.card-size-lg {
+  /* Large card hint - grid systems can interpret this */
+}
+
+.card-size-xl {
+  /* Extra large card hint - grid systems can interpret this */
+}
+
+/* Gradient card custom properties */
+:root {
+  --gradient-teal: linear-gradient(135deg, #14b8a6 0%, #22c55e 100%);
+  --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-sunset: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  --gradient-ocean: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+}
+
+/* Gradient card utility classes */
+.gradient-teal {
+  background: var(--gradient-teal);
+}
+
+.gradient-blue {
+  background: var(--gradient-blue);
+}
+
+.gradient-purple {
+  background: var(--gradient-purple);
+}
+
+.gradient-sunset {
+  background: var(--gradient-sunset);
+}
+
+.gradient-ocean {
+  background: var(--gradient-ocean);
+}
+
 /* You can add more custom styles or component styles below */

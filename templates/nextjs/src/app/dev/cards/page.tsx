@@ -6,6 +6,12 @@ import { BlogCardWide } from '@/components/cards/BlogCardWide';
 import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
 import { BlogCardImage } from '@/components/cards/BlogCardImage';
 import BlogCardImageV2 from '@/components/cards/BlogCardImageV2';
+import {
+  EnhancedBaseCard,
+  CardHeader,
+  CardContent,
+  CardTitle,
+} from '@/components/cards/EnhancedBaseCard';
 
 const samplePost = {
   title: 'The Power of Component-Based Architecture',
@@ -96,6 +102,123 @@ export default function CardTestPage() {
             <h3 className="mb-2 font-semibold">New BlogCardImageV2</h3>
             <BlogCardImageV2 {...samplePost} />
           </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-4 border-b pb-2">6. EnhancedBaseCard Variants</h2>
+        <div className="space-y-8">
+          
+          <div>
+            <h3 className="mb-4 font-semibold">Base Variant</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <EnhancedBaseCard size="sm">
+                <CardHeader><CardTitle>Small</CardTitle></CardHeader>
+                <CardContent><p>A small base card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard size="md">
+                <CardHeader><CardTitle>Medium</CardTitle></CardHeader>
+                <CardContent><p>A medium base card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard size="lg">
+                <CardHeader><CardTitle>Large</CardTitle></CardHeader>
+                <CardContent><p>A large base card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard size="xl">
+                <CardHeader><CardTitle>Extra Large</CardTitle></CardHeader>
+                <CardContent><p>An extra large base card.</p></CardContent>
+              </EnhancedBaseCard>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Elevated Variant</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <EnhancedBaseCard variant="elevated" size="sm">
+                <CardHeader><CardTitle>Small</CardTitle></CardHeader>
+                <CardContent><p>A small elevated card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="elevated" size="md">
+                <CardHeader><CardTitle>Medium</CardTitle></CardHeader>
+                <CardContent><p>A medium elevated card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="elevated" size="lg">
+                <CardHeader><CardTitle>Large</CardTitle></CardHeader>
+                <CardContent><p>A large elevated card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="elevated" size="xl">
+                <CardHeader><CardTitle>Extra Large</CardTitle></CardHeader>
+                <CardContent><p>An extra large elevated card.</p></CardContent>
+              </EnhancedBaseCard>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Bordered Variant (hover to see effect)</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <EnhancedBaseCard variant="bordered" size="sm">
+                <CardHeader><CardTitle>Small</CardTitle></CardHeader>
+                <CardContent><p>A small bordered card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="bordered" size="md">
+                <CardHeader><CardTitle>Medium</CardTitle></CardHeader>
+                <CardContent><p>A medium bordered card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="bordered" size="lg">
+                <CardHeader><CardTitle>Large</CardTitle></CardHeader>
+                <CardContent><p>A large bordered card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="bordered" size="xl">
+                <CardHeader><CardTitle>Extra Large</CardTitle></CardHeader>
+                <CardContent><p>An extra large bordered card.</p></CardContent>
+              </EnhancedBaseCard>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Gradient Variant</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <EnhancedBaseCard variant="gradient" size="sm">
+                <CardHeader><CardTitle>Small</CardTitle></CardHeader>
+                <CardContent><p>A small gradient card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="gradient" size="md">
+                <CardHeader><CardTitle>Medium</CardTitle></CardHeader>
+                <CardContent><p>A medium gradient card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="gradient" size="lg">
+                <CardHeader><CardTitle>Large</CardTitle></CardHeader>
+                <CardContent><p>A large gradient card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="gradient" size="xl">
+                <CardHeader><CardTitle>Extra Large</CardTitle></CardHeader>
+                <CardContent><p>An extra large gradient card.</p></CardContent>
+              </EnhancedBaseCard>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold">Interactive Variant (hover to see effect)</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <EnhancedBaseCard variant="interactive" size="sm">
+                <CardHeader><CardTitle>Small</CardTitle></CardHeader>
+                <CardContent><p>A small interactive card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="interactive" size="md">
+                <CardHeader><CardTitle>Medium</CardTitle></CardHeader>
+                <CardContent><p>A medium interactive card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="interactive" size="lg">
+                <CardHeader><CardTitle>Large</CardTitle></CardHeader>
+                <CardContent><p>A large interactive card.</p></CardContent>
+              </EnhancedBaseCard>
+              <EnhancedBaseCard variant="interactive" size="xl">
+                <CardHeader><CardTitle>Extra Large</CardTitle></CardHeader>
+                <CardContent><p>An extra large interactive card.</p></CardContent>
+              </EnhancedBaseCard>
+            </div>
+          </div>
+
         </div>
       </section>
 
