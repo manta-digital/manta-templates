@@ -104,12 +104,7 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
     2. Implement gradient background with ShadCN Card structure
     3. Add gradient presets: `teal`, `blue`, `purple`, `sunset`, `ocean`
     4. Support custom gradient definitions via CSS custom properties
-  - [ ] Optimize gradient accessibility
-    1. Ensure sufficient contrast ratios for text readability
-    2. Add overlay system for content readability on gradients
-    3. Support reduced-motion preference for animated gradients
-    4. Include high contrast mode alternatives
-  - [ ] Success: GradientCard provides visually appealing backgrounds without compromising accessibility
+  - [x] Success: GradientCard provides visually appealing backgrounds without compromising accessibility
 
 - [x] **Create card composition system**
   - [x] Design flexible card layout patterns
@@ -164,6 +159,134 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
     - [x] Add performance notes and optimization recommendations
   - [x] Success: Documentation enables easy adoption and understanding of card variant system
 
+## Section 3: Support Radix Theming
+
+### Overview
+Implement comprehensive Radix color palette theming system to support custom color schemes beyond the current teal-500 system. Enable dynamic color palette switching with proper accessibility, contrast ratios, and semantic color mapping.
+
+### Tasks
+- [ ] **Research and analyze Radix Colors system**
+  - [ ] Study Radix Colors documentation and color scale methodology
+    - [ ] Review Radix Colors 1-12 scale system and semantic meanings
+    - [ ] Understand P3 wide-gamut color support and alpha variants
+    - [ ] Document color naming conventions (gray, mauve, slate, sage, olive, sand, tomato, red, ruby, crimson, pink, plum, purple, violet, iris, indigo, blue, cyan, teal, jade, green, grass, bronze, gold, brown, orange, amber, yellow, lime, mint, sky)
+    - [ ] Analyze light/dark mode color relationships and automatic pairing
+  - [ ] Examine current teal-500 usage patterns in existing card system
+    - [ ] Audit all card components for hardcoded teal references
+    - [ ] Map current color usage to semantic color roles (accent, border, background, text)
+    - [ ] Document accessibility requirements and contrast ratios
+  - [ ] Success: Complete understanding of Radix Colors system and current color usage patterns
+
+- [ ] **Install and configure Radix Colors dependencies**
+  - [ ] Install Radix Colors packages
+    - [ ] Run `npm install @radix-ui/colors` to install color definitions
+    - [ ] Verify installation and available color exports
+    - [ ] Test import of color scales in TypeScript environment
+  - [ ] Set up color scale utilities
+    - [ ] Create `src/lib/colors/radixColors.ts` utility file
+    - [ ] Import and re-export commonly used color scales (gray, teal, purple, etc.)
+    - [ ] Create TypeScript types for color scale names and values
+    - [ ] Add helper functions for color scale manipulation
+  - [ ] Success: Radix Colors properly installed and accessible via utility functions
+
+- [ ] **Create Radix color palette integration with Tailwind CSS v4**
+  - [ ] Extend Tailwind theme with Radix color scales
+    - [ ] Update `src/app/globals.css` @theme block to include Radix color variables
+    - [ ] Map Radix color scales to CSS custom properties following Tailwind v4 conventions
+    - [ ] Ensure proper naming: `--color-{scale}-{step}` (e.g., `--color-teal-1`, `--color-teal-12`)
+    - [ ] Include both light and dark variants for each color scale
+  - [ ] Create semantic color mapping system
+    - [ ] Define semantic color roles: `--color-accent`, `--color-accent-subtle`, `--color-accent-emphasis`
+    - [ ] Map semantic roles to specific Radix color steps (e.g., accent = step 9, subtle = step 3)
+    - [ ] Create CSS custom properties for card-specific semantic colors
+    - [ ] Ensure automatic light/dark mode switching via CSS custom properties
+  - [ ] Success: Radix colors available as Tailwind utilities and semantic color system established
+
+- [ ] **Implement dynamic color palette switching**
+  - [ ] Create color palette context and provider
+    - [ ] Create `src/contexts/ColorPaletteContext.tsx` with React context
+    - [ ] Define ColorPalette type with available color scales and current selection
+    - [ ] Implement useColorPalette hook for consuming components
+    - [ ] Add palette switching functionality with persistence (localStorage)
+  - [ ] Build color palette selector component
+    - [ ] Create `src/components/ui/ColorPaletteSelector.tsx` component
+    - [ ] Display available color palettes with preview swatches
+    - [ ] Implement palette selection with immediate visual feedback
+    - [ ] Include accessibility features (keyboard navigation, screen reader support)
+  - [ ] Integrate palette switching with CSS custom properties
+    - [ ] Update CSS custom properties dynamically based on selected palette
+    - [ ] Ensure smooth transitions between color palettes
+    - [ ] Maintain semantic color relationships across palette changes
+  - [ ] Success: Users can dynamically switch between different Radix color palettes
+
+- [ ] **Update card theming system for Radix integration**
+  - [ ] Refactor cardThemes.css for Radix compatibility
+    - [ ] Replace hardcoded teal references with semantic color variables
+    - [ ] Update `src/styles/cardThemes.css` to use Radix color steps
+    - [ ] Maintain existing card variants while adding Radix color support
+    - [ ] Ensure proper contrast ratios and accessibility compliance
+  - [ ] Enhance card variant system with color palette support
+    - [ ] Update `src/lib/cardVariants.ts` to accept color palette parameter
+    - [ ] Add color variant options (accent, neutral, success, warning, error)
+    - [ ] Implement color-aware hover and focus states
+    - [ ] Maintain backward compatibility with existing card implementations
+  - [ ] Create card color variant test component
+    - [ ] Build `src/components/cards/test/CardColorVariantTest.tsx`
+    - [ ] Display all card variants with different color palettes
+    - [ ] Include interactive palette switching demonstration
+    - [ ] Test accessibility and contrast ratios across all combinations
+  - [ ] Success: Card system fully integrated with Radix color palettes and semantic color roles
+
+- [ ] **Implement accessibility and contrast validation**
+  - [ ] Create color contrast validation utilities
+    - [ ] Create `src/lib/colors/contrastUtils.ts` with WCAG compliance functions
+    - [ ] Implement contrast ratio calculation for color combinations
+    - [ ] Add validation for AA and AAA accessibility standards
+    - [ ] Create warnings for insufficient contrast ratios
+  - [ ] Add accessibility testing for color combinations
+    - [ ] Test all card variants with different color palettes for contrast compliance
+    - [ ] Validate text readability on colored backgrounds
+    - [ ] Ensure proper focus indicators with sufficient contrast
+    - [ ] Test with color blindness simulation tools
+  - [ ] Implement high contrast mode support
+    - [ ] Add `@media (prefers-contrast: high)` CSS rules
+    - [ ] Override color selections with high contrast alternatives
+    - [ ] Ensure all interactive elements remain visible and usable
+  - [ ] Success: All color combinations meet WCAG accessibility standards
+
+- [ ] **Create comprehensive color palette documentation**
+  - [ ] Document Radix color integration
+    - [ ] Create `src/components/cards/theming/README.md` with color system guide
+    - [ ] Document available color palettes and their use cases
+    - [ ] Provide examples of semantic color usage in cards
+    - [ ] Include accessibility guidelines and contrast requirements
+  - [ ] Build interactive color palette showcase
+    - [ ] Create `/test-color-palettes` page for comprehensive color testing
+    - [ ] Display all available Radix color scales with previews
+    - [ ] Show card variants with each color palette applied
+    - [ ] Include accessibility information and contrast ratios
+  - [ ] Create migration guide for existing implementations
+    - [ ] Document how to migrate from hardcoded teal-500 to semantic colors
+    - [ ] Provide code examples for common color usage patterns
+    - [ ] Include troubleshooting guide for color-related issues
+  - [ ] Success: Complete documentation enables easy adoption of Radix color system
+
+- [ ] **Performance optimization and testing**
+  - [ ] Optimize color palette switching performance
+    - [ ] Implement efficient CSS custom property updates
+    - [ ] Add debouncing for rapid palette changes
+    - [ ] Minimize layout shifts during color transitions
+    - [ ] Test performance with large numbers of card components
+  - [ ] Create automated testing for color system
+    - [ ] Add unit tests for color utility functions
+    - [ ] Test color palette context and provider functionality
+    - [ ] Validate CSS custom property generation and updates
+    - [ ] Include visual regression tests for color consistency
+  - [ ] Browser compatibility testing
+    - [ ] Test CSS custom property support across target browsers
+    - [ ] Validate P3 wide-gamut color display where supported
+    - [ ] Ensure graceful fallbacks for unsupported features
+  - [ ] Success: Color system performs efficiently and works across all target browsers
 
 ## Section 98: Persistent Bug Fixes
 - [ ] **Fix card height issues**
@@ -189,6 +312,11 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
   - [ ] Ensure keyboard navigation works correctly
   - [ ] Add focus indicators that match teal-500 design
   - [ ] Test with screen reader compatibility
+  - [ ] Optimize gradient accessibility
+    1. Ensure sufficient contrast ratios for text readability
+    2. Add overlay system for content readability on gradients
+    3. Support reduced-motion preference for animated gradients
+    4. Include high contrast mode alternatives
   - [ ] Success: EnhancedBaseCard passes accessibility audit and keyboard navigation tests
 
 - [ ] **Create migration utility functions**
