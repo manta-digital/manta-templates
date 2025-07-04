@@ -13,7 +13,7 @@ export const cardVariants = cva(
           'bg-card text-card-foreground border-2 border-gray-200 hover:border-teal-500 dark:border-gray-700 dark:hover:border-teal-400 transition-colors duration-300',
         gradient: 'text-white bg-gradient-to-br from-teal-500 to-green-500 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-1000',
         interactive:
-          'bg-card text-card-foreground border shadow-sm cursor-pointer hover:shadow-lg hover:scale-[1.02]',
+          'bg-card text-card-foreground border shadow-sm cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:ring-1 hover:ring-teal-400',
       },
       // Defines the size as semantic hints for grid systems
       size: {
@@ -25,22 +25,26 @@ export const cardVariants = cva(
       // Defines the corner radius independently
       radius: {
         none: 'rounded-none',
-        sm: 'rounded-md',
-        md: 'rounded-lg',
-        lg: 'rounded-xl',
-        xl: 'rounded-2xl',
+        sm: 'rounded',
+        md: 'rounded-sm',
+        lg: 'rounded-md',
+        xl: 'rounded-xl',
       },
       // Defines programmatic states
       state: {
         default: '',
         active: 'transform scale-[0.98]',
         disabled: 'opacity-50 cursor-not-allowed',
+        loading: 'animate-pulse bg-gray-200 text-transparent cursor-wait',
+        success: 'border-2 border-green-500 bg-green-50',
+        error: 'border-2 border-red-500 bg-red-50',
       },
     },
     defaultVariants: {
       variant: 'base',
       size: 'md',
       radius: 'md',
+      state: 'default',
     },
   },
 );

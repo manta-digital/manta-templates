@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, Variants, HTMLMotionProps } from 'framer-motion';
+import { motion, Variants, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 
 type AnimationVariant = 'fade-in' | 'slide-up' | 'scale-in';
 
@@ -40,6 +40,8 @@ export function AnimatedCard({
   children,
   ...props
 }: AnimatedCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimate = enabled && !shouldReduceMotion;
   const variants = cardAnimationVariants[variant];
   const transition = {
     duration,
@@ -49,11 +51,11 @@ export function AnimatedCard({
 
   return (
     <motion.div
-      initial={enabled ? 'hidden' : 'visible'}
+      initial={shouldAnimate ? 'hidden' : 'visible'}
       animate="visible"
-      exit="hidden"
+      exit={shouldAnimate ? 'hidden' : 'visible'}
       variants={variants}
-      transition={enabled ? transition : {}}
+      transition={shouldAnimate ? transition : {}}
       className={className}
       {...props}
     >

@@ -117,6 +117,22 @@ export function CardVariantTest() {
       </div>
 
       {/* Animation Controls */}
+            {/* Micro-Interactions */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">Micro-Interactions</h3>
+        <div className="flex flex-wrap gap-4">
+          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'loading' })}>
+            <p className="invisible">Loading...</p>
+          </div>
+          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'success' })}>
+            <h4 className="font-semibold mb-2">Success!</h4>
+          </div>
+          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'error' })}>
+            <h4 className="font-semibold mb-2">Error</h4>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col md:flex-row gap-4 items-center mb-4">
         <label className="flex items-center space-x-2">
           <input type="checkbox" checked={animEnabled} onChange={e => setAnimEnabled(e.target.checked)} />
