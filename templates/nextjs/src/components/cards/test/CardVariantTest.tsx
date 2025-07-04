@@ -6,6 +6,8 @@ import { CardVariantProps } from '@/types/cardVariants';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { AnimatedCard } from '@/components/cards/animations/AnimatedCard';
+import { AnimatePresence } from 'framer-motion';
 
 /**
  * Test component to verify the card variant system works correctly
@@ -44,6 +46,13 @@ export function CardVariantTest() {
     { variant: 'base', size: 'md', radius: 'lg', label: 'More Rounded' },
     { variant: 'base', size: 'md', radius: 'xl', label: 'Very Rounded' },
   ];
+
+  // Animation controls
+  const [animEnabled, setAnimEnabled] = useState(true);
+  const [animVariant, setAnimVariant] = useState<'fade-in' | 'slide-up' | 'scale-in'>('fade-in');
+  const [animDuration, setAnimDuration] = useState(0.5);
+  const [animStagger, setAnimStagger] = useState(false);
+  const [showCards, setShowCards] = useState(true);
 
   return (
     <div className={cn('p-8 space-y-8 min-h-screen transition-colors', isDark ? 'dark' : '')}>
@@ -104,6 +113,58 @@ export function CardVariantTest() {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Animation Controls */}
+      <div className="flex flex-col md:flex-row gap-4 items-center mb-4">
+        <label className="flex items-center space-x-2">
+          <input type="checkbox" checked={animEnabled} onChange={e => setAnimEnabled(e.target.checked)} />
+          <span>Enable animations</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <span>Variant:</span>
+          <select value={animVariant} onChange={e => setAnimVariant(e.target.value as 'fade-in' | 'slide-up' | 'scale-in')} className="border rounded px-2 py-1">
+            <option value="fade-in">Fade In</option>
+            <option value="slide-up">Slide Up</option>
+            <option value="scale-in">Scale In</option>
+          </select>
+        </label>
+        <label className="flex items-center space-x-2">
+          <span>Duration:</span>
+          <input type="number" min="0" step="0.1" value={animDuration} onChange={e => setAnimDuration(parseFloat(e.target.value) || 0)} className="w-16 border rounded px-1 py-1" />
+        </label>
+        <label className="flex items-center space-x-2">
+          <input type="checkbox" checked={animStagger} onChange={e => setAnimStagger(e.target.checked)} />
+          <span>Stagger children</span>
+        </label>
+        <label className="flex items-center space-x-2">
+          <input type="checkbox" checked={showCards} onChange={e => setShowCards(e.target.checked)} />
+          <span>Show cards</span>
+        </label>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">Animation Demo</h3>
+        <div className="flex space-x-4">
+          <AnimatePresence mode="wait">
+            {showCards && (
+              <>
+                <AnimatedCard key={`card1-${animEnabled}-${animVariant}-${animDuration}-${animStagger}`} enabled={animEnabled} variant={animVariant} duration={animDuration} staggerChildren={animStagger} className="p-4 bg-background rounded-lg shadow">
+                  <div className={cardVariants({ variant: 'interactive', size: 'md' })}>
+                    <h4 className="font-semibold mb-2">Slide-Up Entry</h4>
+                    <p className="text-sm opacity-80">Interactive Card</p>
+                  </div>
+                </AnimatedCard>
+                <AnimatedCard key={`card2-${animEnabled}-${animVariant}-${animDuration}-${animStagger}`} enabled={animEnabled} variant={animVariant} duration={animDuration} staggerChildren={animStagger} className="p-4 bg-background rounded-lg shadow">
+                  <div className={cardVariants({ variant: 'gradient', size: 'md' })}>
+                    <h4 className="font-semibold mb-2">Fade-In Entry</h4>
+                    <p className="text-sm opacity-80">Gradient Card</p>
+                  </div>
+                </AnimatedCard>
+              </>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

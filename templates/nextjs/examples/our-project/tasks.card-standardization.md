@@ -123,11 +123,11 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
   - [x] Success: CardComposition enables complex card layouts with optimal performance
 
 - [ ] **Develop card animation system**
-  - [ ] Create smooth card animations
-    1. Create `src/components/cards/animations/CardAnimations.tsx`
-    2. Implement entrance animations: `fade-in`, `slide-up`, `scale-in`
-    3. Add exit animations with proper cleanup for React transitions
-    4. Support staggered animations for card collections
+  - [x] Create smooth card animations
+    1. [x] Create `src/components/cards/animations/CardAnimations.tsx`
+    2. [x] Implement entrance animations: `fade-in`, `slide-up`, `scale-in`
+    3. [ ] Add exit animations with proper cleanup for React transitions
+    4. [x] Support staggered animations for card collections
   - [ ] Add micro-interactions
     1. Implement card hover micro-animations (subtle scale, glow effects)
     2. Add loading state animations with skeleton patterns
@@ -135,6 +135,10 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
     4. Include accessibility controls for motion preferences
   - [ ] Success: Card animations enhance UX while respecting accessibility and performance
 
+- [ ] **Centralize Test Page**
+  - [ ] Create root /test or /dev/test page with links to the other test pages that we now.
+  - [ ] Success: Test page displays all card variants and layouts
+  
 - [ ] **Build card theming system**
   - [ ] Create comprehensive theme support
     1. Create `src/styles/cardThemes.css` with theme-specific variables

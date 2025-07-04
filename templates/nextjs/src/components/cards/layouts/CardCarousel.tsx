@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Button } from '@/components/ui/button';
 import { useUniformHeight } from '@/hooks/useUniformHeight';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 export interface CardCarouselProps {
   children: React.ReactNode[];
@@ -56,6 +57,12 @@ export function CardCarousel({
   const isDraggingRef = useRef<boolean>(false);
   const dragDirectionRef = useRef<'left' | 'right' | null>(null);
   const breakpoint = useBreakpoint();
+  const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
+  const slideVariants: Variants = {
+    hidden: (dir) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+    visible: { x: '0%', opacity: 1 },
+    exit: (dir) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0 }),
+  };  
 
   const totalCards = children.length;
   const maxIndex = infinite ? totalCards : Math.max(0, totalCards - visibleCount);
@@ -81,6 +88,7 @@ export function CardCarousel({
   }, [infinite, totalCards, maxIndex]);
 
   const nextSlide = useCallback(() => {
+    setSlideDirection(1);
     if (infinite) {
       setCurrentIndex((prev) => (prev + 1) % totalCards);
     } else {
@@ -89,6 +97,7 @@ export function CardCarousel({
   }, [infinite, totalCards, maxIndex]);
 
   const prevSlide = useCallback(() => {
+    setSlideDirection(-1);
     if (infinite) {
       setCurrentIndex((prev) => (prev - 1 + totalCards) % totalCards);
     } else {
@@ -280,18 +289,24 @@ export function CardCarousel({
 
   const cardWidth = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
   
-  // Calculate translateX - each card "owns" gap/visibleCount of gap space
-  const translateX = `calc(-${currentIndex * (100 / visibleCount)}% - ${currentIndex * gap / visibleCount}px)`;
 
   return (
     <div className={cn('relative w-full', className)}>
       {/* Carousel Container */}
       <div className="relative overflow-hidden">
-        <div
+          <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={currentIndex}
+          custom={slideDirection}
+          variants={slideVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={{ duration: 0.3 }}
           ref={containerRef}
-          className="flex items-stretch transition-transform duration-300 ease-in-out cursor-grab active:cursor-grabbing"
+          className="flex items-stretch cursor-grab active:cursor-grabbing"
           style={{
-            transform: `translateX(${translateX})`,
+            
             gap: `${gap}px`,
              ...(cardHeight !== undefined && { height: `${cardHeight}px` }),
           }}
@@ -338,7 +353,8 @@ export function CardCarousel({
               );
             })}
 
-        </div>
+        </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Navigation Arrows */}
