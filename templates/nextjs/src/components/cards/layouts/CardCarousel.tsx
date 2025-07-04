@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Button } from '@/components/ui/button';
+import { useUniformHeight } from '@/hooks/useUniformHeight';
 
 export interface CardCarouselProps {
   children: React.ReactNode[];
@@ -50,6 +51,7 @@ export function CardCarousel({
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay > 0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardHeight = useUniformHeight(containerRef, [children, visibleCount, infinite]);
   const startXRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
   const dragDirectionRef = useRef<'left' | 'right' | null>(null);
@@ -291,6 +293,7 @@ export function CardCarousel({
           style={{
             transform: `translateX(${translateX})`,
             gap: `${gap}px`,
+             ...(cardHeight !== undefined && { height: `${cardHeight}px` }),
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -308,18 +311,33 @@ export function CardCarousel({
             }
           }}
         >
-          {(infinite ? [...children, ...children] : children).map((child, index) => (
-            <div
-              key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
-              className={cn('flex-shrink-0 select-none flex flex-col h-full', itemClassName)}
-              style={{ 
-                width: cardWidth,
-                ...(minHeight && { minHeight })
-              }}
-            >
-              {child}
-            </div>
-          ))}
+          {(infinite ? [...children, ...children] : children).map((child, index) => {
+              // Ensure the card element itself fills the container height
+              const content = React.isValidElement(child)
+                ? React.cloneElement(
+                    child as React.ReactElement<React.ComponentProps<'div'>>,
+                    {
+                      className: cn(
+                        (child as React.ReactElement<React.ComponentProps<'div'>>).props.className,
+                        'h-full'
+                      ),
+                    }
+                  )
+                : child;
+              return (
+                <div
+                  key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
+                  className={cn('flex-shrink-0 select-none flex flex-col h-full', itemClassName)}
+                  style={{
+                    width: cardWidth,
+                    ...(minHeight && { minHeight })
+                  }}
+                >
+                  {content}
+                </div>
+              );
+            })}
+
         </div>
       </div>
 

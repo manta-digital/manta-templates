@@ -174,6 +174,10 @@ Create enhanced card variants that combine ShadCN structure with advanced featur
     4. Add performance notes and optimization recommendations
   - [ ] Success: Documentation enables easy adoption and understanding of card variant system
 
+## Section 98: Persistent Bug Fixes
+- [ ] **Fix card height issues**
+  - [ ] Card heights are not consistent in container (infinite mode).
+
 ## Section 99: Enhancements (keep this section last)
 - [ ] **Build interactive card variant**
   - [ ] Implement advanced interaction patterns
