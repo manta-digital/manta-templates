@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
  */
 export function CardVariantTest() {
   const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [, setMounted] = useState(false);
 
   // Handle hydration-safe theme detection
   useEffect(() => {

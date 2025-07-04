@@ -86,7 +86,7 @@ export function LightDarkModeTest() {
                 <CardDescription>Card with enhanced shadow and hover effects</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>This card should have a prominent shadow that's visible in both light and dark modes. Hover to see the lift effect.</p>
+                <p>This card should have a prominent shadow that&apos;s visible in both light and dark modes. Hover to see the lift effect.</p>
               </CardContent>
             </Card>
           </div>

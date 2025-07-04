@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
-export interface VirtualCardListProps<T = any> {
+export interface VirtualCardListProps<T = unknown> {
   /** Array of data items to render */
   items: T[];
   /** Height of each item in pixels */
@@ -32,7 +32,7 @@ export interface VirtualCardListProps<T = any> {
   endReachedThreshold?: number;
 }
 
-export function VirtualCardList<T = any>({
+export function VirtualCardList<T = unknown>({
   items,
   itemHeight,
   containerHeight,
@@ -93,13 +93,7 @@ export function VirtualCardList<T = any>({
     }
   }, [containerHeight, totalHeight, itemHeight, gap, onEndReached, endReachedThreshold]);
 
-  // Scroll to specific index
-  const scrollToIndex = useCallback((index: number) => {
-    if (scrollElementRef.current) {
-      const scrollTop = index * (itemHeight + gap);
-      scrollElementRef.current.scrollTop = scrollTop;
-    }
-  }, [itemHeight, gap]);
+
 
   // Scroll to top
   const scrollToTop = useCallback(() => {

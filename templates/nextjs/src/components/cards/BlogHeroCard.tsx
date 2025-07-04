@@ -25,7 +25,7 @@ const BlogHeroCard: React.FC<BlogHeroCardProps> = ({
         'text-primary-foreground',
         'bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 dark:from-blue-700 dark:via-purple-700 dark:to-indigo-800',
         'flex flex-col justify-center',
-        'min-h-[112px] md:min-h-[144px]', // Puff up hero card height
+        // Removed hardcoded height for flexible sizing
         className
       )}
     >

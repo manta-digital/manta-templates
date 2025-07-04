@@ -33,7 +33,6 @@ const BaseCard = React.forwardRef<HTMLElement, BaseCardProps>(
           'flex-col',
           variantClass,
           sizeClass,
-          'min-h-[112px] md:min-h-[144px]',
           className
         )}
         {...props}

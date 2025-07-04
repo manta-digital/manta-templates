@@ -25,7 +25,7 @@ const BaseCardV2 = React.forwardRef<
   return (
     <ShadcnCard
       ref={ref}
-      className={cn('min-h-[112px] md:min-h-[144px]', 'transition-all duration-300 ease-in-out', className)}
+      className={cn('transition-all duration-300 ease-in-out', className)}
       {...props}
     />
   );

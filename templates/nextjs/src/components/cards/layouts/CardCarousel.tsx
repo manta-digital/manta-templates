@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -28,6 +28,8 @@ export interface CardCarouselProps {
   showDots?: boolean;
   /** Enable touch/swipe gestures */
   enableSwipe?: boolean;
+  /** Minimum height for carousel cards (e.g., '200px', '12rem') */
+  minHeight?: string;
 }
 
 export function CardCarousel({
@@ -41,13 +43,16 @@ export function CardCarousel({
   showArrows = true,
   showDots = true,
   enableSwipe = true,
+  minHeight,
 }: CardCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(visibleCards.desktop);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay > 0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const startXRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
+  const dragDirectionRef = useRef<'left' | 'right' | null>(null);
   const breakpoint = useBreakpoint();
 
   const totalCards = children.length;
@@ -64,6 +69,66 @@ export function CardCarousel({
     }
   }, [breakpoint, visibleCards]);
 
+  // Slide navigation helpers (placed before effects to avoid use-before-define)
+  const goToSlide = useCallback((index: number) => {
+    if (infinite) {
+      setCurrentIndex(((index % totalCards) + totalCards) % totalCards);
+    } else {
+      setCurrentIndex(Math.max(0, Math.min(index, maxIndex)));
+    }
+  }, [infinite, totalCards, maxIndex]);
+
+  const nextSlide = useCallback(() => {
+    if (infinite) {
+      setCurrentIndex((prev) => (prev + 1) % totalCards);
+    } else {
+      setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+    }
+  }, [infinite, totalCards, maxIndex]);
+
+  const prevSlide = useCallback(() => {
+    if (infinite) {
+      setCurrentIndex((prev) => (prev - 1 + totalCards) % totalCards);
+    } else {
+      setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    }
+  }, [infinite, totalCards]);
+
+  // Global event listeners to catch events that escape component boundaries (mainly for touch)
+  useEffect(() => {
+    const handleGlobalTouchEnd = (e: TouchEvent) => {
+      if (!isDraggingRef.current) return;
+      
+      const endX = e.changedTouches && e.changedTouches.length > 0 
+        ? e.changedTouches[0].clientX 
+        : startXRef.current;
+      
+      const deltaX = endX - startXRef.current;
+      const threshold = 20;
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX < 0 && (infinite || currentIndex < maxIndex)) {
+          nextSlide();
+        } else if (deltaX > 0 && (infinite || currentIndex > 0)) {
+          prevSlide();
+        }
+      }
+
+      isDraggingRef.current = false;
+      if (autoPlay > 0) {
+        setTimeout(() => setIsAutoPlaying(true), 3000);
+      }
+    };
+
+    // Only add touch listener globally, mouse events should be handled by component
+    document.addEventListener('touchend', handleGlobalTouchEnd);
+
+    return () => {
+      document.removeEventListener('touchend', handleGlobalTouchEnd);
+    };
+
+  }, [infinite, currentIndex, maxIndex, autoPlay, nextSlide, prevSlide]);
+
   // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlaying || autoPlay <= 0) return;
@@ -78,53 +143,70 @@ export function CardCarousel({
     }, autoPlay);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, autoPlay, infinite, maxIndex, totalCards]);
-
-  const goToSlide = (index: number) => {
-    if (infinite) {
-      setCurrentIndex(((index % totalCards) + totalCards) % totalCards);
-    } else {
-      setCurrentIndex(Math.max(0, Math.min(index, maxIndex)));
-    }
-  };
-
-  const nextSlide = () => {
-    goToSlide(currentIndex + 1);
-  };
-
-  const prevSlide = () => {
-    goToSlide(currentIndex - 1);
-  };
+  }, [isAutoPlaying, autoPlay, infinite, totalCards, maxIndex]);
 
   // Touch/swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (!enableSwipe) return;
-    startXRef.current = e.touches[0].clientX;
+    if (!enableSwipe || isTransitioning) return;
+    const x = e.touches[0].clientX;
+    startXRef.current = x;
     isDraggingRef.current = true;
+    dragDirectionRef.current = null;
     setIsAutoPlaying(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!enableSwipe || !isDraggingRef.current) return;
+    if (!enableSwipe || !isDraggingRef.current || isTransitioning) return;
     e.preventDefault();
+    
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - startXRef.current;
+    const threshold = 15; // Lower threshold for quicker response
+    
+    // Determine direction and trigger smooth transition immediately
+    if (Math.abs(deltaX) > threshold && !dragDirectionRef.current) {
+      if (deltaX < 0 && (infinite || currentIndex < maxIndex)) {
+        dragDirectionRef.current = 'left';
+        setIsTransitioning(true);
+        nextSlide();
+        setTimeout(() => setIsTransitioning(false), 300);
+      } else if (deltaX > 0 && (infinite || currentIndex > 0)) {
+        dragDirectionRef.current = 'right';
+        setIsTransitioning(true);
+        prevSlide();
+        setTimeout(() => setIsTransitioning(false), 300);
+      }
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!enableSwipe || !isDraggingRef.current) return;
-    
-    const endX = e.changedTouches[0].clientX;
-    const deltaX = startXRef.current - endX;
-    const threshold = 50;
 
-    if (Math.abs(deltaX) > threshold) {
-      if (deltaX > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
+    // If no direction was triggered during move, check final position
+    if (!dragDirectionRef.current) {
+      const endX = e.changedTouches && e.changedTouches.length > 0 
+        ? e.changedTouches[0].clientX 
+        : startXRef.current;
+      
+      const deltaX = endX - startXRef.current;
+      const threshold = 20;
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX < 0 && (infinite || currentIndex < maxIndex)) {
+          setIsTransitioning(true);
+          nextSlide();
+          setTimeout(() => setIsTransitioning(false), 300);
+        } else if (deltaX > 0 && (infinite || currentIndex > 0)) {
+          setIsTransitioning(true);
+          prevSlide();
+          setTimeout(() => setIsTransitioning(false), 300);
+        }
       }
     }
 
+    // Always reset drag state
     isDraggingRef.current = false;
+    dragDirectionRef.current = null;
     if (autoPlay > 0) {
       setTimeout(() => setIsAutoPlaying(true), 3000);
     }
@@ -132,33 +214,63 @@ export function CardCarousel({
 
   // Mouse drag handlers for desktop
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (!enableSwipe) return;
-    startXRef.current = e.clientX;
+    if (!enableSwipe || isTransitioning) return;
+    const x = e.clientX;
+    startXRef.current = x;
     isDraggingRef.current = true;
+    dragDirectionRef.current = null;
     setIsAutoPlaying(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!enableSwipe || !isDraggingRef.current) return;
+    if (!enableSwipe || !isDraggingRef.current || isTransitioning) return;
     e.preventDefault();
+    
+    const currentX = e.clientX;
+    const deltaX = currentX - startXRef.current;
+    const threshold = 15; // Lower threshold for quicker response
+    
+    // Determine direction and trigger smooth transition immediately
+    if (Math.abs(deltaX) > threshold && !dragDirectionRef.current) {
+      if (deltaX < 0 && (infinite || currentIndex < maxIndex)) {
+        dragDirectionRef.current = 'left';
+        setIsTransitioning(true);
+        nextSlide();
+        setTimeout(() => setIsTransitioning(false), 300);
+      } else if (deltaX > 0 && (infinite || currentIndex > 0)) {
+        dragDirectionRef.current = 'right';
+        setIsTransitioning(true);
+        prevSlide();
+        setTimeout(() => setIsTransitioning(false), 300);
+      }
+    }
   };
 
   const handleMouseUp = (e: React.MouseEvent) => {
     if (!enableSwipe || !isDraggingRef.current) return;
-    
-    const endX = e.clientX;
-    const deltaX = startXRef.current - endX;
-    const threshold = 50;
 
-    if (Math.abs(deltaX) > threshold) {
-      if (deltaX > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
+    // If no direction was triggered during move, check final position
+    if (!dragDirectionRef.current) {
+      const endX = e.clientX;
+      const deltaX = endX - startXRef.current;
+      const threshold = 20;
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX < 0 && (infinite || currentIndex < maxIndex)) {
+          setIsTransitioning(true);
+          nextSlide();
+          setTimeout(() => setIsTransitioning(false), 300);
+        } else if (deltaX > 0 && (infinite || currentIndex > 0)) {
+          setIsTransitioning(true);
+          prevSlide();
+          setTimeout(() => setIsTransitioning(false), 300);
+        }
       }
     }
 
+    // Always reset drag state
     isDraggingRef.current = false;
+    dragDirectionRef.current = null;
     if (autoPlay > 0) {
       setTimeout(() => setIsAutoPlaying(true), 3000);
     }
@@ -187,14 +299,23 @@ export function CardCarousel({
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={() => {
-            isDraggingRef.current = false;
+            // Reset drag state if mouse leaves while dragging
+            if (isDraggingRef.current) {
+              isDraggingRef.current = false;
+              if (autoPlay > 0) {
+                setTimeout(() => setIsAutoPlaying(true), 3000);
+              }
+            }
           }}
         >
           {(infinite ? [...children, ...children] : children).map((child, index) => (
             <div
               key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
               className={cn('flex-shrink-0 select-none', itemClassName)}
-              style={{ width: cardWidth }}
+              style={{ 
+                width: cardWidth,
+                ...(minHeight && { minHeight })
+              }}
             >
               {child}
             </div>

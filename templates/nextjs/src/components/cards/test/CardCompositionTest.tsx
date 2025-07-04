@@ -7,19 +7,17 @@ import { CardCarousel } from '@/components/cards/layouts/CardCarousel';
 import { VirtualCardList } from '@/components/cards/layouts/VirtualCardList';
 import { cardVariants } from '@/lib/cardVariants';
 import { cn } from '@/lib/utils';
-import { Shuffle, Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 
 // Sample data for testing
 const sampleCards = [
   { id: 1, title: 'Elevated Card', description: 'Card with shadow elevation', variant: 'elevated' as const },
   { id: 2, title: 'Bordered Card', description: 'Card with distinctive border', variant: 'bordered' as const },
   { id: 3, title: 'Gradient Card', description: 'Card with gradient background', variant: 'gradient' as const },
-  { id: 4, title: 'Interactive Card', description: 'Card with hover interactions', variant: 'interactive' as const },
   { id: 5, title: 'Base Card', description: 'Standard card design', variant: 'base' as const },
   { id: 6, title: 'Feature Card', description: 'Highlighting key features', variant: 'elevated' as const },
   { id: 7, title: 'Product Card', description: 'Showcasing products', variant: 'bordered' as const },
   { id: 8, title: 'Service Card', description: 'Service offerings', variant: 'gradient' as const },
-  { id: 9, title: 'Team Card', description: 'Team member profiles', variant: 'interactive' as const },
   { id: 10, title: 'Testimonial Card', description: 'Customer testimonials', variant: 'base' as const },
 ];
 
@@ -142,14 +140,12 @@ export function CardCompositionTest() {
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Infinite Loop Carousel</h3>
           <CardCarousel
+            infinite
+            minHeight="200px"
+            autoPlay={5000}
             visibleCards={{ mobile: 1, tablet: 2, desktop: 4 }}
-            gap={12}
-            infinite={true}
-            autoPlay={2000}
-            showArrows={true}
-            showDots={false}
-            enableSwipe={true}
-            className="bg-muted/30 p-4 rounded-lg"
+            gap={16}
+            className="mb-8"
           >
             {sampleCards.slice(0, 6).map(renderCarouselCard)}
           </CardCarousel>
