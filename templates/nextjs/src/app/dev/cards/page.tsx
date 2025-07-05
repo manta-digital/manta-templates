@@ -1,7 +1,8 @@
-import BaseCard from '@/components/cards/BaseCard';
+
 import BlogCard from '@/components/cards/BlogCard';
 import BlogCardV2 from '@/components/cards/BlogCardV2';
 import { BaseCardV2 } from '@/components/cards/BaseCardV2';
+import BaseCard from '@/components/cards/BaseCard';
 import { BlogCardWide } from '@/components/cards/BlogCardWide';
 import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
 import { BlogCardImage } from '@/components/cards/BlogCardImage';
@@ -46,9 +47,10 @@ export default function CardTestPage() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <h3 className="mb-2 font-semibold">Original: `size=&quot;sm&quot;`</h3>
-            <BaseCard size="sm" className="w-full max-w-[400px]">
+            {/* @ts-ignore */}
+            <BaseCardV2 size="sm" className="w-full max-w-[400px]">
               <p>This card uses the `size=&quot;sm&quot;` prop for `p-4` padding.</p>
-            </BaseCard>
+            </BaseCardV2>
           </div>
           <div>
             <h3 className="mb-2 font-semibold">New: `className=&quot;p-4&quot;`</h3>
@@ -64,9 +66,10 @@ export default function CardTestPage() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <h3 className="mb-2 font-semibold">Original: `variant=&quot;outlined&quot;`</h3>
-            <BaseCard variant="outlined" className="w-full max-w-[400px]">
+            {/* @ts-ignore */}
+            <BaseCardV2 variant="outlined" className="w-full max-w-[400px]">
               <p>This card uses `variant=&quot;outlined&quot;` for a transparent background.</p>
-            </BaseCard>
+            </BaseCardV2>
           </div>
           <div>
             <h3 className="mb-2 font-semibold">New: `className=&quot;bg-transparent&quot;`</h3>

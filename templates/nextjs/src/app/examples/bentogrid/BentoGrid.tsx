@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BentoLayout } from '@/components/layouts/bento-layout';
-import BaseCard from '@/components/cards/BaseCard';
+import { BaseCardV2 as BaseCard } from '@/components/cards/BaseCardV2';
 
 interface BentoGridProps {
   mini?: boolean;
