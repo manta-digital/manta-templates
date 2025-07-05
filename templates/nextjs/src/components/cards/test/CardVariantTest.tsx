@@ -32,7 +32,7 @@ export function CardVariantTest() {
     }
   };
   const testVariants: Array<CardVariantProps & { label: string; description: string }> = [
-    { variant: 'base', size: 'sm', label: 'Base Small', description: 'Clean minimal design' },
+    { variant: 'default', size: 'sm', label: 'Default Small', description: 'Clean minimal design' },
     { variant: 'elevated', size: 'md', label: 'Elevated Medium', description: 'Hover to see lift effect' },
     { variant: 'bordered', size: 'lg', label: 'Bordered Large', description: 'Hover to see border change' },
     { variant: 'gradient', size: 'xl', label: 'Gradient Extra Large', description: 'Hover to see shimmer effect' },
@@ -40,11 +40,11 @@ export function CardVariantTest() {
   ];
 
   const radiusVariants: Array<CardVariantProps & { label: string }> = [
-    { variant: 'base', size: 'md', radius: 'none', label: 'Sharp Corners' },
-    { variant: 'base', size: 'md', radius: 'sm', label: 'Subtle Rounded' },
-    { variant: 'base', size: 'md', radius: 'md', label: 'Default Rounded' },
-    { variant: 'base', size: 'md', radius: 'lg', label: 'More Rounded' },
-    { variant: 'base', size: 'md', radius: 'xl', label: 'Very Rounded' },
+    { variant: 'default', size: 'md', radius: 'none', label: 'Sharp Corners' },
+    { variant: 'default', size: 'md', radius: 'sm', label: 'Subtle Rounded' },
+    { variant: 'default', size: 'md', radius: 'md', label: 'Default Rounded' },
+    { variant: 'default', size: 'md', radius: 'lg', label: 'More Rounded' },
+    { variant: 'default', size: 'md', radius: 'xl', label: 'Very Rounded' },
   ];
 
   // Animation controls
@@ -121,14 +121,14 @@ export function CardVariantTest() {
       <div>
         <h3 className="text-lg font-semibold mb-4 text-foreground">Micro-Interactions</h3>
         <div className="flex flex-wrap gap-4">
-          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'loading' })}>
-            <p className="invisible">Loading...</p>
+          <div className={cardVariants({ variant: 'default', size: 'md', radius: 'md', state: 'loading' })}>
+            Loading Card
           </div>
-          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'success' })}>
-            <h4 className="font-semibold mb-2">Success!</h4>
+          <div className={cardVariants({ variant: 'default', size: 'md', radius: 'md', state: 'success' })}>
+            Success Card
           </div>
-          <div className={cardVariants({ variant: 'base', size: 'md', radius: 'md', state: 'error' })}>
-            <h4 className="font-semibold mb-2">Error</h4>
+          <div className={cardVariants({ variant: 'default', size: 'md', radius: 'md', state: 'error' })}>
+            Error Card
           </div>
         </div>
       </div>

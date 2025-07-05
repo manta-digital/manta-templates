@@ -1,12 +1,15 @@
 /**
  * Defines the visual style variants for card components.
- * - `base`: Standard card with default styling.
+ * - `default`: Standard card with default styling.
+ * - `primary`: Primary card with brand colors.
  * - `elevated`: Card with shadow for a lifted appearance.
  * - `bordered`: Card with a visible border.
  * - `gradient`: Card with a gradient background.
  * - `interactive`: Card with enhanced hover and focus states.
+ * - `accent`: Card with accent background colors.
+ * - `surface`: Card with surface background and backdrop blur.
  */
-export type CardVariant = 'base' | 'elevated' | 'bordered' | 'gradient' | 'interactive';
+export type CardVariant = 'default' | 'primary' | 'elevated' | 'bordered' | 'gradient' | 'interactive' | 'accent' | 'surface';
 
 /**
  * Defines the size variants for card components, supporting responsive design.
@@ -23,8 +26,11 @@ export type CardSize = 'sm' | 'md' | 'lg' | 'xl';
  * - `hover`: The state when the user hovers over the card.
  * - `active`: The state when the card is being actively pressed or clicked.
  * - `disabled`: The state when the card is disabled and cannot be interacted with.
+ * - `loading`: The state when the card is in a loading state.
+ * - `success`: The state when the card shows a success state.
+ * - `error`: The state when the card shows an error state.
  */
-export type CardState = 'default' | 'hover' | 'active' | 'disabled';
+export type CardState = 'default' | 'hover' | 'active' | 'disabled' | 'loading' | 'success' | 'error';
 
 /**
  * Defines the corner radius variants for card components.
@@ -43,7 +49,7 @@ export type CardRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 export interface CardVariantProps {
   /**
    * The visual style of the card.
-   * @default 'base'
+   * @default 'default'
    */
   variant?: CardVariant;
   /**

@@ -14,16 +14,16 @@ const sampleCards = [
   { id: 1, title: 'Elevated Card', description: 'Card with shadow elevation', variant: 'elevated' as const },
   { id: 2, title: 'Bordered Card', description: 'Card with distinctive border', variant: 'bordered' as const },
   { id: 3, title: 'Gradient Card', description: 'Card with gradient background', variant: 'gradient' as const },
-  { id: 5, title: 'Base Card', description: 'Standard card design', variant: 'base' as const },
+  { id: 5, title: 'Default Card', description: 'Standard card design', variant: 'default' as const },
   { id: 6, title: 'Feature Card', description: 'Highlighting key features', variant: 'elevated' as const },
   { id: 7, title: 'Product Card', description: 'Showcasing products', variant: 'bordered' as const },
   { id: 8, title: 'Service Card', description: 'Service offerings', variant: 'gradient' as const },
-  { id: 10, title: 'Testimonial Card', description: 'Customer testimonials', variant: 'base' as const },
+  { id: 10, title: 'Testimonial Card', description: 'Customer testimonials', variant: 'default' as const },
 ];
 
 // Generate large dataset for virtual scrolling
 const generateLargeDataset = (count: number) => {
-  const variants = ['base', 'elevated', 'bordered', 'gradient', 'interactive'] as const;
+  const variants = ['default', 'elevated', 'bordered', 'gradient', 'interactive'] as const;
   const categories = ['Technology', 'Design', 'Business', 'Marketing', 'Development'];
   const baseDate = new Date(2020, 0, 1); // Jan 1, 2020
 

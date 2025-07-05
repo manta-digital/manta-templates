@@ -23,6 +23,7 @@ export default function TestIndex() {
           { href: '/test-composition', title: 'Card Composition Test' },
           { href: '/test-variants', title: 'Animation Variant Test' },
           { href: '/dev/cards', title: 'Dev Card Test' },
+          { href: '/test/radix-colors', title: 'Radix Colors Test' },
         ].map(({ href, title }) => (
           <Link key={href} href={href} className="cursor-pointer">
             <GradientCard title={title} description={href} className="h-32 hover:shadow-xl">

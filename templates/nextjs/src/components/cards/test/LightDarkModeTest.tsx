@@ -64,7 +64,7 @@ export function LightDarkModeTest() {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Base Card</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className={cardVariants({ variant: 'base' })}>
+            <Card className={cardVariants({ variant: 'default' })}>
               <CardHeader>
                 <CardTitle>Base Card</CardTitle>
                 <CardDescription>Standard card with subtle shadow</CardDescription>

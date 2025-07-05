@@ -112,7 +112,7 @@ export function GradientCard({
     <Card
       className={cn(
         cardVariants({
-          variant: 'base', // We'll override the background
+          variant: 'default', // We'll override the background
           size,
           radius,
           state: state === 'hover' ? 'default' : state,
@@ -123,8 +123,6 @@ export function GradientCard({
         shimmerClasses,
         // Add overlay support
         overlayClasses,
-        // Text color for gradients
-        'text-white',
         // Custom classes
         className
       )}
