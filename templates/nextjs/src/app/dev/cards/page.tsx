@@ -2,7 +2,7 @@
 import BlogCard from '@/components/cards/BlogCard';
 import BlogCardV2 from '@/components/cards/BlogCardV2';
 import { BaseCardV2 } from '@/components/cards/BaseCardV2';
-import BaseCard from '@/components/cards/BaseCard';
+
 import { BlogCardWide } from '@/components/cards/BlogCardWide';
 import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
 import { BlogCardImage } from '@/components/cards/BlogCardImage';
@@ -47,7 +47,7 @@ export default function CardTestPage() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <h3 className="mb-2 font-semibold">Original: `size=&quot;sm&quot;`</h3>
-            {/* @ts-ignore */}
+            {/* @ts-expect-error migrate deprecated props */}
             <BaseCardV2 size="sm" className="w-full max-w-[400px]">
               <p>This card uses the `size=&quot;sm&quot;` prop for `p-4` padding.</p>
             </BaseCardV2>
@@ -66,7 +66,7 @@ export default function CardTestPage() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <h3 className="mb-2 font-semibold">Original: `variant=&quot;outlined&quot;`</h3>
-            {/* @ts-ignore */}
+            {/* @ts-expect-error migrate deprecated props */}
             <BaseCardV2 variant="outlined" className="w-full max-w-[400px]">
               <p>This card uses `variant=&quot;outlined&quot;` for a transparent background.</p>
             </BaseCardV2>

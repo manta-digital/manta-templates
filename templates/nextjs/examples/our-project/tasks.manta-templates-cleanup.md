@@ -58,7 +58,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Document all BaseCard usage patterns
   - Success: Complete inventory of BaseCard usage
 
-- [ ] **Update BaseCard imports to BaseCardV2**
+- [x] **Update BaseCard imports to BaseCardV2**
   - Replace `import BaseCard from './BaseCard'` with `import BaseCardV2 from './BaseCardV2'`
   - Update component props and interfaces to use BaseCardV2Props
   - Verify ShadCN Card component compatibility
