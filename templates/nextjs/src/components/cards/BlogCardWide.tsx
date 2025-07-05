@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link'; 
 import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/utils'; 
-import BaseCard, { BaseCardProps } from './BaseCard';
+import { BaseCardV2, BaseCardV2Props } from './BaseCardV2';
 
 // Define props for the BlogCardWide, similar to BlogCardProps
-export interface BlogCardWideProps extends Omit<BaseCardProps, 'children'> {
+export interface BlogCardWideProps extends Omit<BaseCardV2Props, 'children'> {
   title: string;
   date?: string | Date;
   excerpt?: string;
@@ -70,7 +70,7 @@ export const BlogCardWide: React.FC<BlogCardWideProps> = ({
   );
 
   return (
-    <BaseCard 
+    <BaseCardV2 
       className={cn('flex flex-col overflow-hidden h-full', className)} 
       {...baseCardProps}
     >
@@ -81,6 +81,6 @@ export const BlogCardWide: React.FC<BlogCardWideProps> = ({
       ) : (
         cardContent
       )}
-    </BaseCard>
+    </BaseCardV2>
   );
 };

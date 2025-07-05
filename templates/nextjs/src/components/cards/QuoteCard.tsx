@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import type { QuoteContent } from '@/types/content';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard';
+import { BaseCardV2 } from './BaseCardV2';
 import { useTheme } from '@/context/themecontext';
 
 interface QuoteCardProps {
@@ -61,7 +61,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
   if (!displayQuote) return null;
 
   return (
-    <BaseCard className={
+    <BaseCardV2 className={
       cn('relative rounded-lg overflow-hidden p-4', 
         'bg-white dark:bg-gray-800',
         className)}
@@ -109,7 +109,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
           </div>
         </div>
       </div>
-    </BaseCard>
+    </BaseCardV2>
   );
 };
 

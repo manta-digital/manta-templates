@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/utils';
-import BaseCard, { BaseCardProps } from './BaseCard'; // Assuming BaseCard provides base styling like rounded corners
+import { BaseCardV2, BaseCardV2Props } from './BaseCardV2'; // Assuming BaseCard provides base styling like rounded corners
 
-export interface BlogCardImageProps extends Omit<BaseCardProps, 'children' | 'variant' | 'size'> {
+export interface BlogCardImageProps extends Omit<BaseCardV2Props, 'children' | 'variant' | 'size'> {
   title: string;
   date?: string | Date;
   excerpt?: string;
@@ -61,7 +61,7 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   );
 
   return (
-    <BaseCard 
+    <BaseCardV2 
       className={cn(
         'relative overflow-hidden h-full w-full',
         imageMaxHeight ? imageMaxHeight : 'min-h-[280px] md:min-h-[360px]',
@@ -89,6 +89,6 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
           {cardContent}
         </div>
       )}
-    </BaseCard>
+    </BaseCardV2>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image'; 
 import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/utils'; 
-import BaseCard from './BaseCard'; 
+import { BaseCardV2 } from './BaseCardV2'; 
 
 interface BlogCardProps {
   title: string;
@@ -55,12 +55,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
   );
 
   return (
-    <BaseCard
+    <BaseCardV2
       className={cn('overflow-hidden', className)}
       {...baseCardProps}
     >
       {cardContent}
-    </BaseCard>
+    </BaseCardV2>
   );
 };
 

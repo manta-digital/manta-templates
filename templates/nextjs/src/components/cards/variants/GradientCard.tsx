@@ -126,7 +126,10 @@ export function GradientCard({
         // Custom classes
         className
       )}
-      style={customStyles}
+      style={{
+        ...customStyles,
+        '--card-foreground': '#fff',
+      } as React.CSSProperties}
       {...props}
     >
       {/* Overlay for better text readability */}

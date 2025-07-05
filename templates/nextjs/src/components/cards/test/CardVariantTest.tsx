@@ -6,6 +6,7 @@ import { CardVariantProps } from '@/types/cardVariants';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
 import { AnimatedCard } from '@/components/cards/animations/AnimatedCard';
 import { AnimatePresence } from 'framer-motion';
 

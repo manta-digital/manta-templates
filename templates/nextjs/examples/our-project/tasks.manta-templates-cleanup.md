@@ -13,7 +13,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
 ### Tasks
 
 #### 1.1: Analyze Current V1 Card Usage
-- [ ] **Audit all V1 card imports in template**
+- [x] **Audit all V1 card imports in template**
   - Scan `src/components/blog/BlogPageClient.tsx` for V1 card imports
   - Check all files in `src/app/examples/` for V1 card usage
   - Identify all files importing from `@/components/cards/BlogCard`, `BlogCardWide`, `BlogCardImage`
@@ -28,7 +28,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Success: V2 cards render correctly with no visual regressions
 
 #### 1.2: Update Template Imports to V2 Cards
-- [ ] **Update BlogPageClient component**
+- [x] **Update BlogPageClient component**
   - Change `src/components/blog/BlogPageClient.tsx` imports:
     - `import BlogCard from '@/components/cards/BlogCard'` → `import BlogCardV2 from '@/components/cards/BlogCardV2'`
     - `import { BlogCardWide } from '@/components/cards/BlogCardWide'` → `import BlogCardWideV2 from '@/components/cards/BlogCardWideV2'`
@@ -36,14 +36,14 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Update component usage in CardComponent assignment logic
   - Success: BlogPageClient imports and uses V2 cards without errors
 
-- [ ] **Update example pages to use V2 cards**
+- [x] **Update example pages to use V2 cards**  <!-- no V1 blog card imports in examples -->
   - Update `/examples/blog` page to import V2 cards
   - Update `/examples/portfolio` page if using blog cards
   - Update any other example pages using blog cards
   - Verify all import statements point to V2 versions
   - Success: All example pages use V2 cards and render correctly
 
-- [ ] **Update components/cards/index.ts exports**
+- [x] **Update components/cards/index.ts exports**
   - Change exports from V1 to V2 cards:
     - `export { default as BlogCard } from './BlogCard'` → `export { default as BlogCard } from './BlogCardV2'`
     - Add exports for BlogCardWide and BlogCardImage pointing to V2 versions
@@ -51,7 +51,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Success: Index file exports V2 cards, no V1 references remain
 
 #### 1.3: Replace BaseCard Usage with BaseCardV2
-- [ ] **Audit BaseCard usage**
+- [x] **Audit BaseCard usage**
   - Search for all imports of `BaseCard` in template files
   - Identify components that extend or use BaseCard
   - Check if any custom cards inherit from BaseCard
@@ -148,3 +148,9 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
 - **Enhanced TypeScript**: Improved interfaces and prop validation
 - **Maintainability**: Single card system across entire project
 - **ShadCN Integration**: Proper use of Card, CardHeader, CardContent components
+
+### 99: Future Improvements and Maintenance Needed
+- [ ] interactive card in variant test needs transition
+- [ ] carousel sizing needs adjustment as it cuts off the elevated card shadow
+- [x] in light mode, we should use Text White or similar, not dark text, for gradient cards
+- [x] default card variant now displays correct border and shadow consistently across test pages.

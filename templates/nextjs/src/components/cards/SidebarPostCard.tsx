@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard'; // Assuming BaseCard is defined in a separate file
+import { BaseCardV2 } from './BaseCardV2'; // Using V2 BaseCard for migration
 
 interface SidebarPostCardProps {
   /** The title of the blog post. */
@@ -30,7 +30,7 @@ const SidebarPostCard: React.FC<SidebarPostCardProps> = ({
 }) => {
   return (
     <Link href={href} className="block">
-      <BaseCard
+      <BaseCardV2
         // Revert styles back onto BaseCard
         className={cn(
           'flex items-start gap-4 group transition-colors hover:bg-accent/50',
@@ -58,7 +58,7 @@ const SidebarPostCard: React.FC<SidebarPostCardProps> = ({
             {excerpt}
           </p>
         </div>
-      </BaseCard>
+      </BaseCardV2>
     </Link>
   );
 };

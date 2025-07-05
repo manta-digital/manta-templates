@@ -3,9 +3,9 @@ import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { BlogLayoutSwitcher } from './BlogLayoutSwitcher';
 import BlogIndexLayout, { BlogPost } from '../../app/blog/BlogIndexLayout';
-import BlogCard from '@/components/cards/BlogCard';
-import { BlogCardWide } from '@/components/cards/BlogCardWide';
-import { BlogCardImage } from '@/components/cards/BlogCardImage';
+import BlogCardV2 from '@/components/cards/BlogCardV2';
+import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
+import BlogCardImageV2 from '@/components/cards/BlogCardImageV2';
 
 interface BlogPageClientProps {
   posts: BlogPost[];
@@ -15,7 +15,7 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
   const params = useSearchParams();
   const variant = params.get('layout') ?? 'default';
   const CardComponent =
-    variant === 'wide' ? BlogCardWide : variant === 'image' ? BlogCardImage : BlogCard;
+    variant === 'wide' ? BlogCardWideV2 : variant === 'image' ? BlogCardImageV2 : BlogCardV2;
 
   return (
     <>

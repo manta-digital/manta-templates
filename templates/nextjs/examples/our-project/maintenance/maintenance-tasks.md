@@ -4,3 +4,4 @@
 - [ ] Resolve inconsistent styles between cards.  BaseCard appears to use darker border than FeatureCardWrapper.
 - [x] Connect all monorepo links in `src/components/cards/GuidesFeatureCard.tsx` to https://github.com/manta-digital/manta-templates so they will at least resolve somewhere.
 - [x] Make background video autoplay without hover
+- [ ] interactive card in card variants test needs transition
