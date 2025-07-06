@@ -1,0 +1,47 @@
+/* Card Theming System */
+/* Define card-specific color variables for light, dark, high-contrast, and reduced-motion */
+/* Now uses semantic colors that can switch between different palettes */
+
+:root {
+  /* Primary card theme - now uses semantic colors */
+  --card-bg-primary: var(--color-card-accent);
+  --card-fg-primary: var(--color-background);
+  --card-border-primary: var(--color-card-border);
+  --card-border-primary-hover: var(--color-card-border-hover);
+  
+  /* Additional semantic card colors */
+  --card-bg-subtle: var(--color-card-accent-subtle);
+  --card-bg-emphasis: var(--color-card-accent-emphasis);
+  --card-text-accent: var(--color-card-text-accent);
+  --card-text-primary: var(--color-card-text-primary);
+  
+  /* Surface and overlay colors */
+  --card-surface: var(--color-accent-surface);
+  --card-overlay: var(--color-accent-a6);
+}
+
+.dark {
+  /* Dark mode inherits from semantic colors automatically */
+  --card-bg-primary: var(--color-card-accent);
+  --card-fg-primary: var(--color-background);
+  --card-border-primary: var(--color-card-border);
+  --card-border-primary-hover: var(--color-card-border-hover);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    /* High contrast mode - use emphasis colors */
+    --card-bg-primary: var(--color-card-accent-emphasis);
+    --card-fg-primary: var(--color-background);
+    --card-border-primary: var(--color-card-accent-emphasis);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  .dark {
+    /* Fallback to static colors when reduced motion is preferred */
+    --card-bg-primary: var(--color-card-accent);
+    --card-border-primary: var(--color-card-border);
+  }
+}

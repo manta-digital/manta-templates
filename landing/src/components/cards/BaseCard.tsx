@@ -1,49 +1,35 @@
-import React from 'react';
+import * as React from 'react';
 import { cn } from '@/lib/utils';
+import {
+  Card as ShadcnCard,
+  CardHeader as ShadcnCardHeader,
+  CardFooter as ShadcnCardFooter,
+  CardTitle as ShadcnCardTitle,
+  CardDescription as ShadcnCardDescription,
+  CardContent as ShadcnCardContent,
+} from '@/components/ui/card';
 
-/**
- * BaseCard props
- * @param as       Render as this element type (e.g., 'div', 'section')
- * @param variant  Visual style variant ('default' or 'outlined')
- * @param size     Size variant ('sm', 'md', 'lg')
- */
-export type BaseCardProps = {
-  children: React.ReactNode;
-  className?: string;
-  as?: React.ElementType;
-  variant?: 'default' | 'outlined';
-  size?: 'sm' | 'md' | 'lg';
-} & React.HTMLAttributes<HTMLElement>;
+// Re-export the ShadCN components for direct use when needed
+export const CardHeader = ShadcnCardHeader;
+export const CardFooter = ShadcnCardFooter;
+export const CardTitle = ShadcnCardTitle;
+export const CardDescription = ShadcnCardDescription;
+export const CardContent = ShadcnCardContent;
 
-const BaseCard = React.forwardRef<HTMLElement, BaseCardProps>(
-  ({ children, className, as: Component = 'article', variant = 'default', size = 'md', ...props }, ref) => {
-    // Determine padding by size
-    const sizeClass = size === 'sm' ? 'p-4' : size === 'lg' ? 'p-12' : 'p-8';
-    // Determine variant styles
-    const variantClass =
-      variant === 'outlined'
-        ? 'border border-teal-500 bg-transparent'
-        : 'border border-teal-500 bg-card text-card-foreground';
-    return (
-      <Component
-        ref={ref}
-        className={cn(
-          'rounded-lg shadow-sm',
-          'flex',
-          'flex-col',
-          variantClass,
-          sizeClass,
-          'min-h-[112px] md:min-h-[144px]',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
-);
+export type BaseCardV2Props = React.ComponentProps<typeof ShadcnCard>;
 
-BaseCard.displayName = 'BaseCard';
+const BaseCardV2 = React.forwardRef<
+  React.ElementRef<typeof ShadcnCard>,
+  BaseCardV2Props
+>(({ className, ...props }, ref) => {
+  return (
+    <ShadcnCard
+      ref={ref}
+      className={cn('transition-all duration-300 ease-in-out', className)}
+      {...props}
+    />
+  );
+});
+BaseCardV2.displayName = 'BaseCardV2';
 
-export default BaseCard;
+export { BaseCardV2 };

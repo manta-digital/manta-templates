@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard';
+import { BaseCard } from './index';
 
 interface BlogHeroCardProps {
   title: string;

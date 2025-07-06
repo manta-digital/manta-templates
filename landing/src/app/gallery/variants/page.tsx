@@ -2,6 +2,8 @@
 
 import { CardVariantTest } from '@/components/cards/test/CardVariantTest';
 
-export default function TestVariantsPage() {
+export default function GalleryVariantsPage() {
   return <CardVariantTest />;
 }
+
+

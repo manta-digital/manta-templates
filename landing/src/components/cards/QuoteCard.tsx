@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import type { QuoteContent } from '@/types/content';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard';
+import { BaseCard } from './index';
 import { useTheme } from '@/context/themecontext';
 
 interface QuoteCardProps {

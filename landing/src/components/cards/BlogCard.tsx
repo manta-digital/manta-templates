@@ -1,67 +1,67 @@
 import React from 'react';
-import Image from 'next/image'; 
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils'; 
-import BaseCard from './BaseCard'; 
+import Image from 'next/image';
+import { cn, formatDate } from '@/lib/utils';
+import { BaseCardV2, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
-interface BlogCardProps {
+interface BlogCardV2Props {
   title: string;
-  date?: string | Date; 
+  date?: string | Date;
   excerpt: string;
   coverImageUrl: string;
   className?: string;
-  imageMaxHeight?: string; 
-  author?: string;   
+  imageMaxHeight?: string;
+  author?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({
+const BlogCardV2: React.FC<BlogCardV2Props> = ({
   title,
   date,
   excerpt,
   coverImageUrl,
-  imageMaxHeight, // Destructured, used for styling internal image div
+  imageMaxHeight,
   author,
   className,
-  ...baseCardProps
+  ...props
 }) => {
   const formattedDate = date ? formatDate(date) : null;
 
-  const cardContent = (
-    <>
-      {coverImageUrl && (
-        <div className={cn('relative w-full aspect-[16/9] overflow-hidden', imageMaxHeight ? imageMaxHeight : 'min-h-[180px]' )}>
-          <Image 
-            src={coverImageUrl} 
-            alt={title} 
-            layout="fill" 
-            objectFit="cover"
-            className="rounded-t-lg" 
-          />
-        </div>
-      )}
-      <div className="pt-4 flex flex-col grow"> 
-        <h3 className="text-lg font-semibold mb-1 line-clamp-2">{title}</h3>
-        {author && (
-          <p className="text-xs text-muted-foreground mb-2">{author}</p>
-        )}
-        {formattedDate && (
-          <p className="text-xs text-muted-foreground mb-2">{formattedDate}</p>
-        )}
-        <p className="text-sm text-muted-foreground line-clamp-3 grow">
-          {excerpt}
-        </p>
-      </div>
-    </>
-  );
-
   return (
-    <BaseCard
-      className={cn('overflow-hidden', className)}
-      {...baseCardProps}
-    >
-      {cardContent}
-    </BaseCard>
+    <BaseCardV2 className={cn('p-0 overflow-hidden', className)} {...props}>
+      <div className="p-8 flex flex-col h-full">
+        {coverImageUrl && (
+          <div
+            className={cn(
+              'relative w-full aspect-[16/9] overflow-hidden rounded-t-lg',
+              imageMaxHeight ? imageMaxHeight : 'min-h-[180px]'
+            )}
+          >
+            <Image
+              src={coverImageUrl}
+              alt={title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-lg"
+            />
+          </div>
+        )}
+        <div className="pt-6 flex flex-col grow">
+          <CardHeader className="p-0">
+            <CardTitle className="line-clamp-2">{title}</CardTitle>
+            <CardDescription>
+              {author && <span className="text-xs">{author}</span>}
+              {author && formattedDate && ' ・ '}
+              {formattedDate && <span className="text-xs">{formattedDate}</span>}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-0 pt-2 grow flex flex-col">
+            <p className="text-sm text-muted-foreground line-clamp-3 grow">
+              {excerpt}
+            </p>
+          </CardContent>
+        </div>
+      </div>
+    </BaseCardV2>
   );
 };
 
-export default BlogCard;
+export default BlogCardV2;

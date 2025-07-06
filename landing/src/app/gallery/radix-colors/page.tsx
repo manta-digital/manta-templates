@@ -1,6 +1,6 @@
 import { RadixColorTest } from '@/components/cards/test/RadixColorTest';
 
-export default function RadixColorsTestPage() {
+export default function GalleryRadixColorsPage() {
   return (
     <div className="min-h-screen bg-background">
       <RadixColorTest />
@@ -9,6 +9,6 @@ export default function RadixColorsTestPage() {
 }
 
 export const metadata = {
-  title: 'Radix Colors Test - Manta Templates',
-  description: 'Test page for Radix color palette integration with semantic color system',
+  title: 'Radix Colors Gallery - Manta Templates',
+  description: 'Interactive showcase of Radix color palette integration with semantic color system',
 };

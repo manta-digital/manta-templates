@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { BentoLayout } from '@/components/layouts/bento-layout';
 import GridItem from '@/components/layouts/grid-layout/grid-item';
-import BaseCard from '@/components/cards/BaseCard';
+import { BaseCard } from '@/components/cards';
 
 export interface BlogPost {
   slug: string;

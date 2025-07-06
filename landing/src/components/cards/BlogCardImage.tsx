@@ -1,25 +1,30 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils';
-import BaseCard, { BaseCardProps } from './BaseCard'; // Assuming BaseCard provides base styling like rounded corners
+import { cn, formatDate } from '@/lib/utils';
+import { BaseCardV2 } from './BaseCard';
 
-export interface BlogCardImageProps extends Omit<BaseCardProps, 'children' | 'variant' | 'size'> {
+export interface BlogCardImageProps {
+  imageMaxHeight?: string; 
   title: string;
   date?: string | Date;
   excerpt?: string;
   slug?: string;
-  coverImageUrl: string; // Required for this card type
+  coverImageUrl: string;
   category?: string;
   author?: string;
-  // Props specific to how the text overlays the image, e.g., text color, overlay opacity
-  textColorClassName?: string; // e.g., 'text-white'
-  overlayClassName?: string;   // e.g., 'bg-black/50' for a dark scrim
-  imageMaxHeight?: string; // Consumed to prevent passing to BaseCard
+  textColorClassName?: string;
+  overlayClassName?: string;
+  /** Dim background image using CSS brightness (e.g. 75%) */
+  dim?: boolean;
+  /** Apply blur to background image. If blurAmount is provided, this is ignored. */
+  blur?: boolean;
+  /** Tailwind blur amount, e.g. 'sm', 'md', 'lg', 'xl', '2xl', '3xl'. */
+  blurAmount?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  className?: string;
 }
 
-export const BlogCardImage: React.FC<BlogCardImageProps> = ({
+const BlogCardImage: React.FC<BlogCardImageProps> = ({
   title,
   date,
   excerpt,
@@ -27,68 +32,77 @@ export const BlogCardImage: React.FC<BlogCardImageProps> = ({
   coverImageUrl,
   category,
   author,
-  textColorClassName = 'text-white', // Default to white text
+  textColorClassName = 'text-white',
   overlayClassName = 'bg-gradient-to-t from-black/70 via-black/50 to-transparent',
-  imageMaxHeight, // Destructured, not used by this component directly
+  dim = false,
+  blur = false,
+  blurAmount,
   className,
-  ...baseCardProps
+  imageMaxHeight,
+  ...props
 }) => {
   const formattedDate = date ? formatDate(date) : null;
 
   const cardContent = (
-    <div className={cn('relative h-full w-full flex flex-col justify-end p-6 md:p-8', textColorClassName)}>
-      {/* Overlay for text readability */}
-      <div className={cn('absolute inset-0 z-0', overlayClassName)} />
-
-      {/* Text content, ensure it's above the overlay */}
-      <div className="relative z-10">
-        {category && (
-          <p className="text-xs font-semibold uppercase tracking-wider opacity-90 mb-1">{category}</p>
-        )}
-        <h3 className="text-2xl md:text-3xl font-bold mb-2 line-clamp-3">{title}</h3>
-        {excerpt && (
-          <p className="text-sm md:text-base opacity-90 mb-3 line-clamp-2 md:line-clamp-3">
-            {excerpt}
-          </p>
-        )}
-        <div className="flex items-center text-xs opacity-80">
-          {author && <span>By {author}</span>}
-          {author && formattedDate && <span className="mx-2">•</span>}
-          {formattedDate && <span>{formattedDate}</span>}
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <BaseCard 
+    <BaseCardV2
       className={cn(
-        'relative overflow-hidden h-full w-full',
-        imageMaxHeight ? imageMaxHeight : 'min-h-[280px] md:min-h-[360px]',
+        'group relative overflow-hidden w-full p-0 transition-shadow duration-300 hover:shadow-lg',
+        imageMaxHeight ?? 'min-h-[280px] md:min-h-[360px]',
         className
       )}
-      // We don't pass variant or size to BaseCard from here, as this card has a very specific style
-      {...baseCardProps} 
+      {...props}
     >
-      {/* Background Image */}
-      <Image 
+      <Image
         src={coverImageUrl}
         alt={`Background for ${title}`}
         layout="fill"
         objectFit="cover"
-        className="absolute inset-0 z-0" // Ensures it's behind the content
-        priority // Consider if this card is often above the fold
+        className={cn(
+          'absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-105',
+          dim && 'brightness-75',
+          blurAmount ? `blur-${blurAmount}` : (blur && 'blur-sm')
+        )}
+        priority
       />
-      {slug ? (
-        <Link href={slug} className="absolute inset-0 z-20" aria-label={`Read more about ${title}`}>
-          {/* Link covers the whole card, content is for visual rendering */}
-          {cardContent}
-        </Link>
-      ) : (
-        <div className="absolute inset-0 z-20">
-          {cardContent}
+      <div className={cn('absolute inset-0 z-10', overlayClassName)} />
+      <div
+        className={cn(
+          'relative z-20 h-full w-full flex flex-col justify-center p-8',
+          textColorClassName
+        )}
+      >
+        
+        <div className="relative z-10">
+          {category && (
+            <p className="text-xs font-semibold uppercase tracking-wider opacity-90 mb-1">
+              {category}
+            </p>
+          )}
+          <h3 className="text-2xl md:text-3xl font-bold mb-2 line-clamp-3">
+            {title}
+          </h3>
+          {excerpt && (
+            <p className="text-sm md:text-base opacity-90 mb-3 line-clamp-2 md:line-clamp-3">
+              {excerpt}
+            </p>
+          )}
+          <div className="flex items-center text-xs opacity-80">
+            {author && <span>By {author}</span>}
+            {author && formattedDate && <span className="mx-2">•</span>}
+            {formattedDate && <span>{formattedDate}</span>}
+          </div>
         </div>
-      )}
-    </BaseCard>
+      </div>
+    </BaseCardV2>
+  );
+
+  return slug ? (
+    <Link href={slug} className="contents" aria-label={`Read more about ${title}`}>
+      {cardContent}
+    </Link>
+  ) : (
+    cardContent
   );
 };
+
+export default BlogCardImage;

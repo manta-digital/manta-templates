@@ -161,12 +161,12 @@ Reorganize test pages, components, and utilities to provide a clear separation b
   - Success: Clear migration map from template → landing gallery
 
 #### 2.2 Migrate Test Pages to Landing Gallery
-- [ ] **Create gallery routes in landing workspace**
+- [x] **Create gallery routes in landing workspace**
   - Add pages under `landing/src/app/gallery/*` mirroring original routes (`cards`, `composition`, `variants`, `radix-colors`)  
   - Ensure routing uses App Router conventions (Next 15)  
   - Success: Landing dev server displays migrated pages without errors
 
-- [ ] **Transfer page source & assets**
+- [x] **Transfer page source & assets**
   - Copy TSX/MDX, images, and local helpers; update import paths to landing equivalents  
   - Replace Tailwind v3 classes with v4 utilities if encountered  
   - Success: Pages compile with Tailwind 4 & Radix custom palettes intact
@@ -177,13 +177,13 @@ Reorganize test pages, components, and utilities to provide a clear separation b
   - Export via `components/dev/index.ts` for easy tree-shaking  
   - Success: No dev component lives in production bundles (verified via `next build --profile`)
 
-- [ ] **Update imports after move**
+- [x] **Update imports after move**
   - Refactor test pages (now in landing) to import from `landing/components/dev`  
   - Template code must not import from `components/dev`  
   - Success: `grep -R "from .*components/dev" templates/nextjs/src` returns 0 results
 
 #### 2.4 Clean Template Routes & Navigation
-- [ ] **Remove test routes from template**
+- [x] **Remove test routes from template**
   - Delete `/src/app/test*`, `/src/app/dev/cards`, and related navigation links  
   - Update any leftover links in header/footer components  
   - Success: Production template build contains no test routes (checked via `.next/routes-manifest.json`)

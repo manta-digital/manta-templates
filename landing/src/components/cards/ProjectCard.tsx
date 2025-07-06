@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard';
+import { BaseCard } from './index';
 import type { ProjectContent } from '@/types/content';
 
 interface ProjectCardProps {

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import BaseCard from './BaseCard'; // Assuming BaseCard is defined in a separate file
+import { BaseCard } from './index';
 
 interface SidebarPostCardProps {
   /** The title of the blog post. */
