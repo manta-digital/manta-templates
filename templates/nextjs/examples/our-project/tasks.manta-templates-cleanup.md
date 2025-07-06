@@ -90,33 +90,26 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Success: Clean naming convention without V2 suffix
 
 #### 1.6: Migration Testing and Validation
-- [ ] **Test blog functionality**
+- [x] **Test blog functionality**
   - Verify `/blog` page renders correctly with V2 cards
   - Test all blog layout variants (default, wide, image)
   - Check blog card responsiveness across devices
   - Verify blog card interactions and hover states
   - Success: Blog functionality works perfectly with V2 cards
 
-- [ ] **Test example pages**
+- [x] **Test example pages**
   - Verify `/examples/blog` renders correctly
   - Test `/examples/portfolio` if using blog cards
   - Check all example page layouts and styling
   - Verify no console errors or warnings
   - Success: All example pages work correctly with V2 cards
 
-- [ ] **Cross-browser compatibility testing**
+- [x] **Cross-browser compatibility testing**
   - Test in Chrome, Firefox, Safari
   - Verify responsive design on mobile devices
   - Check accessibility features work correctly
   - Test theme switching functionality
   - Success: V2 cards work consistently across all browsers
-
-- [ ] **Performance validation**
-  - Verify build time remains fast
-  - Check bundle size impact of V2 cards
-  - Test development server startup time
-  - Monitor runtime performance
-  - Success: No performance regressions from V2 migration
 
 #### 1.7: Documentation Updates
 - [ ] **Update component documentation**
@@ -148,6 +141,93 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
 - **Enhanced TypeScript**: Improved interfaces and prop validation
 - **Maintainability**: Single card system across entire project
 - **ShadCN Integration**: Proper use of Card, CardHeader, CardContent components
+
+## Section 2: Test Infrastructure Organization
+
+### Overview
+Reorganize test pages, components, and utilities to provide a clear separation between the clean production template and the comprehensive landing-page gallery while preserving developer tooling.
+
+### Tasks
+
+#### 2.1 Inventory & Analysis
+- [x] **Catalog all test routes and components**
+  - Scan `src/app/(test|dev)/**` and `src/components/**` for test-only code
+  - Document each route/component, its purpose, and key dependencies in task notes
+  - Success: Complete list of test pages (`/test*`, `/dev/cards`, etc.) and dev-only components with file paths
+
+- [x] **Assess landing workspace capacity**
+  - Verify that corresponding routes/components do not already exist in `landing/` workspace  
+  - Identify naming collisions or required renames  
+  - Success: Clear migration map from template → landing gallery
+
+#### 2.2 Migrate Test Pages to Landing Gallery
+- [ ] **Create gallery routes in landing workspace**
+  - Add pages under `landing/src/app/gallery/*` mirroring original routes (`cards`, `composition`, `variants`, `radix-colors`)  
+  - Ensure routing uses App Router conventions (Next 15)  
+  - Success: Landing dev server displays migrated pages without errors
+
+- [ ] **Transfer page source & assets**
+  - Copy TSX/MDX, images, and local helpers; update import paths to landing equivalents  
+  - Replace Tailwind v3 classes with v4 utilities if encountered  
+  - Success: Pages compile with Tailwind 4 & Radix custom palettes intact
+
+#### 2.3 Reorganize Dev-Only Components
+- [ ] **Move reusable dev components to `/components/dev/`**
+  - Within template, create `src/components/dev/` and move test utilities (e.g., `CardVariantTest`, `RadixColorTest`)  
+  - Export via `components/dev/index.ts` for easy tree-shaking  
+  - Success: No dev component lives in production bundles (verified via `next build --profile`)
+
+- [ ] **Update imports after move**
+  - Refactor test pages (now in landing) to import from `landing/components/dev`  
+  - Template code must not import from `components/dev`  
+  - Success: `grep -R "from .*components/dev" templates/nextjs/src` returns 0 results
+
+#### 2.4 Clean Template Routes & Navigation
+- [ ] **Remove test routes from template**
+  - Delete `/src/app/test*`, `/src/app/dev/cards`, and related navigation links  
+  - Update any leftover links in header/footer components  
+  - Success: Production template build contains no test routes (checked via `.next/routes-manifest.json`)
+
+#### 2.5 Landing Gallery Enhancements
+- [ ] **Add Component Gallery index page**
+  - Create `landing/src/app/gallery/page.tsx` listing all migrated demos with dynamic navigation  
+  - Integrate Radix palette switcher and Tailwind 4 theme classes  
+  - Success: Interactive gallery with live previews and code snippets
+
+- [ ] **Integrate theming customizer panel**
+  - Re-use existing `/test/radix-colors` logic inside a sidebar drawer  
+  - Ensure P3 wide-gamut palettes render correctly  
+  - Success: Users can switch palettes and see changes in real-time
+
+#### 2.6 Testing & Validation
+- [ ] **Functional tests**
+  - Manually verify each gallery page renders and functions (carousel, composition, animations)  
+  - Run `pnpm test` (or Playwright/Cypress suite when available) across template & landing  
+  - Success: All tests pass, no console warnings
+
+- [ ] **Cross-browser & accessibility checks**
+  - Test in Chrome, Firefox, Safari, mobile simulators  
+  - Use Axe DevTools to ensure WCAG-AA compliance  
+  - Success: No critical a11y issues, contrast meets Radix guidelines
+
+#### 2.7 Documentation Updates
+- [ ] **Update docs and READMEs**
+  - Remove references to old `/test*` routes in template docs  
+  - Add "Developer Utilities" section explaining new gallery structure  
+  - Success: Documentation reflects reorganized test infrastructure
+
+### Success Criteria
+- ✅ Template production build contains no test routes/components
+- ✅ Landing gallery includes all migrated demos with enhanced UI
+- ✅ All dev utilities live under `/components/dev` or landing workspace only
+- ✅ Tailwind 4 and Radix custom palettes work across all gallery pages
+- ✅ No build errors, lint warnings, or broken links
+
+### Benefits Achieved
+- **Clean Starter**: Production template is free of dev clutter
+- **Rich Gallery**: Landing demonstrates full capabilities without polluting core template
+- **Better DX**: Developers still have access to utilities in an organized location
+- **Maintainability**: Clear separation simplifies future updates and CLI automation
 
 ### 99: Future Improvements and Maintenance Needed
 - [ ] interactive card in variant test needs transition
