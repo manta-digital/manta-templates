@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCardV2';
+import { BaseCardV2 } from './BaseCard';
 import BackgroundVideo from '@/components/ui/background-video';
 import VideoPlayer from '@/components/ui/video-player';
 import { VideoContent } from '@/types/content';

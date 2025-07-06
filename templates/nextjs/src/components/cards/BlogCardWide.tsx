@@ -1,24 +1,23 @@
 import React from 'react';
-import Image from 'next/image'; 
-import Link from 'next/link'; 
-import { cn } from '@/lib/utils';
-import { formatDate } from '@/lib/utils'; 
-import { BaseCardV2, BaseCardV2Props } from './BaseCardV2';
+import Image from 'next/image';
+import Link from 'next/link';
+import { cn, formatDate } from '@/lib/utils';
+import { BaseCardV2, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
-// Define props for the BlogCardWide, similar to BlogCardProps
-export interface BlogCardWideProps extends Omit<BaseCardV2Props, 'children'> {
+export interface BlogCardWideV2Props {
+  imageMaxHeight?: string;
+
   title: string;
   date?: string | Date;
   excerpt?: string;
-  slug?: string; // For linking to the blog post
+  slug?: string;
   coverImageUrl?: string;
-  category?: string; // Optional: for a category badge or similar
-  author?: string;   // Optional: if you want to display author
-  imageMaxHeight?: string; // Optional: Tailwind class for max image height
-  // Add any specific props for BlogCardWide if different from BlogCard
+  category?: string;
+  author?: string;
+  className?: string;
 }
 
-export const BlogCardWide: React.FC<BlogCardWideProps> = ({
+const BlogCardWideV2: React.FC<BlogCardWideV2Props> = ({
   title,
   date,
   excerpt,
@@ -26,61 +25,63 @@ export const BlogCardWide: React.FC<BlogCardWideProps> = ({
   coverImageUrl,
   category,
   author,
-  imageMaxHeight = 'h-[200px]', // Default value, used for styling internal image div
   className,
-  ...baseCardProps
+  imageMaxHeight,
+  ...props
 }) => {
   const formattedDate = date ? formatDate(date) : null;
 
-  // For now, the internal structure is the same as BlogCard.
-  // This can be customized later for a 'wide' specific layout (e.g., image side-by-side with text).
   const cardContent = (
-    <>
+    <BaseCardV2
+      className={cn(
+        'p-0 overflow-hidden flex flex-col md:flex-row',
+        className
+      )}
+      {...props}
+    >
       {coverImageUrl && (
-        <div className={cn('relative w-full aspect-[16/9] overflow-hidden', imageMaxHeight ? imageMaxHeight : 'min-h-[180px]' )}>
-          <Image 
-            src={coverImageUrl} 
-            alt={title} 
-            layout="fill" 
+        <div className={cn('relative w-full md:w-1/3', imageMaxHeight ?? 'aspect-[16/9] md:aspect-auto')}>
+          <Image
+            src={coverImageUrl}
+            alt={title}
+            layout="fill"
             objectFit="cover"
-            className="rounded-t-lg" 
+            className="md:rounded-l-lg md:rounded-t-none rounded-t-lg"
           />
         </div>
       )}
-      <div className="p-4 flex flex-col grow">
-        <h3 className="text-lg font-semibold mb-1 line-clamp-2">{title}</h3>
-        {author && (
-          <p className="text-xs text-muted-foreground mb-1">By: {author}</p>
-        )}
-        {formattedDate && (
-          <p className="text-xs text-muted-foreground mb-2">{formattedDate}</p>
-        )}
-        {excerpt && (
-          <p className="text-sm text-muted-foreground line-clamp-3 grow">
-            {excerpt}
-          </p>
-        )}
-        {category && (
-          <p className="text-xs bg-secondary text-secondary-foreground inline-block px-2 py-1 rounded-full mt-auto self-start">
-            {category}
-          </p>
-        )}
+      <div className="flex flex-col p-8 w-full md:w-2/3">
+        <CardHeader className="p-0">
+          <CardTitle className="line-clamp-2">{title}</CardTitle>
+          <CardDescription>
+            {author && <span className="text-xs">{author}</span>}
+            {author && formattedDate && ' ・ '}
+            {formattedDate && <span className="text-xs">{formattedDate}</span>}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-0 pt-2 grow flex flex-col">
+          {excerpt && (
+            <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+              {excerpt}
+            </p>
+          )}
+          {category && (
+            <p className="text-xs bg-secondary text-secondary-foreground inline-block px-2 py-1 rounded-full mt-auto self-start">
+              {category}
+            </p>
+          )}
+        </CardContent>
       </div>
-    </>
-  );
-
-  return (
-    <BaseCardV2 
-      className={cn('flex flex-col overflow-hidden h-full', className)} 
-      {...baseCardProps}
-    >
-      {slug ? (
-        <Link href={slug} className="contents">
-          {cardContent}
-        </Link>
-      ) : (
-        cardContent
-      )}
     </BaseCardV2>
   );
+
+  return slug ? (
+    <Link href={slug} className="contents">
+      {cardContent}
+    </Link>
+  ) : (
+    cardContent
+  );
 };
+
+export default BlogCardWideV2;

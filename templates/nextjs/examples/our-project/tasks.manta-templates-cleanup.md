@@ -20,7 +20,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Document current import patterns and file locations
   - Success: Complete list of files using V1 cards with specific import statements
 
-- [ ] **Verify V2 card functionality**
+- [x] **Verify V2 card functionality**
   - Test V2 cards in dev environment at `/dev/cards`
   - Compare visual rendering between V1 and V2 cards
   - Verify responsive behavior across mobile, tablet, desktop
@@ -66,14 +66,14 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Success: All components use BaseCardV2 without errors
 
 #### 1.4: Remove V1 Card Files
-- [ ] **Delete V1 card component files**
+- [x] **Delete V1 card component files**
   - Delete `src/components/cards/BlogCard.tsx`
   - Delete `src/components/cards/BlogCardWide.tsx`
   - Delete `src/components/cards/BlogCardImage.tsx`
   - Delete `src/components/cards/BaseCard.tsx`
   - Success: V1 card files removed from filesystem
 
-- [ ] **Clean up V1-specific references**
+- [x] **Clean up V1-specific references**
   - Remove any V1-specific styling or CSS classes
   - Clean up any V1 card references in documentation
   - Remove V1 card imports from any remaining files
@@ -81,7 +81,7 @@ Migrate template from V1 cards to V2 cards for consistency with landing page and
   - Success: No V1 card references remain in codebase
 
 #### 1.5: Optional V2 File Renaming
-- [ ] **Rename V2 files to remove suffix (Optional)**
+- [x] **Rename V2 files to remove suffix (Optional)**
   - Rename `BlogCardV2.tsx` → `BlogCard.tsx`
   - Rename `BlogCardWideV2.tsx` → `BlogCardWide.tsx`
   - Rename `BlogCardImageV2.tsx` → `BlogCardImage.tsx`

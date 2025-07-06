@@ -1,12 +1,12 @@
 
-import BlogCard from '@/components/cards/BlogCard';
-import BlogCardV2 from '@/components/cards/BlogCardV2';
-import { BaseCardV2 } from '@/components/cards/BaseCardV2';
+import { BlogCard } from '@/components/cards';
+import { BlogCard as BlogCardV2 } from '@/components/cards';
+import { BaseCard as BaseCardV2 } from '@/components/cards';
 
-import { BlogCardWide } from '@/components/cards/BlogCardWide';
-import BlogCardWideV2 from '@/components/cards/BlogCardWideV2';
-import { BlogCardImage } from '@/components/cards/BlogCardImage';
-import BlogCardImageV2 from '@/components/cards/BlogCardImageV2';
+import { BlogCardWide } from '@/components/cards';
+import { BlogCardWide as BlogCardWideV2 } from '@/components/cards';
+import { BlogCardImage } from '@/components/cards';
+import { BlogCardImage as BlogCardImageV2 } from '@/components/cards';
 import {
   EnhancedBaseCard,
   CardHeader,

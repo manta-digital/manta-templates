@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCardV2'; // Using V2 BaseCard for migration
+import { BaseCardV2 } from './BaseCard'; // Using V2 BaseCard for migration
 
 interface SidebarPostCardProps {
   /** The title of the blog post. */

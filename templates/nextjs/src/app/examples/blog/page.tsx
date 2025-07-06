@@ -1,5 +1,5 @@
 import { BentoLayout } from '@/components/layouts/bento-layout';
-import { BaseCardV2 as BaseCard } from '@/components/cards/BaseCardV2';
+import { BaseCard } from '@/components/cards';
 import { cn } from '@/lib/utils';
 
 const cardColors = [
