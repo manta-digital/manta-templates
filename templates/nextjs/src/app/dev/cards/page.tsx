@@ -6,7 +6,6 @@ import { BaseCard as BaseCardV2 } from '@/components/cards';
 import { BlogCardWide } from '@/components/cards';
 import { BlogCardWide as BlogCardWideV2 } from '@/components/cards';
 import { BlogCardImage } from '@/components/cards';
-import { BlogCardImage as BlogCardImageV2 } from '@/components/cards';
 import {
   EnhancedBaseCard,
   CardHeader,
@@ -102,10 +101,15 @@ export default function CardTestPage() {
             <BlogCardImage {...samplePost} />
           </div>
           <div>
-            <h3 className="mb-2 font-semibold">New BlogCardImageV2</h3>
-            <BlogCardImageV2 {...samplePost} />
+            <h3 className="mb-2 font-semibold">New BlogCardImage</h3>
+            <BlogCardImage {...samplePost} />
           </div>
         </div>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-4 border-b pb-2">5b. BlogCardImage Dim + Blur Test</h2>
+        <BlogCardImage {...samplePost} dim blur className="w-full max-w-[400px]" />
       </section>
 
       <section>

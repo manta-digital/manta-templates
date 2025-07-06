@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
 import { BaseCardV2 } from './BaseCard';
 
-export interface BlogCardImageV2Props {
+export interface BlogCardImageProps {
   imageMaxHeight?: string; 
   title: string;
   date?: string | Date;
@@ -15,10 +15,16 @@ export interface BlogCardImageV2Props {
   author?: string;
   textColorClassName?: string;
   overlayClassName?: string;
+  /** Dim background image using CSS brightness (e.g. 75%) */
+  dim?: boolean;
+  /** Apply blur to background image. If blurAmount is provided, this is ignored. */
+  blur?: boolean;
+  /** Tailwind blur amount, e.g. 'sm', 'md', 'lg', 'xl', '2xl', '3xl'. */
+  blurAmount?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   className?: string;
 }
 
-const BlogCardImageV2: React.FC<BlogCardImageV2Props> = ({
+const BlogCardImage: React.FC<BlogCardImageProps> = ({
   title,
   date,
   excerpt,
@@ -28,6 +34,9 @@ const BlogCardImageV2: React.FC<BlogCardImageV2Props> = ({
   author,
   textColorClassName = 'text-white',
   overlayClassName = 'bg-gradient-to-t from-black/70 via-black/50 to-transparent',
+  dim = false,
+  blur = false,
+  blurAmount,
   className,
   imageMaxHeight,
   ...props
@@ -37,7 +46,8 @@ const BlogCardImageV2: React.FC<BlogCardImageV2Props> = ({
   const cardContent = (
     <BaseCardV2
       className={cn(
-        'relative overflow-hidden w-full p-0', imageMaxHeight ?? 'min-h-[280px] md:min-h-[360px]',
+        'group relative overflow-hidden w-full p-0 transition-shadow duration-300 hover:shadow-lg',
+        imageMaxHeight ?? 'min-h-[280px] md:min-h-[360px]',
         className
       )}
       {...props}
@@ -47,16 +57,21 @@ const BlogCardImageV2: React.FC<BlogCardImageV2Props> = ({
         alt={`Background for ${title}`}
         layout="fill"
         objectFit="cover"
-        className="absolute inset-0 z-0"
+        className={cn(
+          'absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-105',
+          dim && 'brightness-75',
+          blurAmount ? `blur-${blurAmount}` : (blur && 'blur-sm')
+        )}
         priority
       />
+      <div className={cn('absolute inset-0 z-10', overlayClassName)} />
       <div
         className={cn(
-          'relative z-10 h-full w-full flex flex-col justify-center p-8',
+          'relative z-20 h-full w-full flex flex-col justify-center p-8',
           textColorClassName
         )}
       >
-        <div className={cn('absolute inset-0 z-0', overlayClassName)} />
+        
         <div className="relative z-10">
           {category && (
             <p className="text-xs font-semibold uppercase tracking-wider opacity-90 mb-1">
@@ -90,4 +105,4 @@ const BlogCardImageV2: React.FC<BlogCardImageV2Props> = ({
   );
 };
 
-export default BlogCardImageV2;
+export default BlogCardImage;
