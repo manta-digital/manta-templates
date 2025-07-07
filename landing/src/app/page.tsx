@@ -51,13 +51,47 @@ export default function Home() {
   const examples = (
     <GridLayout
       gridData={{
-        default: [[6], [6], [6], [6], [3, 3], [3, 3]],
-        md: [[6], [3, 3], [3, 3], [3, 3], [6]],
-        lg: [[4, 2], [2, 2, 2], [2, 2, 2]],
+        default: [[6], [6], [6], [6], [6], [3, 3], [3, 3]],
+        md: [[6], [6], [3, 3], [3, 3], [3, 3], [6]],
+        lg: [[6], [4, 2], [2, 2, 2], [2, 2, 2]],
       }}
       gap="1rem"
       minRowHeight="200px"
     >
+      <ProjectCard
+        title="Project Card Gallery"
+        description="Project card gallery"
+        techStack={[]}
+        demoUrl="/gallery"
+        overlay
+        className="relative overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 z-0 transition-all duration-300 dark:opacity-90"
+          aria-hidden="true"
+          style={{
+            background:
+              'linear-gradient(120deg, var(--purple-3, #eaddfb) 0%, var(--mint-3, #b8f2e6) 100%)',
+            opacity: 0.55,
+            mixBlendMode: 'lighten',
+          }}
+        />
+        <div
+          className="absolute inset-0 z-0 transition-all duration-300 opacity-0 dark:opacity-100"
+          aria-hidden="true"
+          style={{
+            background:
+              'linear-gradient(120deg, var(--purple-8, #6c3fc7) 0%, var(--mint-8, #13c29a) 100%)',
+            opacity: 0.72,
+            mixBlendMode: 'multiply',
+          }}
+        />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full">
+          <span className="font-semibold text-lg md:text-xl lg:text-2xl text-white drop-shadow-md">
+            Explore Card Gallery
+          </span>
+        </div>
+      </ProjectCard>
       <BlogCardImage
         title="Blog Example"
         excerpt="MDX-driven content, blog layout"

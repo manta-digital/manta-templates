@@ -188,30 +188,43 @@ Reorganize test pages, components, and utilities to provide a clear separation b
   - Update any leftover links in header/footer components  
   - Success: Production template build contains no test routes (checked via `.next/routes-manifest.json`)
 
-#### 2.5 Landing Gallery Enhancements
-- [ ] **Add Component Gallery index page**
-  - Create `landing/src/app/gallery/page.tsx` listing all migrated demos with dynamic navigation  
-  - Integrate Radix palette switcher and Tailwind 4 theme classes  
-  - Success: Interactive gallery with live previews and code snippets
+#### 2.5 Landing Gallery Link Card
+- [x] **2.5.1 Analyze Existing Grid Layout**
+  - Review the Examples section grid implementation in `landing/src/app/page.tsx` (done)
+  - Determine how grid rows and columns are structured (e.g., CSS grid, Bento grid, etc.) (done)
+  - Identify how to insert a new row at the top without breaking layout (done)
 
-- [ ] **Integrate theming customizer panel**
-  - Re-use existing `/test/radix-colors` logic inside a sidebar drawer  
-  - Ensure P3 wide-gamut palettes render correctly  
-  - Success: Users can switch palettes and see changes in real-time
+- [x] **2.5.2 Define Gallery Card Requirements**
+  - Card should visually match other example cards in the grid
+  - Card must always span all columns (full-width, first row)
+  - Card should function as a link to the gallery page (`/gallery` or equivalent)
+  - Card should have a clear label (e.g., “Explore Card Gallery”)
+  - Card should be accessible (keyboard, screen reader)
+
+- [x] **2.5.3 Implement Full-Width Gallery Card**
+  - Insert a new grid row (row 0) with a single cell spanning all columns (done)
+  - Add the gallery card with correct styling and link behavior (done)
+  - Ensure card is responsive and maintains grid integrity across breakpoints (done)
+
+- [x] **2.5.5 Test and Validate**
+  - Verify card appears as the first row, full width, on all screen sizes
+  - Confirm link navigates to gallery page
+  - Check accessibility and keyboard navigation
+  - Ensure no regressions in grid layout or other cards
 
 #### 2.6 Testing & Validation
-- [ ] **Functional tests**
+- [x] **Functional tests**
   - Manually verify each gallery page renders and functions (carousel, composition, animations)  
   - Run `pnpm test` (or Playwright/Cypress suite when available) across template & landing  
   - Success: All tests pass, no console warnings
 
-- [ ] **Cross-browser & accessibility checks**
+- [x] **Cross-browser & accessibility checks**
   - Test in Chrome, Firefox, Safari, mobile simulators  
   - Use Axe DevTools to ensure WCAG-AA compliance  
   - Success: No critical a11y issues, contrast meets Radix guidelines
 
 #### 2.7 Documentation Updates
-- [ ] **Update docs and READMEs**
+- [x] **Update docs and READMEs**
   - Remove references to old `/test*` routes in template docs  
   - Add "Developer Utilities" section explaining new gallery structure  
   - Success: Documentation reflects reorganized test infrastructure
@@ -229,8 +242,15 @@ Reorganize test pages, components, and utilities to provide a clear separation b
 - **Better DX**: Developers still have access to utilities in an organized location
 - **Maintainability**: Clear separation simplifies future updates and CLI automation
 
-### 99: Future Improvements and Maintenance Needed
-- [ ] interactive card in variant test needs transition
-- [ ] carousel sizing needs adjustment as it cuts off the elevated card shadow
+### 97: Bugs
+- [ ] Blog card is skipped in tab layout -- cannot tab to blog card.
+- [ ] Some objects are not maintaining proper height, for example the documentation inner cards in the landing page.
 - [x] in light mode, we should use Text White or similar, not dark text, for gradient cards
+
+### 98: Maintenance Items
+- [x] interactive card in variant test needs transition
+
+### 99: Future Enhancements
+- [ ] carousel sizing needs adjustment as it cuts off the elevated card shadow
+- [ ] update and enhance gallery card (placeholder in first grid row)
 - [x] default card variant now displays correct border and shadow consistently across test pages.

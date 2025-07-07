@@ -47,7 +47,11 @@ pnpm build:template # production build of the starter
 pnpm build:landing  # production build of the landing site
 ```
 
-The two workspaces share code but keep their pages independent—use the starter for a clean beginning and the landing app as a component reference.
+This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included.
+
+Looking for examples, demos, or a gallery of all card and layout components? Visit:
+
+https://templates.manta.digital
 
 ⸻
 
