@@ -124,7 +124,7 @@ The template currently contains:
 - `/examples/bentogrid` - Single grid example (most versatile)
 
 **Requirements**:
-- Ensure all examples use V2 cards after migration
+- Ensure all examples use updated cards after migration
 - Test functionality and styling
 - Maintain clean, professional appearance
 - Provide clear documentation

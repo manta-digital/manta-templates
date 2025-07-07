@@ -243,8 +243,9 @@ Reorganize test pages, components, and utilities to provide a clear separation b
 - **Maintainability**: Clear separation simplifies future updates and CLI automation
 
 ### 97: Bugs
-- [ ] Blog card is skipped in tab layout -- cannot tab to blog card.
 - [ ] Some objects are not maintaining proper height, for example the documentation inner cards in the landing page.
+- [ ] Some focus rectangles do not match their card shape (blog, gallery).
+- [x] Blog card is skipped in tab layout -- cannot tab to blog card.
 - [x] in light mode, we should use Text White or similar, not dark text, for gradient cards
 
 ### 98: Maintenance Items

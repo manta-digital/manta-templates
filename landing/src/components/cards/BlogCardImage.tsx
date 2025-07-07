@@ -97,7 +97,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
   );
 
   return slug ? (
-    <Link href={slug} className="contents" aria-label={`Read more about ${title}`}>
+    <Link href={slug} className="block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" aria-label={`Read more about ${title}`}>
       {cardContent}
     </Link>
   ) : (

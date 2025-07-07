@@ -50,7 +50,6 @@ pnpm build:landing  # production build of the landing site
 This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included.
 
 Looking for examples, demos, or a gallery of all card and layout components? Visit:
-
 https://templates.manta.digital
 
 ⸻
