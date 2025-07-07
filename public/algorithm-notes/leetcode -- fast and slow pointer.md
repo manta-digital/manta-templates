@@ -15,3 +15,4 @@ is there a better way?  surely there is?  or maybe not.  we can't sort, and the 
 
 does this still work if numbers can be anything?  for example if we have 10 3 6 (etc)?  First we check and find no matches for 10, then we check matches for 3 and we don't need to check 10.  So yes it provides a reasonable but not amazing optimization by speeding up the fast pointer.  
 3
+
