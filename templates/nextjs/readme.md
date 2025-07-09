@@ -47,7 +47,7 @@ pnpm build:template # production build of the starter
 pnpm build:landing  # production build of the landing site
 ```
 
-This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included. Essential examples are available at `/examples` including blog layouts, portfolio grids, and bento layouts.
+This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included. Essential examples are available at `/examples` including blog layouts, portfolio grids, and bento layouts. Each example demonstrates different use cases and responsive design patterns.
 
 Looking for advanced examples, demos, or a gallery of all card and layout components? Visit:
 https://templates.manta.digital

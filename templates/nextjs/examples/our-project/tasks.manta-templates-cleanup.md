@@ -395,3 +395,152 @@ Curate example pages in the template to keep only essential demos, while migrati
 - ✅ Navigation and documentation are updated and accurate
 - ✅ No broken links or references to removed examples
 - ✅ All preserved examples are tested for functionality, responsiveness, and accessibility
+
+## Section 4: Documentation Organization
+
+### Overview
+Clean up and organize documentation structure to reflect all changes made in previous sections. Remove references to deleted components and pages, update code examples to use current implementations, and ensure all documentation is accurate and helpful for users of the production-ready template.
+
+### Tasks
+
+#### 4.1 Inventory & Analysis
+- [x] **Audit all documentation files**
+  - Review `docs/radix-theming-guide.md` for references to deleted test pages or outdated components
+  - Review `docs/radix-colors-quick-reference.md` for accuracy after cleanup
+  - Check `readme.md` for any remaining references to removed features
+  - Scan for any other documentation files that may need updates
+  - Success: Complete inventory of documentation files with required updates
+
+- [x] **Identify outdated references**
+  - Search for references to `/test*` routes, `/dev/cards`, or other removed pages
+  - Look for mentions of V1 cards, V2 cards, or card migration processes
+  - Find any references to removed examples (masonrygrid, gridlayout)
+  - Check for outdated component lists or feature inventories
+  - Success: List of all outdated references requiring updates
+
+#### 4.2 Update Core Documentation
+- [x] **Update Radix theming guide**
+  - Remove references to `/test/radix-colors` page (now in landing gallery)
+  - Update any component examples to use current card implementations
+  - Verify all code examples work with current template structure
+  - Update testing section to reference landing page gallery instead
+  - Success: Radix theming guide is accurate and current
+
+- [x] **Update Radix colors quick reference**
+  - Remove reference to `/test/radix-colors` testing page
+  - Update any component examples to reflect current implementations
+  - Verify all quick reference examples work with current template
+  - Add note about comprehensive testing available at templates.manta.digital
+  - Success: Quick reference is accurate and helpful
+
+- [x] **Update main README**
+  - Verify all feature lists reflect current template capabilities
+  - Ensure all code examples use current component implementations
+  - Update any outdated script references or development workflows
+  - Confirm all links work and point to correct resources
+  - Success: README accurately represents current template state
+
+#### 4.3 Clean Up Internal Documentation
+- [x] **Remove development notes**
+  - Clean up any internal development notes or migration documentation
+  - Remove temporary documentation created during cleanup process
+  - Archive or delete any obsolete documentation files
+  - Ensure no development-only documentation remains in production template
+  - Success: Only production-relevant documentation remains
+
+- [x] **Update component documentation**
+  - Remove any documentation for deleted V1 cards
+  - Update component lists to reflect current card system
+  - Verify all component examples use current implementations
+  - Remove references to deleted test components or utilities
+  - Success: Component documentation is accurate and current
+
+#### 4.4 Content Structure Updates
+- [x] **Update content examples**
+  - Review sample content files for any outdated references
+  - Update any content that references removed pages or components
+  - Ensure all content examples work with current template structure
+  - Verify markdown processing works correctly with current setup
+  - Success: All content examples are current and functional
+
+- [x] **Update configuration documentation**
+  - Review any configuration examples or setup instructions
+  - Update any references to removed files or components
+  - Verify all configuration examples work with current template
+  - Update any development workflow documentation
+  - Success: Configuration documentation is accurate and helpful
+
+#### 4.5 Code Example Updates
+- [x] **Update all code examples**
+  - Replace any examples using V1 cards with current implementations
+  - Update import statements in documentation to reflect current structure
+  - Verify all code examples compile and run correctly
+  - Update any component usage examples to use current patterns
+  - Success: All code examples are current and functional
+
+- [x] **Update TypeScript examples**
+  - Verify all TypeScript examples use current interfaces and types
+  - Update any component prop examples to reflect current implementations
+  - Remove any examples using deprecated or removed components
+  - Ensure all TypeScript examples pass type checking
+  - Success: All TypeScript examples are current and type-safe
+
+#### 4.6 Reference Updates
+- [x] **Update external references**
+  - Verify all links to templates.manta.digital are current and working
+  - Update any references to the landing page gallery structure
+  - Ensure all external documentation links are accurate
+  - Update any references to the monorepo structure if needed
+  - Success: All external references are accurate and working
+
+- [x] **Update internal references**
+  - Fix any broken internal links within documentation
+  - Update any cross-references between documentation files
+  - Ensure all file paths and component references are accurate
+  - Update any navigation or table of contents sections
+  - Success: All internal references are accurate and working
+
+#### 4.7 Documentation Testing & Validation
+- [x] **Test all documentation examples**
+  - Run through all code examples to ensure they work correctly
+  - Test all links and references for accuracy
+  - Verify all component examples render correctly
+  - Check that all setup instructions are current and complete
+  - Success: All documentation examples work as intended
+
+- [x] **Validate documentation completeness**
+  - Ensure all current features are documented appropriately
+  - Verify no important functionality is missing from documentation
+  - Check that documentation matches actual template capabilities
+  - Ensure documentation is helpful for new users
+  - Success: Documentation is complete and helpful
+
+#### 4.8 Final Documentation Polish
+- [x] **Improve documentation clarity**
+  - Review all documentation for clarity and readability
+  - Update any confusing or outdated explanations
+  - Ensure consistent terminology throughout documentation
+  - Add helpful examples where needed
+  - Success: Documentation is clear and easy to follow
+
+- [x] **Organize documentation structure**
+  - Ensure logical organization of documentation files
+  - Update any table of contents or navigation elements
+  - Verify documentation follows consistent formatting
+  - Add any missing documentation sections if needed
+  - Success: Documentation is well-organized and easy to navigate
+
+### Success Criteria
+- ✅ All documentation reflects current template state after cleanup
+- ✅ No references to deleted components, pages, or features remain
+- ✅ All code examples use current implementations and work correctly
+- ✅ Documentation is helpful and accurate for new users
+- ✅ All links and references work correctly
+- ✅ Documentation supports the production-ready template goals
+
+### Benefits Achieved
+- **Accurate Documentation**: All documentation reflects the current, clean template state
+- **User-Friendly**: Documentation helps users understand and use the template effectively
+- **Professional Quality**: Documentation matches the production-ready template standards
+- **Maintainable**: Clean documentation structure makes future updates easier
+- **Consistent**: All documentation uses consistent terminology and examples

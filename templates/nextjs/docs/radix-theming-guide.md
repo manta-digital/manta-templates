@@ -190,7 +190,7 @@ Palette switching is handled via the `data-palette` attribute:
 
 ### Interactive Palette Switching
 
-See our test page at `/test/radix-colors` for a live demonstration of palette switching with all card variants.
+For a live demonstration of palette switching with all card variants, visit the comprehensive gallery at [templates.manta.digital](https://templates.manta.digital).
 
 ## Creating Custom Palettes
 
@@ -280,7 +280,7 @@ const Button = () => (
 
 ### Interactive Test Page
 
-Visit `/test/radix-colors` to:
+Visit the comprehensive gallery at [templates.manta.digital](https://templates.manta.digital) to:
 
 - Switch between all available palettes
 - View color scales and semantic mappings
@@ -372,7 +372,7 @@ Add smooth transitions between palette changes:
 ### Getting Help
 
 - Review the [Radix Colors documentation](https://www.radix-ui.com/colors)
-- Test your implementation at `/test/radix-colors`
+- Test your implementation at [templates.manta.digital](https://templates.manta.digital)
 - Check browser dev tools for CSS custom property values
 
 ---

@@ -45,7 +45,7 @@ className="bg-teal-100 text-teal-900"
 
 ## Testing
 
-Visit `/test/radix-colors` to test all palettes and variants interactively.
+Visit [templates.manta.digital](https://templates.manta.digital) to test all palettes and variants interactively in the comprehensive gallery.
 
 ## Color Scale Reference
 
