@@ -317,27 +317,27 @@ Curate example pages in the template to keep only essential demos, while migrati
   - Success: Advanced examples function correctly in landing page
   - **Findings**: Advanced examples already exist in landing at `landing/src/app/examples/`. Masonrygrid and gridlayout confirmed present and functional.
 
-- [ ] **3.3.1: Update navigation terminology**
+- [x] **3.3.1: Update navigation terminology**
   - Find and update top navigation to change "Demos" to "Examples" in templates/nextjs
   - Locate navigation component (likely in header.tsx or similar)
   - Update text and any related links/references
   - Success: Navigation displays "Examples" instead of "Demos"
 
-- [ ] **3.3.2: Create examples index page**
+- [x] **3.3.2: Create examples index page**
   - Create `/examples/page.tsx` as main examples landing page
   - Design card layout showcasing each example (blog, bentogrid, portfolio)
   - Include title, description, and link to each example
   - Use consistent card styling with rest of template
   - Success: Users can easily discover all examples from `/examples`
 
-- [ ] **3.3.3: Update About page with landing page reference**
+- [x] **3.3.3: Update About page with landing page reference**
   - Locate and update About page content
   - Add blurb or card directing users to templates.manta.digital
   - Include reference text about comprehensive showcase and advanced examples
   - Maintain consistent styling with page design
   - Success: About page guides users to landing page for full showcase
 
-- [ ] **3.3.4: Simplify blog layout options**
+- [x] **3.3.4: Simplify blog layout options**
   - These subtasks apply ONLY to templates/nextjs, *not* to landing page.  Leave landing as-is.
   - Remove BlogIndexLayout layout switching functionality
   - Set blog to use image mode only (BlogCardImage) for simplicity
@@ -345,6 +345,13 @@ Curate example pages in the template to keep only essential demos, while migrati
   - Update blog page to use fixed image layout
   - Preserve full layout options in landing page
   - Success: Blog uses single, clean image layout without complexity
+
+- [x] **3.3.5: Adjust About Page content**
+  - About page should reference that this is a template provided by manta-templates
+  - Make sure link is present
+  - Add a nice card to tell the user that more features, examples, and galleries are available
+  - Remove any personal-promotional / resume content about the author (me)
+  - **Findings**: Updated About page to focus on template features, added feature list, enhanced showcase card
 
 #### 3.4 Navigation & Documentation Updates
 - [ ] **Update navigation and routing in the template**

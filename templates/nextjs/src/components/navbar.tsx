@@ -15,7 +15,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/blog', label: 'Blog' }, // Placeholder path
-  { href: '/demos', label: 'Demos' }, // Placeholder path
+  { href: '/examples', label: 'Examples' }, // Placeholder path
   { href: '/about', label: 'About' }, // Placeholder path
 ];
 
