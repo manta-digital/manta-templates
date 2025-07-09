@@ -296,23 +296,55 @@ Curate example pages in the template to keep only essential demos, while migrati
     variants in landing page gallery example. 
 
 #### 3.2 Essential Example Preservation
-- [ ] **Retain only essential examples in the template**
+- [x] **Retain only essential examples in the template**
   - Keep `/examples/blog`, `/examples/portfolio`, and `/examples/bentogrid` in the template
   - Remove or migrate `/examples/masonrygrid`, `/examples/gridlayout`, and any other advanced/experimental examples
   - Success: Only essential examples remain in the template
+  - **Findings**: Removed masonrygrid and gridlayout (preserved in landing). Blog, bentogrid, portfolio remain.
 
-- [ ] **Update all essential examples to use V2 cards**
+- [x] **Update all essential examples to use V2 cards**
   - Refactor imports and usage to ensure BlogCard, BlogCardWide, BlogCardImage, and BaseCard are V2
   - Test rendering and styling for each essential example
   - Success: All essential examples use V2 cards and render correctly
+  - **Findings**: Already completed during V2 cleanup. All examples use BaseCard imports correctly.
 
 #### 3.3 Migration of Advanced Examples
-- [ ] **Migrate advanced/experimental examples to landing page**
+- [x] **Migrate advanced/experimental examples to landing page**
   - Note: very likely these are already in landing page.  Verify first.
   - Move `/examples/masonrygrid`, `/examples/gridlayout`, and any other advanced/experimental examples to the landing workspace (e.g., `landing/src/app/examples/`)
   - Update import paths and dependencies as needed for landing environment
   - Test migrated pages in landing dev server
   - Success: Advanced examples function correctly in landing page
+  - **Findings**: Advanced examples already exist in landing at `landing/src/app/examples/`. Masonrygrid and gridlayout confirmed present and functional.
+
+- [ ] **3.3.1: Update navigation terminology**
+  - Find and update top navigation to change "Demos" to "Examples" in templates/nextjs
+  - Locate navigation component (likely in header.tsx or similar)
+  - Update text and any related links/references
+  - Success: Navigation displays "Examples" instead of "Demos"
+
+- [ ] **3.3.2: Create examples index page**
+  - Create `/examples/page.tsx` as main examples landing page
+  - Design card layout showcasing each example (blog, bentogrid, portfolio)
+  - Include title, description, and link to each example
+  - Use consistent card styling with rest of template
+  - Success: Users can easily discover all examples from `/examples`
+
+- [ ] **3.3.3: Update About page with landing page reference**
+  - Locate and update About page content
+  - Add blurb or card directing users to templates.manta.digital
+  - Include reference text about comprehensive showcase and advanced examples
+  - Maintain consistent styling with page design
+  - Success: About page guides users to landing page for full showcase
+
+- [ ] **3.3.4: Simplify blog layout options**
+  - These subtasks apply ONLY to templates/nextjs, *not* to landing page.  Leave landing as-is.
+  - Remove BlogIndexLayout layout switching functionality
+  - Set blog to use image mode only (BlogCardImage) for simplicity
+  - Remove layout parameter handling and switcher components
+  - Update blog page to use fixed image layout
+  - Preserve full layout options in landing page
+  - Success: Blog uses single, clean image layout without complexity
 
 #### 3.4 Navigation & Documentation Updates
 - [ ] **Update navigation and routing in the template**
