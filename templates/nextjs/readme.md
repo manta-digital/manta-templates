@@ -11,7 +11,7 @@
 | **Next.js 15** (App Router) | Strict TS, Turbopack dev server, image optimisation |
 | **Tailwind CSS v4** | Dark/Light mode via CSS variables, Radix preset & `@tailwindcss/typography` |
 | **ShadCN UI + Radix** | Pre-wired and theme-aware components |
-| **Layout kit** | • Flexible **GridContainer** / **GridItem**<br>• Responsive **MasonryGrid**<br>• “Bento” six-column grid |
+| **Layout kit** | • Flexible **GridContainer** / **GridItem**<br>• Essential examples (blog, portfolio, bento grid)<br>• “Bento” six-column grid |
 | **Markdown / MDX blog** | Gray-matter front-matter, remark & rehype pipeline, Shiki code highlighting |
 | **Animations** | Framer Motion baseline, `tw-animate-css` helpers |
 | **Tooling** | ESLint, Prettier 3, TypeScript strict, Axe CLI accessibility check |
@@ -47,9 +47,9 @@ pnpm build:template # production build of the starter
 pnpm build:landing  # production build of the landing site
 ```
 
-This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included.
+This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included. Essential examples are available at `/examples` including blog layouts, portfolio grids, and bento layouts.
 
-Looking for examples, demos, or a gallery of all card and layout components? Visit:
+Looking for advanced examples, demos, or a gallery of all card and layout components? Visit:
 https://templates.manta.digital
 
 ⸻
