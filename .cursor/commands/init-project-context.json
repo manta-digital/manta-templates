@@ -1,0 +1,73 @@
+{
+  "name": "01-Initialize Project Context",
+  "description": "Build initial prompt for project context including optional frameworks, APIs, and tools",
+  "command": "cursor.command.insertText",
+  "args": {
+    "text": "Welcome. Use the following parameters for the remainder of this conversation:\n\n**Required Parameters:**\n- project (always required)\n- template (if working in monorepo)\n- section\n- framework(s)\n- tool(s)\n- api(s)\n\n**Project Context:**\nWe are working on {project}. If {section} is not specified, assume this is a project-wide request. Always anchor to `guide.ai-project.process`. You should know your role and where our task(s) fit into the process guide. In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s). If any of this is missing, stop and request from Project Manager. Do not proceed without it. You should receive additional message(s) describing current task and goal details.\n\n**Monorepo Context:**\nWe are working in {project}, {template}, where {project} is a monorepo. For directories such as /project-documents, we use the path /project/{template}/project-documents. This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example. For anything that would normally be in /project/{template}/project-documents/our-project, we use /project/{template}/examples/our-project.\n\n**Knowledge Sources:**\nYou will need to consult specific knowledge for {tool}, {framework}, and/or {api}. These should be available to you in the tool-guides/{tool}, framework-guides/{framework}, and api-guides/{api} directories for our curated knowledge. Follow these steps when working with {tool}, {framework}, or {api}:\n\n1. Start with the `introduction` or `setup` file (if no introduction) in the directory as described above.\n2. Locate additional documentation: scan the initial guide for references to more detailed documentation, for example in a {tool}/documentation/ directory, specific notes or tips in `research-crumbs`.\n3. Search within these specific documentation sources first using `grep_search` or `codebase_search`.\n4. Use context7 to locate additional documentation, and to verify that you are using the most current documentation for {tool}, {framework}, or {api}.\n5. Web search may be used as an additional fallback.\n\nThis is your project setup and background. Once received, acknowledge, verify that you have all required inputs and resources, and wait for further instructions.",
+    "position": "start"
+  },
+  "inputs": [
+    {
+      "name": "project",
+      "description": "Project name (required)",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "template",
+      "description": "Template name (if working in monorepo)",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "section",
+      "description": "Section being worked on",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "frameworks",
+      "description": "Frameworks being used (comma-separated)",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "tools",
+      "description": "Tools being used (comma-separated)",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "apis",
+      "description": "APIs being used (comma-separated)",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "manta-templates-nextjs",
+      "description": "Manta Templates - NextJS template",
+      "values": {
+        "project": "manta-templates",
+        "template": "templates/nextjs",
+        "section": "nextjs",
+        "frameworks": "Next.js 15.3.3, React 19, TypeScript",
+        "tools": "Tailwind CSS, ShadCN, Prisma",
+        "apis": ""
+      }
+    },
+    {
+      "name": "manta-templates-landing",
+      "description": "Manta Templates - Landing page",
+      "values": {
+        "project": "manta-templates",
+        "template": "landing",
+        "section": "landing",
+        "frameworks": "Astro, React",
+        "tools": "Tailwind CSS",
+        "apis": ""
+      }
+    }
+  ]
+} 

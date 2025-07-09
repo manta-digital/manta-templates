@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCard';
+import { BaseCard } from './BaseCard';
 import type { ProjectContent } from '@/types/content';
 
 interface ProjectCardProps {
@@ -74,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // overlay mode: children as background, text overlaid
   if (overlay) {
     const overlayContent = (
-      <BaseCardV2 tabIndex={0} className={cn('relative overflow-hidden h-full p-4', className)}>
+      <BaseCard tabIndex={0} className={cn('relative overflow-hidden h-full p-4', className)}>
         {/* background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {children}
@@ -90,13 +90,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           repoUrl={repoUrl || content?.repoUrl}
           demoUrl={demoUrl || content?.demoUrl}
         />
-      </BaseCardV2>
+      </BaseCard>
     );
     return demoUrl ? <Link href={demoUrl} className="block h-full" tabIndex={-1} aria-label={title}>{overlayContent}</Link> : overlayContent;
   }
   // standard cardContent
   const cardContent = (
-    <BaseCardV2 tabIndex={0} className={cn('h-full group cursor-pointer focus:ring-2 focus:ring-ring focus:outline-none', className)}>
+    <BaseCard tabIndex={0} className={cn('h-full group cursor-pointer focus:ring-2 focus:ring-ring focus:outline-none', className)}>
       <div className="flex flex-col grow h-full">
         {/* Preview/children area (flex-1, fills top) */}
         {children && (
@@ -116,7 +116,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           demoUrl={demoUrl || content?.demoUrl}
         />
       </div>
-    </BaseCardV2>
+          </BaseCard>
   );
 
   // If demoUrl is set, wrap the card in a Link

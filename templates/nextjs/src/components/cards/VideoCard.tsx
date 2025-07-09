@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCard';
+import { BaseCard } from './BaseCard';
 import BackgroundVideo from '@/components/ui/background-video';
 import VideoPlayer from '@/components/ui/video-player';
 import { VideoContent } from '@/types/content';
@@ -39,7 +39,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
   // Background video mode
   if (displayMode === 'background') {
     return (
-      <BaseCardV2 className={cn('overflow-hidden h-full relative', className)}>
+              <BaseCard className={cn('overflow-hidden h-full relative', className)}>
         <BackgroundVideo
           src={cardVideoUrl}
           poster={poster || cardThumbnailUrl}
@@ -58,14 +58,14 @@ const VideoCard: React.FC<VideoCardProps> = ({
           )}
           {children}
         </BackgroundVideo>
-      </BaseCardV2>
+      </BaseCard>
     );
   }
 
   // Interactive player mode
   if (displayMode === 'player') {
     return (
-      <BaseCardV2 className={cn('overflow-hidden h-full', className)}>
+      <BaseCard className={cn('overflow-hidden h-full', className)}>
         <div className="w-full h-full">
           <VideoPlayer
             url={cardVideoUrl}
@@ -83,13 +83,13 @@ const VideoCard: React.FC<VideoCardProps> = ({
           )}
           {children}
         </div>
-      </BaseCardV2>
+      </BaseCard>
     );
   }
 
   // Default thumbnail mode (original behavior)
   return (
-    <BaseCardV2 className={cn('overflow-hidden h-full justify-center', className)}> 
+    <BaseCard className={cn('overflow-hidden h-full justify-center', className)}> 
       {/* Make Link fill height */}
       <Link href={cardVideoUrl} target="_blank" rel="noopener noreferrer" className="group"> 
         {/* Image container with 16:9 aspect ratio - This will now be centered vertically */}
@@ -115,7 +115,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
         )}
         {children}
       </Link>
-    </BaseCardV2>
+    </BaseCard>
   );
 };
 

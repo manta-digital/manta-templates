@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCard';
+import { BaseCard } from './BaseCard';
 
 export interface BlogCardImageProps {
   imageMaxHeight?: string; 
@@ -44,7 +44,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
   const formattedDate = date ? formatDate(date) : null;
 
   const cardContent = (
-    <BaseCardV2
+          <BaseCard
       className={cn(
         'group relative overflow-hidden w-full p-0 transition-shadow duration-300 hover:shadow-lg',
         imageMaxHeight ?? 'min-h-[280px] md:min-h-[360px]',
@@ -93,7 +93,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
           </div>
         </div>
       </div>
-    </BaseCardV2>
+          </BaseCard>
   );
 
   return slug ? (

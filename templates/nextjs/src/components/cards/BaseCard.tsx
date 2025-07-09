@@ -16,11 +16,11 @@ export const CardTitle = ShadcnCardTitle;
 export const CardDescription = ShadcnCardDescription;
 export const CardContent = ShadcnCardContent;
 
-export type BaseCardV2Props = React.ComponentProps<typeof ShadcnCard>;
+export type BaseCardProps = React.ComponentProps<typeof ShadcnCard>;
 
-const BaseCardV2 = React.forwardRef<
+const BaseCard = React.forwardRef<
   React.ElementRef<typeof ShadcnCard>,
-  BaseCardV2Props
+  BaseCardProps
 >(({ className, ...props }, ref) => {
   return (
     <ShadcnCard
@@ -30,6 +30,6 @@ const BaseCardV2 = React.forwardRef<
     />
   );
 });
-BaseCardV2.displayName = 'BaseCardV2';
+BaseCard.displayName = 'BaseCard';
 
-export { BaseCardV2 };
+export { BaseCard };

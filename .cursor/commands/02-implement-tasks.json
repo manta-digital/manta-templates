@@ -1,0 +1,41 @@
+{
+  "name": "02-Implement Tasks",
+  "description": "Implement tasks for section/subsection in project",
+  "command": "cursor.command.insertText",
+  "args": {
+    "text": "Your role is \"Senior AI\". Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file. STOP and confer with Project Manager after each task.\n\nWork carefully and ensure that each task is verified complete before proceeding to the next. If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation from Project Manager, and do not proceed to additional tasks in this case.\n\nIf our tasks document contains Phase 3 and Phase 4 items in our assigned area, use the Phase 4 items (with subtasks) as implementation items and Phase 3 as overview. Don't forget to check off items when complete, and when all of the subtasks for something are complete, check off its corresponding phase 3 item, provided there is one (there should be).\n\nIf you need more information, stop and wait for confirmation from the Project Manager. Once a task is complete and *verified with the project manager*, check it off in the section tasks file.\n\nNotes:\n* ignore case sensitivity in all file and directory names. If you cannot locate the files referenced above STOP until receiving information from the project manager. Do not guess, assume, or proceed without them.\n* do not mark any tasks in the 'three such attempts' or similar error state as complete.",
+    "position": "start"
+  },
+  "inputs": [
+    {
+      "name": "section",
+      "description": "Section being worked on",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "subsection",
+      "description": "Subsection (if applicable)",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "manta-templates-nextjs",
+      "description": "Manta Templates - NextJS template",
+      "values": {
+        "section": "nextjs",
+        "subsection": ""
+      }
+    },
+    {
+      "name": "manta-templates-landing",
+      "description": "Manta Templates - Landing page",
+      "values": {
+        "section": "landing",
+        "subsection": ""
+      }
+    }
+  ]
+} 

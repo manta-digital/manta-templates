@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn, formatDate } from '@/lib/utils';
-import { BaseCardV2, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
+import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
-interface BlogCardV2Props {
+interface BlogCardProps {
   title: string;
   date?: string | Date;
   excerpt: string;
@@ -13,7 +13,7 @@ interface BlogCardV2Props {
   author?: string;
 }
 
-const BlogCardV2: React.FC<BlogCardV2Props> = ({
+const BlogCard: React.FC<BlogCardProps> = ({
   title,
   date,
   excerpt,
@@ -26,7 +26,7 @@ const BlogCardV2: React.FC<BlogCardV2Props> = ({
   const formattedDate = date ? formatDate(date) : null;
 
   return (
-    <BaseCardV2 className={cn('p-0 overflow-hidden', className)} {...props}>
+    <BaseCard className={cn('p-0 overflow-hidden', className)} {...props}>
       <div className="p-8 flex flex-col h-full">
         {coverImageUrl && (
           <div
@@ -60,8 +60,8 @@ const BlogCardV2: React.FC<BlogCardV2Props> = ({
           </CardContent>
         </div>
       </div>
-    </BaseCardV2>
-  );
-};
+          </BaseCard>
+    );
+  };
 
-export default BlogCardV2;
+  export default BlogCard;

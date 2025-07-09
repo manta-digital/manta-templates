@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
-import { BaseCardV2, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
+import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
-export interface BlogCardWideV2Props {
+export interface BlogCardWideProps {
   imageMaxHeight?: string;
 
   title: string;
@@ -17,7 +17,7 @@ export interface BlogCardWideV2Props {
   className?: string;
 }
 
-const BlogCardWideV2: React.FC<BlogCardWideV2Props> = ({
+const BlogCardWide: React.FC<BlogCardWideProps> = ({
   title,
   date,
   excerpt,
@@ -32,7 +32,7 @@ const BlogCardWideV2: React.FC<BlogCardWideV2Props> = ({
   const formattedDate = date ? formatDate(date) : null;
 
   const cardContent = (
-    <BaseCardV2
+    <BaseCard
       className={cn(
         'p-0 overflow-hidden flex flex-col md:flex-row',
         className
@@ -72,7 +72,7 @@ const BlogCardWideV2: React.FC<BlogCardWideV2Props> = ({
           )}
         </CardContent>
       </div>
-    </BaseCardV2>
+    </BaseCard>
   );
 
   return slug ? (
@@ -84,4 +84,4 @@ const BlogCardWideV2: React.FC<BlogCardWideV2Props> = ({
   );
 };
 
-export default BlogCardWideV2;
+export default BlogCardWide;

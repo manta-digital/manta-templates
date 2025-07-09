@@ -1,0 +1,40 @@
+{
+  "name": "04-Split Tasks",
+  "description": "Split feature into tasks and subtasks suitable for AI implementation",
+  "command": "cursor.command.insertText",
+  "args": {
+    "text": "Continuing to work in {project}, {section} as a Technical Fellow, we will now split our feature described in feature.{section}.md into tasks as described in Phase 3 and Phase 4 of our `guide.ai-project.process.md`. We are more concerned with creating detailed tasks than a strict Phase 3 / Phase 4 adherence. We will create our tasks in tasks.{section}.md.\n\nIf tasks.{section}.md already exists, you should be given a current subsection or phase of the {feature} document for which we will create tasks. Insert our tasks into the existing document, keeping subsections in numerical order.",
+    "position": "start"
+  },
+  "inputs": [
+    {
+      "name": "project",
+      "description": "Project name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "section",
+      "description": "Section being worked on",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "feature",
+      "description": "Feature name being split into tasks",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "manta-templates-nextjs-split",
+      "description": "Manta Templates - NextJS task splitting",
+      "values": {
+        "project": "manta-templates",
+        "section": "nextjs",
+        "feature": "new-feature"
+      }
+    }
+  ]
+} 

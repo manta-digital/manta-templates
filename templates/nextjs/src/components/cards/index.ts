@@ -1,6 +1,6 @@
 // This file exports all components from the cards directory
 
-export { BaseCardV2 as BaseCard } from './BaseCard';
+export { BaseCard } from './BaseCard';
 export { default as BlogCard } from './BlogCard';
 export { default as BlogCardWide } from './BlogCardWide';
 export { default as ProjectCard } from './ProjectCard';

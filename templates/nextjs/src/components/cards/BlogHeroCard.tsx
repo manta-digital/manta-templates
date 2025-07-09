@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BaseCardV2 } from './BaseCard';
+import { BaseCard } from './BaseCard';
 
 interface BlogHeroCardProps {
   title: string;
@@ -20,7 +20,7 @@ const BlogHeroCard: React.FC<BlogHeroCardProps> = ({
   return (
     // Using BaseCard provides consistent padding and rounded corners
     // Apply gradient background here
-    <BaseCardV2
+    <BaseCard
       className={cn(
         'text-primary-foreground',
         'bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 dark:from-blue-700 dark:via-purple-700 dark:to-indigo-800',
@@ -31,7 +31,7 @@ const BlogHeroCard: React.FC<BlogHeroCardProps> = ({
     >
       <h1 className="text-white text-2xl md:text-3xl font-bold mb-1">{title}</h1>
       <p className="text-white text-sm md:text-base opacity-90">{subtitle}</p>
-    </BaseCardV2>
+          </BaseCard>
   );
 };
 

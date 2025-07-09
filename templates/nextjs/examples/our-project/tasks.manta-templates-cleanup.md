@@ -255,3 +255,99 @@ Reorganize test pages, components, and utilities to provide a clear separation b
 - [ ] carousel sizing needs adjustment as it cuts off the elevated card shadow
 - [ ] update and enhance gallery card (placeholder in first grid row)
 - [x] default card variant now displays correct border and shadow consistently across test pages.
+
+## Section 3: Example Pages Curation
+
+### Overview
+Curate example pages in the template to keep only essential demos, while migrating advanced and experimental examples to the landing page. Ensure all examples use updated (V2) cards, maintain a clean and professional appearance, and provide clear documentation and navigation.
+
+### Tasks
+
+#### 3.1 Inventory & Analysis
+- [x] **Catalog all example pages in the template**
+  - List all files under `src/app/examples/` (blog, portfolio, bentogrid, masonrygrid, gridlayout, etc.)
+  - Document which examples are essential (to keep) and which are advanced/experimental (to migrate)
+  - Success: Complete inventory of example pages with migration status
+  - **Findings**: Essential (keep): blog, bentogrid, portfolio. Advanced (migrate): masonrygrid, gridlayout
+
+- [x] **Audit card usage in all example pages**
+  - Check that all examples use V2 card components (BlogCard, BlogCardWide, BlogCardImage, BaseCard)
+  - Note any pages still using V1 cards or outdated imports
+  - Success: List of pages needing card import updates
+  - **Findings**: All examples use BaseCard imports. No V1 card names found. Portfolio uses custom grid without cards.
+
+- [x] **Catalog pages currently used in landing workspace**
+  - List all pages under `landing/src/app/` (gallery, examples, blog, etc.)
+  - Document which test pages have been migrated to landing gallery
+  - Document which examples already exist in landing examples
+  - Success: Complete inventory of landing pages with migration status
+  - **Findings**: Gallery contains cards, variants, composition, radix-colors. Examples contains blog, bentogrid, portfolio, gridlayout, masonrygrid
+
+- [x] **Audit and clean up V2 suffix references**
+  - Remove dev/cards page that contains V2 aliases and comparisons
+  - Audit remaining V2 references in component files and exports
+  - Success: No V2 suffix references remain in template
+  - **Findings**: Removed dev/cards page and updated all component files to remove V2 suffixes from names, imports, and exports
+
+- [x] **Remove dev/cards**
+  - Analyze cards and demos present in dev/cards/page.tsx in templates/nextjs
+  - Preserve the image + blur BlogImageCard test --> but MOVE it to a preserved example
+  - Ensure all card types in the to-be-removed page are available somewhere -- ideally card variants or animation
+    variants in landing page gallery example. 
+
+#### 3.2 Essential Example Preservation
+- [ ] **Retain only essential examples in the template**
+  - Keep `/examples/blog`, `/examples/portfolio`, and `/examples/bentogrid` in the template
+  - Remove or migrate `/examples/masonrygrid`, `/examples/gridlayout`, and any other advanced/experimental examples
+  - Success: Only essential examples remain in the template
+
+- [ ] **Update all essential examples to use V2 cards**
+  - Refactor imports and usage to ensure BlogCard, BlogCardWide, BlogCardImage, and BaseCard are V2
+  - Test rendering and styling for each essential example
+  - Success: All essential examples use V2 cards and render correctly
+
+#### 3.3 Migration of Advanced Examples
+- [ ] **Migrate advanced/experimental examples to landing page**
+  - Note: very likely these are already in landing page.  Verify first.
+  - Move `/examples/masonrygrid`, `/examples/gridlayout`, and any other advanced/experimental examples to the landing workspace (e.g., `landing/src/app/examples/`)
+  - Update import paths and dependencies as needed for landing environment
+  - Test migrated pages in landing dev server
+  - Success: Advanced examples function correctly in landing page
+
+#### 3.4 Navigation & Documentation Updates
+- [ ] **Update navigation and routing in the template**
+  - Remove links to migrated examples from template navigation (header, footer, sidebars)
+  - Ensure navigation only references preserved examples
+  - Success: Navigation is clean and accurate
+
+- [ ] **Add references to landing page for advanced examples**
+  - In template documentation, guide users to landing page HOWEVER, just send them to https://templates.manta.digital,
+    as that is where we actually deploy the landing page.  A user using the nextjs template to create an app starter will not (and should not) need to know about manta-templates/landing (the landing page folder in the monorepo).
+  - If we have additional monorepo documentation, *that* is the place to explain in context of templates/nextjs vs   
+    landing/, as these users are actually working in the monorepo.
+  - Success: Users are guided to the landing page for more examples
+
+- [ ] **Update documentation to reflect curated examples**
+  - Revise any docs listing example pages to match the new set
+  - Remove references to deleted/migrated examples
+  - Ensure code samples use V2 cards and current examples
+  - Success: Documentation is accurate and up-to-date
+
+#### 3.5 Testing & Validation
+- [ ] **Test all preserved example pages**
+  - Verify `/examples/blog`, `/examples/portfolio`, and `/examples/bentogrid` render correctly and use V2 cards
+  - Check for responsive design, accessibility, and theme switching
+  - Success: All preserved examples work as intended
+
+- [ ] **Test landing page advanced examples**
+  - Verify migrated examples render and function in the landing workspace
+  - Check for styling, responsiveness, and correct imports
+  - Success: Advanced examples are fully functional in landing
+
+### Success Criteria
+- ✅ Only essential examples remain in the template (blog, portfolio, bentogrid)
+- ✅ All template examples use V2 cards exclusively
+- ✅ Advanced/experimental examples are migrated to the landing page and work correctly
+- ✅ Navigation and documentation are updated and accurate
+- ✅ No broken links or references to removed examples
+- ✅ All preserved examples are tested for functionality, responsiveness, and accessibility
