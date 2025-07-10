@@ -7,7 +7,10 @@
         "dev:landing": "pnpm --filter manta-landing dev",
         "build:template": "pnpm --filter \"./templates/nextjs\" build",
         "build:landing": "pnpm --filter manta-landing build",
-        "build": "pnpm -r build"
+        "build": "pnpm -r build",
+        "code-review": "node scripts/code-review-agent.js",
+        "code-review:quick": "node scripts/code-review-agent.js --depth=quick",
+        "code-review:deep": "node scripts/code-review-agent.js --depth=deep"
     },
     "workspaces": [
         "templates/nextjs",
