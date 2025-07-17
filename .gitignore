@@ -9,8 +9,11 @@ desktop.ini
 .env.*.local
 
 # --- Obsidian ---
-.obsidian/workspace.json
 .obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/appearance.json   # Optional, if you want device-specific appearance
 .obsidian/plugins/*/data.json
 
 # --- Python ---
