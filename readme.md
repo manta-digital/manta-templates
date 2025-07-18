@@ -1,12 +1,45 @@
 ---
 docType: repository-overview
 ---
-# Manta Knowledge & Guide Repository
+# AI Project Guides & Methodology
 
-Welcome!  
-This repo is the single source of truth for every guide, playbook, and reference that powers our projects and agentic workflows.  If you’re a human contributor, start here. If you’re an AI agent, parse the folder map below to find exactly what you need—no guessing required.
+> Structured project guides and parameterized prompts that dramatically expand what AI tools can help you build. Turn complex projects into manageable, AI-assisted workflows.
+
+This repository contains a comprehensive methodology for AI-assisted development, including:
+- **6-phase project process** with clear roles and workflows
+- **Parameterized prompts** that work with any AI tool
+- **Tool-specific guides** for frameworks, libraries, and APIs
+- **Code rules and patterns** for consistent, maintainable code
 
 ---
+
+## 🚀 Quick Start
+
+### Add to Existing Project
+```bash
+# In your existing project root
+mkdir project-documents
+cd project-documents
+git clone --depth 1 --filter=blob:none https://github.com/ecorkran/ai-project-guide.git .
+```
+
+This gives you all guides in read-only mode. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
+
+### Want a Full Template?
+If you want a complete Next.js starter with these guides pre-integrated:
+- **Web**: https://templates.manta.digital
+- **GitHub**: https://github.com/manta-digital/manta-templates
+
+### Essential Files for Quick Structure
+For immediate project organization, focus on:
+- **`project-guides/guide.ai-project.process.md`** - The core 6-phase methodology
+- **`project-guides/template.ai-project.prompts.md`** - Ready-made AI prompts  
+- **`project-guides/coderules.md`** - Copy into your `.cursorrules` or equivalent
+
+These three files will immediately give your AIs the structure and context they need to help effectively.
+
+---
+
 ## 🔑 What lives where?
 
 | Folder | Look here when you need…                                                                                                      |
@@ -18,9 +51,10 @@ This repo is the single source of truth for every guide, playbook, and reference
 | **`domain-guides/`** | Cross-cutting subject knowledge useful across many projects (game-development, hydrology, financial-visualisation…).          |
 | **`snippets/`** | Language-agnostic code fragments and quick copy-paste helpers.                                                                |
 
-*Full details and rationale live in [`project-documents/directory-structure.md`](project-documents/directory-structure.md).* directory-structure.md](file-service://file-7qir1sE13SRFYrvctFhnsb)
+*Full details and rationale live in [`project-documents/directory-structure.md`](project-documents/directory-structure.md).*
 
 ---
+
 ## 🧭 Zero-ambiguity decision matrix
 
 1. Is it a **process** document? → `project-guides/`  
@@ -29,36 +63,20 @@ This repo is the single source of truth for every guide, playbook, and reference
 4. Is it **imported as a library** inside another app? → `tool-guides/`  
 5. Is it broad **subject matter** knowledge? → `domain-guides/`  
 
-Anything that doesn’t match gets flagged for discussion before filing.
+Anything that doesn't match gets flagged for discussion before filing.
 
 ---
+
 ## 📐 Naming & formatting conventions
 
-All file and folder names follow our kebab-case pattern and document-type prefixes outlined in [`file-naming-conventions.md`](project-documents/file-naming-conventions.md). file-naming-conventions.md](file-service://file-9aqEMStvihP9s5DfmT7yFh)  
+All file and folder names follow our kebab-case pattern and document-type prefixes outlined in [`file-naming-conventions.md`](project-documents/file-naming-conventions.md).  
 Please review that doc before adding or renaming files.
 
 ---
-## 🚀 Quick start for humans & AIs
 
-1. **Read this README** (you’re here!).  
-2. **Jump to the folder** that matches the decision matrix above.  
-3. **Add YAML front-matter** (`layer: framework|tool|api|domain|process`) to any new guide so agents can auto-classify even if it’s misplaced.  
+## 📦 Advanced Usage
 
----
-## 📦 Adding Guides to Existing Projects
-
-Have an existing project that's getting complex? AIs starting to struggle with organization? These guides can help! Here are two ways to add them to any existing repository:
-
-### Option 1: Simple Clone (Recommended)
-```bash
-# In your existing project root
-mkdir project-documents
-cd project-documents
-git clone --depth 1 --filter=blob:none https://github.com/ecorkran/ai-project-guide.git .
-```
-This gives you all guides in read-only mode. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
-
-### Option 2: Git Subtree (For updates)
+### Git Subtree (For updates)
 ```bash
 # In your existing project root
 git subtree add --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
@@ -69,19 +87,12 @@ To update later:
 git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
 ```
 
-### Essential Files for Quick Structure
-For immediate project organization, focus on:
-- **`project-guides/guide.ai-project.process.md`** - The core 6-phase methodology
-- **`project-guides/template.ai-project.prompts.md`** - Ready-made AI prompts  
-- **`project-guides/coderules.md`** - Copy into your `.cursorrules` or equivalent
-
-These three files will immediately give your AIs the structure and context they need to help effectively.
-
 ---
+
 ## 🤝 Contributing
 * Keep documents concise; link out rather than duplicate content.  
 * Cite sources inline when pulling in external material.  
-* Follow the “one-path rule”: each document should live in exactly one canonical folder.  
+* Follow the "one-path rule": each document should live in exactly one canonical folder.  
 * For substantial restructures, update `directory-structure.md` first, then this README.
 
 Thanks for helping maintain a knowledge base that humans and AI agents can navigate with zero friction!  Happy building. 
