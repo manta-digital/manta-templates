@@ -4,22 +4,12 @@
 
 ---
 
-## ✨ Features
-
-| Stack | What you get out-of-the-box |
-|-------|----------------------------|
-| **Next.js 15** (App Router) | Strict TS, Turbopack dev server, optimized images |
-| **Tailwind CSS v4** | Dark/Light mode, no config files needed |
-| **ShadCN UI + Radix** | Pre-wired, accessible components |
-| **Layout Components** | Flexible grid system with examples |
-| **Markdown Content** | Gray-matter frontmatter, code highlighting |
-| **Clean Structure** | Minimal examples, ready for your content |
-
----
-
 ## 🚀 Quick Start
 
 ```bash
+# Recommended: Install pnpm (one-time setup)
+npm install -g pnpm
+
 # Create your project from the template
 pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-project
 cd my-project
@@ -35,6 +25,19 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) - you'll see a minimal starter with sample content.
+
+---
+
+## ✨ Features
+
+| Stack | What you get out-of-the-box |
+|-------|----------------------------|
+| **Next.js 15** (App Router) | Strict TS, Turbopack dev server, optimized images |
+| **Tailwind CSS v4** | Dark/Light mode, no config files needed |
+| **ShadCN UI + Radix** | Pre-wired, accessible components |
+| **Layout Components** | Flexible grid system with examples |
+| **Markdown Content** | Gray-matter frontmatter, code highlighting |
+| **Clean Structure** | Minimal examples, ready for your content |
 
 ---
 
