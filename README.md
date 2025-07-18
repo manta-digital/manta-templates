@@ -1,45 +1,18 @@
 # manta-templates
 
-> Monorepo of opinionated starter templates (Next.js, Astro, React-Native soon!), plus shared UI components and curated project guides.
+> Modern starter templates with AI-assisted development workflows built-in. Ship faster with Next.js 15, Tailwind 4, and comprehensive project guides.
 
 ---
 
-# manta-templates 🏄‍♂️ v0.4
+# manta-templates 🏄‍♂️ v0.7.0
 
 https://templates.manta.digital
 
 A **Next.js 15 starter** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
 
-> **Note:** This project is in active development (v0.4). Expect breaking changes.
-
+> **Note:** This project is in active development (v0.7.0). Expect breaking changes.
 
 ---
-
-## Why it Exists and Where it's Going
-
-### Why it exists  
-I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows.  
-
-* **ai-project-guide** ↔️ pre-wired: generate detailed task lists, docs, or next steps with parameterized prompts.
-* **Tailwind 4** grid **Cards**: drop-in components for text, code, metrics, images—ready to customize.  
-* Clean Markdown content pipeline, Shiki code-highlighting, image optimization, dark/light theme toggle.
-
-### Where it's Going
-
-🎞️ Video, 3D, and chart cards (embed YouTube, Three.js, SciChart)
-🎨 Radix color themes & preset palettes
-📚 Astro static template
-
-Status · Early-Access (v0.4)
-Heads-up: v0.4 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
-
-Known gaps: limited card types, no Radix theme switcher, inconsistent lint rules, limited support for markdown-driven content.
-
-Interfaces may change between minor versions.
-
-Bug reports are welcome; expect some rough edges as we stabilize toward v1.0.
-
-
 
 ## 🚀 Quickstart
 
@@ -77,6 +50,32 @@ pnpm dev             # launches the dev server
 ```
 
 *Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
+
+---
+
+## Why it Exists and Where it's Going
+
+### Why it exists  
+I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows.  
+
+* **ai-project-guide** ↔️ pre-wired: generate detailed task lists, docs, or next steps with parameterized prompts.
+* **Tailwind 4** grid **Cards**: drop-in components for text, code, metrics, images—ready to customize.  
+* Clean Markdown content pipeline, Shiki code-highlighting, image optimization, dark/light theme toggle.
+
+### Where it's Going
+
+🎞️ Video, 3D, and chart cards (embed YouTube, Three.js, SciChart)
+🎨 Radix color themes & preset palettes
+📚 Astro static template
+
+Status · Early-Access (v0.7.0)
+Heads-up: v0.7.0 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
+
+Known gaps: limited card types, no Radix theme switcher, inconsistent lint rules, limited support for markdown-driven content.
+
+Interfaces may change between minor versions.
+
+Bug reports are welcome; expect some rough edges as we stabilize toward v1.0.
 
 ---
 
@@ -157,6 +156,28 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ---
 
+## 📋 Changelog
+
+### v0.7.0 (Current)
+- **Monorepo structure cleanup** - Clean separation between templates and development artifacts
+- **Fixed sync-guides workflow** - Fresh monorepo clones now work out of the box
+- **Template distribution improvements** - Templates ship clean without project-documents
+- **Updated template README** - Correct user workflow with `pnpm dlx degit`
+- **Cross-platform compatibility** - Better support for different development environments
+- **Repository structure flattening** - Consistent `project-documents/` structure across monorepo and standalone usage
+
+### v0.6.0
+- Next.js 15 upgrade
+- Tailwind CSS v4 integration
+- Enhanced card component system
+
+### v0.5.x
+- Initial template development
+- Basic project structure
+- Core component library
+
+---
+
 ## 🤝 Contributing
 
 This repo is **solo-maintained**, primarily as a consumable starting point.
@@ -169,7 +190,7 @@ Feel free to open issues if you find bugs or have suggestions—PRs are welcome 
 ```jsonc
 "scripts": {
   // First-time or recurring import of public guides:
-  "sync-guides": "git remote get-url ai-guides > /dev/null 2>&1 || git remote add ai-guides git@github.com:ecorkran/ai-project-guide.git; git fetch ai-guides; git subtree add --prefix project-documents ai-guides public-only --squash -m \"docs: import public guides\" || git subtree pull --prefix project-documents ai-guides public-only --squash -m \"docs: sync public guides\""
+  "sync-guides": "bash scripts/sync-guides.sh"
 }
 ```
 
