@@ -12,15 +12,15 @@
 
 **Why Vite (or a Bundler) is Needed**
 - Modern JS projects (e.g., using Three.js with `import` statements) require a build step.
-- Browsers can’t load pnpm packages directly; Vite bundles dependencies and rewrites asset paths.
+- Browsers can’t load npm packages directly; Vite bundles dependencies and rewrites asset paths.
 - Vite’s `base` config ensures correct asset URLs when deploying to a subpath (e.g., `/three-toy/`).
 
 How to Configure Vite**
 - Install Vite and dependencies:
 
 ```
-pnpm install --save-dev vite
-pnpm install three
+npm install --save-dev vite
+npm install three
 ```
 
 - Add `vite.config.js`:
@@ -41,8 +41,6 @@ export default defineConfig({
 ```
 
 **Relevant GitHub Actions Workflow (`.github/workflows/deploy.yml`):**
-Note: uses pnpm as not known if pnpm is supported here (admittedly haven't looked).
-
 ```yaml
 name: Deploy static site to Pages
 
@@ -68,9 +66,9 @@ jobs:
 	    with:
 		  node-version: 20
 	  - name: Install dependencies
-  	    run: pnpm ci
+  	    run: npm ci
 	  - name: Build site
-	    run: pnpm run build
+	    run: npm run build
 	  - uses: actions/upload-pages-artifact@v3
 	    with:
 	      path: dist

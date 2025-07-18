@@ -2,8 +2,7 @@
 
 ```json
 "scripts": {
-    "setup-guides": "mkdir -p project-documents && rsync -a --delete ../../guides/public/ ./project-documents",
-    "setup-guides:private": "mkdir -p project-documents && git clone --depth 1 git@github.com:ecorkran/ai-project-guides.git tmp-guides && rsync -a --delete tmp-guides/private/ ./project-documents && rm -rf tmp-guides && pnpm run setup-guides", 
-    "guides": "pnpm run setup-guides"
+    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
+    "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
   }
 ```

@@ -35,21 +35,24 @@ git --version
 
 #### Repo Bootstrap
 
-1.  Create the project -- normally not needed, it should already be created 
-for you.
-
-2. Add shadcn-ui
+1.  Create the project
 ```sh
-pnpm shadcn-ui@latest init
-# ? Which style — default → "New York"
-# ? Use TypeScript → yes
-# ? Enable RSC / App Router → yes
-# ? Global CSS path → app/globals.css
+pnpm create next-app mysite.com --template app-router --eslint --tailwind \
+  --ts --use-pnpm
 ```
 
-3. Scaffold first components
+2. Add shadcn-ui
 ```sh
-pnpm dlx shadcn-ui add card button
+npx shadcn-ui@latest init
+# ? Which style — default → "New York"
+# ? Use TypeScript → yes
+# ? Enable RSC / App Router → yes
+# ? Global CSS path → app/globals.css
+```
+
+3. Scaffold first components
+```sh
+npx shadcn-ui add card button
 ```
 
 

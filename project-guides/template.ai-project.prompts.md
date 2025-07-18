@@ -34,18 +34,20 @@ phase: phase;
 ```markdown
 input template: {project, project concept description} = { , }
 
-We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.process` (can also be referred to as Project Guide, Process Guide, or the guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
+We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.a-project.process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
 The actual concept description as well as additional concept will be provided by project manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
 To do this, we need to use the Project Guide together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
 
-When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Remember that you can use your context7 tool to access relevant documentation on almost any tool.  Pause here until you receive the project concept description from the Project Manager (me).
+When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager (me).
 ```
 
 ##### Project Phase
 ```markdown
 input: {project, n, phase, optional: guide}
+
+{if n>1} Phase {n-1} is approved!{end-if}
 
 Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (guide.ai-project.concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
 
@@ -71,34 +73,27 @@ We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhan
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 
-Output results into a new file our-project/tasks.{section}.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
+Output results into a new file our-project/tasks.{section}.phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
-##### Task Evaluation and Expansion (v0.2)
-Use to process a proposed Phase 3 task list, expanding tasks as needed.
-
+##### Task Implementation
 ```markdown
-Analyze the file tasks.{project}.md in the `our-project` directory.  If {section} is specified, confine your analysis only tasks for {section}.  If you cannot locate or read this file or other inputs, stop and request from Project Manager.  Do not proceed without them.  This is a Project and Process work order, *not* a coding one.  Your role as defined in `guide.ai-project.process` is Technical Fellow.
+Hello. Our input {
+    project (required), 
+    section (required), 
+    subsection,
+    tool,
+    notes (optional)
+} is 
+{ 
+    example-project-name, 
+    example-section ex: review - chartanalysis, 
+    example-subsection ex: configuration improvements
+    scichart,
+}
 
-Review the tasks in the file.  Is granularity and level sufficient to allow a Junior AI or human programmer to implement the task?  If splitting into additional detail or subtasks would increase chances for success, do so according to `guide.ai-project.task-expansion`.
+We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
-Remember, do not include any subjective or other tasks that could not realistically be accomplished by an AI acting as a Junior Developer.
-
-For any section with tasks benefitting from expansion as described above, record the Phase 3 *and* Phase 4 tasks in a file `our-project/tasks.{section}.md` where {section} will be the relevant section from the main tasks file.  Create the new expande task files if they don't exist.  If you encounter errors creating or editing the reuquisite file, stop and wait for the Project Manager.
-
-In the output filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
-```
-
-##### Task Implementation (v0.2)
-
-###### Setup
-Generally this paragraph is no longer needed as these guidelines should be provided by initial setup prompts, and a separate one should no longer be retired here.  Retained until confirmed no longer needed.
-```markdown
-We are working on the {project, section} tasks in phase 4 of `guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.  If no documentation is available or additional documentation is needed, use the "context7" tool in your toolbox.  
-```
-
-###### Implementation
-```markdown
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
 Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
@@ -113,102 +108,16 @@ Notes:
 ```
 
 ##### Impromptu or Task Detail Processing
-
-*Background or Context*
 ```markdown
 Hello.  Please ensure that you have {project, section, issue, tool} inputs before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/tasks.{section}.md or optionally tasks.{section}.phase-{n}.md.
-```
 
-*Task Creation Section*
-
-##### Impromptu Task (v0.2)
-```markdown
-Hello.  We need to add {task} to {project, section}.
-
-Start by examining {task} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
+Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
 If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
-```
-
-##### Design Feature
-```markdown
-We will be working in { project, section } and will document our feature design in feature.{section}.md, in the our-project directory.  As always, start with `guide.ai-project.process.md`, and use `.windsurfrules` to guide tasks, with `coderules.md` as a backup if the more specific rules file is not present.
-
-Act as a Technical Fellow as defined in `guide.ai-process.md` and create a low-level design.  Use the { goal } as described in the feature file unless a more specific goal is described here.
-
-We continue to work in { project }, so there is no need to describe the overall project here.  Concentrate only on the functionality needed to accomplish { goal }.  
-
-This is a design and specification task *not* a coding task.  Address feature overview, any technical requirement or issue adding feature into current stack.  Address main sections or components of feature with sufficient detail for us to use this feature document in order to create and expand tasks according to the guide.  You do not need to create the detailed task breakdown yet.
-```
-
-##### Split Feature into Tasks
-```markdown
-Continuing to work in { project, section } as a Technical Fellow, we will now split our feature described in feature.{section}.md into tasks as described in Phase 3 and Phase 4 of our `guide.ai-project.process.md`.  We are more concerned with creating detailed tasks than a strict Phase 3 / Phase 4 adherance.  We will create our tasks in tasks.{section}.md.
-
-If tasks.{section}.md already exists, you should be given a current subsection or phase of the {feature} document for which we will create tasks.  Insert our tasks into the existing document, keeping subsections in numerical order.
-```
-
-##### Monorepo Template
-```
-We are working in { project, template }, where { project } is a monorepo.  For directories such as /project-documents, we use the path /project/{template}/project-documents.  This means that tool guides would be located at /project/{template}/project-documents/tool-guides, for example.  For anything that would normally be in /project/{template}/project-documents/our-project, we use /project/{template}/examples/our-project. 
-```
-
-##### Use 3rd Party Tool (v0.2)
-*Add the following to existing prompt when working with {tool}, {framework}, or {api}.*
-```markdown
-You will need to consult specific knowledge for {tool}, {framework}, and/or {api}.  These should be available to you in the tool-guides/{tool}, framework-guides/{framework}, and api-guides/{api} directories for our curated knowledge.  Follow these steps when working with {tool}, {framework}, or {api}:
-
-1. Start with the `introduction` or `setup` file (if no introduction) in the 
-   directory as described above.
-2. Locate additional documentation: scan the initial guide for references to 
-   more detailed documentation, for example in a {tool}/documentation/ directory,
-   specific notes or tips in `research-crumbs`.
-3. Search within these specific documentation sources first using `grep_search` 
-   or `codebase_search`.
-4. Use context7 to locate additional documentation, and to verify that you are 
-   using the most current documentation for {tool}, {framework}, or {api}.
-5. Web search may be used as an additional fallback.
-```
-
-##### Implement Tasks from Code Review Results
-Interestingly we do not in general need this.  Once the tasks are processed into a Phase 3 + Phase 4 list, they can be implemented like any other tasks.  The fact that they originated in code review is not relevant.
-
-##### Perform Routine Maintenance
-```markdown
-Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/our-project/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
-```
-
-##### Add and Implement Maintenance Item
-*Assumes an existing chat providing additional context. Add if this is not the case.*
-```markdown
-Continue operating in your role as Senior AI.  Add {item} to 
-maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.process` and `guide.ai-project.task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
-
-If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
-```
-
-##### Model Onboarding (v0.2)
-Use when starting a new chat, or to onboard a model to an existing project, for example initial Windsurf prompts for an existing project.  This replaces "Model Change or Context Review"
-
-*Properties*
-```markown
-Welcome.  Use the following input for the remainder of this conversation.  
-{
-  project,
-  section (optional),
-  framework(s),
-  tool(s),
-  api(s)
-}
-```
-
-*Prompt*
-```markdown
-We are working on {project}.  If {section} is not specified, assume this is a project-wide request.  Always anchor to `guide.ai-project.process`.  You should know your role and where our task(s) fit in to the process guide.  In addition to Project and Process details, it provides information on framework(s), tool(s), and api(s).  If any of this is missing, stop and request from Project Manager.  Do not proceed without it. You should receive additional message(s) describing current task and goal details.
 ```
 
 ##### Add Subtask to Existing Item
@@ -251,6 +160,41 @@ Here is an example of a subtask to add a button in an element:
 STOP and confirm the {subtask} is acceptable to the Project Manager and okay to proceed.  
 
 Once confirmed, implement the task items.  Check off items once completed *and* verified.  Do not proceed to add other tasks.
+```
+
+##### Use 3rd Party Tool
+
+*Add the following to existing prompt when working with {tool}.*
+```markdown
+You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
+
+1. Consult Overview: Start with the specific `AI Tool Overview 
+   [toolname].md` in the `project-documents/tool-
+   guides/{tool}` directory.
+2. Locate Docs: Scan the Overview for references to more detailed 
+   documentation (like local API files under `/documentation`, 
+   notes in `research-crumbs` or official web links).
+3. Search Docs: Search within those specific documentation sources 
+   first using `grep_search` or `codebase_search`.
+4. Web Search Fallback: If the targeted search doesn't yield 
+   results, then perform a `search_web`.
+```
+
+##### Implement Tasks from Code Review Results
+Interestingly we do not in general need this.  Once the tasks are processed into a Phase 3 + Phase 4 list, they can be implemented like any other tasks.  The fact that they originated in code review is not relevant.
+
+##### Perform Routine Maintenance
+```markdown
+Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/our-project/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
+```
+
+##### Add and Implement Maintenance Item
+*Assumes an existing chat providing additional context. Add if this is not the case.*
+```markdown
+Continue operating in your role as Senior AI.  Add {item} to 
+maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.process` and `guide.ai-project.task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
+
+If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
 ```
 
 
@@ -297,8 +241,17 @@ Let's analyze the following existing codebase and document our findings.  We wan
   use tailwind.config.ts/.js. 
 ```
 
+##### Model Change or Context Review
+*Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
+```markdown
+The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
+
+Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+```
 
 ##### Add AI Projects Support
+Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
+
 ```markdown
 Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
 
@@ -306,32 +259,4 @@ Add the following scripts to package.json.  If no package.json exists, run `npm 
     "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
     "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
   }
-```
-
-
-***
-#### Deprecated
-
-##### Model Change or Context Review (deprecated)
-*Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
-
-```markdown
-We are working on {project} and you may receive additional input data such as { section, subsection, framework(s), tool(s), issue or goal }.  Operate as 'Senior AI' as defined in `guide.ai-project.process`, unless otherwise specified.  See that same document for a description of resources and their locations.  Always start with the `guide.ai-project.process` for project and process tasks, the `guide.ui-development.ai` for UI tasks, and `coderules` or `.windsurfrules` for coding tasks.  
-
-You should receive information on { issue | goal } and preferably some idea of initial guidance (e.g. you should know what you are working on).
-
-If {tool(s)} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
-```
-
-##### Examine Tasks (deprecated)
-
-*In general use Design Feature or Split Feature Into Tasks instead.*
-```markdown
-Hello.  We need to add {task} to {project, section}.
-
-Start by examining {task} in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.  Again project-customized versions of the respective guides supersede the general versions.
-
-All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
-
-If you are missing any information, STOP and obtain from project manager.  Do not move on to additional tasks.
 ```

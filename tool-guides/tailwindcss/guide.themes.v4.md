@@ -193,7 +193,7 @@ Here’s a checklist and recommendations for finalizing your Tailwind v4 migrati
   - Example:  
     ```json
     "scripts": {
-      "build:css": "pnpm dlx @tailwindcss/cli -i ./path/to/your/input.css -o ./path/to/your/output.css --minify"
+      "build:css": "npx @tailwindcss/cli -i ./path/to/your/input.css -o ./path/to/your/output.css --minify"
     }
     ```
 

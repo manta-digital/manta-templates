@@ -69,7 +69,7 @@ purpose: Short one‑liner
 
 ## Quickstart (copy‑paste)
 ```bash
-CI=true pnpm create‑<tool>@latest my‑project --yes
+CI=true npx create‑<tool>@latest my‑project --yes
 ````
 
 ## Folder Structure (optional)
@@ -89,7 +89,7 @@ Organise as collapsible bullet lists or tables:
 ### Common Pitfalls
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Build fails on `pnpm dev` | ESM + CommonJS mix | Add `type:"module"` |
+| Build hangs on `next build` | ESM + CommonJS mix | Add `type:"module"` |
 ````
 
 ---
@@ -109,10 +109,10 @@ Organise as collapsible bullet lists or tables:
 
 ```bash
 # Good: minimal, standalone, no user prompts
-CI=true pnpm create‑next‑app@latest my‑site --typescript --tailwind
+CI=true npx create‑next‑app@latest my‑site --typescript --tailwind
 
 # ❌ Avoid: ellipses, comments requiring edit
-pnpm install some‑lib   # then edit config <-- move to text above
+npm install some‑lib   # then edit config <-- move to text above
 ```
 
 ---

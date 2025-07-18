@@ -23,7 +23,7 @@ Next.js uses PostCSS for Tailwind integration.
 
 1. **Install Dependencies**
    ```bash
-   pnpm install -D tailwindcss@latest @tailwindcss/postcss postcss
+   npm install -D tailwindcss@latest @tailwindcss/postcss postcss
    ```
 2. **Configure PostCSS**
    - Create `postcss.config.mjs` in your project root:
@@ -52,7 +52,7 @@ Next.js uses PostCSS for Tailwind integration.
 
 1. **Install Dependencies**
    ```bash
-   pnpm install tailwindcss @tailwindcss/vite
+   npm install tailwindcss @tailwindcss/vite
    ```
 2. **Configure Vite**
    - Edit `vite.config.js` or `vite.config.ts`:
@@ -77,7 +77,7 @@ Next.js uses PostCSS for Tailwind integration.
 
 1. **Install Dependencies**
    ```bash
-   pnpm install tailwindcss @tailwindcss/vite
+   npm install tailwindcss @tailwindcss/vite
    ```
 2. **Configure Astro with Vite Plugin**
    - In `astro.config.mjs`:
@@ -108,7 +108,7 @@ Next.js uses PostCSS for Tailwind integration.
 
 1. **Install Dependencies**
    ```bash
-   pnpm install tailwindcss @tailwindcss/vite
+   npm install tailwindcss @tailwindcss/vite
    ```
 2. **Configure Vite**
    - In `vite.config.js` or `vite.config.ts`:
@@ -141,10 +141,10 @@ Next.js uses PostCSS for Tailwind integration.
 
 | Framework  | Install Command                                         | Config File(s)             | Import CSS Directive      | Plugin/Loader Config                 |
 |------------|---------------------------------------------------------|----------------------------|--------------------------|--------------------------------------|
-| Next.js    | `pnpm install -D tailwindcss @tailwindcss/postcss postcss` | `postcss.config.mjs`       | `@import "tailwindcss";` | `@tailwindcss/postcss` in PostCSS     |
-| Vite       | `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` plugin           |
-| Astro      | `pnpm install tailwindcss @tailwindcss/vite`             | `astro.config.mjs`         | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config    |
-| SvelteKit  | `pnpm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config    |
+| Next.js    | `npm install -D tailwindcss @tailwindcss/postcss postcss` | `postcss.config.mjs`       | `@import "tailwindcss";` | `@tailwindcss/postcss` in PostCSS    |
+| Vite       | `npm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` plugin           |
+| Astro      | `npm install tailwindcss @tailwindcss/vite`             | `astro.config.mjs`         | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config   |
+| SvelteKit  | `npm install tailwindcss @tailwindcss/vite`             | `vite.config.js/ts`        | `@import "tailwindcss";` | `@tailwindcss/vite` in Vite config   |
 
 ---
 
@@ -190,7 +190,7 @@ For advanced configuration, refer to Tailwind's official documentation[1][2][6][
 - **Upgrade tool:**  
   For existing projects, run:
   ```bash
-  pnpm dlx @tailwindcss/upgrade@next
+  npx @tailwindcss/upgrade@next
   ```
   This automates most migration steps (requires Node.js 20+)[2][6][9].
 

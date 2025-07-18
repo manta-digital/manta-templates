@@ -8,10 +8,6 @@ Project Structure
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
 - Information and tasks specific to our project in `project-documents/our-project`.
 
-MCP (Model Context Protocol)
-* always use context7 to locate current relevant documentation for specific technologies or tools in use.  
-* do not use smithery Toolbox (toolbox) for general tasks.  project manager will guide its use.
-
 Code Structure
 * Keep source files to max 300 lines (excluding whitespace) when possible.
 * Keep functions & methods to max 50 lines (excluding whitespace) when possible.
@@ -40,7 +36,7 @@ Prisma
 - enabled: as needed only (default: false)
 - Manage DB logic with Prisma in `prisma/schema.prisma`, `src/lib/db.ts`.
 - snake_case table → camelCase fields.
-- No raw SQL; run `pnpm prisma migrate dev`, never use `pnpm prisma db push`.
+- No raw SQL; run `npx prisma migrate dev`, never use `npx prisma db push`.
 
 Icons
 - Prefer `lucide-react`; name icons in PascalCase.
@@ -90,8 +86,8 @@ Tools
 - After a complex task is performed, use the `codeReview` tool create a diff and use the diff to conduct a code review of the changes.
 
 Builds
-- After all changes are made, ALWAYS build the project with `pnpm build`. allow warnings, fix errors.
-* If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
+- After all changes are made, ALWAYS build the project with `npm run build`. allow warnings, fix errors.
+* If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `npm run build`
 - Always run typescript check to ensure no typescript errors.
 - Log warnings to `/project-documents/our-project/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point.
 

@@ -25,14 +25,14 @@ This guide walks you through scaffolding a modern Three.js project with **Vite**
 Create a fresh project folder and initialise Vite (Vanilla TS template recommended):
 
 ```bash
-pnpm create vite@latest threejs-app -- --template vanilla-ts
+npm create vite@latest threejs-app -- --template vanilla-ts
 cd threejs-app
 ```
 
 Install Three.js:
 
 ```bash
-pnpm i three
+npm i three
 ```
 
 #### 1.1 Update `vite.config.js`
@@ -175,7 +175,7 @@ window.addEventListener('resize', () => {
 ### 6 · Local Development
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Visit the printed localhost URL and verify:
