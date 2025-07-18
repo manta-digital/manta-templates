@@ -20,9 +20,9 @@
 ## 🚀 Quick Start
 
 ```bash
-# Clone the template
-git clone https://github.com/manta-digital/manta-templates.git
-cd manta-templates/templates/nextjs
+# Create your project from the template
+pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-project
+cd my-project
 
 # Install dependencies
 pnpm install
