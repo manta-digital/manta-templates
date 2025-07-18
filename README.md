@@ -66,14 +66,14 @@ cd manta-templates
 # 2. Install dependencies
 pnpm install
 
-# 3. Import public guides (auto-adds remote & handles first-time import)
-pnpm run sync-guides
+# 3. Import public guides (at monorepo root)
+pnpm sync-guides
 
 # 4. Bootstrap the Next.js starter
 cd templates/nextjs
 pnpm install
-pnpm run setup-guides    # copies public guides into project-documents
-pnpm dev                 # launches the dev server
+pnpm setup-guides    # copies guides from monorepo into template
+pnpm dev             # launches the dev server
 ```
 
 *Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
