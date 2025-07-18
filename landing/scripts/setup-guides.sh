@@ -12,13 +12,14 @@ mkdir -p "$TARGET"
 if [ -d "$LOCAL_GUIDES" ]; then
   # Monorepo user: copy from local project-documents directory
   echo "📚 Copying guides from monorepo (project-documents/)..."
-  rsync -a --delete "$LOCAL_GUIDES/" "$TARGET/"
+  rsync -a "$LOCAL_GUIDES/" "$TARGET/"
   echo "✅ Guides copied from monorepo"
 else
   # Stand-alone user: fetch from GitHub (flattened structure)
   echo "📚 Fetching guides from GitHub (flattened structure)..."
-  git clone --depth 1 https://github.com/mantaray-ar/ai-project-guides.git tmp &&
-    rsync -a --delete tmp/ "$TARGET/" &&
+  rm -rf tmp  # Clean up any previous runs
+  git clone --depth 1 https://github.com/ecorkran/ai-project-guide.git tmp &&
+    rsync -a tmp/ "$TARGET/" &&
     rm -rf tmp
   echo "✅ Guides fetched from GitHub"
 fi

@@ -74,7 +74,7 @@ If you want to use AI-assisted development workflows:
 pnpm setup-guides
 ```
 
-This populates `project-documents/` with comprehensive guides for AI-assisted development.
+This populates `project-documents/` with comprehensive guides for AI-assisted development and enables version control for your project-specific documents. You can safely run this command multiple times.
 
 ### 3. Customize Your Site
 - Update `src/app/page.tsx` with your homepage content

@@ -50,8 +50,8 @@ Thumbs.db
 .cursor/
 
 # Development artifacts - these get populated by setup-guides
-/project-documents/
 /examples/our-project/
 
 # Keep only essential template examples
 !/examples/sample-content/
+project-documents/

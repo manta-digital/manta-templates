@@ -14,7 +14,7 @@ mkdir -p "$TARGET"
 if [ -d "$LOCAL_GUIDES" ]; then
   # Monorepo user: copy from local project-documents directory
   echo "📚 Copying guides from monorepo (project-documents/)..."
-  rsync -a --delete "$LOCAL_GUIDES/" "$TARGET/"
+  rsync -a "$LOCAL_GUIDES/" "$TARGET/"
   
   # For monorepo, also copy development artifacts
   if [ -d "../../project-artifacts/nextjs-template" ]; then
@@ -23,11 +23,15 @@ if [ -d "$LOCAL_GUIDES" ]; then
     echo "✅ Development artifacts copied"
   fi
   echo "✅ Guides copied from monorepo"
+  
+  # Enable project-documents for version control (safe to run multiple times)
+  node scripts/enable-project-docs.js
 else
   # Stand-alone user: fetch from GitHub (flattened structure)
   echo "📚 Fetching guides from GitHub (flattened structure)..."
-  git clone --depth 1 https://github.com/mantaray-ar/ai-project-guides.git tmp &&
-    rsync -a --delete tmp/ "$TARGET/" &&
+  rm -rf tmp  # Clean up any previous runs
+  git clone --depth 1 https://github.com/ecorkran/ai-project-guide.git tmp &&
+    rsync -a tmp/ "$TARGET/" &&
     rm -rf tmp
     
   # Create basic our-project structure for standalone users
@@ -37,6 +41,9 @@ else
 
 This directory is for your project-specific documents and tasks." > "examples/our-project/README.md"
   echo "✅ Guides fetched from GitHub"
+  
+  # Enable project-documents for version control (safe to run multiple times)
+  node scripts/enable-project-docs.js
 fi
 
 echo "Project guides setup complete!"

@@ -123,6 +123,26 @@ Under the hood:
 
 ---
 
+## 🛠 Monorepo Development
+
+### Template Development Workflow
+
+When developing templates within the monorepo:
+
+1. **Template development work** goes in `project-artifacts/{template}-template/` (not in the template itself)
+2. **Templates ship clean** without `project-documents/` - users get guides via `setup-guides`
+3. **setup-guides enables version control** for project-documents after population
+
+### Why This Approach?
+
+- **Clean distribution**: Templates ship without development artifacts
+- **User flexibility**: Users get guides when they need them and can commit their customizations
+- **No conflicts**: Template development work doesn't interfere with user experience
+
+For template users, this complexity is hidden - they just run `setup-guides` and everything works.
+
+---
+
 ## 📦 Publishing & Consumption
 
 * **Templates**:
