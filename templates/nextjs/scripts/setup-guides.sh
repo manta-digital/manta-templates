@@ -2,7 +2,7 @@
 set -e
 
 # Where public guides live in the monorepo
-LOCAL_GUIDES="../../guides/public"
+LOCAL_GUIDES="../../project-documents"
 
 # Where we want them in the project
 TARGET="project-documents"
@@ -12,8 +12,8 @@ echo "Setting up project guides..."
 mkdir -p "$TARGET"
 
 if [ -d "$LOCAL_GUIDES" ]; then
-  # Monorepo user: copy from local guides/public directory
-  echo "📚 Copying guides from monorepo (guides/public/)..."
+  # Monorepo user: copy from local project-documents directory
+  echo "📚 Copying guides from monorepo (project-documents/)..."
   rsync -a --delete "$LOCAL_GUIDES/" "$TARGET/"
   
   # For monorepo, also copy development artifacts

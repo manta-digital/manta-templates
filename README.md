@@ -84,9 +84,8 @@ pnpm dev                 # launches the dev server
 
 ```
 manta-templates/
-├─ guides/                 # Your curated project guides
-│   ├─ public/             # Public docs (shipped in this repo)
-│   └─ private/            # Private docs (pulled only by you)
+├─ project-documents/      # Your curated project guides
+│   └─ private/            # Private docs (pulled only by you, when needed)
 │
 ├─ templates/              # Application & site starter templates
 │   ├─ nextjs/             # Next.js 15 + Tailwind 4 + ShadCN
@@ -104,7 +103,7 @@ manta-templates/
 
 ## 🔧 Project Guides
 
-This monorepo ships **public** guides under `guides/public`. To copy them into *any* template’s `project-documents/` folder, run in the template folder:
+This monorepo ships **public** guides under `project-documents/`. To copy them into *any* template's `project-documents/` folder, run in the template folder:
 
 ```bash
 pnpm run setup-guides
@@ -118,8 +117,8 @@ pnpm run setup-guides:private
 
 Under the hood:
 
-* **`sync-guides`** (root) uses Git subtree to import or update `guides/public` automatically (no manual remote setup).
-* **`setup-guides`** (template) uses `rsync` to copy `guides/public/` → `project-documents/`.
+* **`sync-guides`** (root) uses Git subtree to import or update `project-documents/` automatically (no manual remote setup).
+* **`setup-guides`** (template) uses `rsync` to copy `project-documents/` → `project-documents/`.
 * **`setup-guides:private`** clones your private repo, rsyncs its `private/` folder, then re-runs `setup-guides`.
 
 ---
@@ -150,7 +149,7 @@ Feel free to open issues if you find bugs or have suggestions—PRs are welcome 
 ```jsonc
 "scripts": {
   // First-time or recurring import of public guides:
-  "sync-guides": "git remote get-url ai-guides > /dev/null 2>&1 || git remote add ai-guides git@github.com:ecorkran/ai-project-guide.git; git fetch ai-guides; git subtree add --prefix guides/public ai-guides public-only --squash -m \"docs: import public guides\" || git subtree pull --prefix guides/public ai-guides public-only --squash -m \"docs: sync public guides\""
+  "sync-guides": "git remote get-url ai-guides > /dev/null 2>&1 || git remote add ai-guides git@github.com:ecorkran/ai-project-guide.git; git fetch ai-guides; git subtree add --prefix project-documents ai-guides public-only --squash -m \"docs: import public guides\" || git subtree pull --prefix project-documents ai-guides public-only --squash -m \"docs: sync public guides\""
 }
 ```
 

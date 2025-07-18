@@ -4,7 +4,7 @@ set -e
 REMOTE_NAME=ai-guides
 REMOTE_URL=git@github.com:ecorkran/ai-project-guide.git
 BRANCH=public-only
-PREFIX=guides/public
+PREFIX=project-documents
 
 # Add the SSH remote once
 if ! git remote get-url "$REMOTE_NAME" >/dev/null 2>&1; then
