@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 set -e
 
-TMP="tmp-guides"
+# Where private guides should live
+TARGET="project-documents/private"
 
-# Make sure public docs are already in place
-# (you’ve already run setup-guides.sh)
+mkdir -p "$TARGET"
 
-# Clone your private repo
-git clone --depth 1 git@github.com:ecorkran/ai-project-guide.git "$TMP"
+# Check if we're in a monorepo with access to private guides
+LOCAL_PRIVATE="../../project-documents/private"
 
-# **Overlay** private docs **without deleting** public ones**
-rsync -a "$TMP/private/" project-documents/
-
-# Cleanup
-rm -rf "$TMP"
+if [ -d "$LOCAL_PRIVATE" ]; then
+  # Monorepo user: copy from local private guides
+  echo "🔒 Copying private guides from monorepo..."
+  rsync -a --delete "$LOCAL_PRIVATE/" "$TARGET/"
+  echo "✅ Private guides copied from monorepo"
+else
+  # Stand-alone user: fetch from private repository
+  echo "🔒 Fetching private guides from repository..."
+  # Note: Update this URL to your private guides repository
+  git clone --depth 1 git@github.com:mantaray-ar/ai-project-guides-private.git tmp &&
+    rsync -a --delete tmp/ "$TARGET/" &&
+    rm -rf tmp
+  echo "✅ Private guides fetched from repository"
+fi

@@ -15,7 +15,7 @@ export default function Home() {
 
       {/* Sample Content */}
       <Container className="pb-20">
-        <QuoteCardContainer slug="art-of-programming" />
+        <QuoteCardContainer slug="sample-quote" />
       </Container>
     </Layout>
   );

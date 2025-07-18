@@ -1,170 +1,162 @@
 # Manta Next 15 × Tailwind 4 × ShadCN Template
 
-> An opinionated starter that lets you ship beautiful, content-driven sites **fast**.
+> A **clean**, production-ready starter that lets you ship beautiful, content-driven sites **fast**.
 
 ---
 
 ## ✨ Features
 
-| Stack | Goodies you get out-of-the-box |
-|-------|--------------------------------|
-| **Next.js 15** (App Router) | Strict TS, Turbopack dev server, image optimisation |
-| **Tailwind CSS v4** | Dark/Light mode via CSS variables, Radix preset & `@tailwindcss/typography` |
-| **ShadCN UI + Radix** | Pre-wired and theme-aware components |
-| **Layout kit** | • Flexible **GridContainer** / **GridItem**<br>• Essential examples (blog, portfolio, bento grid)<br>• “Bento” six-column grid |
-| **Markdown / MDX blog** | Gray-matter front-matter, remark & rehype pipeline, Shiki code highlighting |
-| **Animations** | Framer Motion baseline, `tw-animate-css` helpers |
-| **Tooling** | ESLint, Prettier 3, TypeScript strict, Axe CLI accessibility check |
-| **AI project docs** | Built-in subtree commands to pull your *ai-project-guide* docs |
+| Stack | What you get out-of-the-box |
+|-------|----------------------------|
+| **Next.js 15** (App Router) | Strict TS, Turbopack dev server, optimized images |
+| **Tailwind CSS v4** | Dark/Light mode, no config files needed |
+| **ShadCN UI + Radix** | Pre-wired, accessible components |
+| **Layout Components** | Flexible grid system with examples |
+| **Markdown Content** | Gray-matter frontmatter, code highlighting |
+| **Clean Structure** | Minimal examples, ready for your content |
 
 ---
 
-## 🚀 Quick start
+## 🚀 Quick Start
 
 ```bash
-# Option 1: use a template to start your project
-pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-nextjs-app
-cd my-nextjs-app
-pnpm install  # or npm/yarn
-pnpm dev
+# Clone the template
+git clone https://github.com/manta-digital/manta-templates.git
+cd manta-templates/templates/nextjs
 
-# Option 2: clone the template repository to modify templates or process.
-git clone --depth 1 https://github.com/manta-digital/manta-templates/templates/nextjs.git my-site
-cd my-site
+# Install dependencies
 pnpm install
+
+# Set up project guides (optional)
+pnpm setup-guides
+
+# Start development
 pnpm dev
-
-Open http://localhost:3000 and start editing files under app/.
-
-### Using inside the manta-templates monorepo
-
-This template lives alongside a richer **landing** showcase in the root monorepo.  When working from the repo root you can run:
-
-```bash
-pnpm dev:template   # minimal starter (this workspace)
-pnpm dev:landing    # full showcase landing site
-pnpm build:template # production build of the starter
-pnpm build:landing  # production build of the landing site
 ```
 
-This template is production-ready and contains only clean, deployable code—no test, dev, or demo pages are included. Essential examples are available at `/examples` including blog layouts, portfolio grids, and bento layouts. Each example demonstrates different use cases and responsive design patterns.
+Open [http://localhost:3000](http://localhost:3000) - you'll see a minimal starter with sample content.
 
-Looking for advanced examples, demos, or a gallery of all card and layout components? Visit:
-https://templates.manta.digital
+---
 
-⸻
+## 📁 Project Structure
 
-📚 Content & Blog workflow
-	1.	Add a new Markdown file to src/content/blog/your-post.mdx.
-	2.	Include the required front-matter:
+```
+src/
+├── app/                 # Next.js App Router pages
+├── components/          # Reusable React components
+├── content/            # Your markdown content (replace samples)
+├── lib/                # Utilities and shared logic
+└── types/              # TypeScript type definitions
 
+examples/
+├── sample-content/     # Sample markdown files (replace these)
+└── our-project/        # Your project docs (populated by setup-guides)
+
+project-documents/      # AI project guides (run setup-guides)
+```
+
+---
+
+## 🎯 Getting Started
+
+### 1. Replace Sample Content
+The template includes minimal sample content in `src/content/` and `examples/sample-content/`:
+
+- `quotes/sample-quote.md` - Example quote card
+- `projects/sample-project.md` - Example project showcase
+
+Replace these with your own content following the same frontmatter structure.
+
+### 2. Set Up Project Guides (Optional)
+If you want to use AI-assisted development workflows:
+
+```bash
+pnpm setup-guides
+```
+
+This populates `project-documents/` with comprehensive guides for AI-assisted development.
+
+### 3. Customize Your Site
+- Update `src/app/page.tsx` with your homepage content
+- Modify components in `src/components/` 
+- Add your content to `src/content/`
+- Customize themes in `src/app/globals.css`
+
+---
+
+## 🛠 Available Scripts
+
+```bash
+pnpm dev          # Start development server
+pnpm build        # Build for production  
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
+pnpm setup-guides # Set up AI project guides
+```
+
+---
+
+## 🎨 Content System
+
+The template includes a flexible content system for markdown files:
+
+### Quote Cards
+```yaml
+---
+author: "Your Name"
+quote: "Your inspiring quote here"
+featured: true
+---
+```
+
+### Project Showcases  
+```yaml
+---
+title: "Project Name"
+description: "Brief description"
+techStack: ["Next.js", "TypeScript"]
+repoUrl: "https://github.com/..."
+---
+```
+
+### Blog Posts
+```yaml
 ---
 title: "Post Title"
-date: "2025-05-16"
-description: "Optional summary"
-image: "/images/posts/cover.jpg"   # optional
-type: "article"                    # optional
-cardSize: "medium"                 # small | medium | large (optional)
+pubDate: "2024-01-01"
+description: "Post description"
 ---
-
-	3.	Restart the dev server (or let Contentlayer HMR pick it up).
-	4.	Visit /blog/your-post.
-
-All posts render inside a .prose container with Dark/Light theming and code blocks highlighted by Shiki.
-
-⸻
-
-## 🧩 Using the layout components
-
-Both layout primitives share the same `GridItem` component (just a styled `div`).  
-**GridLayout** decides the grid structure, while **BentoLayout** lets each card decide its own footprint.
+```
 
 ---
 
-### GridLayout – container-driven flow
+## 🚀 Deployment
 
-```tsx
-import { GridLayout, GridItem } from '@/components/layouts';
+This template works with any Next.js hosting provider:
 
-/**
- * 3 equal-width columns, 1 rem gap, rows auto-height
- */
-<GridLayout columns={3} gap={4} rowHeight="auto">
-  <GridItem>Card A</GridItem>
-  <GridItem>Card B</GridItem>
-  <GridItem>Card C</GridItem>
-</GridLayout>
+- **Vercel**: `git push` to deploy automatically
+- **Netlify**: Connect your repository for auto-deploys
+- **Docker**: `pnpm build` then containerize the output
 
-Prop	Type (GridLayout)	Default	What it does
-columns	number | string	2	A number (3) or Tailwind class ("grid-cols-4").
-gap	number | string	4	Tailwind spacing scale or custom class.
-rowHeight	string	"auto"	"auto", "8rem", etc.
+---
 
-Cards flow left-to-right, top-to-bottom; you don’t set spans or positions—just drop them in.
-```
-⸻
+## 📚 Documentation
 
-### BentoLayout – card-driven mosaic
+After running `pnpm setup-guides`, you'll have access to comprehensive documentation including:
 
-```tsx
-import BentoLayout, { GridItem } from '@/components/layouts';
+- AI-assisted development workflows
+- Component architecture guides  
+- Best practices and patterns
+- Advanced customization examples
 
-/**
- * 6 columns by default; you can override with `columns`.
- * Each GridItem declares its own span *and* (optionally) start row/col.
- */
-<BentoLayout columns={6} gap={4} rowHeight="6rem">
-  {/* row 1, columns 1-2 */}
-  <GridItem className="col-span-2 row-span-1">Wide card</GridItem>
+---
 
-  {/* row 1-2, column 3 */}
-  <GridItem className="col-span-1 row-span-2">Tall card</GridItem>
+## 🤝 Contributing
 
-  {/* row 2, columns 1-2 */}
-  <GridItem className="col-span-2 row-span-1">Another</GridItem>
-</BentoLayout>
-```
+This template is part of the [Manta Templates](https://github.com/manta-digital/manta-templates) monorepo. Contributions welcome!
 
-Prop	Type (BentoLayout)	Default	Notes
-columns	number	6	Total columns in the grid.
-gap	number | string	4	Same as GridLayout.
-rowHeight	string	"auto"	Fixed height per row, or "auto".
+---
 
-	•	In BentoLayout the cards control their size (row-span, col-span) and position (row-start-*, col-start-*)—perfect for Pinterest / Apple-site style mosaics.
-	•	If you omit row-start / col-start, cards still flow top-left, but you can override to create intentional gaps & overlaps.
+## 📄 License
 
-⸻
-
-That’s it—drop layouts, and feed them GridItems.
-
-⸻
-
-## 🎨 Customising the theme
-
-All colours run through CSS custom properties defined in styles/theme.css.
-Edit the file (or generate a new palette with your own script) and both Tailwind classes and ShadCN components update instantly.
-
-⸻
-
-## 🔧 Script reference
-
-Script	Purpose
-pnpm dev	Run dev server with Turbopack
-pnpm build	Production build
-pnpm start	Start prod server
-pnpm lint ESLint with Next config
-pnpm format:write	Prettier auto-format
-pnpm ai-typecheck	TS type check (no emit)
-pnpm guides	Pull the latest ai-project-guide subtree
-
-⸻
-
-🙏 Acknowledgements
-
-Inspired by Kevin Leneway’s next-ai-starter and his video on prompt-driven task lists.
-
-⸻
-
-📜 License
-
-MIT © 2025 Erik Corkran
+MIT License - see the [LICENSE](LICENSE) file for details.

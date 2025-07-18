@@ -22,6 +22,7 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "setup-guides": "bash scripts/setup-guides.sh",
+    "setup-guides:degit": "npx degit ecorkran/ai-project-guide project-documents && rm -rf project-documents/.git",
     "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
     "guides": "pnpm setup-guides",
     "ai-assisted-build": "pnpm ai-typecheck && pnpm lint && pnpm format:check && pnpm build",
