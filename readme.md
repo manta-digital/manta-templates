@@ -45,6 +45,39 @@ Please review that doc before adding or renaming files.
 3. **Add YAML front-matter** (`layer: framework|tool|api|domain|process`) to any new guide so agents can auto-classify even if it’s misplaced.  
 
 ---
+## 📦 Adding Guides to Existing Projects
+
+Have an existing project that's getting complex? AIs starting to struggle with organization? These guides can help! Here are two ways to add them to any existing repository:
+
+### Option 1: Simple Clone (Recommended)
+```bash
+# In your existing project root
+mkdir project-documents
+cd project-documents
+git clone --depth 1 --filter=blob:none https://github.com/ecorkran/ai-project-guide.git .
+```
+This gives you all guides in read-only mode. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
+
+### Option 2: Git Subtree (For updates)
+```bash
+# In your existing project root
+git subtree add --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
+```
+
+To update later:
+```bash
+git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
+```
+
+### Essential Files for Quick Structure
+For immediate project organization, focus on:
+- **`project-guides/guide.ai-project.process.md`** - The core 6-phase methodology
+- **`project-guides/template.ai-project.prompts.md`** - Ready-made AI prompts  
+- **`project-guides/coderules.md`** - Copy into your `.cursorrules` or equivalent
+
+These three files will immediately give your AIs the structure and context they need to help effectively.
+
+---
 ## 🤝 Contributing
 * Keep documents concise; link out rather than duplicate content.  
 * Cite sources inline when pulling in external material.  
