@@ -8,7 +8,7 @@
 
 https://templates.manta.digital
 
-A **Next.js 15 template** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
+A **Next.js 15 template** that lets you spin up modern, AI-assisted project sites quickly.
 
 > **Note:** This project is in active development (v0.7.1). Expect breaking changes.
 
