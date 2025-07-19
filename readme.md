@@ -40,6 +40,40 @@ These three files will immediately give your AIs the structure and context they 
 
 ---
 
+## 📚 Guide System Overview
+
+The AI project guide system operates on three layers, designed to work together seamlessly:
+
+### **1. Public Guides** (This Repository)
+- **Source**: `ai-project-guide.git`
+- **Content**: Core methodology, tool guides, framework guides
+- **Behavior**: Updated frequently, safe to overwrite
+- **Usage**: Everyone gets these automatically
+
+### **2. Organization Private Guides** (Advanced Feature)
+- **Source**: Configurable via `PRIVATE_GUIDES_URL` environment variable
+- **Content**: Company procedures, specialized knowledge, internal standards
+- **Behavior**: Fail silently if not configured, overlay on public guides
+- **Usage**: Advanced teams with private knowledge repositories
+
+### **3. Project Private Guides** (Your Work)
+- **Location**: `project-documents/private/`
+- **Content**: Project-specific concept docs, specs, tasks, code reviews
+- **Behavior**: Never overwritten, always preserved
+- **Usage**: Your valuable project work that should be committed to git
+
+### **Update Strategy**
+- **Public guides**: Safe to update (overwrite)
+- **Organization guides**: Overlay carefully (project wins in conflicts)
+- **Project guides**: Never touched, always preserved
+
+### **Collision Resolution**
+- **Public vs Private**: Public wins (safe to update)
+- **Organization vs Project Private**: Project wins (preserve user work)
+- **Same file in both**: Project version preserved
+
+---
+
 ## 🔑 What lives where?
 
 | Folder | Look here when you need…                                                                                                      |
