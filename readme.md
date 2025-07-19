@@ -18,12 +18,18 @@ This repository contains a comprehensive methodology for AI-assisted development
 ### Add to Existing Project
 ```bash
 # In your existing project root
-mkdir project-documents
-cd project-documents
-git clone --depth 1 --filter=blob:none https://github.com/ecorkran/ai-project-guide.git .
+git subtree add --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
 ```
 
-This gives you all guides in read-only mode. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
+This gives you all guides integrated into your project. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
+
+**Alternative (if you prefer manual copy):**
+```bash
+# Download and extract without git history
+curl -L https://github.com/ecorkran/ai-project-guide/archive/refs/heads/main.tar.gz | tar -xz
+mv ai-project-guide-main project-documents
+rm -rf project-documents/.git
+```
 
 ### Want a Full Template?
 If you want a complete Next.js starter with these guides pre-integrated:
@@ -110,15 +116,26 @@ Please review that doc before adding or renaming files.
 
 ## 📦 Advanced Usage
 
-### Git Subtree (For updates)
-```bash
-# In your existing project root
-git subtree add --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
-```
-
-To update later:
+### Git Subtree (Recommended for ongoing updates)
+If you used the git subtree method above, you can update guides later:
 ```bash
 git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
+```
+
+### Manual Copy (One-time setup)
+If you used the manual copy method, you'll need to re-download for updates:
+```bash
+# Backup your project-specific files first
+cp -r project-documents/private project-documents-private-backup
+
+# Download fresh guides
+curl -L https://github.com/ecorkran/ai-project-guide/archive/refs/heads/main.tar.gz | tar -xz
+rm -rf project-documents
+mv ai-project-guide-main project-documents
+rm -rf project-documents/.git
+
+# Restore your project-specific files
+cp -r project-documents-private-backup/* project-documents/private/
 ```
 
 ---
