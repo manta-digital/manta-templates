@@ -26,7 +26,7 @@ fi
 echo "📚 Updating public guides..."
 rm -rf tmp  # Clean up any previous runs
 git clone --depth 1 https://github.com/ecorkran/ai-project-guide.git tmp &&
-  rsync -a --delete tmp/ project-documents/ &&
+  rsync -a --delete --exclude='private/' tmp/ project-documents/ &&
   rm -rf tmp
 
 # Update organization private guides (if available, overlay carefully)
@@ -40,7 +40,21 @@ if [ -n "$PRIVATE_GUIDES_URL" ]; then
     mkdir -p project-documents/private
     
     # Overlay organization guides (project guides win in conflicts)
-    rsync -a tmp-private/ project-documents/private/
+    echo "📚 Merging organization guides with project files..."
+    
+    # Copy files one by one, skip if they already exist (project files win)
+    find tmp-private -type f | while read src_file; do
+      # Get the relative path
+      rel_path="${src_file#tmp-private/}"
+      dest_file="project-documents/private/$rel_path"
+      
+      # Only copy if destination doesn't exist (project files win)
+      if [ ! -f "$dest_file" ]; then
+        # Create directory if needed
+        mkdir -p "$(dirname "$dest_file")"
+        cp "$src_file" "$dest_file"
+      fi
+    done
     
     echo "✅ Organization private guides updated"
     rm -rf tmp-private
