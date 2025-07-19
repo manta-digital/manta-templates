@@ -4,13 +4,13 @@
 
 ---
 
-# manta-templates 🏄‍♂️ v0.7.0
+# manta-templates 🏄‍♂️ v0.7.1
 
 https://templates.manta.digital
 
 A **Next.js 15 template** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
 
-> **Note:** This project is in active development (v0.7.0). Expect breaking changes.
+> **Note:** This project is in active development (v0.7.1). Expect breaking changes.
 
 ---
 
@@ -54,13 +54,13 @@ pnpm dev             # launches the dev server
 ---
 
 ## Guides Quickstart
-Running `pnpm setup-guides` gets you the ai-project-guide in `project-documentation/`.  Place any project-specific
-guides in a `private` subfolder.  Mimic structure of the parent folder (minus the `private` folder, lest you
-recurse infinitely).
+Running `pnpm setup-guides` gets you the ai-project-guide in `project-documentation/`.  Place any project-specific guides in a `private` subfolder.  Mimic structure of the parent folder (minus the `private` folder, lest you recurse infinitely).  Run `pnpm update-guides` to fetch any updates from ai-project-guide.  
 
-Run `pnpm update-guides` to fetch any updates from ai-project-guide.  You can also keep organization-wide private
-guides that you can easily use in multiple projects.  See the documentation here https://github.com/ecorkran/ai-project-guide
-for details.
+### Organization Private Guides
+You can also keep organization-wide private guides that you can easily use in multiple projects. Copy `env.example` to `.env` and set  `PRIVATE_GUIDES_URL=your-private-guides-repository`. Organization private guides will not overwrite project-specific guides.
+
+### Guides Homepage
+Guides repository is public and available at: https://github.com/ecorkran/ai-project-guide
 
 
 ## Why it Exists and Where it's Going
@@ -78,8 +78,8 @@ I wanted one repo that handled the boring plumbing **and** baked in my AI projec
 🎨 Radix color themes & preset palettes
 📚 Astro static template
 
-Status · Early-Access (v0.7.0)
-Heads-up: v0.7.0 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
+Status · Early-Access (v0.7.1)
+Heads-up: v0.7.1 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
 
 Known gaps: limited card types, no Radix theme switcher, inconsistent lint rules, limited support for markdown-driven content.
 
@@ -168,7 +168,14 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ## 📋 Changelog
 
-### v0.7.0 (Current)
+### v0.7.1 (Current)
+- **Private guides workflow** - Environment-based configuration for organization private guides
+- **.env file support** - Simple configuration via `.env` files (like Python!)
+- **Project files preservation** - Update scripts now properly preserve project-specific content
+- **Cross-platform compatibility** - Improved Node.js scripts for better Windows support
+- **Template development workflow** - Clarified development vs distribution separation
+
+### v0.7.0
 - **Monorepo structure cleanup** - Clean separation between templates and development artifacts
 - **Fixed sync-guides workflow** - Fresh monorepo clones now work out of the box
 - **Template distribution improvements** - Templates ship clean without project-documents
