@@ -8,7 +8,7 @@
 
 https://templates.manta.digital
 
-A **Next.js 15 starter** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
+A **Next.js 15 template** that lets you spin up modern, AI-assisted project sites in minutes—not hours.
 
 > **Note:** This project is in active development (v0.7.0). Expect breaking changes.
 
@@ -52,6 +52,16 @@ pnpm dev             # launches the dev server
 *Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
 
 ---
+
+## Guides Quickstart
+Running `pnpm setup-guides` gets you the ai-project-guide in `project-documentation/`.  Place any project-specific
+guides in a `private` subfolder.  Mimic structure of the parent folder (minus the `private` folder, lest you
+recurse infinitely).
+
+Run `pnpm update-guides` to fetch any updates from ai-project-guide.  You can also keep organization-wide private
+guides that you can easily use in multiple projects.  See the documentation here https://github.com/ecorkran/ai-project-guide
+for details.
+
 
 ## Why it Exists and Where it's Going
 
