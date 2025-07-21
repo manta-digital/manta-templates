@@ -114,6 +114,8 @@ If useful, you can add a review summary or overview for each file.  Note that th
 
 Note: Upon completion of review, *every* file should be accounted for, meaning that if there were (for example) 54 files and you processed 36 of them, you should be able to account for the remaining 18, and this would indicate that your review was not complete.
 
+You MUST update the main review file after each file is processed.  Otherwise we lose our pause and resume ability.  Not after each batch.  After each file.
+
 #### YAML Block
 Place this at the beginning of all created code-review files:
 ```yaml

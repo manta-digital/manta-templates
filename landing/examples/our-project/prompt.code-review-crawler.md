@@ -109,7 +109,7 @@ Create single session task file: `tasks.code-review.session.MMDD.md`
 - Next File: [filename]
 - Resume Point: File #X
 
-## Tasks by File
+## Tasks by File (examples):
 
 ### src/components/Button.tsx
 - [ ] **P1: Remove hard-coded colors**
