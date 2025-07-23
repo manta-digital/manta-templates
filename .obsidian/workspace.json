@@ -25,14 +25,32 @@
             "id": "c7d78fcde7108616",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "project-guides/guide.code-review-2.ai.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "guide.code-review-2.ai"
+            }
+          },
+          {
+            "id": "cd057c6ff6158748",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "project-guides/guide.code-review-crawler.md.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "guide.code-review-crawler.md"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -175,7 +193,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,10 +209,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c7d78fcde7108616",
+  "active": "fa433f09f34f36b8",
   "lastOpenFiles": [
-    "project-guides/readme.md",
+    "project-guides/guide.code-review-2.ai.md",
+    "project-guides/guide.code-review-crawler.md.md",
+    "Untitled",
     "project-guides/guide.code-review.ai.md",
+    "project-guides/template.ai-project.prompts.md",
+    "project-guides/readme.md",
     "project-guides/guide.ai-project.task-expansion.md",
     "project-guides/guide.ai-project.spec.md",
     "project-guides/guide.ai-project.process.md",
@@ -224,9 +247,6 @@
     "tool-guides/threejs",
     "tool-guides/tailwindcss",
     "tool-guides",
-    "public/directory-structure.md",
-    "snippets/gitignore.jetbrains-idea.configuration.md",
-    "private/_readme.md",
     "public/z-attachments/Pasted image 20250502054547.png",
     "public/z-attachments/Pasted image 20250428194224.png",
     "public/z-attachments/Pasted image 20250425124955.png",
@@ -234,7 +254,6 @@
     "public/z-attachments",
     "public/tool-guides/threejs",
     "public/tool-guides/tailwindcss",
-    "public/tool-guides/shadcn",
-    "public/tool-guides/r3f"
+    "public/tool-guides/shadcn"
   ]
 }

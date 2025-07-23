@@ -36,7 +36,7 @@ input template: {project, project concept description} = { , }
 
 We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.a-project.process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
-The actual concept description as well as additional concept will be provided by project manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
+The actual concept description as well as additional concept will be provided by Project Manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
 To do this, we need to use the Project Guide together with information provided to create our concept document. If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
 
@@ -87,8 +87,8 @@ Hello. Our input {
 } is 
 { 
     example-project-name, 
-    example-section ex: review - chartanalysis, 
-    example-subsection ex: configuration improvements
+    example-section ex: review-chartanalysis, 
+    example-subsection ex: configuration-improvements
     scichart,
 }
 
