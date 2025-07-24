@@ -63,7 +63,7 @@ Generate detailed tasks required to accomplish {goal} granular enough to be dele
 
 This is a variation of Phase 4 in `guide.ai-project.process`.  Please request if you don't have it.  In general, do not write code.  Our goal is to create detailed enough tasks that our junior team members can write the code.  Do not deviate from {goal}.
 
-Make sure to follow our rules in .windsurfrules.  Additionally reference `guide.ui-development.ai.md` if this is a UI goal.  If you do not know if this is a UI goal, ask.  If your user gives you a UI goal that does not include UI in it, give them a good natured hard time because it is good for them and they will appreciate it.
+Make sure to follow our rules in the rules/ directory.  Additionally reference `guide.ui-development.ai.md` if this is a UI goal.  If you do not know if this is a UI goal, ask.  If your user gives you a UI goal that does not include UI in it, give them a good natured hard time because it is good for them and they will appreciate it.
 ```
 
 ##### Task Expansion
