@@ -42,7 +42,7 @@ export default function Home() {
         className="h-full"
       >
         <div className="h-full">
-          <QuoteCardContainer slug="art-of-programming" />
+          <QuoteCardContainer slug="sample-quote" />
         </div>
       </GridItem>
     </BentoLayout>
