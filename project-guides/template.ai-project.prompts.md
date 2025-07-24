@@ -49,7 +49,7 @@ input: {project, n, phase, optional: guide}
 
 {if n>1} Phase {n-1} is approved!{end-if}
 
-Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (guide.ai-project.concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager. 
+Now let's work together to create the {phase.name} for {project}.  Refer to our concept document (guide.ai-project.01-concept.md) describing the project.  We're now working on phase {n} - {phase}.  To do this, we'll use our `guide.ai-project.00-process` for our specific phase {if guide != null, add the following}: combined with additional information (potentially tailored to {project}) in {guide}.{end-if}.  We will not proceed beyond phase {n} until that output is complete, and then approved by the Project Manager.
 
 When creating project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.
 ```
@@ -61,7 +61,7 @@ Note: If goal is not input, request it.
 
 Generate detailed tasks required to accomplish {goal} granular enough to be delegated to a junior AI.  Do not include any tasks that could not be completed by an AI or agent.  These should be very small tasks, think subtasks in a 1-point story.  
 
-This is a variation of Phase 4 in `guide.ai-project.process`.  Please request if you don't have it.  In general, do not write code.  Our goal is to create detailed enough tasks that our junior team members can write the code.  Do not deviate from {goal}.
+This is a variation of Phase 4 in `guide.ai-project.00-process`.  Please request if you don't have it.  In general, do not write code.  Our goal is to create detailed enough tasks that our junior team members can write the code.  Do not deviate from {goal}.
 
 Make sure to follow our rules in .windsurfrules.  Additionally reference `guide.ui-development.ai.md` if this is a UI goal.  If you do not know if this is a UI goal, ask.  If your user gives you a UI goal that does not include UI in it, give them a good natured hard time because it is good for them and they will appreciate it.
 ```
@@ -92,7 +92,7 @@ Hello. Our input {
     scichart,
 }
 
-We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
+We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.00-process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/{section}-tasks.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
@@ -132,7 +132,7 @@ Hello.  Please ensure that you have input as described above in input before pro
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/private/tasks/{project}-tasks-{section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
 
-Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
+Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.00-process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  We will implement the task in code, but STOP and confirm the tasks are represented effectively before starting to write code. 
 
@@ -149,7 +149,7 @@ input {
 
 Continue to operate in the "Senior AI" role.  Continue using {project, section, issue, tool} that we have been working with. Ensure that you have needed documentation for {tool}.  Our goal is to add a new {subtask} into an existing issue or update section.
 
-Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in `guide.ai-project.process`.
+Evaluate subtask as presented by user.  If it is too large to be accomplished in a single subtask (potentially with division into a atomic steps), STOP.  Project manager will provide additional instruction.  If it is sufficiently detailed, add the subtask.  Ideally this will be a Phase 4 item.  Make sure subtask is properly defined as described in `guide.ai-project.00-process`.
 
 Here is an example of a subtask to add a button in an element:
 - [ ] Subtask 2: Implement AutoScale Button in ChartCanvas
@@ -246,7 +246,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ```markdown
 The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
 
-Refer to the Resource Structure in `guide.ai-project.process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+Refer to the Resource Structure in `guide.ai-project.00-process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
 ```
 
 ##### Add AI Projects Support

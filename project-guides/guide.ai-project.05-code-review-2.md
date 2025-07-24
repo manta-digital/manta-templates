@@ -272,7 +272,7 @@ Transform review findings into actionable tasks in a separate file named `tasks.
 
 ### Step 4: Task Processing
 
-Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.process`:
+Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.00-process`:
 
   
 

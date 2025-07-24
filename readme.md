@@ -84,7 +84,7 @@ The AI project guide system operates on three layers, designed to work together 
 
 | Folder | Look here when you need…                                                                                                      |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.process, guide.ai-project.spec, Code Rules). |
+| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.00-process, guide.ai-project.02-spec, Code Rules). |
 | **`framework-guides/`** | App-level runtimes or platforms that own the entire build/runtime cycle (Next.js, Astro, Flutter, Qt…).                       |
 | **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (SciChart, Three.js, Tailwind…).                                       |
 | **`api-guides/`** | External data or service endpoints accessed over HTTP/gRPC (USGS Water Services, ArcGIS, Alpha Vantage…).                     |

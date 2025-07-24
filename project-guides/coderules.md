@@ -8,7 +8,7 @@ Code rules.  Apply when working with any project tasks involving code, it's anal
 
 Project Structure
 - If the first item in a list or sublist is `enabled: false`, ignore that section.
-- Always refer to `guide.ai-project.process` and follow links as appropriate.
+- Always refer to `guide.ai-project.00-process` and follow links as appropriate.
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
