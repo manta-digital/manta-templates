@@ -17,19 +17,19 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.dig
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'manta.digital Templates',
+  title: 'manta.digital NextJS Template',
   description: 'Templates, layouts, and UI components created with the included AI Project Guides',
   openGraph: {
-    title: 'manta.digital Templates',
+    title: 'manta.digital NextJS Template',
     description: 'Templates, layouts, and UI components created with the included AI Project Guides',
     url: '/',
-    siteName: 'manta.digital Templates',
+    siteName: 'manta.digital NextJS Template',
     images: [
       {
         url: 'https://templates.manta.digital/image/opengraph-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'manta.digital Templates OG Image',
+        alt: 'manta.digital NextJS Template OG Image',
       },
     ],
     locale: 'en_US',
