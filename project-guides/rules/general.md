@@ -7,8 +7,8 @@
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
-- Information and tasks specific to our project in `project-documents/our-project`.
-- **IMPORTANT**: if we are working on a template in a monorepo, the 'our-project' path will be 'templates/{template-name}/examples/our-project'. Substitute accordingly.
+- Information and tasks specific to our project in `project-documents/private`.
+- **IMPORTANT**: if we are working on a template in a monorepo, the 'private' path will be 'templates/{template-name}/examples/our-project'. Substitute accordingly.
 
 ## MCP (Model Context Protocol)
 
@@ -46,4 +46,4 @@
 - After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors.
 - If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
 - Always run typescript check to ensure no typescript errors.
-- Log warnings to `/project-documents/our-project/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. 
+- Log warnings to `/project-documents/private/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. 

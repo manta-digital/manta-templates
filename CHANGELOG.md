@@ -5,6 +5,32 @@ All notable changes to the AI Project Guide system will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2025-01-27
+
+### Added
+- **Phase numbering system**: Implemented `guide.ai-project.XX-name.md` naming convention for all project guides
+- **Clear phase progression**: Files now alphabetize correctly while showing clear phase order (00-process, 01-concept, 02-spec, 04-task-expansion, 05-code-review)
+
+### Changed
+- **Guide file names**: Renamed all project guides to use phase numbers:
+  - `guide.ai-project.process.md` → `guide.ai-project.00-process.md`
+  - `guide.ai-project.concept.md` → `guide.ai-project.01-concept.md`
+  - `guide.ai-project.spec.md` → `guide.ai-project.02-spec.md`
+  - `guide.ai-project.task-expansion.md` → `guide.ai-project.04-task-expansion.md`
+  - `guide.code-review.ai.md` → `guide.ai-project.05-code-review.md`
+  - `guide.code-review-2.ai.md` → `guide.ai-project.05-code-review-2.md`
+  - `guide.code-review-crawler.md` → `guide.ai-project.05-code-review-crawler.md`
+- **Internal references**: Updated all cross-references between guides to use new naming convention
+- **Template prompts**: Updated all prompt templates to reference new guide names
+- **Rules consistency**: Updated `rules/general.md` to use `private/` instead of `our-project/`
+
+### Removed
+- **`project-guides/coderules.md`**: Completely removed deprecated file, replaced by `project-guides/rules/general.md`
+
+### Fixed
+- **File organization**: All guides now follow consistent phase-based naming
+- **Cross-references**: All internal links and dependencies updated to new structure
+
 ## [0.5.0] - 2025-01-27
 
 ### Added
