@@ -168,7 +168,14 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ## 📋 Changelog
 
-### v0.7.1 (Current)
+### v0.7.2 (Current)
+- **Directory structure migration** - Migrated from `our-project/` to `private/` throughout all guides
+- **Setup script fixes** - Template instances now create `project-documents/private/` correctly
+- **Git submodule warnings eliminated** - Added `.git` exclusion to all setup scripts
+- **Documentation consistency** - Updated 13 files across the guide system for new structure
+- **Migration guide added** - Clear instructions for updating older projects
+
+### v0.7.1
 - **Private guides workflow** - Environment-based configuration for organization private guides
 - **.env file support** - Simple configuration via `.env` files (like Python!)
 - **Project files preservation** - Update scripts now properly preserve project-specific content
