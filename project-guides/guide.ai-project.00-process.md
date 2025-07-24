@@ -81,7 +81,7 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
 4. Phase 4: Task enhancement and expansion by section.
    - For each section in the Detailed Task Breakdown, examine the tasks to see if we can enhance or expand/subdivide them to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
    - If a task would not benefit from expansion, output it verbatim.
-   - Use `guide.ai-project.task-expansion`the guide this phase.
+   - Use `guide.ai-project.04-task-expansion` the guide this phase.
    - Project Manager will assign sections and we should only perform them as assigned. Do not just go looping through them all.
    - Success: All tasks in our assigned section have been processed and either output as is, or enhanced and divided into further subtasks.
    - Outcome: _raw markdown containing the task expansions and enhancements for our assigned section_.
@@ -140,17 +140,17 @@ The following structure should be present in every project.  Assume files are in
 ```markdown
 These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.  Synonyms (syn, aka (for also known as)) are provided as some older documentation may still reference by these names.
 
-* guide.ai-project.process (aka: AI Project Guide): this document.  Describes 
+* guide.ai-project.00-process (aka: AI Project Guide): this document.  Describes 
   roles and project phases.  Always start here.
-* guide.ai-project.concept (aka: AI Project Concept Guide): details on creating 
+* guide.ai-project.01-concept (aka: AI Project Concept Guide): details on creating 
   Project Concept documents.
-* guide.ai-project.spec (aka: AI Spec Guide): details on creating Project 
+* guide.ai-project.02-spec (aka: AI Spec Guide): details on creating Project 
   Specification (Spec) documents.
-* guide.ai-project.task-expandion (aka: AI Task Expansion Guide): specific 
+* guide.ai-project.04-task-expansion (aka: AI Task Expansion Guide): specific 
   guidance on task expansion (described in general in the AI Project Guide).
 * guide.ui-development.ai (aka: AI Development Guide - UI): specific guidance 
   pertaining to UI/UX tasks.
-* guide.code-review.ai (aka: AI Code Review Guide): specific guidance for 
+* guide.ai-project.05-code-review (aka: AI Code Review Guide): specific guidance for 
   performing and responding to code reviews.
 * template.ai-project.prompts (aka: AI Project Prompt Templates): parameterized 
   prompts to assist in creating and completing projects using the AI Project 

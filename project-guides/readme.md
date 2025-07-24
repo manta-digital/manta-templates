@@ -3,12 +3,12 @@ This readme provides general information on project-guides including order in wh
 
 | Phase              | Primary guide                          | Quick link                                                                   |
 | ------------------ | -------------------------------------- | ---------------------------------------------------------------------------- |
-| 0 – Meta           | AI Project Process                     | [guide.ai-project.process.md](guide.ai-project.process.md)                   |
-| 1 – Concept        | Concept Guide                          | [guide.ai-project.concept.md](guide.ai-project.concept.md)                   |
-| 2 – Spec           | Spec Guide                             | [guide.ai-project.spec.md](guide.ai-project.spec.md)                         |
+| 0 – Meta           | AI Project Process                     | [guide.ai-project.00-process.md](guide.ai-project.00-process.md)                   |
+| 1 – Concept        | Concept Guide                          | [guide.ai-project.01-concept.md](guide.ai-project.01-concept.md)                   |
+| 2 – Spec           | Spec Guide                             | [guide.ai-project.02-spec.md](guide.ai-project.02-spec.md)                         |
 | 3 – Task Breakdown | _none (method lives in Process Guide)_ | –                                                                            |
-| 4 – Task Expansion | Task-Expansion Guide                   | [guide.ai-project.task-expansion.md](guide.ai-project.task-expansion.md)     |
-| 5 – Execution      | Code-Review Guide (support)            | [guide.code-review.ai.md](guide.code-review.ai.md)                           |
+| 4 – Task Expansion | Task-Expansion Guide                   | [guide.ai-project.04-task-expansion.md](guide.ai-project.04-task-expansion.md)     |
+| 5 – Execution      | Code-Review Guide (support)            | [guide.ai-project.05-code-review.md](guide.ai-project.05-code-review.md)                           |
 | 6 – Iteration      | –                                      | –                                                                            |
 | All                | Prompt Templates                       | [template.ai-project.prompts.md](template.ai-project.prompts.md) |
 

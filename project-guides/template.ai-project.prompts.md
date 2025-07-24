@@ -7,11 +7,11 @@ audience:
   - ai
 description: Parameterised prompt library mapped to each project phase.
 dependsOn:
-  - guide.ai-project.process.md
+  - guide.ai-project.00-process.md
 npmScriptsAiSupport: "!include ../snippets/npm-scripts.ai-support.json"
 ---
 
-This document contains prompt templates considered useful in applying the `guide.ai-project.process` and performing additional supplemental tasks.
+This document contains prompt templates considered useful in applying the `guide.ai-project.00-process` and performing additional supplemental tasks.
 ##### Project Object Model and Parameters
 ```python
 # Project Object Model and Parameters.  Use this when resolving user requests
@@ -34,7 +34,7 @@ phase: phase;
 ```markdown
 input template: {project, project concept description} = { , }
 
-We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
+We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
 The actual concept description as well as additional concept will be provided by Project Manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
@@ -69,7 +69,7 @@ Make sure to follow our rules in .windsurfrules.  Additionally reference `guide.
 ##### Task Expansion
 ```markdown
 {project, section} = { , }
-We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
+We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 
@@ -113,7 +113,7 @@ Hello.  Please ensure that you have {project, section, issue, tool} inputs befor
 
 Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/private/tasks/{section}-tasks.md or optionally {section}-tasks-phase-{n}.md.
 
-Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
+Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.00-process`.  For Phase 4, additionally refer to `guide.ai-project.04-task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
 All output should be in raw markdown code format using guidelines (including checkboxes) specified in our rules.  This is NOT a code writing assignment. Write output to the proper section of the tasks file mentioned above. 
 
@@ -192,7 +192,7 @@ Let's perform routine maintenance tasks such as resolving warnings.  Examine fil
 *Assumes an existing chat providing additional context. Add if this is not the case.*
 ```markdown
 Continue operating in your role as Senior AI.  Add {item} to 
-maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.process` and `guide.ai-project.task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
+maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.00-process` and `guide.ai-project.04-task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
 
 If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
 ```

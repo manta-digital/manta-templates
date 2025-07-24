@@ -38,7 +38,7 @@ If you want a complete Next.js starter with these guides pre-integrated:
 
 ### Essential Files for Quick Structure
 For immediate project organization, focus on:
-- **`project-guides/guide.ai-project.process.md`** - The core 6-phase methodology
+- **`project-guides/guide.ai-project.00-process.md`** - The core 6-phase methodology
 - **`project-guides/template.ai-project.prompts.md`** - Ready-made AI prompts  
 - **`project-guides/rules/`** - Copy to your IDE's rules directory (`.cursor/rules/`, `.windsurf/rules/`, etc.)
 
