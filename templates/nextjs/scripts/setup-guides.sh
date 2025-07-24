@@ -34,12 +34,16 @@ else
     rsync -a tmp/ "$TARGET/" &&
     rm -rf tmp
     
-  # Create basic our-project structure for standalone users
+  # Create basic private structure for standalone users
   echo "📁 Setting up project structure for standalone use..."
-  mkdir -p "examples/our-project"
-  echo "# Project Documents
+  mkdir -p "project-documents/private"
+  mkdir -p "project-documents/private/code-reviews"
+  mkdir -p "project-documents/private/maintenance"
+  mkdir -p "project-documents/private/tasks"
+  mkdir -p "project-documents/private/ui/screenshots"
+  echo "# Project Private Documents
 
-This directory is for your project-specific documents and tasks." > "examples/our-project/README.md"
+This directory is for your project-specific documents, tasks, code reviews, and maintenance items." > "project-documents/private/README.md"
   echo "✅ Guides fetched from GitHub"
   
   # Enable project-documents for version control (safe to run multiple times)
@@ -48,4 +52,8 @@ fi
 
 echo "Project guides setup complete!"
 echo "- Guides available in: $TARGET/"
-echo "- Project workspace: examples/our-project/"
+if [ -d "$LOCAL_GUIDES" ]; then
+  echo "- Project workspace: examples/our-project/ (monorepo template development)"
+else
+  echo "- Project workspace: project-documents/private/ (standalone project)"
+fi
