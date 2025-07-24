@@ -73,7 +73,7 @@ export const theme = {
 
 2. ESLint + Prettier
 ```sh
-# Referenced in coderules, this provides additional detail.
+# Referenced in rules/, this provides additional detail.
 pnpm add -D prettier eslint-config-prettier
 echo '{ "extends": ["next/core-web-vitals","prettier"] }' > .eslintrc.json
 ```

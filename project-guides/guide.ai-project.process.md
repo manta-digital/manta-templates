@@ -157,8 +157,7 @@ These files, shared by all of our projects, are contained in {project-root}/proj
 * template.ai-project.prompts (aka: AI Project Prompt Templates): parameterized 
   prompts to assist in creating and completing projects using the AI Project 
   Guide. Usable by humans or AIs.
-* coderules: specify general code rules.  Copied to IDE or agent-
-  specific files (.windsurfrules, Claude.md, etc) as needed.  
+* rules/: modular code rules organized by platform/technology.  Copy to IDE-specific directories (.cursor/rules/, .windsurf/rules/, etc) as needed.  
 
 Additional Relevant in `project-documents/` Directory:
 * directory-structure: defines our `project-documents` directory structure

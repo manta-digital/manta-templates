@@ -17,7 +17,7 @@ The inputs to this task are as follows:
 * guide.ai-project.task-expansion (this document)
 * {project} - spec (phase 2 output)
 * {project} - tasks (this is the detailed task breakdown, phase 3 output)
-* coderules - file containing specific coding rules and guidelines.
+* rules/ - directory containing specific coding rules and guidelines organized by platform/technology.
 * {project, section} where section is the part of the Detailed Task Breakdown we will work on
 
 If any inputs are missing, insufficient, or you have questions, stop and resolve these with the Project Manager before proceeding.
@@ -40,7 +40,7 @@ Document may begin with a 1-line title in H1 format.  No other H1 should be pres
 #### Specific Instructions
 Our job is to examine our assigned section and *only* our assigned section of the Detailed Task Breakdown, and expand or enhance the tasks where this additional granularity would improve our AI developer's chances of completing the task successfully.
 
-For any additional context, how and where we fit into the project or the overall plan, consult the additional documentation provided with the input.  While we are mostly not writing code, the coderules input file will provide guidelines for writing any minimal required code as well as potential usefulness in structuring the tasks.  
+For any additional context, how and where we fit into the project or the overall plan, consult the additional documentation provided with the input.  While we are mostly not writing code, the rules/ directory will provide guidelines for writing any minimal required code as well as potential usefulness in structuring the tasks.  
 
 Phases 1, 2, and 3 are completed and approved.  We are going to work on Phase 4, Task enhancement and expansion by section.  We will receive our assigned section of Detailed Task Breakdown from the Project Manager or delegate.  For this task, we will work *only* on the assigned section and we will not proceed beyond it.  
 ###### Procedure

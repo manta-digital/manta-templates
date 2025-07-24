@@ -94,7 +94,7 @@ Hello. Our input {
 
 We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
-Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/{section}-tasks.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
+Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/{section}-tasks.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
 Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
 
