@@ -168,7 +168,10 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ## 📋 Changelog
 
-### v0.7.2 (Current)
+### v0.7.3 (Current)
+- **Fixed sync-guides script** - Now pulls from `main` branch instead of `public-only` to get latest guides
+
+### v0.7.2
 - **Directory structure migration** - Migrated from `our-project/` to `private/` throughout all guides
 - **Setup script fixes** - Template instances now create `project-documents/private/` correctly
 - **Git submodule warnings eliminated** - Added `.git` exclusion to all setup scripts

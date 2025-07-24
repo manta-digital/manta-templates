@@ -1,6 +1,6 @@
 {
     "name": "manta-templates",
-    "version": "0.7.2",
+    "version": "0.7.3",
     "private": true,
     "scripts": {
         "sync-guides": "bash ./scripts/sync-guides.sh",
