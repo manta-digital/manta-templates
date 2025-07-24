@@ -39,6 +39,7 @@ else
   mkdir -p "project-documents/private"
   mkdir -p "project-documents/private/code-reviews"
   mkdir -p "project-documents/private/maintenance"
+  mkdir -p "project-documents/private/project-guides"
   mkdir -p "project-documents/private/tasks"
   mkdir -p "project-documents/private/ui/screenshots"
   echo "# Project Private Documents
