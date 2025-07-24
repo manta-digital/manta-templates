@@ -209,8 +209,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "fa433f09f34f36b8",
+  "active": "cd057c6ff6158748",
   "lastOpenFiles": [
+    "project-guides/agents/code-review-config.json",
+    "project-guides/agents/code-review-agent.md",
+    "project-guides/rules/typescript.md",
+    "project-guides/rules/testing.md",
+    "project-guides/rules/review.md",
+    "project-guides/rules/react.md",
+    "project-guides/rules/general.md",
+    "project-guides/rules/database.md",
+    "project-guides/agents",
+    "project-guides/rules",
     "project-guides/guide.code-review-2.ai.md",
     "project-guides/guide.code-review-crawler.md.md",
     "Untitled",
@@ -236,14 +246,6 @@
     "public/algorithm-notes/leetcode -- fast and slow pointer.md",
     "public/algorithm-notes",
     "public/snippets/npm-scripts.ai-support.json.md",
-    "public/project-guides/guide.ai-project.process.md",
-    "public/project-guides/guide.ai-project.spec.md",
-    "public/project-guides/guide.ai-project.task-expansion.md",
-    "public/project-guides/guide.ai-project.concept.md",
-    "public/snippets/gitignore.windsurf-access.configuration.md",
-    "tool-guides/threejs/setup.md",
-    "tool-guides/threejs/guide.deployment.github-pages.md",
-    "tool-guides/tailwindcss/introduction.md",
     "tool-guides/threejs",
     "tool-guides/tailwindcss",
     "tool-guides",
@@ -252,8 +254,6 @@
     "public/z-attachments/Pasted image 20250425124955.png",
     "public/z-attachments/Pasted image 20250425124903.png",
     "public/z-attachments",
-    "public/tool-guides/threejs",
-    "public/tool-guides/tailwindcss",
-    "public/tool-guides/shadcn"
+    "public/tool-guides/threejs"
   ]
 }

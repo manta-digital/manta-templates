@@ -1,4 +1,10 @@
-Code rules.  Apply when working with any project tasks involving code, it's analysis, or its design.  General rules (`project-documents/project-guides/coderules/`) apply unless superseded by a more detailed ruleset (`project-documents/project-guides/{target-platform}/coderules`) is present.
+> **⚠️ DEPRECATED** - This file has been replaced by the modular rules system in `project-guides/rules/`. 
+> 
+> **For new projects:** Copy files from `project-guides/rules/` to your IDE's rules directory (e.g., `.cursor/rules/` or `.windsurf/rules/`).
+> 
+> **For existing projects:** This file is maintained for backward compatibility but should be migrated to the new structure.
+
+Code rules.  Apply when working with any project tasks involving code, it's analysis, or its design.  General rules (`project-documents/project-guides/rules/`) apply unless superseded by a more detailed ruleset (`project-documents/project-guides/rules/{platform}.md`) is present.
 
 Project Structure
 - If the first item in a list or sublist is `enabled: false`, ignore that section.

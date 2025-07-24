@@ -18,6 +18,20 @@ guide.ui-development.ai: applicable to any UI development task (Phase 4, 5)
 notes.ai-project.onboarding: onboarding notes primarily for human devs
 ```
 
+### IDE Integration: Agents & Rules
+
+The `agents/` and `rules/` directories contain configurations designed to be copied into your IDE's configuration directory:
+
+**For Cursor:**
+- Copy `agents/*` → `.cursor/agents/`
+- Copy `rules/*` → `.cursor/rules/`
+
+**For Windsurf:**
+- Copy `agents/*` → `.windsurf/agents/`
+- Copy `rules/*` → `.windsurf/rules/`
+
+These files provide platform-specific configurations while maintaining consistency across your AI-assisted development workflow.
+
 ### YAML front-matter schema for project-guides
 
 | Key           | Type   | Required | Allowed values / notes                                                                  |
