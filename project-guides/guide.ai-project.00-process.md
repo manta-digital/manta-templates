@@ -152,7 +152,7 @@ These files, shared by all of our projects, are contained in {project-root}/proj
   pertaining to UI/UX tasks.
 * guide.ai-project.05-code-review (aka: AI Code Review Guide): specific guidance for 
   performing and responding to code reviews.
-* template.ai-project.prompts (aka: AI Project Prompt Templates): parameterized 
+* prompt.ai-project.system (aka: AI Project Prompt Templates): parameterized 
   prompts to assist in creating and completing projects using the AI Project 
   Guide. Usable by humans or AIs.
 * rules/: modular code rules organized by platform/technology.  Copy to IDE-specific directories (.cursor/rules/, .windsurf/rules/, etc) as needed.  

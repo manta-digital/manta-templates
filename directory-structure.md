@@ -14,7 +14,7 @@ project-documents/
 ├── domain-guides/           # cross-cutting subject knowledge
 │   └── hydrology/ …
 ├── snippets/                # language-agnostic code or prompt templates
-│   └── template.ai-project.prompts.md   # process-wide prompts library
+│   └── prompt.ai-project.system.md   # process-wide prompts library
 ├── private/                 # project-specific customization, 1 project 1 repo.
 │   ├── code-reviews/        # review docs & follow-up actions
 │   ├── maintenance/         # maintenance tasks & outcomes
@@ -28,7 +28,7 @@ project-documents/
 └── README.md                # folder-local orientation (this file’s sibling)
 ```
 > **Note:**
-> _If_ a prompt template is tightly coupled to your AI-process phases (as with template.ai-project.prompts.md), keep it in **project-guides/**; ad-hoc language snippets still go to **snippets/**
+> _If_ a prompt template is tightly coupled to your AI-process phases (as with prompt.ai-project.system.md), keep it in **project-guides/**; ad-hoc language snippets still go to **snippets/**
 > 
 > **Monorepo Template Note:**  
 > When working on templates in the monorepo, project-specific files that are normally in `private/` are located in `{template}/examples/our-project/` to maintain compatibility with existing tooling.
@@ -50,7 +50,7 @@ project-documents/
 Images will be moved to the `z-attachments` folder in Obsidian.  Obsidian will rewrite links automatically when you move files.
 #### Templates & snippets
 * **Prompt/code templates** that are part of the **process** live in  
-  `project-guides/` (e.g., `template.ai-project.prompts.md`).  
+  `project-guides/` (e.g., `prompt.ai-project.system.md`).  
 * Ad-hoc language or tooling snippets that don’t belong to a phase go in `snippets/`.
 ### Naming reminder
 Follow the pattern `[doc-type].[subject].[info].md`. See `file-naming-conventions.md` for full details.

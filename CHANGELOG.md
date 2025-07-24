@@ -13,13 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **Guide file names**: Renamed all project guides to use phase numbers:
+- **Prompt file names**: Renamed prompt files for better clarity:
+  - `template.ai-project.prompts.md` → `prompt.ai-project.system.md`
+  - `guide.ai-project.05-code-review-crawler.md` → `prompt.code-review-crawler.md`
   - `guide.ai-project.process.md` → `guide.ai-project.00-process.md`
   - `guide.ai-project.concept.md` → `guide.ai-project.01-concept.md`
   - `guide.ai-project.spec.md` → `guide.ai-project.02-spec.md`
   - `guide.ai-project.task-expansion.md` → `guide.ai-project.04-task-expansion.md`
   - `guide.code-review.ai.md` → `guide.ai-project.05-code-review.md`
   - `guide.code-review-2.ai.md` → `guide.ai-project.05-code-review-2.md` (consolidated into main code review guide)
-  - `guide.code-review-crawler.md` → `guide.ai-project.05-code-review-crawler.md`
+  - `guide.code-review-crawler.md` → `prompt.code-review-crawler.md`
 - **Internal references**: Updated all cross-references between guides to use new naming convention
 - **Template prompts**: Updated all prompt templates to reference new guide names
 - **Rules consistency**: Updated `rules/general.md` to use `private/` instead of `our-project/`
