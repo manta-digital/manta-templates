@@ -31,7 +31,7 @@ else
   echo "📚 Fetching guides from GitHub (flattened structure)..."
   rm -rf tmp  # Clean up any previous runs
   git clone --depth 1 https://github.com/ecorkran/ai-project-guide.git tmp &&
-    rsync -a tmp/ "$TARGET/" &&
+    rsync -a --exclude='.git' tmp/ "$TARGET/" &&
     rm -rf tmp
     
   # Create basic private structure for standalone users

@@ -30,7 +30,7 @@ if git clone --depth 1 "$PRIVATE_GUIDES_URL" "$TMP" 2>/dev/null; then
   mkdir -p project-documents/private
   
   # **Overlay** private docs **without deleting** public ones
-  rsync -a "$TMP/" project-documents/private/
+  rsync -a --exclude='.git' "$TMP/" project-documents/private/
   
   echo "✅ Organization private guides copied"
 else
