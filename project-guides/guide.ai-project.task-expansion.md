@@ -45,7 +45,7 @@ For any additional context, how and where we fit into the project or the overall
 Phases 1, 2, and 3 are completed and approved.  We are going to work on Phase 4, Task enhancement and expansion by section.  We will receive our assigned section of Detailed Task Breakdown from the Project Manager or delegate.  For this task, we will work *only* on the assigned section and we will not proceed beyond it.  
 ###### Procedure
 * Identify and review all required inputs and confirm any questions, omissions, or inconsistencies.
-* Determine if required output file /project-plan/design/{project} - tasks - {section}.md is present.  If not, create it.  If you encounter an error in file creation, stop and wait for Project Manager.  
+* Determine if required output file project-documents/private/tasks/{project}-tasks-{section}.md is present.  If not, create it.  If you encounter an error in file creation, stop and wait for Project Manager.  
 * For each task in our assigned section, examine it.  Can a relatively junior developer complete it as described?  If we could improve the odds of that by making the task more granular, adding detail, potentially splitting into subtasks, let's do it.
 * Make sure we cover all the tasks.
 * If a task cannot effectively be improved, add it to our output verbatim.

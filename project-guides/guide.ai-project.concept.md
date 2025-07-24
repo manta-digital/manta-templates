@@ -36,3 +36,6 @@ In general, favor simplicity and avoid over-engineering.  Remember the cliche ab
 
 ##### Summary
 The goal here is to create a high-level concept document tailored to the current project.
+
+##### Output Location
+Save the completed concept document as `concept.{project}.md` in the `project-documents/private/` directory, where `{project}` is your project name.

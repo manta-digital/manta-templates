@@ -15,15 +15,22 @@ project-documents/
 │   └── hydrology/ …
 ├── snippets/                # language-agnostic code or prompt templates
 │   └── template.ai-project.prompts.md   # process-wide prompts library
-├── our-project/             # project-specific customization, 1 project 1 repo.
+├── private/                 # project-specific customization, 1 project 1 repo.
 │   ├── code-reviews/        # review docs & follow-up actions
 │   ├── maintenance/         # maintenance tasks & outcomes
-│   └── ui/                  # UI tasks & resources
-│       └── screenshots/     # mock-ups, design references
+│   ├── tasks/               # task breakdowns & phase documents
+│   ├── ui/                  # UI tasks & resources
+│   │   └── screenshots/     # mock-ups, design references
+│   ├── concept.{project}.md # project concept documents
+│   ├── spec.{project}.md    # project specifications
+│   └── notes.{project}.md   # project-specific notes
 └── README.md                # folder-local orientation (this file’s sibling)
 ```
 > **Note:**
 > _If_ a prompt template is tightly coupled to your AI-process phases (as with template.ai-project.prompts.md), keep it in **project-guides/**; ad-hoc language snippets still go to **snippets/**
+> 
+> **Monorepo Template Note:**  
+> When working on templates in the monorepo, project-specific files that are normally in `private/` are located in `{template}/examples/our-project/` to maintain compatibility with existing tooling.
 
 ## Zero-ambiguity decision matrix
 

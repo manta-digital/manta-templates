@@ -140,6 +140,41 @@ cp -r project-documents-private-backup/* project-documents/private/
 
 ---
 
+## 🔄 Migrating from `our-project/` to `private/`
+
+If you're working with an existing project that uses the old `our-project/` structure, here's how to migrate to the new `private/` structure:
+
+### Quick Migration Steps
+1. **Rename the directory**: `mv project-documents/our-project project-documents/private`
+2. **Create new subdirectories** (if they don't exist):
+   ```bash
+   mkdir -p project-documents/private/tasks
+   ```
+3. **Move project documents** to the root of `private/`:
+   ```bash
+   # Move concept, spec, and notes files to private/ root
+   mv project-documents/private/concept/* project-documents/private/ 2>/dev/null || true
+   mv project-documents/private/spec/* project-documents/private/ 2>/dev/null || true
+   ```
+4. **Update any references** in your project-specific files from `our-project/` to `private/`
+
+### New Structure After Migration
+```
+private/
+├── code-reviews/        # (existing)
+├── maintenance/         # (existing) 
+├── tasks/               # (new) - move task files here
+├── ui/                  # (existing)
+│   └── screenshots/     # (existing)
+├── concept.{project}.md # (moved to root)
+├── spec.{project}.md    # (moved to root)
+└── notes.{project}.md   # (moved to root)
+```
+
+> **Note**: The guides in this repository have been updated to use `private/`. If you see references to `our-project/` in guides, those are likely outdated and should be treated as `private/`.
+
+---
+
 ## 🤝 Contributing
 * Keep documents concise; link out rather than duplicate content.  
 * Cite sources inline when pulling in external material.  

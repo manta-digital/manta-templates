@@ -8,7 +8,7 @@ This document outlines the comprehensive process for conducting code reviews. Sp
 
 ## Infrastructure Guidelines
 
-Place reviews into the our-project/code-reviews/ directory. Note that 'our-project' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+Place reviews into the private/code-reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
 
   
 
@@ -210,7 +210,7 @@ When reviewing code, systematically answer these core questions:
 
 ### Step 1: Create Review Document
 
-Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/our-project/code-reviews` directory.
+Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/private/code-reviews` directory.
 
   
 

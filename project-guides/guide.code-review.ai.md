@@ -32,7 +32,7 @@ This guide supports two distinct code review scenarios:
 The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
 
 ## Infrastructure Guidelines
-Place reviews into the our-project/code-reviews/ directory. Note that 'our-project' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+Place reviews into the private/code-reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
 
 ### For Directory Crawl Reviews
 Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.
@@ -142,7 +142,7 @@ When reviewing code, systematically answer these core questions.
 Create a review document named `review.{filename}.{YYYYMMDD}.md` in the appropriate directory.
 
 #### For Directory Crawl Reviews
-Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/our-project/code-reviews` directory.
+Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/private/code-reviews` directory.
 
 All reviewed files should be present in either Files with Issues, or Files with No Issues sections. No file should be unaccounted for. Update this after reviewing each file. Additionally, keep track of how many files have been reviewed, and what the last filed review was, so this can be restarted at any time. Make sure to update the status (started, in-progress, complete). We need to be able to pause and resume this task without losing work or missing items.
 

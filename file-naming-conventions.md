@@ -3,7 +3,7 @@ This document outlines standard naming conventions for project files and directo
 
 ## Directory Structure
 - Use kebab-case (hyphenated lowercase) for directory names
-  - Example: `code-reviews`, `project-guides`, `our-project`
+  - Example: `code-reviews`, `project-guides`, `private`
 
 - Maintain a logical hierarchy with clear parent-child relationships
   - Example: `project-documents/code-reviews/`
@@ -32,7 +32,7 @@ Common document type prefixes:
 - `spec` - Technical specifications
 - `notes` - Meeting notes or research findings
 - `template` - Prompt or other templates, organized with project-guides.
-- `maintenance` - maintenance tasks or actions, in `our-project/maintenance`.
+- `maintenance` - maintenance tasks or actions, in `private/maintenance`.
 
 ### Date Format
 

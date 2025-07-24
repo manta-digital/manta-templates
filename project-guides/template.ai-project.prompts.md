@@ -73,7 +73,7 @@ We're working in our guide.ai-project.process, Phase 4: Task expansion and Enhan
 
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 
-Output results into a new file our-project/tasks.{section}.phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
+Output results into a new file private/tasks/{section}-tasks-phase-4.md. In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 ```
 
 ##### Task Implementation
@@ -94,7 +94,7 @@ Hello. Our input {
 
 We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
-Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/our-project/tasks.{section}.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
+Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/{section}-tasks.md file.  Please work through the tasks, following the guidelines in our project guides, and using the rules in the coderules file.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
 
 Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
 
@@ -111,7 +111,7 @@ Notes:
 ```markdown
 Hello.  Please ensure that you have {project, section, issue, tool} inputs before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
 
-Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/tasks.{section}.md or optionally tasks.{section}.phase-{n}.md.
+Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/private/tasks/{section}-tasks.md or optionally {section}-tasks-phase-{n}.md.
 
 Start by examining the tasks in light of Phase 3 and Phase 4 of `guide.ai-project.process`.  For Phase 4, additionally refer to `guide.ai-project.task-expansion` and follow its links as needed.  Expand detail as needed according to the guide.
 
@@ -130,7 +130,7 @@ input {
 
 Hello.  Please ensure that you have input as described above in input before proceeding with this work.  Issue may also be specified as goal or update.  Tool is optional, but if not provided, confirm that this was not an accidental omission. If tool is present, make sure to follow note: {tool} which should be included with this request.
 
-Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/our-project/{project} - tasks - {section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
+Your role is "Senior AI".  Your job is to evaluate the tasks for our {issue} which should be contained in /project-documents/private/tasks/{project}-tasks-{section}.md.  If it does not exist, create it.  If it does not contain a top-level H3 entry for {issue} add it, and add H5 entries for Phase 3 Tasks and Phase 4 Subtasks.  If you add a new H3 section to a non-empty file, add a blank line to separate from any existing sections and lists.
 
 Add subtask(s).  If subtask as presented by user is sufficiently small and detailed enough to be represented in a single Phase 4 item (as defined in `guide.ai-project.process`), add it as such.  If subtask is too big, STOP and confirm that the Project Manager wishes to perform task expansion here, and do not proceed without this confirmation.
 
@@ -185,7 +185,7 @@ Interestingly we do not in general need this.  Once the tasks are processed into
 
 ##### Perform Routine Maintenance
 ```markdown
-Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/our-project/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
+Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/private/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
 ```
 
 ##### Add and Implement Maintenance Item
@@ -203,7 +203,7 @@ If {item} does not provide sufficient detail, expand according to the project an
 Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
 ###### General
-* Document your findings in the project-documents/our-project/codebase-
+* Document your findings in the project-documents/private/codebase-
   analysis.md. You will probably need to create this file.
 * Write in markdown format, following our rules for markdown output.  If you 
   cannot find these rules, STOP and do not proceed until you request and receive 

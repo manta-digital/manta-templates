@@ -116,19 +116,23 @@ The following structure should be present in every project.  Assume files are in
     ├── api-guides/        # external data endpoints (USGS, ArcGIS …)
     ├── domain-guides/     # cross-cutting subject matter (hydrology …)
     ├── snippets/          # reusable templates / code fragments
-    └── our-project/       # project-specific artifacts (tasks, UI, reviews)
+    └── private/           # project-specific artifacts (tasks, UI, reviews)
 ```
 
-###### our-project subfolders
+###### private subfolders
 ```markdown
-* our-project/: information customized to our current project.
-* our-project/code-reviews: code review findings, task lists, and 
+* private/: information customized to our current project.
+* private/code-reviews: code review findings, task lists, and 
   resolutions.
-* our-project/maintenance:  maintenance item issue and resolution 
+* private/maintenance:  maintenance item issue and resolution 
   tracking.
-* our-project/ui: UI specific designs, tasks, and guidance for our 
+* private/tasks: task breakdowns & phase documents.
+* private/ui: UI specific designs, tasks, and guidance for our 
   project.
-* our-project/ui/screenshots: supporting images for UI information.
+* private/ui/screenshots: supporting images for UI information.
+* private/concept.{project}.md: project concept documents.
+* private/spec.{project}.md: project specifications.
+* private/notes.{project}.md: project-specific notes.
 ```
 
 > Each folder has its own `README.md` or `introduction.md` with deeper context.  

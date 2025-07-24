@@ -40,3 +40,6 @@ We will use this as a guide for creating a project spec.  We generally will not 
 - References to similar solutions or inspiration for design.
 - Supporting materials like diagrams, mockups, or interactive prototypes.
 
+##### Output Location
+Save the completed specification document as `spec.{project}.md` in the `project-documents/private/` directory, where `{project}` is your project name.
+

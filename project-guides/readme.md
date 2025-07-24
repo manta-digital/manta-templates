@@ -10,7 +10,7 @@ This readme provides general information on project-guides including order in wh
 | 4 – Task Expansion | Task-Expansion Guide                   | [guide.ai-project.task-expansion.md](guide.ai-project.task-expansion.md)     |
 | 5 – Execution      | Code-Review Guide (support)            | [guide.code-review.ai.md](guide.code-review.ai.md)                           |
 | 6 – Iteration      | –                                      | –                                                                            |
-| All                | Prompt Templates                       | [template.ai-project.prompts.md](../snippets/template.ai-project.prompts.md) |
+| All                | Prompt Templates                       | [template.ai-project.prompts.md](template.ai-project.prompts.md) |
 
 ##### Additional
 ```
