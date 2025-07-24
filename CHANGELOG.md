@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `guide.ai-project.spec.md` → `guide.ai-project.02-spec.md`
   - `guide.ai-project.task-expansion.md` → `guide.ai-project.04-task-expansion.md`
   - `guide.code-review.ai.md` → `guide.ai-project.05-code-review.md`
-  - `guide.code-review-2.ai.md` → `guide.ai-project.05-code-review-2.md`
+  - `guide.code-review-2.ai.md` → `guide.ai-project.05-code-review-2.md` (consolidated into main code review guide)
   - `guide.code-review-crawler.md` → `guide.ai-project.05-code-review-crawler.md`
 - **Internal references**: Updated all cross-references between guides to use new naming convention
 - **Template prompts**: Updated all prompt templates to reference new guide names
@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - **`project-guides/coderules.md`**: Completely removed deprecated file, replaced by `project-guides/rules/general.md`
+- **`project-guides/guide.ai-project.05-code-review-2.md`**: Consolidated duplicate content into main code review guide
 
 ### Fixed
 - **File organization**: All guides now follow consistent phase-based naming
