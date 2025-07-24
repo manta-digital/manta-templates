@@ -150,11 +150,14 @@ If you're working with an existing project that uses the old `our-project/` stru
    ```bash
    mkdir -p project-documents/private/tasks
    ```
-3. **Move project documents** to the root of `private/`:
+3. **Move project documents** to the `private/project-guides/` directory:
    ```bash
-   # Move concept, spec, and notes files to private/ root
-   mv project-documents/private/concept/* project-documents/private/ 2>/dev/null || true
-   mv project-documents/private/spec/* project-documents/private/ 2>/dev/null || true
+   # Create project-guides directory if it doesn't exist
+   mkdir -p project-documents/private/project-guides
+   
+   # Move concept, spec, and notes files to private/project-guides/
+   mv project-documents/private/concept/* project-documents/private/project-guides/ 2>/dev/null || true
+   mv project-documents/private/spec/* project-documents/private/project-guides/ 2>/dev/null || true
    ```
 4. **Update any references** in your project-specific files from `our-project/` to `private/`
 
@@ -163,12 +166,13 @@ If you're working with an existing project that uses the old `our-project/` stru
 private/
 ├── code-reviews/        # (existing)
 ├── maintenance/         # (existing) 
+├── project-guides/      # (new) - project-specific guide customizations
+│   ├── concept.{project}.md # (moved here)
+│   ├── spec.{project}.md    # (moved here)
+│   └── notes.{project}.md   # (moved here)
 ├── tasks/               # (new) - move task files here
-├── ui/                  # (existing)
-│   └── screenshots/     # (existing)
-├── concept.{project}.md # (moved to root)
-├── spec.{project}.md    # (moved to root)
-└── notes.{project}.md   # (moved to root)
+└── ui/                  # (existing)
+    └── screenshots/     # (existing)
 ```
 
 > **Note**: The guides in this repository have been updated to use `private/`. If you see references to `our-project/` in guides, those are likely outdated and should be treated as `private/`.

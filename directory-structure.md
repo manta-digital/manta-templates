@@ -18,12 +18,13 @@ project-documents/
 ├── private/                 # project-specific customization, 1 project 1 repo.
 │   ├── code-reviews/        # review docs & follow-up actions
 │   ├── maintenance/         # maintenance tasks & outcomes
+│   ├── project-guides/      # project-specific guide customizations
+│   │   ├── concept.{project}.md # project concept documents
+│   │   ├── spec.{project}.md    # project specifications
+│   │   └── notes.{project}.md   # project-specific notes
 │   ├── tasks/               # task breakdowns & phase documents
-│   ├── ui/                  # UI tasks & resources
-│   │   └── screenshots/     # mock-ups, design references
-│   ├── concept.{project}.md # project concept documents
-│   ├── spec.{project}.md    # project specifications
-│   └── notes.{project}.md   # project-specific notes
+│   └── ui/                  # UI tasks & resources
+│       └── screenshots/     # mock-ups, design references
 └── README.md                # folder-local orientation (this file’s sibling)
 ```
 > **Note:**

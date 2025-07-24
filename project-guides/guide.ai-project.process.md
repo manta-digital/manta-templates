@@ -126,13 +126,11 @@ The following structure should be present in every project.  Assume files are in
   resolutions.
 * private/maintenance:  maintenance item issue and resolution 
   tracking.
+* private/project-guides: project-specific guide customizations.
 * private/tasks: task breakdowns & phase documents.
 * private/ui: UI specific designs, tasks, and guidance for our 
   project.
 * private/ui/screenshots: supporting images for UI information.
-* private/concept.{project}.md: project concept documents.
-* private/spec.{project}.md: project specifications.
-* private/notes.{project}.md: project-specific notes.
 ```
 
 > Each folder has its own `README.md` or `introduction.md` with deeper context.  
