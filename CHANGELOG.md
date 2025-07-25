@@ -5,6 +5,20 @@ All notable changes to the AI Project Guide system will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.2] - 2025-01-27
+
+### Added
+- **Project document phase numbering**: Implemented `XX-name.{project}.md` naming convention for project-specific documents
+- **Consistent ordering**: Project documents now follow the same phase-based ordering as guides
+
+### Changed
+- **Project document names**: Updated project-specific document naming to use phase numbers:
+  - `concept.{project}.md` → `01-concept.{project}.md`
+  - `spec.{project}.md` → `02-spec.{project}.md`
+  - `notes.{project}.md` → `03-notes.{project}.md`
+- **Guide output locations**: Updated all guides to reference new phase-numbered document names
+- **Directory structure**: Updated structure diagrams to reflect new naming convention
+
 ## [0.5.1] - 2025-01-27
 
 ### Added

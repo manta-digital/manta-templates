@@ -19,9 +19,9 @@ project-documents/
 │   ├── code-reviews/        # review docs & follow-up actions
 │   ├── maintenance/         # maintenance tasks & outcomes
 │   ├── project-guides/      # project-specific guide customizations
-│   │   ├── concept.{project}.md # project concept documents
-│   │   ├── spec.{project}.md    # project specifications
-│   │   └── notes.{project}.md   # project-specific notes
+│   │   ├── 01-concept.{project}.md # project concept documents
+│   │   ├── 02-spec.{project}.md    # project specifications
+│   │   └── 03-notes.{project}.md   # project-specific notes
 │   ├── tasks/               # task breakdowns & phase documents
 │   └── ui/                  # UI tasks & resources
 │       └── screenshots/     # mock-ups, design references

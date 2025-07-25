@@ -1,22 +1,42 @@
-# Code Review Guidelines
+# Code Review Rules
 
 ## Overview
-This document outlines the comprehensive process for conducting code reviews.  Specific guidelines are provided for project aspects (ex: UI) and platform specifics (ex: NextJS) Code reviews ensure code quality, maintainability, and alignment with project goals while identifying potential issues before they become problematic.
+This document outlines the comprehensive process for conducting code reviews. Code reviews ensure code quality, maintainability, and alignment with project goals while identifying potential issues before they become problematic. Specific guidelines are provided for project aspects (ex: UI) and platform specifics (ex: NextJS).
+
+## Usage Modes
+This guide supports two distinct code review scenarios:
+
+### 1. Single-File Code Review
+- **Purpose**: Review a single provided source file
+- **Scope**: Focus on one specific file or component
+- **Process**: Apply the code review questionnaire to the individual file and create tasks as needed
+- **Documentation**: Create a simple review document for the findings and a corresponding task file if issues are identified
+
+### 2. Directory Crawl Review
+- **Purpose**: Systematically review an entire directory structure or project
+- **Scope**: Process multiple files in a coordinated batch operation
+- **Process**: Follow the full infrastructure guidelines below for organizing multiple review sessions
+- **Documentation**: Use the structured directory approach with session tracking and comprehensive file accounting
+
+The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
 
 ## Infrastructure Guidelines
-Place reviews into the private/code-reviews/ directory.  Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules.  If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+Place reviews into the private/code-reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
 
-Create a subdirectory for each crawl session.  Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md.  The -nn should be just a two digit number, start at 01. 
+### For Directory Crawl Reviews
+Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.
 
 This way you can keep tasks separated by file, without causing difficulty in file management, while keeping task files small enough that we can easily manage or even parallelize their implementation.
 
-Keep count of files processed and remaining to be processed.  Update this after each file, ideally storing in the review.{project}.{YYYYMMDD-nn}.md file.  Use a single such review file for the entire session.  Continue to create and keep separate asks files for each file reviewed.
+Keep count of files processed and remaining to be processed. Update this after each file, ideally storing in the review.{project}.{YYYYMMDD-nn}.md file. Use a single such review file for the entire session. Continue to create and keep separate asks files for each file reviewed.
 
 For any file which generates no tasks, keep a list of such files in the aforementioned review document.
 
-## Code Review Questionnaire
-When reviewing code, systematically answer these core questions:
+### For Single-File Reviews
+Create a simple review document named `review.{filename}.{YYYYMMDD}.md` and, if needed, a corresponding task file `tasks.code-review.{filename}.{YYYYMMDD}.md`.
 
+## Code Review Questionnaire
+When reviewing code, systematically answer these core questions.  
 ### 1. Potential Bugs & Edge Cases
 - Are there any bugs or strong potential for bugs?
 - Are there unhandled edge cases?
@@ -67,7 +87,7 @@ When reviewing code, systematically answer these core questions:
 - Are large bundles being imported when smaller alternatives exist?
 - Is proper memoization used where needed (useMemo, useCallback)?
 - Are images and assets optimized?
-
+  
 ### 9. Security Considerations
 - Is user input properly validated and sanitized?
 - Are authentication and authorization properly implemented?
@@ -94,30 +114,36 @@ When reviewing code, systematically answer these core questions:
 - Is App Router used and its patterns followed correctly?
 - Are any deprecated expressions present?
 - Are Metadata and SEO considerations addressed?
-
 - Does the code follow react/typescript/nextJS best practices?
 - If Tailwind is used, it should be v4 and avoid legacy v3 patterns and code
 - If NextJS is used, it should be v15 and avoid legacy v14 patterns and code
-- In general there should be no tailwind.config.ts (or .js, etc).  This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
+
+- In general there should be no tailwind.config.ts (or .js, etc). This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
+
 - If Radix is used, specifically Radix themes with ShadCN, you should evaluate against existing known issues with this combination and ensure we are not at risk.
 
-
-
+  
 ## Code Review Process
 
 ### Step 1: Create Review Document
+
+#### For Single-File Reviews
+Create a review document named `review.{filename}.{YYYYMMDD}.md` in the appropriate directory.
+
+#### For Directory Crawl Reviews
 Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/private/code-reviews` directory.
 
-All reviewed files should be present in either Files with Issues, or Files with No Issues sections.  No file should be unaccounted for.  Update this after reviewing each file.  Additionally, keep track of how many files have been reviewed, and what the last filed review was, so this can be restarted at any time.  Make sure to update the status (started, in-progress, complete).  We need to be able to pause and resume this task without losing work or missing items.
+All reviewed files should be present in either Files with Issues, or Files with No Issues sections. No file should be unaccounted for. Update this after reviewing each file. Additionally, keep track of how many files have been reviewed, and what the last filed review was, so this can be restarted at any time. Make sure to update the status (started, in-progress, complete). We need to be able to pause and resume this task without losing work or missing items.
 
-If useful, you can add a review summary or overview for each file.  Note that this does not obviate the need to create tasks.  Perform all tasks exactly as specified here.
+If useful, you can add a review summary or overview for each file. Note that this does not obviate the need to create tasks. Perform all tasks exactly as specified here.
 
 Note: Upon completion of review, *every* file should be accounted for, meaning that if there were (for example) 54 files and you processed 36 of them, you should be able to account for the remaining 18, and this would indicate that your review was not complete.
 
-You MUST update the main review file after each file is processed.  Otherwise we lose our pause and resume ability.  Not after each batch.  After each file.
+You MUST update the main review file after each file is processed. Otherwise we lose our pause and resume ability. Not after each batch. After each file.
 
 #### YAML Block
 Place this at the beginning of all created code-review files:
+
 ```yaml
 ---
 layer: project
@@ -126,6 +152,7 @@ docType: review
 ```
 
 ### Step 2: Conduct Review
+
 Analyze the file systematically using the code review questionnaire. Group findings by category for clarity:
 1. **Critical Issues**: Bugs, security vulnerabilities, performance problems
 2. **Code Quality**: Hard-coded values, duplication, structure issues
@@ -134,33 +161,38 @@ Analyze the file systematically using the code review questionnaire. Group findi
 5. **Testing**: Missing or inadequate test coverage
 
 ### Step 3: Create Tasks from Review Findings
-Transform review findings into actionable tasks in a separate file named `tasks.code-review.{filename}.MMDD.md` in the `project-documents/code-reviews` directory.  Create one such task file per reviewed file.  Add the file to the appropriate list in the review.{project}.{YYYYMMDD-nn}.md file, based on whether or not code review issues were present in the file.
+Transform review findings into actionable tasks in a separate file:
+- **Single-File**: `tasks.code-review.{filename}.{YYYYMMDD}.md`
+- **Directory Crawl**: `tasks.code-review.{filename}.MMDD.md` in the `project-documents/code-reviews` directory
+
+Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
 
 ### Step 4: Task Processing
 Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.00-process`:
 
 1. **Phase 3: Granularity and Clarity**
-   - Convert each review finding into clear, actionable tasks
-   - Ensure task scope is precise and narrow
-   - Include acceptance criteria
+- Convert each review finding into clear, actionable tasks
+- Ensure task scope is precise and narrow
+- Include acceptance criteria
 
-2. **Phase 4: Expansion and Detailing**
-   - Add implementation details and subtasks
-   - Reference specific code locations
-   - Provide concrete examples where helpful
+1. **Phase 4: Expansion and Detailing**
+- Add implementation details and subtasks
+- Reference specific code locations
+- Provide concrete examples where helpful
 
 Example task structure:
-
 ```markdown
+
 ## Code Review Tasks: {Component}
 - [ ] **Task 1: Remove Hard-coded Date Range**
-  - Replace hard-coded 2024 date range with configurable values from settings
-  - Add to chartSettings.ts with appropriate defaults
-  - Update initialization code to use these settings
-  - **Success:** Chart date constraints are configurable without code changes
+- Replace hard-coded 2024 date range with configurable values from settings
+- Add to chartSettings.ts with appropriate defaults
+- Update initialization code to use these settings
+- **Success:** Chart date constraints are configurable without code changes
 ```
 
 ### Step 5: Prioritization and Implementation
+
 The Project Manager will prioritize tasks for implementation based on:
 - **P0**: Critical bugs, security issues, performance blockers
 - **P1**: Code quality issues that impact maintainability
@@ -168,6 +200,7 @@ The Project Manager will prioritize tasks for implementation based on:
 - **P3**: Nice-to-have optimizations and enhancements
 
 ## Approval Criteria
+
 Before approving a code review, ensure:
 - [ ] All automated checks pass (linting, type checking, build verification)
 - [ ] No critical bugs or security vulnerabilities identified
@@ -181,9 +214,7 @@ Before approving a code review, ensure:
 - [ ] Hard-coded values are eliminated or justified
 
 ## Review Documentation Templates
-
 ### Code Review Template
-
 ```markdown
 # Code Review: {Filename}
 
@@ -212,7 +243,6 @@ Before approving a code review, ensure:
 ## Summary
 [Overall assessment and priority level]
 ```
-
 ### Task List Template
 
 ```markdown
@@ -220,29 +250,29 @@ Before approving a code review, ensure:
 
 ## P0: Critical Issues
 - [ ] **Task: [Bug Fix Name]**
-  - [Detailed description]
-  - [Implementation guidance]
-  - **Success:** [Success criteria]
+- [Detailed description]
+- [Implementation guidance]
+- **Success:** [Success criteria]
 
 ## P1: Code Quality
 - [ ] **Task: [Quality Improvement]**
-  - [Description and implementation details]
-  - **Success:** [Success criteria]
+- [Description and implementation details]
+- **Success:** [Success criteria]
 
 ## P2: Best Practices
 - [ ] **Task: [Pattern Improvement]**
-  - [Description and implementation details]
-  - **Success:** [Success criteria]
+- [Description and implementation details]
+- **Success:** [Success criteria]
 
 ## P3: Enhancements
 - [ ] **Task: [Enhancement Name]**
-  - [Description and implementation details]
-  - **Success:** [Success criteria]
+- [Description and implementation details]
+- **Success:** [Success criteria]
 ```
 
----
-
+  ---
 ## Quality Assessment
+
 These guidelines facilitate comprehensive code reviews by:
 1. **Systematic Approach**: The questionnaire ensures no critical areas are missed
 2. **Actionable Outcomes**: Direct translation from findings to prioritized tasks
@@ -250,5 +280,6 @@ These guidelines facilitate comprehensive code reviews by:
 4. **Comprehensive Coverage**: From bugs to accessibility to performance
 5. **Documentation Standards**: Clear templates and naming conventions
 6. **Priority Framework**: P0-P3 system for effective task management
+7. **Flexible Usage**: Supports both single-file reviews and comprehensive directory crawls
 
-The structured process transforms code reviews from subjective assessments into systematic quality assurance with measurable outcomes. 
+The structured process transforms code reviews from subjective assessments into systematic quality assurance with measurable outcomes.

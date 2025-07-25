@@ -167,9 +167,9 @@ private/
 ├── code-reviews/        # (existing)
 ├── maintenance/         # (existing) 
 ├── project-guides/      # (new) - project-specific guide customizations
-│   ├── concept.{project}.md # (moved here)
-│   ├── spec.{project}.md    # (moved here)
-│   └── notes.{project}.md   # (moved here)
+│   ├── 01-concept.{project}.md # (moved here)
+│   ├── 02-spec.{project}.md    # (moved here)
+│   └── 03-notes.{project}.md   # (moved here)
 ├── tasks/               # (new) - move task files here
 └── ui/                  # (existing)
     └── screenshots/     # (existing)
