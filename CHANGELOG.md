@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Project document phase numbering**: Implemented `XX-name.{project}.md` naming convention for project-specific documents
 - **Consistent ordering**: Project documents now follow the same phase-based ordering as guides
+- **Setup Script**: setup scripts for Windsurf and Cursor rules/ and agents/.
 
 ### Changed
 - **Project document names**: Updated project-specific document naming to use phase numbers:
