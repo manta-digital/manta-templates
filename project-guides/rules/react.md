@@ -1,3 +1,9 @@
+---
+description: React and Next.js component rules, naming conventions, and best practices
+globs: ["**/*.tsx", "**/*.jsx", "**/*.ts", "**/*.js", "src/components/**/*", "app/**/*"]
+alwaysApply: false
+---
+
 # React & Next.js Rules
 
 ## Components & Naming

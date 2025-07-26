@@ -1,3 +1,8 @@
+---
+description: General coding rules and project structure guidelines for AI-assisted development
+alwaysApply: true
+---
+
 # General Coding Rules
 
 ## Project Structure

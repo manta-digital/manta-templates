@@ -1,3 +1,9 @@
+---
+description: Automated code review agent configuration for comprehensive project codebase analysis
+globs: ["**/*"]
+alwaysApply: false
+---
+
 # Automated Code Review Agent
 
 ## Agent Purpose

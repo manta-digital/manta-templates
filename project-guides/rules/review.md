@@ -1,3 +1,8 @@
+---
+description: Comprehensive code review guidelines, processes, and quality assurance standards
+alwaysApply: false
+---
+
 # Code Review Rules
 
 ## Overview

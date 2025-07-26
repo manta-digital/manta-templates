@@ -1,3 +1,9 @@
+---
+description: Database management with Prisma, schema guidelines, and background job configuration
+globs: ["prisma/**/*", "**/*.prisma", "src/lib/db.*", "**/*inngest*"]
+alwaysApply: false
+---
+
 # Database & Prisma Rules
 
 ## Prisma

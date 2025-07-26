@@ -1,3 +1,9 @@
+---
+description: Testing guidelines, Storybook configuration, and development tools usage
+globs: ["**/*.test.*", "**/*.spec.*", "**/*.stories.*", "src/stories/**/*"]
+alwaysApply: false
+---
+
 # Testing & Development Tools
 
 ## Storybook

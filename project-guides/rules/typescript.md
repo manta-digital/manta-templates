@@ -1,3 +1,9 @@
+---
+description: TypeScript syntax rules, tRPC router guidelines, and strict typing standards
+globs: ["**/*.ts", "**/*.tsx", "src/lib/api/**/*"]
+alwaysApply: false
+---
+
 # TypeScript Rules
 
 ## TypeScript & Syntax

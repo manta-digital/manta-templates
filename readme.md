@@ -31,6 +31,19 @@ mv ai-project-guide-main project-documents
 rm -rf project-documents/.git
 ```
 
+### IDE Setup (Cursor/Windsurf)
+After adding the guides to your project, set up IDE rules for enhanced AI assistance:
+
+```bash
+# Automated setup (recommended)
+./project-documents/scripts/setup-ide cursor     # For Cursor IDE
+./project-documents/scripts/setup-ide windsurf   # For Windsurf IDE
+```
+
+This copies all project rules to your IDE's configuration directory, handles file renaming (`.md` to `.mdc` for Cursor), and validates frontmatter requirements.
+
+**Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
+
 ### Want a Full Template?
 If you want a complete Next.js starter with these guides pre-integrated:
 - **Web**: https://templates.manta.digital
