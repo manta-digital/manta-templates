@@ -16,54 +16,55 @@ NC='\033[0m' # No Color
 # Script configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Determine if we're in the ai-project-guide source repo or in a project that includes it
+# Find the actual project root by looking for project-documents directory
+find_project_root() {
+    local current_dir="$(pwd)"
+    
+    # If we're in the ai-project-guide source repo
+    if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
+        echo "$(dirname "$SCRIPT_DIR")"
+        return
+    fi
+    
+    # Look for project-documents directory going up the directory tree
+    local search_dir="$current_dir"
+    while [[ "$search_dir" != "/" ]]; do
+        if [[ -d "$search_dir/project-documents" ]]; then
+            echo "$search_dir"
+            return
+        fi
+        search_dir="$(dirname "$search_dir")"
+    done
+    
+    # If no project-documents found, assume current directory is project root
+    echo "$current_dir"
+}
+
+PROJECT_ROOT="$(find_project_root)"
+TARGET_ROOT="$PROJECT_ROOT"
+
+# Set source directories
 if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
     # We're in the source repository
-    PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-    RULES_SOURCE_DIR="$PROJECT_ROOT/project-guides/rules"
-    AGENTS_SOURCE_DIR="$PROJECT_ROOT/project-guides/agents"
-    TARGET_ROOT="$(pwd)"  # Create .cursor/.windsurf in current directory
-else
-    # We're in a project that includes ai-project-guide
-    # Script is in project-documents/scripts/, so go up two levels to project root
-    PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
     RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
     AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
-    TARGET_ROOT="$(pwd)"  # Create .cursor/.windsurf in current directory
+else
+    # We're in a project that includes ai-project-guide
+    RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
+    AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
 fi
 
 # Function to check if we're in the right directory
 check_directory() {
     local current_dir=$(pwd)
-    local script_name=$(basename "$0")
     
-    # Check if we're running from the wrong location
-    if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
-        # In source repo - warn if not in project root
-        if [[ "$current_dir" != "$PROJECT_ROOT" ]]; then
-            print_status $YELLOW "⚠️  Warning: You're running the script from the wrong directory!"
-            echo ""
-            print_status $BLUE "💡 The script should be run from the project root, not from the scripts/ directory."
-            echo ""
-            print_status $BLUE "Current location: $current_dir"
-            print_status $BLUE "Expected location: $PROJECT_ROOT"
-            echo ""
-            print_status $GREEN "✅ Correct usage:"
-            echo "   cd $PROJECT_ROOT"
-            echo "   ./scripts/$script_name $1"
-            echo ""
-            print_status $YELLOW "❓ Do you want to continue anyway? (y/N)"
-            read -r response
-            if [[ ! "$response" =~ ^[Yy]$ ]]; then
-                print_status $BLUE "👋 Exiting. Please run from the project root directory."
-                exit 0
-            fi
-            print_status $YELLOW "⚠️  Continuing... IDE directories will be created in: $current_dir"
-            echo ""
-        fi
-    else
-        # In a project with ai-project-guide - this is the correct usage
-        print_status $BLUE "✅ Running from project root - IDE directories will be created in: $current_dir"
+    print_status $BLUE "📍 Project root detected: $PROJECT_ROOT"
+    print_status $BLUE "📍 IDE directories will be created in: $TARGET_ROOT"
+    echo ""
+    
+    # Warn if we're deep in subdirectories (might be confusing)
+    if [[ "$current_dir" != "$PROJECT_ROOT" ]] && [[ "$current_dir" == */project-documents/* ]]; then
+        print_status $YELLOW "💡 Note: You're running from inside project-documents/, but IDE files will be created in the project root."
         echo ""
     fi
 }
