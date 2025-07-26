@@ -193,6 +193,7 @@ main() {
     # Set up target directory and file extension behavior
     local target_base_dir="$TARGET_ROOT/.$ide"
     local rules_target_dir="$target_base_dir/rules"
+    local agents_target_dir="$target_base_dir/agents"
     local rename_to_mdc=false
     
     if [ "$ide" = "cursor" ]; then
@@ -209,7 +210,7 @@ main() {
         exit 1
     fi
     
-    # Create target directory
+    # Create target directories
     mkdir -p "$rules_target_dir"
     print_status $GREEN "📁 Created directory: $rules_target_dir"
     
@@ -221,8 +222,10 @@ main() {
     
     # Copy agents if directory exists
     if [ -d "$AGENTS_SOURCE_DIR" ]; then
+        mkdir -p "$agents_target_dir"
+        print_status $GREEN "📁 Created directory: $agents_target_dir"
         print_status $BLUE "🤖 Copying agent files..."
-        copy_rules "$AGENTS_SOURCE_DIR" "$rules_target_dir" $rename_to_mdc "agent"
+        copy_rules "$AGENTS_SOURCE_DIR" "$agents_target_dir" $rename_to_mdc "agent"
     else
         print_status $YELLOW "⚠️  Agents directory not found, skipping"
     fi
@@ -236,6 +239,7 @@ main() {
             echo ""
             print_status $BLUE "💡 Cursor setup notes:"
             echo "   • Rules are now in .cursor/rules/ as .mdc files"
+            echo "   • Agents are now in .cursor/agents/ as .mdc files"
             echo "   • Files with frontmatter warnings may need manual fixes"
             echo "   • Restart Cursor to ensure rules are loaded"
             ;;
@@ -243,6 +247,7 @@ main() {
             echo ""
             print_status $BLUE "💡 Windsurf setup notes:"
             echo "   • Rules are now in .windsurf/rules/ as .md files"
+            echo "   • Agents are now in .windsurf/agents/ as .md files"
             echo "   • Files with frontmatter warnings may need manual fixes"
             echo "   • Restart Windsurf to ensure rules are loaded"
             ;;
