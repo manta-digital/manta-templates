@@ -1,5 +1,6 @@
 ---
 description: General coding rules and project structure guidelines for AI-assisted development
+globs: 
 alwaysApply: true
 ---
 

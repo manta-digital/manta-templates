@@ -1,5 +1,6 @@
 ---
 description: Comprehensive code review guidelines, processes, and quality assurance standards
+globs: 
 alwaysApply: false
 ---
 
