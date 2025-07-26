@@ -35,12 +35,18 @@ rm -rf project-documents/.git
 After adding the guides to your project, set up IDE rules for enhanced AI assistance:
 
 ```bash
-# Automated setup (recommended)
+# Option 1: Direct script (run from project root)
 ./project-documents/scripts/setup-ide cursor     # For Cursor IDE
 ./project-documents/scripts/setup-ide windsurf   # For Windsurf IDE
+
+# Option 2: npm scripts (recommended)
+npm run setup-cursor                              # For Cursor IDE  
+npm run setup-windsurf                            # For Windsurf IDE
 ```
 
 This copies all project rules to your IDE's configuration directory, handles file renaming (`.md` to `.mdc` for Cursor), and validates frontmatter requirements.
+
+**💡 Pro tip:** Use the npm scripts to avoid directory confusion. The direct script will warn you if run from the wrong location.
 
 **Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
 
