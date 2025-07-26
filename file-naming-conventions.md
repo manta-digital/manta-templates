@@ -44,13 +44,23 @@ When including dates in filenames:
 Task files should follow this convention:
 
 ```
-tasks.[category].[component/feature].[additional-info].md
+nn-tasks-{section}.md
 ```
 
+Where:
+- `nn` is a sequential index (01, 02, 03, etc.)
+- `{section}` is the section name in lowercase with special characters removed and spaces replaced with hyphens
+
 Examples:
-- `tasks.feature.chart-updates.md`
-- `tasks.code-review.chartcanvas.0419.md`
-- `tasks.bug-fix.chart-rendering.md`
+- `01-tasks-frontend.md`
+- `02-tasks-backend-api.md`  
+- `03-tasks-database-setup.md`
+
+### Legacy Task File Patterns
+Previously used patterns (now deprecated):
+- `tasks.[category].[component/feature].[additional-info].md`
+- `{section}-tasks-phase-4.md`
+- `tasks.code-review.{filename}.{date}.md` (still used for code review tasks)
 
 ## Benefits
 
