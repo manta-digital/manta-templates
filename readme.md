@@ -48,6 +48,8 @@ This copies all project rules to your IDE's configuration directory, handles fil
 
 **💡 Pro tip:** Use the npm scripts to avoid directory confusion. The direct script will warn you if run from the wrong location.
 
+**📍 Important:** The script creates `.cursor/` and `.windsurf/` directories in your project root (not inside `project-documents/`).
+
 **Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
 
 ### Want a Full Template?
