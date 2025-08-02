@@ -74,6 +74,8 @@ We're working in our guide.ai-project.00-process, Phase 4: Task expansion and En
 If you have all required inputs and sufficient information, go ahead and perform the tasks as instructed in the guide.  If not, request required information then proceed when received.
 
 Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
+
+Note: this is a project and process task, not a coding task.  
 ```
 
 ##### Task Implementation
@@ -90,8 +92,9 @@ Hello. Our input {
     example-section ex: review-chartanalysis, 
     example-subsection ex: configuration-improvements
     scichart,
-}
+}```
 
+```markdown
 We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.00-process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
 Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/nn-tasks-{section}.md file (where nn is the sequential index).  Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
@@ -247,6 +250,8 @@ Let's analyze the following existing codebase and document our findings.  We wan
 The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
 
 Refer to the Resource Structure in `guide.ai-project.00-process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+
+If you were previously assigned a role, continue in that role.  If not, assume role of Senior AI as defined in the guide mentioned in the preceding paragraph.
 ```
 
 ##### Add AI Projects Support
