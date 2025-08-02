@@ -254,7 +254,12 @@ Refer to the Resource Structure in `guide.ai-project.00-process` for a descripti
 If you were previously assigned a role, continue in that role.  If not, assume role of Senior AI as defined in the guide mentioned in the preceding paragraph.
 ```
 
+
+***
+#### Deprecated but Retained for Now
+
 ##### Add AI Projects Support
+*Note: this prompt is no longer required for any regular use-case.*
 Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
 
 ```markdown
