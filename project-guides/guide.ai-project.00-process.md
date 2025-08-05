@@ -54,7 +54,7 @@ Each project phase must be approved by Project Manager & Tech Lead before moving
    - Only include tasks that can reasonably be completed by an AI. Do not include open-ended human-centric tasks such as SEO optimization.
    - If insufficient information is available to fully convert an item into tasks, _stop_ and request clarifying information before continuing. Ideally, perform analysis and identify missing information before creating the tasks.
    - Keep section names concise and self explanatory, ex: Project Setup, not: Project Setup & Base configuration. Follow all markdown guidelines.
-   - use codingrules to guide task creation.  If not available STOP and confirm with Project Manager before proceeding.
+   - use codingrules to guide task creation unless more specific rules are available.  If not available STOP and confirm with Project Manager before proceeding.
    - This is not a coding phase.
    - For each task, note acceptance criteria.
 
