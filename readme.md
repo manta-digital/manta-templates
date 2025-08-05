@@ -5,9 +5,7 @@ docType: repository-overview
 
 > Structured project guides and parameterized prompts that dramatically expand what AI tools can help you build. Helps turn complex issues into manageable, AI-assisted workflows.  Setup scripts provided for Windsurf and Cursor.
 
-This project was created in early 2025 to address difficulties I encountered when trying to create anything but the most trivial app using AI-assisted development.  Since then, the AI tools have advanced, adding better rule support, task lists, and more.  It is my experience that AI Project Guide still provides *far* better results than just using the built-in to-do lists and agent knowledge.
-
-That said, the space is moving fast and this repository remains a work in progress.
+This project was created in early 2025 to address difficulties I encountered when trying to create anything but the most trivial app using AI-assisted development.  Since then, the AI tools have advanced, adding better rule support, task lists, and more.  It is my experience that AI Project Guide still provides *far* better results than just using the built-in to-do lists and agent knowledge.  That said, the space is moving fast and this repository remains a work in progress.
 
 The repository contains a comprehensive methodology for AI-assisted development, including:
 - **Six-phase project process** with clear roles and workflows
@@ -15,6 +13,7 @@ The repository contains a comprehensive methodology for AI-assisted development,
 - **Tool-specific guides** for frameworks, libraries, and APIs
 - **Code rules and patterns** for consistent, maintainable code
 ---
+
 
 ## 🚀 Quick Start
 
@@ -57,7 +56,9 @@ This copies all project rules to your IDE's configuration directory, handles fil
 
 ### Start with Full Template Instead
 For a complete template with easy setup scripts, use the full template from [manta-templates](https://github.com/manta-digital/manta-templates).  It makes the guides setup extremely easy.  Just Next.js for now, but more flexible options should be coming very soon.  See demo at https://templates.manta.digital.
-***
+
+---
+
 
 ## 🛠️ How to Use
 
@@ -142,7 +143,9 @@ When working with AI Project Guide, provide input in a format like this, and you
 
 #### TroubleShooting
 In Windsurf, the rules are sometimes not recognized until you manually access them in settings.  *todo: add tip for fixing this here, and verifying that rules are loaded correctly in Cursor*
-***
+
+---
+
 
 ## 📚 Guide System Overview
 
@@ -175,7 +178,8 @@ The AI project guide system operates on three layers, designed to work together 
 - **Public vs Private**: Public wins (safe to update)
 - **Organization vs Project Private**: Project wins (preserve user work)
 - **Same file in both**: Project version preserved
-***
+---
+
 
 ## 🔑 What lives where?
 
@@ -189,7 +193,9 @@ The AI project guide system operates on three layers, designed to work together 
 | **`snippets/`** | Language-agnostic code fragments and quick copy-paste helpers.                                                                |
 
 *Full details and rationale live in [`project-documents/directory-structure.md`](project-documents/directory-structure.md).*
-***
+
+---
+
 
 ## 🧭 Zero-ambiguity decision matrix
 
@@ -200,12 +206,16 @@ The AI project guide system operates on three layers, designed to work together 
 5. Is it broad **subject matter** knowledge? → `domain-guides/`  
 
 Anything that doesn't match gets flagged for discussion before filing.
-***
+
+---
+
 
 ## 📐 Naming & formatting conventions
 
 All file and folder names follow our kebab-case pattern and document-type prefixes outlined in [`file-naming-conventions.md`](project-documents/file-naming-conventions.md).    Please review that doc before adding or renaming files.
-***
+
+---
+
 
 ## 📦 Advanced Usage
 
@@ -230,7 +240,6 @@ rm -rf project-documents/.git
 # Restore your project-specific files
 cp -r project-documents-private-backup/* project-documents/private/
 ```
-
 ---
 
 ## 🔄 Migrating from `our-project/` to `private/`
@@ -270,6 +279,7 @@ private/
 
 > **Note**: The guides in this repository have been updated to use `private/`. If you see references to `our-project/` in guides, those are likely outdated and should be treated as `private/`.
 ---
+
 
 ## 🤝 Contributing
 * Keep documents concise; link out rather than duplicate content.  
