@@ -38,7 +38,7 @@ When creating these project documents, do not guess.  If information is missing
 ```
 
 ##### Project Phase
-*This replaces the previous Project Phase prompt.  Even this one is often not needed, as many AIs will ask to work on the next phase, and they are self-describing.*
+*This replaces the previous Project Phase prompt.  Even this one is often not needed, as many AIs will ask to work on the next phase, and they are self-describing.  It is useful for explicitly running Phase 2 and Phase 3.*
 ```markdown
 Refer to the `guide.ai-project.process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the fules in `directory-structure` for any files or directories created.
 ```
@@ -50,6 +50,8 @@ Refer to the `guide.ai-project.process`, and function as a Senior AI.  Implement
 We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
 
 If you have all required inputs and sufficient information, go ahead and perform the task expansion as instructed in the guide.  If not, request required information then proceed when received.
+
+Note that some tasks may be implementable as described in `03-tasks.{project}.md` and not require additional expansion.  In any task for which this is the case, copy the task as-is to the expanded file.  This maintains consistency and improves reliability.
 
 Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 
@@ -91,7 +93,7 @@ You will need to consult specific knowledge for {tool}, which should be availabl
    results, then perform a `search_web`.
 ```
 
-##### Model Change or Context Review
+##### Model Change or Context Refresh
 *Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
 
 ```markdown

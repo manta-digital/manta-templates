@@ -44,7 +44,7 @@ When including dates in filenames:
 Task files should follow this convention:
 
 ```
-nn-tasks-{section}.md
+nn-tasks.{section}.md
 ```
 
 Where:
@@ -52,18 +52,22 @@ Where:
 - `{section}` is the section name in lowercase with special characters removed and spaces replaced with hyphens
 
 Examples:
-- `01-tasks-frontend.md`
-- `02-tasks-backend-api.md`  
-- `03-tasks-database-setup.md`
+- `01-tasks.frontend.md`
+- `02-tasks.backend-api.md`  
+- `03-tasks.database-setup.md`
 
 ### Legacy Task File Patterns
 Previously used patterns (now deprecated):
 - `tasks.[category].[component/feature].[additional-info].md`
 - `{section}-tasks-phase-4.md`
+- `nn-tasks-{section}.md`
 - `tasks.code-review.{filename}.{date}.md` (still used for code review tasks)
 
-## Benefits
+## Feature Files
+Feature files should follow the same convention as task files, but with the word "feature" instead of "tasks".
 
+
+## Benefits
 This naming convention provides:
 - Clear visual hierarchy in filenames
 - Easier tab completion in terminals
