@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **Feature file naming convention**: Updated from `{feature}-feature.md` to `nn-feature.{feature}.md` format
 - **Task file naming convention**: Updated from `{section}-tasks-phase-4.md` to `nn-tasks-{section}.md` format
   - Added sequential index prefix (01, 02, 03, etc.) for better organization
   - Removed confusing '-phase-4' suffix from task file names
   - Updated all prompt templates and guides to use new naming pattern
+  - Streamlined and updated system prompts.
 - **File naming documentation**: Updated `file-naming-conventions.md` with new task file patterns and documented legacy formats
 
 ## [0.5.2] - 2025-01-27
