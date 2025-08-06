@@ -1,0 +1,269 @@
+#!/bin/bash
+
+# AI Project Guide - IDE Setup Script
+# Copies project rules to your IDE configuration directory
+# Supports: Cursor, Windsurf
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Script configuration
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Find the actual project root by looking for project-documents directory
+find_project_root() {
+    local current_dir="$(pwd)"
+    
+    # If we're in the ai-project-guide source repo
+    if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
+        echo "$(dirname "$SCRIPT_DIR")"
+        return
+    fi
+    
+    # Look for project-documents directory going up the directory tree
+    local search_dir="$current_dir"
+    while [[ "$search_dir" != "/" ]]; do
+        if [[ -d "$search_dir/project-documents" ]]; then
+            echo "$search_dir"
+            return
+        fi
+        search_dir="$(dirname "$search_dir")"
+    done
+    
+    # If no project-documents found, assume current directory is project root
+    echo "$current_dir"
+}
+
+PROJECT_ROOT="$(find_project_root)"
+TARGET_ROOT="$PROJECT_ROOT"
+
+# Set source directories
+if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
+    # We're in the source repository
+    RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
+    AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
+else
+    # We're in a project that includes ai-project-guide
+    RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
+    AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
+fi
+
+# Function to check if we're in the right directory
+check_directory() {
+    local current_dir=$(pwd)
+    
+    print_status $BLUE "📍 Project root detected: $PROJECT_ROOT"
+    print_status $BLUE "📍 IDE directories will be created in: $TARGET_ROOT"
+    echo ""
+    
+    # Warn if we're deep in subdirectories (might be confusing)
+    if [[ "$current_dir" != "$PROJECT_ROOT" ]] && [[ "$current_dir" == */project-documents/* ]]; then
+        print_status $YELLOW "💡 Note: You're running from inside project-documents/, but IDE files will be created in the project root."
+        echo ""
+    fi
+}
+
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 <ide>"
+    echo ""
+    echo "Supported IDEs:"
+    echo "  cursor    - Copy rules to .cursor/rules/ (renames .md to .mdc)"
+    echo "  windsurf  - Copy rules to .windsurf/rules/ (keeps .md extension)"
+    echo ""
+    echo "Examples:"
+    echo "  $0 cursor"
+    echo "  $0 windsurf"
+    echo ""
+    echo "This script copies AI project rules from project-guides/ to your IDE's"
+    echo "configuration directory and validates frontmatter requirements."
+}
+
+# Function to print colored output
+print_status() {
+    local color=$1
+    local message=$2
+    echo -e "${color}${message}${NC}"
+}
+
+# Function to validate frontmatter
+validate_frontmatter() {
+    local file=$1
+    local filename=$(basename "$file")
+    
+    if ! grep -q "^---" "$file"; then
+        print_status $YELLOW "⚠️  WARNING: $filename missing frontmatter"
+        return 1
+    fi
+    
+    if ! grep -q "description:" "$file"; then
+        print_status $YELLOW "⚠️  WARNING: $filename missing 'description' in frontmatter"
+        return 1
+    fi
+    
+    if ! grep -q "globs:" "$file"; then
+        print_status $YELLOW "⚠️  WARNING: $filename missing 'globs' in frontmatter"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Function to copy and potentially rename files
+copy_rules() {
+    local source_dir=$1
+    local target_dir=$2
+    local rename_extension=$3
+    local file_type=$4
+    
+    if [ ! -d "$source_dir" ]; then
+        print_status $RED "❌ Source directory not found: $source_dir"
+        return 1
+    fi
+    
+    local copied_count=0
+    local warning_count=0
+    
+    for file in "$source_dir"/*.md; do
+        if [ ! -f "$file" ]; then
+            continue
+        fi
+        
+        local filename=$(basename "$file")
+        local target_filename="$filename"
+        
+        # Rename .md to .mdc for cursor
+        if [ "$rename_extension" = true ]; then
+            target_filename="${filename%.md}.mdc"
+        fi
+        
+        local target_path="$target_dir/$target_filename"
+        
+        # Copy file
+        cp "$file" "$target_path"
+        print_status $GREEN "✅ Copied $filename → $target_filename"
+        
+        # Validate frontmatter
+        if ! validate_frontmatter "$target_path"; then
+            ((warning_count++))
+        fi
+        
+        ((copied_count++))
+    done
+    
+    print_status $BLUE "📋 Copied $copied_count $file_type files"
+    if [ $warning_count -gt 0 ]; then
+        print_status $YELLOW "⚠️  $warning_count files have frontmatter issues"
+    fi
+}
+
+# Main script logic
+main() {
+    # Check parameters
+    if [ $# -eq 0 ]; then
+        print_status $RED "❌ Error: IDE parameter required"
+        echo ""
+        show_usage
+        exit 1
+    fi
+    
+    local ide=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    
+    # Check if we're in the right directory
+    check_directory "$1"
+    
+    # Validate IDE parameter
+    case "$ide" in
+        cursor|windsurf)
+            ;;
+        *)
+            print_status $RED "❌ Error: Unsupported IDE '$1'"
+            echo ""
+            show_usage
+            exit 1
+            ;;
+    esac
+    
+    # Set up target directory and file extension behavior
+    local target_base_dir="$TARGET_ROOT/.$ide"
+    local rules_target_dir="$target_base_dir/rules"
+    local agents_target_dir="$target_base_dir/agents"
+    local rename_to_mdc=false
+    
+    if [ "$ide" = "cursor" ]; then
+        rename_to_mdc=true
+    fi
+    
+    print_status $BLUE "🚀 Setting up $ide IDE rules..."
+    echo ""
+    
+    # Validate source directories exist
+    if [ ! -d "$RULES_SOURCE_DIR" ]; then
+        print_status $RED "❌ Error: Rules source directory not found: $RULES_SOURCE_DIR"
+        print_status $YELLOW "💡 Make sure you're running this from a project that includes ai-project-guide"
+        exit 1
+    fi
+    
+    # Create target directories
+    mkdir -p "$rules_target_dir"
+    print_status $GREEN "📁 Created directory: $rules_target_dir"
+    
+    # Copy rules
+    print_status $BLUE "📄 Copying rules files..."
+    copy_rules "$RULES_SOURCE_DIR" "$rules_target_dir" $rename_to_mdc "rule"
+    
+    echo ""
+    
+    # Copy agents if directory exists
+    if [ -d "$AGENTS_SOURCE_DIR" ]; then
+        mkdir -p "$agents_target_dir"
+        print_status $GREEN "📁 Created directory: $agents_target_dir"
+        print_status $BLUE "🤖 Copying agent files..."
+        copy_rules "$AGENTS_SOURCE_DIR" "$agents_target_dir" $rename_to_mdc "agent"
+    else
+        print_status $YELLOW "⚠️  Agents directory not found, skipping"
+    fi
+    
+    echo ""
+    print_status $GREEN "✅ Setup complete for $ide!"
+    
+    # IDE-specific instructions
+    case "$ide" in
+        cursor)
+            echo ""
+            print_status $BLUE "💡 Cursor setup notes:"
+            echo "   • Rules are now in .cursor/rules/ as .mdc files"
+            echo "   • Agents are now in .cursor/agents/ as .mdc files"
+            echo "   • Files with frontmatter warnings may need manual fixes"
+            echo "   • Restart Cursor to ensure rules are loaded"
+            ;;
+        windsurf)
+            echo ""
+            print_status $BLUE "💡 Windsurf setup notes:"
+            echo "   • Rules are now in .windsurf/rules/ as .md files"
+            echo "   • Agents are now in .windsurf/agents/ as .md files"
+            echo "   • Files with frontmatter warnings may need manual fixes"
+            echo "   • Restart Windsurf to ensure rules are loaded"
+            ;;
+    esac
+    
+    if grep -q "WARNING" <(echo ""); then
+        echo ""
+        print_status $YELLOW "⚠️  Some files had frontmatter issues. For Cursor compatibility,"
+        print_status $YELLOW "   ensure all .mdc files have proper YAML frontmatter with:"
+        echo "   ---"
+        echo "   description: Brief description of what this rule does"
+        echo "   globs: [\"**/*.ext\"]"
+        echo "   alwaysApply: false"
+        echo "   ---"
+    fi
+}
+
+# Run main function with all arguments
+main "$@" 
