@@ -5,14 +5,16 @@ docType: repository-overview
 
 > Structured project guides and parameterized prompts that dramatically expand what AI tools can help you build. Helps turn complex issues into manageable, AI-assisted workflows.  Setup scripts provided for Windsurf and Cursor.
 
-This project was created in early 2025 to address difficulties I encountered when trying to create anything but the most trivial app using AI-assisted development.  Since then, the AI tools have advanced, adding better rule support, task lists, and more.  It is my experience that AI Project Guide still provides *far* better results than just using the built-in to-do lists and agent knowledge.  That said, the space is moving fast and this repository remains a work in progress.
+I created this project after encountering difficulties using AI-assisted development tools like Windsurf and Cursor to create the apps I wanted.  While extremely helpful, the AI still failed at many even moderately complex tasks, and the effect increased with the codebase size.  
+
+The tools have advanced since then, adding better rule support, tasks lists, and more.  The AI Project Guide has advanced as well, and together they keep proving themselves useful.  It is my hope that they can be useful to others as well.
 
 The repository contains a comprehensive methodology for AI-assisted development, including:
 - **Six-phase project process** with clear roles and workflows
 - **Parameterized prompts** that work with any AI tool
 - **Tool-specific guides** for frameworks, libraries, and APIs
 - **Code rules and patterns** for consistent, maintainable code
----
+
 
 
 ## 🚀 Quick Start
@@ -24,14 +26,6 @@ git subtree add --prefix=project-documents https://github.com/ecorkran/ai-projec
 ```
 
 This gives you all guides integrated into your project. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
-
-**Alternative (if you prefer manual copy):**
-```bash
-# Download and extract without git history
-curl -L https://github.com/ecorkran/ai-project-guide/archive/refs/heads/main.tar.gz | tar -xz
-mv ai-project-guide-main project-documents
-rm -rf project-documents/.git
-```
 
 ### IDE Setup (Cursor/Windsurf)
 After adding the guides to your project, set up IDE rules for enhanced AI assistance:
@@ -54,10 +48,10 @@ This copies all project rules to your IDE's configuration directory, handles fil
 
 **Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
 
+
 ### Start with Full Template Instead
 For a complete template with easy setup scripts, use the full template from [manta-templates](https://github.com/manta-digital/manta-templates).  It makes the guides setup extremely easy.  Just Next.js for now, but more flexible options should be coming very soon.  See demo at https://templates.manta.digital.
 
----
 
 
 ## 🛠️ How to Use
@@ -65,11 +59,13 @@ For a complete template with easy setup scripts, use the full template from [man
 ### 🆕 New Projects
 The project guide is well-suited to new projects and can assist you with all phases of development.  
 
+
 #### 📝 Describe your Project
 Start by describing your project, ideally in a markdown file. Include goals, design ideas, target environments, and technical details if available.  
 
 * Place your file in `project-documents/private/`.
 * Name it `concept.{project}.description.md`. You can use a different filename if you like—just provide it to the AI with your kickoff prompt.
+
 
 #### 🚦 Initial Prompts – Phases 1 and 2
 After you describe your project and provide basic Input Parameters, paste the **Project Kickoff** prompt into your chat. If third-party tools are in use (they almost always are), additionally paste the **3rd Party Tools** prompt.
@@ -78,6 +74,7 @@ This will generate `01-concept.{project}.md` in `private/project-guides/`, custo
 
 At this point you’re ready to create tasks.
 
+
 #### 🔨 Creating & Expanding Tasks – Phases 3 and 4
 The `guide.ai-project.00-process` file instructs the AI on how to perform all project phases, including creating and expanding tasks. Use the **Project Phase** prompt again for **Phase 3**.  The guide will write the `03-tasks.{project}.md` file in `private/project-guides/`.
 
@@ -85,27 +82,35 @@ In general, letting the AI subdivide tasks as needed results in tasks that can b
 
 Just run the "Task Expansion" prompt.  Make sure to provide a `{ section: section-name }` so the AI knows what tasks to focus on.  Tasks will be expanded as needed and written to `tasks/nn-tasks.{section}.md`, with nn starting at 01.  
 
+
 #### 💻 Implementing Tasks – Phase 5
 Once tasks are written to `tasks/nn-tasks.{section}.md`, you’re ready to implement them. You can pass the entire task file to an AI, but for complex cases it’s better to tackle **subsections** one at a time.  Just update `{ subsection: subsection-name }` as needed.
 
 Then run the **Task Implementation** prompt. You can have it process all tasks in a file or just a subsection.  For non-trivial cases, subsection generally provides higher quality results.
 
+
 #### 🔁 Continuous Integration – Phase 6
 Less structured, but it maps well onto the same process used for **Feature Development & Continuous Integration** (next section).
 
-#### 🧪 Testing – Phase 7 (coming soon)
+
+#### 🧪 Known Limitations – Phase X
 If you’re thinking “where is testing?!” you’re not alone. Unit-test integration is high on the to-do list and will be added ASAP.
 
+Additionally, the guide system is weakest in UI.  Still helpful, but needs better prompt following, and ideally support for Figma MCP.  Also on the short list.
 
+
+## ⚡ Additional Tasks
 ### Feature Development and Continuous Integration
 It is almost always the case that projects need additional items not completely reflected in the initial task breakdown.  These may be additional features, expanded requirements, or unforeseen complexities in the initial implementation.  Several prompts are provided to simplify this process.
 
-#### Context Refresh or Model Change
+
+#### 🔄 Context Refresh or Model Change
 When starting a new conversation in an existing project (recommended to keep context size from growing uncontrollably), use the "Model Change or Context Refresh" prompt to improve anchoring to the project guide process.  Also useful to add into long conversation to minimize forgotten information.
 
 When starting a new chat for the project, remember to again provide the input parameters { project: etc }.
 
-#### Feature Development
+
+#### ✨ Feature Development
 For major new features, or addressing architectural issues, use the Features prompts.  Features large enough to require this should be described in a short feature document, i.e. `project-documents/private/feature.{project}.{feature-name}.md`
 ##### Feature Design
 Use the "Feature Design" prompt with your file and you will receive a `features/nn-feature.{feature}.md` file containing your feature's combined spec + low-level design as output.
@@ -114,7 +119,8 @@ Now use the "Feature Tasks" prompt and it will add a new section of Phase 3 task
 ##### Feature Expansion and Implementation
 Your feature tasks are now no different from the other tasks in the project.  Use the same prompts described above for Task Expansion and Implementation.
 
-#### Ad-Hoc Items
+
+#### 🎯 Ad-Hoc Items
 For addressing new features or issues not large enough to warrant their own spec, you can create task sections ad-hoc.  Just create a new section in `03-tasks.{project}.md` and describe your tasks.  You don't necessarily need the level of detail used by the AI in creating its Phase 3 tasks, but the more specific you are, the better the results will be.
 
 Now you can run the same Task Expansion and Task Implementation prompts on your new task section, with no special process required.
@@ -144,7 +150,6 @@ When working with AI Project Guide, provide input in a format like this, and you
 #### TroubleShooting
 In Windsurf, the rules are sometimes not recognized until you manually access them in settings.  *todo: add tip for fixing this here, and verifying that rules are loaded correctly in Cursor*
 
----
 
 
 ## 📚 Guide System Overview
@@ -178,7 +183,7 @@ The AI project guide system operates on three layers, designed to work together 
 - **Public vs Private**: Public wins (safe to update)
 - **Organization vs Project Private**: Project wins (preserve user work)
 - **Same file in both**: Project version preserved
----
+
 
 
 ## 🔑 What lives where?
@@ -194,27 +199,13 @@ The AI project guide system operates on three layers, designed to work together 
 
 *Full details and rationale live in [`project-documents/directory-structure.md`](project-documents/directory-structure.md).*
 
----
 
-
-## 🧭 Zero-ambiguity decision matrix
-
-1. Is it a **process** document? → `project-guides/`  
-2. Does it **own the whole app lifecycle**? → `framework-guides/`  
-3. Is it an **external network API**? → `api-guides/`  
-4. Is it **imported as a library** inside another app? → `tool-guides/`  
-5. Is it broad **subject matter** knowledge? → `domain-guides/`  
-
-Anything that doesn't match gets flagged for discussion before filing.
-
----
 
 
 ## 📐 Naming & formatting conventions
 
 All file and folder names follow our kebab-case pattern and document-type prefixes outlined in [`file-naming-conventions.md`](project-documents/file-naming-conventions.md).    Please review that doc before adding or renaming files.
 
----
 
 
 ## 📦 Advanced Usage
@@ -225,22 +216,7 @@ If you used the git subtree method above, you can update guides later:
 git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
 ```
 
-### Manual Copy (One-time setup)
-If you used the manual copy method, you'll need to re-download for updates:
-```bash
-# Backup your project-specific files first
-cp -r project-documents/private project-documents-private-backup
 
-# Download fresh guides
-curl -L https://github.com/ecorkran/ai-project-guide/archive/refs/heads/main.tar.gz | tar -xz
-rm -rf project-documents
-mv ai-project-guide-main project-documents
-rm -rf project-documents/.git
-
-# Restore your project-specific files
-cp -r project-documents-private-backup/* project-documents/private/
-```
----
 
 ## 🔄 Migrating from `our-project/` to `private/`
 If you're working with an existing project that uses the old `our-project/` structure, here's how to migrate to the new `private/` structure:
@@ -278,13 +254,8 @@ private/
 ```
 
 > **Note**: The guides in this repository have been updated to use `private/`. If you see references to `our-project/` in guides, those are likely outdated and should be treated as `private/`.
----
+
 
 
 ## 🤝 Contributing
-* Keep documents concise; link out rather than duplicate content.  
-* Cite sources inline when pulling in external material.  
-* Follow the "one-path rule": each document should live in exactly one canonical folder.  
-* For substantial restructures, update `directory-structure.md` first, then this README.
-
-Thanks for helping maintain a knowledge base that humans and AI agents can navigate with zero friction!  Happy building. 
+First, if you are using the AI Project Guide and found it useful enough to contribute or even report and issue, thank you. I'll try to respond to review PRs, and respond to issues & comments.
