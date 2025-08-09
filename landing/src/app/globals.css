@@ -174,3 +174,24 @@
 }
 
 /* You can add more custom styles or component styles below */
+
+@layer utilities {
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-slow {
+    animation: scroll 80s linear infinite;
+  }
+  .animate-scroll-normal {
+    animation: scroll 40s linear infinite;
+  }
+  .animate-scroll-fast {
+    animation: scroll 20s linear infinite;
+  }
+  .animate-reverse {
+    animation-direction: reverse;
+  }
+}
