@@ -1,3 +1,77 @@
+# Next.js Template (Tailwind v4 + shadcn/ui + Radix)
+
+This template is designed to be approachable and flexible. Start simple, then stretch technically when you're ready.
+
+## Quick Start
+
+1. Install dependencies and run dev:
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
+2. Visit `http://localhost:3000`
+
+## Site Configuration (one place)
+
+All site-level data lives in `src/content/site.config.ts`:
+- `site`: name, url, domain
+- `author`: name
+- `contacts`: primary, business, support (auto-derived from `domain` if omitted)
+- `presets`: which content pack to use for legal/footer (`'placeholder' | 'mit'`)
+- `variants` (future): UI choices like footer style
+
+Change values there once and the rest of the site updates. For example, set `domain = 'acme.com'` and we’ll default emails to `info@acme.com`, `business@acme.com`, `support@acme.com`.
+
+## Content Presets (placeholder vs MIT)
+
+You can switch between simple placeholders and a ready-to-edit MIT pack.
+
+- Switch in `src/content/site.config.ts`:
+  ```ts
+  presets: {
+    legal: 'mit',   // or 'placeholder'
+    footer: 'mit',  // or 'placeholder'
+  }
+  ```
+- Where files live:
+  - Placeholders (default):
+    - `src/content/legal/{privacy,terms,cookies}.md`
+    - `src/content/footer/footer-content.md` (optional)
+  - MIT Pack:
+    - `src/content/presets/mit/legal/{privacy,terms,cookies}.md`
+    - `src/content/presets/mit/footer/footer-content.md`
+
+### Tokens in Markdown
+
+Markdown supports simple tokens we replace at build time using your site config:
+
+- `{{site.name}}`, `{{site.url}}`
+- `{{author.name}}`
+- `{{contacts.primaryEmail}}`, `{{contacts.businessEmail}}`, `{{contacts.supportEmail}}`
+
+This makes it easy to hand the template to a friend: change `site.config.ts`, not 15 different files.
+
+> Note: MIT preset text is provided as a convenience and is not legal advice. Please review and adapt for your project.
+
+## Layout building blocks
+
+- `Header` and `Footer` use a variant pattern:
+  - `src/components/header.tsx` re-exports from `components/headers/DefaultHeader`
+  - `src/components/footer.tsx` re-exports from `components/footers/DefaultFooter`
+  - Later, add more variants and switch by changing the re-export.
+
+- `ContentCard` (`src/components/layouts/ContentCard.tsx`)
+  - A reusable wrapper for markdown/static pages
+  - Centralizes width, padding, border, and prose classes (`max-w-[70rem]`)
+
+## Stretch goals and learning ideas
+
+- Add a compact footer variant and map variants to content presets.
+- Create a headers gallery under `app/gallery/headers` to preview options.
+- Extend tokens or add a remark plugin for richer site-wide content patterns.
+
+Have fun, keep it readable, and don’t be afraid to tinker. Small steps add up fast.
+
 # Manta Next 15 × Tailwind 4 × ShadCN Template
 
 > A **clean**, production-ready starter that lets you ship beautiful, content-driven sites **fast**.
