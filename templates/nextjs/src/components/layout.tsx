@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      {/* Header is provided globally in app/layout.tsx; keep this component for legacy pages */}
       <main className="grow">
         {children}
       </main>

@@ -15,6 +15,8 @@ export interface BackgroundVideoProps {
   children?: ReactNode;
   /** Autoplay toggle; when true, video plays immediately */
   autoplay?: boolean;
+  /** When true, the container fills available width/height instead of enforcing aspect ratio */
+  full?: boolean;
 }
 
 export interface VideoPlayerProps {

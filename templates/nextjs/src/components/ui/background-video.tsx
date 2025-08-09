@@ -7,7 +7,7 @@ import type { BackgroundVideoProps } from '@/types/video';
 /**
  * BackgroundVideo component - simplified version focused on autoplay
  */
-const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, className, children, autoplay = true }) => {
+const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, className, children, autoplay = true, full }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasError, setHasError] = useState(false);
 
@@ -66,7 +66,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, poster, classNam
   return (
     <div
       className={cn(
-        'relative overflow-hidden aspect-video',
+        full ? 'relative overflow-hidden w-full h-full' : 'relative overflow-hidden aspect-video',
         className
       )}
       onMouseEnter={autoplay ? undefined : handleMouseEnter}
