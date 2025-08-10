@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { BaseCard } from './BaseCard';
 import type { ProjectContent } from '@/types/content';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   title?: string;
@@ -71,6 +72,39 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   children,
   overlay = false,
 }) => {
+  // Showcase variant (image-top spotlight style)
+  if (content?.displayVariant === 'showcase') {
+    const showTitle = title || content?.title;
+    const showDesc = description || content?.description;
+    const showStack = techStack.length ? techStack : (content?.techStack || []);
+    const image = content?.image;
+    return (
+      <BaseCard className={cn('relative h-full flex flex-col p-4 md:p-6 overflow-hidden bg-background border border-border group', className)}>
+        {image && (
+          <div className="relative mb-4 rounded-lg overflow-hidden h-40">
+            <Image src={image} alt={showTitle || 'Project image'} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover object-top" />
+          </div>
+        )}
+        <h3 className="text-2xl font-bold text-foreground mb-2">{showTitle}</h3>
+        {showDesc && <p className="text-sm text-muted-foreground mb-4 flex-grow">{showDesc}</p>}
+        {!!showStack.length && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {showStack.map((tech) => (
+              <span key={tech} className="px-3 py-1 border rounded-[0.5em] text-xs font-medium bg-teal-100 text-teal-800 border-teal-300 dark:bg-mintteal-2 dark:text-mintteal-12 dark:border-mintteal-7">
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+        {(repoUrl || content?.repoUrl) && (
+          <a href={repoUrl || content?.repoUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center px-3 py-2 bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-8)] text-background rounded-md">
+            View on GitHub
+          </a>
+        )}
+      </BaseCard>
+    );
+  }
+
   // overlay mode: children as background, text overlaid
   if (overlay) {
     const overlayContent = (
