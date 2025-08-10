@@ -1,5 +1,5 @@
 import ProjectCard from './ProjectCard';
-import ProjectFeatureCard from './ProjectFeatureCard';
+// ProjectFeatureCard merged into ProjectCard
 import { getContentBySlug } from '@/lib/content';
 import { Zap, Layers, type LucideIcon } from 'lucide-react';
 import type { ProjectContent } from '@/types/content';
@@ -28,8 +28,8 @@ export default async function ProjectCardContainer({
   try {
     const { frontmatter: content } = await getContentBySlug<ProjectContent>('projects', slug);
 
-    // If displayMode is 'feature', render ProjectFeatureCard
-    if (content.displayMode === 'feature') {
+    // If displayVariant is 'showcase', render showcase via ProjectCard
+    if (content.displayVariant === 'showcase') {
       const features = content.features?.map(f => {
         const IconComponent = iconMap[f.icon] || Zap; // Default icon
         return {
@@ -39,15 +39,12 @@ export default async function ProjectCardContainer({
       });
 
       return (
-        <ProjectFeatureCard
-          title={content.title}
-          description={content.description || ''}
-          techStack={content.techStack}
-          repoUrl={content.repoUrl}
-          demoUrl={content.demoUrl}
-          features={features}
-          mode={mode}
-        />
+        <ProjectCard
+          content={{ ...content, displayVariant: 'showcase' }}
+          className={className}
+        >
+          {children}
+        </ProjectCard>
       );
     }
 
