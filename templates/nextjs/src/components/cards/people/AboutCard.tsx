@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { Github, Linkedin, Mail, X } from 'lucide-react';
+import { GradientCard } from '@/components/cards/variants/GradientCard';
 import type { AboutContent, SocialLink } from '@/types/content';
 
-const socialIconMap: Record<SocialLink['platform'], string> = {
-  github: 'GitHub',
-  linkedin: 'LinkedIn',
-  x: 'X',
-  twitter: 'X',
-  mail: 'Email',
+const socialIconMap: Record<SocialLink['platform'], React.ComponentType<{ className?: string }>> = {
+  github: Github,
+  linkedin: Linkedin,
+  x: X,
+  twitter: X,
+  mail: Mail,
 };
 
 interface AboutCardProps extends Partial<AboutContent> {
@@ -19,7 +20,7 @@ interface AboutCardProps extends Partial<AboutContent> {
 
 export default function AboutCard({ title, description, avatar = '/window.svg', socials = [], contentHtml, className }: AboutCardProps) {
   return (
-    <BaseCard className={cn('h-full overflow-hidden flex flex-col p-4 md:p-6', className)}>
+    <GradientCard gradient="teal" overlayOpacity={0.2} className={cn('h-full overflow-hidden flex flex-col p-4 md:p-6', className)}>
       <div className="flex items-start pb-4 border-b border-border/40">
         <div className="w-20 h-20 mr-4 flex-shrink-0 rounded-sm overflow-hidden bg-gray-300">
           <Image src={avatar} alt={title || 'Profile'} width={80} height={80} className="w-full h-full object-cover dark:invert" />
@@ -38,14 +39,23 @@ export default function AboutCard({ title, description, avatar = '/window.svg', 
 
       <div className="mt-auto pt-4 border-t border-border/40">
         <div className="flex items-center space-x-2">
-          {socials.map((s, i) => (
-            <Link key={`${s.platform}-${i}`} href={s.platform === 'mail' ? `mailto:${s.url}` : s.url} target={s.platform === 'mail' ? undefined : '_blank'} rel="noopener noreferrer" className="p-2 bg-muted hover:bg-muted/80 rounded text-foreground/80 hover:text-foreground transition-colors text-xs">
-              {socialIconMap[s.platform]}
-            </Link>
-          ))}
+          {socials.map((s, i) => {
+            const Icon = socialIconMap[s.platform];
+            return (
+              <Link
+                key={`${s.platform}-${i}`}
+                href={s.platform === 'mail' ? `mailto:${s.url}` : s.url}
+                target={s.platform === 'mail' ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                className="p-2 bg-white/10 hover:bg-white/20 rounded text-white/90 hover:text-white transition-colors"
+              >
+                <Icon className="w-5 h-5" />
+              </Link>
+            );
+          })}
         </div>
       </div>
-    </BaseCard>
+    </GradientCard>
   );
 }
 
