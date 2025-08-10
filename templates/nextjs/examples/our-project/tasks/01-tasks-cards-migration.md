@@ -72,20 +72,20 @@
   - [x] Success: README updated
 
 ### Documentation & examples
-- [ ] Update `templates/nextjs/readme.md`
-  - [ ] Add “Portfolio Cards” section with quick usage
-  - [ ] Success: clear, concise, copy-pasteable snippets
-- [ ] (Optional) Add `/examples/portfolio/` page to showcase cards
-  - [ ] Success: page renders with sample content
+- [x] Update `templates/nextjs/readme.md`
+  - [x] Add “Portfolio Cards” section with quick usage
+  - [x] Success: clear, concise, copy-pasteable snippets
+- [x] (Optional) Add `/examples/portfolio/` page to showcase cards
+  - [x] Success: page renders with sample content
 
 ### QA & verification
-- [ ] Lint, typecheck, and build at template root
-  - [ ] Run: `pnpm -C templates/nextjs ai-typecheck && pnpm -C templates/nextjs lint && pnpm -C templates/nextjs build`
-  - [ ] Success: green
-- [ ] Visual parity check
-  - [ ] Compare new `ProjectCard` panel vs old `ProjectFeatureCard`
-  - [ ] Compare new `ProjectCard` showcase vs Spotlight layout
-  - [ ] Success: parity achieved
-- [ ] Accessibility
-  - [ ] Verify alt text, focus states, keyboard nav on links/CTAs
-  - [ ] Success: no a11y regressions in cards
+- [x] Lint, typecheck, and build at template root
+  - [x] Run: `pnpm -C templates/nextjs ai-typecheck && pnpm -C templates/nextjs lint && pnpm -C templates/nextjs build`
+  - [x] Success: green
+- [x] Visual parity check
+  - [x] Compare new `ProjectCard` panel vs old `ProjectFeatureCard`
+  - [x] Compare new `ProjectCard` showcase vs Spotlight layout
+  - [x] Success: parity achieved
+- [x] Accessibility
+  - [x] Verify alt text, focus states, keyboard nav on links/CTAs
+  - [x] Success: no a11y regressions in cards
