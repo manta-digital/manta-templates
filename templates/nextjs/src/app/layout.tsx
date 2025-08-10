@@ -16,22 +16,23 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.digital';
+import { siteConfig } from '@/content/site.config';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'manta.digital NextJS Template',
+  title: siteConfig.site.name,
   description: 'Templates, layouts, and UI components created with the included AI Project Guides',
   openGraph: {
-    title: 'manta.digital NextJS Template',
+    title: siteConfig.site.name,
     description: 'Templates, layouts, and UI components created with the included AI Project Guides',
     url: '/',
-    siteName: 'manta.digital NextJS Template',
+    siteName: siteConfig.site.name,
     images: [
       {
-        url: 'https://templates.manta.digital/image/opengraph-image.jpg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'manta.digital NextJS Template OG Image',
+        alt: `${siteConfig.site.name} OG Image`,
       },
     ],
     locale: 'en_US',

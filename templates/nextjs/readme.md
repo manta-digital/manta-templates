@@ -45,6 +45,20 @@ MIT Pack:
   - `src/content/presets/mit/legal/{privacy,terms,cookies}.md` (exist for completeness; expanded footer will consolidate to single Legal link)
   - `src/content/presets/mit/footer/footer-content.md`
 
+### Open Graph (OG) Image
+
+This template ships with a dynamic OG image generator.
+
+- Route: `src/app/opengraph-image.tsx` (uses `next/og` `ImageResponse`)
+- Metadata: `src/app/layout.tsx` points `openGraph.images[0].url` to `/opengraph-image`
+- Config-driven: pulls title and tagline from `src/content/site.config.ts` (`site.name`, `site.domain`/`site.url`)
+
+How to customize:
+- Change `site.name` and `site.domain` (or `site.url`) in `site.config.ts`
+- Tweak typography/colors in `opengraph-image.tsx`
+
+Tip: Test previews with social debuggers (e.g., Facebook Sharing Debugger, LinkedIn Post Inspector). After deploying, paste your site URL and “Scrape Again/Refresh”.
+
 Footer behavior summary:
 - `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`). Page content comes from `presets.legal` ('default' → neutral, 'mit' → MIT).
 - `variants.footer = 'default'` shows legal links from content. If `presets.legal = 'mit'`, links are consolidated to a single “Legal” link.

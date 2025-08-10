@@ -168,7 +168,13 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ## 📋 Changelog
 
-### v0.7.3 (Current)
+### v0.7.4
+- **site.config.ts** - configures metadata, policy, author, and components.
+- **Headers and Footers** - configurable, choice of default/compact
+- **Policy Text** - added canned policy text (helper, *not legal advice*).
+- **OpenGraph** - dynamic OG image/card created from react component.
+
+### v0.7.3
 - **Fixed sync-guides script** - Now pulls from `main` branch instead of `public-only` to get latest guides
 
 ### v0.7.2
