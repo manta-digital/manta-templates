@@ -17,22 +17,22 @@ interface AboutCardProps extends Partial<AboutContent> {
   className?: string;
 }
 
-export default function AboutCard({ title, description, avatar = '/image/avatar.png', socials = [], contentHtml, className }: AboutCardProps) {
+export default function AboutCard({ title, description, avatar = '/window.svg', socials = [], contentHtml, className }: AboutCardProps) {
   return (
     <BaseCard className={cn('h-full overflow-hidden flex flex-col p-4 md:p-6', className)}>
       <div className="flex items-start pb-4 border-b border-border/40">
         <div className="w-20 h-20 mr-4 flex-shrink-0 rounded-sm overflow-hidden bg-gray-300">
-          <Image src={avatar} alt={title || 'Profile'} width={80} height={80} className="w-full h-full object-cover" />
+          <Image src={avatar} alt={title || 'Profile'} width={80} height={80} className="w-full h-full object-cover dark:invert" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-bold pt-3 mb-1">{title}</h3>
+          <h3 className="text-xl font-bold pt-3 mb-1 text-foreground">{title}</h3>
           {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       </div>
 
       <div className="flex-1 text-sm overflow-hidden pt-4 pb-4">
         {contentHtml && (
-          <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: contentHtml.replace(/<h1[^>]*>.*?<\/h1>/gi, '').replace(/<h2[^>]*>.*?<\/h2>/gi, '') }} />
+          <div className="prose prose-sm max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: contentHtml.replace(/<h1[^>]*>.*?<\/h1>/gi, '').replace(/<h2[^>]*>.*?<\/h2>/gi, '') }} />
         )}
       </div>
 

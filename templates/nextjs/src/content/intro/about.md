@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 description: "Building clean, content-driven apps with modern tooling."
-avatar: "/image/profile.png"
+avatar: "/window.svg"
 socials:
   - platform: github
     url: "https://github.com/manta-digital"
