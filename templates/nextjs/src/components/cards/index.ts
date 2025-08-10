@@ -9,7 +9,6 @@ export { default as QuoteCard } from './QuoteCard';
 export { default as BlogHeroCard } from './BlogHeroCard';
 export { default as SidebarPostCard } from './SidebarPostCard';
 export { default as BlogCardImage } from './BlogCardImage';
-// ProjectFeatureCard merged into ProjectCard (panel default, 'showcase' variant)
 export { default as ComingSoonFeatureCard } from './ComingSoonFeatureCard';
 export { default as GuidesFeatureCard } from './GuidesFeatureCard';
 export { default as ThreeJSCard } from './ThreeJSCard';

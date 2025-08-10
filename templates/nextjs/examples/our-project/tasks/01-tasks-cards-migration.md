@@ -62,12 +62,12 @@
   - [.] Success: renders about page card correctly
 
 ### Migrations & cleanup (names/structure)
-- [ ] Replace internal usages of `ProjectFeatureCard` with `projects/ProjectCard` (default panel)
-  - [ ] Success: build succeeds; visuals unchanged where used
-- [ ] Replace usages of `ProjectSpotlightCard` with `projects/ProjectCard` variant='showcase'
-  - [ ] Success: visuals match original Spotlight layout
-- [ ] Remove `src/components/cards/ProjectFeatureCard.tsx` and update exports/imports
-  - [ ] Success: no references remain; build passes
+- [.] Replace internal usages of `ProjectFeatureCard` with `projects/ProjectCard` (default panel)
+  - [.] Success: build succeeds; visuals unchanged where used
+- [.] Replace usages of `ProjectSpotlightCard` with `projects/ProjectCard` variant='showcase'
+  - [.] Success: visuals match original Spotlight layout
+- [.] Remove `src/components/cards/ProjectFeatureCard.tsx` and update exports/imports
+  - [.] Success: no references remain; build passes
 - [ ] Do not add a `TechnologiesCard`; document `BaseCard + TechnologyScroller` composition
   - [ ] Success: README updated
 
