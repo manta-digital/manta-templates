@@ -53,7 +53,7 @@ export const TechnologyScroller = ({
       >
         {items.concat(items).map((item, idx) => (
           <li
-            className="flex-none flex items-center justify-center gap-2 pl-12 first:pl-0"
+            className="flex-none flex items-center justify-center gap-2 pl-12"
             key={`${item.name}-${idx}`}
           >
             {item.color ? (
