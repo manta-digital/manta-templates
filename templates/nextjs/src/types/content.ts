@@ -14,6 +14,10 @@ export interface ProjectContent {
   demoUrl?: string;
   features?: Feature[];
   displayMode?: 'standard' | 'feature';
+  /** Optional image to support showcase-style layouts */
+  image?: string;
+  /** Prefer 'showcase' for image-top promo layout */
+  displayVariant?: 'showcase';
 }
 
 // Defines the structure of the feature frontmatter
@@ -64,4 +68,39 @@ export interface PostContent {
   author?: string;
   heroImage?: string;
   tags?: string[];
+}
+
+// Article promo content (formerly FeaturedArticleContent)
+export interface ArticleContent {
+  title: string;
+  subtitle?: string;
+  description: string;
+  image: string;
+  href: string;
+  variant?: string;
+}
+
+export interface SocialLink {
+  platform: 'github' | 'linkedin' | 'x' | 'twitter' | 'mail';
+  url: string;
+}
+
+export interface AboutContent {
+  title: string;
+  description?: string;
+  avatar?: string;
+  socials?: SocialLink[];
+}
+
+// Technologies scroller content
+export interface TechnologiesContent {
+  title: string;
+  description: string;
+  techs: {
+    name: string;
+    svg: string;
+    color?: string;
+    colorDark?: string;
+    invertOnDark?: boolean;
+  }[];
 }
