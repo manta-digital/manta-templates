@@ -18,7 +18,7 @@ All site-level data lives in `src/content/site.config.ts`:
 - `author`: name
 - `contacts`: primary, business, support (auto-derived from `domain` if omitted)
 - `presets`: which content pack to use for legal (`'default' | 'mit'`)
-- `variants`: UI choices like footer style
+- `variants`: UI choices like footer style (e.g., footer 'default' | 'compact')
 
 Change values there once and the rest of the site updates. For example, set `domain = 'acme.com'` and we’ll default emails to `info@acme.com`, `business@acme.com`, `support@acme.com`.
 
@@ -37,23 +37,26 @@ You can switch between a default content pack and a ready-to-edit MIT pack.
   ```
 Where files live:
 Default:
-  - `src/content/legal/{privacy,terms,cookies}.md`
+  - `src/content/legal/legal.md` (single-page neutral legal)
+  - `src/content/legal/{privacy,terms,cookies}.md` (three-page placeholders used by expanded footer)
   - `src/content/footer/footer-content.md` (optional)
 MIT Pack:
-  - `src/content/presets/mit/legal/{privacy,terms,cookies}.md`
+  - `src/content/presets/mit/legal/legal.md` (single-page MIT legal)
+  - `src/content/presets/mit/legal/{privacy,terms,cookies}.md` (exist for completeness; expanded footer will consolidate to single Legal link)
   - `src/content/presets/mit/footer/footer-content.md`
 
 Footer behavior summary:
-- `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`).
-- `variants.footer = 'default'` shows legal links from content. If `presets.legal = 'mit'`, it is consolidated to a single “Legal” link.
+- `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`). Page content comes from `presets.legal` ('default' → neutral, 'mit' → MIT).
+- `variants.footer = 'default'` shows legal links from content. If `presets.legal = 'mit'`, links are consolidated to a single “Legal” link.
 
 ### Tokens in Markdown
 
 Markdown supports simple tokens we replace at build time using your site config:
 
 - `{{site.name}}`, `{{site.url}}`
-- `{{author.name}}`
+- `{{author.name}}` (falls back to `site.name` if empty)
 - `{{contacts.primaryEmail}}`, `{{contacts.businessEmail}}`, `{{contacts.supportEmail}}`
+- `{{copyright.year}}`, `{{copyright.lastUpdated}}`, `{{copyright.holder}}`
 
 This makes it easy to hand the template to a friend: change `site.config.ts`, not 15 different files.
 
@@ -61,10 +64,11 @@ This makes it easy to hand the template to a friend: change `site.config.ts`, no
 
 ## Layout building blocks
 
-- `Header` and `Footer` use a variant pattern:
+- `Header` uses a variant pattern via re-export:
   - `src/components/header.tsx` re-exports from `components/headers/DefaultHeader`
-  - `src/components/footer.tsx` re-exports from `components/footers/DefaultFooter`
-  - Later, add more variants and switch by changing the re-export.
+  - To add header variants, create files under `components/headers/` and change the re-export.
+- `Footer` variant is configured in `src/content/site.config.ts`:
+  - `variants.footer = 'default' | 'compact'` (runtime switch)
 
 - `ContentCard` (`src/components/layouts/ContentCard.tsx`)
   - A reusable wrapper for markdown/static pages
