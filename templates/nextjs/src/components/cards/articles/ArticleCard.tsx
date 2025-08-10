@@ -25,7 +25,7 @@ export default function ArticleCard({ title, subtitle, description, image, href 
             <div className="absolute inset-0 bg-muted" />
           )}
           {/* gradient for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
           {/* content overlay anchored to bottom */}
           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 text-white">
             {subtitle && (

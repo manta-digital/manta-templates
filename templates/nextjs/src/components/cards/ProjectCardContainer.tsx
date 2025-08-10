@@ -5,17 +5,15 @@ import { Zap, Layers, type LucideIcon } from 'lucide-react';
 import type { ProjectContent } from '@/types/content';
 
 // Map icon names from frontmatter to actual Lucide icon components
-const iconMap: { [key: string]: LucideIcon } = {
-  Zap,
-  Layers,
-};
+// Reserved for future mapping of feature icons from frontmatter if needed
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const iconMap: { [key: string]: LucideIcon } = { Zap, Layers };
 
 interface ProjectCardContainerProps {
   slug: string;
   className?: string;
   children?: React.ReactNode;
   overlay?: boolean;
-  mode?: 'dark' | 'light';
 }
 
 export default async function ProjectCardContainer({
@@ -23,20 +21,12 @@ export default async function ProjectCardContainer({
   className,
   children,
   overlay = false,
-  mode = 'dark'
 }: ProjectCardContainerProps) {
   try {
     const { frontmatter: content } = await getContentBySlug<ProjectContent>('projects', slug);
 
     // If displayVariant is 'showcase', render showcase via ProjectCard
     if (content.displayVariant === 'showcase') {
-      const features = content.features?.map(f => {
-        const IconComponent = iconMap[f.icon] || Zap; // Default icon
-        return {
-          icon: <IconComponent size={14} className={f.color} />,
-          label: f.label
-        };
-      });
 
       return (
         <ProjectCard

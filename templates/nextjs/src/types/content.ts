@@ -67,6 +67,8 @@ export interface PostContent {
   pubDate: string;
   author?: string;
   heroImage?: string;
+  image?: string;
+  thumbnail?: string;
   tags?: string[];
 }
 

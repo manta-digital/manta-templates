@@ -1,0 +1,45 @@
+import React from 'react';
+import ArticleCardContentLoader from '@/components/cards/articles/ArticleCardContentLoader';
+import BlogIndexCard from '@/components/cards/articles/BlogIndexCard';
+import AboutCardContentLoader from '@/components/cards/people/AboutCardContentLoader';
+import ProjectCardContentLoader from '@/components/cards/projects/ProjectCardContentLoader';
+
+export default async function CardsExamplesPage() {
+  return (
+    <main className="min-h-screen bg-background px-4 py-10">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <h1 className="text-2xl font-semibold">Cards Examples</h1>
+
+        <section>
+          <h2 className="text-lg font-medium mb-3">ArticleCard (from content)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ArticleCardContentLoader slug="featured-article-sample" />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-medium mb-3">BlogIndexCard</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <BlogIndexCard />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-medium mb-3">AboutCard (from content)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AboutCardContentLoader />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-medium mb-3">ProjectCard showcase (from content)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ProjectCardContentLoader slug="sample-project" />
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
+
+

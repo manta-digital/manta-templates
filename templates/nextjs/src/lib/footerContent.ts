@@ -1,4 +1,3 @@
-import { getContentBySlug } from './content';
 import { getPresetContent } from './presetContent';
 import { siteConfig } from '@/content/site.config';
 
@@ -93,7 +92,7 @@ export async function getFooterContent() {
       sections.legal = [{ label: 'Legal', href: '/legal' }];
     }
     return { sections };
-  } catch (e) {
+  } catch {
     const fallback: FooterSections = {
       quickLinks: [
         { label: 'About', href: '/about' },

@@ -3,10 +3,6 @@
 import React from 'react';
 import useRowHeight from '@/hooks/useRowHeight';
 import GridLayout, { GridData } from '@/components/layouts/grid-layout/grid-layout';
-import ArticleCardContentLoader from '@/components/cards/articles/ArticleCardContentLoader';
-import BlogIndexCard from '@/components/cards/articles/BlogIndexCard';
-import AboutCardContentLoader from '@/components/cards/people/AboutCardContentLoader';
-import ProjectCardContentLoader from '@/components/cards/projects/ProjectCardContentLoader';
 
 // Shared grid configuration for the portfolio demo
 const gridData: GridData = {
@@ -68,19 +64,14 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ mini = false, className =
       minRowHeight={minRowHeight}
       className={`${className} ${mini ? 'w-full h-full' : ''}`}
     >
-      {/* Temporary: showcase new content-driven cards for visual QA */}
-      <div className="h-full">
-        <ArticleCardContentLoader slug="featured-article-sample" />
-      </div>
-      <div className="h-full">
-        <BlogIndexCard />
-      </div>
-      <div className="h-full">
-        <AboutCardContentLoader />
-      </div>
-      <div className="h-full">
-        <ProjectCardContentLoader slug="sample-project" />
-      </div>
+      {cardStyles.map((style, idx) => (
+        <div
+          key={idx}
+          className={`h-full ${mini ? 'rounded-[0.5rem]' : 'rounded-xl'} shadow-lg flex items-center justify-center ${style} ${mini ? '' : 'text-xl font-semibold'}`}
+        >
+          {!mini && `Card ${idx + 1}`}
+        </div>
+      ))}
     </GridLayout>
   );
 
