@@ -1,75 +1,75 @@
 # Tasks — cards-migration
 
 ### Guardrails / Pre-flight
-- [.] Confirm work is performed only under `templates/nextjs/`; do not modify `landing/`
-  - [.] Success: `git status` shows changes only under `templates/nextjs/`
-- [.] Ensure root/template build scripts are present and run
-  - [.] Run: `pnpm -C templates/nextjs ai-typecheck && pnpm -C templates/nextjs lint && pnpm -C templates/nextjs build`
-  - [.] Success: no type or build errors; lints pass (warnings allowed)
+- [x] Confirm work is performed only under `templates/nextjs/`; do not modify `landing/`
+  - [x] Success: `git status` shows changes only under `templates/nextjs/`
+- [x] Ensure root/template build scripts are present and run
+  - [x] Run: `pnpm -C templates/nextjs ai-typecheck && pnpm -C templates/nextjs lint && pnpm -C templates/nextjs build`
+  - [x] Success: no type or build errors; lints pass (warnings allowed)
 
 ### Types and content definitions
-- [.] Add `ArticleContent` type
-  - [.] Fields: `title`, `subtitle?`, `description`, `image`, `href`, `variant?`
-  - [.] Success: `src/types/content.ts` exports `ArticleContent`; typecheck passes
-- [.] Extend `ProjectContent`
-  - [.] Add optional `image?` and `displayVariant?: 'showcase'`
-  - [.] Success: `ProjectContent` extended; no breaking changes
-- [.] Add `AboutContent` and `SocialLink` types
-  - [.] `AboutContent`: `title`, `description?`, `avatar?`, `socials?: SocialLink[]`; body via `contentHtml`
-  - [.] `SocialLink`: { platform: 'github' | 'linkedin' | 'x' | 'twitter' | 'mail'; url: string }
-  - [.] Success: types exported; typecheck passes
-- [.] Ensure `TechnologiesContent` type exists (no changes unless missing)
-  - [.] Success: available for `TechnologyScroller` usage
+- [x] Add `ArticleContent` type
+  - [x] Fields: `title`, `subtitle?`, `description`, `image`, `href`, `variant?`
+  - [x] Success: `src/types/content.ts` exports `ArticleContent`; typecheck passes
+- [x] Extend `ProjectContent`
+  - [x] Add optional `image?` and `displayVariant?: 'showcase'`
+  - [x] Success: `ProjectContent` extended; no breaking changes
+- [x] Add `AboutContent` and `SocialLink` types
+  - [x] `AboutContent`: `title`, `description?`, `avatar?`, `socials?: SocialLink[]`; body via `contentHtml`
+  - [x] `SocialLink`: { platform: 'github' | 'linkedin' | 'x' | 'twitter' | 'mail'; url: string }
+  - [x] Success: types exported; typecheck passes
+- [x] Ensure `TechnologiesContent` type exists (no changes unless missing)
+  - [x] Success: available for `TechnologyScroller` usage
 
 ### Content (markdown) – samples and tokens
-- [.] Create `src/content/main-grid/featured-article-sample.md` with `ArticleContent` frontmatter
-  - [.] Use tokens where reasonable; include absolute/fallback image path
-  - [.] Success: file loads via content loader without errors
-- [.] Create/ensure `src/content/main-grid/technologies.md` exists with `TechnologiesContent`
-  - [.] Ensure icons referenced exist under `public/assets/icons/tech/`
-  - [.] Success: `TechnologyScroller` renders items from file
-- [.] Create `src/content/intro/about.md` with `AboutContent` frontmatter and body
-  - [.] Include `socials` sample entries; use tokens for emails/site
-  - [.] Success: About content loads and renders
-- [.] Create `src/content/projects/sample-project.md` with extended `ProjectContent`
-  - [.] Include `displayVariant` and optional `image` for showcase
-  - [.] Success: Loads; renders both variants via loader
+- [x] Create `src/content/main-grid/featured-article-sample.md` with `ArticleContent` frontmatter
+  - [x] Use tokens where reasonable; include absolute/fallback image path
+  - [x] Success: file loads via content loader without errors
+- [x] Create/ensure `src/content/main-grid/technologies.md` exists with `TechnologiesContent`
+  - [x] Ensure icons referenced exist under `public/assets/icons/tech/`
+  - [x] Success: `TechnologyScroller` renders items from file
+- [x] Create `src/content/intro/about.md` with `AboutContent` frontmatter and body
+  - [x] Include `socials` sample entries; use tokens for emails/site
+  - [x] Success: About content loads and renders
+- [x] Create `src/content/projects/sample-project.md` with extended `ProjectContent`
+  - [x] Include `displayVariant` and optional `image` for showcase
+  - [x] Success: Loads; renders both variants via loader
 
 ### Components – presentational (pure UI)
-- [.] Create `src/components/cards/articles/ArticleCard.tsx`
-  - [.] Map props to `ArticleContent`; full-bleed image, gradient overlay, subtitle, title, description, link
-  - [.] Success: visually correct with sample content
-- [.] Create `src/components/cards/articles/BlogIndexCard.tsx`
-  - [.] Props: `postLimit=3`, `excludeSlugs?`, `className?`
-  - [.] Success: lists recent posts; links to `/blog`
-- [.] Create `src/components/cards/projects/ProjectCard.tsx`
-  - [.] Props: `title`, `description?`, `techStack?`, `features?`, `image?`, `repoUrl?`, `demoUrl?`, `ctaPrimary?`, `ctaSecondary?`, `mode?`, `variant?`, `overlayClassName?`, `className?`
-  - [.] Default layout (no variant) = panel; `variant='showcase'` = image-top
-  - [.] Success: parity with both existing layouts
-- [.] Create `src/components/cards/people/AboutCard.tsx`
-  - [.] Props: title/desc/avatar/socials + `contentHtml` body (strip h1/h2)
-  - [.] Success: renders avatar, text, body, and social icons
+- [x] Create `src/components/cards/articles/ArticleCard.tsx`
+  - [x] Map props to `ArticleContent`; full-bleed image, gradient overlay, subtitle, title, description, link
+  - [x] Success: visually correct with sample content
+- [x] Create `src/components/cards/articles/BlogIndexCard.tsx`
+  - [x] Props: `postLimit=3`, `excludeSlugs?`, `className?`
+  - [x] Success: lists recent posts; links to `/blog`
+- [x] Create `src/components/cards/projects/ProjectCard.tsx`
+  - [x] Props: `title`, `description?`, `techStack?`, `features?`, `image?`, `repoUrl?`, `demoUrl?`, `ctaPrimary?`, `ctaSecondary?`, `mode?`, `variant?`, `overlayClassName?`, `className?`
+  - [x] Default layout (no variant) = panel; `variant='showcase'` = image-top
+  - [x] Success: parity with both existing layouts
+- [x] Create `src/components/cards/people/AboutCard.tsx`
+  - [x] Props: title/desc/avatar/socials + `contentHtml` body (strip h1/h2)
+  - [x] Success: renders avatar, text, body, and social icons
 
 ### Components – ContentLoaders (markdown-driven)
-- [.] `src/components/cards/articles/ArticleCardContentLoader.tsx`
-  - [.] Props: `slug` (contentType=`'main-grid'`), `className?`
-  - [.] Success: renders sample file without errors
-- [.] `src/components/cards/projects/ProjectCardContentLoader.tsx`
-  - [.] Props: `slug` (contentType=`'projects'`), `className?`
-  - [.] Success: renders both panel and showcase using sample project file
-- [.] `src/components/cards/people/AboutCardContentLoader.tsx`
-  - [.] Props: `slug='about'` (contentType=`'intro'`), `className?`
-  - [.] Success: renders about page card correctly
+- [x] `src/components/cards/articles/ArticleCardContentLoader.tsx`
+  - [x] Props: `slug` (contentType=`'main-grid'`), `className?`
+  - [x] Success: renders sample file without errors
+- [x] `src/components/cards/projects/ProjectCardContentLoader.tsx`
+  - [x] Props: `slug` (contentType=`'projects'`), `className?`
+  - [x] Success: renders both panel and showcase using sample project file
+- [x] `src/components/cards/people/AboutCardContentLoader.tsx`
+  - [x] Props: `slug='about'` (contentType=`'intro'`), `className?`
+  - [x] Success: renders about page card correctly
 
 ### Migrations & cleanup (names/structure)
-- [.] Replace internal usages of `ProjectFeatureCard` with `projects/ProjectCard` (default panel)
-  - [.] Success: build succeeds; visuals unchanged where used
-- [.] Replace usages of `ProjectSpotlightCard` with `projects/ProjectCard` variant='showcase'
-  - [.] Success: visuals match original Spotlight layout
-- [.] Remove `src/components/cards/ProjectFeatureCard.tsx` and update exports/imports
-  - [.] Success: no references remain; build passes
-- [ ] Do not add a `TechnologiesCard`; document `BaseCard + TechnologyScroller` composition
-  - [ ] Success: README updated
+- [x] Replace internal usages of `ProjectFeatureCard` with `projects/ProjectCard` (default panel)
+  - [x] Success: build succeeds; visuals unchanged where used
+- [x] Replace usages of `ProjectSpotlightCard` with `projects/ProjectCard` variant='showcase'
+  - [x] Success: visuals match original Spotlight layout
+- [x] Remove `src/components/cards/ProjectFeatureCard.tsx` and update exports/imports
+  - [x] Success: no references remain; build passes
+- [x] Do not add a `TechnologiesCard`; document `BaseCard + TechnologyScroller` composition
+  - [x] Success: README updated
 
 ### Documentation & examples
 - [ ] Update `templates/nextjs/readme.md`

@@ -78,15 +78,38 @@ This makes it easy to hand the template to a friend: change `site.config.ts`, no
 
 ## Layout building blocks
 
-- `Header` uses a variant pattern via re-export:
+- `Header` variants
   - `src/components/header.tsx` re-exports from `components/headers/DefaultHeader`
-  - To add header variants, create files under `components/headers/` and change the re-export.
-- `Footer` variant is configured in `src/content/site.config.ts`:
+  - Add variants in `src/components/headers/` and update the re-export to switch
+- `Footer` variants (configured via `src/content/site.config.ts`)
   - `variants.footer = 'default' | 'compact'` (runtime switch)
 
 - `ContentCard` (`src/components/layouts/ContentCard.tsx`)
   - A reusable wrapper for markdown/static pages
   - Centralizes width, padding, border, and prose classes (`max-w-[70rem]`)
+
+## Cards (content-driven)
+
+- Articles
+  - `ArticleCard` UI: `src/components/cards/articles/ArticleCard.tsx`
+  - Content loader: `src/components/cards/articles/ArticleCardContentLoader.tsx`
+  - Sample content: `src/content/main-grid/featured-article-sample.md`
+- Blog
+  - `BlogIndexCard` UI: `src/components/cards/articles/BlogIndexCard.tsx`
+- People
+  - `AboutCard` UI: `src/components/cards/people/AboutCard.tsx`
+  - Content loader: `src/components/cards/people/AboutCardContentLoader.tsx`
+  - Sample content: `src/content/intro/about.md`
+- Projects
+  - `ProjectCard` UI: `src/components/cards/ProjectCard.tsx` (panel default, `variant="showcase"` supported)
+  - Content loader: `src/components/cards/projects/ProjectCardContentLoader.tsx`
+  - Sample content: `src/content/projects/sample-project.md`
+- Technologies
+  - `TechnologyScroller`: `src/components/ui/TechnologyScroller.tsx`
+  - Content: `src/content/main-grid/technologies.md` (type `TechnologiesContent` in `src/types/content.ts`)
+
+Examples
+- Visit `/examples/cards` to see all the above rendered from markdown where applicable.
 
 ## Stretch goals and learning ideas
 
