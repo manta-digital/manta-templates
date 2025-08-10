@@ -1,6 +1,12 @@
 ---
 title: "About Me"
-description: ""
+description: "Building clean, content-driven apps with modern tooling."
+avatar: "/image/avatar.png"
+socials:
+  - platform: github
+    url: "https://github.com/manta-digital"
+  - platform: linkedin
+    url: "https://www.linkedin.com/in/erikcorkran"
 ---
 
 I’m exploring the cutting edge of AI to push past basic automation, creating powerful software for everything from financial market insights to action-packed games—and even this website. 
