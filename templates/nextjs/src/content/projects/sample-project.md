@@ -1,5 +1,15 @@
 ---
 title: "Sample Project"
+description: "Showcase variant with image-top layout"
+techStack: ["Next.js", "TypeScript", "Tailwind CSS"]
+repoUrl: "https://github.com/manta-digital/manta-templates"
+displayVariant: "showcase"
+image: "/image/blog-sample-image.png"
+---
+
+This is a sample project card rendered from markdown content.
+---
+title: "Sample Project"
 description: "A demonstration project showcasing modern web development practices with React and TypeScript."
 techStack: ["React", "TypeScript", "Next.js", "Tailwind CSS"]
 repoUrl: "https://github.com/example/sample-project"
