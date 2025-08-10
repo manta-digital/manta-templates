@@ -45,15 +45,15 @@ export const TechnologyScroller = ({
     >
       <ul
         className={cn(
-          'flex min-w-full shrink-0 gap-12 py-4 w-max flex-nowrap will-change-transform',
+          'flex min-w-full shrink-0 py-4 w-max flex-nowrap will-change-transform',
           getSpeedClass(),
           direction === 'right' ? 'animate-reverse' : '',
           pauseOnHover && 'hover:[animation-play-state:paused]'
         )}
       >
-        {[...items, ...items].map((item, idx) => (
+        {items.concat(items).map((item, idx) => (
           <li
-            className="flex-none flex items-center justify-center gap-2"
+            className="flex-none flex items-center justify-center gap-2 pl-12 first:pl-0"
             key={`${item.name}-${idx}`}
           >
             {item.color ? (

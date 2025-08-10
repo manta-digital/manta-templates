@@ -281,13 +281,10 @@
 /* You can add more custom styles or component styles below */
 
 @layer utilities {
+  /* Duplicate content scroll: animate two concatenated lists exactly one list width */
   @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .animate-scroll-slow {
