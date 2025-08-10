@@ -10,8 +10,8 @@ interface ArticleCardProps extends Partial<ArticleContent> {
 
 export default function ArticleCard({ title, subtitle, description, image, href = '/#', className }: ArticleCardProps) {
   return (
-    <Link href={href} className={cn('group block h-full w-full', className)}>
-      <BaseCard className="relative h-full w-full overflow-hidden p-0 m-0">
+    <Link href={href} className={cn('group block w-full', className)}>
+      <BaseCard className="relative w-full overflow-hidden p-0 m-0">
         {image && (
           <Image
             src={image}
