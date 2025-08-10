@@ -1,13 +1,13 @@
-export type PresetKey = 'placeholder' | 'mit';
+export type PresetKey = 'default' | 'mit';
 
 export const siteConfig = {
   site: {
-    name: 'manta-templates',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.digital',
+    name: 'my site',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
     domain: 'example.com',
   },
   author: {
-    name: 'Your Name',
+    name: '',
   },
   contacts: {
     primaryEmail: '',
@@ -15,12 +15,15 @@ export const siteConfig = {
     supportEmail: '',
   },
   presets: {
-    legal: 'default' as PresetKey,
-    footer: 'default' as PresetKey,
+    legal: 'mit' as PresetKey,
   },
   // Optional UI variants; can be expanded later (e.g., header variants)
   variants: {
-    footer: 'default' as 'default' | 'compact',
+    footer: 'compact', // 'default' | 'compact'
+  },
+  // Optional copyright settings (e.g., "2022–2025"). If omitted, current year is used.
+  copyright: {
+    year: '',
   },
 };
 

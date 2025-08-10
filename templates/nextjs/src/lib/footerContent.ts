@@ -1,5 +1,5 @@
 import { getContentBySlug } from './content';
-import { getPresetContent, buildTokens } from './presetContent';
+import { getPresetContent } from './presetContent';
 import { siteConfig } from '@/content/site.config';
 
 export interface FooterSections {
@@ -53,11 +53,20 @@ function parseFooterContent(contentHtml: string): FooterSections {
     };
   };
 
-  const copyrightFrom = (html: string): CopyrightInfo => ({
-    notice: html.match(/<strong>Copyright Notice<\/strong>:([^<\n]*)/i)?.[1]?.trim() || '© 2025 Manta Templates. All rights reserved.',
-    attribution: html.match(/<strong>Attribution<\/strong>:\s*([\s\S]*?)<\/p>/i)?.[1]?.trim() || 'Built with Next.js, Tailwind CSS, and Manta Templates.',
-    lastUpdated: html.match(/<strong>Last Updated<\/strong>:([^<\n]*)/i)?.[1]?.trim() || '2025',
-  });
+  const copyrightFrom = (html: string): CopyrightInfo => {
+    const notice = html.match(/<strong>Copyright Notice<\/strong>:([^<\n]*)/i)?.[1]?.trim();
+    const attribution = html.match(/<strong>Attribution<\/strong>:\s*([\s\S]*?)<\/p>/i)?.[1]?.trim();
+    const updated = html.match(/<strong>Last Updated<\/strong>:([^<\n]*)/i)?.[1]?.trim();
+    const currentYear = new Date().getFullYear().toString();
+    const configuredYear = siteConfig.copyright?.year?.trim();
+    const yearToUse = configuredYear || currentYear;
+
+    return {
+      notice: notice || `© ${yearToUse} ${siteConfig.author.name}.`,
+      attribution: attribution || '',
+      lastUpdated: updated || yearToUse,
+    };
+  };
 
   const s = (name: string) => (contentHtml.match(section(name))?.[1] ?? '');
 
@@ -76,38 +85,44 @@ function parseFooterContent(contentHtml: string): FooterSections {
 
 export async function getFooterContent() {
   try {
-    // Try preset first
-    const preset = siteConfig.presets.footer;
-    const content = await getPresetContent<Record<string, unknown>>('footer', 'footer-content', preset);
-    return { sections: parseFooterContent(content.contentHtml) };
+    // Load footer content from default path, or MIT preset only if explicitly available later
+    const content = await getPresetContent<Record<string, unknown>>('footer', 'footer-content', 'default');
+    const sections = parseFooterContent(content.contentHtml);
+    // If legal preset is MIT, force single-page legal link regardless of footer content pack
+    if (siteConfig.presets.legal === 'mit') {
+      sections.legal = [{ label: 'Legal', href: '/legal' }];
+    }
+    return { sections };
   } catch (e) {
-    return {
-      sections: {
-        quickLinks: [
-          { label: 'About', href: '/about' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Examples', href: '/examples' },
-        ],
-        resources: [
-          { label: 'Guides', href: '/guides' },
-          { label: 'Docs', href: '/docs' },
-        ],
-        legal: [
-          { label: 'Privacy', href: '/privacy' },
-          { label: 'Terms', href: '/terms' },
-          { label: 'Cookies', href: '/cookies' },
-        ],
-        socialProfessional: [],
-        socialCommunity: [],
-        primaryContact: { email: '', location: '' },
-        professionalContact: { business: '', support: '' },
-        copyright: {
-          notice: '© 2025 Manta Templates. All rights reserved.',
-          attribution: 'Built with Next.js, Tailwind CSS, and Manta Templates.',
-          lastUpdated: '2025',
-        },
-      } as FooterSections,
+    const fallback: FooterSections = {
+      quickLinks: [
+        { label: 'About', href: '/about' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Examples', href: '/examples' },
+      ],
+      resources: [
+        { label: 'Guides', href: '/guides' },
+        { label: 'Docs', href: '/docs' },
+      ],
+      legal: [
+        { label: 'Privacy', href: '/privacy' },
+        { label: 'Terms', href: '/terms' },
+        { label: 'Cookies', href: '/cookies' },
+      ],
+      socialProfessional: [],
+      socialCommunity: [],
+      primaryContact: { email: '', location: '' },
+      professionalContact: { business: '', support: '' },
+      copyright: {
+        notice: '© 2025 manta.digital. MIT licensed.',
+        attribution: 'Built with Next.js, Tailwind CSS, and Manta Templates.',
+        lastUpdated: '2025',
+      },
     };
+    if (siteConfig.presets.legal === 'mit') {
+      fallback.legal = [{ label: 'Legal', href: '/legal' }];
+    }
+    return { sections: fallback };
   }
 }
 

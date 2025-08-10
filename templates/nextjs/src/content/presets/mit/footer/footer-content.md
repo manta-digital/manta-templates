@@ -22,9 +22,7 @@ updated: "2025-08-01"
 - [Documentation](/docs)
 
 ### Legal
-- [Privacy Policy](/privacy)
-- [Terms of Service](/terms)
-- [Cookie Policy](/cookies)
+- [Legal](/legal)
 
 ## Social Links
 
@@ -48,7 +46,7 @@ updated: "2025-08-01"
 
 ## Copyright Information
 
-**Copyright Notice**: © {{author.name}}. All rights reserved.
+**Copyright Notice**: © {{author.name}}. MIT Licensed.
 
 **Attribution**: Built with [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and [Manta Templates](https://templates.manta.digital).
 

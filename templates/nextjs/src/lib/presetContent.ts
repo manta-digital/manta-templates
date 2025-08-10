@@ -27,14 +27,21 @@ const customSanitizeSchema: typeof defaultSchema = {
 
 export function buildTokens() {
   const contacts = deriveContacts(siteConfig);
+  const resolvedAuthorName = (siteConfig.author.name && siteConfig.author.name.trim()) || siteConfig.site.name;
   const tokens: Record<string, string> = {
     'site.name': siteConfig.site.name,
     'site.url': siteConfig.site.url,
-    'author.name': siteConfig.author.name,
+    'author.name': resolvedAuthorName,
     'contacts.primaryEmail': contacts.primary,
     'contacts.businessEmail': contacts.business,
     'contacts.supportEmail': contacts.support,
   };
+  const currentYear = new Date().getFullYear().toString();
+  const configuredYear = siteConfig.copyright?.year?.trim();
+  const yearToUse = configuredYear || currentYear;
+  tokens['copyright.year'] = yearToUse;
+  tokens['copyright.lastUpdated'] = yearToUse;
+  tokens['copyright.holder'] = resolvedAuthorName;
   return tokens;
 }
 
@@ -48,8 +55,8 @@ function applyTokens(raw: string, tokens: Record<string, string>): string {
 }
 
 export async function getPresetContent<T extends object>(contentType: string, slug: string, preset: PresetKey) {
-  // Try preset path first when not placeholder
-  if (preset !== 'placeholder') {
+  // Try preset path first when not 'default'
+  if (preset !== 'default') {
     const presetDir = path.join(contentRoot, 'presets', preset, contentType);
     const presetPath = path.join(presetDir, `${slug}.md`);
     if (fs.existsSync(presetPath)) {
@@ -70,8 +77,28 @@ export async function getPresetContent<T extends object>(contentType: string, sl
       };
     }
   }
-  // Fallback to default content loader
-  return getContentBySlug<T>(contentType, slug);
+  // Fallback to default content path with token interpolation as well
+  const defaultDir = path.join(contentRoot, contentType);
+  const defaultPath = path.join(defaultDir, `${slug}.md`);
+  if (!fs.existsSync(defaultPath)) {
+    // Keep parity with previous behavior
+    return getContentBySlug<T>(contentType, slug);
+  }
+  const raw = fs.readFileSync(defaultPath, 'utf8');
+  const parsed = matter(raw);
+  const withTokens = applyTokens(parsed.content, buildTokens());
+  const processed = await remark()
+    .use(gfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypePrettyCode, { theme: 'github-dark' })
+    .use(rehypeSanitize, customSanitizeSchema)
+    .use(rehypeStringify)
+    .process(withTokens);
+  return {
+    slug,
+    contentHtml: processed.toString(),
+    frontmatter: parsed.data as T,
+  };
 }
 
 

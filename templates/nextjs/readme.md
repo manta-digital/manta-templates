@@ -17,29 +17,35 @@ All site-level data lives in `src/content/site.config.ts`:
 - `site`: name, url, domain
 - `author`: name
 - `contacts`: primary, business, support (auto-derived from `domain` if omitted)
-- `presets`: which content pack to use for legal/footer (`'placeholder' | 'mit'`)
-- `variants` (future): UI choices like footer style
+- `presets`: which content pack to use for legal (`'default' | 'mit'`)
+- `variants`: UI choices like footer style
 
 Change values there once and the rest of the site updates. For example, set `domain = 'acme.com'` and we’ll default emails to `info@acme.com`, `business@acme.com`, `support@acme.com`.
 
-## Content Presets (placeholder vs MIT)
+## Content Presets & Variants
 
-You can switch between simple placeholders and a ready-to-edit MIT pack.
+You can switch between a default content pack and a ready-to-edit MIT pack.
 
 - Switch in `src/content/site.config.ts`:
   ```ts
   presets: {
-    legal: 'mit',   // or 'placeholder'
-    footer: 'mit',  // or 'placeholder'
+    legal: 'mit',    // or 'default'
+  },
+  variants: {
+    footer: 'compact', // or 'default'
   }
   ```
-- Where files live:
-  - Placeholders (default):
-    - `src/content/legal/{privacy,terms,cookies}.md`
-    - `src/content/footer/footer-content.md` (optional)
-  - MIT Pack:
-    - `src/content/presets/mit/legal/{privacy,terms,cookies}.md`
-    - `src/content/presets/mit/footer/footer-content.md`
+Where files live:
+Default:
+  - `src/content/legal/{privacy,terms,cookies}.md`
+  - `src/content/footer/footer-content.md` (optional)
+MIT Pack:
+  - `src/content/presets/mit/legal/{privacy,terms,cookies}.md`
+  - `src/content/presets/mit/footer/footer-content.md`
+
+Footer behavior summary:
+- `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`).
+- `variants.footer = 'default'` shows legal links from content. If `presets.legal = 'mit'`, it is consolidated to a single “Legal” link.
 
 ### Tokens in Markdown
 
