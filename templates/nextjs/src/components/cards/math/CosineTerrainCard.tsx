@@ -6,10 +6,13 @@ import {
   PerspectiveCamera,
   WebGLRenderer,
   MeshBasicMaterial,
+  MeshStandardMaterial,
   PlaneGeometry,
   BufferAttribute,
   Vector3,
   Mesh,
+  AmbientLight,
+  DirectionalLight,
 } from 'three';
 
 /**
@@ -98,7 +101,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   materialColor = 0x00ff00,
   wireframe = true,
   materialType = 'basic',
-  renderPreset = 'wireframe',
+  renderPreset = 'solid',
   maxPixelRatio = 2,
   maxTilesX = 96,
 }) => {
@@ -172,13 +175,26 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
+    // Optional simple lighting for solid shading
+    if (renderPreset === 'solid') {
+      const amb = new AmbientLight(0xffffff, 0.35);
+      const dir = new DirectionalLight(0xffffff, 0.9);
+      dir.position.set(1, 2, 1).normalize();
+      scene.add(amb);
+      scene.add(dir);
+    }
+
     // Create material per configuration
     const createMaterial = () => {
       const finalWireframe = renderPreset === 'solid' ? false : wireframe;
       const common = { color: materialColor, wireframe: finalWireframe } as const;
-      if (materialType === 'standard') {
-        // Fallback to basic to avoid extra deps/light setup; keep API stable
-        return new MeshBasicMaterial(common);
+      if (materialType === 'standard' || renderPreset === 'solid') {
+        return new MeshStandardMaterial({
+          color: common.color,
+          wireframe: common.wireframe,
+          metalness: 0.1,
+          roughness: 0.9,
+        });
       }
       return new MeshBasicMaterial(common);
     };
