@@ -132,12 +132,18 @@ export interface PerfSettings {
   showTerrainLogs?: boolean;
 }
 
+export interface LightingSettings {
+  ambientColor?: number | string;
+  ambientIntensity?: number;
+}
+
 const DEFAULT_SETTINGS: {
   camera: Required<CameraSettings>;
   terrain: Required<TerrainSettings>;
   tiling: Required<TilingSettings>;
   material: Required<MaterialSettings>;
   background: Required<BackgroundSettings>;
+  lighting: Required<LightingSettings>;
   perf: Required<PerfSettings> & { maxTilesX: number };
   seed: number;
   terrainQuality: 0 | 1 | 2;
@@ -174,17 +180,21 @@ const DEFAULT_SETTINGS: {
     maxTilesX: 96,
   },
   material: {
-    renderPreset: 'wireframe',
-    materialType: 'basic',
-    materialColor: 0x00bf7f,
+    renderPreset: 'solid',
+    materialType: 'standard',
+    materialColor: 0xeeeeee,
     materialOpacity: 1,
     wireframe: true,
-    metalness: 0.1,
-    roughness: 0.9,
+    metalness: 0.9,
+    roughness: 0.1,
   },
   background: {
     backgroundColor: 0x001f0f,
     backgroundAlpha: 0,
+  },
+  lighting: {
+    ambientColor: 0xffffff,
+    ambientIntensity: 0.5,
   },
   perf: {
     maxPixelRatio: 2,
@@ -275,6 +285,13 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
         flat.backgroundColor ?? (settings as any)?.background?.backgroundColor ?? DEFAULT_SETTINGS.background.backgroundColor,
       backgroundAlpha:
         flat.backgroundAlpha ?? (settings as any)?.background?.backgroundAlpha ?? DEFAULT_SETTINGS.background.backgroundAlpha,
+    },
+    lighting: {
+      ...DEFAULT_SETTINGS.lighting,
+      ...(settings as any)?.lighting,
+      ambientColor: (settings as any)?.lighting?.ambientColor ?? DEFAULT_SETTINGS.lighting.ambientColor,
+      ambientIntensity:
+        (settings as any)?.lighting?.ambientIntensity ?? DEFAULT_SETTINGS.lighting.ambientIntensity,
     },
     perf: {
       ...DEFAULT_SETTINGS.perf,
@@ -381,7 +398,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
 
     // Optional simple lighting for solid shading
     if (cfg.material.renderPreset === 'solid') {
-      const amb = new AmbientLight(0xffffff, 0.35);
+      const amb = new AmbientLight(cfg.lighting.ambientColor as any, cfg.lighting.ambientIntensity);
       const dir = new DirectionalLight(0xffffff, 0.9);
       dir.position.set(1, 2, 1).normalize();
       scene.add(amb);
@@ -469,7 +486,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     };
 
     const regenerateTileGeometry = (tile: Mesh, newTileX: number, newTileZ: number) => {
-      if (cfg.terrainQuality < 2) return;
+      if (cfg.terrainQuality < 1) return;
       const geometry = tile.geometry as PlaneGeometry;
       const positions = geometry.attributes.position as BufferAttribute;
       const vertex = new Vector3();
@@ -658,6 +675,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
         console.log(`  Terrain coverage: tiles ${minZ} to ${maxZ} (span: ${maxZ - minZ + 1} tiles)`);
       };
       maybeLogProgress(now, delta);
+
       // Scan a fixed-size chunk of tiles per frame for recycling to reduce spikes
       const len = terrainTiles.length;
       const chunk = Math.max(8, Math.min(cfg.perf.recycleChunkSize, len));
@@ -673,7 +691,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
           const tileZ = newTileZ / cfg.terrain.terrainScale;
           tile.position.set(tileX * cfg.terrain.terrainScale, 0, tileZ * cfg.terrain.terrainScale);
           recycledThisFrame++;
-          if (cfg.terrainQuality >= 2) {
+          if (cfg.terrainQuality >= 1) {
             regenerateTileGeometry(tile, tileX, tileZ);
           }
         }
