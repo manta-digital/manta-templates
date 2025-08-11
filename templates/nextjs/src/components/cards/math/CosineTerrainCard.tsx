@@ -68,6 +68,12 @@ export interface CosineTerrainCardProps {
   maxPixelRatio?: number;
   // Limits
   maxTilesX?: number;
+  /** renderer clear color; pass 'transparent' via backgroundAlpha */
+  backgroundColor?: number | string;
+  /** clear alpha 0..1; 0 = transparent */
+  backgroundAlpha?: number;
+  /** material opacity 0..1 (sets material.transparent) */
+  materialOpacity?: number;
 }
 
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
@@ -98,12 +104,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   enableDynamicTilesX = true,
   cameraFarPlane = 28000,
   showTerrainLogs = false,
-  materialColor = 0x00ff00,
+  materialColor = 0x00cf8f,
   wireframe = true,
   materialType = 'basic',
-  renderPreset = 'solid',
+  renderPreset = 'wireframe',
   maxPixelRatio = 2,
   maxTilesX = 96,
+  backgroundColor,
+  backgroundAlpha = 1,
+  materialOpacity = 1,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -172,6 +181,11 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const devicePR = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     const pixelRatio = Math.min(Math.max(1, devicePR), Math.max(1, maxPixelRatio));
     renderer.setPixelRatio(pixelRatio);
+    if (backgroundColor !== undefined) {
+      renderer.setClearColor(backgroundColor as any, Math.max(0, Math.min(1, backgroundAlpha)));
+    } else {
+      renderer.setClearColor(0x000000, Math.max(0, Math.min(1, backgroundAlpha)));
+    }
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
@@ -188,15 +202,19 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const createMaterial = () => {
       const finalWireframe = renderPreset === 'solid' ? false : wireframe;
       const common = { color: materialColor, wireframe: finalWireframe } as const;
+      const transparent = materialOpacity < 1;
+      const opacity = Math.max(0, Math.min(1, materialOpacity));
       if (materialType === 'standard' || renderPreset === 'solid') {
         return new MeshStandardMaterial({
           color: common.color,
           wireframe: common.wireframe,
           metalness: 0.1,
           roughness: 0.9,
+          transparent,
+          opacity,
         });
       }
-      return new MeshBasicMaterial(common);
+      return new MeshBasicMaterial({ ...common, transparent, opacity });
     };
 
     const material = createMaterial();
