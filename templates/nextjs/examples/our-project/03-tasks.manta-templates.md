@@ -15,9 +15,15 @@ Scope: Integrate reusable, markdown-driven cards into `templates/nextjs/src/comp
 - [x] QA: build/lint/typecheck green; visual parity and a11y verified (note: one img warning intentionally ignored)
 
 ## cosine-card
-- [ ] Receive new migration source for cosine-surface card.  It will consist of a React component and potentially several supporting files.
-- [ ] Design method to integrate into our templates/nexjs/ template.  Confirm with Project Manager.  Consider this a mini-design.
-- [ ] integrate the cosine surface face from the migration source.  no/minimal updates, just get this thing over here and working, with minimal disruptions.  we are going to do interesting stuff with it after that 
+- [x] Add cosine surface card from provided source
+- [x] Refactor and reorganize parameters to improve usability
+
+## cosine-card-terrain
+- [ ] Analyze the provided source and see how we might integrate the parameteric behavior
+- [ ] Determine if the new source provides any additional terrain calculation features
+- [ ] Examine viability and best method of adding control panel (design task)
+- [ ] Panel should be accessed by a small gear icon or similar.  Don't display it all the time.
+- [ ] Consider how to respond to changes in controls (refresh, smoothly adapt to new parameters, etc).  Use feature.cosine-live-update as additional background in evaluating this task.
 
 ---
 

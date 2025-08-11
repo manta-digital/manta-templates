@@ -181,7 +181,7 @@ const DEFAULT_SETTINGS: {
   material: {
     renderPreset: 'wireframe',
     materialType: 'basic',
-    materialColor: 0x70f0b0,
+    materialColor: 0x90ffc0,
     materialOpacity: 1,
     metalness: 0.9,
     roughness: 0.1,
@@ -424,7 +424,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     };
 
     const material = createMaterial();
-
     const terrainTiles: Mesh[] = [];
 
     const detectAndFillGaps = () => {
