@@ -182,7 +182,7 @@ export function VirtualCardList<T = unknown>({
 
       {/* Scroll indicator */}
       {isScrolling && items.length > visibleItemCount && (
-        <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs">
+        <div className="absolute top-2 right-2 bg-black/50 text-foreground px-2 py-1 rounded text-xs">
           {Math.round((scrollTop / (totalHeight - containerHeight)) * 100)}%
         </div>
       )}

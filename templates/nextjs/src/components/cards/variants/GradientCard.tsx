@@ -146,7 +146,7 @@ export function GradientCard({
           <CardHeader>
             {header}
             {title && <CardTitle>{title}</CardTitle>}
-            {description && <CardDescription className="text-white/80">{description}</CardDescription>}
+            {description && <CardDescription className="text-card-foreground/80">{description}</CardDescription>}
           </CardHeader>
         )}
         

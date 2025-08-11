@@ -20,8 +20,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ mini = false, className = '' }) =
       <div className="col-span-4 row-span-1 bg-zinc-700 rounded-[0.5rem]" />
       <div className="col-span-2 row-span-1 bg-zinc-700 rounded-[0.5rem]" />
       <div className="col-span-2 row-span-1 bg-zinc-700 rounded-[0.5rem]" />
-      <div className="col-span-4 row-span-2 bg-linear-to-tr from-green-400 to-teal-500 rounded-[0.5rem]" />
-      <div className="col-span-2 row-span-2 bg-linear-to-tr from-teal-500 to-white rounded-[0.5rem]" />
+      <div className="col-span-4 row-span-2 bg-linear-to-tr from-green-400 to-[var(--color-accent-9)] rounded-[0.5rem]" />
+      <div className="col-span-2 row-span-2 bg-linear-to-tr from-[var(--color-accent-9)] to-white rounded-[0.5rem]" />
     </>
   ) : (
     <>
@@ -46,11 +46,11 @@ const BentoGrid: React.FC<BentoGridProps> = ({ mini = false, className = '' }) =
         <p>Another bento block, same height as sidebar.</p>
       </BaseCard>
       {/* Tall cards */}
-      <BaseCard className="col-span-2 lg:col-span-4 row-span-2 justify-center items-center bg-linear-to-tr from-green-400 to-teal-500 text-white">
+      <BaseCard className="col-span-2 lg:col-span-4 row-span-2 justify-center items-center bg-linear-to-tr from-green-400 to-[var(--color-accent-9)] text-[var(--color-accent-contrast)]">
         <h3 className="text-xl font-semibold mb-2">Tall Card</h3>
         <p>Spans 2 rows for visual interest.</p>
       </BaseCard>
-      <BaseCard className="col-span-2 row-span-2 md:col-span-1 lg:col-span-2 justify-center items-center bg-linear-to-tr from-teal-500 to-white text-black">
+      <BaseCard className="col-span-2 row-span-2 md:col-span-1 lg:col-span-2 justify-center items-center bg-linear-to-tr from-[var(--color-accent-9)] to-white text-foreground">
         <h3 className="text-xl font-semibold mb-2">Tall Card</h3>
         <p>Spans 2 rows for visual interest.</p>
       </BaseCard>

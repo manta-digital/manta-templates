@@ -121,8 +121,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* overlay text */}
         <ProjectCardBody
           wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10"
-          h3ClassName="text-lg font-semibold mb-2 text-white"
-          pClassName="text-sm text-white mb-4"
+         h3ClassName="text-lg font-semibold mb-2 text-card-foreground"
+         pClassName="text-sm text-card-foreground mb-4"
           title={title || content?.title}
           description={description || content?.description}
           techStack={techStack || content?.techStack}

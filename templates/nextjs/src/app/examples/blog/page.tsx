@@ -11,7 +11,7 @@ const cardColors = [
   'bg-pink-200',
   'bg-purple-200',
   'bg-orange-200',
-  'bg-teal-200',
+  'bg-[var(--color-accent-3)]',
   'bg-lime-200',
   'bg-cyan-200',
   'bg-gray-200',

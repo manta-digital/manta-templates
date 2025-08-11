@@ -50,7 +50,7 @@ export default function ComingSoonFeatureCard({ mode = 'dark', content }: Coming
     backgroundGradient: 'bg-gradient-to-r from-[var(--color-accent-3)]/60 to-[var(--color-accent-4)]/60',
     animatedDots: 'bg-[var(--color-accent-9)]',
   } : {
-    title: 'text-white',
+    title: 'text-card-foreground',
     description: 'text-slate-300',
     features: 'text-slate-300',
     divider: 'bg-slate-700/70',
