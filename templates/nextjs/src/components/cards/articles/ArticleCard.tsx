@@ -18,8 +18,8 @@ export default function ArticleCard({ title, subtitle, description, image, href 
             <Image
               src={image}
               alt={title || 'Featured article'}
-              fill
-              className="object-cover transform-gpu transition-transform duration-500 ease-in-out will-change-transform group-hover:scale-105"
+              fill       
+              className="object-cover transform-gpu transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
           ) : (
             <div className="absolute inset-0 bg-muted" />
