@@ -55,6 +55,30 @@
   --color-accent-emphasis: var(--color-accent-10);
   --color-border-accent: var(--color-accent-7);
   --color-border-accent-hover: var(--color-accent-8);  
+
+  /* Accent semantic tokens exposed for Tailwind utilities (e.g., bg-accent-9) */
+  --color-accent-1: var(--color-accent-1);
+  --color-accent-2: var(--color-accent-2);
+  --color-accent-3: var(--color-accent-3);
+  --color-accent-4: var(--color-accent-4);
+  --color-accent-5: var(--color-accent-5);
+  --color-accent-6: var(--color-accent-6);
+  --color-accent-7: var(--color-accent-7);
+  --color-accent-8: var(--color-accent-8);
+  --color-accent-9: var(--color-accent-9);
+  --color-accent-10: var(--color-accent-10);
+  --color-accent-11: var(--color-accent-11);
+  --color-accent-12: var(--color-accent-12);
+
+  /* Compatibility shim for existing teal-* Tailwind usages */
+  --color-teal-100: var(--teal-2);
+  --color-teal-200: var(--teal-3);
+  --color-teal-300: var(--teal-6);
+  --color-teal-400: var(--teal-7);
+  --color-teal-500: var(--teal-9);
+  --color-teal-600: var(--teal-10);
+  --color-teal-700: var(--teal-11);
+  --color-teal-800: var(--teal-12);
 }
 
 @theme inline {
@@ -112,7 +136,7 @@
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: var(--color-teal-500);
+  --border: var(--color-border-accent);
   --input: oklch(0.929 0.013 255.508);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -146,7 +170,7 @@
   --accent: oklch(0.279 0.041 260.031);
   --accent-foreground: oklch(0.984 0.003 247.858);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: var(--color-teal-500);
+  --border: var(--color-border-accent);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
