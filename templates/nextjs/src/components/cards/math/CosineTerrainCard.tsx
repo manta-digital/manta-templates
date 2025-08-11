@@ -76,6 +76,8 @@ export interface CosineTerrainCardProps {
   materialOpacity?: number;
   /** per-frame recycle scan chunk size */
   recycleChunkSize?: number;
+  /** grouped settings (merged with individual props; individual props win) */
+  settings?: Partial<CosineTerrainCardProps>;
 }
 
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
@@ -116,7 +118,12 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   backgroundAlpha = 0,
   materialOpacity = 1,
   recycleChunkSize = 128,
+  settings,
 }) => {
+  // Merge grouped settings with individual props (individuals take precedence)
+  const merged = { ...(settings || {}) } as Required<CosineTerrainCardProps>;
+  const pick = <K extends keyof CosineTerrainCardProps>(key: K, value: NonNullable<CosineTerrainCardProps[K]>) =>
+    (merged[key] as typeof value) ?? value;
   const mountRef = useRef<HTMLDivElement>(null);
 
   const TILE_RECYCLING_THRESHOLD = 3.5;
@@ -418,49 +425,57 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     let lastTime = performance.now();
     let scanIndex = 0;
+    const updateFps = (nowMs: number) => {
+      if (!showFPS || !fpsElement) return;
+      frameCount++;
+      if (nowMs - fpsLastTime >= 1000) {
+        currentFPS = Math.round((frameCount * 1000) / (nowMs - fpsLastTime));
+        fpsElement.textContent = `FPS: ${currentFPS}`;
+        frameCount = 0;
+        fpsLastTime = nowMs;
+      }
+    };
+
+    const followTerrainCamera = (timeNow: number, deltaSec: number) => {
+      const currentTerrainHeight = sampleTerrainHeight(camera.position.x, camera.position.z);
+      const timeVariation = Math.sin(timeNow * 0.001 * heightVariationFrequency) * heightVariation;
+      camera.position.y = currentTerrainHeight + cameraHeight + timeVariation;
+      const lookAheadX = camera.position.x;
+      const lookAheadZ = camera.position.z - lookAheadDistance;
+      const lookAheadTerrainHeight = sampleTerrainHeight(lookAheadX, lookAheadZ);
+      const lookAtPoint = new Vector3(lookAheadX, lookAheadTerrainHeight + lookAtHeight, lookAheadZ);
+      camera.lookAt(lookAtPoint);
+    };
+
     const animate = (nowHighRes?: number) => {
       frameId = requestAnimationFrame(animate);
       const now = typeof nowHighRes === 'number' ? nowHighRes : performance.now();
       const delta = (now - lastTime) / 1000;
       lastTime = now;
-      if (showFPS && fpsElement) {
-        frameCount++;
-        if (now - fpsLastTime >= 1000) {
-          currentFPS = Math.round((frameCount * 1000) / (now - fpsLastTime));
-          fpsElement.textContent = `FPS: ${currentFPS}`;
-          frameCount = 0;
-          fpsLastTime = now;
-        }
-      }
+      updateFps(now);
       camera.position.z -= delta * speed;
       if (followTerrain) {
-        const currentTerrainHeight = sampleTerrainHeight(camera.position.x, camera.position.z);
-        const timeVariation = Math.sin(now * 0.001 * heightVariationFrequency) * heightVariation;
-        camera.position.y = currentTerrainHeight + cameraHeight + timeVariation;
-        const lookAheadX = camera.position.x;
-        const lookAheadZ = camera.position.z - lookAheadDistance;
-        const lookAheadTerrainHeight = sampleTerrainHeight(lookAheadX, lookAheadZ);
-        const lookAtPoint = new Vector3(lookAheadX, lookAheadTerrainHeight + lookAtHeight, lookAheadZ);
-        camera.lookAt(lookAtPoint);
+        followTerrainCamera(now, delta);
       } else {
         camera.position.y = cameraHeight;
       }
       let recycledThisFrame = 0;
       const nowMs = now;
-      if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
-        const shouldLog = Math.floor(nowMs / 5000) !== Math.floor((nowMs - delta * 1000) / 5000);
-        if (shouldLog) {
-          const timeSeconds = Math.floor(nowMs / 1000);
-          const cameraZTile = Math.round(camera.position.z / terrainScale);
-          const allTileZ = terrainTiles.map((t) => Math.round(t.position.z / terrainScale));
-          const minZ = Math.min(...allTileZ);
-          const maxZ = Math.max(...allTileZ);
-          console.log(
-            `T=${timeSeconds}s: Camera Z=${camera.position.z.toFixed(0)} (tile ${cameraZTile}), Tiles: ${terrainTiles.length}`,
-          );
-          console.log(`  Terrain coverage: tiles ${minZ} to ${maxZ} (span: ${maxZ - minZ + 1} tiles)`);
-        }
-      }
+      const maybeLogProgress = (nowMsLocal: number, deltaSec: number) => {
+        if (!(showTerrainLogs && process.env.NODE_ENV !== 'production')) return;
+        const shouldLog = Math.floor(nowMsLocal / 5000) !== Math.floor((nowMsLocal - deltaSec * 1000) / 5000);
+        if (!shouldLog) return;
+        const timeSeconds = Math.floor(nowMsLocal / 1000);
+        const cameraZTile = Math.round(camera.position.z / terrainScale);
+        const allTileZ = terrainTiles.map((t) => Math.round(t.position.z / terrainScale));
+        const minZ = Math.min(...allTileZ);
+        const maxZ = Math.max(...allTileZ);
+        console.log(
+          `T=${timeSeconds}s: Camera Z=${camera.position.z.toFixed(0)} (tile ${cameraZTile}), Tiles: ${terrainTiles.length}`,
+        );
+        console.log(`  Terrain coverage: tiles ${minZ} to ${maxZ} (span: ${maxZ - minZ + 1} tiles)`);
+      };
+      maybeLogProgress(now, delta);
       // Scan a fixed-size chunk of tiles per frame for recycling to reduce spikes
       const len = terrainTiles.length;
       const chunk = Math.max(8, Math.min(recycleChunkSize, len));
