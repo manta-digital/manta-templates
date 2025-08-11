@@ -25,7 +25,7 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className }) => 
         "transition-all outline-none rounded-full border-2",
         // icon + border react to accent and dark mode
         "text-[var(--color-accent-11)]",
-        "border-[var(--color-border-accent)] dark:border-[var(--color-border-accent)]",
+        "!border-[var(--color-border-accent)] dark:!border-[var(--color-border-accent)]",
         // Force hover styles to override variant default using important modifier
         "hover:!bg-[var(--color-accent-3)] dark:hover:!bg-[var(--color-accent-4)]",
         "hover:!text-[var(--color-accent-12)]",
