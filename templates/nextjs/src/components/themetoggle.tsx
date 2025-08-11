@@ -22,7 +22,7 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className }) => 
       onClick={toggleTheme}
       className={cn(
         // React to theme using semantic accent tokens
-        "transition-all outline-none",
+        "transition-all outline-none rounded-full border-2",
         // icon + border react to accent and dark mode
         "text-[var(--color-accent-11)]",
         "border-[var(--color-border-accent)] dark:border-[var(--color-border-accent)]",

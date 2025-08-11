@@ -57,6 +57,14 @@
   --card-surface-text: var(--color-accent-12);
 }
 
+/* Dark-mode border tuning: use a slightly stronger step for borders */
+.dark {
+  --color-card-border: var(--color-accent-8);
+  --color-card-border-hover: var(--color-accent-9);
+  --color-border-accent: var(--color-accent-8);
+  --color-border-accent-hover: var(--color-accent-9);
+}
+
 /* Mintteal palette variant - your existing brand color */
 [data-palette="mintteal"] {
   --color-accent-1: var(--mintteal-1);

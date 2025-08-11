@@ -28,6 +28,8 @@ export interface CardCarouselProps {
   showArrows?: boolean;
   /** Show dot indicators */
   showDots?: boolean;
+  /** Show inline pause/play control */
+  showPause?: boolean;
   /** Enable touch/swipe gestures */
   enableSwipe?: boolean;
   /** Minimum height for carousel cards (e.g., '200px', '12rem') */
@@ -44,6 +46,7 @@ export function CardCarousel({
   autoPlay = 0,
   showArrows = true,
   showDots = true,
+  showPause = true,
   enableSwipe = true,
   minHeight,
 }: CardCarouselProps) {
@@ -389,7 +392,7 @@ export function CardCarousel({
       )}
 
       {/* Auto-play pause/resume button */}
-      {autoPlay > 0 && (
+      {autoPlay > 0 && showPause && (
         <Button
           variant="outline"
           size="sm"
