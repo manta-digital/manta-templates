@@ -17,7 +17,7 @@ export default function ExamplesPage() {
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(120px, auto)" columns="grid-cols-8">
         {/* Hero */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-1 lg:row-span-2 xl:col-span-2 xl:row-span-2">
-          <GradientCard title="Theme Test Grid" description="Switch palette and dark/light to validate tokens" variant="teal" />
+          <GradientCard title="Theme Test Grid" description="Switch palette and dark/light to validate tokens" gradient="teal" />
         </GridItem>
 
         {/* Project spotlight / carousel */}
