@@ -40,6 +40,14 @@ export interface CosineTerrainCardProps {
   enableDynamicTilesX?: boolean;
   cameraFarPlane?: number;
   showTerrainLogs?: boolean;
+  // Material / render
+  materialColor?: number;
+  wireframe?: boolean;
+  materialType?: 'basic' | 'standard';
+  // Rendering perf
+  maxPixelRatio?: number;
+  // Limits
+  maxTilesX?: number;
 }
 
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
@@ -70,6 +78,11 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   enableDynamicTilesX = true,
   cameraFarPlane = 28000,
   showTerrainLogs = false,
+  materialColor = 0x00ff00,
+  wireframe = true,
+  materialType = 'basic',
+  maxPixelRatio = 2,
+  maxTilesX = 96,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -82,9 +95,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const viewWidth = 2 * Math.tan((fov * Math.PI / 180) / 2) * cameraFarPlane;
     const baselineTiles = Math.ceil(viewWidth / terrainScale);
     const aspectRatio = viewportWidth / viewportHeight;
-    const aspectAdjustedTiles = Math.round(baselineTiles * aspectRatio);
-    const finalTileCount = aspectAdjustedTiles;
-    if (showTerrainLogs) {
+    const aspectAdjustedTiles = Math.round(baselineTiles * Math.max(1, aspectRatio));
+    const finalTileCount = Math.min(Math.max(aspectAdjustedTiles, 1), Math.max(1, maxTilesX));
+    if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
       console.log('🔧 Tile Calculation Debug:', {
         viewportSize: `${viewportWidth}×${viewportHeight}px`,
         aspectRatio: aspectRatio.toFixed(2),
@@ -104,7 +117,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const wavelength = (2 * Math.PI) / frequency;
     const tileWavelengthRatio = wavelength / terrainScale;
     const fractionalPart = tileWavelengthRatio % 1;
-    if (fractionalPart > 0.2 && fractionalPart < 0.8) {
+    if (fractionalPart > 0.2 && fractionalPart < 0.8 && process.env.NODE_ENV !== 'production') {
       console.warn(
         `Terrain frequency ${frequency} may cause tile boundary artifacts. ` +
           `Wavelength/tile ratio: ${tileWavelengthRatio.toFixed(2)}. ` +
@@ -134,22 +147,22 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     );
     camera.position.y = cameraHeight;
     const renderer = new WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, Math.max(1, maxPixelRatio));
+    renderer.setPixelRatio(pixelRatio);
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    const material =
-      terrainQuality >= 1
-        ? new MeshBasicMaterial({
-            color: 0x00ff00,
-            wireframe: true,
-            depthTest: true,
-            depthWrite: true,
-            polygonOffset: true,
-            polygonOffsetFactor: 1,
-            polygonOffsetUnits: 1,
-          })
-        : new MeshBasicMaterial({ color: 0x00ff00, wireframe: true, depthTest: false, depthWrite: false });
+    // Create material per configuration
+    const createMaterial = () => {
+      const common = { color: materialColor, wireframe } as const;
+      if (materialType === 'standard') {
+        // Fallback to basic to avoid extra deps/light setup; keep API stable
+        return new MeshBasicMaterial(common);
+      }
+      return new MeshBasicMaterial(common);
+    };
+
+    const material = createMaterial();
 
     const terrainTiles: Mesh[] = [];
 
@@ -187,7 +200,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     };
 
     const generateTerrainTile = (tileX: number, tileZ: number) => {
-      const resolution = terrainQuality >= 1 ? meshResolution : meshResolution - 1;
+      const safeMeshResolution = Math.max(1, Math.floor(meshResolution));
+      const resolution = terrainQuality >= 1 ? safeMeshResolution : Math.max(1, safeMeshResolution - 1);
       const geometry = new PlaneGeometry(terrainScale, terrainScale, resolution, resolution);
       geometry.rotateX(-Math.PI / 2);
       const positions = geometry.attributes.position as BufferAttribute;
@@ -334,9 +348,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     }
 
     let lastTime = performance.now();
-    const animate = () => {
+    const animate = (nowHighRes?: number) => {
       frameId = requestAnimationFrame(animate);
-      const now = performance.now();
+      const now = typeof nowHighRes === 'number' ? nowHighRes : performance.now();
       const delta = (now - lastTime) / 1000;
       lastTime = now;
       if (showFPS && fpsElement) {
@@ -363,7 +377,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       }
       let recycledThisFrame = 0;
       const nowMs = now;
-      if (showTerrainLogs) {
+      if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
         const shouldLog = Math.floor(nowMs / 5000) !== Math.floor((nowMs - delta * 1000) / 5000);
         if (shouldLog) {
           const timeSeconds = Math.floor(nowMs / 1000);
@@ -377,7 +391,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
           console.log(`  Terrain coverage: tiles ${minZ} to ${maxZ} (span: ${maxZ - minZ + 1} tiles)`);
         }
       }
-      terrainTiles.forEach((tile) => {
+      // Limit recycle checks; tiles far from the recycle boundary can be skipped
+      for (const tile of terrainTiles) {
         if (recycledThisFrame >= MAX_TILES_PER_FRAME_RECYCLE) return;
         const recycleThreshold = terrainScale * TILE_RECYCLING_THRESHOLD;
         const distanceBehindCamera = tile.position.z - camera.position.z;
@@ -391,7 +406,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
             regenerateTileGeometry(tile, tileX, tileZ);
           }
         }
-      });
+      }
       detectAndFillGaps();
       renderer.render(scene, camera);
     };
