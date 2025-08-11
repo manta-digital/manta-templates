@@ -12,3 +12,4 @@ export { default as BlogCardImage } from './BlogCardImage';
 export { default as ComingSoonFeatureCard } from './ComingSoonFeatureCard';
 export { default as GuidesFeatureCard } from './GuidesFeatureCard';
 export { default as ThreeJSCard } from './ThreeJSCard';
+export { default as CosineTerrainCard } from './math/CosineTerrainCard';

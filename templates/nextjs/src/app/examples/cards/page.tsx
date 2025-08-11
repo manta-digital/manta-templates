@@ -4,6 +4,7 @@ import BlogIndexCard from '@/components/cards/articles/BlogIndexCard';
 import AboutCardContentLoader from '@/components/cards/people/AboutCardContentLoader';
 import ProjectCardContentLoader from '@/components/cards/projects/ProjectCardContentLoader';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
+import { CosineTerrainCard } from '@/components/cards';
 import { getContentBySlug } from '@/lib/content';
 import type { TechnologiesContent } from '@/types/content';
 
@@ -32,6 +33,13 @@ export default async function CardsExamplesPage() {
           <h2 className="text-lg font-medium mb-3">TechnologyScroller (from content)</h2>
           <div className="border rounded-2xl p-4">
             <TechnologyScroller items={technologies.frontmatter.techs} />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-medium mb-3">CosineTerrainCard (Three.js)</h2>
+          <div className="border rounded-2xl overflow-hidden" style={{ height: 360 }}>
+            <CosineTerrainCard className="w-full h-full" />
           </div>
         </section>
 
