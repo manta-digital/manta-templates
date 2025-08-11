@@ -115,7 +115,6 @@ export interface MaterialSettings {
   materialType?: 'basic' | 'standard';
   materialColor?: number;
   materialOpacity?: number;
-  wireframe?: boolean;
   /** PBR: 0..1 */
   metalness?: number;
   /** PBR: 0..1 */
@@ -180,21 +179,20 @@ const DEFAULT_SETTINGS: {
     maxTilesX: 96,
   },
   material: {
-    renderPreset: 'solid',
-    materialType: 'standard',
-    materialColor: 0xeeeeee,
+    renderPreset: 'wireframe',
+    materialType: 'basic',
+    materialColor: 0x70f0b0,
     materialOpacity: 1,
-    wireframe: true,
     metalness: 0.9,
     roughness: 0.1,
   },
   background: {
-    backgroundColor: 0x001f0f,
-    backgroundAlpha: 0,
+    backgroundColor: 0x90ffff,
+    backgroundAlpha: 0.5,
   },
   lighting: {
-    ambientColor: 0xffffff,
-    ambientIntensity: 0.5,
+    ambientColor: 0x20f0c0,
+    ambientIntensity: 2.00,
   },
   perf: {
     maxPixelRatio: 2,
@@ -276,7 +274,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
         flat.materialColor ?? (settings as any)?.material?.materialColor ?? DEFAULT_SETTINGS.material.materialColor,
       materialOpacity:
         flat.materialOpacity ?? (settings as any)?.material?.materialOpacity ?? DEFAULT_SETTINGS.material.materialOpacity,
-      wireframe: flat.wireframe ?? (settings as any)?.material?.wireframe ?? DEFAULT_SETTINGS.material.wireframe,
     },
     background: {
       ...DEFAULT_SETTINGS.background,
@@ -408,8 +405,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     // Create material per configuration
     const createMaterial = () => {
       const finalRenderPreset = cfg.material.renderPreset;
-      const finalWireframe = finalRenderPreset === 'solid' ? false : cfg.material.wireframe;
-      const common = { color: cfg.material.materialColor, wireframe: finalWireframe } as const;
+      const isWireframe = finalRenderPreset === 'wireframe';
+      const common = { color: cfg.material.materialColor, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
       const finalMaterialType = cfg.material.materialType;
