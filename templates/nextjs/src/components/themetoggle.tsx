@@ -14,11 +14,29 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className }) => 
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={toggleTheme} className={cn(className)}>
+    <Button
+      variant="outline"
+      size="icon"
+      aria-pressed={theme === "dark"}
+      title={theme === "light" ? "Switch to dark" : "Switch to light"}
+      onClick={toggleTheme}
+      className={cn(
+        // React to theme using semantic accent tokens
+        "transition-all outline-none",
+        // icon + border react to accent and dark mode
+        "text-[var(--color-accent-11)]",
+        "border-[var(--color-border-accent)] dark:border-[var(--color-border-accent)]",
+        // Force hover styles to override variant default using important modifier
+        "hover:!bg-[var(--color-accent-3)] dark:hover:!bg-[var(--color-accent-4)]",
+        "hover:!text-[var(--color-accent-12)]",
+        "hover:!border-[var(--color-border-accent-hover)]",
+        className,
+      )}
+    >
       {theme === "light" ? (
-        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Sun strokeWidth={1.75} className="h-[1.2rem] w-[1.2rem] transition-transform duration-200" />
       ) : (
-        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <Moon strokeWidth={1.75} className="h-[1.2rem] w-[1.2rem] transition-transform duration-200" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>
