@@ -80,6 +80,54 @@ export interface CosineTerrainCardProps {
   settings?: Partial<CosineTerrainCardProps>;
 }
 
+// Structured settings groups for readability (optional via `settings`)
+export interface CameraSettings {
+  speed?: number;
+  cameraHeight?: number;
+  fov?: number;
+  cameraFarPlane?: number;
+  followTerrain?: boolean;
+  lookAheadDistance?: number;
+  lookAtHeight?: number;
+  heightVariation?: number;
+  heightVariationFrequency?: number;
+}
+export interface TerrainSettings {
+  terrainScale?: number;
+  terrainFrequency?: number;
+  terrainAmplitude?: number;
+  terrainEquation?: 'multiplicative' | 'additive';
+  xAmplitudeMultiplier?: number;
+  zAmplitudeMultiplier?: number;
+  enableAmplitudeVariation?: boolean;
+  amplitudeVariationFrequency?: number;
+  amplitudeVariationIntensity?: number;
+}
+export interface TilingSettings {
+  tilesX?: number;
+  tilesZ?: number;
+  meshResolution?: number;
+  enableDynamicTilesX?: boolean;
+  maxTilesX?: number;
+}
+export interface MaterialSettings {
+  renderPreset?: 'wireframe' | 'solid';
+  materialType?: 'basic' | 'standard';
+  materialColor?: number;
+  materialOpacity?: number;
+  wireframe?: boolean;
+}
+export interface BackgroundSettings {
+  backgroundColor?: number | string;
+  backgroundAlpha?: number;
+}
+export interface PerfSettings {
+  maxPixelRatio?: number;
+  recycleChunkSize?: number;
+  showFPS?: boolean;
+  showTerrainLogs?: boolean;
+}
+
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   className,
   seed = 0,
@@ -120,10 +168,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   recycleChunkSize = 128,
   settings,
 }) => {
-  // Merge grouped settings with individual props (individuals take precedence)
-  const merged = { ...(settings || {}) } as Required<CosineTerrainCardProps>;
-  const pick = <K extends keyof CosineTerrainCardProps>(key: K, value: NonNullable<CosineTerrainCardProps[K]>) =>
-    (merged[key] as typeof value) ?? value;
+  // Merge structured settings (optional) – individual props override
+  const s = (settings || {}) as Partial<{
+    camera: CameraSettings;
+    terrain: TerrainSettings;
+    tiling: TilingSettings;
+    material: MaterialSettings;
+    background: BackgroundSettings;
+    perf: PerfSettings;
+  }> & Partial<CosineTerrainCardProps>;
   const mountRef = useRef<HTMLDivElement>(null);
 
   const TILE_RECYCLING_THRESHOLD = 3.5;
@@ -135,8 +188,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const viewWidth = 2 * Math.tan((fov * Math.PI / 180) / 2) * cameraFarPlane;
     const baselineTiles = Math.ceil(viewWidth / terrainScale);
     const aspectRatio = viewportWidth / viewportHeight;
+    const maxTiles = s?.perf?.maxTilesX ?? maxTilesX;
     const aspectAdjustedTiles = Math.round(baselineTiles * Math.max(1, aspectRatio));
-    const finalTileCount = Math.min(Math.max(aspectAdjustedTiles, 1), Math.max(1, maxTilesX));
+    const finalTileCount = Math.min(Math.max(aspectAdjustedTiles, 1), Math.max(1, maxTiles));
     if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
       console.log('🔧 Tile Calculation Debug:', {
         viewportSize: `${viewportWidth}×${viewportHeight}px`,
@@ -189,18 +243,23 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const renderer = new WebGLRenderer({ antialias: true });
     // Pixel ratio: keep it stable to avoid periodic GC/surface reallocations
     const devicePR = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-    const pixelRatio = Math.min(Math.max(1, devicePR), Math.max(1, maxPixelRatio));
+    const pixelRatio = Math.min(
+      Math.max(1, devicePR),
+      Math.max(1, s?.perf?.maxPixelRatio ?? maxPixelRatio),
+    );
     renderer.setPixelRatio(pixelRatio);
-    if (backgroundColor !== undefined) {
-      renderer.setClearColor(backgroundColor as any, Math.max(0, Math.min(1, backgroundAlpha)));
+    const bgAlpha = Math.max(0, Math.min(1, s?.background?.backgroundAlpha ?? backgroundAlpha));
+    const bgColor = (s?.background?.backgroundColor ?? backgroundColor) as any;
+    if (bgColor !== undefined) {
+      renderer.setClearColor(bgColor, bgAlpha);
     } else {
-      renderer.setClearColor(0x000000, Math.max(0, Math.min(1, backgroundAlpha)));
+      renderer.setClearColor(0x000000, bgAlpha);
     }
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
     // Optional simple lighting for solid shading
-    if (renderPreset === 'solid') {
+    if ((s?.material?.renderPreset ?? renderPreset) === 'solid') {
       const amb = new AmbientLight(0xffffff, 0.35);
       const dir = new DirectionalLight(0xffffff, 0.9);
       dir.position.set(1, 2, 1).normalize();
@@ -210,11 +269,13 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     // Create material per configuration
     const createMaterial = () => {
-      const finalWireframe = renderPreset === 'solid' ? false : wireframe;
-      const common = { color: materialColor, wireframe: finalWireframe } as const;
+      const finalRenderPreset = s?.material?.renderPreset ?? renderPreset;
+      const finalWireframe = finalRenderPreset === 'solid' ? false : (s?.material?.wireframe ?? wireframe);
+      const common = { color: s?.material?.materialColor ?? materialColor, wireframe: finalWireframe } as const;
       const transparent = materialOpacity < 1;
-      const opacity = Math.max(0, Math.min(1, materialOpacity));
-      if (materialType === 'standard' || renderPreset === 'solid') {
+      const opacity = Math.max(0, Math.min(1, s?.material?.materialOpacity ?? materialOpacity));
+      const finalMaterialType = s?.material?.materialType ?? materialType;
+      if (finalMaterialType === 'standard' || finalRenderPreset === 'solid') {
         return new MeshStandardMaterial({
           color: common.color,
           wireframe: common.wireframe,
