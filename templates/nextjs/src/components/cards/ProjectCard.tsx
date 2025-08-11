@@ -90,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {!!showStack.length && (
           <div className="flex flex-wrap gap-2 mb-4">
             {showStack.map((tech) => (
-              <span key={tech} className="px-3 py-1 border rounded-[0.5em] text-xs font-medium bg-teal-100 text-teal-800 border-teal-300 dark:bg-mintteal-2 dark:text-mintteal-12 dark:border-mintteal-7">
+              <span key={tech} className="px-3 py-1 border rounded-[0.5em] text-xs font-medium bg-[var(--color-accent-3)] text-[var(--color-accent-12)] border-[var(--color-card-border)]">
                 {tech}
               </span>
             ))}

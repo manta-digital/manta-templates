@@ -40,3 +40,9 @@ Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-theme
 Notes:
 - Technologies marquee: use `BaseCard` + `TechnologyScroller` directly; no dedicated wrapper.
 - All tasks apply under monorepo mode—operate only inside `templates/nextjs/`.
+
+## cosine-terrain-eslint
+Design source: `templates/nextjs/examples/our-project/tasks/04-tasks-cosine-terrain-eslint.md`
+
+- [ ] Fix strict types and ESLint in `CosineTerrainCard.tsx` (no-explicit-any, unused vars, cleanup warning)
+- [ ] No behavior changes; keep perf identical

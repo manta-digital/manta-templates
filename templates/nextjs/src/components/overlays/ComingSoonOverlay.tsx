@@ -24,18 +24,18 @@ const colorMap: Record<ColorKey, {
 }> = {
   teal: {
     dark: {
-      badgeBg: "bg-teal-500/20",
-      badgeText: "text-teal-300",
-      icon: "text-teal-400",
-      pattern: "from-teal-500 to-emerald-400",
-      border: "border-teal-700/30",
+      badgeBg: "bg-[var(--color-accent-4)]/40",
+      badgeText: "text-[var(--color-accent-11)]",
+      icon: "text-[var(--color-accent-10)]",
+      pattern: "from-[var(--color-accent-9)] to-[var(--color-accent-10)]",
+      border: "border-[var(--color-card-border)]/30",
     },
     light: {
-      badgeBg: "bg-teal-100/60",
-      badgeText: "text-teal-700",
-      icon: "text-teal-600",
-      pattern: "from-teal-400 to-emerald-500",
-      border: "border-teal-300/50",
+      badgeBg: "bg-[var(--color-accent-3)]/60",
+      badgeText: "text-[var(--color-accent-12)]",
+      icon: "text-[var(--color-accent-11)]",
+      pattern: "from-[var(--color-accent-9)] to-[var(--color-accent-10)]",
+      border: "border-[var(--color-card-border)]/50",
     },
   },
   purple: {
