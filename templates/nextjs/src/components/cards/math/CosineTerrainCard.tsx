@@ -12,18 +12,33 @@ import {
   Mesh,
 } from 'three';
 
+/**
+ * Animated cosine-terrain renderer using Three.js.
+ * Exposes tuning props for frequency, amplitude, tiling, and performance.
+ */
 export interface CosineTerrainCardProps {
   className?: string;
+  /** phase seed for cosine fields */
   seed?: number;
+  /** camera forward speed (world units/sec) */
   speed?: number;
+  /** baseline camera height above sampled terrain */
   cameraHeight?: number;
+  /** spatial frequency of cosine fields (radians per unit) */
   terrainFrequency?: number;
+  /** base amplitude for height field */
   terrainAmplitude?: number;
+  /** mesh segments per tile edge (>=1) */
   meshResolution?: number;
+  /** horizontal tile count (used if dynamic disabled) */
   tilesX?: number;
+  /** depth (Z) tile count */
   tilesZ?: number;
+  /** camera field of view in degrees */
   fov?: number;
+  /** world size of a tile edge */
   terrainScale?: number;
+  /** height combination equation */
   terrainEquation?: 'multiplicative' | 'additive';
   xAmplitudeMultiplier?: number;
   zAmplitudeMultiplier?: number;
@@ -147,7 +162,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     );
     camera.position.y = cameraHeight;
     const renderer = new WebGLRenderer({ antialias: true });
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, Math.max(1, maxPixelRatio));
+    // Pixel ratio: keep it stable to avoid periodic GC/surface reallocations
+    const devicePR = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    const pixelRatio = Math.min(Math.max(1, devicePR), Math.max(1, maxPixelRatio));
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
@@ -313,12 +330,23 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
         // Reset timing to avoid a huge delta after resume
         lastTime = performance.now();
         // Regenerate all tile geometries immediately for a fully drawn surface
-        if (terrainQuality >= 2) {
-          for (const tile of terrainTiles) {
-            const tileX = tile.position.x / terrainScale;
-            const tileZ = tile.position.z / terrainScale;
-            regenerateTileGeometry(tile, tileX, tileZ);
+        for (const tile of terrainTiles) {
+          const tileX = tile.position.x / terrainScale;
+          const tileZ = tile.position.z / terrainScale;
+          // For consistent visuals across qualities, always refresh positions/normals
+          const geometry = tile.geometry as PlaneGeometry;
+          const positions = geometry.attributes.position as BufferAttribute;
+          const vertex = new Vector3();
+          for (let i = 0; i < positions.count; i++) {
+            vertex.fromBufferAttribute(positions, i);
+            const worldX = tileX * terrainScale + vertex.x;
+            const worldZ = tileZ * terrainScale + vertex.z;
+            const y = calculateTerrainHeight(worldX, worldZ);
+            positions.setY(i, y);
           }
+          positions.needsUpdate = true;
+          geometry.computeVertexNormals();
+          geometry.attributes.position.needsUpdate = true;
         }
         // Render a frame immediately after regeneration
         renderer.render(scene, camera);
@@ -393,7 +421,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       }
       // Limit recycle checks; tiles far from the recycle boundary can be skipped
       for (const tile of terrainTiles) {
-        if (recycledThisFrame >= MAX_TILES_PER_FRAME_RECYCLE) return;
+        if (recycledThisFrame >= MAX_TILES_PER_FRAME_RECYCLE) break;
         const recycleThreshold = terrainScale * TILE_RECYCLING_THRESHOLD;
         const distanceBehindCamera = tile.position.z - camera.position.z;
         if (distanceBehindCamera > recycleThreshold) {
