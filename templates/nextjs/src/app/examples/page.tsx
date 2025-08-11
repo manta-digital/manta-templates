@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { BentoLayout } from '@/components/layouts/bento-layout';
 import GridItem from '@/components/layouts/grid-layout/grid-item';
-import BlogHeroCard from '@/components/cards/BlogHeroCard';
+import { GradientCard } from '@/components/cards/variants/GradientCard';
 import ArticleCard from '@/components/cards/articles/ArticleCard';
 import BlogCardImage from '@/components/cards/BlogCardImage';
 import ProjectCard from '@/components/cards/ProjectCard';
@@ -17,7 +17,7 @@ export default function ExamplesPage() {
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(120px, auto)" columns="grid-cols-8">
         {/* Hero */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-1 lg:row-span-2 xl:col-span-2 xl:row-span-2">
-          <BlogHeroCard title="Theme Test Grid" subtitle="Switch palette and dark/light to validate tokens" />
+          <GradientCard title="Theme Test Grid" description="Switch palette and dark/light to validate tokens" variant="teal" />
         </GridItem>
 
         {/* Project spotlight / carousel */}
@@ -35,7 +35,7 @@ export default function ExamplesPage() {
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-4">
-          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-card-foreground" />
+          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
         </GridItem>
 
         {/* Cosine terrain visual */}
