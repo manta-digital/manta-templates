@@ -74,6 +74,8 @@ export interface CosineTerrainCardProps {
   backgroundAlpha?: number;
   /** material opacity 0..1 (sets material.transparent) */
   materialOpacity?: number;
+  /** per-frame recycle scan chunk size */
+  recycleChunkSize?: number;
 }
 
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
@@ -104,15 +106,16 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   enableDynamicTilesX = true,
   cameraFarPlane = 28000,
   showTerrainLogs = false,
-  materialColor = 0x00cf8f,
+  materialColor = 0x00bf7f,
   wireframe = true,
   materialType = 'basic',
   renderPreset = 'wireframe',
   maxPixelRatio = 2,
   maxTilesX = 96,
-  backgroundColor,
-  backgroundAlpha = 1,
+  backgroundColor = 0x001f0f,
+  backgroundAlpha = 0,
   materialOpacity = 1,
+  recycleChunkSize = 128,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -414,6 +417,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     }
 
     let lastTime = performance.now();
+    let scanIndex = 0;
     const animate = (nowHighRes?: number) => {
       frameId = requestAnimationFrame(animate);
       const now = typeof nowHighRes === 'number' ? nowHighRes : performance.now();
@@ -457,9 +461,13 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
           console.log(`  Terrain coverage: tiles ${minZ} to ${maxZ} (span: ${maxZ - minZ + 1} tiles)`);
         }
       }
-      // Limit recycle checks; tiles far from the recycle boundary can be skipped
-      for (const tile of terrainTiles) {
+      // Scan a fixed-size chunk of tiles per frame for recycling to reduce spikes
+      const len = terrainTiles.length;
+      const chunk = Math.max(8, Math.min(recycleChunkSize, len));
+      for (let k = 0; k < chunk; k++) {
         if (recycledThisFrame >= MAX_TILES_PER_FRAME_RECYCLE) break;
+        const idx = (scanIndex + k) % len;
+        const tile = terrainTiles[idx];
         const recycleThreshold = terrainScale * TILE_RECYCLING_THRESHOLD;
         const distanceBehindCamera = tile.position.z - camera.position.z;
         if (distanceBehindCamera > recycleThreshold) {
@@ -473,6 +481,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
           }
         }
       }
+      scanIndex = (scanIndex + chunk) % Math.max(1, len);
       detectAndFillGaps();
       renderer.render(scene, camera);
     };
