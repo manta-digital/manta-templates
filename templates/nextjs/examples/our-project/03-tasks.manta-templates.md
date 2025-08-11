@@ -25,7 +25,17 @@ Scope: Integrate reusable, markdown-driven cards into `templates/nextjs/src/comp
 - [ ] Panel should be accessed by a small gear icon or similar.  Don't display it all the time.
 - [ ] Consider how to respond to changes in controls (refresh, smoothly adapt to new parameters, etc).  Use feature.cosine-live-update as additional background in evaluating this task.
 
----
+## color-themes 
+Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-themes.md`
+
+### Overview
+- [x] Inventory current theming systems and propose unified design
+  - Systems: Radix custom palettes (`radixCustomColors.css`), semantic aliases (`semanticColors.css`), card theming (`cardThemes.css`), shadcn base tokens (in `globals.css`), Tailwind v4 utilities (some hard-coded `teal-*`)
+- [ ] Implement accent palette switching via `[data-accent]` mappings (teal, mintteal, blue, purple; extensible)
+- [ ] Align Tailwind tokens and semantic aliases; add `accent-*` utilities and compatibility shim for `teal-*`
+- [ ] ThemeProvider: manage `accent` with persistence; set `[data-accent]`
+- [ ] Migrate hard-coded classes to semantic tokens incrementally (keep shim until complete)
+- [ ] Docs + a11y verification (contrast, high-contrast media)
 
 Notes:
 - Technologies marquee: use `BaseCard` + `TechnologyScroller` directly; no dedicated wrapper.
