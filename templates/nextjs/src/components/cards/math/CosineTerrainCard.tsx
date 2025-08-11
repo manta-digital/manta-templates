@@ -116,6 +116,10 @@ export interface MaterialSettings {
   materialColor?: number;
   materialOpacity?: number;
   wireframe?: boolean;
+  /** PBR: 0..1 */
+  metalness?: number;
+  /** PBR: 0..1 */
+  roughness?: number;
 }
 export interface BackgroundSettings {
   backgroundColor?: number | string;
@@ -175,6 +179,8 @@ const DEFAULT_SETTINGS: {
     materialColor: 0x00bf7f,
     materialOpacity: 1,
     wireframe: true,
+    metalness: 0.1,
+    roughness: 0.9,
   },
   background: {
     backgroundColor: 0x001f0f,
@@ -301,18 +307,18 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
 
   const calculateOptimalTilesX = (viewportWidth: number, viewportHeight: number): number => {
     const viewWidth = 2 * Math.tan((cfg.camera.fov * Math.PI / 180) / 2) * cfg.camera.cameraFarPlane;
-    const baselineTiles = Math.ceil(viewWidth / terrainScale);
+    const baselineTiles = Math.ceil(viewWidth / cfg.terrain.terrainScale);
     const aspectRatio = viewportWidth / viewportHeight;
     const maxTiles = cfg.perf.maxTilesX;
     const aspectAdjustedTiles = Math.round(baselineTiles * Math.max(1, aspectRatio));
     const finalTileCount = Math.min(Math.max(aspectAdjustedTiles, 1), Math.max(1, maxTiles));
-    if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
+    if (cfg.perf.showTerrainLogs && process.env.NODE_ENV !== 'production') {
       console.log('🔧 Tile Calculation Debug:', {
         viewportSize: `${viewportWidth}×${viewportHeight}px`,
         aspectRatio: aspectRatio.toFixed(2),
-        fov: `${fov}°`,
-        cameraFarPlane: cameraFarPlane,
-        terrainScale: terrainScale,
+        fov: `${cfg.camera.fov}°`,
+        cameraFarPlane: cfg.camera.cameraFarPlane,
+        terrainScale: cfg.terrain.terrainScale,
         viewWidth: `${viewWidth.toFixed(0)} world units`,
         baselineTiles: `${baselineTiles} tiles (geometric baseline)`,
         aspectAdjustedTiles: `${aspectAdjustedTiles} tiles (after aspect)`,
@@ -324,7 +330,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
 
   const validateTerrainFrequency = (frequency: number): void => {
     const wavelength = (2 * Math.PI) / frequency;
-    const tileWavelengthRatio = wavelength / terrainScale;
+    const tileWavelengthRatio = wavelength / cfg.terrain.terrainScale;
     const fractionalPart = tileWavelengthRatio % 1;
     if (fractionalPart > 0.2 && fractionalPart < 0.8 && process.env.NODE_ENV !== 'production') {
       console.warn(
@@ -387,15 +393,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       const finalRenderPreset = cfg.material.renderPreset;
       const finalWireframe = finalRenderPreset === 'solid' ? false : cfg.material.wireframe;
       const common = { color: cfg.material.materialColor, wireframe: finalWireframe } as const;
-      const transparent = materialOpacity < 1;
+      const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
       const finalMaterialType = cfg.material.materialType;
       if (finalMaterialType === 'standard' || finalRenderPreset === 'solid') {
         return new MeshStandardMaterial({
           color: common.color,
           wireframe: common.wireframe,
-          metalness: 0.1,
-          roughness: 0.9,
+          metalness: Math.max(0, Math.min(1, cfg.material.metalness)),
+          roughness: Math.max(0, Math.min(1, cfg.material.roughness)),
           transparent,
           opacity,
         });
@@ -412,15 +418,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       const cameraZ = camera.position.z;
       const frontmostZ = cameraZ - TILE_BUFFER_DISTANCE * cfg.terrain.terrainScale;
       const tilesInFront = terrainTiles.filter(
-        (tile) => tile.position.z <= frontmostZ && tile.position.z >= frontmostZ - tilesZ * terrainScale,
+        (tile) => tile.position.z <= frontmostZ && tile.position.z >= frontmostZ - cfg.tiling.tilesZ * cfg.terrain.terrainScale,
       );
-      const expectedTilesInFront = Math.min(tilesZ, Math.ceil(TILE_BUFFER_DISTANCE * 2));
+      const expectedTilesInFront = Math.min(cfg.tiling.tilesZ, Math.ceil(TILE_BUFFER_DISTANCE * 2));
       if (tilesInFront.length < expectedTilesInFront * 0.8) {
         const frontmostTile = terrainTiles.reduce((front, tile) => (tile.position.z < front.position.z ? tile : front));
-        const emergencyTileZ = frontmostTile.position.z - terrainScale;
+        const emergencyTileZ = frontmostTile.position.z - cfg.terrain.terrainScale;
         const emergencyTileX = 0;
         console.warn(`Gap detected! Creating emergency tile at Z: ${emergencyTileZ}`);
-        terrainTiles.push(generateTerrainTile(emergencyTileX, emergencyTileZ / terrainScale));
+        terrainTiles.push(generateTerrainTile(emergencyTileX, emergencyTileZ / cfg.terrain.terrainScale));
       }
     };
 
@@ -441,7 +447,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     };
 
     const generateTerrainTile = (tileX: number, tileZ: number) => {
-      const safeMeshResolution = Math.max(1, Math.floor(meshResolution));
+      const safeMeshResolution = Math.max(1, Math.floor(cfg.tiling.meshResolution));
       const resolution = cfg.terrainQuality >= 1 ? safeMeshResolution : Math.max(1, safeMeshResolution - 1);
       const geometry = new PlaneGeometry(cfg.terrain.terrainScale, cfg.terrain.terrainScale, resolution, resolution);
       geometry.rotateX(-Math.PI / 2);
@@ -457,20 +463,20 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       positions.needsUpdate = true;
       geometry.computeVertexNormals();
       const mesh = new Mesh(geometry, material);
-      mesh.position.set(tileX * terrainScale, 0, tileZ * terrainScale);
+      mesh.position.set(tileX * cfg.terrain.terrainScale, 0, tileZ * cfg.terrain.terrainScale);
       scene.add(mesh);
       return mesh;
     };
 
     const regenerateTileGeometry = (tile: Mesh, newTileX: number, newTileZ: number) => {
-      if (terrainQuality < 2) return;
+      if (cfg.terrainQuality < 2) return;
       const geometry = tile.geometry as PlaneGeometry;
       const positions = geometry.attributes.position as BufferAttribute;
       const vertex = new Vector3();
       for (let i = 0; i < positions.count; i++) {
         vertex.fromBufferAttribute(positions, i);
-        const worldX = newTileX * terrainScale + vertex.x;
-        const worldZ = newTileZ * terrainScale + vertex.z;
+        const worldX = newTileX * cfg.terrain.terrainScale + vertex.x;
+        const worldZ = newTileZ * cfg.terrain.terrainScale + vertex.z;
         const y = calculateTerrainHeight(worldX, worldZ);
         positions.setY(i, y);
       }
@@ -555,16 +561,16 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
         lastTime = performance.now();
         // Regenerate all tile geometries immediately for a fully drawn surface
         for (const tile of terrainTiles) {
-          const tileX = tile.position.x / terrainScale;
-          const tileZ = tile.position.z / terrainScale;
+          const tileX = tile.position.x / cfg.terrain.terrainScale;
+          const tileZ = tile.position.z / cfg.terrain.terrainScale;
           // For consistent visuals across qualities, always refresh positions/normals
           const geometry = tile.geometry as PlaneGeometry;
           const positions = geometry.attributes.position as BufferAttribute;
           const vertex = new Vector3();
           for (let i = 0; i < positions.count; i++) {
             vertex.fromBufferAttribute(positions, i);
-            const worldX = tileX * terrainScale + vertex.x;
-            const worldZ = tileZ * terrainScale + vertex.z;
+            const worldX = tileX * cfg.terrain.terrainScale + vertex.x;
+            const worldZ = tileZ * cfg.terrain.terrainScale + vertex.z;
             const y = calculateTerrainHeight(worldX, worldZ);
             positions.setY(i, y);
           }
@@ -582,7 +588,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     let fpsLastTime = performance.now();
     let currentFPS = 0;
     let fpsElement: HTMLDivElement | null = null;
-    if (showFPS) {
+    if (cfg.perf.showFPS) {
       fpsElement = document.createElement('div');
       fpsElement.style.position = 'absolute';
       fpsElement.style.top = '10px';
@@ -602,7 +608,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     let lastTime = performance.now();
     let scanIndex = 0;
     const updateFps = (nowMs: number) => {
-      if (!showFPS || !fpsElement) return;
+      if (!cfg.perf.showFPS || !fpsElement) return;
       frameCount++;
       if (nowMs - fpsLastTime >= 1000) {
         currentFPS = Math.round((frameCount * 1000) / (nowMs - fpsLastTime));
@@ -612,14 +618,14 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       }
     };
 
-    const followTerrainCamera = (timeNow: number, deltaSec: number) => {
+    const followTerrainCamera = (timeNow: number, _deltaSec: number) => {
       const currentTerrainHeight = sampleTerrainHeight(camera.position.x, camera.position.z);
-      const timeVariation = Math.sin(timeNow * 0.001 * heightVariationFrequency) * heightVariation;
-      camera.position.y = currentTerrainHeight + cameraHeight + timeVariation;
+      const timeVariation = Math.sin(timeNow * 0.001 * cfg.camera.heightVariationFrequency) * cfg.camera.heightVariation;
+      camera.position.y = currentTerrainHeight + cfg.camera.cameraHeight + timeVariation;
       const lookAheadX = camera.position.x;
-      const lookAheadZ = camera.position.z - lookAheadDistance;
+      const lookAheadZ = camera.position.z - cfg.camera.lookAheadDistance;
       const lookAheadTerrainHeight = sampleTerrainHeight(lookAheadX, lookAheadZ);
-      const lookAtPoint = new Vector3(lookAheadX, lookAheadTerrainHeight + lookAtHeight, lookAheadZ);
+      const lookAtPoint = new Vector3(lookAheadX, lookAheadTerrainHeight + cfg.camera.lookAtHeight, lookAheadZ);
       camera.lookAt(lookAtPoint);
     };
 
@@ -629,21 +635,21 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       const delta = (now - lastTime) / 1000;
       lastTime = now;
       updateFps(now);
-      camera.position.z -= delta * speed;
-      if (followTerrain) {
+      camera.position.z -= delta * cfg.camera.speed;
+      if (cfg.camera.followTerrain) {
         followTerrainCamera(now, delta);
       } else {
-        camera.position.y = cameraHeight;
+        camera.position.y = cfg.camera.cameraHeight;
       }
       let recycledThisFrame = 0;
       const nowMs = now;
       const maybeLogProgress = (nowMsLocal: number, deltaSec: number) => {
-        if (!(showTerrainLogs && process.env.NODE_ENV !== 'production')) return;
+        if (!(cfg.perf.showTerrainLogs && process.env.NODE_ENV !== 'production')) return;
         const shouldLog = Math.floor(nowMsLocal / 5000) !== Math.floor((nowMsLocal - deltaSec * 1000) / 5000);
         if (!shouldLog) return;
         const timeSeconds = Math.floor(nowMsLocal / 1000);
-        const cameraZTile = Math.round(camera.position.z / terrainScale);
-        const allTileZ = terrainTiles.map((t) => Math.round(t.position.z / terrainScale));
+      const cameraZTile = Math.round(camera.position.z / cfg.terrain.terrainScale);
+      const allTileZ = terrainTiles.map((t) => Math.round(t.position.z / cfg.terrain.terrainScale));
         const minZ = Math.min(...allTileZ);
         const maxZ = Math.max(...allTileZ);
         console.log(
@@ -654,20 +660,20 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
       maybeLogProgress(now, delta);
       // Scan a fixed-size chunk of tiles per frame for recycling to reduce spikes
       const len = terrainTiles.length;
-      const chunk = Math.max(8, Math.min(recycleChunkSize, len));
+      const chunk = Math.max(8, Math.min(cfg.perf.recycleChunkSize, len));
       for (let k = 0; k < chunk; k++) {
         if (recycledThisFrame >= MAX_TILES_PER_FRAME_RECYCLE) break;
         const idx = (scanIndex + k) % len;
         const tile = terrainTiles[idx];
-        const recycleThreshold = terrainScale * TILE_RECYCLING_THRESHOLD;
+        const recycleThreshold = cfg.terrain.terrainScale * TILE_RECYCLING_THRESHOLD;
         const distanceBehindCamera = tile.position.z - camera.position.z;
         if (distanceBehindCamera > recycleThreshold) {
-          const newTileZ = tile.position.z - terrainScale * tilesZ;
-          const tileX = tile.position.x / terrainScale;
-          const tileZ = newTileZ / terrainScale;
-          tile.position.set(tileX * terrainScale, 0, tileZ * terrainScale);
+          const newTileZ = tile.position.z - cfg.terrain.terrainScale * cfg.tiling.tilesZ;
+          const tileX = tile.position.x / cfg.terrain.terrainScale;
+          const tileZ = newTileZ / cfg.terrain.terrainScale;
+          tile.position.set(tileX * cfg.terrain.terrainScale, 0, tileZ * cfg.terrain.terrainScale);
           recycledThisFrame++;
-          if (terrainQuality >= 2) {
+          if (cfg.terrainQuality >= 2) {
             regenerateTileGeometry(tile, tileX, tileZ);
           }
         }
