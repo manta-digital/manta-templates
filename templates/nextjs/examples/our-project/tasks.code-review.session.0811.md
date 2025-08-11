@@ -29,25 +29,25 @@ status: COMPLETED
 
 ### templates/nextjs/src/components/cards/math/CosineTerrainCard.tsx
 
-- [ ] P1: Make rendering style configurable
+- [x] P1: Make rendering style configurable
   - Lines 132-143: Hard-coded `MeshBasicMaterial` (wireframe, color `0x00ff00`).
   - Add props: `materialColor`, `wireframe`, optional `materialType` (`'basic' | 'lambert' | 'phong' | 'standard'`).
   - Success: Consumers can customize color/material without editing source.
 
-- [ ] P1: Clamp unsafe inputs
+- [x] P1: Clamp unsafe inputs
   - Lines 43-47, 60, 72-78: Guard `meshResolution` (>= 1), `tilesX`/`tilesZ` (>= 1), `amplitudeVariationIntensity` (>= 0), `speed` (>= 0).
   - Success: No invalid geometry or NaNs from degenerate inputs.
 
-- [ ] P1: Silence logs in production
+- [x] P1: Silence logs in production
   - Lines 79-89, 357-369: Gate `console.*` by `showTerrainLogs && process.env.NODE_ENV !== 'production'`.
   - Success: No noisy logs in production builds.
 
-- [ ] P2: Fast resume for all quality levels
+- [x] P2: Fast resume for all quality levels
   - Lines 287-303: On `visibilitychange`, regeneration runs only for `terrainQuality >= 2`.
   - Add a one-shot full regeneration (positions update) for quality 0–1 and render immediately.
   - Success: Instant resume regardless of quality setting.
 
-- [ ] P2: Cap dynamic tilesX
+- [x] P2: Cap dynamic tilesX
   - Lines 72-92, 114-117: `calculateOptimalTilesX` may produce very large counts with big far plane/aspect.
   - Add `maxTilesX` prop (default ~96) and clamp calculated value.
   - Success: Stable FPS; avoid excessive memory.
@@ -57,12 +57,12 @@ status: COMPLETED
   - Track a sliding Z-window or chunk work into fixed-size batches; only inspect tiles near recycle boundary.
   - Success: CPU per frame scales well with tile count.
 
-- [ ] P2: Limit pixel ratio for perf
+- [x] P2: Limit pixel ratio for perf
   - Line 128: `renderer.setPixelRatio(window.devicePixelRatio)` can be heavy on hi-DPI.
   - Add `maxPixelRatio` prop (default 2) and use `Math.min(window.devicePixelRatio, maxPixelRatio)`.
   - Success: Improved FPS on 2×/3× displays.
 
-- [ ] P3: Prop docs and clarity
+- [x] P3: Prop docs and clarity
   - Lines 6-34: Add concise JSDoc on major props (quality levels, equations, variation fields).
   - Success: Easier tuning for template users.
 
