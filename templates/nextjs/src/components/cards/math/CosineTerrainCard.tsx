@@ -284,6 +284,25 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     window.addEventListener('resize', onWindowResize);
 
+    // Fast resume when tab/window becomes visible again
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        // Reset timing to avoid a huge delta after resume
+        lastTime = performance.now();
+        // Regenerate all tile geometries immediately for a fully drawn surface
+        if (terrainQuality >= 2) {
+          for (const tile of terrainTiles) {
+            const tileX = tile.position.x / terrainScale;
+            const tileZ = tile.position.z / terrainScale;
+            regenerateTileGeometry(tile, tileX, tileZ);
+          }
+        }
+        // Render a frame immediately after regeneration
+        renderer.render(scene, camera);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     let frameCount = 0;
     let fpsLastTime = performance.now();
     let currentFPS = 0;
@@ -373,6 +392,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     return () => {
       cancelAnimationFrame(frameId);
       window.removeEventListener('resize', onWindowResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       const currentMountRef = mountRef.current;
       if (currentMountRef) {
         currentMountRef.innerHTML = '';
