@@ -22,7 +22,7 @@ export default function ExamplesPage() {
 
         {/* Project spotlight / carousel */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-1">
-          <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showPause={false}>
+          <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showDots={false} showPause={false}>
             <ProjectCard className="h-full" content={{ title: 'Semantic Colors', description: 'Cards using accent and foreground tokens', techStack: ['Next.js', 'Tailwind v4', 'Radix'] }} />
             <VideoCard className="h-full" content={{ title: 'Video Card', videoUrl: 'https://storage.coverr.co/videos/coverr-a-mountain-with-a-waterfall-0042/1080p.mp4', displayMode: 'background', autoplay: true }} overlay />
           </CardCarousel>
@@ -30,7 +30,7 @@ export default function ExamplesPage() {
 
         {/* Featured article */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 xl:col-span-2">
-          <ArticleCard title="Colors and Themes" subtitle="Research" description="Radix scales with semantic aliasing and palette switching." image="/image/blog-sample-image.png" href="/blog/sample-post" />
+          <ArticleCard className="h-full" title="Colors and Themes" subtitle="Research" description="Radix scales with semantic aliasing and palette switching." image="/image/blog-sample-image.png" href="/blog/sample-post" />
         </GridItem>
 
         {/* Blog image card */}
