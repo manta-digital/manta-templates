@@ -58,7 +58,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
         layout="fill"
         objectFit="cover"
         className={cn(
-          'absolute inset-0 z-0 transform-gpu transition-transform duration-500 ease-in-out will-change-transform group-hover:scale-105',
+          'absolute inset-0 z-0 transform-gpu transition-transform [transition-property:transform!important] [transition-duration:500ms!important] ease-in-out will-change-transform group-hover:scale-105',
           dim && 'brightness-75',
           blurAmount ? `blur-${blurAmount}` : (blur && 'blur-sm')
         )}
