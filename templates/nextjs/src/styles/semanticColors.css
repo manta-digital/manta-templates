@@ -144,8 +144,8 @@
 
 /* Smooth transitions between palette changes */
 html[data-palette] * {
-  /* Smooth palette fade without affecting component transforms */
-  transition-property: background-color, border-color, color, box-shadow;
+  /* Allow components to keep their transform transitions (e.g., hover scale) */
+  transition-property: background-color, border-color, color, box-shadow, transform;
   transition-duration: 0.2s;
   transition-timing-function: ease;
 }

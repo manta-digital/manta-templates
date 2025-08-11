@@ -36,8 +36,8 @@ const DefaultHeader = async () => {
               ))}
             </ul>
           </nav>
-          <AccentToggle className="inline-flex" />
-          <ThemeToggle className="text-accent-11 !border-[var(--color-border-accent)] hover:!bg-[var(--color-accent-a3)] dark:!border-[var(--color-border-accent)]" />
+          <AccentToggle className="inline-flex border-1 !border-[var(--color-border-accent)] hover:!border-[var(--color-border-accent-hover)] text-[var(--color-accent-11)] dark:border" />
+          <ThemeToggle className="text-accent-11 border-1 !border-[var(--color-border-accent)] hover:!bg-[var(--color-accent-a3)] dark:!border-[var(--color-border-accent)]" />
         </div>
       </Container>
     </header>
