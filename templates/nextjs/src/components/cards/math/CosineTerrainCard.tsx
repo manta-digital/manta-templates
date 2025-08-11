@@ -128,46 +128,161 @@ export interface PerfSettings {
   showTerrainLogs?: boolean;
 }
 
-const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
-  className,
-  seed = 0,
-  speed = 2400,
-  cameraHeight = 3600,
-  terrainFrequency = 0.000113,
-  terrainAmplitude = 2400,
-  meshResolution = 8,
-  tilesX = 20,
-  tilesZ = 65,
-  fov = 60,
-  terrainScale = 2048,
-  terrainEquation = 'multiplicative',
-  xAmplitudeMultiplier = 1.2,
-  zAmplitudeMultiplier = 1.0,
-  enableAmplitudeVariation = true,
-  amplitudeVariationFrequency = 0.000233,
-  amplitudeVariationIntensity = 1.73,
-  showFPS = true,
-  followTerrain = true,
-  lookAheadDistance = 8100,
-  lookAtHeight = 1024,
-  heightVariation = 0,
-  heightVariationFrequency = 0.25,
-  terrainQuality = 2,
-  enableDynamicTilesX = true,
-  cameraFarPlane = 28000,
-  showTerrainLogs = false,
-  materialColor = 0x00bf7f,
-  wireframe = true,
-  materialType = 'basic',
-  renderPreset = 'wireframe',
-  maxPixelRatio = 2,
-  maxTilesX = 96,
-  backgroundColor = 0x001f0f,
-  backgroundAlpha = 0,
-  materialOpacity = 1,
-  recycleChunkSize = 128,
-  settings,
-}) => {
+const DEFAULT_SETTINGS: {
+  camera: Required<CameraSettings>;
+  terrain: Required<TerrainSettings>;
+  tiling: Required<TilingSettings>;
+  material: Required<MaterialSettings>;
+  background: Required<BackgroundSettings>;
+  perf: Required<PerfSettings> & { maxTilesX: number };
+  seed: number;
+  terrainQuality: 0 | 1 | 2;
+  enableDynamicTilesX: boolean;
+} = {
+  seed: 0,
+  camera: {
+    speed: 2400,
+    cameraHeight: 3600,
+    fov: 60,
+    cameraFarPlane: 28000,
+    followTerrain: true,
+    lookAheadDistance: 8100,
+    lookAtHeight: 1024,
+    heightVariation: 0,
+    heightVariationFrequency: 0.25,
+  },
+  terrain: {
+    terrainScale: 2048,
+    terrainFrequency: 0.000113,
+    terrainAmplitude: 2400,
+    terrainEquation: 'multiplicative',
+    xAmplitudeMultiplier: 1.2,
+    zAmplitudeMultiplier: 1.0,
+    enableAmplitudeVariation: true,
+    amplitudeVariationFrequency: 0.000233,
+    amplitudeVariationIntensity: 1.73,
+  },
+  tiling: {
+    tilesX: 20,
+    tilesZ: 65,
+    meshResolution: 8,
+    enableDynamicTilesX: true,
+    maxTilesX: 96,
+  },
+  material: {
+    renderPreset: 'wireframe',
+    materialType: 'basic',
+    materialColor: 0x00bf7f,
+    materialOpacity: 1,
+    wireframe: true,
+  },
+  background: {
+    backgroundColor: 0x001f0f,
+    backgroundAlpha: 0,
+  },
+  perf: {
+    maxPixelRatio: 2,
+    recycleChunkSize: 128,
+    showFPS: true,
+    showTerrainLogs: false,
+    maxTilesX: 96,
+  },
+  terrainQuality: 2,
+  enableDynamicTilesX: true,
+};
+
+const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settings, ...flat }) => {
+  // Build effective config: defaults → settings.groups → flat props overrides
+  const cfg = {
+    seed: flat.seed ?? DEFAULT_SETTINGS.seed,
+    terrainQuality: flat.terrainQuality ?? DEFAULT_SETTINGS.terrainQuality,
+    camera: {
+      ...DEFAULT_SETTINGS.camera,
+      ...(settings as any)?.camera,
+      speed: flat.speed ?? (settings as any)?.camera?.speed ?? DEFAULT_SETTINGS.camera.speed,
+      cameraHeight:
+        flat.cameraHeight ?? (settings as any)?.camera?.cameraHeight ?? DEFAULT_SETTINGS.camera.cameraHeight,
+      fov: flat.fov ?? (settings as any)?.camera?.fov ?? DEFAULT_SETTINGS.camera.fov,
+      cameraFarPlane:
+        flat.cameraFarPlane ?? (settings as any)?.camera?.cameraFarPlane ?? DEFAULT_SETTINGS.camera.cameraFarPlane,
+      followTerrain:
+        flat.followTerrain ?? (settings as any)?.camera?.followTerrain ?? DEFAULT_SETTINGS.camera.followTerrain,
+      lookAheadDistance:
+        flat.lookAheadDistance ?? (settings as any)?.camera?.lookAheadDistance ?? DEFAULT_SETTINGS.camera.lookAheadDistance,
+      lookAtHeight:
+        flat.lookAtHeight ?? (settings as any)?.camera?.lookAtHeight ?? DEFAULT_SETTINGS.camera.lookAtHeight,
+      heightVariation:
+        flat.heightVariation ?? (settings as any)?.camera?.heightVariation ?? DEFAULT_SETTINGS.camera.heightVariation,
+      heightVariationFrequency:
+        flat.heightVariationFrequency ?? (settings as any)?.camera?.heightVariationFrequency ?? DEFAULT_SETTINGS.camera.heightVariationFrequency,
+    },
+    terrain: {
+      ...DEFAULT_SETTINGS.terrain,
+      ...(settings as any)?.terrain,
+      terrainScale:
+        flat.terrainScale ?? (settings as any)?.terrain?.terrainScale ?? DEFAULT_SETTINGS.terrain.terrainScale,
+      terrainFrequency:
+        flat.terrainFrequency ?? (settings as any)?.terrain?.terrainFrequency ?? DEFAULT_SETTINGS.terrain.terrainFrequency,
+      terrainAmplitude:
+        flat.terrainAmplitude ?? (settings as any)?.terrain?.terrainAmplitude ?? DEFAULT_SETTINGS.terrain.terrainAmplitude,
+      terrainEquation:
+        flat.terrainEquation ?? (settings as any)?.terrain?.terrainEquation ?? DEFAULT_SETTINGS.terrain.terrainEquation,
+      xAmplitudeMultiplier:
+        flat.xAmplitudeMultiplier ?? (settings as any)?.terrain?.xAmplitudeMultiplier ?? DEFAULT_SETTINGS.terrain.xAmplitudeMultiplier,
+      zAmplitudeMultiplier:
+        flat.zAmplitudeMultiplier ?? (settings as any)?.terrain?.zAmplitudeMultiplier ?? DEFAULT_SETTINGS.terrain.zAmplitudeMultiplier,
+      enableAmplitudeVariation:
+        flat.enableAmplitudeVariation ?? (settings as any)?.terrain?.enableAmplitudeVariation ?? DEFAULT_SETTINGS.terrain.enableAmplitudeVariation,
+      amplitudeVariationFrequency:
+        flat.amplitudeVariationFrequency ?? (settings as any)?.terrain?.amplitudeVariationFrequency ?? DEFAULT_SETTINGS.terrain.amplitudeVariationFrequency,
+      amplitudeVariationIntensity:
+        flat.amplitudeVariationIntensity ?? (settings as any)?.terrain?.amplitudeVariationIntensity ?? DEFAULT_SETTINGS.terrain.amplitudeVariationIntensity,
+    },
+    tiling: {
+      ...DEFAULT_SETTINGS.tiling,
+      ...(settings as any)?.tiling,
+      tilesX: flat.tilesX ?? (settings as any)?.tiling?.tilesX ?? DEFAULT_SETTINGS.tiling.tilesX,
+      tilesZ: flat.tilesZ ?? (settings as any)?.tiling?.tilesZ ?? DEFAULT_SETTINGS.tiling.tilesZ,
+      meshResolution:
+        flat.meshResolution ?? (settings as any)?.tiling?.meshResolution ?? DEFAULT_SETTINGS.tiling.meshResolution,
+      enableDynamicTilesX:
+        flat.enableDynamicTilesX ?? (settings as any)?.tiling?.enableDynamicTilesX ?? DEFAULT_SETTINGS.tiling.enableDynamicTilesX,
+      maxTilesX: (settings as any)?.perf?.maxTilesX ?? DEFAULT_SETTINGS.tiling.maxTilesX,
+    },
+    material: {
+      ...DEFAULT_SETTINGS.material,
+      ...(settings as any)?.material,
+      renderPreset:
+        flat.renderPreset ?? (settings as any)?.material?.renderPreset ?? DEFAULT_SETTINGS.material.renderPreset,
+      materialType:
+        flat.materialType ?? (settings as any)?.material?.materialType ?? DEFAULT_SETTINGS.material.materialType,
+      materialColor:
+        flat.materialColor ?? (settings as any)?.material?.materialColor ?? DEFAULT_SETTINGS.material.materialColor,
+      materialOpacity:
+        flat.materialOpacity ?? (settings as any)?.material?.materialOpacity ?? DEFAULT_SETTINGS.material.materialOpacity,
+      wireframe: flat.wireframe ?? (settings as any)?.material?.wireframe ?? DEFAULT_SETTINGS.material.wireframe,
+    },
+    background: {
+      ...DEFAULT_SETTINGS.background,
+      ...(settings as any)?.background,
+      backgroundColor:
+        flat.backgroundColor ?? (settings as any)?.background?.backgroundColor ?? DEFAULT_SETTINGS.background.backgroundColor,
+      backgroundAlpha:
+        flat.backgroundAlpha ?? (settings as any)?.background?.backgroundAlpha ?? DEFAULT_SETTINGS.background.backgroundAlpha,
+    },
+    perf: {
+      ...DEFAULT_SETTINGS.perf,
+      ...(settings as any)?.perf,
+      maxPixelRatio:
+        flat.maxPixelRatio ?? (settings as any)?.perf?.maxPixelRatio ?? DEFAULT_SETTINGS.perf.maxPixelRatio,
+      recycleChunkSize:
+        flat.recycleChunkSize ?? (settings as any)?.perf?.recycleChunkSize ?? DEFAULT_SETTINGS.perf.recycleChunkSize,
+      showFPS: flat.showFPS ?? (settings as any)?.perf?.showFPS ?? DEFAULT_SETTINGS.perf.showFPS,
+      showTerrainLogs:
+        flat.showTerrainLogs ?? (settings as any)?.perf?.showTerrainLogs ?? DEFAULT_SETTINGS.perf.showTerrainLogs,
+      maxTilesX: (settings as any)?.perf?.maxTilesX ?? DEFAULT_SETTINGS.perf.maxTilesX,
+    },
+  } as const;
   // Merge structured settings (optional) – individual props override
   const s = (settings || {}) as Partial<{
     camera: CameraSettings;
@@ -185,10 +300,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   const MAX_TILES_PER_FRAME_RECYCLE = 5;
 
   const calculateOptimalTilesX = (viewportWidth: number, viewportHeight: number): number => {
-    const viewWidth = 2 * Math.tan((fov * Math.PI / 180) / 2) * cameraFarPlane;
+    const viewWidth = 2 * Math.tan((cfg.camera.fov * Math.PI / 180) / 2) * cfg.camera.cameraFarPlane;
     const baselineTiles = Math.ceil(viewWidth / terrainScale);
     const aspectRatio = viewportWidth / viewportHeight;
-    const maxTiles = s?.perf?.maxTilesX ?? maxTilesX;
+    const maxTiles = cfg.perf.maxTilesX;
     const aspectAdjustedTiles = Math.round(baselineTiles * Math.max(1, aspectRatio));
     const finalTileCount = Math.min(Math.max(aspectAdjustedTiles, 1), Math.max(1, maxTiles));
     if (showTerrainLogs && process.env.NODE_ENV !== 'production') {
@@ -220,36 +335,36 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     }
   };
 
-  validateTerrainFrequency(terrainFrequency);
+  validateTerrainFrequency(cfg.terrain.terrainFrequency);
 
   useEffect(() => {
     if (!mountRef.current) return;
     mountRef.current.innerHTML = '';
     let frameId: number;
 
-    const actualTilesX = enableDynamicTilesX
+    const actualTilesX = cfg.tiling.enableDynamicTilesX
       ? calculateOptimalTilesX(mountRef.current.clientWidth, mountRef.current.clientHeight)
-      : tilesX;
+      : cfg.tiling.tilesX;
 
     const cameraNearPlane = 0.1;
     const scene = new Scene();
     const camera = new PerspectiveCamera(
-      fov,
+      cfg.camera.fov,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       cameraNearPlane,
-      cameraFarPlane,
+      cfg.camera.cameraFarPlane,
     );
-    camera.position.y = cameraHeight;
+    camera.position.y = cfg.camera.cameraHeight;
     const renderer = new WebGLRenderer({ antialias: true });
     // Pixel ratio: keep it stable to avoid periodic GC/surface reallocations
     const devicePR = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     const pixelRatio = Math.min(
       Math.max(1, devicePR),
-      Math.max(1, s?.perf?.maxPixelRatio ?? maxPixelRatio),
+      Math.max(1, cfg.perf.maxPixelRatio),
     );
     renderer.setPixelRatio(pixelRatio);
-    const bgAlpha = Math.max(0, Math.min(1, s?.background?.backgroundAlpha ?? backgroundAlpha));
-    const bgColor = (s?.background?.backgroundColor ?? backgroundColor) as any;
+    const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha));
+    const bgColor = cfg.background.backgroundColor as any;
     if (bgColor !== undefined) {
       renderer.setClearColor(bgColor, bgAlpha);
     } else {
@@ -259,7 +374,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     mountRef.current.appendChild(renderer.domElement);
 
     // Optional simple lighting for solid shading
-    if ((s?.material?.renderPreset ?? renderPreset) === 'solid') {
+    if (cfg.material.renderPreset === 'solid') {
       const amb = new AmbientLight(0xffffff, 0.35);
       const dir = new DirectionalLight(0xffffff, 0.9);
       dir.position.set(1, 2, 1).normalize();
@@ -269,12 +384,12 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     // Create material per configuration
     const createMaterial = () => {
-      const finalRenderPreset = s?.material?.renderPreset ?? renderPreset;
-      const finalWireframe = finalRenderPreset === 'solid' ? false : (s?.material?.wireframe ?? wireframe);
-      const common = { color: s?.material?.materialColor ?? materialColor, wireframe: finalWireframe } as const;
+      const finalRenderPreset = cfg.material.renderPreset;
+      const finalWireframe = finalRenderPreset === 'solid' ? false : cfg.material.wireframe;
+      const common = { color: cfg.material.materialColor, wireframe: finalWireframe } as const;
       const transparent = materialOpacity < 1;
-      const opacity = Math.max(0, Math.min(1, s?.material?.materialOpacity ?? materialOpacity));
-      const finalMaterialType = s?.material?.materialType ?? materialType;
+      const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
+      const finalMaterialType = cfg.material.materialType;
       if (finalMaterialType === 'standard' || finalRenderPreset === 'solid') {
         return new MeshStandardMaterial({
           color: common.color,
@@ -295,7 +410,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     const detectAndFillGaps = () => {
       if (!GAP_DETECTION_ENABLED) return;
       const cameraZ = camera.position.z;
-      const frontmostZ = cameraZ - TILE_BUFFER_DISTANCE * terrainScale;
+      const frontmostZ = cameraZ - TILE_BUFFER_DISTANCE * cfg.terrain.terrainScale;
       const tilesInFront = terrainTiles.filter(
         (tile) => tile.position.z <= frontmostZ && tile.position.z >= frontmostZ - tilesZ * terrainScale,
       );
@@ -310,32 +425,32 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     };
 
     const calculateTerrainHeight = (worldX: number, worldZ: number): number => {
-      const cosX = Math.cos(worldX * terrainFrequency + seed);
-      const cosZ = Math.cos(worldZ * terrainFrequency + seed);
-      let localAmplitude = terrainAmplitude;
-      if (enableAmplitudeVariation) {
+      const cosX = Math.cos(worldX * cfg.terrain.terrainFrequency + cfg.seed);
+      const cosZ = Math.cos(worldZ * cfg.terrain.terrainFrequency + cfg.seed);
+      let localAmplitude = cfg.terrain.terrainAmplitude;
+      if (cfg.terrain.enableAmplitudeVariation) {
         const amplitudeNoise =
-          Math.sin(worldX * amplitudeVariationFrequency + seed * 0.7) *
-          Math.cos(worldZ * amplitudeVariationFrequency + seed * 1.3);
-        const amplitudeVariationFactor = 1 + amplitudeNoise * amplitudeVariationIntensity;
+          Math.sin(worldX * cfg.terrain.amplitudeVariationFrequency + cfg.seed * 0.7) *
+          Math.cos(worldZ * cfg.terrain.amplitudeVariationFrequency + cfg.seed * 1.3);
+        const amplitudeVariationFactor = 1 + amplitudeNoise * cfg.terrain.amplitudeVariationIntensity;
         localAmplitude *= amplitudeVariationFactor;
       }
-      return terrainEquation === 'additive'
-        ? (xAmplitudeMultiplier * cosX + zAmplitudeMultiplier * cosZ) * localAmplitude * 0.5
-        : xAmplitudeMultiplier * cosX * (zAmplitudeMultiplier * cosZ) * localAmplitude;
+      return cfg.terrain.terrainEquation === 'additive'
+        ? (cfg.terrain.xAmplitudeMultiplier * cosX + cfg.terrain.zAmplitudeMultiplier * cosZ) * localAmplitude * 0.5
+        : cfg.terrain.xAmplitudeMultiplier * cosX * (cfg.terrain.zAmplitudeMultiplier * cosZ) * localAmplitude;
     };
 
     const generateTerrainTile = (tileX: number, tileZ: number) => {
       const safeMeshResolution = Math.max(1, Math.floor(meshResolution));
-      const resolution = terrainQuality >= 1 ? safeMeshResolution : Math.max(1, safeMeshResolution - 1);
-      const geometry = new PlaneGeometry(terrainScale, terrainScale, resolution, resolution);
+      const resolution = cfg.terrainQuality >= 1 ? safeMeshResolution : Math.max(1, safeMeshResolution - 1);
+      const geometry = new PlaneGeometry(cfg.terrain.terrainScale, cfg.terrain.terrainScale, resolution, resolution);
       geometry.rotateX(-Math.PI / 2);
       const positions = geometry.attributes.position as BufferAttribute;
       const vertex = new Vector3();
       for (let i = 0; i < positions.count; i++) {
         vertex.fromBufferAttribute(positions, i);
-        const worldX = terrainQuality >= 1 ? tileX * terrainScale + vertex.x : vertex.x + tileX * terrainScale;
-        const worldZ = terrainQuality >= 1 ? tileZ * terrainScale + vertex.z : vertex.z + tileZ * terrainScale;
+        const worldX = cfg.terrainQuality >= 1 ? tileX * cfg.terrain.terrainScale + vertex.x : vertex.x + tileX * cfg.terrain.terrainScale;
+        const worldZ = cfg.terrainQuality >= 1 ? tileZ * cfg.terrain.terrainScale + vertex.z : vertex.z + tileZ * cfg.terrain.terrainScale;
         const y = calculateTerrainHeight(worldX, worldZ);
         positions.setY(i, y);
       }
@@ -367,13 +482,13 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
     };
 
     for (let i = 0; i < actualTilesX; i++) {
-      for (let j = 0; j < tilesZ; j++) {
-        terrainTiles.push(generateTerrainTile(i - Math.floor(actualTilesX / 2), j - tilesZ));
+      for (let j = 0; j < cfg.tiling.tilesZ; j++) {
+        terrainTiles.push(generateTerrainTile(i - Math.floor(actualTilesX / 2), j - cfg.tiling.tilesZ));
       }
     }
 
     const sampleTerrainHeight = (worldX: number, worldZ: number): number => {
-      if (terrainQuality >= 2) {
+      if (cfg.terrainQuality >= 2) {
         return calculateTerrainHeight(worldX, worldZ);
       }
       let closestTile: Mesh | null = null;
@@ -382,7 +497,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
         const dx = worldX - tile.position.x;
         const dz = worldZ - tile.position.z;
         const distance = Math.sqrt(dx * dx + dz * dz);
-        const halfScale = terrainScale / 2;
+        const halfScale = cfg.terrain.terrainScale / 2;
         if (Math.abs(dx) <= halfScale && Math.abs(dz) <= halfScale) {
           closestTile = tile;
           break;
@@ -395,11 +510,11 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       if (!closestTile) return calculateTerrainHeight(worldX, worldZ);
       const localX = worldX - closestTile.position.x;
       const localZ = worldZ - closestTile.position.z;
-      const u = (localX + terrainScale / 2) / terrainScale;
-      const v = (localZ + terrainScale / 2) / terrainScale;
+      const u = (localX + cfg.terrain.terrainScale / 2) / cfg.terrain.terrainScale;
+      const v = (localZ + cfg.terrain.terrainScale / 2) / cfg.terrain.terrainScale;
       const geometry = closestTile.geometry as PlaneGeometry;
       const positions = geometry.attributes.position as BufferAttribute;
-      const resolution = terrainQuality >= 1 ? meshResolution : meshResolution - 1;
+      const resolution = cfg.terrainQuality >= 1 ? cfg.tiling.meshResolution : cfg.tiling.meshResolution - 1;
       const segmentsX = resolution;
       const segmentsZ = resolution;
       const gridX = u * segmentsX;
