@@ -1,7 +1,16 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  MeshBasicMaterial,
+  PlaneGeometry,
+  BufferAttribute,
+  Vector3,
+  Mesh,
+} from 'three';
 
 export interface CosineTerrainCardProps {
   className?: string;
@@ -116,22 +125,22 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       : tilesX;
 
     const cameraNearPlane = 0.1;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(
       fov,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       cameraNearPlane,
       cameraFarPlane,
     );
     camera.position.y = cameraHeight;
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
     const material =
       terrainQuality >= 1
-        ? new THREE.MeshBasicMaterial({
+        ? new MeshBasicMaterial({
             color: 0x00ff00,
             wireframe: true,
             depthTest: true,
@@ -140,9 +149,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
             polygonOffsetFactor: 1,
             polygonOffsetUnits: 1,
           })
-        : new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, depthTest: false, depthWrite: false });
+        : new MeshBasicMaterial({ color: 0x00ff00, wireframe: true, depthTest: false, depthWrite: false });
 
-    const terrainTiles: THREE.Mesh[] = [];
+    const terrainTiles: Mesh[] = [];
 
     const detectAndFillGaps = () => {
       if (!GAP_DETECTION_ENABLED) return;
@@ -179,10 +188,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     const generateTerrainTile = (tileX: number, tileZ: number) => {
       const resolution = terrainQuality >= 1 ? meshResolution : meshResolution - 1;
-      const geometry = new THREE.PlaneGeometry(terrainScale, terrainScale, resolution, resolution);
+      const geometry = new PlaneGeometry(terrainScale, terrainScale, resolution, resolution);
       geometry.rotateX(-Math.PI / 2);
-      const positions = geometry.attributes.position as THREE.BufferAttribute;
-      const vertex = new THREE.Vector3();
+      const positions = geometry.attributes.position as BufferAttribute;
+      const vertex = new Vector3();
       for (let i = 0; i < positions.count; i++) {
         vertex.fromBufferAttribute(positions, i);
         const worldX = terrainQuality >= 1 ? tileX * terrainScale + vertex.x : vertex.x + tileX * terrainScale;
@@ -192,17 +201,17 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       }
       positions.needsUpdate = true;
       geometry.computeVertexNormals();
-      const mesh = new THREE.Mesh(geometry, material);
+      const mesh = new Mesh(geometry, material);
       mesh.position.set(tileX * terrainScale, 0, tileZ * terrainScale);
       scene.add(mesh);
       return mesh;
     };
 
-    const regenerateTileGeometry = (tile: THREE.Mesh, newTileX: number, newTileZ: number) => {
+    const regenerateTileGeometry = (tile: Mesh, newTileX: number, newTileZ: number) => {
       if (terrainQuality < 2) return;
-      const geometry = tile.geometry as THREE.PlaneGeometry;
-      const positions = geometry.attributes.position as THREE.BufferAttribute;
-      const vertex = new THREE.Vector3();
+      const geometry = tile.geometry as PlaneGeometry;
+      const positions = geometry.attributes.position as BufferAttribute;
+      const vertex = new Vector3();
       for (let i = 0; i < positions.count; i++) {
         vertex.fromBufferAttribute(positions, i);
         const worldX = newTileX * terrainScale + vertex.x;
@@ -227,7 +236,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       if (terrainQuality >= 2) {
         return calculateTerrainHeight(worldX, worldZ);
       }
-      let closestTile: THREE.Mesh | null = null;
+      let closestTile: Mesh | null = null;
       let minDistance = Infinity;
       for (const tile of terrainTiles) {
         const dx = worldX - tile.position.x;
@@ -248,8 +257,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
       const localZ = worldZ - closestTile.position.z;
       const u = (localX + terrainScale / 2) / terrainScale;
       const v = (localZ + terrainScale / 2) / terrainScale;
-      const geometry = closestTile.geometry as THREE.PlaneGeometry;
-      const positions = geometry.attributes.position as THREE.BufferAttribute;
+      const geometry = closestTile.geometry as PlaneGeometry;
+      const positions = geometry.attributes.position as BufferAttribute;
       const resolution = terrainQuality >= 1 ? meshResolution : meshResolution - 1;
       const segmentsX = resolution;
       const segmentsZ = resolution;
@@ -347,7 +356,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
         const lookAheadX = camera.position.x;
         const lookAheadZ = camera.position.z - lookAheadDistance;
         const lookAheadTerrainHeight = sampleTerrainHeight(lookAheadX, lookAheadZ);
-        const lookAtPoint = new THREE.Vector3(lookAheadX, lookAheadTerrainHeight + lookAtHeight, lookAheadZ);
+        const lookAtPoint = new Vector3(lookAheadX, lookAheadTerrainHeight + lookAtHeight, lookAheadZ);
         camera.lookAt(lookAtPoint);
       } else {
         camera.position.y = cameraHeight;
