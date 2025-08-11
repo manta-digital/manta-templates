@@ -59,6 +59,8 @@ export interface CosineTerrainCardProps {
   materialColor?: number;
   wireframe?: boolean;
   materialType?: 'basic' | 'standard';
+  /** quick preset for material look */
+  renderPreset?: 'wireframe' | 'solid';
   // Rendering perf
   maxPixelRatio?: number;
   // Limits
@@ -96,6 +98,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
   materialColor = 0x00ff00,
   wireframe = true,
   materialType = 'basic',
+  renderPreset = 'wireframe',
   maxPixelRatio = 2,
   maxTilesX = 96,
 }) => {
@@ -171,7 +174,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({
 
     // Create material per configuration
     const createMaterial = () => {
-      const common = { color: materialColor, wireframe } as const;
+      const finalWireframe = renderPreset === 'solid' ? false : wireframe;
+      const common = { color: materialColor, wireframe: finalWireframe } as const;
       if (materialType === 'standard') {
         // Fallback to basic to avoid extra deps/light setup; keep API stable
         return new MeshBasicMaterial(common);

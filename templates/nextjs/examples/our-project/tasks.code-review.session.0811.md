@@ -66,7 +66,7 @@ status: COMPLETED
   - Lines 6-34: Add concise JSDoc on major props (quality levels, equations, variation fields).
   - Success: Easier tuning for template users.
 
-- [ ] P3: Optional non-wireframe preset
+- [x] P3: Optional non-wireframe preset
   - Provide a preset (via props object or booleans) for a solid material look to showcase variety.
   - Success: Quick visual swap without code changes.
 
