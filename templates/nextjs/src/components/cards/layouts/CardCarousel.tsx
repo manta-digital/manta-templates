@@ -378,8 +378,8 @@ export function CardCarousel({
               className={cn(
                 'w-2 h-2 rounded-full transition-colors duration-200',
                 index === currentIndex % (infinite ? totalCards : maxIndex + 1)
-                  ? 'bg-teal-500'
-                  : 'bg-gray-300 hover:bg-gray-400'
+                  ? 'bg-[var(--color-accent-9)]'
+                  : 'bg-gray-300 hover:bg-[var(--color-accent-7)]'
               )}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}

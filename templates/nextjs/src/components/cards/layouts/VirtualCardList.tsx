@@ -120,7 +120,7 @@ export function VirtualCardList<T = unknown>({
       >
         {loadingComponent || (
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[var(--color-card-border)] border-t-transparent rounded-full animate-spin" />
             <span className="text-sm text-muted-foreground">Loading...</span>
           </div>
         )}
@@ -173,7 +173,7 @@ export function VirtualCardList<T = unknown>({
         {loading && items.length > 0 && (
           <div className="flex justify-center py-4">
             <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-[var(--color-card-border)] border-t-transparent rounded-full animate-spin" />
               <span className="text-sm text-muted-foreground">Loading more...</span>
             </div>
           </div>
@@ -191,7 +191,7 @@ export function VirtualCardList<T = unknown>({
       {scrollTop > containerHeight && (
         <button
           onClick={scrollToTop}
-          className="absolute bottom-4 right-4 bg-teal-500 hover:bg-teal-600 text-white p-2 rounded-full shadow-lg transition-colors"
+          className="absolute bottom-4 right-4 bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-10)] text-white p-2 rounded-full shadow-lg transition-colors"
           aria-label="Scroll to top"
         >
           <svg
