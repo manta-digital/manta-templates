@@ -16,12 +16,12 @@ export default function ExamplesPage() {
     <main className="min-h-screen p-6 md:p-10">
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(120px, auto)" columns="grid-cols-8">
         {/* Hero */}
-        <GridItem className="col-span-8 md:col-span-4 xl:col-span-2 xl:row-span-2">
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-1 lg:row-span-2 xl:col-span-2 xl:row-span-2">
           <BlogHeroCard title="Theme Test Grid" subtitle="Switch palette and dark/light to validate tokens" />
         </GridItem>
 
         {/* Project spotlight / carousel */}
-        <GridItem className="col-span-8 md:col-span-4 xl:col-span-4 xl:row-span-1">
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-1">
           <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showPause={false}>
             <ProjectCard className="h-full" content={{ title: 'Semantic Colors', description: 'Cards using accent and foreground tokens', techStack: ['Next.js', 'Tailwind v4', 'Radix'] }} />
             <VideoCard className="h-full" content={{ title: 'Video Card', videoUrl: 'https://storage.coverr.co/videos/coverr-a-mountain-with-a-waterfall-0042/1080p.mp4', displayMode: 'background', autoplay: true }} overlay />

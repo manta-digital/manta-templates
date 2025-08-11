@@ -29,8 +29,8 @@ const BlogHeroCard: React.FC<BlogHeroCardProps> = ({
         className
       )}
     >
-      <h1 className="text-card-foreground text-2xl md:text-3xl font-bold mb-1">{title}</h1>
-      <p className="text-card-foreground text-sm md:text-base opacity-90">{subtitle}</p>
+      <h1 className="text-white text-2xl md:text-3xl font-bold mb-1">{title}</h1>
+      <p className="text-white text-sm md:text-base opacity-90">{subtitle}</p>
           </BaseCard>
   );
 };

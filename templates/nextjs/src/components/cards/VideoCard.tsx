@@ -48,7 +48,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
         >
           {overlay && (
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <div className="text-card-foreground text-center p-4">
+              <div className="text-white text-center p-4">
                 <h3 className="text-lg font-semibold mb-2">{cardTitle}</h3>
                 {content?.description && (
                   <p className="text-sm opacity-90">{content.description}</p>
@@ -75,9 +75,9 @@ const VideoCard: React.FC<VideoCardProps> = ({
           />
           {overlay && cardTitle && (
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-              <h3 className="text-card-foreground text-sm font-medium">{cardTitle}</h3>
+              <h3 className="text-white text-sm font-medium">{cardTitle}</h3>
               {content?.description && (
-                <p className="text-card-foreground/80 text-xs mt-1">{content.description}</p>
+                <p className="text-white/80 text-xs mt-1">{content.description}</p>
               )}
             </div>
           )}
@@ -102,7 +102,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
           />
           {/* Overlay + Play Icon Placeholder - Placed *inside* the relative container */}
           <div className="absolute inset-0 bg-[rgba(0,0,0,0)] group-hover:bg-[rgba(0,0,0,0.5)] transition-opacity flex items-center justify-center rounded-md z-10">
-            <span className="text-card-foreground text-4xl opacity-0 group-hover:opacity-90 transition-opacity">▶</span>
+            <span className="text-white text-4xl opacity-0 group-hover:opacity-90 transition-opacity">▶</span>
           </div>
         </div>
         {overlay && cardTitle && (

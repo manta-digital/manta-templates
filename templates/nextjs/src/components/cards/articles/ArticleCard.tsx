@@ -27,15 +27,15 @@ export default function ArticleCard({ title, subtitle, description, image, href 
           {/* gradient for legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
           {/* content overlay anchored to bottom */}
-          <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 text-card-foreground">
+          <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 text-white">
             {subtitle && (
-              <p className="mb-2 text-[0.8rem] font-semibold uppercase tracking-wider text-card-foreground/80">{subtitle}</p>
+              <p className="mb-2 text-[0.8rem] font-semibold uppercase tracking-wider text-white/80">{subtitle}</p>
             )}
             <h3 className="text-2xl sm:text-3xl font-bold leading-tight text-balance">
               {title}
             </h3>
             {description && (
-              <p className="mt-3 text-sm sm:text-base text-card-foreground/90 line-clamp-3 md:line-clamp-4 lg:line-clamp-5">
+              <p className="mt-3 text-sm sm:text-base text-white/90 line-clamp-3 md:line-clamp-4 lg:line-clamp-5">
                 {description}
               </p>
             )}
