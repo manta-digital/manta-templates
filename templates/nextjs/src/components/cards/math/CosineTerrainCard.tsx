@@ -725,9 +725,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       cancelAnimationFrame(frameId);
       window.removeEventListener('resize', onWindowResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      const mount = mountRef.current;
-      if (mount) {
-        mount.innerHTML = '';
+      const mountNow = mountRef.current;
+      if (mountNow) {
+        mountNow.innerHTML = '';
       }
       renderer.dispose();
       terrainTiles.forEach((tile) => {

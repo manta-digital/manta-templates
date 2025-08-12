@@ -2,7 +2,7 @@ export type PresetKey = 'default' | 'mit';
 
 export const siteConfig = {
   site: {
-    name: 'my site',
+    name: 'Manta Next.js Template',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
     domain: 'example.com',
   },
