@@ -79,6 +79,20 @@
   --color-accent-10: var(--mintteal-10);
   --color-accent-11: var(--mintteal-11);
   --color-accent-12: var(--mintteal-12);
+
+  /* Alpha steps to tint UI with active palette */
+  --color-accent-a1: var(--mintteal-a1);
+  --color-accent-a2: var(--mintteal-a2);
+  --color-accent-a3: var(--mintteal-a3);
+  --color-accent-a4: var(--mintteal-a4);
+  --color-accent-a5: var(--mintteal-a5);
+  --color-accent-a6: var(--mintteal-a6);
+  --color-accent-a7: var(--mintteal-a7);
+  --color-accent-a8: var(--mintteal-a8);
+  --color-accent-a9: var(--mintteal-a9);
+  --color-accent-a10: var(--mintteal-a10);
+  --color-accent-a11: var(--mintteal-a11);
+  --color-accent-a12: var(--mintteal-a12);
 }
 
 /* Standard Radix palette options (when @radix-ui/colors is installed) */
@@ -95,6 +109,20 @@
   --color-accent-10: var(--blue-10);
   --color-accent-11: var(--blue-11);
   --color-accent-12: var(--blue-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--blue-a1);
+  --color-accent-a2: var(--blue-a2);
+  --color-accent-a3: var(--blue-a3);
+  --color-accent-a4: var(--blue-a4);
+  --color-accent-a5: var(--blue-a5);
+  --color-accent-a6: var(--blue-a6);
+  --color-accent-a7: var(--blue-a7);
+  --color-accent-a8: var(--blue-a8);
+  --color-accent-a9: var(--blue-a9);
+  --color-accent-a10: var(--blue-a10);
+  --color-accent-a11: var(--blue-a11);
+  --color-accent-a12: var(--blue-a12);
 }
 
 [data-palette="purple"] {
@@ -110,6 +138,20 @@
   --color-accent-10: var(--purple-10);
   --color-accent-11: var(--purple-11);
   --color-accent-12: var(--purple-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--purple-a1);
+  --color-accent-a2: var(--purple-a2);
+  --color-accent-a3: var(--purple-a3);
+  --color-accent-a4: var(--purple-a4);
+  --color-accent-a5: var(--purple-a5);
+  --color-accent-a6: var(--purple-a6);
+  --color-accent-a7: var(--purple-a7);
+  --color-accent-a8: var(--purple-a8);
+  --color-accent-a9: var(--purple-a9);
+  --color-accent-a10: var(--purple-a10);
+  --color-accent-a11: var(--purple-a11);
+  --color-accent-a12: var(--purple-a12);
 }
 
 [data-palette="green"] {
@@ -125,6 +167,20 @@
   --color-accent-10: var(--green-10);
   --color-accent-11: var(--green-11);
   --color-accent-12: var(--green-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--green-a1);
+  --color-accent-a2: var(--green-a2);
+  --color-accent-a3: var(--green-a3);
+  --color-accent-a4: var(--green-a4);
+  --color-accent-a5: var(--green-a5);
+  --color-accent-a6: var(--green-a6);
+  --color-accent-a7: var(--green-a7);
+  --color-accent-a8: var(--green-a8);
+  --color-accent-a9: var(--green-a9);
+  --color-accent-a10: var(--green-a10);
+  --color-accent-a11: var(--green-a11);
+  --color-accent-a12: var(--green-a12);
 }
 
 [data-palette="orange"] {
@@ -140,6 +196,20 @@
   --color-accent-10: var(--orange-10);
   --color-accent-11: var(--orange-11);
   --color-accent-12: var(--orange-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--orange-a1);
+  --color-accent-a2: var(--orange-a2);
+  --color-accent-a3: var(--orange-a3);
+  --color-accent-a4: var(--orange-a4);
+  --color-accent-a5: var(--orange-a5);
+  --color-accent-a6: var(--orange-a6);
+  --color-accent-a7: var(--orange-a7);
+  --color-accent-a8: var(--orange-a8);
+  --color-accent-a9: var(--orange-a9);
+  --color-accent-a10: var(--orange-a10);
+  --color-accent-a11: var(--orange-a11);
+  --color-accent-a12: var(--orange-a12);
 }
 
 /* Smooth transitions between palette changes */
