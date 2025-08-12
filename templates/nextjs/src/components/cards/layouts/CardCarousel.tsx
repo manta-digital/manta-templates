@@ -28,8 +28,8 @@ export interface CardCarouselProps {
   showArrows?: boolean;
   /** Show dot indicators */
   showDots?: boolean;
-  /** Show inline pause/play control */
-  showPause?: boolean;
+  /** Show auto-play pause/play controls */
+  showControls?: boolean;
   /** Enable touch/swipe gestures */
   enableSwipe?: boolean;
   /** Minimum height for carousel cards (e.g., '200px', '12rem') */
@@ -46,7 +46,7 @@ export function CardCarousel({
   autoPlay = 0,
   showArrows = true,
   showDots = true,
-  showPause = true,
+  showControls = false,
   enableSwipe = true,
   minHeight,
 }: CardCarouselProps) {
@@ -59,7 +59,11 @@ export function CardCarousel({
   const startXRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
   const dragDirectionRef = useRef<'left' | 'right' | null>(null);
+  const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const breakpoint = useBreakpoint();
+  
+  // Auto-play resume delay after manual interaction
+  const AUTO_PLAY_RESUME_DELAY = 5000;
     
 
   const totalCards = children.length;
@@ -78,28 +82,63 @@ export function CardCarousel({
 
   // Slide navigation helpers (placed before effects to avoid use-before-define)
   const goToSlide = useCallback((index: number) => {
+    if (isTransitioning) return;
+    
+    // Pause auto-play when manually navigating
+    if (autoPlay > 0) {
+      setIsAutoPlaying(false);
+      // Clear any existing timeout
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+      // Resume auto-play after AUTO_PLAY_RESUME_DELAY
+      autoPlayTimeoutRef.current = setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
+    }
+    
     if (infinite) {
-      setCurrentIndex(((index % totalCards) + totalCards) % totalCards);
+      setCurrentIndex(index);
     } else {
       setCurrentIndex(Math.max(0, Math.min(index, maxIndex)));
     }
-  }, [infinite, totalCards, maxIndex]);
+  }, [infinite, maxIndex, autoPlay, isTransitioning]);
 
   const nextSlide = useCallback(() => {
+    // Pause auto-play when manually navigating
+    if (autoPlay > 0) {
+      setIsAutoPlaying(false);
+      // Clear any existing timeout
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+      // Resume auto-play after AUTO_PLAY_RESUME_DELAY
+      autoPlayTimeoutRef.current = setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
+    }
+    
     if (infinite) {
-      setCurrentIndex((prev) => (prev + 1) % totalCards);
+      setCurrentIndex((prev) => prev + 1);
     } else {
       setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
     }
-  }, [infinite, totalCards, maxIndex]);
+  }, [infinite, maxIndex, autoPlay]);
 
   const prevSlide = useCallback(() => {
+    // Pause auto-play when manually navigating
+    if (autoPlay > 0) {
+      setIsAutoPlaying(false);
+      // Clear any existing timeout
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+      // Resume auto-play after AUTO_PLAY_RESUME_DELAY
+      autoPlayTimeoutRef.current = setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
+    }
+    
     if (infinite) {
-      setCurrentIndex((prev) => (prev - 1 + totalCards) % totalCards);
+      setCurrentIndex((prev) => prev - 1);
     } else {
       setCurrentIndex((prev) => Math.max(prev - 1, 0));
     }
-  }, [infinite, totalCards]);
+  }, [infinite, autoPlay]);
 
   // Global event listeners to catch events that escape component boundaries (mainly for touch)
   useEffect(() => {
@@ -123,7 +162,7 @@ export function CardCarousel({
 
       isDraggingRef.current = false;
       if (autoPlay > 0) {
-        setTimeout(() => setIsAutoPlaying(true), 3000);
+        setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
       }
     };
 
@@ -143,7 +182,7 @@ export function CardCarousel({
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         if (infinite) {
-          return (prev + 1) % totalCards;
+          return prev + 1;
         }
         return prev >= maxIndex ? 0 : prev + 1;
       });
@@ -151,6 +190,37 @@ export function CardCarousel({
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, autoPlay, infinite, totalCards, maxIndex]);
+
+  // Handle seamless infinite carousel reset after transition
+  useEffect(() => {
+    if (!infinite) return;
+
+    // Reset to equivalent position after transition completes
+    const timer = setTimeout(() => {
+      if (currentIndex >= totalCards) {
+        // Reset from firstSlide duplicate to actual first slide
+        setIsTransitioning(true);
+        setCurrentIndex(0);
+        // Re-enable transitions after reset
+        setTimeout(() => setIsTransitioning(false), 50);
+      } else if (currentIndex === -1) {
+        // Reset from lastSlide position to actual last slide immediately
+        setIsTransitioning(true);
+        setCurrentIndex(totalCards - 1);
+        // Re-enable transitions after reset
+        setTimeout(() => setIsTransitioning(false), 50);
+      } else if (currentIndex < -1) {
+        // Reset to equivalent position in the main array
+        setIsTransitioning(true);
+        const equivalentIndex = ((currentIndex + 1) % totalCards + totalCards) % totalCards;
+        setCurrentIndex(equivalentIndex);
+        // Re-enable transitions after reset
+        setTimeout(() => setIsTransitioning(false), 50);
+      }
+    }, 350); // Slightly after transition duration
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, infinite, totalCards]);
 
   // Touch/swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -215,7 +285,7 @@ export function CardCarousel({
     isDraggingRef.current = false;
     dragDirectionRef.current = null;
     if (autoPlay > 0) {
-      setTimeout(() => setIsAutoPlaying(true), 3000);
+      setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
     }
   };
 
@@ -279,25 +349,26 @@ export function CardCarousel({
     isDraggingRef.current = false;
     dragDirectionRef.current = null;
     if (autoPlay > 0) {
-      setTimeout(() => setIsAutoPlaying(true), 3000);
+      setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
     }
   };
 
   const cardWidth = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
-  // Calculate translateX - each card "owns" a portion of the gap
-  const translateX = `calc(-${currentIndex * (100 / visibleCount)}% - ${currentIndex * gap / visibleCount}px)`;
+  // Calculate translateX - account for offset in infinite carousel
+  const actualIndex = infinite ? currentIndex + 1 : currentIndex;
+  const translateX = `calc(-${actualIndex * (100 / visibleCount)}% - ${actualIndex * gap / visibleCount}px)`;
   
 
   return (
-    <div className={cn('relative w-full', className)}>
+    <div className={cn('relative w-full h-full', className)}>
       {/* Carousel Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden h-full">
         <motion.div
           
           animate={{ x: translateX }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: isTransitioning ? 0 : 0.3 }}
           ref={containerRef}
-          className="flex items-stretch cursor-grab active:cursor-grabbing"
+          className="flex items-stretch cursor-grab active:cursor-grabbing h-full"
           style={{
             gap: `${gap}px`,
             ...(cardHeight !== undefined && { height: `${cardHeight}px` }),
@@ -313,34 +384,22 @@ export function CardCarousel({
             if (isDraggingRef.current) {
               isDraggingRef.current = false;
               if (autoPlay > 0) {
-                setTimeout(() => setIsAutoPlaying(true), 3000);
+                setTimeout(() => setIsAutoPlaying(true), AUTO_PLAY_RESUME_DELAY);
               }
             }
           }}
         >
-          {(infinite ? [...children, ...children] : children).map((child, index) => {
-              // Ensure the card element itself fills the container height
-              const content = React.isValidElement(child)
-                ? React.cloneElement(
-                    child as React.ReactElement<React.ComponentProps<'div'>>,
-                    {
-                      className: cn(
-                        (child as React.ReactElement<React.ComponentProps<'div'>>).props.className,
-                        'h-full'
-                      ),
-                    }
-                  )
-                : child;
+          {(infinite ? [...children.slice(-1), ...children, ...children.slice(0, 1)] : children).map((child, index) => {
               return (
                 <div
                   key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
-                  className={cn('flex-shrink-0 select-none flex flex-col h-full', itemClassName)}
+                  className={cn('flex-shrink-0 select-none flex flex-col', itemClassName)}
                   style={{
                     width: cardWidth,
                     ...(minHeight && { minHeight })
                   }}
                 >
-                  {content}
+                  {child}
                 </div>
               );
             })}
@@ -354,7 +413,7 @@ export function CardCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm hover:bg-background/90 rounded-full border !border-[var(--color-border-accent)] hover:!border-[var(--color-border-accent-hover)] text-[var(--color-accent-11)] dark:border"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm hover:bg-background/90"
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
           >
@@ -363,7 +422,7 @@ export function CardCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm hover:bg-background/90 rounded-full border !border-[var(--color-border-accent)] hover:!border-[var(--color-border-accent-hover)] text-[var(--color-accent-11)] dark:border"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm hover:bg-background/90"
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
           >
@@ -381,8 +440,8 @@ export function CardCarousel({
               className={cn(
                 'w-2 h-2 rounded-full transition-colors duration-200',
                 index === currentIndex % (infinite ? totalCards : maxIndex + 1)
-                  ? 'bg-[var(--color-accent-9)]'
-                  : 'bg-gray-300 hover:bg-[var(--color-accent-7)]'
+                  ? 'bg-teal-500'
+                  : 'bg-gray-300 hover:bg-gray-400'
               )}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
@@ -392,7 +451,7 @@ export function CardCarousel({
       )}
 
       {/* Auto-play pause/resume button */}
-      {autoPlay > 0 && showPause && (
+      {autoPlay > 0 && showControls && (
         <Button
           variant="outline"
           size="sm"

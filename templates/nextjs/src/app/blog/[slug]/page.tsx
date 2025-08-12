@@ -41,7 +41,7 @@ export default async function Page({ params }: BlogPostPageProps) {
               alt={frontmatter.title}
               fill
               sizes="(max-width: 768px) 100vw, 700px"
-              className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-300 ease-in-out hover:scale-105"
               priority
             />
           </div>

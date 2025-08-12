@@ -15,6 +15,8 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
+import { BaseCard } from '@/components/cards/BaseCard';
+import { cn } from '@/lib/utils';
 
 /**
  * Animated cosine-terrain renderer using Three.js.
@@ -22,6 +24,8 @@ import type { ColorRepresentation } from 'three';
  */
 export interface CosineTerrainCardProps {
   className?: string;
+  /** Display variant: 'raw' for canvas only, 'card' for BaseCard wrapper */
+  variant?: 'raw' | 'card';
   /** phase seed for cosine fields */
   seed?: number;
   /** camera forward speed (world units/sec) */
@@ -208,7 +212,7 @@ const DEFAULT_SETTINGS: {
   enableDynamicTilesX: true,
 };
 
-const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settings, ...flat }) => {
+const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, variant = 'raw', settings, ...flat }) => {
   // Normalize grouped settings type for safe access
   const s = (settings || {}) as Partial<{
     camera: CameraSettings;
@@ -722,7 +726,17 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, settin
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={mountRef} className={className} />;
+  const canvasElement = <div ref={mountRef} className={variant === 'card' ? 'w-full h-full' : className} />;
+
+  if (variant === 'card') {
+    return (
+      <BaseCard className={cn('p-0 overflow-hidden', className)}>
+        {canvasElement}
+      </BaseCard>
+    );
+  }
+
+  return canvasElement;
 };
 
 export default CosineTerrainCard;

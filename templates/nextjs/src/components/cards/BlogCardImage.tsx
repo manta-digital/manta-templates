@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
 import { BaseCard } from './BaseCard';
@@ -52,22 +55,28 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
       )}
       {...props}
     >
-      <Image
-        src={coverImageUrl}
-        alt={`Background for ${title}`}
-        layout="fill"
-        objectFit="cover"
-        className={cn(
-          'absolute inset-0 z-0 transform-gpu transition-transform [transition-property:transform!important] [transition-duration:500ms!important] ease-in-out will-change-transform group-hover:scale-105',
-          dim && 'brightness-75',
-          blurAmount ? `blur-${blurAmount}` : (blur && 'blur-sm')
-        )}
-        priority
-      />
-      <div className={cn('absolute inset-0 z-10', overlayClassName)} />
+      <motion.div
+        className="absolute inset-0 z-0"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
+        <Image
+          src={coverImageUrl}
+          alt={`Background for ${title}`}
+          layout="fill"
+          objectFit="cover"
+          className={cn(
+            'absolute inset-0 w-full h-full object-cover',
+            dim && 'brightness-75',
+            blurAmount ? `blur-${blurAmount}` : (blur && 'blur-sm')
+          )}
+          priority
+        />
+      </motion.div>
+      <div className={cn('absolute inset-0 z-10 pointer-events-none', overlayClassName)} />
       <div
         className={cn(
-          'relative z-20 h-full w-full flex flex-col justify-center p-8',
+          'relative z-20 h-full w-full flex flex-col justify-center p-8 pointer-events-none',
           textColorClassName
         )}
       >
