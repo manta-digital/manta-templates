@@ -413,7 +413,7 @@ export function CardCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_30%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)]"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)]"
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
           >
@@ -422,7 +422,7 @@ export function CardCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_30%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)]"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)]"
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
           >

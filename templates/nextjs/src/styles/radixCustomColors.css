@@ -277,6 +277,34 @@
   --green-10: #299764;
   --green-11: #18794e;
   --green-12: #153226;
+
+  /* Standard Radix Orange Palette - Light Mode */
+  --orange-1: #fefcfb;
+  --orange-2: #fff7ed;
+  --orange-3: #ffead5;
+  --orange-4: #ffd8ae;
+  --orange-5: #ffc285;
+  --orange-6: #ffa55a;
+  --orange-7: #ff8a3c;
+  --orange-8: #f76b15;
+  --orange-9: #f76808;
+  --orange-10: #ed5f00;
+  --orange-11: #bd4b00;
+  --orange-12: #431407;
+
+  /* Light alpha tints for orange */
+  --orange-a1: #ff7a0008;
+  --orange-a2: #ff7a0016;
+  --orange-a3: #ff7a002b;
+  --orange-a4: #ff7a0046;
+  --orange-a5: #ff7a0064;
+  --orange-a6: #ff7a0086;
+  --orange-a7: #ff7a00a8;
+  --orange-a8: #f76808c0;
+  --orange-a9: #f76808d1;
+  --orange-a10: #ed5f00cc;
+  --orange-a11: #bd4b00cc;
+  --orange-a12: #431407e6;
 }
 
 .dark {
@@ -334,4 +362,32 @@
   --green-10: #3cb179;
   --green-11: #4cc38a;
   --green-12: #b4f1c9;
+
+  /* Standard Radix Orange Palette - Dark Mode */
+  --orange-1: #1f1300;
+  --orange-2: #2b1700;
+  --orange-3: #3b1d00;
+  --orange-4: #4a2302;
+  --orange-5: #5c2c05;
+  --orange-6: #71350d;
+  --orange-7: #8f4518;
+  --orange-8: #b35627;
+  --orange-9: #f76808;
+  --orange-10: #ff802b;
+  --orange-11: #ffa366;
+  --orange-12: #ffe0c2;
+
+  /* Dark alpha tints for orange */
+  --orange-a1: #ff7a000a;
+  --orange-a2: #ff7a0011;
+  --orange-a3: #ff7a001c;
+  --orange-a4: #ff7a0028;
+  --orange-a5: #ff7a0036;
+  --orange-a6: #ff7a0048;
+  --orange-a7: #ff7a0060;
+  --orange-a8: #ff7a007c;
+  --orange-a9: #f76808bf;
+  --orange-a10: #ff802bcc;
+  --orange-a11: #ffa366e0;
+  --orange-a12: #ffe0c2f0;
 }

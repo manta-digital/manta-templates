@@ -1,8 +1,8 @@
 // Defines the structure of a feature item for cards like ProjectFeatureCard
 export interface Feature {
-  icon: string;
+  icon?: string;
   label: string;
-  color: string; // Tailwind CSS color class
+  color?: string; // Tailwind CSS color class
 }
 
 // Defines the structure of the project frontmatter
@@ -12,6 +12,7 @@ export interface ProjectContent {
   techStack: string[];
   repoUrl?: string;
   demoUrl?: string;
+  actions?: { label: string; href: string; variant?: 'primary' | 'outline' | 'secondary' }[];
   features?: Feature[];
   displayMode?: 'standard' | 'feature';
   /** Optional image to support showcase-style layouts */

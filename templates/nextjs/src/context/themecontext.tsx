@@ -9,7 +9,7 @@ import React, {
 } from "react";
 
 type Theme = "light" | "dark";
-type Accent = "teal" | "mintteal" | "blue" | "purple";
+type Accent = "teal" | "mintteal" | "blue" | "purple" | "orange";
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -52,7 +52,7 @@ export function ThemeProvider({
         setTheme(stored);
       }
       const storedAccent = localStorage.getItem(`${storageKey}-accent`) as Accent;
-      if (storedAccent === "teal" || storedAccent === "mintteal" || storedAccent === "blue" || storedAccent === "purple") {
+      if (storedAccent === "teal" || storedAccent === "mintteal" || storedAccent === "blue" || storedAccent === "purple" || storedAccent === "orange") {
         setAccent(storedAccent);
       }
     } catch {}

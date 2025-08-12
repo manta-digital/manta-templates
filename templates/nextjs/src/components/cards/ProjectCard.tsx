@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { BaseCard } from './BaseCard';
 import type { ProjectContent } from '@/types/content';
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { Zap, Code } from 'lucide-react';
 
 interface ProjectCardProps {
   title?: string;
@@ -43,7 +45,10 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
     {description && <p className={pClassName}>{description}</p>}
     <div className="flex flex-wrap gap-2 mb-4">
       {techStack.map((tech) => (
-        <span key={tech} className="px-2 py-0.5 rounded bg-secondary text-secondary-foreground text-xs font-medium">
+        <span
+          key={tech}
+          className="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium leading-none"
+        >
           {tech}
         </span>
       ))}
@@ -78,34 +83,82 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const showDesc = description || content?.description;
     const showStack = techStack.length ? techStack : (content?.techStack || []);
     const image = content?.image;
-    return (
+    const features = content?.features || [];
+        return (
       <BaseCard className={cn('relative h-full flex flex-col p-4 md:p-6 overflow-hidden bg-background border border-border group', className)}>
-        {image && (
-          <div className="relative mb-4 rounded-lg overflow-hidden h-40">
-            <Image src={image} alt={showTitle || 'Project image'} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover object-top" />
-          </div>
-        )}
-        <h3 className="text-2xl font-bold text-foreground mb-2">{showTitle}</h3>
-        {showDesc && <p className="text-sm text-muted-foreground mb-4 flex-grow">{showDesc}</p>}
-        {!!showStack.length && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {showStack.map((tech) => (
-              <span key={tech} className="px-3 py-1 border rounded-[0.5em] text-xs font-medium bg-[var(--color-accent-3)] text-[var(--color-accent-12)] border-[var(--color-card-border)]">
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-        {(repoUrl || content?.repoUrl) && (
-          <a
-            href={repoUrl || content?.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-auto inline-flex items-center justify-center px-3 py-2 bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-8)] text-background rounded-md"
-          >
-            View on GitHub
-          </a>
-        )}
+        <div className="relative z-10 flex flex-col h-full">
+          {image && (
+            <div className="relative mb-4 rounded-lg overflow-hidden h-40">
+              <Image
+                src={image}
+                alt={showTitle || 'Project image'}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+          )}
+          <h3 className="text-2xl font-bold text-foreground mb-2">{showTitle}</h3>
+          {showDesc && <p className="text-sm text-muted-foreground mb-4 flex-grow">{showDesc}</p>}
+          
+          {!!showStack.length && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {showStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center px-3 py-1 rounded-full border bg-[var(--color-accent-3)] text-[var(--color-accent-12)] border-[var(--color-card-border)] text-xs font-medium"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {!!features.length && (
+            <div className="space-y-2 mt-0.5 mb-6">
+              {features.slice(0,4).map((f) => (
+                <div key={f.label} className="flex items-center text-muted-foreground">
+                  <Zap 
+                    size={14} 
+                    className="mr-2" 
+                    style={f.color ? { 
+                      color: f.color === 'primary' ? 'var(--color-accent-9)' : `var(--${f.color}-9)` 
+                    } : undefined}
+                    {...(!f.color && { className: 'mr-2 text-yellow-400' })}
+                  />
+                  <span className="text-xs">{f.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {(() => {
+            const actions = (content?.actions && content.actions.length > 0) ? content.actions : [{
+              href: repoUrl || content?.repoUrl || '',
+              label: 'View on GitHub',
+              variant: 'primary' as const
+            }];
+            const action = actions[0];
+            if (!action?.href) return null;
+            const isPrimary = action.variant === 'primary';
+            return (
+              <Button
+                asChild
+                key={`${action.href}-${action.label}`}
+                className={isPrimary 
+                  ? "mt-auto bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-8)] text-background"
+                  : "mt-auto inline-flex items-center px-3 py-1.5 rounded-full border bg-[var(--color-accent-3)] text-[var(--color-accent-12)] border-[var(--color-card-border)] text-xs font-medium leading-none hover:bg-[var(--color-accent-4)] transition-colors"
+                }
+              >
+                <a href={action.href} target="_blank" rel="noopener noreferrer">
+                  <Code size={16} className="mr-2" />
+                  {action.label}
+                </a>
+              </Button>
+            );
+          })()}
+        </div>
       </BaseCard>
     );
   }
@@ -154,6 +207,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           repoUrl={repoUrl || content?.repoUrl}
           demoUrl={demoUrl || content?.demoUrl}
         />
+        {!!(content?.features?.length) && (
+          <ul className="px-6 pb-4 -mt-2 space-y-2">
+            {content.features.slice(0,4).map((f) => (
+              <li key={f.label} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Zap className="h-4 w-4 text-muted-foreground/70" />
+                <span>{f.label}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
           </BaseCard>
   );

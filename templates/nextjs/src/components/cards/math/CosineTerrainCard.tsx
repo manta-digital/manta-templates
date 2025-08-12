@@ -403,6 +403,18 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
+    // Post-layout correction: ensure we pick up the final grid size on the next tick
+    setTimeout(() => {
+      if (!mount) return;
+      const w = mount.clientWidth;
+      const h = mount.clientHeight;
+      if (w > 0 && h > 0) {
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+    }, 0);
+
     // Optional simple lighting for solid shading
     if (cfg.material.renderPreset === 'solid') {
       const amb = new AmbientLight(cfg.lighting.ambientColor as ColorRepresentation | undefined, cfg.lighting.ambientIntensity);

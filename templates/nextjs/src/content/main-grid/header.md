@@ -1,7 +1,7 @@
 ---
 type: header
-logo: "/logo.svg"
-logoDark: "/logo.svg"
+logo: 
+logoDark: 
 title: "manta-templates"
 links:
   - href: "/"

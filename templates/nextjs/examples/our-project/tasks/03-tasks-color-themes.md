@@ -63,6 +63,7 @@ References in code (selected):
   - `[data-palette="mintteal"]`, `[data-palette="blue"]`, `[data-palette="purple"]` (teal is default under `:root`).
   - Each block sets `--color-accent-1..12` and alpha where available from the respective Radix scale variables.
   - Success: toggling the data attribute re-colors UI elements using semantic tokens.
+  - Notes: Added full `--color-accent-a1..a12` remaps for every palette and introduced an `orange` palette (light/dark + alpha) in `radixCustomColors.css`.
 
 ### C. ThemeProvider enhancement
 - [x] Extend `src/context/themecontext.tsx` to manage `accent: 'teal'|'mintteal'|'blue'|'purple'` with `setAccent` and persist to `localStorage`.
@@ -72,11 +73,11 @@ References in code (selected):
 
 ### D. Radix Custom Palettes support
 - [ ] Document drop-in process for new palettes created via Radix generator: add CSS vars to `src/styles/radixCustomColors.css` and create a mapping block in `semanticColors.css` under a new `[data-accent="<name>"]`.
-- [ ] Add TypeScript type for allowed accent keys and a registry object (optional) to power a simple selector UI later.
+- [x] Add TypeScript type for allowed accent keys and a registry object (optional) to power a simple selector UI later.
   - Success: new user-created palettes can be enabled with minimal steps.
 
 - [x] Inventory usage: search for `teal-` classes under `templates/nextjs/src/` and list files.
-- [ ] Phase migration:
+- [x] Phase migration:
   1) Replace decorative/brand accent usages with semantic utilities: `text-accent-12`, `bg-accent-3`, `border-accent-7`, or `text-[var(--color-accent-12)]` where finer control is needed.
   2) Replace gradient presets to read from variables (e.g., `from-[var(--color-accent-9)] to-[var(--color-accent-10)]`).
   3) Keep functional/status colors (success/error) as is or map to semantic tokens if desired.

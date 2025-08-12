@@ -46,11 +46,11 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className }) => 
   );
 };
 
-const ACCENTS = ["teal", "mintteal", "blue", "purple"] as const;
+const ACCENTS = ["teal", "mintteal", "blue", "purple", "orange"] as const;
 
-type AccentKey = typeof ACCENTS[number];
+type AccentKey = (typeof ACCENTS)[number];
 
-export const AccentToggle: React.FC<{ className?: string }> = ({ className }) => {
+export const ColorSelector: React.FC<{ className?: string }> = ({ className }) => {
   const { accent, setAccent } = useTheme();
 
   const cycleAccent = () => {
@@ -60,7 +60,21 @@ export const AccentToggle: React.FC<{ className?: string }> = ({ className }) =>
   };
 
   return (
-    <Button variant="outline" size="sm" onClick={cycleAccent} className={cn("gap-2", className)}>
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={cycleAccent}
+      className={cn(
+        "gap-2 rounded-full border-2 transition-all outline-none",
+        "text-[var(--color-accent-11)] !border-[var(--color-border-accent)] dark:!border-[var(--color-border-accent)]",
+        "!bg-transparent dark:!bg-transparent",
+        "hover:!bg-[var(--color-accent-3)] dark:hover:!bg-[var(--color-accent-4)]",
+        "hover:!text-[var(--color-accent-12)] hover:!border-[var(--color-border-accent-hover)]",
+        className
+      )}
+      title={`Accent: ${accent}`}
+      aria-label="Toggle accent palette"
+    >
       <Droplet className="h-4 w-4" />
       <span className="capitalize">{accent}</span>
       <span className="sr-only">Toggle accent palette</span>
