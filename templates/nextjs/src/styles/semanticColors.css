@@ -226,3 +226,16 @@ html[data-palette] * {
     transition: none !important;
   }
 }
+
+/* High-contrast mode adjustments */
+@media (prefers-contrast: more) {
+  :root {
+    /* Strengthen borders and text for visibility */
+    --color-border-accent: var(--color-accent-9);
+    --color-border-accent-hover: var(--color-accent-10);
+  }
+  .dark {
+    --color-border-accent: var(--color-accent-10);
+    --color-border-accent-hover: var(--color-accent-11);
+  }
+}

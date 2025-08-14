@@ -142,9 +142,7 @@
   }
 }
 
-.dark, .dark-theme, :is(.dark, .dark-theme) :where(.radix-themes:not(.light, .light-theme)) {
-  --color-background: #111;
-}
+/* Removed base token overrides from raw scales file to keep this file scale-only */
 
 /* LIGHT MODE COLORS */
 :root, .light, .light-theme {
@@ -217,9 +215,7 @@
   }
 }
 
-:root, .light, .light-theme, .radix-themes {
-  --color-background: #fff;
-}
+/* Removed base token overrides from raw scales file to keep this file scale-only */
 
 /* MINTTEAL CUSTOM PALETTE - Your existing brand color as a proper Radix scale */
 :root {
