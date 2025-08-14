@@ -31,14 +31,14 @@ const gridData: GridData = {
 };
 
 const cardStyles = [
-  'bg-sky-700 text-sky-200',
-  'bg-sky-600 text-sky-100',
-  'bg-sky-800 text-sky-100',
-  'bg-zinc-800 text-zinc-200',
-  'bg-violet-800 text-teal-300',
-  'bg-violet-900 text-emerald-300',
-  'bg-slate-700 text-sky-300',
-  'bg-slate-800 text-green-300',
+  'bg-[var(--color-accent-7)] text-[var(--color-accent-12)]',
+  'bg-[var(--color-accent-6)] text-[var(--color-accent-12)]',
+  'bg-[var(--color-accent-8)] text-[var(--color-accent-12)]',
+  'bg-[var(--color-gray-8)] text-[var(--color-gray-12)]',
+  'bg-[var(--color-accent-5)] text-[var(--color-accent-12)]',
+  'bg-[var(--color-accent-9)] text-[var(--color-accent-1)]',
+  'bg-[var(--color-gray-7)] text-[var(--color-gray-12)]',
+  'bg-[var(--color-gray-8)] text-[var(--color-gray-12)]',
 ];
 
 const defaultGap = '1em';
