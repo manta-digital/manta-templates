@@ -89,6 +89,17 @@ This makes it easy to hand the template to a friend: change `site.config.ts`, no
   - Centralizes width, padding, border, and prose classes (`max-w-[70rem]`)
 
 ## Cards (content-driven)
+## Theming: Accent palettes and semantic tokens
+
+This template centralizes palettes and semantic tokens to make theme changes easy:
+
+- Raw scales: `src/styles/radixCustomColors.css` (light/dark + alpha steps). Keep scale-only here.
+- Palette switching: `src/styles/semanticColors.css` remaps `--color-accent-1..12` and `--color-accent-a1..a12` via `[data-palette]`.
+- Tailwind access: `src/app/globals.css` `@theme` exposes semantic tokens to utilities.
+
+Add a new palette by following `examples/our-project/palette-onboarding.md`.
+
+Guideline: avoid raw hex and Tailwind brand color utilities in components. Prefer semantic utilities (e.g., `text-foreground`, `text-muted-foreground`) and semantic tokens (e.g., `bg-[var(--color-accent-9)]`).
 
 - Articles
   - `ArticleCard` UI: `src/components/cards/articles/ArticleCard.tsx`
