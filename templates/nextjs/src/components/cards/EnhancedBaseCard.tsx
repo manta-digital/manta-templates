@@ -12,11 +12,11 @@ import {
 } from '@/components/ui/card';
 
 const EnhancedBaseCard = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, size, state, ...props }, ref) => {
+  ({ className, variant, state, ...props }, ref) => {
     return (
       <ShadcnCard
         ref={ref}
-        className={cn(cardVariants({ variant, size, state, className }))}
+        className={cn(cardVariants({ variant, state, className }))}
         {...props}
       />
     );

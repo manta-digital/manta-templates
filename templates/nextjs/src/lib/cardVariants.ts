@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 export const cardVariants = cva(
   // Base classes applied to all variants
-  'transition-all duration-300 ease-in-out',
+  'transition-all duration-300 ease-in-out p-8',
   {
     variants: {
       // Defines the visual style of the card
@@ -21,13 +21,7 @@ export const cardVariants = cva(
         surface:
           'bg-[var(--card-surface-accessible)] text-[var(--card-surface-text)] border border-[var(--color-card-border)] backdrop-blur-sm',
       },
-      // Defines the size as semantic hints for grid systems
-      size: {
-        sm: 'p-8 card-size-sm',
-        md: 'p-8 card-size-md',
-        lg: 'p-8 card-size-lg',
-        xl: 'p-8 card-size-xl',
-      },
+      // Removed size variant; padding is now part of base classes
       // Defines the corner radius independently
       radius: {
         none: 'rounded-none',
@@ -48,7 +42,6 @@ export const cardVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
-      size: 'md',
       radius: 'md',
       state: 'default',
     },

@@ -18,7 +18,8 @@ export type CardVariant = 'default' | 'primary' | 'elevated' | 'bordered' | 'gra
  * - `lg`: Large
  * - `xl`: Extra Large
  */
-export type CardSize = 'sm' | 'md' | 'lg' | 'xl';
+// Size variant removed; padding handled in base card classes
+export type CardSize = never;
 
 /**
  * Defines the interaction states for card components.
@@ -52,11 +53,7 @@ export interface CardVariantProps {
    * @default 'default'
    */
   variant?: CardVariant;
-  /**
-   * The size of the card.
-   * @default 'md'
-   */
-  size?: CardSize;
+  // Size removed
   /**
    * The current interaction state of the card.
    * This is typically managed internally by the component.

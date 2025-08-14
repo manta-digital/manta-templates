@@ -74,7 +74,6 @@ export function GradientCard({
   customGradient,
   shimmer = true,
   overlayOpacity = 0,
-  size = 'md',
   radius = 'md',
   state,
   header,
@@ -113,7 +112,6 @@ export function GradientCard({
       className={cn(
         cardVariants({
           variant: 'default', // We'll override the background
-          size,
           radius,
           state: state === 'hover' ? 'default' : state,
         }),
