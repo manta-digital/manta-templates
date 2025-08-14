@@ -46,3 +46,53 @@ Design source: `templates/nextjs/examples/our-project/tasks/04-tasks-cosine-terr
 
 - [ ] Fix strict types and ESLint in `CosineTerrainCard.tsx` (no-explicit-any, unused vars, cleanup warning)
 - [ ] No behavior changes; keep perf identical
+
+
+## color-themes-2
+
+Goal: simplify and consolidate potentially overlapping color systems. Establish one clear source of truth and eliminate drift.
+
+- Remove duplicates and define single source of truth
+  - Consolidate palette definitions in `src/styles/radixCustomColors.css` only (raw scales: light/dark + alpha).
+  - Keep all semantic mappings and palette switching in `src/styles/semanticColors.css` only.
+  - Trim `src/app/globals.css` to just `@theme` exposure and Shadcn base tokens; no palette values.
+
+- Normalize semantic token surface
+  - Ensure `semanticColors.css` is the only place mapping scale → semantic tokens (`--color-accent-*`, `--color-accent-a*`, border, surface, ring).
+  - Keep neutral mapping (gray-1..12) defined once; `@theme` only re-exports.
+
+- Eliminate legacy/overlapping systems
+  - Remove `cardThemes.css` color constants or migrate still-needed values into semantic tokens; delete the file if redundant.
+  - Remove compatibility shim usages (`teal-*`, `text-white`) by migrating to semantic utilities; then delete the shim block from `globals.css`.
+  - Replace legacy gradient hexes in `globals.css` with semantic/scale-based gradients or move gradients into a small semantic gradients section.
+
+- Tighten palette switching
+  - Verify each `[data-palette]` block remaps both solid and alpha steps (1..12 and a1..a12).
+  - Keep dark/light border and contrast tuning within `semanticColors.css` only.
+
+- Document and enforce
+  - Doc: “Palette onboarding” (where to drop Radix custom output, how to wire `[data-palette]`, and how `@theme` exposes tokens).
+  - Rule: avoid raw hex/classes in components; prefer semantic utilities.
+  - Optional guardrail: lint/codemod to flag hard-coded color classes.
+
+- Audit and migrate
+  - Repo-wide audit for `teal-*`, `text-white`, raw hex in components/styles.
+  - Migrate remaining components to semantic tokens and gradients.
+
+- A11y/QA safeguards
+  - WCAG contrast checks for all palettes; add `@media (prefers-contrast: high)` overrides centrally in `semanticColors.css`.
+  - Add an examples section demonstrating `useTheme()` with all palettes; use for visual regression.
+
+- Cleanup milestones (deletion gates)
+  - After migration: remove the teal compatibility shim.
+  - After consolidation: remove `cardThemes.css` if empty.
+
+- Optional helpers
+  - Provide a small TS token map for semantic names to aid auto-complete and consistency.
+  - Script to validate presence of `--color-accent-*`/`--color-accent-a*` across palettes.
+
+- High-impact order
+  1. Consolidate sources (raw scales in `radixCustomColors.css`; mappings in `semanticColors.css`; keep `globals.css` minimal).
+  2. Audit/migrate legacy classes and raw hex; replace gradients with semantic/scale values.
+  3. Remove shim and `cardThemes.css` if redundant.
+  4. Documentation + a11y checks.
