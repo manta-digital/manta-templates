@@ -8,46 +8,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Green palette */
-  --color-green-50:  #f0fdf4;
-  --color-green-100: #dcfce7;
-  --color-green-200: #bbf7d0;
-  --color-green-300: #86efac;
-  --color-green-400: #4ade80;
-  --color-green-500: #22c55e;
-  --color-green-600: #16a34a;
-  --color-green-700: #15803d;
-  --color-green-800: #166534;
-  --color-green-900: #14532d;
-  --color-green-950: #052e16;
-
-  /* Custom Radix Teal palette - mapped to Tailwind naming */
-  --color-teal-1: var(--teal-1);
-  --color-teal-2: var(--teal-2);
-  --color-teal-3: var(--teal-3);
-  --color-teal-4: var(--teal-4);
-  --color-teal-5: var(--teal-5);
-  --color-teal-6: var(--teal-6);
-  --color-teal-7: var(--teal-7);
-  --color-teal-8: var(--teal-8);
-  --color-teal-9: var(--teal-9);
-  --color-teal-10: var(--teal-10);
-  --color-teal-11: var(--teal-11);
-  --color-teal-12: var(--teal-12);
-
-  /* Mintteal palette - mapped to Tailwind naming */
-  --color-mintteal-1: var(--mintteal-1);
-  --color-mintteal-2: var(--mintteal-2);
-  --color-mintteal-3: var(--mintteal-3);
-  --color-mintteal-4: var(--mintteal-4);
-  --color-mintteal-5: var(--mintteal-5);
-  --color-mintteal-6: var(--mintteal-6);
-  --color-mintteal-7: var(--mintteal-7);
-  --color-mintteal-8: var(--mintteal-8);
-  --color-mintteal-9: var(--mintteal-9);
-  --color-mintteal-10: var(--mintteal-10);
-  --color-mintteal-11: var(--mintteal-11);
-  --color-mintteal-12: var(--mintteal-12);
+  /* Expose semantic accent steps for Tailwind utilities */
 
   /* Semantic color mappings for easy usage */
   --color-accent: var(--color-accent-9);
