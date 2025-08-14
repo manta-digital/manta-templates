@@ -60,10 +60,10 @@ export interface GradientCardProps extends React.HTMLAttributes<HTMLDivElement>,
  */
 const gradientPresets: Record<GradientPreset, string> = {
   teal: 'bg-gradient-to-br from-[var(--color-accent-7)] to-[var(--color-accent-10)]',
-  blue: 'bg-gradient-to-br from-blue-300 to-cyan-500',
-  purple: 'bg-gradient-to-br from-purple-300 to-pink-500',
-  sunset: 'bg-gradient-to-br from-orange-300 to-red-500',
-  ocean: 'bg-gradient-to-br from-blue-400 to-[var(--color-accent-10)]',
+  blue: 'bg-gradient-to-br from-[var(--color-accent-6)] to-[var(--color-accent-10)]',
+  purple: 'bg-gradient-to-br from-[var(--color-accent-7)] to-[var(--color-accent-11)]',
+  sunset: 'bg-gradient-to-br from-[var(--color-accent-5)] to-[var(--color-accent-9)]',
+  ocean: 'bg-gradient-to-br from-[var(--color-accent-6)] to-[var(--color-accent-10)]',
 };
 
 /**

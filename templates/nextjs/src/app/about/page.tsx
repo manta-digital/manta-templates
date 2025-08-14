@@ -25,7 +25,7 @@ const AboutPage: React.FC = () => {
             </p>
           </div>
 
-          <BaseCard className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800">
+          <BaseCard className="p-6 bg-gradient-to-br from-[var(--color-gray-2)] to-[var(--color-gray-3)] dark:from-[var(--color-accent-a2)] dark:to-[var(--color-accent-a3)] border-[var(--color-card-border)]">
             <h3 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
               Explore More Features
             </h3>
