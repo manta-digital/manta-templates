@@ -51,7 +51,7 @@ export default function BlogIndexLayout({ posts, CardComponent }: BlogIndexLayou
           <BaseCard 
             className={cn(
               'justify-center items-start',
-              'bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-500 text-white p-6 h-full'
+              'bg-gradient-to-br from-[var(--color-accent-7)] to-[var(--color-accent-10)] text-card-foreground p-6 h-full'
             )}
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-1">Zefram Cochrane — Blog</h2>

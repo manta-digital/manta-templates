@@ -35,7 +35,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
   coverImageUrl,
   category,
   author,
-  textColorClassName = 'text-white',
+  textColorClassName = 'text-card-foreground',
   overlayClassName = 'bg-gradient-to-t from-black/70 via-black/50 to-transparent',
   dim = false,
   blur = false,

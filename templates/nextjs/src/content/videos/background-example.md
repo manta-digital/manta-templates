@@ -68,7 +68,7 @@ import VideoCardContainer from '@/components/cards/VideoCardContainer';
   className="min-h-[400px]"
 >
   <div className="absolute inset-0 flex items-center justify-center">
-    <h2 className="text-white text-4xl font-bold">Your Content Here</h2>
+    <h2 className="text-card-foreground text-4xl font-bold">Your Content Here</h2>
   </div>
 </VideoCardContainer>
 ```

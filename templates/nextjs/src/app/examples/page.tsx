@@ -54,7 +54,7 @@ export default function ExamplesPage() {
             <BaseCard className="h-full overflow-hidden relative !border-0 p-0">
               <BackgroundVideo full src="https://www.w3schools.com/html/mov_bbb.mp4" poster="/image/blog-sample-image.png" className="w-full h-full" autoplay>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-xl font-semibold">Background Video Demo</h3>
+                  <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
                 </div>
               </BackgroundVideo>
             </BaseCard>

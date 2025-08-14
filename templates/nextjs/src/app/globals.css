@@ -31,15 +31,6 @@
   --color-accent-11: var(--color-accent-11);
   --color-accent-12: var(--color-accent-12);
 
-  /* Compatibility shim for existing teal-* Tailwind usages */
-  --color-teal-100: var(--teal-2);
-  --color-teal-200: var(--teal-3);
-  --color-teal-300: var(--teal-6);
-  --color-teal-400: var(--teal-7);
-  --color-teal-500: var(--teal-9);
-  --color-teal-600: var(--teal-10);
-  --color-teal-700: var(--teal-11);
-  --color-teal-800: var(--teal-12);
 
   /* Neutral gray tokens (Radix gray) exposed to Tailwind: bg-gray-1..12 */
   --color-gray-1: var(--gray-1);

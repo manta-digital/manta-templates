@@ -191,7 +191,7 @@ export function VirtualCardList<T = unknown>({
       {scrollTop > containerHeight && (
         <button
           onClick={scrollToTop}
-          className="absolute bottom-4 right-4 bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-10)] text-white p-2 rounded-full shadow-lg transition-colors"
+          className="absolute bottom-4 right-4 bg-[var(--color-accent-9)] hover:bg-[var(--color-accent-10)] text-[var(--background)] p-2 rounded-full shadow-lg transition-colors"
           aria-label="Scroll to top"
         >
           <svg

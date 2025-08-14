@@ -38,7 +38,7 @@ const AboutPage: React.FC = () => {
               href="https://templates.manta.digital" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+              className="inline-flex items-center px-4 py-2 bg-[var(--color-accent-9)] text-[var(--background)] rounded-md hover:bg-[var(--color-accent-10)] transition-colors font-medium"
             >
               Visit Full Showcase →
             </Link>

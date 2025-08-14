@@ -11,7 +11,7 @@ export const cardVariants = cva(
         default: 'bg-card text-card-foreground border border-[var(--color-card-border)] shadow-sm',
         bordered:
           'bg-card text-card-foreground border-2 border-gray-200 hover:border-[var(--color-card-border-hover)] dark:border-gray-700 dark:hover:border-[var(--color-card-border-hover)] transition-colors duration-300',
-        gradient: 'text-white bg-gradient-to-br from-[var(--color-accent-9)] to-green-500 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-1000',
+        gradient: 'text-[var(--color-card-foreground,white)] bg-gradient-to-br from-[var(--color-accent-9)] to-[var(--color-accent-10)] relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-1000',
         interactive:
           'bg-card text-card-foreground border shadow-sm cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:ring-1 hover:ring-[var(--color-card-border-hover)]',
         elevated:
