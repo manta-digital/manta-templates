@@ -3,7 +3,7 @@
 @plugin "@tailwindcss/typography";
 @import "../styles/radixCustomColors.css";
 @import "../styles/semanticColors.css";
-@import "../styles/cardThemes.css";
+/* cardThemes.css removed; card variables sourced via semantic tokens */
 
 @custom-variant dark (&:is(.dark *));
 

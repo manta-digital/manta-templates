@@ -68,7 +68,7 @@ export default function ExamplesPage() {
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
-          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
+          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-card-foreground" />
         </GridItem>
 
         {/* Cosine terrain visual */}
