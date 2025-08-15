@@ -30,12 +30,12 @@ Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-theme
 
 ### Overview
 - [x] Inventory current theming systems and propose unified design
-  - Systems: Radix custom palettes (`radixCustomColors.css`), semantic aliases (`semanticColors.css`), card theming (`cardThemes.css`), shadcn base tokens (in `globals.css`), Tailwind v4 utilities (some hard-coded `teal-*`)
-- [ ] Implement accent palette switching via `[data-accent]` mappings (teal, mintteal, blue, purple; extensible)
-- [ ] Align Tailwind tokens and semantic aliases; add `accent-*` utilities and compatibility shim for `teal-*`
-- [ ] ThemeProvider: manage `accent` with persistence; set `[data-accent]`
-- [ ] Migrate hard-coded classes to semantic tokens incrementally (keep shim until complete)
-- [ ] Docs + a11y verification (contrast, high-contrast media)
+  - Systems: Radix custom palettes (`radixCustomColors.css`), semantic aliases (`semanticColors.css`), shadcn base tokens (in `globals.css`), Tailwind v4 utilities (some hard-coded `teal-*`) (cardThemes.css removed)
+- [x] Implement accent palette switching via `[data-palette]` mappings (mintteal, blue, purple, green, orange; extensible)
+- [x] Align Tailwind tokens and semantic aliases; added neutral tokens and semantic gradient strategy
+- [x] ThemeProvider: manage `accent` with persistence; set `[data-palette]`
+- [x] Migrate hard-coded classes to semantic tokens; removed shim and legacy brand gradients
+- [x] Docs + a11y verification (contrast, high-contrast media)
 
 Notes:
 - Technologies marquee: use `BaseCard` + `TechnologyScroller` directly; no dedicated wrapper.

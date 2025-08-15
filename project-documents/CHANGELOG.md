@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+### Theming & Colors (Next.js template)
+- Consolidated color systems: raw scales in `radixCustomColors.css`, semantic mappings/switching in `semanticColors.css`, tokens exposed via `@theme` in `globals.css`.
+- Added neutral tokens (`--color-gray-1..12`) and removed Tailwind brand scale exposures.
+- Replaced legacy gradient hexes with semantic accent/neutral gradients; unified gradient presets.
+- Removed teal compatibility shim and deleted `cardThemes.css` (redundant after consolidation).
+- Completed migration of `teal-*`/`text-white` classes to semantic tokens (kept `ArticleCard` white by design).
+- Verified palette switching (solid + alpha remaps), dark/light tuning centralized; added prefers-contrast: more overrides.
+- Added `examples/our-project/palette-onboarding.md` and updated Next.js template README with theming overview and enforcement rule.
 - **Feature file naming convention**: Updated from `{feature}-feature.md` to `nn-feature.{feature}.md` format
 - **Task file naming convention**: Updated from `{section}-tasks-phase-4.md` to `nn-tasks-{section}.md` format
   - Added sequential index prefix (01, 02, 03, etc.) for better organization
