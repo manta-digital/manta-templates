@@ -81,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`our-project/` directory**: Replaced by `private/` directory (with migration path provided)
 
 ### Fixed
-- **Monorepo compatibility**: Added note explaining `{template}/examples/our-project/` usage for template development
+- **Directory structure clarification**: Clarified distinction between `private/` (regular development), `project-artifacts/` (monorepo template development), and deprecated `{template}/examples/our-project/`
 - **File naming consistency**: Updated examples in `file-naming-conventions.md` to use `private/`
 - **Link references**: Fixed broken links in `project-guides/readme.md`
 

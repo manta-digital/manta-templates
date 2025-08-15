@@ -218,10 +218,15 @@ git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-proje
 
 
 
-## 🔄 Migrating from `our-project/` to `private/`
-If you're working with an existing project that uses the old `our-project/` structure, here's how to migrate to the new `private/` structure:
+## 🔄 Directory Structure Migration Guide
 
-### Quick Migration Steps
+### From `our-project/` to Current Structure
+If you're working with an existing project that uses the old `our-project/` structure, choose the appropriate migration path:
+
+#### For Regular Development (Template Instances)
+Migrate to `project-documents/private/`:
+
+**Quick Migration Steps:**
 1. **Rename the directory**: `mv project-documents/our-project project-documents/private`
 2. **Create new subdirectories** (if they don't exist):
    ```bash
@@ -238,22 +243,48 @@ If you're working with an existing project that uses the old `our-project/` stru
    ```
 4. **Update any references** in your project-specific files from `our-project/` to `private/`
 
+#### For Monorepo Template Development
+Migrate to `project-artifacts/`:
+
+**Quick Migration Steps:**
+1. **Rename the directory**: `mv {template}/examples/our-project project-artifacts`
+2. **Create new subdirectories** (if they don't exist):
+   ```bash
+   mkdir -p project-artifacts/tasks
+   mkdir -p project-artifacts/project-guides
+   ```
+3. **Update any references** in your project-specific files to use `project-artifacts/`
+
 ### New Structure After Migration
+
+#### Regular Development (`private/`):
 ```
 private/
-├── code-reviews/        # (existing)
-├── maintenance/         # (existing) 
-├── features/            # (new) - feature definitions & specifications
-├── project-guides/      # (new) - project-specific guide customizations
-│   ├── 01-concept.{project}.md # (moved here)
-│   ├── 02-spec.{project}.md    # (moved here)
-│   └── 03-notes.{project}.md   # (moved here)
-├── tasks/               # (new) - move task files here
-└── ui/                  # (existing)
-    └── screenshots/     # (existing)
+├── code-reviews/        # review docs & follow-up actions
+├── maintenance/         # maintenance tasks & outcomes 
+├── features/            # feature definitions & specifications
+├── project-guides/      # project-specific guide customizations
+│   ├── 01-concept.{project}.md # project concept documents
+│   ├── 02-spec.{project}.md    # project specifications
+│   └── 03-notes.{project}.md   # project-specific notes
+├── tasks/               # task breakdowns & phase documents
+└── ui/                  # UI tasks & resources
+    └── screenshots/     # mock-ups, design references
 ```
 
-> **Note**: The guides in this repository have been updated to use `private/`. If you see references to `our-project/` in guides, those are likely outdated and should be treated as `private/`.
+#### Monorepo Template Development (`project-artifacts/`):
+```
+project-artifacts/
+├── code-reviews/        # review docs & follow-up actions
+├── maintenance/         # maintenance tasks & outcomes
+├── features/            # feature definitions & specifications
+├── project-guides/      # project-specific guide customizations
+├── tasks/               # task breakdowns & phase documents
+└── ui/                  # UI tasks & resources
+    └── screenshots/     # mock-ups, design references
+```
+
+> **Note**: The guides in this repository have been updated to clarify the distinction between `private/` (regular development) and `project-artifacts/` (monorepo template development). References to `{template}/examples/our-project/` are deprecated.
 
 
 

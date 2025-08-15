@@ -30,8 +30,19 @@ project-documents/
 > **Note:**
 > _If_ a prompt template is tightly coupled to your AI-process phases (as with prompt.ai-project.system.md), keep it in **project-guides/**; ad-hoc language snippets still go to **snippets/**
 > 
-> **Monorepo Template Note (IMPORTANT):**   
-> When working on templates in the monorepo, project-specific files that are normally in `private/` are located in `{template}/examples/our-project/` to maintain compatibility with existing tooling.
+> **Directory Structure by Use Case (IMPORTANT):**   
+> 
+> **1. Regular Development** (standard template instance development):
+> - Use `project-documents/private/` for all project-specific files
+> - This is the standard path described throughout the AI Project Guide
+> 
+> **2. Monorepo Template Development** (working on templates themselves or other monorepo sections):
+> - Use `project-artifacts/` for project-specific files that would normally go in `private/`
+> - This maintains compatibility with existing tooling while working on the monorepo structure itself
+> 
+> **3. Legacy `{template}/examples/our-project/`**:
+> - **DEPRECATED**: No longer used
+> - Migrate any existing content to `project-artifacts/` for monorepo work
 
 ## Zero-ambiguity decision matrix
 

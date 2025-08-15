@@ -12,8 +12,11 @@ alwaysApply: true
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
 - Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
-- Information and tasks specific to our project in `project-documents/private`.
-- **IMPORTANT**: if we are working on a template in a monorepo, the 'private' path will be 'templates/{template-name}/examples/our-project'. Substitute accordingly.
+
+### Project-Specific File Locations
+- **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files
+- **Monorepo Template Development** (working on templates or monorepo structure): Use `project-artifacts/` for project-specific files
+- **DEPRECATED**: `{template}/examples/our-project/` is no longer used - migrate to `project-artifacts/` for monorepo work
 
 ## General Guidelines (IMPORTANT)
 - Filenames for project documents may use ` ` or `-` separators. Ignore case in all filenames, titles, and non-code content.

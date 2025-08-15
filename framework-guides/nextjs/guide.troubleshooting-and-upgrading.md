@@ -1,5 +1,27 @@
 
 ## Introduction
+If encountering errors or difficulties when working with Next.js, consult this guide and the primary references listed in the introduction.
+
+### Broken Transitions
+FOUND IT! The ArticleCard is inside a CardCarousel that has a Framer Motion motion.div wrapper with animate={{ x: translateX }}. Framer Motion is taking control of the transform property and overriding CSS transforms.
+
+This is the classic "Framer Motion vs CSS transforms" conflict. When Framer Motion animates x, it sets transform: translateX(...) on the element, which blocks CSS transform: scale() from working properly on child elements.
+
+Quick fix - tell Framer Motion to NOT control transforms on the carousel children by adding style={{ transform: 'none' }} to the motion.div or switching to a different property.
+
+Looking at the CardCarousel code:
+```jsx
+<motion.div
+  animate={{ x: translateX }}
+  transition={{ duration: 0.3 }}
+  transformTemplate={({ x }) => `translateX(${x})`} // Preserve child transforms
+  // ...
+```
+
+To fix, either do not use FramerMotion on the container, or update to use Transform instead of x.
+
+
+### Should be Awaited or Types of Property are Incompatible
 If encountering errors similar to the following, consult this guide and the two primary references listed in this introduction.
 
 ```sh

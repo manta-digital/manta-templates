@@ -103,7 +103,10 @@ Refer to the Resource Structure in `guide.ai-project.00-process` for a descripti
 
 If you were previously assigned a role, continue in that role.  If not, assume role of Senior AI as defined in the guide mentioned in the preceding paragraph.
 
-Remember that if monorepo mode is active, we are working on the monorepo or template structure itself, rather than developing in an instance.  In this case, files normally in `project-documents/private/` are located in `{template}/examples/our-project/` to maintain compatibility with existing tooling.  The Project Manager should inform you if this mode is active.
+**Directory Structure by Development Type:**
+- **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files
+- **Monorepo Template Development** (working on templates or monorepo structure): Use `project-artifacts/` for project-specific files that would normally go in `private/`
+- The Project Manager should inform you which mode is active for the current work
 ```
 
 ##### Feature Design
@@ -114,9 +117,9 @@ We're starting work on a new feature in project {project}.  This is an abbreviat
 
 We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.  
 
-The actual feature description should be contained in project-documents/private/project-guides/feature.{feature}.md.  Request from Project Manager if you cannot find it.
+The actual feature description should be contained in the appropriate project-specific directory (either `project-documents/private/project-guides/feature.{feature}.md` for regular development or `project-artifacts/project-guides/feature.{feature}.md` for monorepo template development).  Request from Project Manager if you cannot find it.
 
-The first thing we need to do is to use our Project Guide together with the additional concept information to create a concise low level design for our feature.  Document this in file private/features/nn-feature-{feature}.md.  Create the features/ directory if needed. Start nn at 01 if no other feature files already exist.   
+The first thing we need to do is to use our Project Guide together with the additional concept information to create a concise low level design for our feature.  Document this in the appropriate features directory (`private/features/` or `project-artifacts/features/`) in file `nn-feature-{feature}.md`.  Create the features/ directory if needed. Start nn at 01 if no other feature files already exist.   
 
 If at any point in this process you are missing required information, do not guess or proceed without it.  Stop and request the information from Project Manager.
 ```
