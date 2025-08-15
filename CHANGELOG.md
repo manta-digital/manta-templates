@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
 ### Changed
+
+### Fixed
+
+## [0.6.0] - 2025-08-15
+
+### Added
+- **Claude Code support**: Added `claude` option to `setup-ide` script to generate `CLAUDE.md` file
+  - Compiles all rules into single Claude-friendly format
+  - Proper heading hierarchy (H1 → H2 → H3 → H4)
+  - General Development Rules listed first, other categories alphabetically
+  - Automatic frontmatter stripping and heading level adjustment
+
+### Changed
+- **Directory structure clarification**: Resolved ambiguity between directory concepts:
+  - `project-documents/private/` for regular development (template instances)
+  - `project-artifacts/` for monorepo template development
+  - Deprecated `{template}/examples/our-project/` with migration path
 - **Feature file naming convention**: Updated from `{feature}-feature.md` to `nn-feature.{feature}.md` format
 - **Task file naming convention**: Updated from `{section}-tasks-phase-4.md` to `nn-tasks-{section}.md` format
   - Added sequential index prefix (01, 02, 03, etc.) for better organization
@@ -15,8 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated all prompt templates and guides to use new naming pattern
   - Streamlined and updated system prompts.
 - **File naming documentation**: Updated `file-naming-conventions.md` with new task file patterns and documented legacy formats
+- **Documentation updates**: Updated README.md to include Claude setup instructions
 
-## [0.5.2] - 2025-01-27
+## [0.5.2] - 2025-07-26
 
 ### Added
 - **Project document phase numbering**: Implemented `XX-name.{project}.md` naming convention for project-specific documents
@@ -31,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Guide output locations**: Updated all guides to reference new phase-numbered document names
 - **Directory structure**: Updated structure diagrams to reflect new naming convention
 
-## [0.5.1] - 2025-01-27
+## [0.5.1] - 2025-07-24
 
 ### Added
 - **Phase numbering system**: Implemented `guide.ai-project.XX-name.md` naming convention for all project guides
@@ -61,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **File organization**: All guides now follow consistent phase-based naming
 - **Cross-references**: All internal links and dependencies updated to new structure
 
-## [0.5.0] - 2025-01-27
+## [0.5.0] - 2025-07-24
 
 ### Added
 - **New modular rules system**: Replaced monolithic `coderules.md` with organized `project-guides/rules/` directory
@@ -81,7 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`our-project/` directory**: Replaced by `private/` directory (with migration path provided)
 
 ### Fixed
-- **Directory structure clarification**: Clarified distinction between `private/` (regular development), `project-artifacts/` (monorepo template development), and deprecated `{template}/examples/our-project/`
+- **Directory structure**: Clarified distinction between `private/` (regular development) and deprecated `our-project/` structure
 - **File naming consistency**: Updated examples in `file-naming-conventions.md` to use `private/`
 - **Link references**: Fixed broken links in `project-guides/readme.md`
 
