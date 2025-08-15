@@ -1,1 +1,0 @@
-This section provides general information on programming domains or subjects, for example game development vs financial data visualization.
