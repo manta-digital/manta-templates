@@ -44,9 +44,8 @@ const BlogCardWide: React.FC<BlogCardWideProps> = ({
           <Image
             src={coverImageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
-            className="md:rounded-l-lg md:rounded-t-none rounded-t-lg"
+            fill
+            className="md:rounded-l-lg md:rounded-t-none rounded-t-lg object-cover"
           />
         </div>
       )}

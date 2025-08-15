@@ -63,8 +63,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
         <Image
           src={coverImageUrl}
           alt={`Background for ${title}`}
-          layout="fill"
-          objectFit="cover"
+          fill
           className={cn(
             'absolute inset-0 w-full h-full object-cover',
             dim && 'brightness-75',
