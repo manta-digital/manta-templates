@@ -138,9 +138,10 @@ Under the hood:
 
 When developing templates within the monorepo:
 
-1. **Template development work** goes in `project-artifacts/{template}-template/` (not in the template itself)
+1. **Canonical development docs** (features, designs, reviews, tasks) live in `project-artifacts/{template}-template/` and are committed to the repo
 2. **Templates ship clean** without `project-documents/` - users get guides via `setup-guides`
-3. **setup-guides enables version control** for project-documents after population
+3. **examples/our-project is deprecated for canonical docs** and should be used only for demo content if needed; do not store source-of-truth design there
+4. **setup-guides enables version control** for project-documents after population
 
 ### Why This Approach?
 
@@ -149,6 +150,12 @@ When developing templates within the monorepo:
 - **No conflicts**: Template development work doesn't interfere with user experience
 
 For template users, this complexity is hidden - they just run `setup-guides` and everything works.
+
+#### Rationale and consistency
+
+- `project-artifacts/{template}-template/` is the single source of truth for template development artifacts
+- `templates/{template}/examples/our-project/` may exist for example/demo content but is not used for canonical docs
+- Public/shared guidance remains under `project-documents/`
 
 ---
 
