@@ -6,8 +6,6 @@ title: "manta-templates"
 links:
   - href: "/"
     label: "Home"
-  - href: "/blog"
-    label: "Blog"
   - href: "/examples"
     label: "Examples"
 ---
