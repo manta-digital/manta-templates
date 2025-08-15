@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { BaseCard } from '@manta/ui-core';
 import type { AboutContent, SocialLink } from '@/types/content';
 
 const socialIconMap: Record<SocialLink['platform'], React.ComponentType<{ className?: string }>> = {

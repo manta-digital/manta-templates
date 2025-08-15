@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { BaseCard } from '@manta/ui-core';
 import { ArticleContent } from '@/types/content';
 import { motion } from 'framer-motion';
 

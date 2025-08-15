@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllContent } from '@/lib/content';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { BaseCard } from '@manta/ui-core';
 import { cn } from '@/lib/utils';
 import type { PostContent } from '@/types/content';
 

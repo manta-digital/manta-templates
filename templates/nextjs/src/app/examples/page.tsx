@@ -6,7 +6,7 @@ import { GradientCard } from '@/components/cards/variants/GradientCard';
 import ArticleCard from '@/components/cards/articles/ArticleCard';
 import BlogCardImage from '@/components/cards/BlogCardImage';
 import ProjectCard from '@/components/cards/ProjectCard';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { BaseCard } from '@manta/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
 import QuoteCard from '@/components/cards/QuoteCard';
 // import VideoCard from '@/components/cards/VideoCard';

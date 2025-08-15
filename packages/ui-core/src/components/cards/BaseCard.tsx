@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import {
   Card as ShadcnCard,
   CardHeader as ShadcnCardHeader,
@@ -7,9 +7,8 @@ import {
   CardTitle as ShadcnCardTitle,
   CardDescription as ShadcnCardDescription,
   CardContent as ShadcnCardContent,
-} from '@manta/ui-core';
+} from '../ui/card';
 
-// Re-export the ShadCN components for direct use when needed
 export const CardHeader = ShadcnCardHeader;
 export const CardFooter = ShadcnCardFooter;
 export const CardTitle = ShadcnCardTitle;
@@ -18,18 +17,13 @@ export const CardContent = ShadcnCardContent;
 
 export type BaseCardProps = React.ComponentProps<typeof ShadcnCard>;
 
-const BaseCard = React.forwardRef<
-  React.ElementRef<typeof ShadcnCard>,
-  BaseCardProps
->(({ className, ...props }, ref) => {
-  return (
-    <ShadcnCard
-      ref={ref}
-      className={cn('transition-all duration-300 ease-in-out', className)}
-      {...props}
-    />
-  );
-});
+const BaseCard = React.forwardRef<React.ElementRef<typeof ShadcnCard>, BaseCardProps>(
+  ({ className, ...props }, ref) => (
+    <ShadcnCard ref={ref} className={cn('transition-all duration-300 ease-in-out', className)} {...props} />
+  ),
+);
 BaseCard.displayName = 'BaseCard';
 
 export { BaseCard };
+
+

@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import { Button } from '@/components/ui/button';
+import { Button } from '@manta/ui-core';
 import { useUniformHeight } from '@/hooks/useUniformHeight';
 import { motion } from 'framer-motion';
 

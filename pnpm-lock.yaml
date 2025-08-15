@@ -17,6 +17,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.0
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
+      '@radix-ui/react-tooltip':
+        specifier: ^1.2.7
+        version: 1.2.7(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -127,8 +130,42 @@ importers:
         specifier: ^5
         version: 5.8.3
 
+  packages/ui-core:
+    dependencies:
+      '@radix-ui/react-slot':
+        specifier: ^1.2.3
+        version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.0.0 || ^19.0.0
+        version: 19.1.0
+      react-dom:
+        specifier: ^18.0.0 || ^19.0.0
+        version: 19.1.0(react@19.1.0)
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.3.1
+    devDependencies:
+      '@types/react':
+        specifier: ^19.1.8
+        version: 19.1.8
+      '@types/react-dom':
+        specifier: ^19.1.6
+        version: 19.1.6(@types/react@19.1.8)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   templates/nextjs:
     dependencies:
+      '@manta/ui-core':
+        specifier: workspace:*
+        version: link:../../packages/ui-core
       '@radix-ui/colors':
         specifier: ^3.0.0
         version: 3.0.0
@@ -1340,8 +1377,8 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
-  chromedriver@139.0.0:
-    resolution: {integrity: sha512-4hzJhx2B2WbGP1160KaDkAIWMHmEBabldes1SrU75JwrzviYevopcVCxQw9B9Ykx+500ij06fv2retL5mK7DbA==}
+  chromedriver@139.0.1:
+    resolution: {integrity: sha512-K16mpBWhVMY/85k+1pf2ZuCOCDNJxSfr/OuIh7YbWoVIT+baNlyB6OvVh2WQw+MYQK2fg7CS0rMUE8GvMY6oCA==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -3121,7 +3158,7 @@ snapshots:
     dependencies:
       '@axe-core/webdriverjs': 4.10.2(selenium-webdriver@4.22.0)
       axe-core: 4.10.3
-      chromedriver: 139.0.0
+      chromedriver: 139.0.1
       colors: 1.4.0
       commander: 9.5.0
       dotenv: 16.5.0
@@ -4177,7 +4214,7 @@ snapshots:
 
   chownr@3.0.0: {}
 
-  chromedriver@139.0.0:
+  chromedriver@139.0.1:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.10.0

@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BaseCard } from './BaseCard';
+import { BaseCard } from '@manta/ui-core';
 import type { ProjectContent } from '@/types/content';
-import { Button } from '@/components/ui/button';
+import { Button } from '@manta/ui-core';
 import Image from 'next/image';
 import { Zap, Code } from 'lucide-react';
 

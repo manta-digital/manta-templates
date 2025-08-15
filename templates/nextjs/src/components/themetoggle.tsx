@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTheme } from "@/context/themecontext";
-import { Button } from "@/components/ui/button";
+import { Button } from "@manta/ui-core";
 import { Moon, Sun, Droplet } from "lucide-react";
 import { cn } from "@/lib/utils";
 
