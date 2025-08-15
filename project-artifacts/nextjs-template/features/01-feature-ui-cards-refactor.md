@@ -49,6 +49,15 @@ Refactor card components to be framework-agnostic (React + Tailwind + ShadCN + R
 
 ---
 
+## Guiding Principles
+
+- ui-core is a React component library. We are not trying to remove React or drop to bare HTML/CSS.
+- Tailwind is the styling interface. No hand-authored CSS beyond token/theming layers.
+- Themes remain app-owned via Radix scales + semantic tokens (see Theme Contract). ui-core only reads CSS vars/classes.
+- No `next/*` imports in ui-core. Framework specifics live in templates or adapters.
+
+---
+
 ## UI-Core Dependencies Policy (allowed, peers, disallowed)
 
 - Allowed runtime deps (lightweight, framework-agnostic):
@@ -64,6 +73,36 @@ Refactor card components to be framework-agnostic (React + Tailwind + ShadCN + R
   - Shipping CSS/themes/tokens; ui-core only references CSS variables/classes
 
 Rationale: ui-core must remain framework-agnostic and portable. Heavy or framework-bound dependencies belong in templates.
+
+---
+
+## Repository Structure (target)
+
+```
+{root}/
+├── packages/
+│   ├── ui-core/              # Shared React components, hooks, utils (no Next.js)
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   ├── utils/
+│   │   │   └── index.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── ui-adapters/          # Optional framework adapters (thin wrappers)
+│       ├── nextjs/
+│       ├── react-router/
+│       └── astro/
+├── templates/
+│   ├── nextjs/               # Next.js template (must not break)
+│   ├── react/                # React + React Router template
+│   └── astro/                # Astro with React islands
+└── package.json              # Workspace root
+```
+
+Notes:
+- Adapters are optional sugar; the baseline remains ui-core + prop injection (link/image).
+- Templates use ui-core directly or via adapters to regain framework conveniences.
 
 ---
 
@@ -113,6 +152,35 @@ Contract principle: if the app provides these tokens and Tailwind mappings, ui-c
    - Optional `prefetch` hint prop or `data-prefetch` attribute that consumers interpret; ui-core itself doesn’t implement prefetch
 
 Risk focus: `next/image` and `Link` are the main coupling points. Injection keeps ui-core portable while preserving Next benefits in templates.
+
+---
+
+## Adapter Strategy (optional thin wrappers)
+
+- Goal: regain framework conveniences without polluting ui-core.
+- Examples:
+  - Next.js: wrapper exports pass `LinkComponent`/`ImageComponent` as Next `Link`/`Image`.
+  - React Router: wrapper exports pass Router `Link` and a simple/lazy image.
+  - Astro: wrapper exports suitable for React islands, relying on the same prop-injection points.
+- When to use: in templates wanting a drop-in import path (`@manta/ui-adapters/nextjs`) rather than per-usage injection.
+
+---
+
+## Templates Matrix (consumption plan)
+
+- templates/nextjs: continue to work unchanged, importing from ui-core or adapters; owns themes/tokens.
+- templates/react: Vite + React Router; imports same ui-core components; uses Router link injection/adapter.
+- templates/astro: Astro + React islands; imports ui-core; adapter provides friendly wrappers if needed.
+
+---
+
+## Complexity Mitigation
+
+- Keep injection points minimal: link and image (primary); avoid expanding beyond necessity.
+- Provide consistent prop names and simple defaults so most use-cases don’t need adapters.
+- Linting guardrails: forbid `next/*` imports in ui-core; CI checks.
+- Build outputs: ESM + types; avoid shipping CSS; keep peer deps clear.
+- Documentation: Theme Contract + short integration notes for each template type.
 
 ---
 
