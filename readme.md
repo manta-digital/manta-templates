@@ -27,24 +27,26 @@ git subtree add --prefix=project-documents https://github.com/ecorkran/ai-projec
 
 This gives you all guides integrated into your project. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
 
-### IDE Setup (Cursor/Windsurf)
+### IDE Setup (Cursor/Windsurf/Claude)
 After adding the guides to your project, set up IDE rules for enhanced AI assistance:
 
 ```bash
 # Option 1: Direct script (run from project root)
 ./project-documents/scripts/setup-ide cursor     # For Cursor IDE
 ./project-documents/scripts/setup-ide windsurf   # For Windsurf IDE
+./project-documents/scripts/setup-ide claude     # For Claude Code agent
 
 # Option 2: npm scripts (recommended)
 npm run setup-cursor                              # For Cursor IDE  
 npm run setup-windsurf                            # For Windsurf IDE
+npm run setup-claude                              # For Claude Code agent
 ```
 
-This copies all project rules to your IDE's configuration directory, handles file renaming (`.md` to `.mdc` for Cursor), and validates frontmatter requirements.
+This copies all project rules to your IDE's configuration directory, handles file renaming (`.md` to `.mdc` for Cursor), generates `CLAUDE.md` for Claude Code, and validates frontmatter requirements.
 
 **💡 Pro tip:** Use the npm scripts to avoid directory confusion. The direct script will warn you if run from the wrong location.
 
-**📍 Important:** The script creates `.cursor/` and `.windsurf/` directories in your project root (not inside `project-documents/`).
+**📍 Important:** The script creates `.cursor/` and `.windsurf/` directories in your project root (not inside `project-documents/`). For Claude, it creates `CLAUDE.md` in your project root.
 
 **Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
 

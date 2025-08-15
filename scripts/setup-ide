@@ -76,10 +76,12 @@ show_usage() {
     echo "Supported IDEs:"
     echo "  cursor    - Copy rules to .cursor/rules/ (renames .md to .mdc)"
     echo "  windsurf  - Copy rules to .windsurf/rules/ (keeps .md extension)"
+    echo "  claude    - Generate CLAUDE.md file for Claude Code agent"
     echo ""
     echo "Examples:"
     echo "  $0 cursor"
     echo "  $0 windsurf"
+    echo "  $0 claude"
     echo ""
     echo "This script copies AI project rules from project-guides/ to your IDE's"
     echo "configuration directory and validates frontmatter requirements."
@@ -163,6 +165,123 @@ copy_rules() {
     fi
 }
 
+# Function to compile rules into CLAUDE.md format
+compile_claude_rules() {
+    local source_dir=$1
+    local target_file=$2
+    
+    if [ ! -d "$source_dir" ]; then
+        print_status $RED "❌ Source directory not found: $source_dir"
+        return 1
+    fi
+    
+    print_status $BLUE "📄 Compiling rules into CLAUDE.md format..."
+    
+    # Create CLAUDE.md file
+    cat > "$target_file" << 'EOF'
+# Project Guidelines for Claude
+
+EOF
+    
+    # Always start with general rules
+    if [ -f "$source_dir/general.md" ]; then
+        print_status $GREEN "✅ Adding General Development Rules"
+        echo "## General Development Rules" >> "$target_file"
+        
+        # Extract content after frontmatter and heading, incrementing heading levels
+        awk '
+        BEGIN { in_frontmatter = 0; past_frontmatter = 0; past_heading = 0 }
+        /^---$/ { 
+            if (!past_frontmatter) {
+                in_frontmatter = !in_frontmatter
+                if (!in_frontmatter) past_frontmatter = 1
+                next
+            }
+        }
+        in_frontmatter { next }
+        past_frontmatter && /^# / { past_heading = 1; next }
+        past_frontmatter && past_heading { 
+            # Increment heading levels by adding one #
+            if (/^#{1,5} /) {
+                gsub(/^#/, "##")
+            }
+            print 
+        }
+        ' "$source_dir/general.md" >> "$target_file"
+        
+        echo "" >> "$target_file"
+    fi
+    
+    # Process other rules files
+    for file in "$source_dir"/*.md; do
+        if [ ! -f "$file" ]; then
+            continue
+        fi
+        
+        local filename=$(basename "$file")
+        
+        # Skip general.md as it's already processed
+        if [ "$filename" = "general.md" ]; then
+            continue
+        fi
+        
+        print_status $GREEN "✅ Adding $(basename "$filename" .md) rules"
+        
+        # Extract the main heading from the file to use as section title
+        local section_title=$(awk '
+        BEGIN { past_frontmatter = 0; in_frontmatter = 0 }
+        /^---$/ { 
+            if (!past_frontmatter) {
+                in_frontmatter = !in_frontmatter
+                if (!in_frontmatter) past_frontmatter = 1
+                next
+            }
+        }
+        in_frontmatter { next }
+        past_frontmatter && /^# / { 
+            gsub(/^# /, "")
+            print
+            exit
+        }
+        ' "$file")
+        
+        # Add section heading
+        if [ -n "$section_title" ]; then
+            echo "## $section_title" >> "$target_file"
+        else
+            # Fallback to filename-based title
+            local fallback_title=$(echo "$filename" | sed 's/\.md$//' | sed 's/\b\w/\U&/g' | sed 's/-/ /g')
+            echo "## $fallback_title Rules" >> "$target_file"
+        fi
+        
+        # Extract content after frontmatter and heading, incrementing heading levels
+        awk '
+        BEGIN { in_frontmatter = 0; past_frontmatter = 0; past_heading = 0 }
+        /^---$/ { 
+            if (!past_frontmatter) {
+                in_frontmatter = !in_frontmatter
+                if (!in_frontmatter) past_frontmatter = 1
+                next
+            }
+        }
+        in_frontmatter { next }
+        past_frontmatter && /^# / { past_heading = 1; next }
+        past_frontmatter && past_heading { 
+            # Increment heading levels by adding one #
+            if (/^#{1,5} /) {
+                gsub(/^#/, "##")
+            }
+            print 
+        }
+        ' "$file" >> "$target_file"
+        
+        echo "" >> "$target_file"
+    done
+    
+    print_status $GREEN "✅ CLAUDE.md compiled successfully"
+    return 0
+}
+
 # Main script logic
 main() {
     # Check parameters
@@ -180,7 +299,7 @@ main() {
     
     # Validate IDE parameter
     case "$ide" in
-        cursor|windsurf)
+        cursor|windsurf|claude)
             ;;
         *)
             print_status $RED "❌ Error: Unsupported IDE '$1'"
@@ -190,7 +309,40 @@ main() {
             ;;
     esac
     
-    # Set up target directory and file extension behavior
+    # Handle Claude separately
+    if [ "$ide" = "claude" ]; then
+        print_status $BLUE "🚀 Setting up Claude Code rules..."
+        echo ""
+        
+        # Validate source directory exists
+        if [ ! -d "$RULES_SOURCE_DIR" ]; then
+            print_status $RED "❌ Error: Rules source directory not found: $RULES_SOURCE_DIR"
+            print_status $YELLOW "💡 Make sure you're running this from a project that includes ai-project-guide"
+            exit 1
+        fi
+        
+        local claude_file="$TARGET_ROOT/CLAUDE.md"
+        
+        # Compile rules into CLAUDE.md
+        if compile_claude_rules "$RULES_SOURCE_DIR" "$claude_file"; then
+            echo ""
+            print_status $GREEN "✅ Setup complete for Claude Code!"
+            echo ""
+            print_status $BLUE "💡 Claude Code setup notes:"
+            echo "   • CLAUDE.md file created in project root"
+            echo "   • Contains all project rules in Claude-friendly format"
+            echo "   • General Development Rules are listed first"
+            echo "   • Additional rules organized by category"
+            echo "   • Ready to use with Claude Code agent"
+        else
+            print_status $RED "❌ Failed to compile CLAUDE.md"
+            exit 1
+        fi
+        
+        return 0
+    fi
+    
+    # Set up target directory and file extension behavior for other IDEs
     local target_base_dir="$TARGET_ROOT/.$ide"
     local rules_target_dir="$target_base_dir/rules"
     local agents_target_dir="$target_base_dir/agents"
