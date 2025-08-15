@@ -30,7 +30,7 @@ export function BlogLayoutSwitcher() {
           onClick={() => setVariant(v)}
           className={cn(
             'px-3 py-1 rounded',
-            variant === v ? 'bg-[var(--color-accent-9)] text-[var(--color-accent-contrast)]' : 'bg-gray-200 text-gray-700'
+            variant === v ? 'bg-[var(--color-accent-9)] text-[var(--background)]' : 'bg-[var(--color-accent-a3)] text-[var(--color-accent-12)]'
           )}
         >
           {v.charAt(0).toUpperCase() + v.slice(1)}
