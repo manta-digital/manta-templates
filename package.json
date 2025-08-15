@@ -14,7 +14,8 @@
         "code-review:deep": "node scripts/code-review-agent.js --depth=deep"
     },
     "workspaces": [
-        "templates/nextjs",
+        "templates/*",
+        "packages/*",
         "landing"
     ],
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",
