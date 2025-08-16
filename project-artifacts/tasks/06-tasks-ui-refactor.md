@@ -236,9 +236,9 @@
   - [x] Success: BaseCard and Button work independently without Next.js dependencies
 
 ### Extract and Abstract Core Cards
-- [ ] Move BlogCard with dependency injection
-  - [ ] Copy templates/nextjs/src/components/cards/BlogCard.tsx to packages/ui-core/src/components/cards/BlogCard.tsx
-  - [ ] Update BlogCard interface to accept ImageComponent and LinkComponent props
+- [x] Move BlogCard with dependency injection
+  - [x] Copy templates/nextjs/src/components/cards/BlogCard.tsx to packages/ui-core/src/components/cards/BlogCard.tsx
+  - [x] Update BlogCard interface to accept ImageComponent and LinkComponent props
     1. Add to BlogCardProps:
     ```typescript
     interface BlogCardProps {
@@ -247,35 +247,35 @@
       LinkComponent?: React.ComponentType<any>;
     }
     ```
-  - [ ] Replace direct Next.js Image usage with injected ImageComponent
+  - [x] Replace direct Next.js Image usage with injected ImageComponent
     1. Replace `<Image` with `<ImageComponent` or fallback to `<img`
     2. Update props to work with generic image component
-  - [ ] Replace direct Next.js Link usage with injected LinkComponent
+  - [x] Replace direct Next.js Link usage with injected LinkComponent
     1. Replace `<Link` with `<LinkComponent` or fallback to `<a`
-  - [ ] Update imports to use ui-core utilities
+  - [x] Update imports to use ui-core utilities
     1. Change `import { cn } from '@/lib/utils'` to relative import from ui-core utils
-- [ ] Move ProjectCard with abstracted dependencies
-  - [ ] Copy templates/nextjs/src/components/cards/ProjectCard.tsx to packages/ui-core/src/components/cards/ProjectCard.tsx
-  - [ ] Apply same dependency injection pattern as BlogCard
-  - [ ] Abstract Next.js Link and Image usage
-  - [ ] Update utility imports to use ui-core paths
-- [ ] Move QuoteCard (minimal abstraction needed)
-  - [ ] Copy templates/nextjs/src/components/cards/QuoteCard.tsx to packages/ui-core/src/components/cards/QuoteCard.tsx
-  - [ ] Update utility imports to relative ui-core paths
-  - [ ] Minimal changes needed since QuoteCard likely has fewer Next.js dependencies
-- [ ] Update component interfaces and exports
-  - [ ] Ensure all card interfaces are properly typed with optional injected components
-  - [ ] Add cards to packages/ui-core/src/components/cards/index.ts:
+- [x] Move ProjectCard with abstracted dependencies
+  - [x] Copy templates/nextjs/src/components/cards/ProjectCard.tsx to packages/ui-core/src/components/cards/ProjectCard.tsx
+  - [x] Apply same dependency injection pattern as BlogCard
+  - [x] Abstract Next.js Link and Image usage
+  - [x] Update utility imports to use ui-core paths
+- [x] Move QuoteCard (minimal abstraction needed)
+  - [x] Copy templates/nextjs/src/components/cards/QuoteCard.tsx to packages/ui-core/src/components/cards/QuoteCard.tsx
+  - [x] Update utility imports to relative ui-core paths
+  - [x] Minimal changes needed since QuoteCard likely has fewer Next.js dependencies
+- [x] Update component interfaces and exports
+  - [x] Ensure all card interfaces are properly typed with optional injected components
+  - [x] Add cards to packages/ui-core/src/components/cards/index.ts:
     ```typescript
     export { BlogCard } from './BlogCard';
     export { ProjectCard } from './ProjectCard';  
     export { QuoteCard } from './QuoteCard';
     ```
-- [ ] Test card extraction
-  - [ ] Build ui-core package
-  - [ ] Test importing cards with mock injected components
-  - [ ] Verify cards render without errors when dependencies are injected
-  - [ ] Success: Cards render correctly with injected dependencies, maintain full functionality
+- [x] Test card extraction
+  - [x] Build ui-core package
+  - [x] Test importing cards with mock injected components
+  - [x] Verify cards render without errors when dependencies are injected
+  - [x] Success: Cards render correctly with injected dependencies, maintain full functionality
 
 ### Extract Layout Components
 - [ ] Move BentoLayout to ui-core

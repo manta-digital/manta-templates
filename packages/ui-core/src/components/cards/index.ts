@@ -1,4 +1,4 @@
-// Card components will be exported here as they are extracted
-// export { BlogCard } from './BlogCard';
-// export { ProjectCard } from './ProjectCard';
-// export { QuoteCard } from './QuoteCard';
+// Card components with dependency injection
+export { BlogCard } from './BlogCard';
+export { ProjectCard } from './ProjectCard';
+export { QuoteCard } from './QuoteCard';
