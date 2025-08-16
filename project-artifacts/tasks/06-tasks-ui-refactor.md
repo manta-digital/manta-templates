@@ -308,6 +308,387 @@
   - [x] Verify Tailwind classes work correctly
   - [x] Success: Layout components work with any React framework, no Next.js coupling
 
+## Phase 2 Extended: Additional Card Component Extraction
+
+### Extract Blog Variant Cards
+- [ ] Extract BlogCardImage to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/BlogCardImage.tsx to packages/ui-core/src/components/cards/BlogCardImage.tsx
+  - [ ] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
+  - [ ] Update BlogCardImage interface to accept ImageComponent and LinkComponent props:
+    ```typescript
+    interface BlogCardImageProps {
+      // existing props...
+      ImageComponent?: React.ComponentType<any>;
+      LinkComponent?: React.ComponentType<any>;
+    }
+    ```
+  - [ ] Replace direct Next.js Image usage with conditional rendering:
+    1. Replace `<Image` with conditional `ImageComponent ? <ImageComponent : <img`
+    2. Update props to work with both Next.js Image and standard img
+    3. Maintain exact aspect ratios and sizing from original
+  - [ ] Replace direct Next.js Link usage with conditional rendering
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test with Next.js components injected - verify exact visual match to original
+  - [ ] Success: BlogCardImage renders identically to original with dependency injection
+
+- [ ] Extract BlogCardWide to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/BlogCardWide.tsx to packages/ui-core/src/components/cards/BlogCardWide.tsx
+  - [ ] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
+  - [ ] Apply same dependency injection pattern as BlogCardImage
+  - [ ] Update interface for ImageComponent and LinkComponent props
+  - [ ] Abstract Next.js dependencies with conditional rendering
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test with Next.js components injected - verify exact visual match to original
+  - [ ] Success: BlogCardWide renders identically to original with dependency injection
+
+### Extract Specialized Cards
+- [ ] Extract AnimatedCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/animations/AnimatedCard.tsx to packages/ui-core/src/components/cards/AnimatedCard.tsx
+  - [ ] CRITICAL: Preserve exact animations and Tailwind classes - do not approximate
+  - [ ] Identify animation dependencies (Framer Motion, CSS animations, etc.)
+  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [ ] Handle animation library dependencies:
+    1. Check if animations use Framer Motion or other libraries
+    2. Keep animation logic intact - do not simplify or approximate
+    3. Ensure animations work with framework-agnostic approach
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test animations work correctly with dependency injection
+  - [ ] Success: AnimatedCard maintains exact animation behavior and visual appearance
+
+- [ ] Extract GradientCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/variants/GradientCard.tsx to packages/ui-core/src/components/cards/GradientCard.tsx
+  - [ ] CRITICAL: Preserve exact gradient styles and Tailwind classes - do not approximate
+  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [ ] Maintain gradient calculations and CSS custom properties
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test gradient rendering across different themes/modes
+  - [ ] Success: GradientCard renders with exact gradients and styling
+
+- [ ] Extract AboutCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/people/AboutCard.tsx to packages/ui-core/src/components/cards/AboutCard.tsx
+  - [ ] CRITICAL: Preserve exact layout and Tailwind classes - do not approximate
+  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [ ] Handle person/profile image requirements with ImageComponent
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test with person data and profile images
+  - [ ] Success: AboutCard renders identically to original with dependency injection
+
+### Extract Media Cards (Complex)
+- [ ] Extract VideoCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/VideoCard.tsx to packages/ui-core/src/components/cards/VideoCard.tsx
+  - [ ] CRITICAL: Preserve exact video layout and Tailwind classes - do not approximate
+  - [ ] Analyze video player dependencies and requirements
+  - [ ] Apply dependency injection pattern for:
+    1. ImageComponent (for video thumbnails)
+    2. LinkComponent (for video links)
+    3. VideoComponent (for video player - may need custom injection pattern)
+  - [ ] Handle video-specific features:
+    1. Video thumbnails and poster images
+    2. Play button overlays and controls
+    3. Video player integration (maintain existing player setup)
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test video functionality with Next.js components injected
+  - [ ] Success: VideoCard maintains exact video functionality and appearance
+
+- [ ] Extract ThreeJSCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/ThreeJSCard.tsx to packages/ui-core/src/components/cards/ThreeJSCard.tsx
+  - [ ] CRITICAL: Preserve exact 3D rendering and layout - do not approximate
+  - [ ] Analyze Three.js dependencies and WebGL requirements
+  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [ ] Handle Three.js specific features:
+    1. WebGL canvas integration
+    2. 3D scene setup and rendering
+    3. Animation loops and interactions
+    4. Ensure Three.js imports and setup remain intact
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test 3D rendering works correctly across frameworks
+  - [ ] Success: ThreeJSCard maintains exact 3D functionality and rendering
+
+- [ ] Extract CosineTerrainCard to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/math/CosineTerrainCard.tsx to packages/ui-core/src/components/cards/CosineTerrainCard.tsx
+  - [ ] CRITICAL: Preserve exact mathematical visualization and layout - do not approximate
+  - [ ] Analyze mathematical rendering dependencies (Canvas, SVG, etc.)
+  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [ ] Handle mathematical visualization features:
+    1. Canvas or SVG rendering for terrain
+    2. Mathematical calculations and algorithms
+    3. Animation and interactive features
+    4. Maintain exact mathematical accuracy
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test mathematical visualizations render correctly
+  - [ ] Success: CosineTerrainCard maintains exact mathematical visualization behavior
+
+### Extract Layout Cards
+- [ ] Extract CardCarousel to ui-core
+  - [ ] Copy templates/nextjs/src/components/cards/layouts/CardCarousel.tsx to packages/ui-core/src/components/layouts/CardCarousel.tsx
+  - [ ] CRITICAL: Preserve exact carousel behavior and Tailwind classes - do not approximate
+  - [ ] Analyze carousel dependencies (Swiper, custom carousel logic, etc.)
+  - [ ] Apply dependency injection pattern for:
+    1. ImageComponent (for carousel item images)
+    2. LinkComponent (for carousel item links)
+    3. Maintain carousel library integration if used
+  - [ ] Handle carousel-specific features:
+    1. Touch/swipe gestures
+    2. Navigation arrows and pagination
+    3. Auto-play and transition animations
+    4. Responsive breakpoints for carousel behavior
+  - [ ] Update utility imports to use ui-core relative paths
+  - [ ] Test carousel functionality across different screen sizes
+  - [ ] Success: CardCarousel maintains exact carousel functionality and behavior
+
+### Update Exports and Testing
+- [ ] Update component exports
+  - [ ] Add all new cards to packages/ui-core/src/components/cards/index.ts:
+    ```typescript
+    // Blog variants
+    export { BlogCardImage } from './BlogCardImage';
+    export { BlogCardWide } from './BlogCardWide';
+    
+    // Specialized cards
+    export { AnimatedCard } from './AnimatedCard';
+    export { GradientCard } from './GradientCard';
+    export { AboutCard } from './AboutCard';
+    
+    // Media cards
+    export { VideoCard } from './VideoCard';
+    export { ThreeJSCard } from './ThreeJSCard';
+    export { CosineTerrainCard } from './CosineTerrainCard';
+    ```
+  - [ ] Add CardCarousel to packages/ui-core/src/components/layouts/index.ts:
+    ```typescript
+    export { CardCarousel } from './CardCarousel';
+    ```
+
+- [ ] Comprehensive testing of extracted cards
+  - [ ] Build ui-core package: `pnpm build`
+  - [ ] Create comprehensive test page for all new cards
+  - [ ] Test each card with Next.js Image and Link components injected
+  - [ ] Verify exact visual and functional match to originals
+  - [ ] Test responsive behavior and animations
+  - [ ] Test video and 3D functionality where applicable
+  - [ ] Success: All extracted cards render and function identically to originals
+
+## Phase 2 Final: Comprehensive Testing Infrastructure
+
+### Create Test Suite for Next.js Integration
+- [ ] Create comprehensive test page for all extracted components
+  - [ ] Create templates/nextjs/src/app/test-all-cards/page.tsx
+  - [ ] Import and test ALL extracted cards with Next.js Image and Link injection
+  - [ ] Include edge cases, different props, responsive behavior
+  - [ ] Test dark/light mode compatibility for all cards
+  - [ ] Test animations, videos, 3D rendering where applicable
+  - [ ] Document visual regression testing approach
+
+- [ ] Create unit/integration tests (high priority for accuracy)
+  - [ ] Set up testing infrastructure in ui-core package
+  - [ ] Create tests for each component with mocked Image/Link components
+  - [ ] Test dependency injection patterns work correctly
+  - [ ] Test component props and interfaces
+  - [ ] Test responsive behavior programmatically
+  - [ ] Success: Comprehensive test coverage prevents regressions
+
+- [ ] Performance testing and optimization
+  - [ ] Test bundle size impact of extracted components
+  - [ ] Verify no performance degradation from dependency injection
+  - [ ] Test lazy loading and code splitting compatibility
+  - [ ] Success: Performance maintained or improved over originals
+
+## Phase 3: Framework-Specific Adapter Creation
+
+### Create Adapter Infrastructure
+- [ ] Set up ui-adapters workspace structure
+  - [ ] Create packages/ui-adapters/ directory structure
+  - [ ] Create packages/ui-adapters/package.json for monorepo workspace
+  - [ ] Set up shared types and utilities for adapters
+  - [ ] Create packages/ui-adapters/shared/ for common adapter utilities
+
+### Next.js Adapter Package
+- [ ] Create packages/ui-adapters/nextjs/ package
+  - [ ] Create packages/ui-adapters/nextjs/package.json with Next.js peer dependencies
+  - [ ] Create packages/ui-adapters/nextjs/src/adapters.ts:
+    ```typescript
+    import Image from 'next/image';
+    import Link from 'next/link';
+    
+    export const NextJSImageAdapter = Image;
+    export const NextJSLinkAdapter = Link;
+    export const NextJSVideoAdapter = 'video'; // or custom video component
+    
+    export const nextjsAdapters = {
+      ImageComponent: NextJSImageAdapter,
+      LinkComponent: NextJSLinkAdapter,
+      VideoComponent: NextJSVideoAdapter,
+    };
+    ```
+  - [ ] Create optimized component wrappers that pre-inject Next.js components
+  - [ ] Test adapter integration with all ui-core components
+  - [ ] Success: Next.js adapter provides optimal Next.js component integration
+
+### Astro Adapter Package
+- [ ] Create packages/ui-adapters/astro/ package
+  - [ ] Create packages/ui-adapters/astro/package.json with Astro peer dependencies
+  - [ ] Research Astro's Image and Link components for React islands
+  - [ ] Create packages/ui-adapters/astro/src/adapters.ts with Astro components
+  - [ ] Handle Astro's island architecture and hydration requirements
+  - [ ] Create Astro-optimized component wrappers
+  - [ ] Test adapter with Astro React islands
+  - [ ] Success: Astro adapter works correctly with island architecture
+
+### React Router Adapter Package  
+- [ ] Create packages/ui-adapters/react-router/ package
+  - [ ] Create packages/ui-adapters/react-router/package.json with React Router peer dependencies
+  - [ ] Create packages/ui-adapters/react-router/src/adapters.ts:
+    ```typescript
+    import { Link as RouterLink } from 'react-router-dom';
+    
+    export const ReactRouterImageAdapter = 'img';
+    export const ReactRouterLinkAdapter = RouterLink;
+    export const ReactRouterVideoAdapter = 'video';
+    
+    export const reactRouterAdapters = {
+      ImageComponent: ReactRouterImageAdapter,
+      LinkComponent: ReactRouterLinkAdapter, 
+      VideoComponent: ReactRouterVideoAdapter,
+    };
+    ```
+  - [ ] Create React Router optimized component wrappers
+  - [ ] Test SPA navigation and client-side routing
+  - [ ] Success: React Router adapter provides SPA-optimized components
+
+### Pure React Adapter Package
+- [ ] Create packages/ui-adapters/react/ package
+  - [ ] Create packages/ui-adapters/react/package.json with minimal React dependencies
+  - [ ] Create packages/ui-adapters/react/src/adapters.ts with standard HTML elements
+  - [ ] Create wrappers for pure React usage (no framework)
+  - [ ] Test components work in vanilla React applications
+  - [ ] Success: Pure React adapter works without any framework dependencies
+
+### Adapter Testing and Validation
+- [ ] Create comprehensive adapter test suite
+  - [ ] Test each adapter package independently
+  - [ ] Verify optimal component selection for each framework
+  - [ ] Test performance characteristics of each adapter
+  - [ ] Test bundle size impact of each adapter
+  - [ ] Cross-framework compatibility testing
+  - [ ] Success: All adapters provide framework-optimal component integration
+
+## Phase 4: Convenience Layer Development
+
+### Smart Provider System
+- [ ] Create packages/ui-providers/ package structure
+  - [ ] Create packages/ui-providers/package.json
+  - [ ] Create framework detection utilities
+  - [ ] Create packages/ui-providers/src/UIProvider.tsx:
+    ```typescript
+    interface UIProviderProps {
+      framework?: 'nextjs' | 'astro' | 'react-router' | 'react';
+      children: React.ReactNode;
+      customAdapters?: Partial<AdapterConfig>;
+    }
+    
+    export const UIProvider: React.FC<UIProviderProps> = ({
+      framework = 'auto',
+      children,
+      customAdapters
+    }) => {
+      // Auto-detect framework or use provided framework
+      // Inject appropriate adapters into context
+    };
+    ```
+
+- [ ] Create hooks for accessing injected components
+  - [ ] Create packages/ui-providers/src/hooks/useUIComponents.ts
+  - [ ] Provide easy access to framework-appropriate components
+  - [ ] Support custom adapter overrides
+  - [ ] Success: Provider system eliminates manual component injection
+
+### Auto-injection Utilities
+- [ ] Create automatic component injection utilities
+  - [ ] Create packages/ui-providers/src/utils/autoInject.ts
+  - [ ] Automatically detect environment and inject appropriate components
+  - [ ] Support build-time optimization where possible
+  - [ ] Create development vs production injection strategies
+  - [ ] Success: Zero-configuration component usage
+
+### Developer Experience Enhancements
+- [ ] Create TypeScript utilities for better DX
+  - [ ] Provide typed component exports for each framework
+  - [ ] Create framework-specific type definitions
+  - [ ] Add IDE auto-completion support
+  - [ ] Create comprehensive JSDoc documentation
+  - [ ] Success: Excellent developer experience across all frameworks
+
+## Phase 5: Pre-configured Framework Packages
+
+### Next.js Package (@manta-templates/nextjs)
+- [ ] Create packages/nextjs/ pre-configured package
+  - [ ] Create packages/nextjs/package.json with Next.js optimizations
+  - [ ] Pre-inject all ui-core components with Next.js adapters
+  - [ ] Create packages/nextjs/src/index.ts:
+    ```typescript
+    // Pre-configured components with Next.js injection
+    import { BlogCard as CoreBlogCard } from '@manta-templates/ui-core';
+    import { nextjsAdapters } from '@manta-templates/ui-adapters/nextjs';
+    
+    export const BlogCard = (props) => (
+      <CoreBlogCard {...props} {...nextjsAdapters} />
+    );
+    // ... all other components
+    ```
+  - [ ] Optimize bundle size and tree-shaking
+  - [ ] Test with Next.js applications
+  - [ ] Success: Drop-in Next.js package with optimal performance
+
+### Astro Package (@manta-templates/astro)
+- [ ] Create packages/astro/ pre-configured package
+  - [ ] Create packages/astro/package.json with Astro optimizations
+  - [ ] Pre-inject all ui-core components with Astro adapters
+  - [ ] Handle Astro's island hydration requirements
+  - [ ] Test with Astro + React islands
+  - [ ] Success: Drop-in Astro package with island optimization
+
+### React Router Package (@manta-templates/react-router)
+- [ ] Create packages/react-router/ pre-configured package
+  - [ ] Create packages/react-router/package.json with React Router optimizations
+  - [ ] Pre-inject all ui-core components with React Router adapters
+  - [ ] Test with React Router applications
+  - [ ] Success: Drop-in React Router package with SPA optimization
+
+### Pure React Package (@manta-templates/react)
+- [ ] Create packages/react/ pre-configured package
+  - [ ] Create packages/react/package.json with minimal dependencies
+  - [ ] Pre-inject all ui-core components with standard HTML elements
+  - [ ] Test with vanilla React applications
+  - [ ] Success: Drop-in React package with zero framework dependencies
+
+### Package Testing and Distribution
+- [ ] Create comprehensive package testing suite
+  - [ ] Test each pre-configured package in real applications
+  - [ ] Verify bundle sizes and performance characteristics
+  - [ ] Test package installation and import patterns
+  - [ ] Create sample applications for each framework
+  - [ ] Document usage patterns and migration guides
+  - [ ] Success: All packages ready for production use
+
+## Final Integration and Documentation
+
+### Complete Integration Testing
+- [ ] End-to-end testing across all frameworks
+  - [ ] Create test applications for each framework
+  - [ ] Verify identical visual and functional behavior
+  - [ ] Test migration paths between packages
+  - [ ] Performance benchmarking across frameworks
+  - [ ] Success: Consistent experience across all frameworks
+
+### Documentation and Developer Guides
+- [ ] Create comprehensive documentation
+  - [ ] Architecture decision records (ADRs)
+  - [ ] Framework-specific usage guides
+  - [ ] Migration guides from existing implementations
+  - [ ] Performance optimization guides
+  - [ ] Troubleshooting and FAQ documentation
+  - [ ] Success: Complete documentation ecosystem
+
 ### Extract Shared Utilities and Types
 - [ ] Move utility functions to ui-core
   - [ ] Identify utilities in templates/nextjs/src/lib/utils

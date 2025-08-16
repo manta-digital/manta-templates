@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils';
 import { BaseCard } from '../ui/BaseCard';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/button';
 import { ProjectContent } from '../../types/content';
 import { Zap, Code } from 'lucide-react';
 
