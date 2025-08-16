@@ -16,12 +16,15 @@ export const CardTitle = ShadcnCardTitle;
 export const CardDescription = ShadcnCardDescription;
 export const CardContent = ShadcnCardContent;
 
-export type BaseCardProps = React.ComponentProps<typeof ShadcnCard>;
+export interface BaseCardProps extends React.ComponentProps<typeof ShadcnCard> {
+  ImageComponent?: React.ComponentType<any>;
+  LinkComponent?: React.ComponentType<any>;
+}
 
 const BaseCard = React.forwardRef<
   React.ElementRef<typeof ShadcnCard>,
   BaseCardProps
->(({ className, ...props }, ref) => {
+>(({ className, ImageComponent, LinkComponent, ...props }, ref) => {
   return (
     <ShadcnCard
       ref={ref}

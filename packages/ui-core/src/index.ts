@@ -5,7 +5,7 @@ export const version = "0.1.0";
 // export * from './components/cards';
 // export * from './components/layouts';
 export * from './components/ui';
-// export * from './components/primitives';
+export * from './components/primitives';
 
 // Utilities
 export * from './utils';
