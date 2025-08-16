@@ -2,34 +2,49 @@
 
 import * as THREE from 'three';
 import React, { useEffect, useRef } from 'react';
+import { BaseCard } from '../ui/BaseCard';
 
 export interface ThreeJSCardProps {
   className?: string;
   /** Theme mode - can be injected from any theme system */
   theme?: 'light' | 'dark';
-  /** Custom background color (overrides theme) */
+  /** Custom background color (overrides theme when variant is 'card') */
   backgroundColor?: number;
+  /**
+   * Display mode:
+   * - 'blend' renders a transparent canvas that blends into surroundings, no border or wrapper
+   * - 'card' renders inside a standard card with rounded border and theme background
+   */
+  variant?: 'blend' | 'card';
 }
 
 const ThreeJSCard: React.FC<ThreeJSCardProps> = ({ 
   className = '', 
   theme = 'light',
-  backgroundColor 
+  backgroundColor,
+  variant = 'blend'
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas: canvasRef.current, 
+      antialias: true,
+      // Use alpha so CSS background (card or page) shows through and matches theme perfectly
+      alpha: true
+    });
     const canvas = canvasRef.current!;
     const bgColor = backgroundColor ?? (theme === 'dark' ? 0x000000 : 0xffffff);
-    renderer.setClearColor(bgColor);
+    // Always transparent so the CSS background handles light/dark and border radii
+    renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(window.devicePixelRatio);
     // Use CSS sizing (w-full h-full), so disable style updates
     renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(bgColor);
+    // Let CSS background show through for both variants
+    scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
     camera.position.z = 2;
@@ -73,9 +88,23 @@ const ThreeJSCard: React.FC<ThreeJSCardProps> = ({
       renderer.dispose();
       window.removeEventListener('resize', handleResize);
     };
-  }, [theme, backgroundColor]);
+  }, [theme, backgroundColor, variant]);
 
-  return <canvas ref={canvasRef} className={`${className} w-full h-full block p-1`} />;
+  const CanvasEl = (
+    <canvas
+      ref={canvasRef}
+      className={`${className} w-full h-full block`}
+    />
+  );
+
+  if (variant === 'card') {
+    // Force card background to follow theme instead of default card styling that may be light in dark mode
+    return (
+      <BaseCard className={`h-full p-3 overflow-hidden rounded-lg bg-background border-border`}>{CanvasEl}</BaseCard>
+    );
+  }
+
+  return CanvasEl;
 };
 
 export { ThreeJSCard };

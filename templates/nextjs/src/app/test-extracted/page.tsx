@@ -16,7 +16,8 @@ import {
   GradientCard,
   AnimatedCard,
   VideoCard,
-  AboutCard
+  AboutCard,
+  ThreeJSCard
 } from '@manta-templates/ui-core';
 import type { SocialIcons } from '@manta-templates/ui-core';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
@@ -284,6 +285,16 @@ export default function TestExtractedPage() {
             LinkComponent={Link}
             socialIcons={socialIcons}
           />
+        </GridItem>
+
+        {/* ThreeJSCard test */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2">
+          <ThreeJSCard className="h-full" variant="blend" />
+        </GridItem>
+
+        {/* ThreeJSCard inside regular card with themed background and border */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2">
+          <ThreeJSCard className="h-full" variant="card" />
         </GridItem>
       </BentoLayout>
     </main>
