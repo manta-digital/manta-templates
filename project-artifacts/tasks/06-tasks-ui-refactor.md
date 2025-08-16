@@ -193,12 +193,12 @@
     }
     ```
     2. Use ImageComponent || 'img' as fallback in component
-- [ ] Move Button component to ui-core
-  - [ ] Copy templates/nextjs/src/components/ui/button.tsx to packages/ui-core/src/components/ui/Button.tsx
-  - [ ] Abstract any Next.js dependencies (likely minimal for Button)
-  - [ ] Update import/export paths to use ui-core structure
-- [ ] Create generic Image and Link primitives with dependency injection
-  - [ ] Create packages/ui-core/src/components/primitives/Image.tsx
+- [x] Move Button component to ui-core
+  - [x] Copy templates/nextjs/src/components/ui/button.tsx to packages/ui-core/src/components/ui/Button.tsx
+  - [x] Abstract any Next.js dependencies (likely minimal for Button)
+  - [x] Update import/export paths to use ui-core structure
+- [x] Create generic Image and Link primitives with dependency injection
+  - [x] Create packages/ui-core/src/components/primitives/Image.tsx
     1. Implement with this pattern:
     ```typescript
     interface CoreImageProps {
@@ -217,23 +217,23 @@
       return <Component {...props} />;
     };
     ```
-  - [ ] Create packages/ui-core/src/components/primitives/Link.tsx
+  - [x] Create packages/ui-core/src/components/primitives/Link.tsx
     1. Implement with dependency injection pattern similar to Image
-- [ ] Update component exports
-  - [ ] Add BaseCard and Button to packages/ui-core/src/components/ui/index.ts:
+- [x] Update component exports
+  - [x] Add BaseCard and Button to packages/ui-core/src/components/ui/index.ts:
     ```typescript
     export { BaseCard } from './BaseCard';
     export { Button } from './Button';
     ```
-  - [ ] Add primitives to packages/ui-core/src/components/primitives/index.ts:
+  - [x] Add primitives to packages/ui-core/src/components/primitives/index.ts:
     ```typescript
     export { CoreImage } from './Image';
     export { CoreLink } from './Link';
     ```
-- [ ] Test extraction
-  - [ ] Build ui-core: `pnpm build`
-  - [ ] Verify components can be imported: `import { BaseCard, Button } from '@manta-templates/ui-core'`
-  - [ ] Success: BaseCard and Button work independently without Next.js dependencies
+- [x] Test extraction
+  - [x] Build ui-core: `pnpm build`
+  - [x] Verify components can be imported: `import { BaseCard, Button } from '@manta-templates/ui-core'`
+  - [x] Success: BaseCard and Button work independently without Next.js dependencies
 
 ### Extract and Abstract Core Cards
 - [ ] Move BlogCard with dependency injection
