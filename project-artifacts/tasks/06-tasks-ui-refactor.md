@@ -404,19 +404,19 @@
   - [x] Test 3D rendering works correctly across frameworks
   - [x] Success: ThreeJSCard maintains exact 3D functionality and rendering
 
-- [ ] Extract CosineTerrainCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/math/CosineTerrainCard.tsx to packages/ui-core/src/components/cards/CosineTerrainCard.tsx
-  - [ ] CRITICAL: Preserve exact mathematical visualization and layout - do not approximate
-  - [ ] Analyze mathematical rendering dependencies (Canvas, SVG, etc.)
-  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
-  - [ ] Handle mathematical visualization features:
+- [x] Extract CosineTerrainCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/math/CosineTerrainCard.tsx to packages/ui-core/src/components/cards/CosineTerrainCard.tsx
+  - [x] CRITICAL: Preserve exact mathematical visualization and layout - do not approximate
+  - [x] Analyze mathematical rendering dependencies (Canvas, SVG, etc.)
+  - [x] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [x] Handle mathematical visualization features:
     1. Canvas or SVG rendering for terrain
     2. Mathematical calculations and algorithms
     3. Animation and interactive features
     4. Maintain exact mathematical accuracy
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test mathematical visualizations render correctly
-  - [ ] Success: CosineTerrainCard maintains exact mathematical visualization behavior
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test mathematical visualizations render correctly
+  - [x] Success: CosineTerrainCard maintains exact mathematical visualization behavior
 
 ### Extract Layout Cards
 - [ ] Extract CardCarousel to ui-core
