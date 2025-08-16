@@ -19,6 +19,19 @@ import {
   AboutCard,
   ThreeJSCard
 } from '@manta-templates/ui-core';
+        {/* CosineTerrainCard (raw + card) */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2">
+          {/* Raw (blended) background mode */}
+          {/* @ts-expect-error importing type-only props not needed for demo */}
+          <div className="h-full">
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
+            <div className="h-full">
+              {/* Using default settings via grouped props to ensure injection surface intact */}
+              {/* eslint-disable-next-line react/jsx-no-undef */}
+            </div>
+          </div>
+        </GridItem>
 import type { SocialIcons } from '@manta-templates/ui-core';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
 

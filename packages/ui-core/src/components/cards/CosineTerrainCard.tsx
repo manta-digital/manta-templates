@@ -385,7 +385,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       cfg.camera.cameraFarPlane,
     );
     camera.position.y = cfg.camera.cameraHeight;
-    const renderer = new WebGLRenderer({ antialias: true });
+    // Use alpha so CSS background (page or BaseCard) can show through when desired
+    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
     // Pixel ratio: keep it stable to avoid periodic GC/surface reallocations
     const devicePR = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     const pixelRatio = Math.min(
@@ -393,7 +394,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       Math.max(1, cfg.perf.maxPixelRatio),
     );
     renderer.setPixelRatio(pixelRatio);
-    const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha));
+    // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
+    const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
     const bgColor = cfg.background.backgroundColor as ColorRepresentation | undefined;
     if (bgColor !== undefined) {
       renderer.setClearColor(bgColor, bgAlpha);
