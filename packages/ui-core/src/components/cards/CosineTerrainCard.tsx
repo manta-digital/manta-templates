@@ -82,7 +82,7 @@ export interface CosineTerrainCardProps {
   /** per-frame recycle scan chunk size */
   recycleChunkSize?: number;
   /** grouped settings (merged with individual props; individual props win) */
-  settings?: Partial<CosineTerrainCardProps>;
+  settings?: Partial<SettingsGroups & CosineTerrainCardProps>;
 }
 
 // Structured settings groups for readability (optional via `settings`)
@@ -141,6 +141,17 @@ export interface PerfSettings {
 export interface LightingSettings {
   ambientColor?: number | string;
   ambientIntensity?: number;
+}
+
+// Public settings groups type for consumers of `settings`
+export interface SettingsGroups {
+  camera: CameraSettings;
+  terrain: TerrainSettings;
+  tiling: TilingSettings;
+  material: MaterialSettings;
+  background: BackgroundSettings;
+  perf: PerfSettings;
+  lighting: LightingSettings;
 }
 
 const DEFAULT_SETTINGS: {
@@ -226,8 +237,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
 
   // Build effective config: defaults → settings.groups → flat props overrides
   const cfg = {
-    seed: flat.seed ?? DEFAULT_SETTINGS.seed,
-    terrainQuality: flat.terrainQuality ?? DEFAULT_SETTINGS.terrainQuality,
+    seed: flat.seed ?? s.seed ?? DEFAULT_SETTINGS.seed,
+    terrainQuality: flat.terrainQuality ?? s.terrainQuality ?? DEFAULT_SETTINGS.terrainQuality,
     camera: {
       ...DEFAULT_SETTINGS.camera,
       ...s.camera,
@@ -278,7 +289,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       meshResolution:
         flat.meshResolution ?? s.tiling?.meshResolution ?? DEFAULT_SETTINGS.tiling.meshResolution,
       enableDynamicTilesX:
-        flat.enableDynamicTilesX ?? s.tiling?.enableDynamicTilesX ?? DEFAULT_SETTINGS.tiling.enableDynamicTilesX,
+        flat.enableDynamicTilesX ?? s.enableDynamicTilesX ?? s.tiling?.enableDynamicTilesX ?? DEFAULT_SETTINGS.tiling.enableDynamicTilesX,
       maxTilesX: s.perf?.maxTilesX ?? DEFAULT_SETTINGS.tiling.maxTilesX,
     },
     material: {
@@ -740,7 +751,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const canvasElement = <div ref={mountRef} className={variant === 'card' ? 'w-full h-full' : className} />;
+  const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;
 
   if (variant === 'card') {
     return (

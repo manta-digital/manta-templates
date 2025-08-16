@@ -17,21 +17,9 @@ import {
   AnimatedCard,
   VideoCard,
   AboutCard,
-  ThreeJSCard
+  ThreeJSCard,
+  CosineTerrainCard
 } from '@manta-templates/ui-core';
-        {/* CosineTerrainCard (raw + card) */}
-        <GridItem className="col-span-8 md:col-span-4 md:row-span-2">
-          {/* Raw (blended) background mode */}
-          {/* @ts-expect-error importing type-only props not needed for demo */}
-          <div className="h-full">
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
-            <div className="h-full">
-              {/* Using default settings via grouped props to ensure injection surface intact */}
-              {/* eslint-disable-next-line react/jsx-no-undef */}
-            </div>
-          </div>
-        </GridItem>
 import type { SocialIcons } from '@manta-templates/ui-core';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
 
@@ -109,6 +97,10 @@ export default function TestExtractedPage() {
       </div>
       
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
+        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:row-span-1">
+          <CosineTerrainCard className="h-full" variant="card" renderPreset="wireframe" materialType="basic" />
+        </GridItem>
+
         {/* Hero - using BlogCardImage */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-2 xl:row-span-2">
           <BlogCardImage 
