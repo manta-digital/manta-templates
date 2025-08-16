@@ -311,10 +311,10 @@
 ## Phase 2 Extended: Additional Card Component Extraction
 
 ### Extract Blog Variant Cards
-- [ ] Extract BlogCardImage to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/BlogCardImage.tsx to packages/ui-core/src/components/cards/BlogCardImage.tsx
-  - [ ] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
-  - [ ] Update BlogCardImage interface to accept ImageComponent and LinkComponent props:
+- [x] Extract BlogCardImage to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/BlogCardImage.tsx to packages/ui-core/src/components/cards/BlogCardImage.tsx
+  - [x] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
+  - [x] Update BlogCardImage interface to accept ImageComponent and LinkComponent props:
     ```typescript
     interface BlogCardImageProps {
       // existing props...
@@ -322,73 +322,73 @@
       LinkComponent?: React.ComponentType<any>;
     }
     ```
-  - [ ] Replace direct Next.js Image usage with conditional rendering:
+  - [x] Replace direct Next.js Image usage with conditional rendering:
     1. Replace `<Image` with conditional `ImageComponent ? <ImageComponent : <img`
     2. Update props to work with both Next.js Image and standard img
     3. Maintain exact aspect ratios and sizing from original
-  - [ ] Replace direct Next.js Link usage with conditional rendering
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test with Next.js components injected - verify exact visual match to original
-  - [ ] Success: BlogCardImage renders identically to original with dependency injection
+  - [x] Replace direct Next.js Link usage with conditional rendering
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test with Next.js components injected - verify exact visual match to original
+  - [x] Success: BlogCardImage renders identically to original with dependency injection
 
-- [ ] Extract BlogCardWide to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/BlogCardWide.tsx to packages/ui-core/src/components/cards/BlogCardWide.tsx
-  - [ ] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
-  - [ ] Apply same dependency injection pattern as BlogCardImage
-  - [ ] Update interface for ImageComponent and LinkComponent props
-  - [ ] Abstract Next.js dependencies with conditional rendering
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test with Next.js components injected - verify exact visual match to original
-  - [ ] Success: BlogCardWide renders identically to original with dependency injection
+- [x] Extract BlogCardWide to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/BlogCardWide.tsx to packages/ui-core/src/components/cards/BlogCardWide.tsx
+  - [x] CRITICAL: Preserve exact CSS layout and Tailwind classes - do not approximate
+  - [x] Apply same dependency injection pattern as BlogCardImage
+  - [x] Update interface for ImageComponent and LinkComponent props
+  - [x] Abstract Next.js dependencies with conditional rendering
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test with Next.js components injected - verify exact visual match to original
+  - [x] Success: BlogCardWide renders identically to original with dependency injection
 
 ### Extract Specialized Cards
-- [ ] Extract AnimatedCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/animations/AnimatedCard.tsx to packages/ui-core/src/components/cards/AnimatedCard.tsx
-  - [ ] CRITICAL: Preserve exact animations and Tailwind classes - do not approximate
-  - [ ] Identify animation dependencies (Framer Motion, CSS animations, etc.)
-  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
-  - [ ] Handle animation library dependencies:
+- [x] Extract AnimatedCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/animations/AnimatedCard.tsx to packages/ui-core/src/components/cards/AnimatedCard.tsx
+  - [x] CRITICAL: Preserve exact animations and Tailwind classes - do not approximate
+  - [x] Identify animation dependencies (Framer Motion, CSS animations, etc.)
+  - [x] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [x] Handle animation library dependencies:
     1. Check if animations use Framer Motion or other libraries
     2. Keep animation logic intact - do not simplify or approximate
     3. Ensure animations work with framework-agnostic approach
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test animations work correctly with dependency injection
-  - [ ] Success: AnimatedCard maintains exact animation behavior and visual appearance
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test animations work correctly with dependency injection
+  - [x] Success: AnimatedCard maintains exact animation behavior and visual appearance
 
-- [ ] Extract GradientCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/variants/GradientCard.tsx to packages/ui-core/src/components/cards/GradientCard.tsx
-  - [ ] CRITICAL: Preserve exact gradient styles and Tailwind classes - do not approximate
-  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
-  - [ ] Maintain gradient calculations and CSS custom properties
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test gradient rendering across different themes/modes
-  - [ ] Success: GradientCard renders with exact gradients and styling
+- [x] Extract GradientCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/variants/GradientCard.tsx to packages/ui-core/src/components/cards/GradientCard.tsx
+  - [x] CRITICAL: Preserve exact gradient styles and Tailwind classes - do not approximate
+  - [x] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [x] Maintain gradient calculations and CSS custom properties
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test gradient rendering across different themes/modes
+  - [x] Success: GradientCard renders with exact gradients and styling
 
-- [ ] Extract AboutCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/people/AboutCard.tsx to packages/ui-core/src/components/cards/AboutCard.tsx
-  - [ ] CRITICAL: Preserve exact layout and Tailwind classes - do not approximate
-  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
-  - [ ] Handle person/profile image requirements with ImageComponent
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test with person data and profile images
-  - [ ] Success: AboutCard renders identically to original with dependency injection
+- [x] Extract AboutCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/people/AboutCard.tsx to packages/ui-core/src/components/cards/AboutCard.tsx
+  - [x] CRITICAL: Preserve exact layout and Tailwind classes - do not approximate
+  - [x] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [x] Handle person/profile image requirements with ImageComponent
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test with person data and profile images
+  - [x] Success: AboutCard renders identically to original with dependency injection
 
 ### Extract Media Cards (Complex)
-- [ ] Extract VideoCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/VideoCard.tsx to packages/ui-core/src/components/cards/VideoCard.tsx
-  - [ ] CRITICAL: Preserve exact video layout and Tailwind classes - do not approximate
-  - [ ] Analyze video player dependencies and requirements
-  - [ ] Apply dependency injection pattern for:
+- [x] Extract VideoCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/VideoCard.tsx to packages/ui-core/src/components/cards/VideoCard.tsx
+  - [x] CRITICAL: Preserve exact video layout and Tailwind classes - do not approximate
+  - [x] Analyze video player dependencies and requirements
+  - [x] Apply dependency injection pattern for:
     1. ImageComponent (for video thumbnails)
     2. LinkComponent (for video links)
     3. VideoComponent (for video player - may need custom injection pattern)
-  - [ ] Handle video-specific features:
+  - [x] Handle video-specific features:
     1. Video thumbnails and poster images
     2. Play button overlays and controls
     3. Video player integration (maintain existing player setup)
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test video functionality with Next.js components injected
-  - [ ] Success: VideoCard maintains exact video functionality and appearance
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test video functionality with Next.js components injected
+  - [x] Success: VideoCard maintains exact video functionality and appearance
 
 - [ ] Extract ThreeJSCard to ui-core
   - [ ] Copy templates/nextjs/src/components/cards/ThreeJSCard.tsx to packages/ui-core/src/components/cards/ThreeJSCard.tsx
@@ -437,8 +437,8 @@
   - [ ] Success: CardCarousel maintains exact carousel functionality and behavior
 
 ### Update Exports and Testing
-- [ ] Update component exports
-  - [ ] Add all new cards to packages/ui-core/src/components/cards/index.ts:
+- [x] Update component exports
+  - [x] Add all new cards to packages/ui-core/src/components/cards/index.ts:
     ```typescript
     // Blog variants
     export { BlogCardImage } from './BlogCardImage';
@@ -454,7 +454,7 @@
     export { ThreeJSCard } from './ThreeJSCard';
     export { CosineTerrainCard } from './CosineTerrainCard';
     ```
-  - [ ] Add CardCarousel to packages/ui-core/src/components/layouts/index.ts:
+  - [x] Add CardCarousel to packages/ui-core/src/components/layouts/index.ts:
     ```typescript
     export { CardCarousel } from './CardCarousel';
     ```
