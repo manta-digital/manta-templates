@@ -178,13 +178,13 @@
 ## Phase 2: Core Component Extraction
 
 ### Extract Base UI Primitives
-- [ ] Move BaseCard component to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/BaseCard.tsx to packages/ui-core/src/components/ui/BaseCard.tsx
-  - [ ] Remove Next.js specific imports from BaseCard
+- [x] Move BaseCard component to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/BaseCard.tsx to packages/ui-core/src/components/ui/BaseCard.tsx
+  - [x] Remove Next.js specific imports from BaseCard
     1. Remove any `import` statements referencing 'next/*'
     2. Replace `import Image from 'next/image'` with generic Image prop pattern
     3. Replace `import Link from 'next/link'` with generic Link prop pattern
-  - [ ] Abstract Image dependency using dependency injection
+  - [x] Abstract Image dependency using dependency injection
     1. Update BaseCard interface to accept optional ImageComponent:
     ```typescript
     interface BaseCardProps {
@@ -278,23 +278,23 @@
   - [x] Success: Cards render correctly with injected dependencies, maintain full functionality
 
 ### Extract Layout Components
-- [ ] Move BentoLayout to ui-core
-  - [ ] Copy templates/nextjs/src/components/layouts/bento-layout.tsx to packages/ui-core/src/components/layouts/BentoLayout.tsx
-  - [ ] Abstract any framework-specific dependencies (likely minimal for BentoLayout)
-  - [ ] Update utility imports to use ui-core relative paths
-- [ ] Move GridLayout system to ui-core
-  - [ ] Copy entire GridLayout system to ui-core:
+- [x] Move BentoLayout to ui-core
+  - [x] Copy templates/nextjs/src/components/layouts/bento-layout.tsx to packages/ui-core/src/components/layouts/BentoLayout.tsx
+  - [x] Abstract any framework-specific dependencies (likely minimal for BentoLayout)
+  - [x] Update utility imports to use ui-core relative paths
+- [x] Move GridLayout system to ui-core
+  - [x] Copy entire GridLayout system to ui-core:
     1. templates/nextjs/src/components/layouts/grid-layout/grid-container.tsx → packages/ui-core/src/components/layouts/GridContainer.tsx
     2. templates/nextjs/src/components/layouts/grid-layout/grid-item.tsx → packages/ui-core/src/components/layouts/GridItem.tsx  
     3. templates/nextjs/src/components/layouts/grid-layout/grid-layout.tsx → packages/ui-core/src/components/layouts/GridLayout.tsx
-  - [ ] Update internal imports within GridLayout system to use relative paths
-  - [ ] Update index.ts file references
-- [ ] Move Container component to ui-core
-  - [ ] Copy templates/nextjs/src/components/container.tsx to packages/ui-core/src/components/layouts/Container.tsx
-  - [ ] Abstract any framework-specific dependencies
-  - [ ] Update utility imports
-- [ ] Update layout exports
-  - [ ] Add layouts to packages/ui-core/src/components/layouts/index.ts:
+  - [x] Update internal imports within GridLayout system to use relative paths
+  - [x] Update index.ts file references
+- [x] Move Container component to ui-core
+  - [x] Copy templates/nextjs/src/components/container.tsx to packages/ui-core/src/components/layouts/Container.tsx
+  - [x] Abstract any framework-specific dependencies
+  - [x] Update utility imports
+- [x] Update layout exports
+  - [x] Add layouts to packages/ui-core/src/components/layouts/index.ts:
     ```typescript
     export { BentoLayout } from './BentoLayout';
     export { GridLayout } from './GridLayout';
@@ -302,11 +302,11 @@
     export { GridItem } from './GridItem';
     export { Container } from './Container';
     ```
-- [ ] Test layout extraction
-  - [ ] Build ui-core package
-  - [ ] Test importing and using layout components
-  - [ ] Verify Tailwind classes work correctly
-  - [ ] Success: Layout components work with any React framework, no Next.js coupling
+- [x] Test layout extraction
+  - [x] Build ui-core package
+  - [x] Test importing and using layout components
+  - [x] Verify Tailwind classes work correctly
+  - [x] Success: Layout components work with any React framework, no Next.js coupling
 
 ### Extract Shared Utilities and Types
 - [ ] Move utility functions to ui-core
