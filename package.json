@@ -9,6 +9,8 @@
         "build:template": "pnpm --filter \"./templates/nextjs\" build",
         "build:landing": "pnpm --filter manta-landing build",
         "build": "pnpm -r build",
+        "build-ui": "pnpm --filter \"./packages/ui-core\" build && pnpm --filter \"./templates/nextjs\" build",
+        "dev-ui": "pnpm --filter \"./packages/ui-core\" build && pnpm --filter \"./templates/nextjs\" dev",
         "code-review": "node scripts/code-review-agent.js",
         "code-review:quick": "node scripts/code-review-agent.js --depth=quick",
         "code-review:deep": "node scripts/code-review-agent.js --depth=deep"

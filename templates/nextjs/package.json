@@ -28,7 +28,9 @@
     "ai-assisted-build": "pnpm ai-typecheck && pnpm lint && pnpm format:check && pnpm build",
     "ai-typecheck": "tsc --noEmit --skipLibCheck",
     "ai-lint": "eslint . --ext .ts,.tsx --fix",
-    "ai-format": "prettier --write ."
+    "ai-format": "prettier --write .",
+    "build-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm build",
+    "dev-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm dev"
   },
   "dependencies": {
     "@manta-templates/ui-core": "workspace:*",

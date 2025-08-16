@@ -419,22 +419,23 @@
   - [x] Success: CosineTerrainCard maintains exact mathematical visualization behavior
 
 ### Extract Layout Cards
-- [ ] Extract CardCarousel to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/layouts/CardCarousel.tsx to packages/ui-core/src/components/layouts/CardCarousel.tsx
-  - [ ] CRITICAL: Preserve exact carousel behavior and Tailwind classes - do not approximate
-  - [ ] Analyze carousel dependencies (Swiper, custom carousel logic, etc.)
-  - [ ] Apply dependency injection pattern for:
+- [x] Extract CardCarousel to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/layouts/CardCarousel.tsx to packages/ui-core/src/components/layouts/CardCarousel2.tsx.  Work on CardCarousel2 as Carousel until this is verified functioning correctly.  DO NOT break the existing carousel.  We will use it for comparison until this one is complete.
+  - [x] CRITICAL: Preserve exact carousel behavior and Tailwind classes - do not approximate.  This includes: correctly functioning infinite carousel, no jump-back, jump-forward or other inconcistencies,  one slide visible (this is configurable I believe and it should stay that way)
+  - [x] Analyze carousel dependencies (Swiper, custom carousel logic, etc.)
+  - [x] Apply dependency injection pattern for:
     1. ImageComponent (for carousel item images)
     2. LinkComponent (for carousel item links)
-    3. Maintain carousel library integration if used
-  - [ ] Handle carousel-specific features:
+    3. ButtonComponent, ChevronLeftIcon, ChevronRightIcon, PlayIcon, PauseIcon
+    4. MotionComponent for animations
+  - [x] Handle carousel-specific features:
     1. Touch/swipe gestures
     2. Navigation arrows and pagination
     3. Auto-play and transition animations
     4. Responsive breakpoints for carousel behavior
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test carousel functionality across different screen sizes
-  - [ ] Success: CardCarousel maintains exact carousel functionality and behavior
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test carousel functionality across different screen sizes
+  - [x] Success: CardCarousel2 maintains exact carousel functionality and behavior with dependency injection
 
 ### Update Exports and Testing
 - [x] Update component exports
