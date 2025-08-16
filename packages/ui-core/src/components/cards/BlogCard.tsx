@@ -37,7 +37,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         {coverImageUrl && (
           <div
             className={cn(
-              'relative w-full aspect-[16/9] overflow-hidden rounded-t-lg',
+              'relative w-full aspect-[16/9] overflow-hidden rounded-lg',
               imageMaxHeight ? imageMaxHeight : 'min-h-[180px]'
             )}
           >
@@ -46,13 +46,13 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 src={coverImageUrl}
                 alt={title}
                 fill="true"
-                className="rounded-t-lg object-cover"
+                className="rounded-lg object-cover"
               />
             ) : (
               <img
                 src={coverImageUrl}
                 alt={title}
-                className="rounded-t-lg object-cover w-full h-full object-cover"
+                className="rounded-lg object-cover w-full h-full object-cover"
               />
             )}
           </div>

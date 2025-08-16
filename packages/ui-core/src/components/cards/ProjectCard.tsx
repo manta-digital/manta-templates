@@ -28,6 +28,7 @@ interface ProjectCardBodyProps {
   wrapperClassName?: string;
   h3ClassName: string;
   pClassName: string;
+  isOverlay?: boolean;
   LinkComponent?: React.ComponentType<any>;
 }
 
@@ -40,6 +41,7 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
   wrapperClassName = '',
   h3ClassName,
   pClassName,
+  isOverlay = false,
   LinkComponent,
 }) => (
   <div className={wrapperClassName}>
@@ -49,7 +51,10 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
       {techStack.map((tech) => (
         <span
           key={tech}
-          className="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium leading-none"
+          className={isOverlay 
+            ? "inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium leading-none backdrop-blur-sm border border-white/30"
+            : "inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium leading-none"
+          }
         >
           {tech}
         </span>
@@ -58,17 +63,36 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
     <div className="mt-auto flex justify-end gap-3 pt-2 w-full">
       {repoUrl && (
         LinkComponent ? (
-          <LinkComponent href={repoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <LinkComponent 
+            href={repoUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={isOverlay 
+              ? "text-sm text-white/80 hover:text-white transition-colors"
+              : "text-sm text-muted-foreground hover:text-foreground transition-colors"
+            }
+          >
             Code
           </LinkComponent>
         ) : (
-          <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <a 
+            href={repoUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={isOverlay 
+              ? "text-sm text-white/80 hover:text-white transition-colors"
+              : "text-sm text-muted-foreground hover:text-foreground transition-colors"
+            }
+          >
             Code
           </a>
         )
       )}
       {demoUrl && (
-        <span className="text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors">Demo</span>
+        <span className={isOverlay 
+          ? "text-sm text-white/80 cursor-pointer group-hover:text-white transition-colors"
+          : "text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors"
+        }>Demo</span>
       )}
     </div>
   </div>
@@ -198,24 +222,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const overlayContent = (
       <BaseCard 
         tabIndex={0} 
-        className={cn('relative overflow-hidden h-full p-4', className)}
+        className={cn('relative overflow-hidden h-full p-4 group', className)}
         ImageComponent={ImageComponent}
         LinkComponent={LinkComponent}
       >
         {/* background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {children}
+          <div className="w-full h-full transition-transform duration-500 group-hover:scale-110">
+            {children}
+          </div>
         </div>
         {/* overlay text */}
         <ProjectCardBody
           wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10"
-          h3ClassName="text-lg font-semibold mb-2 text-card-foreground"
-          pClassName="text-sm text-card-foreground mb-4"
+          h3ClassName="text-lg font-semibold mb-2 text-white"
+          pClassName="text-sm text-white mb-4"
           title={title || content?.title}
           description={description || content?.description}
           techStack={techStack || content?.techStack}
           repoUrl={repoUrl || content?.repoUrl}
           demoUrl={demoUrl || content?.demoUrl}
+          isOverlay={true}
           LinkComponent={LinkComponent}
         />
       </BaseCard>

@@ -1,233 +1,191 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BlogCard, BlogCardImage, ProjectCard, QuoteCard, Container, BentoLayout } from '@manta-templates/ui-core';
-
-// Sample data to test the extracted components
-const sampleBlog = {
-  title: "Test Blog Post", 
-  date: "2024-01-15",
-  excerpt: "This is a test excerpt to verify the extracted BlogCard component works correctly with Next.js Image and Link components injected.",
-  coverImageUrl: "https://picsum.photos/400/200?random=1"
-};
-
-const sampleProject = {
-  title: "Test Project",
-  description: "This is a test project to verify the extracted ProjectCard component.",
-  techStack: ["React", "TypeScript", "Next.js"],
-  repoUrl: "https://github.com/test/repo", 
-  demoUrl: "https://test-demo.com",
-  content: {
-    title: "Test Project",
-    techStack: ["React", "TypeScript", "Next.js"],
-    image: "https://picsum.photos/400/300?random=2"
-  }
-};
-
-const sampleQuote = {
-  quote: "This is a test quote to verify the extracted QuoteCard component renders correctly.",
-  author: "Test Author"
-};
-
-const sampleBlogImage = {
-  title: "Hero Blog Post with Background Image",
-  date: "2024-01-25", 
-  excerpt: "This is a test of the BlogCardImage component with a beautiful background image and overlay effects.",
-  slug: "/blog/test-hero-post",
-  coverImageUrl: "https://picsum.photos/800/600?random=7",
-  category: "Design",
-  author: "Test Author",
-  dim: true,
-  blur: false
-};
+import { cn } from '@/lib/utils';
+import { 
+  BlogCard, 
+  BlogCardImage, 
+  BlogCardWide, 
+  ProjectCard, 
+  QuoteCard, 
+  BentoLayout, 
+  GridItem, 
+  BaseCard,
+  GradientCard,
+  AnimatedCard,
+  VideoCard
+} from '@manta-templates/ui-core';
 
 export default function TestExtractedPage() {
   return (
-    <Container maxWidth="full" className="py-8">
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div>
-          <h1 className="text-3xl font-bold mb-6">Extracted Components Test</h1>
-          <p className="text-muted-foreground mb-8">
-            Testing the extracted ui-core components with Next.js dependencies injected.
-          </p>
-        </div>
-
-        <div className="space-y-12">
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">Card Components</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              <div>
-                <h3 className="text-lg font-medium mb-4">BlogCard</h3>
-                <BlogCard
-                  {...sampleBlog}
-                  ImageComponent={Image}
-                  LinkComponent={Link}
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-4">ProjectCard</h3>
-                <ProjectCard
-                  {...sampleProject}
-                  ImageComponent={Image}
-                  LinkComponent={Link}
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-4">QuoteCard</h3>
-                <QuoteCard
-                  {...sampleQuote}
-                  ImageComponent={Image}
-                  LinkComponent={Link}
-                />
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-medium mb-4">BlogCardImage (Hero Style)</h3>
-                <div className="h-96">
-                  <BlogCardImage
-                    {...sampleBlogImage}
-                    ImageComponent={Image}
-                    LinkComponent={Link}
-                    className="h-full"
-                  />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-4">BlogCardImage (Blur Effect)</h3>
-                <div className="h-96">
-                  <BlogCardImage
-                    {...sampleBlogImage}
-                    title="Blurred Background Example"
-                    blur={true}
-                    blurAmount="md"
-                    dim={false}
-                    ImageComponent={Image}
-                    LinkComponent={Link}
-                    className="h-full"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">BentoLayout Test with BaseCard</h2>
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg font-medium mb-4">Card-Based Bento Grid</h3>
-                <BentoLayout gap={4} columns="grid-cols-6" className="min-h-[400px]">
-                  <div className="col-span-3 row-span-2">
-                    <BlogCard
-                      title="Featured Blog Post"
-                      date="2024-01-20"
-                      excerpt="This is a featured blog post in a larger card format within the bento grid layout."
-                      coverImageUrl="https://picsum.photos/500/300?random=3"
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <ProjectCard
-                      title="Cool Project"
-                      description="A neat project showcase"
-                      techStack={["React", "Next.js"]}
-                      repoUrl="https://github.com/test/project"
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-1">
-                    <QuoteCard
-                      quote="Short quote"
-                      author="Author"
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <ProjectCard
-                      title="Another Project"
-                      description="Different project"
-                      techStack={["TypeScript", "Tailwind"]}
-                      repoUrl="https://github.com/test/another"
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-1">
-                    <QuoteCard
-                      quote="Brief"
-                      author="Someone"
-                      className="h-full"
-                    />
-                  </div>
-                </BentoLayout>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium mb-4">Edge Case Grid</h3>
-                <BentoLayout gap={2} columns="grid-cols-12" className="min-h-[300px]">
-                  <div className="col-span-1">
-                    <QuoteCard
-                      quote="Tiny"
-                      className="h-full text-xs"
-                    />
-                  </div>
-                  <div className="col-span-11">
-                    <BlogCard
-                      title="Ultra Wide Blog Card"
-                      date="2024-01-21"
-                      excerpt="This blog card spans almost the entire width to test extreme aspect ratios."
-                      coverImageUrl="https://picsum.photos/800/200?random=4"
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-6 row-span-2">
-                    <ProjectCard
-                      title="Wide Project"
-                      description="Testing wide project cards with longer descriptions and more content to see how it handles."
-                      techStack={["React", "TypeScript", "Next.js", "Tailwind", "Framer"]}
-                      repoUrl="https://github.com/test/wide"
-                      demoUrl="https://demo.com"
-                      content={{
-                        title: "Wide Project",
-                        techStack: ["React", "TypeScript", "Next.js"],
-                        image: "https://picsum.photos/600/400?random=5"
-                      }}
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-3">
-                    <QuoteCard
-                      quote="Medium length quote to test text wrapping and layout behavior in constrained spaces."
-                      author="Quote Author"
-                      className="h-full"
-                    />
-                  </div>
-                  <div className="col-span-3">
-                    <BlogCard
-                      title="Compact Blog"
-                      date="2024-01-22"
-                      excerpt="Short excerpt for testing compact layouts."
-                      coverImageUrl="https://picsum.photos/300/200?random=6"
-                      ImageComponent={Image}
-                      LinkComponent={Link}
-                      className="h-full"
-                    />
-                  </div>
-                </BentoLayout>
-              </div>
-            </div>
-          </section>
-        </div>
+    <main className="min-h-screen p-6 md:p-10">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-4">Extracted Components Test</h1>
+        <p className="text-muted-foreground">
+          Testing extracted ui-core components with Next.js injection, using the same structure as examples page.
+        </p>
       </div>
-    </Container>
+      
+      <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
+        {/* Hero - using BlogCardImage */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-2 xl:row-span-2">
+          <BlogCardImage 
+            className="h-full" 
+            title="Hero Test Card" 
+            excerpt="Testing BlogCardImage in hero position with dependency injection." 
+            coverImageUrl="https://picsum.photos/600/400?random=1"
+            category="Testing"
+            author="Claude"
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* Project spotlight - using ProjectCard */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-2">
+          <ProjectCard
+            className="h-full"
+            title="Showcase Project"
+            description="Testing ProjectCard with showcase variant and dependency injection"
+            techStack={["React", "TypeScript", "Next.js"]}
+            repoUrl="https://github.com/test/showcase"
+            content={{
+              title: 'UI Core Components',
+              description: 'Framework-agnostic component library with dependency injection',
+              techStack: ['React', 'TypeScript', 'Tailwind v4'],
+              displayVariant: 'showcase',
+              image: 'https://picsum.photos/600/400?random=2',
+              repoUrl: 'https://github.com/manta-templates/ui-core',
+              features: [
+                { label: 'Framework Agnostic Design', icon: 'zap'},
+                { label: 'Dependency Injection Pattern', icon: 'zap', color: 'primary' },
+                { label: 'Next.js Optimized', icon: 'zap', color: 'primary' },
+                { label: 'Tailwind v4 Compatible', icon: 'zap', color: 'primary' },
+              ],
+              actions: [
+                { label: 'View on GitHub', href: 'https://github.com/manta-templates/ui-core', variant: 'outline' },
+              ],
+            }}
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* Featured article - using BlogCard */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
+          <BlogCard 
+            className="h-full" 
+            title="Component Architecture" 
+            date="2024-01-25"
+            excerpt="Deep dive into the dependency injection architecture that makes these components framework-agnostic while maintaining optimal performance."
+            coverImageUrl="https://picsum.photos/400/300?random=3"
+            author="UI Team"
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* Blog image card with blur */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
+          <BlogCardImage 
+            title="Blur Effects Demo" 
+            excerpt="Testing blur and dim effects on background images with text overlays." 
+            coverImageUrl="https://picsum.photos/700/400?random=4"
+            blur={true}
+            blurAmount="md"
+            category="Visual Effects"
+            author="Design Team"
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* Overlay ProjectCard testing */}
+        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
+          <ProjectCard
+            className="h-full"
+            title="Overlay Project Demo"
+            description="Testing ProjectCard in overlay mode with background image and text overlay effects."
+            techStack={["Next.js", "Framer Motion", "Tailwind"]}
+            repoUrl="https://github.com/test/overlay-demo"
+            demoUrl="https://overlay-demo.example.com"
+            overlay={true}
+            ImageComponent={Image}
+            LinkComponent={Link}
+          >
+            {/* Background content for overlay */}
+            <Image
+              src="https://picsum.photos/800/400?random=5"
+              alt="Background for overlay demo"
+              fill
+              className="object-cover"
+            />
+          </ProjectCard>
+        </GridItem>
+
+        {/* BaseCard with custom content */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+          <BaseCard className={cn('h-full w-full flex flex-col justify-center items-center text-center')}>
+            <h3 className="text-xl font-semibold mb-2">Framework Agnostic</h3>
+            <p className="text-muted-foreground">
+              These components work with Next.js, Astro, React Router, or pure React through dependency injection.
+            </p>
+          </BaseCard>
+        </GridItem>
+
+        {/* Quote card */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+          <QuoteCard 
+            quote="The dependency injection pattern allows us to maintain framework-specific optimizations while keeping components truly reusable." 
+            author="Manta Templates Team" 
+          />
+        </GridItem>
+
+        {/* BlogCardWide test */}
+        <GridItem className="col-span-8">
+          <BlogCardWide
+            title="Wide Blog Card Test"
+            excerpt="Testing the BlogCardWide component with Next.js injection"
+            coverImageUrl="https://picsum.photos/400/200?random=6"
+            author="Test Author"
+            date="2024-01-20"
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* GradientCard test */}
+        <GridItem className="col-span-8 md:col-span-4">
+          <GradientCard 
+            gradient="sunset"
+            title="Gradient Card"
+            description="Beautiful gradient backgrounds with dependency injection support"
+            shimmer={true}
+          />
+        </GridItem>
+
+        {/* AnimatedCard test */}
+        <GridItem className="col-span-8 md:col-span-4">
+          <AnimatedCard 
+            enabled={true}
+            variant="slide-up"
+            className="bg-card border rounded-lg p-6"
+          >
+            <h3 className="text-lg font-semibold mb-2">Animated Card</h3>
+            <p className="text-muted-foreground">This card animates on load with Framer Motion</p>
+          </AnimatedCard>
+        </GridItem>
+
+        {/* VideoCard test */}
+        <GridItem className="col-span-8 md:col-span-4">
+          <VideoCard
+            title="Sample Video"
+            thumbnailUrl="https://picsum.photos/400/225?random=7"
+            videoUrl="https://www.youtube.com/watch?v=example"
+            ImageComponent={Image}
+            LinkComponent={Link}
+          />
+        </GridItem>
+      </BentoLayout>
+    </main>
   );
 }

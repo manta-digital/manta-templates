@@ -48,3 +48,27 @@ export interface QuoteContent {
   featured?: boolean;
   order?: number;
 }
+
+export interface SocialLink {
+  platform: 'github' | 'linkedin' | 'x' | 'twitter' | 'mail';
+  url: string;
+}
+
+export interface AboutContent {
+  title: string;
+  description?: string;
+  avatar?: string;
+  socials?: SocialLink[];
+}
+
+// Defines the structure of the video frontmatter
+export interface VideoContent {
+  title: string;
+  description?: string;
+  videoUrl: string;
+  thumbnailUrl?: string;
+  displayMode?: 'background' | 'player' | 'thumbnail';
+  autoplay?: boolean;
+  controls?: boolean;
+  poster?: string;
+}
