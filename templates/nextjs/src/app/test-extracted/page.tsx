@@ -1,5 +1,8 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { 
   BlogCard, 
@@ -14,6 +17,60 @@ import {
   AnimatedCard,
   VideoCard
 } from '@manta-templates/ui-core';
+
+// Background video component for autoplay functionality
+const BackgroundVideoComponent: React.FC<{
+  src: string;
+  poster?: string;
+  autoplay?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}> = ({ src, poster, autoplay, className, children }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  useEffect(() => {
+    if (!autoplay) return;
+    
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.muted = true;
+    
+    const timer = setTimeout(() => {
+      video.play().catch(error => {
+        console.warn('Autoplay failed:', error);
+      });
+    }, 300);
+    
+    return () => {
+      clearTimeout(timer);
+      video.pause();
+    };
+  }, [autoplay]);
+  
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      autoPlay={autoplay}
+      loop
+      muted
+      playsInline
+      controls={false}
+      className={cn("absolute inset-0 w-full h-full object-cover", className)}
+      onLoadedData={() => {
+        if (autoplay && videoRef.current) {
+          videoRef.current.play().catch(error => {
+            console.warn('Autoplay failed on data load:', error);
+          });
+        }
+      }}
+    >
+      {children}
+    </video>
+  );
+};
 
 export default function TestExtractedPage() {
   return (
@@ -100,14 +157,14 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* Overlay ProjectCard testing */}
-        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 lg:row-span-1">
           <ProjectCard
             className="h-full"
             title="Overlay Project Demo"
             description="Testing ProjectCard in overlay mode with background image and text overlay effects."
             techStack={["Next.js", "Framer Motion", "Tailwind"]}
             repoUrl="https://github.com/test/overlay-demo"
-            demoUrl="https://overlay-demo.example.com"
+            // demoUrl="https://overlay-demo.example.com" // Temporarily removed to test hover
             overlay={true}
             ImageComponent={Image}
             LinkComponent={Link}
@@ -141,21 +198,24 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* BlogCardWide test */}
-        <GridItem className="col-span-8">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BlogCardWide
+            className="h-full"
             title="Wide Blog Card Test"
             excerpt="Testing the BlogCardWide component with Next.js injection"
             coverImageUrl="https://picsum.photos/400/200?random=6"
             author="Test Author"
             date="2024-01-20"
+            imageMaxHeight="h-32 sm:h-40 md:h-full"
             ImageComponent={Image}
             LinkComponent={Link}
           />
         </GridItem>
 
         {/* GradientCard test */}
-        <GridItem className="col-span-8 md:col-span-4">
+        <GridItem className="col-span-8 row-span-2 md:col-span-4 lg:row-span-2">
           <GradientCard 
+            className="h-full"
             gradient="sunset"
             title="Gradient Card"
             description="Beautiful gradient backgrounds with dependency injection support"
@@ -168,7 +228,7 @@ export default function TestExtractedPage() {
           <AnimatedCard 
             enabled={true}
             variant="slide-up"
-            className="bg-card border rounded-lg p-6"
+            className="bg-card border rounded-lg p-6 h-full flex flex-col justify-center"
           >
             <h3 className="text-lg font-semibold mb-2">Animated Card</h3>
             <p className="text-muted-foreground">This card animates on load with Framer Motion</p>
@@ -176,13 +236,22 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* VideoCard test */}
-        <GridItem className="col-span-8 md:col-span-4">
+        <GridItem className="col-span-8 row-span-2 md:col-span-8 md:row-span-2">
           <VideoCard
+            className="p-0 h-full"
             title="Sample Video"
             thumbnailUrl="https://picsum.photos/400/225?random=7"
-            videoUrl="https://www.youtube.com/watch?v=example"
+            videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            content={{
+              title: "Sample Video",
+              videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              displayMode: "background",
+              autoplay: true,
+              controls: false
+            }}
             ImageComponent={Image}
             LinkComponent={Link}
+            BackgroundVideoComponent={BackgroundVideoComponent}
           />
         </GridItem>
       </BentoLayout>

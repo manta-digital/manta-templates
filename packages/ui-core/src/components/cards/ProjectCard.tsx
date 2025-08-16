@@ -30,6 +30,7 @@ interface ProjectCardBodyProps {
   pClassName: string;
   isOverlay?: boolean;
   LinkComponent?: React.ComponentType<any>;
+  showLinks?: boolean;
 }
 
 const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
@@ -43,6 +44,7 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
   pClassName,
   isOverlay = false,
   LinkComponent,
+  showLinks = true, // Allow disabling individual links when card is wrapped
 }) => (
   <div className={wrapperClassName}>
     <h3 className={h3ClassName}>{title || 'Untitled Project'}</h3>
@@ -60,41 +62,43 @@ const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
         </span>
       ))}
     </div>
-    <div className="mt-auto flex justify-end gap-3 pt-2 w-full">
-      {repoUrl && (
-        LinkComponent ? (
-          <LinkComponent 
-            href={repoUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={isOverlay 
-              ? "text-sm text-white/80 hover:text-white transition-colors"
-              : "text-sm text-muted-foreground hover:text-foreground transition-colors"
-            }
-          >
-            Code
-          </LinkComponent>
-        ) : (
-          <a 
-            href={repoUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={isOverlay 
-              ? "text-sm text-white/80 hover:text-white transition-colors"
-              : "text-sm text-muted-foreground hover:text-foreground transition-colors"
-            }
-          >
-            Code
-          </a>
-        )
-      )}
-      {demoUrl && (
-        <span className={isOverlay 
-          ? "text-sm text-white/80 cursor-pointer group-hover:text-white transition-colors"
-          : "text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors"
-        }>Demo</span>
-      )}
-    </div>
+    {showLinks && (
+      <div className="mt-auto flex justify-end gap-3 pt-2 w-full">
+        {repoUrl && (
+          LinkComponent ? (
+            <LinkComponent 
+              href={repoUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={isOverlay 
+                ? "text-sm text-white/80 hover:text-white transition-colors"
+                : "text-sm text-muted-foreground hover:text-foreground transition-colors"
+              }
+            >
+              Code
+            </LinkComponent>
+          ) : (
+            <a 
+              href={repoUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={isOverlay 
+                ? "text-sm text-white/80 hover:text-white transition-colors"
+                : "text-sm text-muted-foreground hover:text-foreground transition-colors"
+              }
+            >
+              Code
+            </a>
+          )
+        )}
+        {demoUrl && (
+          <span className={isOverlay 
+            ? "text-sm text-white/80 cursor-pointer group-hover:text-white transition-colors"
+            : "text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors"
+          }>Demo</span>
+        )}
+      </div>
+    )}
   </div>
 );
 
@@ -228,13 +232,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       >
         {/* background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="w-full h-full transition-transform duration-500 group-hover:scale-110">
+          <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-110">
             {children}
           </div>
         </div>
         {/* overlay text */}
         <ProjectCardBody
-          wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10"
+          wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10 pointer-events-none"
           h3ClassName="text-lg font-semibold mb-2 text-white"
           pClassName="text-sm text-white mb-4"
           title={title || content?.title}
@@ -244,17 +248,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           demoUrl={demoUrl || content?.demoUrl}
           isOverlay={true}
           LinkComponent={LinkComponent}
+          showLinks={!demoUrl}
         />
       </BaseCard>
     );
     
     return demoUrl ? (
       LinkComponent ? (
-        <LinkComponent href={demoUrl} className="block h-full" tabIndex={-1} aria-label={title}>
+        <LinkComponent 
+          href={demoUrl} 
+          className="block h-full group hover:ring-2 hover:ring-blue-500" 
+          tabIndex={-1} 
+          aria-label={title}
+          onMouseEnter={() => console.log('Link wrapper hover entered')}
+        >
           {overlayContent}
         </LinkComponent>
       ) : (
-        <a href={demoUrl} className="block h-full" tabIndex={-1} aria-label={title}>
+        <a 
+          href={demoUrl} 
+          className="block h-full group hover:ring-2 hover:ring-blue-500" 
+          tabIndex={-1} 
+          aria-label={title}
+          onMouseEnter={() => console.log('A wrapper hover entered')}
+        >
           {overlayContent}
         </a>
       )
@@ -287,6 +304,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           repoUrl={repoUrl || content?.repoUrl}
           demoUrl={demoUrl || content?.demoUrl}
           LinkComponent={LinkComponent}
+          showLinks={!demoUrl}
         />
         {!!(content?.features?.length) && (
           <ul className="px-6 pb-4 -mt-2 space-y-2">

@@ -44,7 +44,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
   // Background video mode (requires BackgroundVideoComponent injection)
   if (displayMode === 'background' && BackgroundVideoComponent) {
     return (
-      <BaseCard className={cn('overflow-hidden h-full relative', className)}>
+      <BaseCard className={cn('overflow-hidden h-full relative p-0', className)}>
         <BackgroundVideoComponent
           src={cardVideoUrl}
           poster={poster || cardThumbnailUrl}
@@ -94,33 +94,33 @@ const VideoCard: React.FC<VideoCardProps> = ({
 
   // Default thumbnail mode (works without additional dependencies)
   return (
-    <BaseCard className={cn('overflow-hidden h-full justify-center', className)}> 
+    <BaseCard className={cn('overflow-hidden h-full p-0', className)}> 
       {/* Make Link fill height */}
-      <LinkComponent href={cardVideoUrl} target="_blank" rel="noopener noreferrer" className="group"> 
+      <LinkComponent href={cardVideoUrl} target="_blank" rel="noopener noreferrer" className="group h-full block"> 
         {/* Image container with 16:9 aspect ratio - This will now be centered vertically */}
-        <div className="relative w-full aspect-video overflow-hidden rounded-md">
+        <div className="relative w-full h-full overflow-hidden">
           <ImageComponent
             src={cardThumbnailUrl}
             alt={`Thumbnail for ${cardTitle}`}
             fill={ImageComponent !== 'img'}
-            className="object-cover"
+            className="object-cover w-full h-full"
             {...(ImageComponent === 'img' && { 
               style: { width: '100%', height: '100%', objectFit: 'cover' }
             })}
           />
           {/* Overlay + Play Icon Placeholder - Placed *inside* the relative container */}
-          <div className="absolute inset-0 bg-[rgba(0,0,0,0)] group-hover:bg-[rgba(0,0,0,0.5)] transition-opacity flex items-center justify-center rounded-md z-10">
-            <span className="text-card-foreground text-4xl opacity-0 group-hover:opacity-90 transition-opacity">▶</span>
+          <div className="absolute inset-0 bg-[rgba(0,0,0,0)] group-hover:bg-[rgba(0,0,0,0.5)] transition-opacity flex items-center justify-center z-10">
+            <span className="text-white text-4xl opacity-0 group-hover:opacity-90 transition-opacity">▶</span>
           </div>
+          {overlay && cardTitle && (
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+              <h3 className="text-sm font-medium truncate text-white">{cardTitle}</h3>
+              {content?.description && (
+                <p className="text-xs text-white/80 mt-1 line-clamp-2">{content.description}</p>
+              )}
+            </div>
+          )}
         </div>
-        {overlay && cardTitle && (
-          <div className="p-3">
-            <h3 className="text-sm font-medium truncate">{cardTitle}</h3>
-            {content?.description && (
-              <p className="text-xs text-gray-600 mt-1 line-clamp-2">{content.description}</p>
-            )}
-          </div>
-        )}
         {children}
       </LinkComponent>
     </BaseCard>
