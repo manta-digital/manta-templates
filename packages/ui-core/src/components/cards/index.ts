@@ -9,6 +9,7 @@ export { QuoteCard } from './QuoteCard';
 export { AnimatedCard } from './AnimatedCard';
 export { GradientCard } from './GradientCard';
 export { AboutCard } from './AboutCard';
+export type { AboutCardProps, SocialIcons } from './AboutCard';
 export { VideoCard } from './VideoCard';
 export { ThreeJSCard } from './ThreeJSCard';
 export { CosineTerrainCard } from './CosineTerrainCard';

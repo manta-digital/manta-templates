@@ -15,8 +15,11 @@ import {
   BaseCard,
   GradientCard,
   AnimatedCard,
-  VideoCard
+  VideoCard,
+  AboutCard
 } from '@manta-templates/ui-core';
+import type { SocialIcons } from '@manta-templates/ui-core';
+import { Github, Linkedin, Mail, X } from 'lucide-react';
 
 // Background video component for autoplay functionality
 const BackgroundVideoComponent: React.FC<{
@@ -70,6 +73,15 @@ const BackgroundVideoComponent: React.FC<{
       {children}
     </video>
   );
+};
+
+// Social icons for AboutCard
+const socialIcons: SocialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  mail: Mail,
+  x: X,
+  twitter: X
 };
 
 export default function TestExtractedPage() {
@@ -236,7 +248,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* VideoCard test */}
-        <GridItem className="col-span-8 row-span-2 md:col-span-8 md:row-span-2">
+        <GridItem className="col-span-8 row-span-2 md:col-span-4 md:row-span-2">
           <VideoCard
             className="p-0 h-full"
             title="Sample Video"
@@ -252,6 +264,25 @@ export default function TestExtractedPage() {
             ImageComponent={Image}
             LinkComponent={Link}
             BackgroundVideoComponent={BackgroundVideoComponent}
+          />
+        </GridItem>
+
+        {/* AboutCard test */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2">
+          <AboutCard 
+            className="h-full"
+            title="UI Core Developer"
+            description="Framework-agnostic component architect"
+            avatar="https://picsum.photos/80/80?random=8"
+            socials={[
+              { platform: 'github', url: 'https://github.com/manta-templates' },
+              { platform: 'linkedin', url: 'https://linkedin.com/in/example' },
+              { platform: 'mail', url: 'contact@example.com' }
+            ]}
+            contentHtml="<p>Specializing in building reusable, framework-agnostic components with dependency injection patterns. Creating tools that work seamlessly across Next.js, Astro, and pure React applications.</p><p>Current focus on extracting and refining UI components for maximum reusability and developer experience.</p>"
+            ImageComponent={Image}
+            LinkComponent={Link}
+            socialIcons={socialIcons}
           />
         </GridItem>
       </BentoLayout>
