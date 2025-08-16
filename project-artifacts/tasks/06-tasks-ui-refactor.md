@@ -390,19 +390,19 @@
   - [x] Test video functionality with Next.js components injected
   - [x] Success: VideoCard maintains exact video functionality and appearance
 
-- [ ] Extract ThreeJSCard to ui-core
-  - [ ] Copy templates/nextjs/src/components/cards/ThreeJSCard.tsx to packages/ui-core/src/components/cards/ThreeJSCard.tsx
-  - [ ] CRITICAL: Preserve exact 3D rendering and layout - do not approximate
-  - [ ] Analyze Three.js dependencies and WebGL requirements
-  - [ ] Apply dependency injection pattern for ImageComponent and LinkComponent
-  - [ ] Handle Three.js specific features:
+- [x] Extract ThreeJSCard to ui-core
+  - [x] Copy templates/nextjs/src/components/cards/ThreeJSCard.tsx to packages/ui-core/src/components/cards/ThreeJSCard.tsx
+  - [x] CRITICAL: Preserve exact 3D rendering and layout - do not approximate
+  - [x] Analyze Three.js dependencies and WebGL requirements
+  - [x] Apply dependency injection pattern for ImageComponent and LinkComponent
+  - [x] Handle Three.js specific features:
     1. WebGL canvas integration
     2. 3D scene setup and rendering
     3. Animation loops and interactions
     4. Ensure Three.js imports and setup remain intact
-  - [ ] Update utility imports to use ui-core relative paths
-  - [ ] Test 3D rendering works correctly across frameworks
-  - [ ] Success: ThreeJSCard maintains exact 3D functionality and rendering
+  - [x] Update utility imports to use ui-core relative paths
+  - [x] Test 3D rendering works correctly across frameworks
+  - [x] Success: ThreeJSCard maintains exact 3D functionality and rendering
 
 - [ ] Extract CosineTerrainCard to ui-core
   - [ ] Copy templates/nextjs/src/components/cards/math/CosineTerrainCard.tsx to packages/ui-core/src/components/cards/CosineTerrainCard.tsx
