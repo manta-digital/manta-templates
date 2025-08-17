@@ -483,12 +483,11 @@ export function CardCarousel2({
             })}
         </AnimationComponent>
       </div>
-
       {/* Navigation Arrows */}
       {showArrows && (
         <>
           <ButtonComponent
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 aspect-square flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
             aria-label="Previous slide"
@@ -496,7 +495,7 @@ export function CardCarousel2({
             <ChevronLeftIcon className="h-4 w-4" />
           </ButtonComponent>
           <ButtonComponent
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 aspect-square flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
             aria-label="Next slide"

@@ -1,17 +1,11 @@
+"use client";
+
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BentoLayout } from '@/components/layouts/bento-layout';
-import GridItem from '@/components/layouts/grid-layout/grid-item';
-import { GradientCard } from '@/components/cards/variants/GradientCard';
-import ArticleCard from '@/components/cards/articles/ArticleCard';
-import BlogCardImage from '@/components/cards/BlogCardImage';
-import ProjectCard from '@/components/cards/ProjectCard';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { BentoLayout, GridItem, GradientCard, BlogCardImage, ProjectCard, BaseCard, QuoteCard, CosineTerrainCard, CardCarousel2 } from '@manta-templates/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
-import QuoteCard from '@/components/cards/QuoteCard';
-import CosineTerrainCard from '@/components/cards/math/CosineTerrainCard';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
-import { CardCarousel2 } from '@manta-templates/ui-core';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function TestExample2Page() {
   return (
@@ -33,9 +27,18 @@ export default function TestExample2Page() {
             showArrows
             showDots={false}
             showControls={false}
+            ChevronLeftIcon={ChevronLeft}
+            ChevronRightIcon={ChevronRight}
           >
             {/* Simple article sample inside carousel to test image hover */}
-            <ArticleCard className="h-full" title="Carousel Article" subtitle="Demo" description="Testing image hover inside carousel." image="/image/blog-sample-image.png" href="/blog/sample-post" />
+            <BlogCardImage
+              className="h-full"
+              title="Carousel Article"
+              excerpt="Testing image hover inside carousel."
+              coverImageUrl="/image/blog-sample-image.png"
+              slug="/blog/sample-post"
+              textColorClassName="text-white"
+            />
             <ProjectCard
               className="h-full"
               content={{
@@ -68,9 +71,16 @@ export default function TestExample2Page() {
           </CardCarousel2>
         </GridItem>
 
-        {/* Featured article */}
+        {/* Featured article (using BlogCardImage from UI package) */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
-          <ArticleCard className="h-full" title="Colors and Themes" subtitle="Research" description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." image="/image/blog-sample-image.png" href="/blog/sample-post" />
+          <BlogCardImage
+            className="h-full"
+            title="Colors and Themes"
+            excerpt="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout."
+            coverImageUrl="/image/blog-sample-image.png"
+            slug="/blog/sample-post"
+            textColorClassName="text-white"
+          />
         </GridItem>
 
         {/* Blog image card */}
