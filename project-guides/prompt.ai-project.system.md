@@ -5,7 +5,7 @@ purpose: reusable-llm-prompts
 audience:
   - human
   - ai
-description: Parameterised prompt library mapped to each project phase.
+ai description: Parameterized prompt library mapped to slice-based project phases.
 dependsOn:
   - guide.ai-project.00-process.md
 npmScriptsAiSupport: "!include ../snippets/npm-scripts.ai-support.json"
@@ -17,6 +17,7 @@ This document contains prepared prompts useful in applying the `guide.ai-project
 # input keys
 {
   project,
+  slice,
   section, 
   subsection,
   framework,
@@ -37,28 +38,194 @@ To do this, we need to use the Project Guide together with information provided 
 When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager.
 ```
 
-##### Project Phase
-*This replaces the previous Project Phase prompt.  Even this one is often not needed, as many AIs will ask to work on the next phase, and they are self-describing.  It is useful for explicitly running Phase 2 and Phase 3.*
-```markdown
-Refer to the `guide.ai-project.process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the fules in `directory-structure` for any files or directories created.
+##### Project Phase (Traditional)
+*Use this for single features or simple projects that don't need slicing.*
+
+```
+Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
+
+Note: This project is using the traditional approach (not slice-based). Continue with phases as described in the Process Guide section for Projects not using Slices.
 ```
 
-##### Task Expansion
-*Note: this should work for any Phase 4 expansion of Phase 3 tasks.  For small ad-hoc features not necessitating a full feature design or spec, just add a section to the 03-tasks.{project} file yourself, and use this task expansion prompt to expand them into Phase 4.  At that point they can be implemented just like any other Phase 4 task list.*
+##### Slice Planning (Phase 3)
+```markdown
+We're working in our guide.ai-project.00-process, Phase 3: High-Level Design & Slice Planning.  Use `guide.ai-project.03-slice-planning` with the project concept and specification documents to break {project} into manageable vertical slices.
 
+Your role is Technical Fellow as described in the Process Guide. Work with the Project Manager to:
+
+1. Create the high-level design document (03-hld.{project}.md)
+2. Identify foundation work, feature slices, and integration work
+3. Create the slice plan document (03-slices.{project}.md)
+
+Start with *at most 5* feature slices. Focus on slice independence and clear user value. If you have all required inputs and sufficient information, proceed with slice planning. If not, request required information from the Project Manager.
+
+Note: This is a design and planning task, not a coding task.
+```
+
+##### Slice Design (Phase 4)
+```markdown
+We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project}.
+
+Use the high-level design (03-hld.{project}.md) and slice plan (03-slices.{project}.md) as inputs. Your role is Technical Fellow.
+
+Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
+
+- Detailed technical decisions for this slice
+- Data flows and component interactions
+- UI mockups or detailed specifications (if applicable)
+- Cross-slice dependencies and interfaces
+- Any conflicts or considerations discovered
+
+If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
+
+Stop and request clarification if you need more information to complete the slice design.
+```
+
+
+##### Slice Task Breakdown (Phase 5)
+```markdown
+We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the slice design for {slice} in project {project} into granular, actionable tasks.
+
+Your role is Senior AI. Use the slice design document `private/slices/nn-slice.{slice}.md` as input.
+
+Create task file at `private/tasks/nn-tasks.{slice}.md` with:
+
+1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
+2. Context summary section
+3. Granular tasks following Phase 5 guidelines
+
+For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+
+Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.
+
+This is a project planning task, not a coding task.
+```
+
+##### Slice Task Expansion (Phase 6)
+```markdown
+We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
+
+Use `guide.ai-project.04-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
+
+Your role is Senior AI. For each task:
+- If it would benefit from expansion or subdivision, enhance it
+- If it's already appropriate, output it verbatim
+- Ensure all tasks are accounted for
+
+Output results by updating the existing task file. Success: All tasks have been processed and either output as is, or enhanced and divided into further subtasks.
+
+Note: This is a project planning task, not a coding task.
+```
+
+##### Slice Implementation (Phase 7)
+```markdown
+We are working on the {slice} slice in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
+
+Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nn-tasks.{slice}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
+
+The slice design is available at `private/slices/nn-slice.{slice}.md` for additional context.
+
+STOP and confer with Project Manager after each task, unless directed otherwise by the Project Manager. Do not update any progress files until confirmation from Project Manager.
+
+Work carefully and ensure that each task is verified complete before proceeding to the next. If an attempted solution does not work or you find reason to try another approach, do not make more than three attempts without stopping and obtaining confirmation from Project Manager.
+
+Check off completed tasks in the task file when verified complete. When all tasks for the slice are complete, proceed to Phase 8 (integration) with Project Manager approval.
+
+Notes: 
+* Ignore case sensitivity in all file and directory names
+* If you cannot locate referenced files, STOP and request information from Project Manager
+* Do not guess, assume, or proceed without required files
+```
+
+##### Feature Design (Slice-Based)
+*Use this to add a new slice to an existing project.*
+```markdown
+We're adding a new feature slice to project {project}. This slice will be called {slice}.
+
+We will use our slice-based methodology from `guide.ai-project.00-process` to design and implement this feature. Your role is Technical Fellow.
+
+The feature description should be provided by the Project Manager. Use the existing project context including:
+- High-level design (03-hld.{project}.md)  
+- Existing slice plan (03-slices.{project}.md)
+- Current project state
+
+Create:
+1. Updated slice plan adding this slice to the appropriate position
+2. Slice design document (nn-slice.{slice}.md) 
+
+Follow dependency management - identify what foundation work or other slices this depends on, and what future slices might depend on this.
+
+If you need more information about the feature requirements, stop and request from Project Manager.
+```
+
+##### Model Change or Context Refresh (Slice-Based)
+*Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
+```markdown
+The following provides context on our current work in slice-based project {project}. Input may contain: { project, slice, task, issue, tool, note }.
+
+We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
+- Project: {project}
+- Current slice: {slice} (if applicable)
+- Phase: [specify current phase]
+
+Refer to the Resource Structure in `guide.ai-project.00-process` for locations of resources. Key project documents:
+- High-level design: private/project-guides/03-hld.{project}.md
+- Slice plan: private/project-guides/03-slices.{project}.md  
+- Current slice design: private/slices/nn-slice.{slice}.md (if working on a slice)
+- Current tasks: private/tasks/nn-tasks.{slice}.md (if in execution)
+
+**Directory Structure by Development Type:**
+- **Regular Development**: Use `project-documents/private/` for all project-specific files
+- **Monorepo Template Development**: Use `project-artifacts/` for project-specific files
+- The Project Manager should specify which mode is active
+
+If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
+
+{tool} information: [Project Manager will provide if relevant to current work]
+```
+
+##### Maintenance Item (Slice Context)
+```markdown
+Continue operating in your role as Senior AI. Add {item} to maintenance-tasks.md, following existing file format and markdown rules.
+
+Current project context: {project}, slice-based development. If this maintenance item affects multiple slices or requires coordination, note this in the item description.
+
+If item detail level is sufficient for immediate implementation, you may proceed after confirmation with Project Manager. If {item} requires more detailed planning (similar to a slice), expand according to project guides and confirm with Project Manager before implementation.
+
+Consider impact on current slice work and dependencies when planning implementation.
+```
+
+##### Perform Routine Maintenance (Slice-Aware)
+```markdown
+Let's perform routine maintenance tasks while being mindful of our slice-based development approach. Examine file project-documents/private/maintenance/maintenance-tasks.md.
+
+Work through maintenance items one at a time. For each item:
+- Assess impact on current slice work
+- Ensure fixes don't break slice boundaries or interfaces
+- Test that slice functionality still works after maintenance
+- Update maintenance-tasks.md when complete
+
+Stop after each item for Project Manager verification. Don't proceed to next items until current one is verified complete and doesn't interfere with slice development.
+
+Current project: {project}
+Active slice work: {slice} (if applicable)
+```
+
+***
+### Deprecated (Legacy Full-Project Approach)
+
+##### Legacy Task Expansion
+*Note: Use slice-based approach for new projects. This is for legacy projects only.*
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
 
-If you have all required inputs and sufficient information, go ahead and perform the task expansion as instructed in the guide.  If not, request required information then proceed when received.
-
-Note that some tasks may be implementable as described in `03-tasks.{project}.md` and not require additional expansion.  In any task for which this is the case, copy the task as-is to the expanded file.  This maintains consistency and improves reliability.
-
 Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 
-Note: this is a project and process task, not a coding task.  
+Note: this is a project and process task, not a coding task.
 ```
 
-##### Task Implementation
+##### Legacy Task Implementation
+*Note: Use slice-based approach for new projects.*
 ```markdown
 We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.00-process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
 
@@ -73,6 +240,23 @@ If you need more information, stop and wait for confirmation from the Project Ma
 Notes: 
 * ignore case sensitivity in all file and directory names.  If you cannot locate the files referenced above STOP until receiving information from the project manager.  Do not guess, assume, or proceed without them.
 * do not mark any tasks in the 'three such attempts' or similar error state as complete.
+```
+
+
+
+##### Task Expansion
+*Note: this should work for any Phase 4 expansion of Phase 3 tasks.  For small ad-hoc features not necessitating a full feature design or spec, just add a section to the 03-tasks.{project} file yourself, and use this task expansion prompt to expand them into Phase 4.  At that point they can be implemented just like any other Phase 4 task list.*
+
+```markdown
+We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
+
+If you have all required inputs and sufficient information, go ahead and perform the task expansion as instructed in the guide.  If not, request required information then proceed when received.
+
+Note that some tasks may be implementable as described in `03-tasks.{project}.md` and not require additional expansion.  In any task for which this is the case, copy the task as-is to the expanded file.  This maintains consistency and improves reliability.
+
+Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
+
+Note: this is a project and process task, not a coding task.  
 ```
 
 ##### Use 3rd Party Tool
@@ -137,21 +321,6 @@ Specifically, do the following:
 Continue to follow all process guidelines, and remember to use `directory-structure.md` to resolve any file or directory naming or location issues. If any required files are not present or you do not have sufficient information, stop and request update from Project Manager before continuing. 
 ```
 
-##### Add and Implement Maintenance Item
-*Assumes an existing chat providing additional context. Add if this is not the case.*
-
-```markdown
-Continue operating in your role as Senior AI.  Add {item} to 
-maintenance-tasks.md, following existing file format and markdown rules.  If item detail level is sufficient for Phase 4 tasks as described in the `guide.ai-project.00-process` and `guide.ai-project.04-task-expansion`, you may proceed to implementation after any necessary confirmation with Project Manager.
-
-If {item} does not provide sufficient detail, expand according to the project and task expansion guides referenced above, and confirm with project manager before writing to file or implementing code.
-```
-
-##### Perform Routine Maintenance
-```markdown
-Let's perform routine maintenance tasks such as resolving warnings.  Examine file project-documents/private/maintenance/maintenance-tasks.md.  Take the tasks one at a time and see if we can remove warnings so we don't build up tech debt.  Don't proceed to the next warning until we are sure the current one is fixed, with build, and verify that we can still run the app.  Once that is done, update the maintenance-tasks.md file and check off the items.  Go ahead and get started if you have enough info, or ask for more if needed.
-```
-
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps.*
 
@@ -197,18 +366,3 @@ Let's analyze the following existing codebase and document our findings.  We wan
   use tailwind.config.ts/.js. 
 ```
 
-***
-## Deprecated 
-
-##### Add AI Projects Support
-*Note: this prompt is no longer required for any regular use-case.*
-Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
-
-```markdown
-Add the following scripts to package.json.  If no package.json exists, run `npm init -y`, or ask the user to run it if you are not able.  If existing scripts block exists, add the two scripts to the existing block.  Do not add a new scripts block unless none exists in the file.
-
-"scripts": {
-    "setup-guides": "git remote get-url ai-project-guide > /dev/null 2>&1 || git remote add ai-project-guide git@github.com:ecorkran/ai-project-guide.git && git fetch ai-project-guide && git subtree add --prefix project-documents ai-project-guide main --squash || echo 'Subtree already exists—run npm run guides to update.'",
-    "guides": "git fetch ai-project-guide && git subtree pull --prefix project-documents ai-project-guide main --squash"
-  }
-```
