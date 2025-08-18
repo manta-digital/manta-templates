@@ -1,0 +1,5 @@
+# Ignore directories and files for Warp AI indexing
+node_modules/
+dist/
+*.log
+
