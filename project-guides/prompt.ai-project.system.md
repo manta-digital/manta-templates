@@ -39,12 +39,32 @@ When creating these project documents, do not guess.  If information is missing
 ```
 
 ##### Project Phase (Traditional)
-*Use this for single features or simple projects that don't need slicing.*
+*Use to directly execute a phase without additional instructions needed. Also usable with traditional (non-slice-based) projects.*
 
 ```
 Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
+```
 
-Note: This project is using the traditional approach (not slice-based). Continue with phases as described in the Process Guide section for Projects not using Slices.
+##### Spec Creation (Phase 2)
+```markdown
+We're working in our guide.ai-project.00-process, Phase 2: Spec Creation. Use `guide.ai-project.02-spec` with the approved concept document to create the project specification.
+
+Your role is Technical Fellow as described in the Process Guide. Work with the Project Manager to create `private/project-guides/02-spec.{project}.md`.
+
+Required inputs:
+- Approved concept document (01-concept.{project}.md)
+- Technical stack and requirements from Project Manager
+- Any additional specific requirements
+
+Focus on:
+- Tech stack with tool-guides availability check
+- Top-level features and major workflows
+- Architectural considerations and system boundaries
+- Sample data and UI sketches (if applicable)
+
+Keep the spec concise and focused on coordination between components. If you need more information about requirements or cannot access referenced tools, stop and request from Project Manager.
+
+Note: This is a design and planning task, not a coding task.
 ```
 
 ##### Slice Planning (Phase 3)
@@ -80,7 +100,6 @@ If framework or platform are specified, guide(s) for the framework(s) should be 
 
 Stop and request clarification if you need more information to complete the slice design.
 ```
-
 
 ##### Slice Task Breakdown (Phase 5)
 ```markdown
@@ -184,6 +203,27 @@ If you were previously assigned a role, continue in that role. If not, assume ro
 {tool} information: [Project Manager will provide if relevant to current work]
 ```
 
+##### Use 3rd Party Tool
+*Add the following to existing prompt when working with {tool}.*
+
+```markdown
+You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
+
+1. Consult Overview: Start with the specific `AI Tool Overview 
+   [toolname].md` in the `project-documents/tool-
+   guides/{tool}` directory.
+2. Locate Docs: Scan the Overview for references to more detailed 
+   documentation (like local API files under `/documentation`, 
+   notes in `research-crumbs` or official web links).
+3. Search Docs: Search within those specific documentation sources 
+   first using `grep_search` or `codebase_search`.
+4. Additional documentation.  If you have a documentation tool available (ex: 
+   context7 MCP) use it for additional information.  Always use it if available 
+   and no specific tool guide is provided.
+5. Web Search Fallback: If the targeted search doesn't yield 
+   results, then search the web.
+```
+
 ##### Maintenance Item (Slice Context)
 ```markdown
 Continue operating in your role as Senior AI. Add {item} to maintenance-tasks.md, following existing file format and markdown rules.
@@ -209,6 +249,51 @@ Stop after each item for Project Manager verification. Don't proceed to next ite
 
 Current project: {project}
 Active slice work: {slice} (if applicable)
+```
+
+##### Analyze Codebase
+*This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
+
+```markdown
+Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
+
+###### General
+* Document your findings in the project-documents/private/codebase-
+  analysis.md. You will probably need to create this file.
+* Write in markdown format, following our rules for markdown output.  If you 
+  cannot find these rules, STOP and do not proceed until you request and receive 
+  them fro the Project Manager.
+* Document the codebase structure.  Also note presence of any project-documents 
+  or similar folders which probably contain information for us.
+* Document presence or average of tests, and an estimate of coverage if tests 
+  are present.
+* Identify technologies and frameworks in use.  If this is a JS app, does it use 
+  React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it 
+  use TailWind?  ShadCN?  Something else?
+* What package managers are in use?
+* Is there a DevOps pipeline indicated?
+* Analysis should be concise and relevant - no pontificating.
+* Add note in README as follows: Claude: please find code analysis details in 
+  {file mentioned above}.
+
+###### NextJS
+* Perform standard analysis and identify basic environment -- confirm NextJS, 
+  identify common packages in use (Tailwind, ShadCN, etc) and any unusual 
+  packages or features.  
+* If auth is present, attempt to determine its structure and describe its 
+  methodology
+* Is the project containerized?
+* If special scripts (ex: 'docker: {command}') are present, document them in the 
+  README.
+* Provide a description of the UI style, interactivity, etc
+* Document page structure.
+  
+###### Tailwind
+* Is cn used instead of string operations with parameterized or variable   
+  classNames?
+* Prefer Tailwind classes, there should not be custom CSS classes.
+* If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
+  use tailwind.config.ts/.js. 
 ```
 
 ***
@@ -240,41 +325,6 @@ If you need more information, stop and wait for confirmation from the Project Ma
 Notes: 
 * ignore case sensitivity in all file and directory names.  If you cannot locate the files referenced above STOP until receiving information from the project manager.  Do not guess, assume, or proceed without them.
 * do not mark any tasks in the 'three such attempts' or similar error state as complete.
-```
-
-
-
-##### Task Expansion
-*Note: this should work for any Phase 4 expansion of Phase 3 tasks.  For small ad-hoc features not necessitating a full feature design or spec, just add a section to the 03-tasks.{project} file yourself, and use this task expansion prompt to expand them into Phase 4.  At that point they can be implemented just like any other Phase 4 task list.*
-
-```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
-
-If you have all required inputs and sufficient information, go ahead and perform the task expansion as instructed in the guide.  If not, request required information then proceed when received.
-
-Note that some tasks may be implementable as described in `03-tasks.{project}.md` and not require additional expansion.  In any task for which this is the case, copy the task as-is to the expanded file.  This maintains consistency and improves reliability.
-
-Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
-
-Note: this is a project and process task, not a coding task.  
-```
-
-##### Use 3rd Party Tool
-*Add the following to existing prompt when working with {tool}.*
-
-```markdown
-You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
-
-1. Consult Overview: Start with the specific `AI Tool Overview 
-   [toolname].md` in the `project-documents/tool-
-   guides/{tool}` directory.
-2. Locate Docs: Scan the Overview for references to more detailed 
-   documentation (like local API files under `/documentation`, 
-   notes in `research-crumbs` or official web links).
-3. Search Docs: Search within those specific documentation sources 
-   first using `grep_search` or `codebase_search`.
-4. Web Search Fallback: If the targeted search doesn't yield 
-   results, then perform a `search_web`.
 ```
 
 ##### Model Change or Context Refresh
@@ -319,50 +369,5 @@ Specifically, do the following:
 * Perform the Phase 3 procedure for our {feature}, using our feature file described above as the spec for this work.
 
 Continue to follow all process guidelines, and remember to use `directory-structure.md` to resolve any file or directory naming or location issues. If any required files are not present or you do not have sufficient information, stop and request update from Project Manager before continuing. 
-```
-
-##### Analyze Codebase
-*This is mostly specialized to front-end and web apps.*
-
-```markdown
-Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
-
-###### General
-* Document your findings in the project-documents/private/codebase-
-  analysis.md. You will probably need to create this file.
-* Write in markdown format, following our rules for markdown output.  If you 
-  cannot find these rules, STOP and do not proceed until you request and receive 
-  them fro the Project Manager.
-* Document the codebase structure.  Also note presence of any project-documents 
-  or similar folders which probably contain information for us.
-* Document presence or average of tests, and an estimate of coverage if tests 
-  are present.
-* Identify technologies and frameworks in use.  If this is a JS app, does it use 
-  React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it 
-  use TailWind?  ShadCN?  Something else?
-* What package managers are in use?
-* Is there a DevOps pipeline indicated?
-* Analysis should be concise and relevant - no pontificating.
-* Add note in README as follows: Claude: please find code analysis details in 
-  {file mentioned above}.
-
-###### NextJS
-* Perform standard analysis and identify basic environment -- confirm NextJS, 
-  identify common packages in use (Tailwind, ShadCN, etc) and any unusual 
-  packages or features.  
-* If auth is present, attempt to determine its structure and describe its 
-  methodology
-* Is the project containerized?
-* If special scripts (ex: 'docker: {command}') are present, document them in the 
-  README.
-* Provide a description of the UI style, interactivity, etc
-* Document page structure.
-  
-###### Tailwind
-* Is cn used instead of string operations with parameterized or variable   
-  classNames?
-* Prefer Tailwind classes, there should not be custom CSS classes.
-* If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
-  use tailwind.config.ts/.js. 
 ```
 
