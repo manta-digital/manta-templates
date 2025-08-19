@@ -301,12 +301,36 @@
 - [ ] Comprehensive testing of extracted cards
   - [x] Build ui-core package: `pnpm build-ui` (built via `pnpm -C packages/ui-core build`)
   - [x] Verify each card is using Next.js Image and Link components injected (in test-extracted/page.tsx)
-  - [ ] Verify exact visual and functional match to originals
-  - [ ] Test responsive behavior and animations
-  - [ ] Test video and 3D functionality where applicable
-  - [ ] Success: All extracted cards render and function identically to originals
+  - [x] Verify exact visual and functional match to originals
+  - [x] Test responsive behavior and animations
+  - [x] Test video and 3D functionality where applicable
+  - [x] Success: All extracted cards render and function identically to originals
 
 Note: we have additional work to do with carousel.  STOP at this point and confer with Project Manager.
+
+### Carousel Consolidation (CardCarousel2 → CardCarousel)
+- [ ] Preserve CardCarousel2 functionality as the single carousel implementation
+  - [ ] Confirm seamless infinite loop (no jump-back/forward)
+  - [ ] Ensure only one slide visible at all breakpoints by default (configurable)
+  - [ ] Verify touch/swipe gestures, arrows, dots, auto-play pause/resume behavior
+  - [ ] Maintain existing Tailwind classes and sizing logic (no regressions)
+- [ ] Remove legacy component
+  - [ ] Delete `packages/ui-core/src/components/layouts/CardCarousel.tsx`
+- [ ] Rename CardCarousel2 to CardCarousel
+  - [ ] Rename file: `CardCarousel2.tsx` → `CardCarousel.tsx`
+  - [ ] Rename exported symbol to `CardCarousel`
+  - [ ] Update `packages/ui-core/src/components/layouts/index.ts` export to `export { CardCarousel } from './CardCarousel'`
+  - [ ] Update any imports/usages across the repo
+- [ ] Add example usage on test page
+  - [ ] In `templates/nextjs/src/app/test-extracted/page.tsx`, add a `CardCarousel` example with:
+    - [ ] Exactly 3 slides
+    - [ ] `infinite: true`
+    - [ ] Only 1 slide visible at a time (all breakpoints)
+  - [ ] Verify visually on the page and adjust container heights/minHeight if necessary
+- [ ] Build & verify
+  - [ ] Build `ui-core`
+  - [ ] Ensure no TypeScript/lint errors
+  - [ ] Validate behavior and responsiveness in Next.js app
 
 ## Phase 2 Final: Comprehensive Testing Infrastructure
 
