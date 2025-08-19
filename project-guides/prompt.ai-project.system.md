@@ -156,6 +156,31 @@ Notes:
 * Do not guess, assume, or proceed without required files
 ```
 
+##### Quick Task Creation (Feature/Maintenance)
+```markdown
+Create tasks for {feature/maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
+
+Your role is Senior AI. Analyze the {feature/maintenance item} and create a task file at `private/tasks/nn-tasks.{item-name}.md` with:
+
+1. YAML front matter:
+---
+item: {item-name}
+project: {project}
+type: feature|maintenance|bugfix
+dependencies: [list-if-any]
+projectState: brief current state
+lastUpdated: YYYY-MM-DD
+---
+
+2.  Context summary explaining the work
+3. Granular tasks following Phase 5 guidelines
+
+Skip LLD creation - go directly from description to implementable tasks. Each task should be completable by a junior AI with clear success criteria.
+
+If the item is too complex for this approach, recommend creating a proper slice instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
+```
+
+
 ##### Feature Design (Slice-Based)
 *Use this to add a new slice to an existing project.*
 ```markdown
