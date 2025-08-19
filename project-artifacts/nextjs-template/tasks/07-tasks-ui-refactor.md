@@ -300,19 +300,20 @@
 
 - [ ] Comprehensive testing of extracted cards
   - [ ] Build ui-core package: `pnpm build-ui`
-  - [ ] Create comprehensive test page for all new cards -- use existing if possible!
-  - [ ] Test each card with Next.js Image and Link components injected
+  - [ ] Verify each card is using Next.js Image and Link components injected (in test-extracted/page.tsx)
   - [ ] Verify exact visual and functional match to originals
   - [ ] Test responsive behavior and animations
   - [ ] Test video and 3D functionality where applicable
   - [ ] Success: All extracted cards render and function identically to originals
 
+Note: we have additional work to do with carousel.  STOP at this point and confer with Project Manager.
+
 ## Phase 2 Final: Comprehensive Testing Infrastructure
 
 ### Create Test Suite for Next.js Integration
-- [ ] Create comprehensive test page for all extracted components
-  - [ ] Create templates/nextjs/src/app/test-all-cards/page.tsx
-  - [ ] Import and test ALL extracted cards with Next.js Image and Link injection
+- [x] Use existing comprehensive test page for all extracted components
+  - [x] Use templates/nextjs/src/app/test-extracted/page.tsx
+  - [ ] Ensure ALL extracted cards are included with Next.js Image and Link injection
   - [ ] Include edge cases, different props, responsive behavior
   - [ ] Test dark/light mode compatibility for all cards
   - [ ] Test animations, videos, 3D rendering where applicable
