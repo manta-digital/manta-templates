@@ -8,6 +8,7 @@ import {
   BlogCard, 
   BlogCardImage, 
   BlogCardWide, 
+  ArticleCard,
   ProjectCard, 
   QuoteCard, 
   BentoLayout, 
@@ -141,6 +142,21 @@ export default function TestExtractedPage() {
             }}
             ImageComponent={Image}
             LinkComponent={Link}
+          />
+        </GridItem>
+
+        {/* ArticleCard demo - validates Next.js Image/Link injection */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+          <ArticleCard
+            className="h-full"
+            title="Featured Article"
+            subtitle="Architecture"
+            description="Testing ArticleCard with injected Next.js primitives and imageProps passthrough."
+            image="https://picsum.photos/800/500?random=9"
+            href="#"
+            ImageComponent={Image}
+            LinkComponent={Link}
+            imageProps={{ fill: true, priority: true }}
           />
         </GridItem>
 
