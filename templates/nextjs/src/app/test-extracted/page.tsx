@@ -18,7 +18,8 @@ import {
   VideoCard,
   AboutCard,
   ThreeJSCard,
-  CosineTerrainCard
+  CosineTerrainCard,
+  CardCarousel
 } from '@manta-templates/ui-core';
 import type { SocialIcons } from '@manta-templates/ui-core';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
@@ -146,7 +147,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* ArticleCard demo - validates Next.js Image/Link injection */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-2 lg:row-span-2">
           <ArticleCard
             className="h-full"
             title="Featured Article"
@@ -175,8 +176,9 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* Blog image card with blur */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-3">
           <BlogCardImage 
+            className="h-full"
             title="Blur Effects Demo" 
             excerpt="Testing blur and dim effects on background images with text overlays." 
             coverImageUrl="https://picsum.photos/700/400?random=4"
@@ -190,7 +192,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* Overlay ProjectCard testing */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 lg:row-span-1">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-8 lg:row-span-1 xl:col-span-8">
           <ProjectCard
             className="h-full"
             title="Overlay Project Demo"
@@ -237,7 +239,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* BlogCardWide test */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4 xl:col-span-5">
           <BlogCardWide
             className="h-full"
             title="Wide Blog Card Test"
@@ -252,7 +254,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* GradientCard test */}
-        <GridItem className="col-span-8 row-span-2 md:col-span-4 lg:row-span-2">
+        <GridItem className="col-span-8 row-span-2 md:col-span-4 lg:row-span-2 xl:col-span-3">
           <GradientCard 
             className="h-full"
             gradient="sunset"
@@ -263,7 +265,7 @@ export default function TestExtractedPage() {
         </GridItem>
 
         {/* AnimatedCard test */}
-        <GridItem className="col-span-8 md:col-span-4">
+        <GridItem className="col-span-8 md:col-span-4 xl:col-span-5">
           <AnimatedCard 
             enabled={true}
             variant="slide-up"
@@ -272,6 +274,22 @@ export default function TestExtractedPage() {
             <h3 className="text-lg font-semibold mb-2">Animated Card</h3>
             <p className="text-muted-foreground">This card animates on load with Framer Motion</p>
           </AnimatedCard>
+        </GridItem>
+
+        {/* CardCarousel example: 3 slides, infinite, 1 visible */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-8">
+          <CardCarousel
+            className="h-64"
+            itemClassName="h-full"
+            visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }}
+            infinite
+            showArrows
+            showDots={false}
+          >
+            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-3)] text-[var(--color-accent-12)]">Slide One</div>
+            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-4)] text-[var(--color-accent-12)]">Slide Two</div>
+            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-5)] text-[var(--color-accent-12)]">Slide Three</div>
+          </CardCarousel>
         </GridItem>
 
         {/* VideoCard test */}

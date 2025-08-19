@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CardCarousel2 } from '@manta-templates/ui-core';
+import { CardCarousel } from '@manta-templates/ui-core';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -91,7 +91,7 @@ export default function TestCarousel2Page() {
             One card visible (full width), infinite loop, autoplay enabled, no dot controls, actual images working.
           </p>
           
-          <CardCarousel2
+          <CardCarousel
             visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }}
             gap={0}
             infinite={true}
@@ -117,7 +117,7 @@ export default function TestCarousel2Page() {
                 className="h-full"
               />
             ))}
-          </CardCarousel2>
+          </CardCarousel>
         </section>
 
         {/* Test 2: Multiple Cards, Infinite, with Dots */}
@@ -129,7 +129,7 @@ export default function TestCarousel2Page() {
             Multiple cards visible, infinite scroll, autoplay, with dot controls and pause/play.
           </p>
           
-          <CardCarousel2
+          <CardCarousel
             visibleCards={{ mobile: 1, tablet: 2, desktop: 3 }}
             gap={16}
             infinite={true}
@@ -158,7 +158,7 @@ export default function TestCarousel2Page() {
                 className="h-full"
               />
             ))}
-          </CardCarousel2>
+          </CardCarousel>
         </section>
 
         {/* Test 3: Framework-Agnostic (No Injected Components) */}
@@ -170,7 +170,7 @@ export default function TestCarousel2Page() {
             Testing without injected components - should fall back to basic HTML elements.
           </p>
           
-          <CardCarousel2
+          <CardCarousel
             visibleCards={{ mobile: 1, tablet: 2, desktop: 2 }}
             gap={24}
             infinite={false}
@@ -193,7 +193,7 @@ export default function TestCarousel2Page() {
                 </div>
               </div>
             ))}
-          </CardCarousel2>
+          </CardCarousel>
         </section>
 
         {/* Test 4: Mobile-First Responsive */}
@@ -243,7 +243,7 @@ export default function TestCarousel2Page() {
             Testing custom styling with minimum height enforcement and custom gaps.
           </p>
           
-          <CardCarousel2
+          <CardCarousel
             visibleCards={{ mobile: 1, tablet: 2, desktop: 3 }}
             gap={32}
             infinite={false}
@@ -274,7 +274,7 @@ export default function TestCarousel2Page() {
                 </div>
               </div>
             ))}
-          </CardCarousel2>
+          </CardCarousel>
         </section>
 
         {/* Test Results Summary */}

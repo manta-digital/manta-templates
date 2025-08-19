@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BentoLayout, GridItem, GradientCard, BlogCardImage, ProjectCard, BaseCard, QuoteCard, CosineTerrainCard, CardCarousel2 } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, GradientCard, BlogCardImage, ProjectCard, BaseCard, QuoteCard, CosineTerrainCard, CardCarousel } from '@manta-templates/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -18,7 +18,7 @@ export default function TestExample2Page() {
 
         {/* Project spotlight / carousel */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-2">
-          <CardCarousel2
+          <CardCarousel
             className="h-full"
             itemClassName="h-full"
             visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }}
@@ -68,7 +68,7 @@ export default function TestExample2Page() {
                 </div>
               </BackgroundVideo>
             </BaseCard>
-          </CardCarousel2>
+          </CardCarousel>
         </GridItem>
 
         {/* Featured article (using BlogCardImage from UI package) */}

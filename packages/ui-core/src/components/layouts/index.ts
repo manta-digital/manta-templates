@@ -5,7 +5,6 @@ export { GridItem } from './GridItem';
 export { BentoLayout } from './BentoLayout';
 export { GridLayout } from './GridLayout';
 export { CardCarousel } from './CardCarousel';
-export { CardCarousel2 } from './CardCarousel2';
 
 // Types
 export type { ContainerProps } from './Container';
@@ -14,4 +13,3 @@ export type { GridItemProps } from './GridItem';
 export type { BentoLayoutProps } from './BentoLayout';
 export type { GridData } from './GridLayout';
 export type { CardCarouselProps } from './CardCarousel';
-export type { CardCarousel2Props } from './CardCarousel2';
