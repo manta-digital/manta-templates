@@ -12,7 +12,6 @@ import {
   QuoteCard, 
   BentoLayout, 
   GridItem, 
-  BaseCard,
   GradientCard,
   AnimatedCard,
   VideoCard,
@@ -197,14 +196,20 @@ export default function TestExtractedPage() {
           </ProjectCard>
         </GridItem>
 
-        {/* BaseCard with custom content */}
+        {/* GradientCard variant of the previous BaseCard content */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <BaseCard className={cn('h-full w-full flex flex-col justify-center items-center text-center')}>
-            <h3 className="text-xl font-semibold mb-2">Framework Agnostic</h3>
-            <p className="text-muted-foreground">
-              These components work with Next.js, Astro, React Router, or pure React through dependency injection.
-            </p>
-          </BaseCard>
+          <GradientCard 
+            className="h-full" 
+            gradient="sunset" 
+            shimmer={true}
+          >
+            <div className={cn('h-full w-full flex flex-col justify-center items-center text-center')}>
+              <h3 className="text-xl font-semibold mb-2">Framework Agnostic</h3>
+              <p className="text-muted-foreground">
+                These components work with Next.js, Astro, React Router, or pure React through dependency injection.
+              </p>
+            </div>
+          </GradientCard>
         </GridItem>
 
         {/* Quote card */}
