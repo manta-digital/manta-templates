@@ -1,4 +1,5 @@
 // Card components with dependency injection
+export { ArticleCard } from './ArticleCard';
 export { BlogCard } from './BlogCard';
 export { BlogCardImage } from './BlogCardImage';
 export { BlogCardWide } from './BlogCardWide';

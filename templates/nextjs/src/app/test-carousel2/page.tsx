@@ -204,7 +204,8 @@ export default function TestCarousel2Page() {
           <p className="text-gray-600 mb-6">
             Testing responsive behavior: 1 card on mobile, 3 on tablet, 4 on desktop.
           </p>
-          
+
+{/*          
           <CardCarousel2
             visibleCards={{ mobile: 1, tablet: 3, desktop: 4 }}
             gap={12}
@@ -232,7 +233,8 @@ export default function TestCarousel2Page() {
               </div>
             ))}
           </CardCarousel2>
-        </section>
+*/}
+          </section>
 
         {/* Test 5: Custom Styling and Min Height */}
         <section className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">

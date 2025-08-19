@@ -152,17 +152,18 @@ export function CardCarousel({
   const AUTO_PLAY_RESUME_DELAY = 5000;
 
   const totalCards = children.length;
-  const maxIndex = infinite ? totalCards - 1 : Math.max(0, totalCards - visibleCount);
+  const maxIndex = infinite ? totalCards : Math.max(0, totalCards - visibleCount);
 
-  // Padded clones to ensure seamless wrap (especially with multiple visible)
-  const paddedChildren = useMemo(() => {
-    if (!infinite || totalCards === 0) return children;
-    const clonesLeft = Math.min(visibleCount, totalCards);
-    const clonesRight = Math.min(visibleCount, totalCards);
-    const left = children.slice(totalCards - clonesLeft);
-    const right = children.slice(0, clonesRight);
-    return [...left, ...children, ...right];
-  }, [children, infinite, totalCards, visibleCount]);
+  // Create carousel array with clones for infinite scrolling (padded-clone pattern)
+  const carouselArray = useMemo(() => {
+    if (!infinite) return children;
+    // Calculate padding needed: enough clones to fill visible area during transitions
+    const paddingCount = Math.max(visibleCount, totalCards - visibleCount + 1);
+    // Add clones at beginning (from end of array) and at end (from beginning of array)
+    const leftClones = children.slice(-paddingCount);
+    const rightClones = children.slice(0, paddingCount);
+    return [...leftClones, ...children, ...rightClones];
+  }, [children, infinite, visibleCount, totalCards]);
 
   // Handle responsive visible cards using breakpoint hook
   useEffect(() => {
@@ -288,19 +289,29 @@ export function CardCarousel({
     return () => clearInterval(interval);
   }, [isAutoPlaying, autoPlay, infinite, totalCards, maxIndex]);
 
-  // Transition-end handler to snap without delay when wrapping
-  const handleAfterTransition = useCallback(() => {
-    if (!infinite || totalCards === 0) return;
-    if (currentIndex > maxIndex) {
-      setIsTransitioning(true);
-      setCurrentIndex(0);
-      requestAnimationFrame(() => setIsTransitioning(false));
-    } else if (currentIndex < 0) {
-      setIsTransitioning(true);
-      setCurrentIndex(maxIndex);
-      requestAnimationFrame(() => setIsTransitioning(false));
-    }
-  }, [infinite, totalCards, currentIndex, maxIndex]);
+  // Handle seamless infinite carousel reset after transition
+  useEffect(() => {
+    if (!infinite) return;
+
+    // Reset to equivalent position after transition completes
+    const timer = setTimeout(() => {
+      if (currentIndex >= totalCards) {
+        // Reset back to start when we've scrolled past the original array
+        setIsTransitioning(true);
+        setCurrentIndex(currentIndex - totalCards);
+        // Re-enable transitions after reset
+        setTimeout(() => setIsTransitioning(false), 50);
+      } else if (currentIndex < 0) {
+        // Reset from negative position to equivalent positive position
+        setIsTransitioning(true);
+        setCurrentIndex(currentIndex + totalCards);
+        // Re-enable transitions after reset
+        setTimeout(() => setIsTransitioning(false), 50);
+      }
+    }, 300); // Slightly after transition duration
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, infinite, totalCards]);
 
   // Touch/swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -405,8 +416,8 @@ export function CardCarousel({
 
   const cardWidth = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
   // Calculate translateX - account for offset in infinite carousel and drag offset
-  const clonesLeft = Math.min(visibleCount, totalCards);
-  const actualIndex = infinite ? currentIndex + clonesLeft : currentIndex;
+  const paddingCount = infinite ? Math.max(visibleCount, totalCards - visibleCount + 1) : 0;
+  const actualIndex = infinite ? currentIndex + paddingCount : currentIndex;
   const baseTranslateX = `-${actualIndex * (100 / visibleCount)}% - ${actualIndex * gap / visibleCount}px`;
   const translateX = dragOffset !== 0 
     ? `calc(${baseTranslateX} + ${dragOffset}px)`
@@ -417,8 +428,7 @@ export function CardCarousel({
   const animationProps = MotionComponent 
     ? {
         animate: { x: translateX },
-        transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 },
-        onAnimationComplete: handleAfterTransition,
+        transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 }
       }
     : {
         style: {
@@ -456,10 +466,10 @@ export function CardCarousel({
             }
           }}
         >
-          {paddedChildren.map((child, index) => {
+          {carouselArray.map((child, index) => {
               return (
                 <div
-                  key={infinite ? `padded-${index}` : index}
+                  key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
                   className={cn('flex-shrink-0 select-none flex flex-col', itemClassName)}
                   style={{
                     width: cardWidth,

@@ -298,15 +298,13 @@
 - [x] Test article functionality with Next.js components injected (using `templates/nextjs/src/app/test-extracted/page.tsx`)
 - [x] Success: ArticleCard maintains exact article functionality and appearance
 
-- [ ] Comprehensive testing of extracted cards
+- [x] Comprehensive testing of extracted cards
   - [x] Build ui-core package: `pnpm build-ui` (built via `pnpm -C packages/ui-core build`)
   - [x] Verify each card is using Next.js Image and Link components injected (in test-extracted/page.tsx)
   - [x] Verify exact visual and functional match to originals
   - [x] Test responsive behavior and animations
   - [x] Test video and 3D functionality where applicable
   - [x] Success: All extracted cards render and function identically to originals
-
-Note: we have additional work to do with carousel.  STOP at this point and confer with Project Manager.
 
 ### Carousel Consolidation (CardCarousel2 → CardCarousel)
 - [ ] Preserve CardCarousel2 functionality as the single carousel implementation

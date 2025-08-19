@@ -279,9 +279,9 @@ export default function TestExtractedPage() {
         {/* CardCarousel example: 3 slides, infinite, 1 visible */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-8">
           <CardCarousel
-            className="h-64"
+            className="h-full"
             itemClassName="h-full"
-            visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }}
+            visibleCards={{ mobile: 1, tablet: 3, desktop: 3 }}
             infinite
             showArrows
             showDots={false}
