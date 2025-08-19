@@ -156,7 +156,7 @@ Notes:
 * Do not guess, assume, or proceed without required files
 ```
 
-##### Quick Task Creation (Feature/Maintenance)
+##### Ad-Hoc Task Creation (Feature/Maintenance)
 ```markdown
 Create tasks for {feature/maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
 
