@@ -152,14 +152,17 @@ export function CardCarousel({
   const AUTO_PLAY_RESUME_DELAY = 5000;
 
   const totalCards = children.length;
-  const maxIndex = infinite ? totalCards : Math.max(0, totalCards - visibleCount);
+  const maxIndex = infinite ? totalCards - 1 : Math.max(0, totalCards - visibleCount);
 
-  // Create carousel array with duplicates for infinite scrolling
-  const carouselArray = useMemo(() => {
-    if (!infinite) return children;
-    // Render 2x the cards for seamless infinite scroll
-    return [...children, ...children];
-  }, [children, infinite]);
+  // Padded clones to ensure seamless wrap (especially with multiple visible)
+  const paddedChildren = useMemo(() => {
+    if (!infinite || totalCards === 0) return children;
+    const clonesLeft = Math.min(visibleCount, totalCards);
+    const clonesRight = Math.min(visibleCount, totalCards);
+    const left = children.slice(totalCards - clonesLeft);
+    const right = children.slice(0, clonesRight);
+    return [...left, ...children, ...right];
+  }, [children, infinite, totalCards, visibleCount]);
 
   // Handle responsive visible cards using breakpoint hook
   useEffect(() => {
@@ -285,36 +288,19 @@ export function CardCarousel({
     return () => clearInterval(interval);
   }, [isAutoPlaying, autoPlay, infinite, totalCards, maxIndex]);
 
-  // Handle seamless infinite carousel reset after transition
-  useEffect(() => {
-    if (!infinite) return;
-
-    // Reset to equivalent position after transition completes
-    const timer = setTimeout(() => {
-      if (currentIndex >= totalCards) {
-        // Reset back to start when we've scrolled past the first copy
-        setIsTransitioning(true);
-        setCurrentIndex(0);
-        // Re-enable transitions after reset
-        setTimeout(() => setIsTransitioning(false), 50);
-      } else if (currentIndex === -1) {
-        // Reset from lastSlide position to actual last slide immediately
-        setIsTransitioning(true);
-        setCurrentIndex(totalCards - 1);
-        // Re-enable transitions after reset
-        setTimeout(() => setIsTransitioning(false), 50);
-      } else     if (currentIndex < -1) {
-        // Reset to equivalent position in the main array
-        setIsTransitioning(true);
-        const equivalentIndex = ((currentIndex + 1) % totalCards + totalCards) % totalCards;
-        setCurrentIndex(equivalentIndex);
-        // Re-enable transitions after reset
-        setTimeout(() => setIsTransitioning(false), 50);
-      }
-    }, 350); // Slightly after transition duration
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, infinite, totalCards]);
+  // Transition-end handler to snap without delay when wrapping
+  const handleAfterTransition = useCallback(() => {
+    if (!infinite || totalCards === 0) return;
+    if (currentIndex > maxIndex) {
+      setIsTransitioning(true);
+      setCurrentIndex(0);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    } else if (currentIndex < 0) {
+      setIsTransitioning(true);
+      setCurrentIndex(maxIndex);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    }
+  }, [infinite, totalCards, currentIndex, maxIndex]);
 
   // Touch/swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -419,7 +405,8 @@ export function CardCarousel({
 
   const cardWidth = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
   // Calculate translateX - account for offset in infinite carousel and drag offset
-  const actualIndex = infinite ? currentIndex + 1 : currentIndex;
+  const clonesLeft = Math.min(visibleCount, totalCards);
+  const actualIndex = infinite ? currentIndex + clonesLeft : currentIndex;
   const baseTranslateX = `-${actualIndex * (100 / visibleCount)}% - ${actualIndex * gap / visibleCount}px`;
   const translateX = dragOffset !== 0 
     ? `calc(${baseTranslateX} + ${dragOffset}px)`
@@ -430,7 +417,8 @@ export function CardCarousel({
   const animationProps = MotionComponent 
     ? {
         animate: { x: translateX },
-        transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 }
+        transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 },
+        onAnimationComplete: handleAfterTransition,
       }
     : {
         style: {
@@ -468,10 +456,10 @@ export function CardCarousel({
             }
           }}
         >
-          {carouselArray.map((child, index) => {
+          {paddedChildren.map((child, index) => {
               return (
                 <div
-                  key={infinite ? `${index}-${index >= children.length ? 'clone' : 'original'}` : index}
+                  key={infinite ? `padded-${index}` : index}
                   className={cn('flex-shrink-0 select-none flex flex-col', itemClassName)}
                   style={{
                     width: cardWidth,
@@ -489,7 +477,7 @@ export function CardCarousel({
         <>
           <ButtonComponent
             type={typeof ButtonComponent === 'string' ? 'button' : undefined}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center border border-0 rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_50%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
             aria-label="Previous slide"
@@ -498,7 +486,7 @@ export function CardCarousel({
           </ButtonComponent>
           <ButtonComponent
             type={typeof ButtonComponent === 'string' ? 'button' : undefined}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center border border-0 rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_50%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
             aria-label="Next slide"
