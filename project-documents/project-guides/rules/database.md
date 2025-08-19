@@ -1,6 +1,7 @@
 ---
-trigger: model_decision
-description: Rule applies to database or ORM related code when using NextJS framework.
+description: Database management with Prisma, schema guidelines, and background job configuration
+globs: ["prisma/**/*", "**/*.prisma", "src/lib/db.*", "**/*inngest*"]
+alwaysApply: false
 ---
 
 # Database & Prisma Rules
@@ -17,4 +18,4 @@ description: Rule applies to database or ORM related code when using NextJS fram
 - **enabled**: false
 - Use `inngest.config.ts` for Inngest configuration.
 - Use `src/app/api/inngest/route.ts` for Inngest API route.
-- Use polling to update the UI when Inngest events are received, not trpc success response. # Database & Prisma Rules
+- Use polling to update the UI when Inngest events are received, not trpc success response. 
