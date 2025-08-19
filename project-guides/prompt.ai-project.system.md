@@ -124,7 +124,7 @@ This is a project planning task, not a coding task.
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
 
-Use `guide.ai-project.04-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
+Use `guide.ai-project.06-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
 
 Your role is Senior AI. For each task:
 - If it would benefit from expansion or subdivision, enhance it
@@ -179,7 +179,6 @@ Skip LLD creation - go directly from description to implementable tasks. Each ta
 
 If the item is too complex for this approach, recommend creating a proper slice instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
 ```
-
 
 ##### Feature Design (Slice-Based)
 *Use this to add a new slice to an existing project.*
@@ -327,7 +326,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 ##### Legacy Task Expansion
 *Note: Use slice-based approach for new projects. This is for legacy projects only.*
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.04-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
+We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.06-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
 
 Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
 
