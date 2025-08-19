@@ -161,6 +161,40 @@ export default function TestExtractedPage() {
           />
         </GridItem>
 
+        {/* Content Loading Patterns Demo */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2">
+          <div className="h-full bg-card border rounded-lg p-6 flex flex-col">
+            <h3 className="text-lg font-semibold mb-4">Content Loading Patterns</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              ArticleCard supports three content loading patterns:
+            </p>
+            <div className="flex-1 space-y-3 text-xs">
+              <div className="border rounded p-3">
+                <strong className="text-green-600">✓ Hardcoded Props</strong>
+                <code className="block mt-1 text-gray-600">
+                  title=&quot;My Title&quot; description=&quot;...&quot;
+                </code>
+              </div>
+              <div className="border rounded p-3">
+                <strong className="text-blue-600">→ Content Loading</strong>
+                <code className="block mt-1 text-gray-600">
+                  contentProvider={"{provider}"} contentSlug=&quot;article&quot;
+                </code>
+              </div>
+              <div className="border rounded p-3">
+                <strong className="text-purple-600">⚡ Mixed Mode</strong>
+                <code className="block mt-1 text-gray-600">
+                  contentSlug=&quot;article&quot; title=&quot;Override&quot;
+                </code>
+              </div>
+              <div className="mt-3 p-2 bg-blue-50 dark:bg-blue-950/20 rounded text-xs">
+                <strong>Next.js Adapter Available:</strong><br/>
+                <code>@manta-templates/ui-adapters-nextjs</code>
+              </div>
+            </div>
+          </div>
+        </GridItem>
+
         {/* Featured article - using BlogCard */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
           <BlogCard 

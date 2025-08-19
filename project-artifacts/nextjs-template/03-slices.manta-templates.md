@@ -30,7 +30,7 @@ These slices established the project foundation and are now complete:
 - **Status**: Design Complete, Ready for Implementation
 - **Dependencies**: Requires completed ui-refactor foundation (Slices 01-07)
 - **Design**: project-artifacts/nextjs-template/slices/08-slice.markdown-content.md
-- **Tasks**: project-artifacts/nextjs-template/tasks/08-tasks-ui-refactor.md
+- **Tasks**: project-artifacts/nextjs-template/tasks/08-tasks-markdown-content.md
 - **Scope**: Enable ui-core cards to consume markdown content through framework-agnostic dependency injection
 - **Key Deliverables**:
   - ContentProvider interface and framework adapters  

@@ -18,6 +18,7 @@
     "workspaces": [
         "templates/*",
         "packages/*",
+        "packages/ui-adapters/*",
         "landing"
     ],
     "description": "This template ships with a curated set of **public** guides. To pull them into your project:",

@@ -19,11 +19,10 @@ Scope: Integrate reusable, markdown-driven cards into `templates/nextjs/src/comp
 - [x] Refactor and reorganize parameters to improve usability
 
 ## cosine-card-terrain
-- [ ] Analyze the provided source and see how we might integrate the parameteric behavior
-- [ ] Determine if the new source provides any additional terrain calculation features
-- [ ] Examine viability and best method of adding control panel (design task)
-- [ ] Panel should be accessed by a small gear icon or similar.  Don't display it all the time.
-- [ ] Consider how to respond to changes in controls (refresh, smoothly adapt to new parameters, etc).  Use feature.cosine-live-update as additional background in evaluating this task.
+- [x] Analyze the provided source and see how we might integrate the parameteric behavior
+- [x] Determine if the new source provides any additional terrain calculation features
+- [x] Panel should be accessed by a small gear icon or similar.  Don't display it all the time.
+- [x] Consider how to respond to changes in controls (refresh, smoothly adapt to new parameters, etc).  Use feature.cosine-live-update as additional background in evaluating this task.
 
 ## color-themes 
 Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-themes.md`
@@ -40,12 +39,6 @@ Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-theme
 Notes:
 - Technologies marquee: use `BaseCard` + `TechnologyScroller` directly; no dedicated wrapper.
 - All tasks apply under monorepo mode—operate only inside `templates/nextjs/`.
-
-## cosine-terrain-eslint
-Design source: `templates/nextjs/examples/our-project/tasks/04-tasks-cosine-terrain-eslint.md`
-
-- [ ] Fix strict types and ESLint in `CosineTerrainCard.tsx` (no-explicit-any, unused vars, cleanup warning)
-- [ ] No behavior changes; keep perf identical
 
 
 ## color-themes-2
@@ -102,65 +95,59 @@ Design source: `project-artifacts/features/02-feature-ui-refactor.md`
 Scope: Extract framework-agnostic components from Next.js template into reusable ui-core package, enabling multi-framework support (Astro, React Router) while maintaining Next.js optimizations.
 
 ### Phase 1: Infrastructure Setup
-- [ ] **Restructure monorepo workspace**
+- [x] **Restructure monorepo workspace**
   - Create `packages/` directory in existing manta-templates repo
   - Update root `package.json` workspace configuration to include `packages/*`
   - Verify workspace structure builds without errors
   - Success: `pnpm build` runs successfully from root with new workspace structure
 
-- [ ] **Create ui-core package foundation**
+- [x] **Create ui-core package foundation**
   - Initialize `packages/ui-core/` with package.json, tsconfig.json
   - Set up peer dependencies: React >=18.0.0, react-dom >=18.0.0
   - Configure build system (TypeScript compilation, barrel exports)
   - Add core dependencies: @radix-ui/colors, @radix-ui/react-slot, class-variance-authority, clsx, tailwind-merge, lucide-react
   - Success: ui-core package builds independently and can be imported by templates
 
-- [ ] **Set up TypeScript configurations**
+- [x] **Set up TypeScript configurations**
   - Create packages/ui-core/tsconfig.json with appropriate module resolution
   - Configure path mapping for internal imports
   - Set up build scripts and export configuration
   - Success: TypeScript compilation works without errors, proper type exports
 
-- [ ] **Create initial directory structure**
+- [x] **Create initial directory structure**
   - Create packages/ui-core/src/ with components/, hooks/, utils/, types/ subdirectories
   - Set up barrel export system in packages/ui-core/src/index.ts
   - Create packages/ui-adapters/ directory for framework-specific adapters
   - Success: Clean import structure, components can be imported from @manta-templates/ui-core
 
 ### Phase 2: Core Component Extraction
-- [ ] **Extract base UI primitives**
+- [x] **Extract base UI primitives**
   - Move BaseCard from templates/nextjs/src/components/cards/BaseCard.tsx to packages/ui-core/src/components/ui/
   - Move Button from templates/nextjs/src/components/ui/button.tsx to packages/ui-core/src/components/ui/
   - Abstract away Next.js specific dependencies (remove next/image, next/link imports)
   - Create generic Image and Link components with dependency injection pattern
   - Success: BaseCard and Button work independently without Next.js dependencies
 
-- [ ] **Extract and abstract core cards**
+- [x] **Extract and abstract core cards**
   - Move BlogCard to packages/ui-core/src/components/cards/ with Image/Link dependency injection
   - Move ProjectCard to packages/ui-core/src/components/cards/ with abstracted dependencies  
   - Move QuoteCard to packages/ui-core/src/components/cards/ (minimal abstraction needed)
   - Update component interfaces to accept ImageComponent and LinkComponent props
   - Success: Cards render correctly with injected dependencies, maintain full functionality
 
-- [ ] **Extract layout components**
+- [x] **Extract layout components**
   - Move BentoLayout from templates/nextjs/src/components/layouts/ to packages/ui-core/src/components/layouts/
   - Move GridLayout system (grid-container.tsx, grid-item.tsx, grid-layout.tsx) to ui-core
   - Move Container component to packages/ui-core/src/components/layouts/
   - Abstract any framework-specific dependencies
   - Success: Layout components work with any React framework, no Next.js coupling
 
-- [ ] **Extract shared utilities and types**
+- [x] **Extract shared utilities and types**
   - Move cn utility, formatDate, and other shared functions to packages/ui-core/src/utils/
   - Move shared TypeScript interfaces to packages/ui-core/src/types/
   - Create theme-related utilities and hooks in packages/ui-core/src/hooks/
   - Export all utilities through barrel exports
   - Success: All shared code accessible from single ui-core import, no duplication
-
-- [ ] **Set up theme system in ui-core**
-  - Move theme context and provider from templates/nextjs to packages/ui-core/src/providers/
-  - Move ThemeToggle component to packages/ui-core/src/components/ui/
-  - Abstract theme system to work without Next.js specific features
-  - Success: Theme system works independently, can be used across frameworks
 
 ### Phase 3: Adapter Creation
 - [ ] **Create Next.js adapter package**
