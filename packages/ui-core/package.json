@@ -9,8 +9,10 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
-    "clean": "rimraf dist"
+    "dev": "tsc --watch", 
+    "clean": "rimraf dist",
+    "test": "tsx src/__tests__/content.test.ts",
+    "test:watch": "tsx watch src/__tests__/content.test.ts"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -22,7 +24,14 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.507.0",
+    "rehype-pretty-code": "^0.14.1",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-rehype": "^11.1.2",
     "tailwind-merge": "^3.3.1",
     "three": "^0.170.0"
   },
@@ -32,6 +41,7 @@
     "@types/react-dom": "^19.1.6",
     "@types/three": "^0.170.0",
     "rimraf": "^5.0.5",
+    "tsx": "^4.20.4",
     "typescript": "^5.8.3"
   }
 }
