@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '../../utils/cn';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Default breakpoints - can be overridden via props
 const DEFAULT_BREAKPOINTS = {
@@ -128,8 +129,8 @@ export function CardCarousel({
   minHeight,
   breakpoints = DEFAULT_BREAKPOINTS,
   ButtonComponent = 'button',
-  ChevronLeftIcon = () => <span>‹</span>,
-  ChevronRightIcon = () => <span>›</span>,
+  ChevronLeftIcon = ChevronLeft,
+  ChevronRightIcon = ChevronRight,
   PlayIcon = () => <span>▶</span>,
   PauseIcon = () => <span>⏸</span>,
   MotionComponent,
@@ -302,7 +303,7 @@ export function CardCarousel({
         setCurrentIndex(totalCards - 1);
         // Re-enable transitions after reset
         setTimeout(() => setIsTransitioning(false), 50);
-      } else if (currentIndex < -1) {
+      } else     if (currentIndex < -1) {
         // Reset to equivalent position in the main array
         setIsTransitioning(true);
         const equivalentIndex = ((currentIndex + 1) % totalCards + totalCards) % totalCards;
@@ -487,20 +488,22 @@ export function CardCarousel({
       {showArrows && (
         <>
           <ButtonComponent
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 aspect-square flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            type={typeof ButtonComponent === 'string' ? 'button' : undefined}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
             aria-label="Previous slide"
           >
-            <span className="h-4 w-4">‹</span>
+            {ChevronLeftIcon ? <ChevronLeftIcon className="h-4 w-4" /> : <span className="h-4 w-4">‹</span>}
           </ButtonComponent>
           <ButtonComponent
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 aspect-square flex items-center justify-center rounded-full backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            type={typeof ButtonComponent === 'string' ? 'button' : undefined}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_30%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
             aria-label="Next slide"
           >
-            <span className="h-4 w-4">›</span>
+            {ChevronRightIcon ? <ChevronRightIcon className="h-4 w-4" /> : <span className="h-4 w-4">›</span>}
           </ButtonComponent>
         </>
       )}
