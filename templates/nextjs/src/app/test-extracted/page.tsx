@@ -286,9 +286,27 @@ export default function TestExtractedPage() {
             showArrows
             showDots={false}
           >
-            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-3)] text-[var(--color-accent-12)]">Slide One</div>
-            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-4)] text-[var(--color-accent-12)]">Slide Two</div>
-            <div className="h-full flex items-center justify-center rounded-lg border bg-[var(--color-accent-5)] text-[var(--color-accent-12)]">Slide Three</div>
+            <GradientCard
+              className="h-full"
+              gradient="sunset"
+              title="Carousel Slide One"
+              description="GradientCard in carousel"
+              shimmer
+            />
+            <GradientCard
+              className="h-full"
+              gradient="teal"
+              title="Carousel Slide Two"
+              description="GradientCard in carousel"
+              shimmer
+            />
+            <GradientCard
+              className="h-full"
+              gradient="purple"
+              title="Carousel Slide Three"
+              description="GradientCard in carousel"
+              shimmer
+            />
           </CardCarousel>
         </GridItem>
 
