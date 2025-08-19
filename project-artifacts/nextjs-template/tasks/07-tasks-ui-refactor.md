@@ -307,39 +307,39 @@
   - [x] Success: All extracted cards render and function identically to originals
 
 ### Carousel Consolidation (CardCarousel2 → CardCarousel)
-- [ ] Preserve CardCarousel2 functionality as the single carousel implementation
-  - [ ] Confirm seamless infinite loop (no jump-back/forward)
-  - [ ] Ensure only one slide visible at all breakpoints by default (configurable)
-  - [ ] Verify touch/swipe gestures, arrows, dots, auto-play pause/resume behavior
-  - [ ] Maintain existing Tailwind classes and sizing logic (no regressions)
-- [ ] Remove legacy component
-  - [ ] Delete `packages/ui-core/src/components/layouts/CardCarousel.tsx`
-- [ ] Rename CardCarousel2 to CardCarousel
-  - [ ] Rename file: `CardCarousel2.tsx` → `CardCarousel.tsx`
-  - [ ] Rename exported symbol to `CardCarousel`
-  - [ ] Update `packages/ui-core/src/components/layouts/index.ts` export to `export { CardCarousel } from './CardCarousel'`
-  - [ ] Update any imports/usages across the repo
-- [ ] Add example usage on test page
-  - [ ] In `templates/nextjs/src/app/test-extracted/page.tsx`, add a `CardCarousel` example with:
-    - [ ] Exactly 3 slides
-    - [ ] `infinite: true`
-    - [ ] Only 1 slide visible at a time (all breakpoints)
-  - [ ] Verify visually on the page and adjust container heights/minHeight if necessary
-- [ ] Build & verify
-  - [ ] Build `ui-core`
-  - [ ] Ensure no TypeScript/lint errors
-  - [ ] Validate behavior and responsiveness in Next.js app
+- [x] Preserve CardCarousel2 functionality as the single carousel implementation
+  - [x] Confirm seamless infinite loop (no jump-back/forward)
+  - [x] Ensure only one slide visible at all breakpoints by default (configurable)
+  - [x] Verify touch/swipe gestures, arrows, dots, auto-play pause/resume behavior
+  - [x] Maintain existing Tailwind classes and sizing logic (no regressions)
+- [x] Remove legacy component
+  - [x] Delete `packages/ui-core/src/components/layouts/CardCarousel.tsx`
+- [x] Rename CardCarousel2 to CardCarousel
+  - [x] Rename file: `CardCarousel2.tsx` → `CardCarousel.tsx`
+  - [x] Rename exported symbol to `CardCarousel`
+  - [x] Update `packages/ui-core/src/components/layouts/index.ts` export to `export { CardCarousel } from './CardCarousel'`
+  - [x] Update any imports/usages across the repo
+- [x] Add example usage on test page
+  - x] In `templates/nextjs/src/app/test-extracted/page.tsx`, add a `CardCarousel` example with:
+    - [x] Exactly 3 slides
+    - [x] `infinite: true`
+    - [x] Only 1 slide visible at a time (all breakpoints)
+  - [x] Verify visually on the page and adjust container heights/minHeight if necessary
+- [x] Build & verify
+  - [x] Build `ui-core`
+  - [x] Ensure no TypeScript/lint errors
+  - [x] Validate behavior and responsiveness in Next.js app
 
 ## Phase 2 Final: Comprehensive Testing Infrastructure
 
 ### Create Test Suite for Next.js Integration
 - [x] Use existing comprehensive test page for all extracted components
   - [x] Use templates/nextjs/src/app/test-extracted/page.tsx
-  - [ ] Ensure ALL extracted cards are included with Next.js Image and Link injection
-  - [ ] Include edge cases, different props, responsive behavior
-  - [ ] Test dark/light mode compatibility for all cards
-  - [ ] Test animations, videos, 3D rendering where applicable
-  - [ ] Document visual regression testing approach
+  - [x] Ensure ALL extracted cards are included with Next.js Image and Link injection
+  - [x] Include edge cases, different props, responsive behavior
+  - [x] Test dark/light mode compatibility for all cards
+  - [x] Test animations, videos, 3D rendering where applicable
+  - [x] Document visual regression testing approach
 
 - [ ] Create unit/integration tests (high priority for accuracy)
   - [ ] Set up testing infrastructure in ui-core package
