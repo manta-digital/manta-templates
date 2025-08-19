@@ -299,8 +299,8 @@
 - [x] Success: ArticleCard maintains exact article functionality and appearance
 
 - [ ] Comprehensive testing of extracted cards
-  - [ ] Build ui-core package: `pnpm build-ui`
-  - [ ] Verify each card is using Next.js Image and Link components injected (in test-extracted/page.tsx)
+  - [x] Build ui-core package: `pnpm build-ui` (built via `pnpm -C packages/ui-core build`)
+  - [x] Verify each card is using Next.js Image and Link components injected (in test-extracted/page.tsx)
   - [ ] Verify exact visual and functional match to originals
   - [ ] Test responsive behavior and animations
   - [ ] Test video and 3D functionality where applicable
