@@ -92,7 +92,224 @@ export class ReactRouterContentProvider implements ContentProvider {
 }
 ```
 
-### Phase 3: Enhanced Card Components
+### Phase 3: Content System Testing Framework
+
+Before enhancing card components with content loading, establish a comprehensive testing framework to validate the content management system across different scenarios and deployment contexts.
+
+#### Testing Strategy Overview
+
+**Content Source Architecture:**
+- **Template Development**: Content stored in `templates/nextjs/src/content/` for monorepo testing
+- **Template Instance Deployment**: Content stored in `src/content/` for end-user projects
+- **Test Integration**: Examples use relative content paths to demonstrate real-world usage patterns
+
+#### Content Directory Structure
+
+```
+templates/nextjs/src/content/
+├── articles/           # Blog posts and articles
+│   ├── sample-post.md
+│   └── theme-guide.md
+├── projects/          # Project case studies
+│   ├── semantic-colors.md
+│   └── ui-core-refactor.md
+├── quotes/            # Quote content
+│   └── design-philosophy.md
+└── example-2/         # Test-specific content
+    ├── carousel-items.md
+    ├── featured-content.md
+    └── grid-samples.md
+```
+
+#### Template Instance Content Mapping
+
+For deployed template instances, content structure maps as:
+```
+src/content/           # User's content directory
+├── articles/
+├── projects/
+├── quotes/
+└── [custom-collections]/
+```
+
+#### Test Implementation Plan
+
+**Phase 3.1: Content-Driven Test Example**
+Transform `templates/nextjs/src/app/test-example-2/` to use markdown content:
+
+```typescript
+// templates/nextjs/src/app/test-example-2/page.tsx (enhanced)
+import { getContentBySlug, getAllContent } from '@/lib/content';
+
+export default async function TestExample2Page() {
+  // Load content for carousel items
+  const carouselItems = await getAllContent('example-2');
+  
+  // Load featured article
+  const featuredArticle = await getContentBySlug('articles', 'theme-guide');
+  
+  // Load quote
+  const designQuote = await getContentBySlug('quotes', 'design-philosophy');
+  
+  return (
+    <main className="min-h-screen p-6 md:p-10">
+      <BentoLayout>
+        {/* Content-driven carousel */}
+        <GridItem>
+          <CardCarousel>
+            {carouselItems.map(item => (
+              <BlogCardImage
+                key={item.slug}
+                title={item.frontmatter.title}
+                excerpt={item.frontmatter.excerpt}
+                coverImageUrl={item.frontmatter.coverImage}
+                slug={`/content/${item.slug}`}
+              />
+            ))}
+          </CardCarousel>
+        </GridItem>
+        
+        {/* Content-driven featured article */}
+        <GridItem>
+          <BlogCardImage
+            title={featuredArticle.frontmatter.title}
+            excerpt={featuredArticle.frontmatter.excerpt}
+            coverImageUrl={featuredArticle.frontmatter.coverImage}
+          />
+        </GridItem>
+        
+        {/* Content-driven quote */}
+        <GridItem>
+          <QuoteCard
+            quote={designQuote.frontmatter.quote}
+            author={designQuote.frontmatter.author}
+          />
+        </GridItem>
+      </BentoLayout>
+    </main>
+  );
+}
+```
+
+**Phase 3.2: Content Schema Validation**
+Define and validate content schemas for different content types:
+
+```typescript
+// templates/nextjs/src/lib/content/schemas.ts
+import { z } from 'zod';
+
+export const ArticleSchema = z.object({
+  title: z.string(),
+  excerpt: z.string(),
+  coverImage: z.string(),
+  publishedAt: z.string().transform(str => new Date(str)),
+  tags: z.array(z.string()).optional(),
+  featured: z.boolean().optional()
+});
+
+export const ProjectSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  techStack: z.array(z.string()),
+  image: z.string(),
+  repoUrl: z.string().url(),
+  features: z.array(z.object({
+    label: z.string(),
+    icon: z.string(),
+    color: z.string().optional()
+  }))
+});
+
+export const QuoteSchema = z.object({
+  quote: z.string(),
+  author: z.string(),
+  context: z.string().optional()
+});
+```
+
+**Phase 3.3: Content Loading Integration**
+Implement content loading that works in both template development and instance deployment:
+
+```typescript
+// templates/nextjs/src/lib/content/loader.ts
+import { join } from 'path';
+import { ContentProvider } from '@manta-templates/ui-core';
+
+export class NextjsContentProvider implements ContentProvider {
+  private contentPath: string;
+  
+  constructor() {
+    // Adapt to template vs instance context
+    this.contentPath = process.env.NODE_ENV === 'development' 
+      ? join(process.cwd(), 'src/content')
+      : join(process.cwd(), 'src/content');
+  }
+  
+  async loadContent(slug: string, contentType: string) {
+    const filePath = join(this.contentPath, contentType, `${slug}.md`);
+    // Implementation details...
+  }
+}
+```
+
+**Phase 3.4: Testing Coverage Matrix**
+
+| Test Scenario | Content Source | Framework | Expected Behavior |
+|---------------|----------------|-----------|-------------------|
+| Template Development | `templates/nextjs/src/content/` | Next.js | Cards load from monorepo content |
+| Instance Deployment | `src/content/` | Next.js | Cards load from user content |
+| Content Validation | Both | Next.js | Schema validation passes |
+| Missing Content | Both | Next.js | Graceful fallback to hardcoded props |
+| Invalid Frontmatter | Both | Next.js | Error handling with dev feedback |
+
+#### Success Criteria for Phase 3
+
+1. **Content Integration**: `test-example-2` successfully loads all content from markdown files
+2. **Path Resolution**: Content loading works in both template development and instance contexts
+3. **Schema Validation**: All content types validate against defined schemas
+4. **Error Handling**: Missing or invalid content degrades gracefully
+5. **Developer Experience**: Clear error messages for content issues during development
+6. **Performance**: Content loading doesn't impact page performance significantly
+
+#### Content Files Required
+
+**Core Content Files:**
+```markdown
+# templates/nextjs/src/content/example-2/carousel-hero.md
+---
+title: "Semantic Design System"
+excerpt: "Building consistent user experiences with design tokens"
+coverImage: "/image/blog-sample-image.png"
+type: "article"
+---
+
+# templates/nextjs/src/content/articles/theme-guide.md
+---
+title: "Colors and Themes"
+excerpt: "Radix scales with semantic aliasing and palette switching"
+coverImage: "/image/blog-sample-image.png"
+featured: true
+---
+
+# templates/nextjs/src/content/quotes/design-philosophy.md
+---
+quote: "Make the easy path the right path—semantic tokens everywhere."
+author: "Manta Templates"
+context: "Design system principles"
+---
+```
+
+#### Migration Path for Users
+
+When users deploy a template instance:
+1. Content is already positioned at `src/content/` in the deployed template
+2. All relative imports and content loading work seamlessly
+3. Users can modify content without touching component code
+4. Clear documentation guides content organization
+
+This testing phase validates that the content system works reliably before implementing the full framework-agnostic abstraction layer.
+
+### Phase 4: Enhanced Card Components
 Extend ui-core cards with content loading capabilities:
 
 ```typescript
@@ -126,7 +343,7 @@ export function ArticleCard({
 }
 ```
 
-### Phase 4: Framework-Specific Wrappers
+### Phase 5: Framework-Specific Wrappers
 Create convenient wrapper components for each framework:
 
 **Next.js:**
@@ -224,13 +441,19 @@ interface EnhancedCardProps {
 - Create Next.js wrapper components
 - Maintain backward compatibility
 
-### Phase 3: Additional Frameworks (2-3 weeks)
+### Phase 3: Content System Testing (1 week)
+- Create comprehensive testing framework for content management
+- Transform test-example-2 to use markdown content
+- Implement content schema validation
+- Test content loading in both template and instance contexts
+
+### Phase 4: Additional Frameworks (2-3 weeks)
 - Implement Astro content adapter
 - Implement React Router content adapter  
 - Test across frameworks
 - Documentation and examples
 
-### Phase 4: Optimization (1 week)
+### Phase 5: Optimization (1 week)
 - Performance optimization
 - Bundle size analysis
 - Developer experience improvements
