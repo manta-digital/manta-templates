@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import type { ComponentType } from 'react';
 import { cn } from '../../utils';
 import { BaseCard } from '../ui/BaseCard';
 import { Button } from '../ui/button';
 import { ProjectContent } from '../../types/content';
+import type { ContentProvider } from '../../content/types';
 import { Zap, Code } from 'lucide-react';
 
 interface ProjectCardProps {
@@ -17,6 +19,32 @@ interface ProjectCardProps {
   overlay?: boolean; // render children as background overlay
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
+  
+  // Content loading props
+  /**
+   * Content provider instance for loading content dynamically
+   */
+  contentProvider?: ContentProvider<ProjectContent>;
+  /**
+   * Content slug to load when contentProvider is provided
+   */
+  contentSlug?: string;
+  /**
+   * Content type/category for loading (defaults to 'projects')
+   */
+  contentType?: string;
+  /**
+   * Show loading indicator while content is being fetched
+   */
+  showLoadingIndicator?: boolean;
+  /**
+   * Custom loading component to display while loading content
+   */
+  LoadingComponent?: ComponentType;
+  /**
+   * Custom error component to display when content loading fails
+   */
+  ErrorComponent?: ComponentType<{ error: Error; retry: () => void }>;
 }
 
 interface ProjectCardBodyProps {
@@ -114,14 +142,92 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   overlay = false,
   ImageComponent,
   LinkComponent,
+  contentProvider,
+  contentSlug,
+  contentType = 'projects',
+  showLoadingIndicator = false,
+  LoadingComponent,
+  ErrorComponent,
 }) => {
+  // Content loading state
+  const [loadedContent, setLoadedContent] = useState<ProjectContent | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  
+  // Load content when provider and slug are provided
+  useEffect(() => {
+    if (!contentProvider || !contentSlug) {
+      return;
+    }
+
+    let isMounted = true;
+    setIsLoading(true);
+    setError(null);
+
+    const loadContent = async () => {
+      try {
+        const contentData = await contentProvider.loadContent(contentSlug, contentType);
+        if (isMounted) {
+          setLoadedContent(contentData.frontmatter);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          const error = err instanceof Error ? err : new Error('Failed to load content');
+          setError(error);
+          setIsLoading(false);
+          console.warn(`Failed to load project content for ${contentSlug}:`, error);
+        }
+      }
+    };
+
+    loadContent();
+
+    // Cleanup function to prevent state updates on unmounted component
+    return () => {
+      isMounted = false;
+    };
+  }, [contentProvider, contentSlug, contentType]);
+
+  // Retry function for error component
+  const retryContentLoad = () => {
+    if (contentProvider && contentSlug) {
+      setError(null);
+      setLoadedContent(null);
+      setIsLoading(true);
+    }
+  };
+
+  // Merge props: hardcoded props override loaded content, fallback to loaded content
+  const finalContent: ProjectContent | undefined = loadedContent ? {
+    title: title || loadedContent.title,
+    description: description || loadedContent.description,
+    techStack: techStack.length ? techStack : (loadedContent.techStack || []),
+    repoUrl: repoUrl || loadedContent.repoUrl,
+    demoUrl: demoUrl || loadedContent.demoUrl,
+    actions: loadedContent.actions,
+    features: loadedContent.features,
+    displayMode: loadedContent.displayMode,
+    image: loadedContent.image,
+    displayVariant: loadedContent.displayVariant,
+  } : content;
+
+  // Show loading state if requested and content is loading
+  if (showLoadingIndicator && isLoading && LoadingComponent) {
+    return <LoadingComponent />;
+  }
+
+  // Show error state if content loading failed and no fallback content
+  if (error && ErrorComponent && !title && !description && !content) {
+    return <ErrorComponent error={error} retry={retryContentLoad} />;
+  }
   // Showcase variant (image-top spotlight style)
-  if (content?.displayVariant === 'showcase') {
-    const showTitle = title || content?.title;
-    const showDesc = description || content?.description;
-    const showStack = techStack.length ? techStack : (content?.techStack || []);
-    const image = content?.image;
-    const features = content?.features || [];
+  if (finalContent?.displayVariant === 'showcase') {
+    const showTitle = title || finalContent?.title;
+    const showDesc = description || finalContent?.description;
+    const showStack = techStack.length ? techStack : (finalContent?.techStack || []);
+    const image = finalContent?.image;
+    const features = finalContent?.features || [];
     
     return (
       <BaseCard 
@@ -185,8 +291,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
           
           {(() => {
-            const actions = (content?.actions && content.actions.length > 0) ? content.actions : [{
-              href: repoUrl || content?.repoUrl || '',
+            const actions = (finalContent?.actions && finalContent.actions.length > 0) ? finalContent.actions : [{
+              href: repoUrl || finalContent?.repoUrl || '',
               label: 'View on GitHub',
               variant: 'primary' as const
             }];
@@ -241,11 +347,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           wrapperClassName="relative z-10 flex flex-col justify-end h-full p-4 rounded-[0.5rem] bg-black/10 pointer-events-none"
           h3ClassName="text-lg font-semibold mb-2 text-white"
           pClassName="text-sm text-white mb-4"
-          title={title || content?.title}
-          description={description || content?.description}
-          techStack={techStack || content?.techStack}
-          repoUrl={repoUrl || content?.repoUrl}
-          demoUrl={demoUrl || content?.demoUrl}
+          title={title || finalContent?.title}
+          description={description || finalContent?.description}
+          techStack={techStack || finalContent?.techStack}
+          repoUrl={repoUrl || finalContent?.repoUrl}
+          demoUrl={demoUrl || finalContent?.demoUrl}
           isOverlay={true}
           LinkComponent={LinkComponent}
           showLinks={!demoUrl}
@@ -298,17 +404,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           wrapperClassName="flex flex-col p-6 pt-4 pb-6 mt-auto"
           h3ClassName="text-lg font-semibold mb-2 line-clamp-2 group-hover:underline"
           pClassName="text-sm text-muted-foreground mb-4 line-clamp-3 grow"
-          title={title || content?.title}
-          description={description || content?.description}
-          techStack={techStack || content?.techStack}
-          repoUrl={repoUrl || content?.repoUrl}
-          demoUrl={demoUrl || content?.demoUrl}
+          title={title || finalContent?.title}
+          description={description || finalContent?.description}
+          techStack={techStack || finalContent?.techStack}
+          repoUrl={repoUrl || finalContent?.repoUrl}
+          demoUrl={demoUrl || finalContent?.demoUrl}
           LinkComponent={LinkComponent}
           showLinks={!demoUrl}
         />
-        {!!(content?.features?.length) && (
+        {!!(finalContent?.features?.length) && (
           <ul className="px-6 pb-4 -mt-2 space-y-2">
-            {content.features.slice(0,4).map((f) => (
+            {finalContent.features.slice(0,4).map((f) => (
               <li key={f.label} className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Zap className="h-4 w-4 text-muted-foreground/70" />
                 <span>{f.label}</span>
