@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import type { ComponentType } from 'react';
 import { QuoteContent } from '../../types/content';
+import type { ContentProvider } from '../../content/types';
 import { cn } from '../../utils';
 import { BaseCard } from '../ui/BaseCard';
 
@@ -18,6 +20,32 @@ interface QuoteCardProps {
   theme?: 'light' | 'dark';
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
+  
+  // Content loading props
+  /**
+   * Content provider instance for loading content dynamically
+   */
+  contentProvider?: ContentProvider<QuoteContent>;
+  /**
+   * Content slug to load when contentProvider is provided
+   */
+  contentSlug?: string;
+  /**
+   * Content type/category for loading (defaults to 'quotes')
+   */
+  contentType?: string;
+  /**
+   * Show loading indicator while content is being fetched
+   */
+  showLoadingIndicator?: boolean;
+  /**
+   * Custom loading component to display while loading content
+   */
+  LoadingComponent?: ComponentType;
+  /**
+   * Custom error component to display when content loading fails
+   */
+  ErrorComponent?: ComponentType<{ error: Error; retry: () => void }>;
 }
 
 /**
@@ -32,15 +60,89 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
   theme = 'light',
   ImageComponent,
   LinkComponent,
+  contentProvider,
+  contentSlug,
+  contentType = 'quotes',
+  showLoadingIndicator = false,
+  LoadingComponent,
+  ErrorComponent,
 }) => {
+  // Content loading state
+  const [loadedContent, setLoadedContent] = useState<QuoteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  
+  // Load content when provider and slug are provided
+  useEffect(() => {
+    if (!contentProvider || !contentSlug) {
+      return;
+    }
+
+    let isMounted = true;
+    setIsLoading(true);
+    setError(null);
+
+    const loadContent = async () => {
+      try {
+        const contentData = await contentProvider.loadContent(contentSlug, contentType);
+        if (isMounted) {
+          setLoadedContent(contentData.frontmatter);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          const error = err instanceof Error ? err : new Error('Failed to load content');
+          setError(error);
+          setIsLoading(false);
+          console.warn(`Failed to load quote content for ${contentSlug}:`, error);
+        }
+      }
+    };
+
+    loadContent();
+
+    // Cleanup function to prevent state updates on unmounted component
+    return () => {
+      isMounted = false;
+    };
+  }, [contentProvider, contentSlug, contentType]);
+
+  // Retry function for error component
+  const retryContentLoad = () => {
+    if (contentProvider && contentSlug) {
+      setError(null);
+      setLoadedContent(null);
+      setIsLoading(true);
+    }
+  };
+
+  // Merge props: hardcoded props override loaded content, fallback to loaded content
+  const finalContent: QuoteContent | undefined = loadedContent ? {
+    quote: quote || loadedContent.quote,
+    author: author || loadedContent.author,
+    role: loadedContent.role,
+    company: loadedContent.company,
+    featured: loadedContent.featured,
+    order: loadedContent.order,
+  } : content;
+
+  // Show loading state if requested and content is loading
+  if (showLoadingIndicator && isLoading && LoadingComponent) {
+    return <LoadingComponent />;
+  }
+
+  // Show error state if content loading failed and no fallback content
+  if (error && ErrorComponent && !quote && !content) {
+    return <ErrorComponent error={error} retry={retryContentLoad} />;
+  }
   // Define accent color classes based on variant
   const accentColors = {
     primary: 'text-purple-400',
     secondary: 'text-blue-400'
   };
 
-  const displayQuote = content?.quote ?? quote;
-  const displayAuthor = content?.author ?? author;
+  const displayQuote = finalContent?.quote ?? quote;
+  const displayAuthor = finalContent?.author ?? author;
   if (!displayQuote) return null;
 
   return (
