@@ -1,12 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import type { ComponentType } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { cn, formatDate } from '../../utils';
 import { BaseCard } from '../ui/BaseCard';
-import type { ArticleContent } from './ArticleCard';
-import type { ContentProvider } from '../../content/types';
 
 export interface BlogCardImageProps {
   imageMaxHeight?: string; 
@@ -28,32 +25,6 @@ export interface BlogCardImageProps {
   className?: string;
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
-  
-  // Content loading props
-  /**
-   * Content provider instance for loading content dynamically
-   */
-  contentProvider?: ContentProvider<ArticleContent>;
-  /**
-   * Content slug to load when contentProvider is provided
-   */
-  contentSlug?: string;
-  /**
-   * Content type/category for loading (defaults to 'articles')
-   */
-  contentType?: string;
-  /**
-   * Show loading indicator while content is being fetched
-   */
-  showLoadingIndicator?: boolean;
-  /**
-   * Custom loading component to display while loading content
-   */
-  LoadingComponent?: ComponentType;
-  /**
-   * Custom error component to display when content loading fails
-   */
-  ErrorComponent?: ComponentType<{ error: Error; retry: () => void }>;
 }
 
 const BlogCardImage: React.FC<BlogCardImageProps> = ({
@@ -73,80 +44,10 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
   imageMaxHeight,
   ImageComponent,
   LinkComponent,
-  contentProvider,
-  contentSlug,
-  contentType = 'articles',
-  showLoadingIndicator = false,
-  LoadingComponent,
-  ErrorComponent,
   ...props
 }) => {
-  // Content loading state
-  const [loadedContent, setLoadedContent] = useState<ArticleContent | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  
-  // Load content when provider and slug are provided
-  useEffect(() => {
-    if (!contentProvider || !contentSlug) {
-      return;
-    }
-
-    let isMounted = true;
-    setIsLoading(true);
-    setError(null);
-
-    const loadContent = async () => {
-      try {
-        const contentData = await contentProvider.loadContent(contentSlug, contentType);
-        if (isMounted) {
-          setLoadedContent(contentData.frontmatter);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        if (isMounted) {
-          const error = err instanceof Error ? err : new Error('Failed to load content');
-          setError(error);
-          setIsLoading(false);
-          console.warn(`Failed to load blog content for ${contentSlug}:`, error);
-        }
-      }
-    };
-
-    loadContent();
-
-    // Cleanup function to prevent state updates on unmounted component
-    return () => {
-      isMounted = false;
-    };
-  }, [contentProvider, contentSlug, contentType]);
-
-  // Retry function for error component
-  const retryContentLoad = () => {
-    if (contentProvider && contentSlug) {
-      setError(null);
-      setLoadedContent(null);
-      setIsLoading(true);
-    }
-  };
-
-  // Merge props: hardcoded props override loaded content, fallback to loaded content
-  const finalTitle = title || loadedContent?.title || 'Untitled Article';
-  const finalExcerpt = excerpt || loadedContent?.description;
-  const finalCoverImageUrl = coverImageUrl || loadedContent?.image;
-
-  // Show loading state if requested and content is loading
-  if (showLoadingIndicator && isLoading && LoadingComponent) {
-    return <LoadingComponent />;
-  }
-
-  // Show error state if content loading failed and no fallback content
-  if (error && ErrorComponent && !title && !coverImageUrl) {
-    return <ErrorComponent error={error} retry={retryContentLoad} />;
-  }
-
   // Return null if no content to display
-  if (!finalTitle || !finalCoverImageUrl) {
+  if (!title || !coverImageUrl) {
     return null;
   }
   const formattedDate = date ? formatDate(date) : null;
@@ -167,8 +68,8 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
       >
         {ImageComponent ? (
           <ImageComponent
-            src={finalCoverImageUrl}
-            alt={`Background for ${finalTitle}`}
+            src={coverImageUrl}
+            alt={`Background for ${title}`}
             fill
             className={cn(
               'absolute inset-0 w-full h-full object-cover',
@@ -179,8 +80,8 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
           />
         ) : (
           <img
-            src={finalCoverImageUrl}
-            alt={`Background for ${finalTitle}`}
+            src={coverImageUrl}
+            alt={`Background for ${title}`}
             className={cn(
               'absolute inset-0 w-full h-full object-cover',
               dim && 'brightness-75',
@@ -204,11 +105,11 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
             </p>
           )}
           <h3 className="text-2xl md:text-3xl font-bold mb-2 line-clamp-3">
-            {finalTitle}
+            {title}
           </h3>
-          {finalExcerpt && (
+          {excerpt && (
             <p className="text-sm md:text-base opacity-90 mb-3 line-clamp-2 md:line-clamp-3">
-              {finalExcerpt}
+              {excerpt}
             </p>
           )}
           <div className="flex items-center text-xs opacity-80">
@@ -223,11 +124,11 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
 
   return slug ? (
     LinkComponent ? (
-      <LinkComponent href={slug} className="contents" aria-label={`Read more about ${finalTitle}`}>
+      <LinkComponent href={slug} className="contents" aria-label={`Read more about ${title}`}>
         {cardContent}
       </LinkComponent>
     ) : (
-      <a href={slug} className="contents" aria-label={`Read more about ${finalTitle}`}>
+      <a href={slug} className="contents" aria-label={`Read more about ${title}`}>
         {cardContent}
       </a>
     )

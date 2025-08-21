@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { ContentData, ContentMeta } from '../content';
 import { getArticleBySlug, getProjectBySlug, getQuoteBySlug, getExampleContentBySlug, getAllArticles, getAllProjects, getAllQuotes, getAllExampleContent } from './loader';
 import { Article, Project, Quote } from './schemas';
@@ -7,7 +8,7 @@ import { Article, Project, Quote } from './schemas';
  * Framework-agnostic content provider interface
  * This interface defines the contract for loading content across different frameworks
  */
-export interface ContentProvider<T extends object = any> {
+export interface ContentProvider<T extends object = Record<string, unknown>> {
   loadContent(slug: string, contentType: string): Promise<ContentData<T>>;
   loadAllContent(contentType: string): Promise<ContentMeta<T>[]>;
 }
@@ -45,7 +46,7 @@ export class NextjsContentProvider implements ContentProvider {
     // Check if templates/nextjs/src/content exists (template development from root)
     const templateContentPath = path.join(cwd, 'templates', 'nextjs', 'src', 'content');
     try {
-      require('fs').statSync(templateContentPath);
+      fs.statSync(templateContentPath);
       return templateContentPath;
     } catch {
       // Fall back to instance deployment path

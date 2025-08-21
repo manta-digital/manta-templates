@@ -1,80 +1,53 @@
-"use client";
-
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BentoLayout, GridItem, GradientCard, BlogCardImage, ProjectCard, BaseCard, QuoteCard, CosineTerrainCard, CardCarousel } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard } from '@manta-templates/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Article, Project, Quote } from '@/lib/content/schemas';
 
-// Content data - simulating loaded content for testing phase
-const contentData = {
-  carouselHero: {
-    frontmatter: {
+// Mock content loading function (replace with actual content loading)
+async function loadExampleContent() {
+  return {
+    carouselHero: {
       title: "Semantic Design System",
       excerpt: "Building consistent user experiences with design tokens and systematic approach to component architecture.",
-      coverImage: "/image/blog-sample-image.png",
-      publishedAt: new Date("2024-01-15"),
-      featured: true,
-      tags: ["design-system", "tokens", "ui"]
-    } as Article,
-    slug: "carousel-hero"
-  },
-  carouselProject: {
-    frontmatter: {
+      coverImageUrl: "/image/blog-sample-image.png",
+      category: "Design System",
+      author: "Manta Templates",
+      date: "2024-01-15",
+    },
+    carouselProject: {
       title: "Semantic Colors",
       description: "Cards using accent and foreground tokens with comprehensive theming support",
       techStack: ["Next.js", "Tailwind v4", "Radix"],
       image: "/image/blog-sample-image.png",
       repoUrl: "https://github.com/manta-templates/semantic-colors",
+      displayVariant: 'showcase' as const,
       features: [
-        { label: "Structured and Customizable Project Phases", icon: "zap" },
-        { label: "AI-driven Task Discovery and Expansion", icon: "zap", color: "primary" },
-        { label: "Parameterized Prompts", icon: "zap", color: "primary" },
-        { label: "Automated Code Reviews", icon: "zap", color: "primary" },
+        { label: "Structured and Customizable Project Phases" },
+        { label: "AI-driven Task Discovery and Expansion" },
+        { label: "Parameterized Prompts" },
+        { label: "Automated Code Reviews" },
       ]
-    } as Project,
-    slug: "carousel-project"
-  },
-  carouselVideo: {
-    frontmatter: {
-      title: "Background Video Demo",
-      excerpt: "Interactive video backgrounds with semantic overlay content and accessibility considerations.",
-      coverImage: "/image/blog-sample-image.png",
-      publishedAt: new Date("2024-01-10"),
-      tags: ["video", "background", "demo"]
-    } as Article,
-    slug: "carousel-video"
-  },
-  featuredArticle: {
-    frontmatter: {
+    },
+    featuredArticle: {
       title: "Colors and Themes",
       excerpt: "Radix scales with semantic aliasing and palette switching. Testing making this a longer description to see how it handles the card layout.",
-      coverImage: "/image/blog-sample-image.png",
-      publishedAt: new Date("2024-01-20"),
-      featured: true,
-      tags: ["colors", "themes", "radix", "palette"]
-    } as Article,
-    slug: "theme-guide"
-  },
-  designQuote: {
-    frontmatter: {
+      coverImageUrl: "/image/blog-sample-image.png",
+      category: "Design",
+      author: "Design Team",
+      date: "2024-01-20",
+    },
+    designQuote: {
       quote: "Make the easy path the right path—semantic tokens everywhere.",
       author: "Manta Templates",
-      context: "Design system principles and developer experience philosophy"
-    } as Quote,
-    slug: "design-philosophy"
-  }
-};
+      role: "Design Philosophy"
+    }
+  };
+}
 
-export default function TestExample2Page() {
-  // Use the content data (simulating loaded content for testing phase)
-  const carouselHeroContent = contentData.carouselHero;
-  const carouselProjectContent = contentData.carouselProject;
-  const carouselVideoContent = contentData.carouselVideo;
-  const featuredArticle = contentData.featuredArticle;
-  const designQuote = contentData.designQuote;
+export default async function TestExample2Page() {
+  // Load content server-side
+  const content = await loadExampleContent();
 
   return (
     <main className="min-h-screen p-6 md:p-10">
@@ -95,60 +68,66 @@ export default function TestExample2Page() {
             showArrows
             showDots={false}
             showControls={false}
-            ChevronLeftIcon={ChevronLeft}
-            ChevronRightIcon={ChevronRight}
           >
-            {/* Carousel hero content loaded from markdown */}
+            {/* Carousel hero content loaded from server */}
             <BlogCardImage
               className="h-full"
-              title={carouselHeroContent.frontmatter.title}
-              excerpt={carouselHeroContent.frontmatter.excerpt}
-              coverImageUrl={carouselHeroContent.frontmatter.coverImage}
-              slug={`/content/example-2/carousel-hero`}
+              title={content.carouselHero.title}
+              excerpt={content.carouselHero.excerpt}
+              coverImageUrl={content.carouselHero.coverImageUrl}
+              category={content.carouselHero.category}
+              author={content.carouselHero.author}
+              date={content.carouselHero.date}
+              slug="/content/example-2/carousel-hero"
               textColorClassName="text-white"
             />
             <ProjectCard
               className="h-full"
               content={{
-                title: carouselProjectContent.frontmatter.title,
-                description: carouselProjectContent.frontmatter.description,
-                techStack: carouselProjectContent.frontmatter.techStack,
-                displayVariant: 'showcase',
-                image: carouselProjectContent.frontmatter.image,
-                repoUrl: carouselProjectContent.frontmatter.repoUrl,
-                features: carouselProjectContent.frontmatter.features || [],
-                actions: [
-                  { label: 'View on GitHub', href: carouselProjectContent.frontmatter.repoUrl, variant: 'outline' },
-                ],
+                title: content.carouselProject.title,
+                description: content.carouselProject.description,
+                techStack: content.carouselProject.techStack,
+                image: content.carouselProject.image,
+                repoUrl: content.carouselProject.repoUrl,
+                displayVariant: content.carouselProject.displayVariant,
+                features: content.carouselProject.features,
               }}
             />
 
             {/* Background video content loaded from markdown */}
             <BaseCard className="h-full overflow-hidden relative !border-0 p-0">
-              <BackgroundVideo full src="https://www.w3schools.com/html/mov_bbb.mp4" poster={carouselVideoContent.frontmatter.coverImage} className="w-full h-full" autoplay>
+              <BackgroundVideo full src="https://www.w3schools.com/html/mov_bbb.mp4" poster="/image/blog-sample-image.png" className="w-full h-full" autoplay>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-card-foreground text-xl font-semibold">{carouselVideoContent.frontmatter.title}</h3>
+                  <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
                 </div>
               </BackgroundVideo>
             </BaseCard>
           </CardCarousel>
         </GridItem>
 
-        {/* Featured article loaded from markdown */}
+        {/* Featured article loaded from server */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
           <BlogCardImage
             className="h-full"
-            title={featuredArticle.frontmatter.title}
-            excerpt={featuredArticle.frontmatter.excerpt}
-            coverImageUrl={featuredArticle.frontmatter.coverImage}
-            slug={`/articles/${featuredArticle.slug}`}
+            title={content.featuredArticle.title}
+            excerpt={content.featuredArticle.excerpt}
+            coverImageUrl={content.featuredArticle.coverImageUrl}
+            category={content.featuredArticle.category}
+            author={content.featuredArticle.author}
+            date={content.featuredArticle.date}
+            slug="/articles/theme-guide"
             textColorClassName="text-white"
           />
         </GridItem>
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
-          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
+          <BlogCardImage 
+            title="Foreground and Borders"
+            excerpt="This card validates text-card-foreground and border tokens over imagery."
+            coverImageUrl="/image/blog-sample-image.png"
+            textColorClassName="text-white"
+          />
         </GridItem>
 
         {/* Cosine terrain visual */}
@@ -169,9 +148,12 @@ export default function TestExample2Page() {
           </BaseCard>
         </GridItem>
 
-        {/* Quote loaded from markdown */}
+        {/* Quote loaded from server */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <QuoteCard quote={designQuote.frontmatter.quote} author={designQuote.frontmatter.author} />
+          <QuoteCard
+            quote={content.designQuote.quote}
+            author={content.designQuote.author}
+          />
         </GridItem>
       </BentoLayout>
     </main>

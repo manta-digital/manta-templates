@@ -19,7 +19,7 @@ function handleValidationError(error: string, contentType: string, slug: string)
  * Schema-specific loading functions
  */
 export async function getArticleBySlug(slug: string): Promise<ContentData<Article>> {
-  const content = await getContentBySlug<any>('articles', slug);
+  const content = await getContentBySlug<Record<string, unknown>>('articles', slug);
   const result = ArticleSchema.safeParse(content.frontmatter);
   
   if (!result.success) {
@@ -33,7 +33,7 @@ export async function getArticleBySlug(slug: string): Promise<ContentData<Articl
 }
 
 export async function getProjectBySlug(slug: string): Promise<ContentData<Project>> {
-  const content = await getContentBySlug<any>('projects', slug);
+  const content = await getContentBySlug<Record<string, unknown>>('projects', slug);
   const result = ProjectSchema.safeParse(content.frontmatter);
   
   if (!result.success) {
@@ -47,7 +47,7 @@ export async function getProjectBySlug(slug: string): Promise<ContentData<Projec
 }
 
 export async function getQuoteBySlug(slug: string): Promise<ContentData<Quote>> {
-  const content = await getContentBySlug<any>('quotes', slug);
+  const content = await getContentBySlug<Record<string, unknown>>('quotes', slug);
   const result = QuoteSchema.safeParse(content.frontmatter);
   
   if (!result.success) {
@@ -61,7 +61,7 @@ export async function getQuoteBySlug(slug: string): Promise<ContentData<Quote>> 
 }
 
 export async function getExampleContentBySlug(slug: string): Promise<ContentData<Article | Project>> {
-  const content = await getContentBySlug<any>('example-2', slug);
+  const content = await getContentBySlug<Record<string, unknown>>('example-2', slug);
   
   // Try Article schema first
   const articleResult = ArticleSchema.safeParse(content.frontmatter);
@@ -91,7 +91,7 @@ export async function getExampleContentBySlug(slug: string): Promise<ContentData
  * Get all content with validation - returns empty array on schema errors
  */
 export function getAllArticles(): ContentMeta<Article>[] {
-  const allContent = getAllContent<any>('articles');
+  const allContent = getAllContent<Record<string, unknown>>('articles');
   const validContent: ContentMeta<Article>[] = [];
   
   for (const item of allContent) {
@@ -110,7 +110,7 @@ export function getAllArticles(): ContentMeta<Article>[] {
 }
 
 export function getAllProjects(): ContentMeta<Project>[] {
-  const allContent = getAllContent<any>('projects');
+  const allContent = getAllContent<Record<string, unknown>>('projects');
   const validContent: ContentMeta<Project>[] = [];
   
   for (const item of allContent) {
@@ -129,7 +129,7 @@ export function getAllProjects(): ContentMeta<Project>[] {
 }
 
 export function getAllQuotes(): ContentMeta<Quote>[] {
-  const allContent = getAllContent<any>('quotes');
+  const allContent = getAllContent<Record<string, unknown>>('quotes');
   const validContent: ContentMeta<Quote>[] = [];
   
   for (const item of allContent) {
@@ -148,7 +148,7 @@ export function getAllQuotes(): ContentMeta<Quote>[] {
 }
 
 export function getAllExampleContent(): ContentMeta<Article | Project>[] {
-  const allContent = getAllContent<any>('example-2');
+  const allContent = getAllContent<Record<string, unknown>>('example-2');
   const validContent: ContentMeta<Article | Project>[] = [];
   
   for (const item of allContent) {
