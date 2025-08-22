@@ -1,160 +1,76 @@
 # 03 – Tasks (manta-templates)
-Sections are in L2 headings (ex: cards-migration).
+Sections are in L2 headings (ex: component-parity).
 
-## cards-migration
-Design source: `templates/nextjs/examples/our-project/feature.cards-migration.md`
-Scope: Integrate reusable, markdown-driven cards into `templates/nextjs/src/components/cards/` with clear functional subfolders and ContentLoader wrappers. Do not modify `landing/`.
+**Project Status:** Ready for next phase after VideoCard architecture improvements and TypeScript cleanup
+**Current Focus:** Achieving component parity between template and ui-core package
 
-### Overview (completed)
-- [x] Types added/extended: `ArticleContent`, `ProjectContent (displayVariant, image)`, `AboutContent`, `SocialLink`, `TechnologiesContent`
-- [x] Sample content added: featured article, technologies, about, sample project
-- [x] Presentational components: `ArticleCard`, `BlogIndexCard`, `ProjectCard` (panel/showcase), `AboutCard`
-- [x] ContentLoaders: `ArticleCardContentLoader`, `ProjectCardContentLoader`, `AboutCardContentLoader`
-- [x] Migrations/cleanup: replaced legacy card usages; removed `ProjectFeatureCard`
-- [x] Docs: README updated (cards section, header/footer variants, `/examples/cards`)
-- [x] QA: build/lint/typecheck green; visual parity and a11y verified (note: one img warning intentionally ignored)
+## component-parity
+Scope: Migrate remaining components from templates/nextjs to packages/ui-core to achieve full component parity and enable multi-framework support.
 
-## cosine-card
-- [x] Add cosine surface card from provided source
-- [x] Refactor and reorganize parameters to improve usability
+**Current Status:** Template has 53 components, ui-core has 23 components (~30 components missing)
 
-## cosine-card-terrain
-- [x] Analyze the provided source and see how we might integrate the parameteric behavior
-- [x] Determine if the new source provides any additional terrain calculation features
-- [x] Panel should be accessed by a small gear icon or similar.  Don't display it all the time.
-- [x] Consider how to respond to changes in controls (refresh, smoothly adapt to new parameters, etc).  Use feature.cosine-live-update as additional background in evaluating this task.
+### Priority 1: Essential Card Components (12 components)
+- [ ] `ComingSoonFeatureCard.tsx` - migrate to ui-core/cards
+- [ ] `EnhancedBaseCard.tsx` - migrate to ui-core/cards
+- [ ] `FeatureCardContainer.tsx` - migrate to ui-core/cards
+- [ ] `FeatureCardWrapper.tsx` - migrate to ui-core/cards
+- [ ] `GuidesFeatureCard.tsx` - migrate to ui-core/cards
+- [ ] `ProjectCardContainer.tsx` - migrate to ui-core/cards
+- [ ] `QuoteCardContainer.tsx` - migrate to ui-core/cards
+- [ ] `SidebarPostCard.tsx` - migrate to ui-core/cards
+- [ ] `VideoCardContainer.tsx` - migrate to ui-core/cards
+- [ ] `articles/BlogIndexCard.tsx` - migrate to ui-core/cards
+- [ ] `layouts/VirtualCardList.tsx` - migrate to ui-core/layouts
+- [ ] Resolve `BaseCard.tsx` conflict (template vs ui-core/ui/)
 
-## color-themes 
-Design source: `templates/nextjs/examples/our-project/tasks/03-tasks-color-themes.md`
+### Priority 2: Content Loader Components (3 components)
+- [ ] `articles/ArticleCardContentLoader.tsx` - migrate to ui-core/cards
+- [ ] `people/AboutCardContentLoader.tsx` - migrate to ui-core/cards
+- [ ] `projects/ProjectCardContentLoader.tsx` - migrate to ui-core/cards
 
-### Overview
-- [x] Inventory current theming systems and propose unified design
-  - Systems: Radix custom palettes (`radixCustomColors.css`), semantic aliases (`semanticColors.css`), shadcn base tokens (in `globals.css`), Tailwind v4 utilities (some hard-coded `teal-*`) (cardThemes.css removed)
-- [x] Implement accent palette switching via `[data-palette]` mappings (mintteal, blue, purple, green, orange; extensible)
-- [x] Align Tailwind tokens and semantic aliases; added neutral tokens and semantic gradient strategy
-- [x] ThemeProvider: manage `accent` with persistence; set `[data-palette]`
-- [x] Migrate hard-coded classes to semantic tokens; removed shim and legacy brand gradients
-- [x] Docs + a11y verification (contrast, high-contrast media)
+### Priority 3: Header/Footer Components (5 components)
+- [ ] `header.tsx` - migrate to ui-core/components
+- [ ] `footer.tsx` - migrate to ui-core/components
+- [ ] `headers/DefaultHeader.tsx` - migrate to ui-core/components
+- [ ] `footers/CompactFooter.tsx` - migrate to ui-core/components
+- [ ] `footers/DefaultFooter.tsx` - migrate to ui-core/components
 
-Notes:
-- Technologies marquee: use `BaseCard` + `TechnologyScroller` directly; no dedicated wrapper.
-- All tasks apply under monorepo mode—operate only inside `templates/nextjs/`.
+### Priority 4: Critical UI Components (7 components)
+- [ ] `MotionArticle.tsx` - migrate to ui-core/components
+- [ ] `container.tsx` - migrate to ui-core/layouts
+- [ ] `layout.tsx` - migrate to ui-core/layouts
+- [ ] `navbar.tsx` - migrate to ui-core/components
+- [ ] `themetoggle.tsx` - migrate to ui-core/components
+- [ ] `ui/BackgroundVideoComponent.tsx` - migrate to ui-core/ui
+- [ ] `ui/TechnologyScroller.tsx` - migrate to ui-core/ui
 
-
-## color-themes-2
-
-Goal: simplify and consolidate potentially overlapping color systems. Establish one clear source of truth and eliminate drift.
-
-- Remove duplicates and define single source of truth
-  - Consolidate palette definitions in `src/styles/radixCustomColors.css` only (raw scales: light/dark + alpha).
-  - Keep all semantic mappings and palette switching in `src/styles/semanticColors.css` only.
-  - Trim `src/app/globals.css` to just `@theme` exposure and Shadcn base tokens; no palette values.
-
-- Normalize semantic token surface
-  - Ensure `semanticColors.css` is the only place mapping scale → semantic tokens (`--color-accent-*`, `--color-accent-a*`, border, surface, ring).
-  - Keep neutral mapping (gray-1..12) defined once; `@theme` only re-exports.
-
-- Eliminate legacy/overlapping systems
-  - Remove `cardThemes.css` color constants or migrate still-needed values into semantic tokens; delete the file if redundant.
-  - Remove compatibility shim usages (`teal-*`, `text-white`) by migrating to semantic utilities; then delete the shim block from `globals.css`.
-  - Replace legacy gradient hexes in `globals.css` with semantic/scale-based gradients or move gradients into a small semantic gradients section.
-
-- Tighten palette switching
-  - Verify each `[data-palette]` block remaps both solid and alpha steps (1..12 and a1..a12).
-  - Keep dark/light border and contrast tuning within `semanticColors.css` only.
-
-- Document and enforce
-  - Doc: “Palette onboarding” (where to drop Radix custom output, how to wire `[data-palette]`, and how `@theme` exposes tokens).
-  - Rule: avoid raw hex/classes in components; prefer semantic utilities.
-  - Optional guardrail: lint/codemod to flag hard-coded color classes.
-
-- Audit and migrate
-  - Repo-wide audit for `teal-*`, `text-white`, raw hex in components/styles.
-  - Migrate remaining components to semantic tokens and gradients.
-
-- A11y/QA safeguards
-  - WCAG contrast checks for all palettes; add `@media (prefers-contrast: high)` overrides centrally in `semanticColors.css`.
-  - Add an examples section demonstrating `useTheme()` with all palettes; use for visual regression.
-
-- Cleanup milestones (deletion gates)
-  - After migration: remove the teal compatibility shim.
-  - After consolidation: remove `cardThemes.css` if empty.
-
-- Optional helpers
-  - Provide a small TS token map for semantic names to aid auto-complete and consistency.
-  - Script to validate presence of `--color-accent-*`/`--color-accent-a*` across palettes.
-
-- High-impact order
-  1. Consolidate sources (raw scales in `radixCustomColors.css`; mappings in `semanticColors.css`; keep `globals.css` minimal).
-  2. Audit/migrate legacy classes and raw hex; replace gradients with semantic/scale values.
-  3. Remove shim and `cardThemes.css` if redundant.
-  4. Documentation + a11y checks.
+### Layout Conflicts Resolution
+- [ ] Resolve `bento-layout.tsx` vs `BentoLayout.tsx` naming conflict
+- [ ] Migrate `ContentCard.tsx` to ui-core/layouts
+- [ ] Verify `CardCarousel.tsx` is properly migrated
 
 ## ui-refactor
 Design source: `project-artifacts/features/02-feature-ui-refactor.md`  
-Scope: Extract framework-agnostic components from Next.js template into reusable ui-core package, enabling multi-framework support (Astro, React Router) while maintaining Next.js optimizations.
+Scope: Complete framework-agnostic ui-core package and enable multi-framework support.
 
-### Phase 1: Infrastructure Setup
-- [x] **Restructure monorepo workspace**
-  - Create `packages/` directory in existing manta-templates repo
-  - Update root `package.json` workspace configuration to include `packages/*`
-  - Verify workspace structure builds without errors
-  - Success: `pnpm build` runs successfully from root with new workspace structure
+### Phase 1: Infrastructure Setup ✓ COMPLETED
+- [x] Restructure monorepo workspace
+- [x] Create ui-core package foundation  
+- [x] Set up TypeScript configurations
+- [x] Create initial directory structure
 
-- [x] **Create ui-core package foundation**
-  - Initialize `packages/ui-core/` with package.json, tsconfig.json
-  - Set up peer dependencies: React >=18.0.0, react-dom >=18.0.0
-  - Configure build system (TypeScript compilation, barrel exports)
-  - Add core dependencies: @radix-ui/colors, @radix-ui/react-slot, class-variance-authority, clsx, tailwind-merge, lucide-react
-  - Success: ui-core package builds independently and can be imported by templates
+### Phase 2: Core Component Extraction ✓ COMPLETED
+- [x] Extract base UI primitives
+- [x] Extract and abstract core cards
+- [x] Extract layout components
+- [x] Extract shared utilities and types
 
-- [x] **Set up TypeScript configurations**
-  - Create packages/ui-core/tsconfig.json with appropriate module resolution
-  - Configure path mapping for internal imports
-  - Set up build scripts and export configuration
-  - Success: TypeScript compilation works without errors, proper type exports
-
-- [x] **Create initial directory structure**
-  - Create packages/ui-core/src/ with components/, hooks/, utils/, types/ subdirectories
-  - Set up barrel export system in packages/ui-core/src/index.ts
-  - Create packages/ui-adapters/ directory for framework-specific adapters
-  - Success: Clean import structure, components can be imported from @manta-templates/ui-core
-
-### Phase 2: Core Component Extraction
-- [x] **Extract base UI primitives**
-  - Move BaseCard from templates/nextjs/src/components/cards/BaseCard.tsx to packages/ui-core/src/components/ui/
-  - Move Button from templates/nextjs/src/components/ui/button.tsx to packages/ui-core/src/components/ui/
-  - Abstract away Next.js specific dependencies (remove next/image, next/link imports)
-  - Create generic Image and Link components with dependency injection pattern
-  - Success: BaseCard and Button work independently without Next.js dependencies
-
-- [x] **Extract and abstract core cards**
-  - Move BlogCard to packages/ui-core/src/components/cards/ with Image/Link dependency injection
-  - Move ProjectCard to packages/ui-core/src/components/cards/ with abstracted dependencies  
-  - Move QuoteCard to packages/ui-core/src/components/cards/ (minimal abstraction needed)
-  - Update component interfaces to accept ImageComponent and LinkComponent props
-  - Success: Cards render correctly with injected dependencies, maintain full functionality
-
-- [x] **Extract layout components**
-  - Move BentoLayout from templates/nextjs/src/components/layouts/ to packages/ui-core/src/components/layouts/
-  - Move GridLayout system (grid-container.tsx, grid-item.tsx, grid-layout.tsx) to ui-core
-  - Move Container component to packages/ui-core/src/components/layouts/
-  - Abstract any framework-specific dependencies
-  - Success: Layout components work with any React framework, no Next.js coupling
-
-- [x] **Extract shared utilities and types**
-  - Move cn utility, formatDate, and other shared functions to packages/ui-core/src/utils/
-  - Move shared TypeScript interfaces to packages/ui-core/src/types/
-  - Create theme-related utilities and hooks in packages/ui-core/src/hooks/
-  - Export all utilities through barrel exports
-  - Success: All shared code accessible from single ui-core import, no duplication
-
-### Phase 3: Adapter Creation
+### Phase 3: Adapter Creation (IN PROGRESS)
 - [ ] **Create Next.js adapter package**
   - Set up packages/ui-adapters/nextjs/ with proper package.json
   - Create Next.js-specific Image wrapper using next/image
   - Create Next.js-specific Link wrapper using next/link  
-  - Export adapted components (BlogCard, ProjectCard, etc.) with Next.js optimizations injected
+  - Export adapted components with Next.js optimizations injected
   - Success: Next.js adapter provides drop-in replacements with full Next.js optimizations
 
 - [ ] **Create React Router adapter package**
@@ -234,3 +150,30 @@ Scope: Extract framework-agnostic components from Next.js template into reusable
   - Generate examples showing multi-framework usage
   - Update README files for all templates with correct setup instructions
   - Success: Clear documentation, smooth migration path for existing users
+
+## recent-accomplishments
+**Completed in Previous Sessions:**
+
+### VideoCard Architecture ✓ COMPLETED
+- [x] Extracted BackgroundVideoComponent to reusable Next.js-optimized component
+- [x] Implemented linkable background videos using erikcorkran.com conditional Link wrapper pattern
+- [x] Added customizable text overlays with gradient backgrounds for video content
+- [x] Updated test-example-2 to use VideoCard with dependency injection
+
+### Content Loading & UI Enhancements ✓ COMPLETED
+- [x] Replaced BlogCardImage with ArticleCard loading real markdown content (theme-guide.md)
+- [x] Fixed BlogCardImage alignment issues (justify-start for consistent layout)
+- [x] Maintained Server Component Pattern with proper content loading and object spreading
+
+### TypeScript & Build Quality ✓ COMPLETED
+- [x] Fixed all require() imports → ES6 imports in test files
+- [x] Replaced 'any' types with proper TypeScript interfaces
+- [x] Fixed unused variables and ESLint violations
+- [x] Resolved shiki version conflict (3.11.0 → 3.7.0) for markdown syntax highlighting
+- [x] All 63 tests passing with clean TypeScript compilation
+
+### Legacy Completed Tasks ✓ COMPLETED
+- [x] **cards-migration**: Complete card system with ContentLoaders
+- [x] **cosine-card**: Interactive cosine surface card implementation
+- [x] **cosine-card-terrain**: Parametric terrain with gear-icon controls
+- [x] **color-themes**: Unified theming with Radix + semantic tokens + palette switching

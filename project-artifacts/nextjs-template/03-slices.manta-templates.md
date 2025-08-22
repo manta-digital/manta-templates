@@ -41,8 +41,21 @@ These slices established the project foundation and are now complete:
 
 ### Planned Future Slices
 
-#### Slice 09: Advanced Testing Infrastructure  
+#### Slice 09: UI-Core Component Parity
+- **Status**: Ready for Implementation  
 - **Dependencies**: Slice 08 (markdown content system)
+- **Design**: project-artifacts/nextjs-template/slices/09-slice.component-parity.md
+- **Tasks**: project-artifacts/nextjs-template/tasks/08-tasks.markdown-content-3a-adapters.md
+- **Scope**: Migrate remaining ~30 components from templates/nextjs to ui-core package for complete framework-agnostic coverage
+- **Key Deliverables**:
+  - [ ] Priority 1: Essential card components (12 components) - containers, feature cards, specialized cards
+  - [ ] Priority 2: Content loader components (3 components) - ArticleCardContentLoader, AboutCardContentLoader, ProjectCardContentLoader  
+  - [ ] Priority 3: Header/footer components (5 components) - DefaultHeader, CompactFooter, DefaultFooter, etc.
+  - [ ] Priority 4: Critical UI components (7 components) - navbar, theme toggle, BackgroundVideoComponent, etc.
+  - [ ] Layout conflicts resolution - resolve naming conflicts and ensure full layout system coverage
+
+#### Slice 10: Advanced Testing Infrastructure  
+- **Dependencies**: Slice 09 (component parity)
 - **Scope**: Comprehensive testing for multi-framework components
 - **Key Deliverables**:
   - Unit/integration tests for ui-core components
@@ -50,8 +63,8 @@ These slices established the project foundation and are now complete:
   - Visual regression testing setup
   - Performance testing and optimization
 
-#### Slice 10: Astro Template Development
-- **Dependencies**: Slice 08 (content system), Slice 09 (testing)
+#### Slice 11: Astro Template Development
+- **Dependencies**: Slice 08 (content system), Slice 10 (testing)
 - **Scope**: Create production-ready Astro template using ui-core
 - **Key Deliverables**:
   - templates/astro/ directory with full template
@@ -59,8 +72,8 @@ These slices established the project foundation and are now complete:
   - Content collection integration
   - React island configuration
 
-#### Slice 11: React Router Template Development  
-- **Dependencies**: Slice 08 (content system), Slice 09 (testing)
+#### Slice 12: React Router Template Development  
+- **Dependencies**: Slice 08 (content system), Slice 10 (testing)
 - **Scope**: Create production-ready React Router template using ui-core
 - **Key Deliverables**:
   - templates/react-router/ directory with full template
@@ -68,8 +81,8 @@ These slices established the project foundation and are now complete:
   - Client-side routing patterns
   - Bundle optimization
 
-#### Slice 12: Template Distribution System
-- **Dependencies**: Slice 10 (Astro template), Slice 11 (React Router template)
+#### Slice 13: Template Distribution System
+- **Dependencies**: Slice 11 (Astro template), Slice 12 (React Router template)
 - **Scope**: Automated template bundling and distribution
 - **Key Deliverables**:
   - Component usage analysis and bundling system
@@ -83,12 +96,14 @@ Slice 01-07 (UI Refactor Foundation) [COMPLETED]
     ↓
 Slice 08 (Markdown Content) [CURRENT]
     ↓
-Slice 09 (Testing Infrastructure) [PLANNED]
+Slice 09 (Component Parity) [PLANNED]
     ↓
-┌─ Slice 10 (Astro Template) [PLANNED]
-└─ Slice 11 (React Router Template) [PLANNED]
+Slice 10 (Testing Infrastructure) [PLANNED]
     ↓
-Slice 12 (Distribution System) [PLANNED]
+┌─ Slice 11 (Astro Template) [PLANNED]
+└─ Slice 12 (React Router Template) [PLANNED]
+    ↓
+Slice 13 (Distribution System) [PLANNED]
 ```
 
 ## Risk Management
