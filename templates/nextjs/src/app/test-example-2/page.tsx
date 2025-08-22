@@ -3,9 +3,14 @@ import { cn } from '@/lib/utils';
 import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard } from '@manta-templates/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
+import ArticleCard from '@/components/cards/articles/ArticleCard';
+import { getArticleBySlug } from '@/lib/content/loader';
 
 // Mock content loading function (replace with actual content loading)
 async function loadExampleContent() {
+  // Load real article content from markdown
+  const themeGuideArticle = await getArticleBySlug('theme-guide');
+  
   return {
     carouselHero: {
       title: "Semantic Design System",
@@ -41,6 +46,13 @@ async function loadExampleContent() {
       quote: "Make the easy path the right path—semantic tokens everywhere.",
       author: "Manta Templates",
       role: "Design Philosophy"
+    },
+    themeGuideArticle: {
+      title: themeGuideArticle.frontmatter.title,
+      subtitle: themeGuideArticle.frontmatter.tags?.[0] || 'Design',
+      description: themeGuideArticle.frontmatter.excerpt,
+      image: themeGuideArticle.frontmatter.coverImage,
+      href: `/articles/${themeGuideArticle.slug}`
     }
   };
 }
@@ -107,27 +119,29 @@ export default async function TestExample2Page() {
 
         {/* Featured article loaded from server */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
-          <BlogCardImage
+          <ArticleCard 
             className="h-full"
-            title={content.featuredArticle.title}
-            excerpt={content.featuredArticle.excerpt}
-            coverImageUrl={content.featuredArticle.coverImageUrl}
-            category={content.featuredArticle.category}
-            author={content.featuredArticle.author}
-            date={content.featuredArticle.date}
-            slug="/articles/theme-guide"
-            textColorClassName="text-white"
+            title={content.themeGuideArticle.title}
+            subtitle={content.themeGuideArticle.subtitle}
+            description={content.themeGuideArticle.description}
+            image={content.themeGuideArticle.image}
+            href={content.themeGuideArticle.href}
           />
         </GridItem>
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
-          <BlogCardImage 
-            title="Foreground and Borders"
-            excerpt="This card validates text-card-foreground and border tokens over imagery."
-            coverImageUrl="/image/blog-sample-image.png"
-            textColorClassName="text-white"
-          />
+          <BlogCardImage
+              className="h-full"
+              title={content.featuredArticle.title}
+              excerpt={content.featuredArticle.excerpt}
+              coverImageUrl={content.featuredArticle.coverImageUrl}
+              category={content.featuredArticle.category}
+              author={content.featuredArticle.author}
+              date={content.featuredArticle.date}
+              slug="/articles/theme-guide"
+              textColorClassName="text-white"
+            />
         </GridItem>
 
         {/* Cosine terrain visual */}

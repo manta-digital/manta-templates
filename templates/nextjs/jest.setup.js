@@ -1,11 +1,5 @@
 import '@testing-library/jest-dom';
 
-// Extend Jest matchers
-expect.extend({
-  toBeInTheDocument: () => ({ pass: true, message: () => '' }),
-  toHaveAttribute: () => ({ pass: true, message: () => '' }),
-});
-
 // Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter() {

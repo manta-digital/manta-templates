@@ -93,7 +93,7 @@ const BlogCardImage: React.FC<BlogCardImageProps> = ({
       <div className={cn('absolute inset-0 z-10 pointer-events-none', overlayClassName)} />
       <div
         className={cn(
-          'relative z-20 h-full w-full flex flex-col justify-center p-8 pointer-events-none',
+          'relative z-20 h-full w-full flex flex-col justify-start p-8 pointer-events-none',
           textColorClassName
         )}
       >

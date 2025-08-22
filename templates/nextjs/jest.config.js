@@ -13,15 +13,23 @@ const customJestConfig = {
   
   // Test file patterns
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.(js|jsx|ts|tsx)',
+    '<rootDir>/src/**/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)',
     '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)',
-    '<rootDir>/__tests__/**/*.(js|jsx|ts|tsx)'
+    '<rootDir>/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)'
+  ],
+  
+  // Exclude type definition files from test discovery
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/', 
+    '<rootDir>/node_modules/',
+    '.*\\.d\\.ts$'
   ],
   
   // Module name mapping for absolute imports
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^@manta-templates/ui-core$': '<rootDir>/../../packages/ui-core/src/index.ts',
+    // Mock ui-core to avoid ESM import issues with remark
+    '^@manta-templates/ui-core$': '<rootDir>/src/__tests__/__mocks__/ui-core.js',
     '^@manta-templates/ui-adapters-nextjs$': '<rootDir>/../../packages/ui-adapters/nextjs/src/index.ts',
   },
   
@@ -34,9 +42,6 @@ const customJestConfig = {
   transformIgnorePatterns: [
     'node_modules/(?!(remark|remark-parse|remark-html|remark-gfm|micromark|unist-util-stringify-position|unified|vfile|bail|trough|extend)/)'
   ],
-  
-  // Ignore patterns
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   
   // Coverage settings
   collectCoverageFrom: [

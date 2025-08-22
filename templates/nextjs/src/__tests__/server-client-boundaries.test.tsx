@@ -143,7 +143,7 @@ describe('Server/Client Component Boundaries', () => {
       expect(typeof propsWithFunction.onClick).toBe('function');
       
       // In real usage, we would destructure to exclude non-serializable props:
-      const { onClick, ...serializableProps } = propsWithFunction;
+      const { onClick, ...serializableProps } = propsWithFunction as any;
       expect(serializableProps.onClick).toBeUndefined();
       expect(serializableProps.title).toBe('Function Test');
     });
