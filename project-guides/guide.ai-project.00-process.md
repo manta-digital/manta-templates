@@ -228,3 +228,41 @@ These files provide knowledge on use of 3rd party tools, both in general and in 
 * {tool}/research-crumbs: specific knowledge items for {tool}.  often used to 
   provide additional detail for a complex {tool} task.
 ```
+
+##### Task Files
+```markdown
+Task files are created in several places as the output of various prompts.  All such files should be created using checklist format.  For any such file, important sub-items and all success criteria should have checkboxes.  Do not include time estimates, though you may include relative effort levels (1-n not 15 min, 2 hours, etc).
+
+The following provides an example of a well-created task file item:
+
+### Task 3.4: Migrate BlogIndexCard
+**Owner**: Junior AI
+**Dependencies**: Task 3.3
+**Objective**: Migrate complex BlogIndexCard that loads and displays multiple posts.
+
+**Migration Steps**:
+- [x] **Create ui-core component**:
+- File: `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
+- Remove getAllContent dependency
+- Add ContentProvider for multiple content loading
+- Abstract content fetching logic
+
+- [x] **Handle complex content loading**:
+- Support for loading multiple posts
+- Filtering and limiting functionality
+- Sorting by date
+
+- [x] **Framework integration**:
+- Next.js adapter with server-side content loading
+- Preserve async functionality for server components
+
+**Success Criteria**:
+- [x] Multiple post loading works
+- [x] Filtering and limiting functional
+- [x] Date sorting preserved
+- [x] Server component compatibility maintained
+
+**Files to Create**:
+- `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
+- `packages/ui-adapters/nextjs/src/components/BlogIndexCardWithContent.tsx`
+```

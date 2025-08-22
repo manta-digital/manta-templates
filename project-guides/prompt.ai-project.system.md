@@ -181,7 +181,7 @@ Skip LLD creation - go directly from description to implementable tasks. Each ta
 If the item is too complex for this approach, recommend creating a proper slice instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
 ```
 
-##### Feature Design (Slice-Based)
+##### Feature Design 
 *Use this to add a new slice to an existing project.*
 ```markdown
 We're adding a new feature slice to project {project}. This slice will be called {slice}.
@@ -202,7 +202,7 @@ Follow dependency management - identify what foundation work or other slices thi
 If you need more information about the feature requirements, stop and request from Project Manager.
 ```
 
-##### Model Change or Context Refresh (Slice-Based)
+##### Model Change or Context Refresh 
 *Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
 ```markdown
 The following provides context on our current work in slice-based project {project}. Input may contain: { project, slice, task, issue, tool, note }.
@@ -250,15 +250,16 @@ You will need to consult specific knowledge for {tool}, which should be availabl
 ```
 
 ##### Summarize Context
-*Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.*
+*Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.  Currently it appears that at best Claude will output the `[ ]` information into the new context. *
 ```markdown
+Perform the following items and add their output to the compacted context:
 * Preserve the initial context describing what we are working on.
 * Summarize current project state at time of this compaction.
 * Include any open todo list items and work in progress.
 * add the tag --COMPACTED-- after inserting this information. 
 ```
 
-##### Maintenance Item (Slice Context)
+##### Maintenance Item 
 ```markdown
 Continue operating in your role as Senior AI. Add {item} to maintenance-tasks.md, following existing file format and markdown rules.
 
@@ -269,7 +270,7 @@ If item detail level is sufficient for immediate implementation, you may proceed
 Consider impact on current slice work and dependencies when planning implementation.
 ```
 
-##### Perform Routine Maintenance (Slice-Aware)
+##### Perform Routine Maintenance 
 ```markdown
 Let's perform routine maintenance tasks while being mindful of our slice-based development approach. Examine file project-documents/private/maintenance/maintenance-tasks.md.
 
@@ -285,13 +286,74 @@ Current project: {project}
 Active slice work: {slice} (if applicable)
 ```
 
+##### Analysis Processing
+```markdown
+We need to process the artifacts from our recent code analysis.
+
+Role: Senior AI, processing analysis results into actionable items
+Context: Analysis has been completed on {project} (optionally {subproject}) and findings need to be converted into proper maintenance tasks, code review issues, or GitHub issues as appropriate.
+
+Notes: 
+- Be sure to know the current date first.  Do not assume dates based on training 
+  data timeframes.
+
+Process:
+1. Categorize Findings:
+- P0 Critical: Data loss, security vulnerabilities, system failures
+- P1 High: Performance issues, major technical debt, broken features
+- P2 Medium: Code quality, maintainability, best practices
+- P3 Low: Optimizations, nice-to-have improvements
+
+2. Create File and Document by Priority:
+- Create markdown file `maintenance/{nn}-analysis.{project-name}
+  {.subproject?}-00.md`.  If this is the first such file created, {nn} = "01".
+- Note that subproject is often not specified.  Do not add its term to the name 
+  if this is the case. 
+- Divide file into Critical Issues (P0/P1) and Additional Issues(P2/P3)
+- Add concise documentation of each issue -- overview, context, conditions.  
+
+3. File Creation Rules:
+- Use existing file naming conventions from `file-naming-conventions.md`
+- Include YAML front matter for all created files
+- Add the correct date (YYYY-MM-DD) in the file's frontmatter
+- Reference source analysis document (if applicable)
+- Add line numbers and specific locations where applicable
+
+4. GitHub Integration (if available):
+- Create GitHub issues for P0/P1 items
+- Label appropriately: `bug`, `critical`, `technical-debt`, `analysis`
+- Reference analysis document in issue description
+- Include reproduction steps and success criteria
+```
+
+##### Analysis Task Creation
+
+*Create tasks based on codebase analysis.  While we don't yet have a generic analysis prompt, we do have the following modified task-creation prompt for use with analysis results.*
+```markdown
+We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the P0/P1 issues from {analysis-file} into granular, actionable tasks if they are not already.  
+
+Your role is Senior AI. Use the specified analysis document `private/maintenance/nn-analysis.{project-name}{.subproject?}.00.md` as input.  Note that subproject is optional (hence the ?).  Avoid adding extra `.` characters to filename if subproject is not present.
+
+Create task file at `private/tasks/nn-analysis.{.subproject?}-{date}.md` with:
+1. YAML front matter including slice or subproject name, project, YYYYMMDD date, LLD reference, dependencies, and current project state
+2. Context summary section
+3. Granular tasks following Phase 5 guidelines
+
+For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+
+Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.
+
+This is a project planning task, not a coding task.
+```
+
+
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
 ```markdown
 Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
 ###### General
-* Document your findings in the project-documents/private/codebase-
+* Document your findings in the project-documents/private/maintenance/codebase-
   analysis.md. You will probably need to create this file.
 * Write in markdown format, following our rules for markdown output.  If you 
   cannot find these rules, STOP and do not proceed until you request and receive 

@@ -53,12 +53,15 @@ Common document type prefixes:
 - `template` - Prompt or other templates, organized with project-guides
 - `maintenance` - maintenance tasks or actions, in `private/maintenance`
 - `slice` - Low-level design documents for individual slices
+-  analysis - Item created as result of codebase analysis
 
 ### Date Format
-
 When including dates in filenames:
 - Use `MMDD` format for short-term documents (e.g., `0419` for April 19)
 - Use `YYYYMMDD` format for archival purposes (e.g., `20250419`)
+
+### Conditionals in File Naming
+File naming schemes may contain sections such as `file-{nn}.project{.subproject?}.md`.  The `?` in the subproject indicates to only add the term enclosed in `{}` if it is non-null.
 
 ## Slice-Based File Naming
 
