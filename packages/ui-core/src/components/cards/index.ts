@@ -9,6 +9,8 @@ export { ProjectCard } from './ProjectCard';
 export type { ProjectCardProps } from './ProjectCard';
 export { QuoteCard } from './QuoteCard';
 export type { QuoteCardProps } from './QuoteCard';
+export { SidebarPostCard } from './SidebarPostCard';
+export type { SidebarPostCardProps } from './SidebarPostCard';
 
 // Specialized cards
 export { AnimatedCard } from './AnimatedCard';

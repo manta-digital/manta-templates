@@ -31,13 +31,10 @@ const SidebarPostCard: React.FC<SidebarPostCardProps> = ({
   return (
     <Link href={href} className="block">
       <BaseCard
-        // Revert styles back onto BaseCard
-        className={cn(
-          'flex items-start gap-4 group transition-colors hover:bg-accent/50',
-          'p-0! overflow-hidden', // Remove default BaseCard padding
-          className
-        )}
+        className={cn(className)}
+        style={{ display: 'flex', flexDirection: 'row', padding: 0 }}
       >
+        <div className="flex items-start gap-4 group transition-colors hover:bg-accent/50 w-full overflow-hidden">
         {/* Image Container */}
         <div className="relative shrink-0 w-20 h-20 md:w-24 md:h-24 aspect-square">
           <Image
@@ -58,7 +55,8 @@ const SidebarPostCard: React.FC<SidebarPostCardProps> = ({
             {excerpt}
           </p>
         </div>
-              </BaseCard>
+        </div>
+      </BaseCard>
     </Link>
   );
 };
