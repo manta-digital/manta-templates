@@ -5,7 +5,7 @@
  * without pulling in the complex content processing dependencies.
  */
 
-const React = require('react');
+import React from 'react';
 
 // Mock ProjectCard component
 const ProjectCard = ({ title, description, techStack = [], content, className, children, ...props }) => {
@@ -52,9 +52,7 @@ const BlogCardImage = ({
   author, 
   date, 
   slug,
-  textColorClassName,
   className,
-  ImageComponent,
   LinkComponent,
   ...props 
 }) => {

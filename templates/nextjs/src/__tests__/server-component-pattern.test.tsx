@@ -19,7 +19,7 @@ import { ProjectCard, QuoteCard, BlogCardImage } from '@manta-templates/ui-core'
 // Mock Next.js Image and Link for testing
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
+  default: (props: { src: string; alt: string; fill?: boolean; [key: string]: unknown }) => {
     const { src, alt, fill, ...rest } = props;
     return <img src={src} alt={alt} data-fill={fill} {...rest} />;
   },
@@ -27,7 +27,7 @@ jest.mock('next/image', () => ({
 
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: any) => {
+  default: ({ children, href, ...props }: { children: React.ReactNode; href: string; [key: string]: unknown }) => {
     return <a href={href} {...props}>{children}</a>;
   },
 }));
@@ -35,7 +35,7 @@ jest.mock('next/link', () => ({
 // Mock framer-motion for BlogCardImage
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    div: ({ children, ...props }: { children?: React.ReactNode; [key: string]: unknown }) => <div {...props}>{children}</div>,
   },
 }));
 
@@ -283,7 +283,7 @@ describe('Server Component Pattern - Error Boundaries', () => {
     };
 
     // BlogCardImage should return null for missing required props
-    const { container } = render(<BlogCardImage {...invalidContent as any} />);
+    const { container } = render(<BlogCardImage {...(invalidContent as { title?: string; coverImageUrl?: string })} />);
     expect(container.firstChild).toBeNull();
   });
 
@@ -291,7 +291,7 @@ describe('Server Component Pattern - Error Boundaries', () => {
     // Test that components handle null/undefined gracefully
     expect(() => {
       render(<ProjectCard content={undefined} title="Fallback Title" />);
-      render(<QuoteCard quote={undefined as any} author="Fallback Author" />);
+      render(<QuoteCard quote={undefined as unknown as string} author="Fallback Author" />);
     }).not.toThrow();
   });
 });

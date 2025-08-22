@@ -22,7 +22,7 @@ jest.mock('../lib/content/loader', () => ({
   getAllExampleContent: jest.fn(),
 }));
 
-const {
+import {
   getArticleBySlug,
   getProjectBySlug,
   getQuoteBySlug,
@@ -31,7 +31,7 @@ const {
   getAllProjects,
   getAllQuotes,
   getAllExampleContent
-} = require('../lib/content/loader');
+} from '../lib/content/loader';
 
 describe('Server Component Content Loading', () => {
   beforeEach(() => {
@@ -199,7 +199,7 @@ describe('Server Component Content Loading', () => {
       
       expect(Array.isArray(articles)).toBe(true);
       expect(articles).toHaveLength(2);
-      articles.forEach((article: any) => {
+      articles.forEach((article: { slug: string; frontmatter: { title: string } }) => {
         expect(article.slug).toBeDefined();
         expect(article.frontmatter).toBeDefined();
         expect(article.frontmatter.title).toBeDefined();
@@ -222,7 +222,7 @@ describe('Server Component Content Loading', () => {
       
       expect(Array.isArray(projects)).toBe(true);
       expect(projects).toHaveLength(1);
-      projects.forEach((project: any) => {
+      projects.forEach((project: { slug: string; frontmatter: { title: string } }) => {
         expect(project.slug).toBeDefined();
         expect(project.frontmatter).toBeDefined();
         expect(project.frontmatter.title).toBeDefined();
@@ -248,7 +248,7 @@ describe('Server Component Content Loading', () => {
       
       expect(Array.isArray(quotes)).toBe(true);
       expect(quotes).toHaveLength(1);
-      quotes.forEach((quote: any) => {
+      quotes.forEach((quote: { slug: string; frontmatter: { quote: string; author: string } }) => {
         expect(quote.slug).toBeDefined();
         expect(quote.frontmatter).toBeDefined();
         expect(quote.frontmatter.quote).toBeDefined();
@@ -275,7 +275,7 @@ describe('Server Component Content Loading', () => {
       
       expect(Array.isArray(examples)).toBe(true);
       expect(examples).toHaveLength(2);
-      examples.forEach((example: any) => {
+      examples.forEach((example: { slug: string; frontmatter: { title: string } }) => {
         expect(example.slug).toBeDefined();
         expect(example.frontmatter).toBeDefined();
         expect(example.frontmatter.title).toBeDefined();

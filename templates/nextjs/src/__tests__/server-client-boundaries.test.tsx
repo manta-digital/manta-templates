@@ -69,9 +69,9 @@ describe('Server/Client Component Boundaries', () => {
   });
 
   describe('Client Component Interactivity', () => {
-    test('should handle client components with framer-motion', () => {
+    test('should handle client components with framer-motion', async () => {
       // Test that BlogCardImage (client component) works with server props
-      const { BlogCardImage } = require('@manta-templates/ui-core');
+      const { BlogCardImage } = await import('@manta-templates/ui-core');
       
       const serverProps = {
         title: 'Interactive Article',
@@ -89,9 +89,9 @@ describe('Server/Client Component Boundaries', () => {
       expect(motionDiv).toBeInTheDocument();
     });
 
-    test('should handle server components without client features', () => {
+    test('should handle server components without client features', async () => {
       // Test that ProjectCard (server component) works without client hooks
-      const { ProjectCard } = require('@manta-templates/ui-core');
+      const { ProjectCard } = await import('@manta-templates/ui-core');
       
       const serverProps = {
         title: 'Server Project',
@@ -108,7 +108,7 @@ describe('Server/Client Component Boundaries', () => {
   });
 
   describe('Prop Serialization', () => {
-    test('should handle serializable props across boundaries', () => {
+    test('should handle serializable props across boundaries', async () => {
       // Test that complex objects can be passed from server to client
       const complexProps = {
         title: 'Complex Object',
@@ -121,7 +121,7 @@ describe('Server/Client Component Boundaries', () => {
         techStack: ['React', 'Next.js'],
       };
 
-      const { BlogCardImage } = require('@manta-templates/ui-core');
+      const { BlogCardImage } = await import('@manta-templates/ui-core');
       
       render(<BlogCardImage {...complexProps} />);
       
@@ -143,7 +143,8 @@ describe('Server/Client Component Boundaries', () => {
       expect(typeof propsWithFunction.onClick).toBe('function');
       
       // In real usage, we would destructure to exclude non-serializable props:
-      const { onClick, ...serializableProps } = propsWithFunction as any;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { onClick, ...serializableProps } = propsWithFunction as { onClick?: () => void; title: string; coverImageUrl: string };
       expect(serializableProps.onClick).toBeUndefined();
       expect(serializableProps.title).toBe('Function Test');
     });
@@ -194,7 +195,7 @@ describe('Server/Client Component Boundaries', () => {
           };
         },
         // Props can be serialized for hydration
-        serializeProps: (data: any) => JSON.parse(JSON.stringify(data)),
+        serializeProps: (data: Record<string, unknown>) => JSON.parse(JSON.stringify(data)),
       };
 
       expect(typeof staticGenerationPattern.loadContent).toBe('function');
