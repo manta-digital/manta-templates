@@ -596,20 +596,20 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Detailed Migration Steps**:
 
 #### Step 5.6.1: Analyze Header Dependencies and Content
-- [ ] **Examine header content system**:
+- [x] **Examine header content system**:
   - File: `templates/nextjs/src/lib/headerContent.ts`
   - **Document interface**: getHeaderContent() return structure
   - **Note content fields**: title, logo, navigation links
   - **Identify dynamic vs static content**
 
-- [ ] **Map current header usage**:
+- [x] **Map current header usage**:
   - File: `templates/nextjs/src/components/headers/DefaultHeader.tsx`
   - **Document import dependencies**: Next.js Image, Link, headerContent
   - **List all sub-components used**: BrandMark, ThemeToggle, ColorSelector, Container
   - **Identify styling patterns**: Tailwind classes, responsive breakpoints
 
 #### Step 5.6.2: Create Framework-Agnostic Header Interface
-- [ ] **Create header types**:
+- [x] **Create header types**:
   - File: `packages/ui-core/src/types/header.ts`
   - **Define HeaderContent interface**:
     ```typescript
@@ -632,91 +632,91 @@ Based on code analysis, here are the Priority 1 components and their necessity:
     ```
 
 #### Step 5.6.3: Create DefaultHeader Component
-- [ ] **Create header component file**:
+- [x] **Create header component file**:
   - File: `packages/ui-core/src/components/headers/DefaultHeader.tsx`
   - **Copy template structure**: `templates/nextjs/src/components/headers/DefaultHeader.tsx`
   
-- [ ] **Update imports and dependencies**:
-  - [ ] Replace `import Image from 'next/image';` with ImageComponent prop usage
-  - [ ] Replace `import Link from 'next/link';` with LinkComponent prop usage  
-  - [ ] Replace `import { getHeaderContent } from '@/lib/headerContent';` with content prop
-  - [ ] Update `import BrandMark` to `import { BrandMark } from '../ui/BrandMark';`
-  - [ ] Update `import { ThemeToggle } from` to use ui-core ThemeToggle
-  - [ ] Update `import Container` to `import { Container } from '../layouts/Container';`
-  - [ ] Update `import { cn }` to `import { cn } from '../../utils/cn';`
+- [x] **Update imports and dependencies**:
+  - [x] Replace `import Image from 'next/image';` with ImageComponent prop usage
+  - [x] Replace `import Link from 'next/link';` with LinkComponent prop usage  
+  - [x] Replace `import { getHeaderContent } from '@/lib/headerContent';` with content prop
+  - [x] Update `import BrandMark` to `import { BrandMark } from '../ui/BrandMark';`
+  - [x] Update `import { ThemeToggle } from` to use ui-core ThemeToggle
+  - [x] Update `import Container` to `import { Container } from '../layouts/Container';`
+  - [x] Update `import { cn }` to `import { cn } from '../../utils/cn';`
 
-- [ ] **Preserve component logic**:
-  - [ ] Keep same responsive behavior for mobile/desktop navigation
-  - [ ] Keep same header layout: logo/title, navigation, theme controls
-  - [ ] Keep same conditional logo vs BrandMark logic
-  - [ ] Keep all accessibility attributes and ARIA labels
-  - [ ] Keep all Tailwind styling and responsive classes
+- [x] **Preserve component logic**:
+  - [x] Keep same responsive behavior for mobile/desktop navigation
+  - [x] Keep same header layout: logo/title, navigation, theme controls
+  - [x] Keep same conditional logo vs BrandMark logic
+  - [x] Keep all accessibility attributes and ARIA labels
+  - [x] Keep all Tailwind styling and responsive classes
 
-- [ ] **Implement dependency injection**:
-  - [ ] Use ImageComponent for logo rendering: `<ImageComponent src={content.logo} ...>`
-  - [ ] Use LinkComponent for navigation: `<LinkComponent href={nav.href} ...>`
-  - [ ] Handle external links appropriately with LinkComponent
-  - [ ] Default to standard elements if components not provided
+- [x] **Implement dependency injection**:
+  - [x] Use ImageComponent for logo rendering: `<ImageComponent src={content.logo} ...>`
+  - [x] Use LinkComponent for navigation: `<LinkComponent href={nav.href} ...>`
+  - [x] Handle external links appropriately with LinkComponent
+  - [x] Default to standard elements if components not provided
 
 #### Step 5.6.4: Create Header Wrapper Component
-- [ ] **Create header wrapper**:
+- [x] **Create header wrapper**:
   - File: `packages/ui-core/src/components/headers/Header.tsx`
   - **Copy template logic**: `templates/nextjs/src/components/header.tsx`
   
-- [ ] **Abstract variant selection**:
-  - [ ] Accept variant prop instead of reading siteConfig directly
-  - [ ] Support 'default' variant (maps to DefaultHeader)
-  - [ ] Provide interface for adding more header variants later
-  - [ ] Pass through all props to selected header component
+- [x] **Abstract variant selection**:
+  - [x] Accept variant prop instead of reading siteConfig directly
+  - [x] Support 'default' variant (maps to DefaultHeader)
+  - [x] Provide interface for adding more header variants later
+  - [x] Pass through all props to selected header component
 
 #### Step 5.6.5: Handle ColorSelector Integration
-- [ ] **Important decision point**:
-  - [ ] ColorSelector is part of template ThemeToggle but complex
-  - [ ] **For this task**: Keep ColorSelector import from template themetoggle
-  - [ ] **Do NOT migrate ColorSelector** - treat as external dependency
-  - [ ] Document this decision for future ColorSelector migration task
+- [x] **Important decision point**:
+  - [x] ColorSelector is part of template ThemeToggle but complex
+  - [x] **For this task**: Keep ColorSelector import from template themetoggle
+  - [x] **Do NOT migrate ColorSelector** - treat as external dependency
+  - [x] Document this decision for future ColorSelector migration task
 
 #### Step 5.6.6: Update Component Exports
-- [ ] **Create headers directory exports**:
+- [x] **Create headers directory exports**:
   - File: `packages/ui-core/src/components/headers/index.ts`
   - Add: `export { DefaultHeader } from './DefaultHeader';`
   - Add: `export { Header } from './Header';`
   
-- [ ] **Update main component exports**:
+- [x] **Update main component exports**:
   - File: `packages/ui-core/src/components/index.ts` (if exists)
   - Add: `export * from './headers';`
   
-- [ ] **Update types exports**:
+- [x] **Update types exports**:
   - File: `packages/ui-core/src/types/index.ts`
   - Add: `export * from './header';`
 
 #### Step 5.6.7: Add to Test Cards Page
-- [ ] **Import header components**:
+- [x] **Import header components**:
   - File: `templates/nextjs/src/app/test-cards/page.tsx`
   - Add template import: `import TemplateHeader from '@/components/header';`
   - Add ui-core imports: `import { Header as UiCoreHeader } from '@manta-templates/ui-core';`
   - Import headerContent: `import { getHeaderContent } from '@/lib/headerContent';`
 
-- [ ] **Create header comparison section**:
-  - [ ] **Challenge**: Headers are large - use different layout than cards
-  - [ ] Create full-width comparison sections above card grid
-  - [ ] **Template version**: `<TemplateHeader />` 
-  - [ ] **UI-Core version**: `<UiCoreHeader content={headerContent} ImageComponent={Image} LinkComponent={Link} />`
-  - [ ] Use server component pattern to load headerContent
-  - [ ] Include labels distinguishing template vs ui-core versions
+- [x] **Create header comparison section**:
+  - [x] **Challenge**: Headers are large - use different layout than cards
+  - [x] Create full-width comparison sections above card grid
+  - [x] **Template version**: `<TemplateHeader />` 
+  - [x] **UI-Core version**: `<UiCoreHeader content={headerContent} ImageComponent={Image} LinkComponent={Link} />`
+  - [x] Use server component pattern to load headerContent
+  - [x] Include labels distinguishing template vs ui-core versions
 
 #### Step 5.6.8: Build and Verification
-- [ ] **TypeScript compilation**:
-  - [ ] Run `pnpm build` in ui-core package
-  - [ ] Resolve any import path or type errors
-  - [ ] Ensure all header exports are typed correctly
+- [x] **TypeScript compilation**:
+  - [x] Run `pnpm build` in ui-core package
+  - [x] Resolve any import path or type errors
+  - [x] Ensure all header exports are typed correctly
   
-- [ ] **Template integration testing**:
-  - [ ] Run `pnpm build` in templates/nextjs  
-  - [ ] Verify test-cards page renders both headers
-  - [ ] Test responsive behavior on both versions
-  - [ ] Test navigation links work on both versions
-  - [ ] Test theme toggle integration works
+- [x] **Template integration testing**:
+  - [x] Run `pnpm build` in templates/nextjs  
+  - [x] Verify test-cards page renders both headers
+  - [x] Test responsive behavior on both versions
+  - [x] Test navigation links work on both versions
+  - [x] Test theme toggle integration works
 
 **Success Criteria**:
 - [ ] **Visual Parity**: ui-core header looks identical to template version
@@ -1089,7 +1089,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ## Success Metrics
 
 ### Technical Metrics
-- [x] **Component Parity**: In progress - 5/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, BlogIndexCard, TechnologyScroller, and ThemeProvider)
+- [x] **Component Parity**: In progress - 6/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, BlogIndexCard, TechnologyScroller, ThemeProvider, and Header Components)
 - [ ] **Framework Support**: All components work in Next.js with adapters
 - [ ] **Type Safety**: Zero TypeScript errors across all packages
 - [ ] **Performance**: <5% performance overhead from abstraction

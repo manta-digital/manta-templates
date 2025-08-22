@@ -6,6 +6,7 @@ export * from './components/cards';
 export * from './components/layouts';
 export * from './components/ui';
 export * from './components/primitives';
+export * from './components/headers';
 
 // Utilities
 export * from './utils';

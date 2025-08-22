@@ -10,6 +10,7 @@ import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
 import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/ui/TechnologyScroller';
 import TemplateBrandMark from '@/components/ui/brand-mark';
 import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
+import TemplateHeader from '@/components/header';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -19,10 +20,15 @@ import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
 import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates/ui-core';
 import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
 import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
+import { Header as UiCoreHeader, Container as UiCoreContainer } from '@manta-templates/ui-core';
+import { ColorSelector } from '@/components/themetoggle';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Header content for testing
+import { getHeaderContent } from '@/lib/headerContent';
 
 // Sample blog posts for ui-core testing
 const sampleBlogPosts = [
@@ -65,7 +71,8 @@ const sampleTechnologies = [
  * during the migration process. Each component comparison is displayed side-by-side
  * in a consistent 6-column grid layout.
  */
-export default function TestCardsPage() {
+export default async function TestCardsPage() {
+  const headerContent = await getHeaderContent();
   return (
     <main className="min-h-screen p-6 md:p-10">
       <div className="max-w-7xl mx-auto">
@@ -78,6 +85,39 @@ export default function TestCardsPage() {
             Side-by-side comparison of template components and their ui-core equivalents.
             Each row shows template version (left) and ui-core version (right).
           </p>
+        </div>
+
+        {/* Header Component Comparison - Full Width */}
+        <div className="mb-8 space-y-8">
+          <h2 className="text-2xl font-semibold text-foreground">Header Components</h2>
+          
+          {/* Template Header */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 w-fit">
+              Template Header
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <TemplateHeader />
+            </div>
+          </div>
+          
+          {/* UI-Core Header */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+              UI-Core Header
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <UiCoreHeader 
+                content={headerContent}
+                ImageComponent={Image}
+                LinkComponent={Link}
+                BrandMarkComponent={UiCoreBrandMark}
+                ContainerComponent={UiCoreContainer}
+                ThemeToggleComponent={UiCoreThemeToggle}
+                ColorSelectorComponent={ColorSelector}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Test Grid Layout */}
