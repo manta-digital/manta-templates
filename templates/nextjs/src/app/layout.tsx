@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/context/themecontext";
+import { ThemeProvider } from "@manta-templates/ui-core";
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 

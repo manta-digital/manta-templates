@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@/context/themecontext";
+import { useTheme } from "@manta-templates/ui-core";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Droplet } from "lucide-react";
 import { cn } from "@/lib/utils";

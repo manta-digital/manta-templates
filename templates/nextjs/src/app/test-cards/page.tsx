@@ -9,6 +9,7 @@ import TemplateSidebarPostCard from '@/components/cards/SidebarPostCard';
 import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
 import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/ui/TechnologyScroller';
 import TemplateBrandMark from '@/components/ui/brand-mark';
+import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -17,6 +18,7 @@ import { SidebarPostCard as UiCoreSidebarPostCard } from '@manta-templates/ui-co
 import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
 import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates/ui-core';
 import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
+import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -242,6 +244,39 @@ export default function TestCardsPage() {
                     <UiCoreBrandMark size={24} />
                     <UiCoreBrandMark size={36} />
                     <UiCoreBrandMark size={48} />
+                  </div>
+                </div>
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* ThemeToggle Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ThemeToggle" type="template">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">Template ThemeToggle</h3>
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                    Click to toggle light/dark theme. Uses template context.
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <TemplateThemeToggle />
+                  </div>
+                </div>
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ThemeToggle" type="ui-core">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">UI-Core ThemeToggle</h3>
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                    Click to toggle light/dark theme. Uses ui-core ThemeProvider.
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <UiCoreThemeToggle />
                   </div>
                 </div>
               </UiCoreBaseCard>

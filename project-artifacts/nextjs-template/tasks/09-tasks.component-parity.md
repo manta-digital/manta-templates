@@ -495,82 +495,82 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Detailed Migration Steps**:
 
 #### Step 5.5.1: Create ThemeToggle Component
-- [ ] **Create component file**:
+- [x] **Create component file**:
   - File: `packages/ui-core/src/components/ui/ThemeToggle.tsx`
   - **Copy source template**: `templates/nextjs/src/components/themetoggle.tsx`
   
-- [ ] **Update imports and dependencies**:
-  - [ ] Replace `import { useTheme } from "@/context/themecontext";` 
-  - [ ] With `import { useTheme } from "../../hooks/useTheme";`
-  - [ ] Replace `import { Button } from "@/components/ui/button";`
-  - [ ] With `import { Button } from "./button";` 
-  - [ ] Replace `import { cn } from "@/lib/utils";`
-  - [ ] With `import { cn } from "../../utils/cn";`
-  - [ ] Keep `import { Moon, Sun } from "lucide-react";` unchanged
+- [x] **Update imports and dependencies**:
+  - [x] Replace `import { useTheme } from "@/context/themecontext";` 
+  - [x] With `import { useTheme } from "../../hooks/useTheme";`
+  - [x] Replace `import { Button } from "@/components/ui/button";`
+  - [x] With `import { Button } from "./button";` 
+  - [x] Replace `import { cn } from "@/lib/utils";`
+  - [x] With `import { cn } from "../../utils/cn";`
+  - [x] Keep `import { Moon, Sun } from "lucide-react";` unchanged
 
-- [ ] **Preserve exact component logic**:
-  - [ ] Keep same props interface: `{ className?: string }`
-  - [ ] Keep same theme toggle logic: `setTheme(theme === "light" ? "dark" : "light")`
-  - [ ] Keep same conditional icon rendering based on theme state
-  - [ ] Keep all accessibility attributes: `aria-pressed`, `title`, `sr-only`
+- [x] **Preserve exact component logic**:
+  - [x] Keep same props interface: `{ className?: string }`
+  - [x] Keep same theme toggle logic: `setTheme(theme === "light" ? "dark" : "light")`
+  - [x] Keep same conditional icon rendering based on theme state
+  - [x] Keep all accessibility attributes: `aria-pressed`, `title`, `sr-only`
 
-- [ ] **Preserve styling exactly**:
-  - [ ] Keep all Tailwind classes from lines 23-37 of template
-  - [ ] Keep all custom CSS variables: `--color-accent-*`, `--color-border-*`
-  - [ ] Keep all hover states and transitions
-  - [ ] Keep icon styling: `strokeWidth={1.75}`, size classes
-  - [ ] Keep all `!important` modifiers for style override
+- [x] **Preserve styling exactly**:
+  - [x] Keep all Tailwind classes from lines 23-37 of template
+  - [x] Keep all custom CSS variables: `--color-accent-*`, `--color-border-*`
+  - [x] Keep all hover states and transitions
+  - [x] Keep icon styling: `strokeWidth={1.75}`, size classes
+  - [x] Keep all `!important` modifiers for style override
 
 #### Step 5.5.2: Handle Only ThemeToggle (Not ColorSelector)
-- [ ] **Export only ThemeToggle**:
-  - [ ] Export `ThemeToggle` component
-  - [ ] **Do NOT migrate ColorSelector** - that's a separate component
-  - [ ] Remove or comment out ColorSelector if accidentally copied
+- [x] **Export only ThemeToggle**:
+  - [x] Export `ThemeToggle` component
+  - [x] **Do NOT migrate ColorSelector** - that's a separate component
+  - [x] Remove or comment out ColorSelector if accidentally copied
 
 #### Step 5.5.3: Update UI Component Exports
-- [ ] **Add to exports**:
-  - [ ] Update `packages/ui-core/src/components/ui/index.ts`
-  - [ ] Add `export { ThemeToggle } from './ThemeToggle';`
-  - [ ] Add TypeScript types if needed
+- [x] **Add to exports**:
+  - [x] Update `packages/ui-core/src/components/ui/index.ts`
+  - [x] Add `export { ThemeToggle } from './ThemeToggle';`
+  - [x] Add TypeScript types if needed
   
 #### Step 5.5.4: Add to Test Cards Page
-- [ ] **Import components in test-cards**:
-  - [ ] File: `templates/nextjs/src/app/test-cards/page.tsx`
-  - [ ] Add template import: `import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';`
-  - [ ] Add ui-core import: `import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';`
+- [x] **Import components in test-cards**:
+  - [x] File: `templates/nextjs/src/app/test-cards/page.tsx`
+  - [x] Add template import: `import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';`
+  - [x] Add ui-core import: `import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';`
 
-- [ ] **Add comparison section**:
-  - [ ] Create side-by-side ThemeToggle comparison
-  - [ ] **Template version**: `<TemplateThemeToggle />`
-  - [ ] **UI-Core version**: `<UiCoreThemeToggle />`
-  - [ ] Use same CardComparisonWrapper pattern as other components
-  - [ ] Include explanatory text about framework differences
+- [x] **Add comparison section**:
+  - [x] Create side-by-side ThemeToggle comparison
+  - [x] **Template version**: `<TemplateThemeToggle />`
+  - [x] **UI-Core version**: `<UiCoreThemeToggle />`
+  - [x] Use same CardComparisonWrapper pattern as other components
+  - [x] Include explanatory text about framework differences
 
-- [ ] **Test functionality**:
-  - [ ] Both versions should toggle theme when clicked
-  - [ ] Both should show correct icon for current theme
-  - [ ] Both should update simultaneously (same theme state)
+- [x] **Test functionality**:
+  - [x] Both versions should toggle theme when clicked
+  - [x] Both should show correct icon for current theme
+  - [x] Both should update simultaneously (same theme state)
 
 #### Step 5.5.5: Build and Verification
-- [ ] **TypeScript compilation**:
-  - [ ] Run `pnpm build` in ui-core package
-  - [ ] Resolve any import or type errors
-  - [ ] Ensure ThemeToggle exports correctly
+- [x] **TypeScript compilation**:
+  - [x] Run `pnpm build` in ui-core package
+  - [x] Resolve any import or type errors
+  - [x] Ensure ThemeToggle exports correctly
   
-- [ ] **Template integration**:
-  - [ ] Run `pnpm build` in templates/nextjs
-  - [ ] Verify test-cards page renders without errors
-  - [ ] Test that both ThemeToggle versions work
+- [x] **Template integration**:
+  - [x] Run `pnpm build` in templates/nextjs
+  - [x] Verify test-cards page renders without errors
+  - [x] Test that both ThemeToggle versions work
 
 **Success Criteria**:
-- [ ] **Visual Parity**: ui-core ThemeToggle looks identical to template version
-- [ ] **Functional Parity**: Theme switching works identically  
-- [ ] **Styling Preservation**: All accent colors, hover states, transitions preserved
-- [ ] **Accessibility**: All ARIA attributes and screen reader support maintained
-- [ ] **Framework Independence**: Uses ui-core ThemeProvider, no Next.js dependencies
-- [ ] **Test Integration**: Appears in test-cards page with working comparison
-- [ ] **Build Success**: Both ui-core and template packages build without errors
-- [ ] **Interactive Testing**: Both versions toggle theme and update simultaneously
+- [x] **Visual Parity**: ui-core ThemeToggle looks identical to template version
+- [x] **Functional Parity**: Theme switching works identically  
+- [x] **Styling Preservation**: All accent colors, hover states, transitions preserved
+- [x] **Accessibility**: All ARIA attributes and screen reader support maintained
+- [x] **Framework Independence**: Uses ui-core ThemeProvider, no Next.js dependencies
+- [x] **Test Integration**: Appears in test-cards page with working comparison
+- [x] **Build Success**: Both ui-core and template packages build without errors
+- [x] **Interactive Testing**: Both versions toggle theme and update simultaneously
 
 **Common Pitfalls for Junior AI**:
 - ⚠️ Don't change any Tailwind classes or CSS variables - preserve styling exactly
