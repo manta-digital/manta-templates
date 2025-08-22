@@ -11,6 +11,7 @@ import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/u
 import TemplateBrandMark from '@/components/ui/brand-mark';
 import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
 import TemplateHeader from '@/components/header';
+import TemplateFooter from '@/components/footer';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -21,6 +22,7 @@ import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates
 import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
 import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
 import { Header as UiCoreHeader, Container as UiCoreContainer } from '@manta-templates/ui-core';
+import { Footer as UiCoreFooter } from '@manta-templates/ui-core';
 import { ColorSelector } from '@/components/themetoggle';
 
 // Next.js components for dependency injection
@@ -29,6 +31,7 @@ import Link from 'next/link';
 
 // Header content for testing
 import { getHeaderContent } from '@/lib/headerContent';
+import { getFooterContent } from '@/lib/footerContent';
 
 // Sample blog posts for ui-core testing
 const sampleBlogPosts = [
@@ -73,6 +76,7 @@ const sampleTechnologies = [
  */
 export default async function TestCardsPage() {
   const headerContent = await getHeaderContent();
+  const { sections: footerSections } = await getFooterContent();
   return (
     <main className="min-h-screen p-6 md:p-10">
       <div className="max-w-7xl mx-auto">
@@ -115,6 +119,68 @@ export default async function TestCardsPage() {
                 ContainerComponent={UiCoreContainer}
                 ThemeToggleComponent={UiCoreThemeToggle}
                 ColorSelectorComponent={ColorSelector}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Component Comparison - Full Width */}
+        <div className="mb-8 space-y-8">
+          <h2 className="text-2xl font-semibold text-foreground">Footer Components</h2>
+          
+          {/* Template Footer - Default Variant */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 w-fit">
+              Template Footer (Default)
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <TemplateFooter />
+            </div>
+          </div>
+          
+          {/* UI-Core Footer - Default Variant */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+              UI-Core Footer (Default)
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <UiCoreFooter 
+                sections={footerSections}
+                variant="default"
+                LinkComponent={Link}
+                ThemeToggleComponent={UiCoreThemeToggle}
+              />
+            </div>
+          </div>
+
+          {/* UI-Core Footer - Default with Full Legal */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+              UI-Core Footer (Default + Full Legal)
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <UiCoreFooter 
+                sections={footerSections}
+                variant="default"
+                legalPreset="mit"
+                LinkComponent={Link}
+                ThemeToggleComponent={UiCoreThemeToggle}
+              />
+            </div>
+          </div>
+
+          {/* UI-Core Footer - Compact Variant */}
+          <div>
+            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+              UI-Core Footer (Compact)
+            </div>
+            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+              <UiCoreFooter 
+                sections={footerSections}
+                variant="compact"
+                legalPreset="mit"
+                LinkComponent={Link}
+                version="0.1.0"
               />
             </div>
           </div>
