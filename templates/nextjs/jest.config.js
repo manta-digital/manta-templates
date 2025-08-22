@@ -30,7 +30,6 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/src/$1',
     // Mock ui-core to avoid ESM import issues with remark
     '^@manta-templates/ui-core$': '<rootDir>/src/__tests__/__mocks__/ui-core.js',
-    '^@manta-templates/ui-adapters-nextjs$': '<rootDir>/../../packages/ui-adapters/nextjs/src/index.ts',
   },
   
   // Transform files

@@ -243,26 +243,26 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Objective**: Migrate complex BlogIndexCard that loads and displays multiple posts.
 
 **Migration Steps**:
-- [ ] **Create ui-core component**:
+- [x] **Create ui-core component**:
    - File: `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
    - Remove getAllContent dependency
    - Add ContentProvider for multiple content loading
    - Abstract content fetching logic
 
-- [ ] **Handle complex content loading**:
+- [x] **Handle complex content loading**:
    - Support for loading multiple posts
    - Filtering and limiting functionality
    - Sorting by date
 
-- [ ] **Framework integration**:
+- [x] **Framework integration**:
    - Next.js adapter with server-side content loading
    - Preserve async functionality for server components
 
 **Success Criteria**:
-- [ ] Multiple post loading works
-- [ ] Filtering and limiting functional
-- [ ] Date sorting preserved
-- [ ] Server component compatibility maintained
+- [x] Multiple post loading works
+- [x] Filtering and limiting functional
+- [x] Date sorting preserved
+- [x] Server component compatibility maintained
 
 **Files to Create**:
 - `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
@@ -380,7 +380,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ## Success Metrics
 
 ### Technical Metrics
-- [x] **Component Parity**: In progress - 2/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard and Adapter Cleanup)
+- [x] **Component Parity**: In progress - 3/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, and BlogIndexCard)
 - [ ] **Framework Support**: All components work in Next.js with adapters
 - [ ] **Type Safety**: Zero TypeScript errors across all packages
 - [ ] **Performance**: <5% performance overhead from abstraction

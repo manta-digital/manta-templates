@@ -257,9 +257,6 @@ importers:
 
   templates/nextjs:
     dependencies:
-      '@manta-templates/ui-adapters-nextjs':
-        specifier: workspace:*
-        version: link:../../packages/ui-adapters/nextjs
       '@manta-templates/ui-core':
         specifier: workspace:*
         version: link:../../packages/ui-core

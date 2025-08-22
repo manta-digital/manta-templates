@@ -28,13 +28,19 @@ import { ArticleCard } from '@manta-templates/ui-core';
 />
 ```
 
-**After (optional upgrade):**
+**After (current pattern):**
 ```tsx
-import { ArticleCardWithContent } from '@manta-templates/ui-adapters-nextjs';
+import { ArticleCard } from '@manta-templates/ui-core';
+import Image from 'next/image';
+import Link from 'next/link';
 
-<ArticleCardWithContent
-  slug="my-article"
-  contentType="articles"
+<ArticleCard
+  title="My Article"
+  description="Article description"
+  image="/path/to/image.jpg"
+  href="/articles/my-article"
+  ImageComponent={Image}
+  LinkComponent={Link}
 />
 ```
 
@@ -67,15 +73,24 @@ export default async function BlogPage() {
 }
 ```
 
-**After:**
+**After (current pattern):**
 ```tsx
-import { ArticleCardServerContent } from '@manta-templates/ui-adapters-nextjs';
+import { ArticleCard } from '@manta-templates/ui-core';
+import { getArticleBySlug } from '@/lib/content/loader';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const article = await getArticleBySlug('intro-article');
+  
   return (
-    <ArticleCardServerContent
-      slug="intro-article"
-      contentType="blog"
+    <ArticleCard
+      title={article.title}
+      description={article.description}
+      image={article.coverImage}
+      href={`/blog/${article.slug}`}
+      ImageComponent={Image}
+      LinkComponent={Link}
     />
   );
 }
@@ -126,16 +141,33 @@ export default async function HomePage() {
 }
 ```
 
-**After:**
+**After (current pattern):**
 ```tsx
-import { ArticleCardServerContent } from '@manta-templates/ui-adapters-nextjs';
+import { ArticleCard } from '@manta-templates/ui-core';
+import { getArticleBySlug } from '@/lib/content/loader';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const articles = await Promise.all([
+    getArticleBySlug('featured-1'),
+    getArticleBySlug('featured-2'), 
+    getArticleBySlug('featured-3')
+  ]);
+
   return (
     <div className="grid grid-cols-3 gap-4">
-      <ArticleCardServerContent slug="featured-1" contentType="articles" />
-      <ArticleCardServerContent slug="featured-2" contentType="articles" />
-      <ArticleCardServerContent slug="featured-3" contentType="articles" />
+      {articles.map((article) => (
+        <ArticleCard
+          key={article.slug}
+          title={article.title}
+          description={article.description}
+          image={article.coverImage}
+          href={`/articles/${article.slug}`}
+          ImageComponent={Image}
+          LinkComponent={Link}
+        />
+      ))}
     </div>
   );
 }

@@ -8,8 +8,10 @@
  */
 
 import React from 'react';
-// NOTE: Uncomment when adapter package is added to template dependencies
-// import { ArticleCardWithContent, ArticleCardServerContent } from '@manta-templates/ui-adapters-nextjs';
+// Current pattern: Direct dependency injection with ui-core components
+// import { ArticleCard } from '@manta-templates/ui-core';
+// import Image from 'next/image';
+// import Link from 'next/link';
 
 // For now, showing the imports and usage patterns as comments/examples
 
@@ -231,13 +233,14 @@ Your markdown content here...
         <h2 className="text-2xl font-semibold mb-4">Installation</h2>
         <div className="space-y-4">
           <div>
-            <h3 className="font-semibold mb-2">1. Install the adapter package:</h3>
-            <code className="bg-white p-2 rounded block">pnpm add @manta-templates/ui-adapters-nextjs</code>
+            <h3 className="font-semibold mb-2">1. Import ui-core components:</h3>
+            <code className="bg-white p-2 rounded block">import {"{ ArticleCard }"} from '@manta-templates/ui-core';</code>
           </div>
           <div>
-            <h3 className="font-semibold mb-2">2. Import components:</h3>
+            <h3 className="font-semibold mb-2">2. Import Next.js components for dependency injection:</h3>
             <code className="bg-white p-2 rounded block">
-              import {"{ ArticleCardWithContent }"} from '@manta-templates/ui-adapters-nextjs';
+              import Image from 'next/image';<br/>
+              import Link from 'next/link';
             </code>
           </div>
           <div>

@@ -11,6 +11,8 @@ export { QuoteCard } from './QuoteCard';
 export type { QuoteCardProps } from './QuoteCard';
 export { SidebarPostCard } from './SidebarPostCard';
 export type { SidebarPostCardProps } from './SidebarPostCard';
+export { BlogIndexCard } from './BlogIndexCard';
+export type { BlogIndexCardProps, BlogPost } from './BlogIndexCard';
 
 // Specialized cards
 export { AnimatedCard } from './AnimatedCard';

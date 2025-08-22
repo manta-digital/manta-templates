@@ -6,15 +6,42 @@ import GridItem from '@/components/layouts/grid-layout/grid-item';
 import { BaseCard as TemplateBaseCard } from '@/components/cards/BaseCard';
 import TemplateQuoteCard from '@/components/cards/QuoteCard';
 import TemplateSidebarPostCard from '@/components/cards/SidebarPostCard';
+import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
 import { QuoteCard as UiCoreQuoteCard } from '@manta-templates/ui-core';
 import { SidebarPostCard as UiCoreSidebarPostCard } from '@manta-templates/ui-core';
+import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Sample blog posts for ui-core testing
+const sampleBlogPosts = [
+  {
+    slug: 'getting-started-nextjs',
+    title: 'Getting Started with Next.js',
+    description: 'Learn the fundamentals of Next.js and build your first application with this comprehensive guide.',
+    pubDate: '2024-01-15',
+    thumbnail: 'https://picsum.photos/80/80?random=1',
+  },
+  {
+    slug: 'react-best-practices',
+    title: 'React Best Practices for 2024',
+    description: 'Discover the latest React patterns and practices to write better, more maintainable code.',
+    pubDate: '2024-01-10',
+    thumbnail: 'https://picsum.photos/80/80?random=2',
+  },
+  {
+    slug: 'typescript-tips',
+    title: 'TypeScript Tips and Tricks',
+    description: 'Advanced TypeScript techniques that will make your development workflow more efficient.',
+    pubDate: '2024-01-05',
+    thumbnail: 'https://picsum.photos/80/80?random=3',
+  },
+];
 
 /**
  * Test Cards Page
@@ -133,16 +160,21 @@ export default function TestCardsPage() {
             </CardComparisonWrapper>
           </GridItem>
 
-          {/* Placeholder for BlogIndexCard */}
+          {/* BlogIndexCard Comparison */}
           <GridItem colSpan="col-span-3">
             <CardComparisonWrapper title="BlogIndexCard" type="template">
-              <PlaceholderCard componentName="BlogIndexCard" />
+              <TemplateBlogIndexCard postLimit={3} />
             </CardComparisonWrapper>
           </GridItem>
 
           <GridItem colSpan="col-span-3">
             <CardComparisonWrapper title="BlogIndexCard" type="ui-core">
-              <PlaceholderCard componentName="BlogIndexCard" />
+              <UiCoreBlogIndexCard 
+                posts={sampleBlogPosts}
+                postLimit={3}
+                ImageComponent={Image}
+                LinkComponent={Link}
+              />
             </CardComparisonWrapper>
           </GridItem>
 
@@ -180,22 +212,3 @@ function CardComparisonWrapper({ title, type, children }: CardComparisonWrapperP
   );
 }
 
-/**
- * Placeholder Card
- * 
- * Used as a placeholder while components are being migrated.
- */
-interface PlaceholderCardProps {
-  componentName: string;
-}
-
-function PlaceholderCard({ componentName }: PlaceholderCardProps) {
-  return (
-    <div className="w-full h-full bg-muted/50 border border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center text-center">
-      <div className="text-lg font-medium mb-2 text-muted-foreground">{componentName}</div>
-      <div className="text-sm text-muted-foreground/70">
-        Component not yet migrated
-      </div>
-    </div>
-  );
-}

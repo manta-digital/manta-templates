@@ -284,7 +284,6 @@ describe('Build Validation', () => {
       // Test workspace package imports
       const workspaceImports = {
         uiCore: '@manta-templates/ui-core',
-        uiAdapters: '@manta-templates/ui-adapters-nextjs',
         resolutionStrategy: 'workspace:*',
       };
 
@@ -296,8 +295,7 @@ describe('Build Validation', () => {
       // Test dependency resolution
       const dependencyResolution = {
         internalDependencies: [
-          '@manta-templates/ui-core',
-          '@manta-templates/ui-adapters-nextjs'
+          '@manta-templates/ui-core'
         ],
         externalDependencies: [
           'next', 'react', 'framer-motion'
