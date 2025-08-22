@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 import { formatDate } from '../../utils/formatDate';
-import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/BaseCard';
+import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
 export interface BlogCardWideProps {
   imageMaxHeight?: string;

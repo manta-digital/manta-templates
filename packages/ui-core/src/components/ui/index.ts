@@ -1,6 +1,8 @@
 // UI components
-export { BaseCard, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './BaseCard';
+export { BrandMark } from './BrandMark';
 export { Button, buttonVariants } from './button';
-export * from './card';
 export { TechnologyScroller } from './TechnologyScroller';
+
+// Types
+export type { BrandMarkProps } from './BrandMark';
 export type { TechnologyScrollerProps, Technology } from './TechnologyScroller';

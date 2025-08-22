@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '../../utils';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 import type { MotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import type { ComponentType, ElementType } from 'react';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 import { VideoContent } from '../../types/content';
 
 interface VideoCardProps {

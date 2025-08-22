@@ -15,7 +15,7 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
 
 /**

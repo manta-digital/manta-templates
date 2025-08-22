@@ -237,7 +237,6 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 
 ### Task 3.4: Migrate BlogIndexCard
 **Owner**: Junior AI  
-**Estimated Time**: 4 hours  
 **Dependencies**: Task 3.3  
 
 **Objective**: Migrate complex BlogIndexCard that loads and displays multiple posts.
@@ -278,29 +277,33 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Objective**: Migrate TechnologyScroller component to ui-core with dependency injection support.
 
 **Migration Steps**:
-- [ ] **Create ui-core component**:
+- [x] **Create ui-core component**:
    - File: `packages/ui-core/src/components/ui/TechnologyScroller.tsx`
    - Remove Next.js Image dependency (currently uses standard img tag)
    - Add ImageComponent dependency injection for optimized images
    - Preserve all animation and styling functionality
    - Keep technology data interface and prop structure
 
-- [ ] **Follow direct injection pattern**:
+- [x] **Follow direct injection pattern**:
    - No adapter wrapper needed (follows current architecture)
    - Uses ImageComponent dependency injection like other ui-core components
 
-- [ ] **Update test infrastructure**:
+- [x] **Update test infrastructure**:
    - Add TechnologyScroller to test-cards page
    - Create sample technology data
    - Test all speed and direction options
 
+- [x] **Update test-example-2**:
+   - Replace template technology scroller with ui-core version in test-example-2 page
+   - Have project manager verify that new version matches template version
+
 **Success Criteria**:
-- [ ] Component renders identically to template version
-- [ ] All animation speeds and directions work correctly
-- [ ] Hover pause functionality preserved
-- [ ] Image optimization works with dependency injection
-- [ ] Technology data structure maintained
-- [ ] TypeScript types are complete and correct
+- [x] Component renders identically to template version
+- [x] All animation speeds and directions work correctly
+- [x] Hover pause functionality preserved
+- [x] Image optimization works with dependency injection
+- [x] Technology data structure maintained
+- [x] TypeScript types are complete and correct
 
 **Files to Create**:
 - `packages/ui-core/src/components/ui/TechnologyScroller.tsx`
@@ -315,7 +318,217 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Objective**: Confirm that VirtualCardList is unused and can be excluded from migration.
 
 **Verification Task**:
-- [ ] **Confirm component is unused**: Verify that VirtualCardList is not referenced anywhere in the codebase and is only present in the component definition file
+- [x] **Confirm component is unused**: Verify that VirtualCardList is not referenced anywhere in the codebase and is only present in the component definition file
+
+### Task 5.2: Migrate ContentCard
+**Owner**: Junior AI  
+**Complexity**: 1 (Simple)  
+**Dependencies**: Task 5.1  
+
+**Objective**: Migrate ContentCard layout component to ui-core with dependency injection support.
+
+**Migration Steps**:
+- [x] **Create ui-core component**:
+  - File: `packages/ui-core/src/components/layouts/ContentCard.tsx`
+  - Simple wrapper around BaseCard with consistent styling
+  - Currently used in legal, privacy, terms, and cookies pages
+
+**Success Criteria**:
+- [x] Component renders identically to template version
+- [x] Maintains consistent padding and styling
+- [x] Works with all BaseCard props
+- [x] TypeScript types are complete
+
+### Task 5.3: Migrate BrandMark Component
+**Owner**: Junior AI  
+**Complexity**: 1 (Simple)  
+**Dependencies**: Task 5.2  
+
+**Objective**: Migrate brand mark/logo component to ui-core.
+
+**Migration Steps**:
+- [x] **Create ui-core component**:
+  - File: `packages/ui-core/src/components/ui/BrandMark.tsx`
+  - SVG logo/brand component
+  - Configurable size and colors
+  - Link wrapper support
+- [x] **Add to test-cards page**:
+  - Include BrandMark in test-cards comparison
+  - Test different size variants
+  - Test color theming
+
+**Success Criteria**:
+- [x] Brand mark renders correctly
+- [x] Size variants work
+- [x] Color theming supported
+- [x] Link wrapping optional
+- [x] Component appears in test-cards page
+
+### Task 5.4: Migrate ThemeToggle Component
+**Owner**: Junior AI  
+**Complexity**: 2 (Simple-Moderate)  
+**Dependencies**: Task 5.3  
+
+**Objective**: Migrate theme toggle component for dark/light mode switching.
+
+**Migration Steps**:
+- [ ] **Create ui-core component**:
+  - File: `packages/ui-core/src/components/ui/ThemeToggle.tsx`
+  - Framework-agnostic theme switching
+  - Icon component dependency injection
+- [ ] **Abstract theme context**:
+  - Create theme provider interface
+  - Support different theme implementations
+- [ ] **Add to test-cards page**:
+  - Include ThemeToggle in test-cards comparison
+  - Test theme switching functionality
+  - Test accessibility features
+
+**Success Criteria**:
+- [ ] Theme toggle works across frameworks
+- [ ] Icon switching animation preserved
+- [ ] Accessibility features maintained
+- [ ] Works with different theme providers
+- [ ] Component appears in test-cards page
+
+### Task 5.5: Migrate Header Components
+**Owner**: Junior AI  
+**Complexity**: 3 (Moderate)  
+**Dependencies**: Task 5.4  
+
+**Objective**: Migrate header components to ui-core with dependency injection support.
+
+**Migration Steps**:
+- [ ] **Migrate DefaultHeader.tsx**:
+  - Main header implementation with navigation
+  - Add LinkComponent dependency injection
+  - Preserve responsive behavior
+- [ ] **Migrate header.tsx wrapper**:
+  - Wrapper that selects header variant
+  - Support configuration-based selection
+- [ ] **Handle dependencies**:
+  - Container component integration (already migrated)
+  - Theme toggle integration (Task 5.4 dependency)
+  - BrandMark integration (Task 5.3 dependency)
+- [ ] **Add to test-cards page**:
+  - Include Header in test-cards comparison
+  - Test responsive behavior
+  - Test navigation functionality
+
+**Success Criteria**:
+- [ ] Headers render identically to template versions
+- [ ] Navigation works with dependency injection
+- [ ] Responsive menu behavior preserved
+- [ ] Theme toggle integration maintained
+- [ ] Container width constraints work correctly
+- [ ] Component appears in test-cards page
+
+### Task 5.6: Migrate Footer Components
+**Owner**: Junior AI  
+**Complexity**: 4 (Complex)  
+**Dependencies**: Task 5.5  
+
+**Objective**: Migrate footer components to ui-core with full feature preservation.
+
+**Analysis Required**:
+- [ ] **Document footer features**:
+  - DefaultFooter: Multi-column layout with sections
+  - CompactFooter: Minimal single-row layout
+  - Dynamic content loading from footerContent
+  - Legal links configuration
+  - Contact information display
+  - Social links integration
+  - Theme toggle placement
+- [ ] **Identify dependencies**:
+  - FooterContent loading system
+  - Site configuration integration
+  - Icon components (lucide-react)
+
+**Migration Steps**:
+- [ ] **Migrate DefaultFooter.tsx**:
+  - Multi-column responsive layout
+  - Section-based content organization
+  - External link indicators
+  - Contact information display
+- [ ] **Migrate CompactFooter.tsx**:
+  - Single-row minimal layout
+  - Essential links only
+  - Mobile-optimized design
+- [ ] **Migrate footer.tsx wrapper**:
+  - Variant selection logic
+  - Configuration-based switching
+- [ ] **Create content abstraction**:
+  - FooterContent interface
+  - Dependency injection for content loading
+- [ ] **Add to test-cards page**:
+  - Include both Footer variants in test-cards comparison
+  - Test content loading functionality
+  - Test responsive layouts
+
+**Success Criteria**:
+- [ ] Both footer variants render correctly
+- [ ] Content loading abstraction works
+- [ ] Legal links configurable
+- [ ] Responsive layouts maintained
+- [ ] External link indicators work
+- [ ] Theme toggle integration preserved
+- [ ] Components appear in test-cards page
+
+### Task 5.7: Migrate ComingSoonOverlay Component
+**Owner**: Junior AI  
+**Complexity**: 2 (Simple-Moderate)  
+**Dependencies**: Task 5.6  
+
+**Objective**: Migrate coming soon overlay component with updates for reusability.
+
+**Migration Steps**:
+- [ ] **Create ui-core component**:
+  - File: `packages/ui-core/src/components/overlays/ComingSoonOverlay.tsx`
+  - Full-screen overlay design
+  - Customizable messaging
+  - Optional countdown timer support
+- [ ] **Update for flexibility**:
+  - Configurable text and styling
+  - Optional email capture
+  - Animation support
+- [ ] **Add to test-cards page**:
+  - Include ComingSoonOverlay in test-cards comparison
+  - Test customizable content
+  - Test responsive behavior
+
+**Success Criteria**:
+- [ ] Overlay displays correctly
+- [ ] Customizable content works
+- [ ] Responsive design maintained
+- [ ] Optional features configurable
+- [ ] Component appears in test-cards page
+
+### Task 5.8: Migrate Container Component
+**Owner**: Junior AI  
+**Complexity**: 2 (Simple-Moderate)  
+**Dependencies**: Task 5.7  
+
+**Objective**: Migrate container layout component for consistent width constraints.
+
+**Analysis Notes**:
+- Currently used in multiple components (headers, pages, cards)
+- Provides responsive max-width constraints
+- Essential for layout consistency
+
+**Migration Steps**:
+- [x] **Create ui-core component**:
+  - File: `packages/ui-core/src/components/layouts/Container.tsx`
+  - Configurable max-width options
+  - Responsive breakpoints
+  - Padding management
+
+**Success Criteria**:
+- [x] Container width constraints work
+- [x] All size variants supported
+- [x] Responsive behavior maintained
+- [x] Compatible with existing layouts
+
+**Note**: Container component was already migrated to ui-core in previous work.
 
 ## Phase 6: Testing and Integration
 
@@ -380,7 +593,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ## Success Metrics
 
 ### Technical Metrics
-- [x] **Component Parity**: In progress - 3/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, and BlogIndexCard)
+- [x] **Component Parity**: In progress - 4/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, BlogIndexCard, and TechnologyScroller)
 - [ ] **Framework Support**: All components work in Next.js with adapters
 - [ ] **Type Safety**: Zero TypeScript errors across all packages
 - [ ] **Performance**: <5% performance overhead from abstraction

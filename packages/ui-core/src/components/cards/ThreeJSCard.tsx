@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import React, { useEffect, useRef } from 'react';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 
 export interface ThreeJSCardProps {
   className?: string;

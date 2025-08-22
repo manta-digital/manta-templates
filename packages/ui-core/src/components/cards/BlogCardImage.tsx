@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn, formatDate } from '../../utils';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 
 export interface BlogCardImageProps {
   imageMaxHeight?: string; 

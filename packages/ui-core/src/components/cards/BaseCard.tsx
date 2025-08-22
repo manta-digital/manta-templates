@@ -7,7 +7,7 @@ import {
   CardTitle as ShadcnCardTitle,
   CardDescription as ShadcnCardDescription,
   CardContent as ShadcnCardContent,
-} from './card';
+} from '../ui/card';
 
 // Re-export the ShadCN components for direct use when needed
 export const CardHeader = ShadcnCardHeader;

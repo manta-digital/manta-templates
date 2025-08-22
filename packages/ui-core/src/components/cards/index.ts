@@ -1,3 +1,8 @@
+// Core card components
+export { BaseCard, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './BaseCard';
+export { ContentCard } from './ContentCard';
+export type { ContentCardProps } from './ContentCard';
+
 // Card components with dependency injection
 export { ArticleCard } from './ArticleCard';
 export type { ArticleContent } from './ArticleCard';

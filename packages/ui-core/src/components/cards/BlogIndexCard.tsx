@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 
 interface BlogPost {
   slug: string;

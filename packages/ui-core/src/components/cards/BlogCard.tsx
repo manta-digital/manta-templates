@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn, formatDate } from '../../utils';
-import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/BaseCard';
+import { BaseCard, CardContent, CardDescription, CardHeader, CardTitle } from './BaseCard';
 
 interface BlogCardProps {
   title: string;

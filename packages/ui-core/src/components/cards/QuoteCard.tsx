@@ -1,7 +1,7 @@
 import React from 'react';
 import { QuoteContent } from '../../types/content';
 import { cn } from '../../utils';
-import { BaseCard } from '../ui/BaseCard';
+import { BaseCard } from './BaseCard';
 
 interface QuoteCardProps {
   /** Content-driven props */
