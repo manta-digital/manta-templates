@@ -211,7 +211,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 **Objective**: Remove unused adapter components that are remnants of legacy architecture.
 
 **Cleanup Tasks**:
-- [ ] **Remove unused adapter components**:
+- [x] **Remove unused adapter components**:
    - Remove `ArticleCardWithContent.tsx` and related components
    - Remove `BaseCardWithContent.tsx` 
    - Remove `ProjectCardWithContent.tsx`
@@ -219,21 +219,21 @@ Based on code analysis, here are the Priority 1 components and their necessity:
    - Remove `BlogCardImageWithContent.tsx`
    - Clean up exports in `packages/ui-adapters/nextjs/src/components/index.ts`
 
-- [ ] **Update package dependencies**:
+- [x] **Update package dependencies**:
    - Remove `@manta-templates/ui-adapters-nextjs` from template package.json
    - Remove references from jest.config.js
    - Clean up build validation tests
 
-- [ ] **Clean up documentation references**:
+- [x] **Clean up documentation references**:
    - Update or remove references in migration-guide.md
    - Remove commented imports in examples
    - Update content-loading-examples.tsx
 
 **Success Criteria**:
-- [ ] No unused adapter components remain
-- [ ] Package builds successfully without adapter dependencies
-- [ ] Documentation reflects current direct injection pattern
-- [ ] All tests pass after cleanup
+- [x] No unused adapter components remain
+- [x] Package builds successfully without adapter dependencies
+- [x] Documentation reflects current direct injection pattern
+- [x] All tests pass after cleanup
 
 ### Task 3.4: Migrate BlogIndexCard
 **Owner**: Junior AI  
@@ -380,7 +380,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ## Success Metrics
 
 ### Technical Metrics
-- [x] **Component Parity**: In progress - 1/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard)
+- [x] **Component Parity**: In progress - 2/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard and Adapter Cleanup)
 - [ ] **Framework Support**: All components work in Next.js with adapters
 - [ ] **Type Safety**: Zero TypeScript errors across all packages
 - [ ] **Performance**: <5% performance overhead from abstraction
