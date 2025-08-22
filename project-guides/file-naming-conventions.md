@@ -101,6 +101,7 @@ Modern task files include:
 - **YAML front matter** with metadata (slice, project, dependencies, etc.)
 - **Context summary** for AI restart capability
 - **Granular tasks** with clear success criteria
+- Always use checklist structure (see provided example)
 
 Example structure:
 ```markdown
@@ -117,7 +118,33 @@ lastUpdated: 2025-08-18
 [Context and current state]
 
 ## Tasks
-[Detailed task list]
+[Detailed list of tasks (example provided below)]
+
+### Task 3.4: Migrate BlogIndexCard
+**Dependencies**: Task 3.3
+**Objective**: Migrate complex BlogIndexCard that loads and displays multiple posts.
+
+**Migration Steps**:
+- [x] **Create ui-core component**:
+- File: `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
+- Remove getAllContent dependency
+- Add ContentProvider for multiple content loading
+- Abstract content fetching logic
+
+- [x] **Handle complex content loading**:
+- Support for loading multiple posts
+- Filtering and limiting functionality
+- Sorting by date
+
+- [x] **Framework integration**:
+- Next.js adapter with server-side content loading
+- Preserve async functionality for server components
+
+**Success Criteria**:
+- [x] Multiple post loading works
+- [x] Filtering and limiting functional
+- [x] Date sorting preserved
+- [x] Server component compatibility maintained
 ```
 
 ### Legacy Task File Patterns

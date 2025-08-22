@@ -338,6 +338,8 @@ Create task file at `private/tasks/nn-analysis.{.subproject?}-{date}.md` with:
 1. YAML front matter including slice or subproject name, project, YYYYMMDD date, LLD reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
+4. Keep success criteria with their respective task
+5. Always use checklist format described in 
 
 For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
