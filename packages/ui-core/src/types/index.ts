@@ -1,3 +1,4 @@
 // Type definitions
 export * from './content';
 export * from './cardVariants';
+export * from './theme';

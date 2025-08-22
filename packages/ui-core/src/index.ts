@@ -11,7 +11,7 @@ export * from './components/primitives';
 export * from './utils';
 export * from './hooks';
 export * from './types';
-// export * from './providers';
+export * from './providers';
 
 // Content system exports
 export type {

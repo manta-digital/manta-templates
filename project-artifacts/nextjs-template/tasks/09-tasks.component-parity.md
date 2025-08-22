@@ -364,120 +364,616 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 - [x] Link wrapping optional
 - [x] Component appears in test-cards page
 
-### Task 5.4: Migrate ThemeToggle Component
-**Owner**: Junior AI  
-**Complexity**: 2 (Simple-Moderate)  
-**Dependencies**: Task 5.3  
-
-**Objective**: Migrate theme toggle component for dark/light mode switching.
-
-**Migration Steps**:
-- [ ] **Create ui-core component**:
-  - File: `packages/ui-core/src/components/ui/ThemeToggle.tsx`
-  - Framework-agnostic theme switching
-  - Icon component dependency injection
-- [ ] **Abstract theme context**:
-  - Create theme provider interface
-  - Support different theme implementations
-- [ ] **Add to test-cards page**:
-  - Include ThemeToggle in test-cards comparison
-  - Test theme switching functionality
-  - Test accessibility features
-
-**Success Criteria**:
-- [ ] Theme toggle works across frameworks
-- [ ] Icon switching animation preserved
-- [ ] Accessibility features maintained
-- [ ] Works with different theme providers
-- [ ] Component appears in test-cards page
-
-### Task 5.5: Migrate Header Components
+### Task 5.4: Migrate ThemeProvider and Theme System
 **Owner**: Junior AI  
 **Complexity**: 3 (Moderate)  
-**Dependencies**: Task 5.4  
+**Dependencies**: Task 5.3  
 
-**Objective**: Migrate header components to ui-core with dependency injection support.
+**Objective**: Migrate the complete theme system (ThemeProvider, context, types) to ui-core for framework-agnostic theming.
 
-**Migration Steps**:
-- [ ] **Migrate DefaultHeader.tsx**:
-  - Main header implementation with navigation
-  - Add LinkComponent dependency injection
-  - Preserve responsive behavior
-- [ ] **Migrate header.tsx wrapper**:
-  - Wrapper that selects header variant
-  - Support configuration-based selection
-- [ ] **Handle dependencies**:
-  - Container component integration (already migrated)
-  - Theme toggle integration (Task 5.4 dependency)
-  - BrandMark integration (Task 5.3 dependency)
-- [ ] **Add to test-cards page**:
-  - Include Header in test-cards comparison
-  - Test responsive behavior
-  - Test navigation functionality
+**Context & Analysis**:
+- Current theme system in `templates/nextjs/src/context/themecontext.tsx` manages both light/dark themes and custom accent colors
+- System applies CSS classes (`.light/.dark`) and data attributes (`data-palette="teal"`) to `document.documentElement`
+- Uses localStorage for persistence with key `ui-theme` and `ui-theme-accent`
+- Must remain framework-agnostic while preserving all functionality
+
+**Detailed Migration Steps**:
+
+#### Step 5.4.1: Create Theme Type Definitions
+- [x] **Create directory structure**:
+  - `packages/ui-core/src/types/` (if not exists)
+  - `packages/ui-core/src/providers/` (if not exists)  
+  - `packages/ui-core/src/hooks/` (if not exists)
+
+- [x] **Create theme types file**:
+  - File: `packages/ui-core/src/types/theme.ts`
+  - **Exact types to define**:
+    ```typescript
+    export type Theme = 'light' | 'dark';
+    export type Accent = 'teal' | 'mintteal' | 'blue' | 'purple' | 'orange';
+    
+    export interface ThemeProviderProps {
+      children: React.ReactNode;
+      defaultTheme?: Theme;
+      storageKey?: string;
+      defaultAccent?: Accent;
+    }
+    
+    export interface ThemeProviderState {
+      theme: Theme;
+      setTheme: (theme: Theme) => void;
+      accent: Accent;
+      setAccent: (accent: Accent) => void;
+    }
+    ```
+
+#### Step 5.4.2: Create ThemeProvider Component
+- [x] **Copy template ThemeProvider logic**:
+  - Source: `templates/nextjs/src/context/themecontext.tsx`
+  - Target: `packages/ui-core/src/providers/ThemeProvider.tsx`
+  
+- [x] **Preserve exact functionality**:
+  - [x] useState hooks for theme and accent state
+  - [x] localStorage initialization effect (lines 48-59 from template)
+  - [x] CSS class application effect (lines 62-69 from template) 
+  - [x] Data attribute application effect (lines 72-78 from template)
+  - [x] Context creation and provider setup
+  - [x] Default values: `defaultTheme = "light"`, `storageKey = "ui-theme"`, `defaultAccent = "teal"`
+
+- [x] **Remove framework dependencies**:
+  - [x] Remove any Next.js specific imports
+  - [x] Ensure only React hooks and standard APIs used
+  - [x] Test that `document.documentElement` access works in client components
+
+#### Step 5.4.3: Create useTheme Hook
+- [x] **Create hook file**:
+  - File: `packages/ui-core/src/hooks/useTheme.ts`
+  - **Exact implementation**:
+    ```typescript
+    import { useContext } from 'react';
+    import { ThemeProviderContext } from '../providers/ThemeProvider';
+    
+    export const useTheme = () => {
+      const context = useContext(ThemeProviderContext);
+      if (context === undefined) {
+        throw new Error("useTheme must be used within a ThemeProvider");
+      }
+      return context;
+    };
+    ```
+
+#### Step 5.4.4: Update Export Structure
+- [x] **Create/update index files**:
+  - [x] Create `packages/ui-core/src/providers/index.ts` if needed
+  - [x] Create `packages/ui-core/src/hooks/index.ts` if needed
+  - [x] Add exports: `export { ThemeProvider } from './ThemeProvider';`
+  - [x] Add exports: `export { useTheme } from './useTheme';`
+  - [x] Update `packages/ui-core/src/types/index.ts` to include theme types
+  - [x] Update main `packages/ui-core/src/index.ts` to export providers and hooks
+
+#### Step 5.4.5: Build and Verification
+- [x] **TypeScript compilation**:
+  - [x] Run `pnpm build` in ui-core package
+  - [x] Resolve any TypeScript errors
+  - [x] Ensure all exports are properly typed
+
+- [x] **Functionality verification**:
+  - [x] ThemeProvider context creation works
+  - [x] useTheme hook throws error when used outside provider
+  - [x] Theme state management functional
+  - [x] Accent state management functional
 
 **Success Criteria**:
-- [ ] Headers render identically to template versions
-- [ ] Navigation works with dependency injection
-- [ ] Responsive menu behavior preserved
-- [ ] Theme toggle integration maintained
-- [ ] Container width constraints work correctly
-- [ ] Component appears in test-cards page
+- [x] **Functional Parity**: ThemeProvider works identically to template version
+- [x] **Theme Support**: Both light/dark themes work with CSS class application
+- [x] **Accent Support**: All 5 accent colors work with data-palette attributes  
+- [x] **Persistence**: localStorage save/restore works for both theme and accent
+- [x] **Framework Independence**: No Next.js dependencies, only React + standard APIs
+- [x] **Type Safety**: Complete TypeScript types with no `any` types
+- [x] **Build Success**: ui-core package builds without errors
+- [x] **Export Accessibility**: All components/hooks accessible from main package export
 
-### Task 5.6: Migrate Footer Components
-**Owner**: Junior AI  
-**Complexity**: 4 (Complex)  
-**Dependencies**: Task 5.5  
+**Common Pitfalls for Junior AI**:
+- ⚠️ Don't change the localStorage keys (`ui-theme`, `ui-theme-accent`)  
+- ⚠️ Don't change the CSS class names (`.light`, `.dark`) or data attribute (`data-palette`)
+- ⚠️ Ensure `'use client'` directive is preserved - ThemeProvider needs client-side APIs
+- ⚠️ Don't modify the accent color list - must remain exactly 5 colors as specified
 
-**Objective**: Migrate footer components to ui-core with full feature preservation.
-
-**Analysis Required**:
-- [ ] **Document footer features**:
-  - DefaultFooter: Multi-column layout with sections
-  - CompactFooter: Minimal single-row layout
-  - Dynamic content loading from footerContent
-  - Legal links configuration
-  - Contact information display
-  - Social links integration
-  - Theme toggle placement
-- [ ] **Identify dependencies**:
-  - FooterContent loading system
-  - Site configuration integration
-  - Icon components (lucide-react)
-
-**Migration Steps**:
-- [ ] **Migrate DefaultFooter.tsx**:
-  - Multi-column responsive layout
-  - Section-based content organization
-  - External link indicators
-  - Contact information display
-- [ ] **Migrate CompactFooter.tsx**:
-  - Single-row minimal layout
-  - Essential links only
-  - Mobile-optimized design
-- [ ] **Migrate footer.tsx wrapper**:
-  - Variant selection logic
-  - Configuration-based switching
-- [ ] **Create content abstraction**:
-  - FooterContent interface
-  - Dependency injection for content loading
-- [ ] **Add to test-cards page**:
-  - Include both Footer variants in test-cards comparison
-  - Test content loading functionality
-  - Test responsive layouts
-
-**Success Criteria**:
-- [ ] Both footer variants render correctly
-- [ ] Content loading abstraction works
-- [ ] Legal links configurable
-- [ ] Responsive layouts maintained
-- [ ] External link indicators work
-- [ ] Theme toggle integration preserved
-- [ ] Components appear in test-cards page
-
-### Task 5.7: Migrate ComingSoonOverlay Component
+### Task 5.5: Migrate ThemeToggle Component
 **Owner**: Junior AI  
 **Complexity**: 2 (Simple-Moderate)  
+**Dependencies**: Task 5.4  
+
+**Objective**: Migrate theme toggle component for dark/light mode switching using ui-core ThemeProvider.
+
+**Context & Analysis**:
+- Current ThemeToggle in `templates/nextjs/src/components/themetoggle.tsx` uses Next.js theme context
+- Component includes complex Tailwind styling with accent color integration
+- Must preserve all visual styling, animations, and accessibility features
+- Will use ui-core ThemeProvider (from Task 5.4) instead of template context
+
+**Detailed Migration Steps**:
+
+#### Step 5.5.1: Create ThemeToggle Component
+- [ ] **Create component file**:
+  - File: `packages/ui-core/src/components/ui/ThemeToggle.tsx`
+  - **Copy source template**: `templates/nextjs/src/components/themetoggle.tsx`
+  
+- [ ] **Update imports and dependencies**:
+  - [ ] Replace `import { useTheme } from "@/context/themecontext";` 
+  - [ ] With `import { useTheme } from "../../hooks/useTheme";`
+  - [ ] Replace `import { Button } from "@/components/ui/button";`
+  - [ ] With `import { Button } from "./button";` 
+  - [ ] Replace `import { cn } from "@/lib/utils";`
+  - [ ] With `import { cn } from "../../utils/cn";`
+  - [ ] Keep `import { Moon, Sun } from "lucide-react";` unchanged
+
+- [ ] **Preserve exact component logic**:
+  - [ ] Keep same props interface: `{ className?: string }`
+  - [ ] Keep same theme toggle logic: `setTheme(theme === "light" ? "dark" : "light")`
+  - [ ] Keep same conditional icon rendering based on theme state
+  - [ ] Keep all accessibility attributes: `aria-pressed`, `title`, `sr-only`
+
+- [ ] **Preserve styling exactly**:
+  - [ ] Keep all Tailwind classes from lines 23-37 of template
+  - [ ] Keep all custom CSS variables: `--color-accent-*`, `--color-border-*`
+  - [ ] Keep all hover states and transitions
+  - [ ] Keep icon styling: `strokeWidth={1.75}`, size classes
+  - [ ] Keep all `!important` modifiers for style override
+
+#### Step 5.5.2: Handle Only ThemeToggle (Not ColorSelector)
+- [ ] **Export only ThemeToggle**:
+  - [ ] Export `ThemeToggle` component
+  - [ ] **Do NOT migrate ColorSelector** - that's a separate component
+  - [ ] Remove or comment out ColorSelector if accidentally copied
+
+#### Step 5.5.3: Update UI Component Exports
+- [ ] **Add to exports**:
+  - [ ] Update `packages/ui-core/src/components/ui/index.ts`
+  - [ ] Add `export { ThemeToggle } from './ThemeToggle';`
+  - [ ] Add TypeScript types if needed
+  
+#### Step 5.5.4: Add to Test Cards Page
+- [ ] **Import components in test-cards**:
+  - [ ] File: `templates/nextjs/src/app/test-cards/page.tsx`
+  - [ ] Add template import: `import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';`
+  - [ ] Add ui-core import: `import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';`
+
+- [ ] **Add comparison section**:
+  - [ ] Create side-by-side ThemeToggle comparison
+  - [ ] **Template version**: `<TemplateThemeToggle />`
+  - [ ] **UI-Core version**: `<UiCoreThemeToggle />`
+  - [ ] Use same CardComparisonWrapper pattern as other components
+  - [ ] Include explanatory text about framework differences
+
+- [ ] **Test functionality**:
+  - [ ] Both versions should toggle theme when clicked
+  - [ ] Both should show correct icon for current theme
+  - [ ] Both should update simultaneously (same theme state)
+
+#### Step 5.5.5: Build and Verification
+- [ ] **TypeScript compilation**:
+  - [ ] Run `pnpm build` in ui-core package
+  - [ ] Resolve any import or type errors
+  - [ ] Ensure ThemeToggle exports correctly
+  
+- [ ] **Template integration**:
+  - [ ] Run `pnpm build` in templates/nextjs
+  - [ ] Verify test-cards page renders without errors
+  - [ ] Test that both ThemeToggle versions work
+
+**Success Criteria**:
+- [ ] **Visual Parity**: ui-core ThemeToggle looks identical to template version
+- [ ] **Functional Parity**: Theme switching works identically  
+- [ ] **Styling Preservation**: All accent colors, hover states, transitions preserved
+- [ ] **Accessibility**: All ARIA attributes and screen reader support maintained
+- [ ] **Framework Independence**: Uses ui-core ThemeProvider, no Next.js dependencies
+- [ ] **Test Integration**: Appears in test-cards page with working comparison
+- [ ] **Build Success**: Both ui-core and template packages build without errors
+- [ ] **Interactive Testing**: Both versions toggle theme and update simultaneously
+
+**Common Pitfalls for Junior AI**:
+- ⚠️ Don't change any Tailwind classes or CSS variables - preserve styling exactly
+- ⚠️ Don't migrate ColorSelector - this task is only for ThemeToggle
+- ⚠️ Ensure `'use client'` directive is added - ThemeToggle needs client-side hooks
+- ⚠️ Don't modify the toggle logic - keep exact same light/dark switching
+- ⚠️ Import paths must be relative from ui-core structure, not absolute like template
+
+### Task 5.6: Migrate Header Components
+**Owner**: Junior AI  
+**Complexity**: 3 (Moderate)  
+**Dependencies**: Task 5.5  
+
+**Objective**: Migrate header components to ui-core with dependency injection support, preserving all navigation and responsive functionality.
+
+**Context & Analysis**:
+- Current header system has two components: `header.tsx` (wrapper) and `headers/DefaultHeader.tsx` (implementation)
+- DefaultHeader uses Next.js Image, Link, and complex content loading from headerContent
+- Includes BrandMark, ThemeToggle, ColorSelector, and navigation menu
+- Must preserve responsive behavior, accessibility, and all styling
+- Dependencies: Container (migrated), BrandMark (migrated), ThemeToggle (from Task 5.5)
+
+**Detailed Migration Steps**:
+
+#### Step 5.6.1: Analyze Header Dependencies and Content
+- [ ] **Examine header content system**:
+  - File: `templates/nextjs/src/lib/headerContent.ts`
+  - **Document interface**: getHeaderContent() return structure
+  - **Note content fields**: title, logo, navigation links
+  - **Identify dynamic vs static content**
+
+- [ ] **Map current header usage**:
+  - File: `templates/nextjs/src/components/headers/DefaultHeader.tsx`
+  - **Document import dependencies**: Next.js Image, Link, headerContent
+  - **List all sub-components used**: BrandMark, ThemeToggle, ColorSelector, Container
+  - **Identify styling patterns**: Tailwind classes, responsive breakpoints
+
+#### Step 5.6.2: Create Framework-Agnostic Header Interface
+- [ ] **Create header types**:
+  - File: `packages/ui-core/src/types/header.ts`
+  - **Define HeaderContent interface**:
+    ```typescript
+    export interface HeaderContent {
+      title?: string;
+      logo?: string;
+      navigation?: Array<{
+        href: string;
+        label: string;
+        external?: boolean;
+      }>;
+    }
+    
+    export interface HeaderProps {
+      content: HeaderContent;
+      ImageComponent?: React.ComponentType<any>;
+      LinkComponent?: React.ComponentType<any>;
+      className?: string;
+    }
+    ```
+
+#### Step 5.6.3: Create DefaultHeader Component
+- [ ] **Create header component file**:
+  - File: `packages/ui-core/src/components/headers/DefaultHeader.tsx`
+  - **Copy template structure**: `templates/nextjs/src/components/headers/DefaultHeader.tsx`
+  
+- [ ] **Update imports and dependencies**:
+  - [ ] Replace `import Image from 'next/image';` with ImageComponent prop usage
+  - [ ] Replace `import Link from 'next/link';` with LinkComponent prop usage  
+  - [ ] Replace `import { getHeaderContent } from '@/lib/headerContent';` with content prop
+  - [ ] Update `import BrandMark` to `import { BrandMark } from '../ui/BrandMark';`
+  - [ ] Update `import { ThemeToggle } from` to use ui-core ThemeToggle
+  - [ ] Update `import Container` to `import { Container } from '../layouts/Container';`
+  - [ ] Update `import { cn }` to `import { cn } from '../../utils/cn';`
+
+- [ ] **Preserve component logic**:
+  - [ ] Keep same responsive behavior for mobile/desktop navigation
+  - [ ] Keep same header layout: logo/title, navigation, theme controls
+  - [ ] Keep same conditional logo vs BrandMark logic
+  - [ ] Keep all accessibility attributes and ARIA labels
+  - [ ] Keep all Tailwind styling and responsive classes
+
+- [ ] **Implement dependency injection**:
+  - [ ] Use ImageComponent for logo rendering: `<ImageComponent src={content.logo} ...>`
+  - [ ] Use LinkComponent for navigation: `<LinkComponent href={nav.href} ...>`
+  - [ ] Handle external links appropriately with LinkComponent
+  - [ ] Default to standard elements if components not provided
+
+#### Step 5.6.4: Create Header Wrapper Component
+- [ ] **Create header wrapper**:
+  - File: `packages/ui-core/src/components/headers/Header.tsx`
+  - **Copy template logic**: `templates/nextjs/src/components/header.tsx`
+  
+- [ ] **Abstract variant selection**:
+  - [ ] Accept variant prop instead of reading siteConfig directly
+  - [ ] Support 'default' variant (maps to DefaultHeader)
+  - [ ] Provide interface for adding more header variants later
+  - [ ] Pass through all props to selected header component
+
+#### Step 5.6.5: Handle ColorSelector Integration
+- [ ] **Important decision point**:
+  - [ ] ColorSelector is part of template ThemeToggle but complex
+  - [ ] **For this task**: Keep ColorSelector import from template themetoggle
+  - [ ] **Do NOT migrate ColorSelector** - treat as external dependency
+  - [ ] Document this decision for future ColorSelector migration task
+
+#### Step 5.6.6: Update Component Exports
+- [ ] **Create headers directory exports**:
+  - File: `packages/ui-core/src/components/headers/index.ts`
+  - Add: `export { DefaultHeader } from './DefaultHeader';`
+  - Add: `export { Header } from './Header';`
+  
+- [ ] **Update main component exports**:
+  - File: `packages/ui-core/src/components/index.ts` (if exists)
+  - Add: `export * from './headers';`
+  
+- [ ] **Update types exports**:
+  - File: `packages/ui-core/src/types/index.ts`
+  - Add: `export * from './header';`
+
+#### Step 5.6.7: Add to Test Cards Page
+- [ ] **Import header components**:
+  - File: `templates/nextjs/src/app/test-cards/page.tsx`
+  - Add template import: `import TemplateHeader from '@/components/header';`
+  - Add ui-core imports: `import { Header as UiCoreHeader } from '@manta-templates/ui-core';`
+  - Import headerContent: `import { getHeaderContent } from '@/lib/headerContent';`
+
+- [ ] **Create header comparison section**:
+  - [ ] **Challenge**: Headers are large - use different layout than cards
+  - [ ] Create full-width comparison sections above card grid
+  - [ ] **Template version**: `<TemplateHeader />` 
+  - [ ] **UI-Core version**: `<UiCoreHeader content={headerContent} ImageComponent={Image} LinkComponent={Link} />`
+  - [ ] Use server component pattern to load headerContent
+  - [ ] Include labels distinguishing template vs ui-core versions
+
+#### Step 5.6.8: Build and Verification
+- [ ] **TypeScript compilation**:
+  - [ ] Run `pnpm build` in ui-core package
+  - [ ] Resolve any import path or type errors
+  - [ ] Ensure all header exports are typed correctly
+  
+- [ ] **Template integration testing**:
+  - [ ] Run `pnpm build` in templates/nextjs  
+  - [ ] Verify test-cards page renders both headers
+  - [ ] Test responsive behavior on both versions
+  - [ ] Test navigation links work on both versions
+  - [ ] Test theme toggle integration works
+
+**Success Criteria**:
+- [ ] **Visual Parity**: ui-core header looks identical to template version
+- [ ] **Navigation Functionality**: All links work with dependency injection
+- [ ] **Responsive Design**: Mobile/desktop layouts identical
+- [ ] **Component Integration**: BrandMark, ThemeToggle, Container work correctly
+- [ ] **Content Loading**: Header content passed via props works
+- [ ] **Framework Independence**: No Next.js dependencies in ui-core version
+- [ ] **Test Integration**: Both headers appear and function in test-cards page
+- [ ] **Accessibility**: All ARIA attributes and keyboard navigation preserved
+- [ ] **Build Success**: Both packages build without errors
+
+**Common Pitfalls for Junior AI**:
+- ⚠️ Don't migrate ColorSelector - import from template for now
+- ⚠️ Preserve all responsive Tailwind classes exactly
+- ⚠️ Use dependency injection properly - don't hardcode Image/Link components
+- ⚠️ Header is large - don't try to fit in regular card layout on test page
+- ⚠️ Ensure headerContent is loaded at server level, not passed as static data
+
+### Task 5.7: Migrate Footer Components  
+**Owner**: Junior AI  
+**Complexity**: 4 (Complex)  
 **Dependencies**: Task 5.6  
+
+**Objective**: Migrate complete footer system to ui-core with full feature preservation, including multi-variant support and complex content loading.
+
+**Context & Analysis - CRITICAL COMPLEXITY FACTORS**:
+- **Multiple footer variants**: DefaultFooter (complex multi-column) and CompactFooter (minimal)
+- **Complex content system**: Dynamic loading from footerContent with multiple data structures
+- **Rich feature set**: Contact info, social links, legal links, professional links, external link indicators
+- **Deep integrations**: ThemeToggle, custom styling, responsive design, accessibility
+- **Configuration-driven**: Runtime variant selection based on site configuration
+- **Content complexity**: Conditional rendering, multiple link types, dynamic sections
+
+**PHASE 1: Deep Analysis and Planning (MANDATORY)**
+
+#### Step 5.7.1: Comprehensive Footer System Analysis
+- [ ] **Analyze footerContent system**:
+  - File: `templates/nextjs/src/lib/footerContent.ts` 
+  - **Document complete interface**: FooterSections, FooterLink types
+  - **Map all content fields**: quickLinks, resources, socialProfessional, socialCommunity, legal, professionalLinks, professionalContact, primaryContact, copyright
+  - **Note conditional logic**: professionalLinks vs professionalContact switching
+  - **Document async loading**: getFooterContent() async function
+
+- [ ] **Analyze DefaultFooter complexity**:
+  - File: `templates/nextjs/src/components/footers/DefaultFooter.tsx`
+  - **Document layout structure**: 4-column responsive grid with complex breakpoints
+  - **Map all sections**: Quick Links + Contact, Resources, Social & Community, Legal & Professional
+  - **Note conditional rendering**: logo vs BrandMark, professionalLinks vs contact emails
+  - **Document external link indicators**: ExternalLink icon usage
+  - **Map responsive behavior**: grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+
+- [ ] **Analyze CompactFooter** (if exists):
+  - File: `templates/nextjs/src/components/footers/CompactFooter.tsx`
+  - **Document minimal layout**: single-row design
+  - **Map essential elements**: copyright, basic links, theme toggle
+  - **Compare with DefaultFooter**: identify shared vs unique elements
+
+- [ ] **Analyze footer wrapper**:
+  - File: `templates/nextjs/src/components/footer.tsx`
+  - **Document variant selection**: siteConfig.variants.footer logic
+  - **Map configuration options**: 'default' vs 'compact'
+  - **Note async pattern**: server component with content loading
+
+#### Step 5.7.2: Design Framework-Agnostic Content Interfaces
+- [ ] **Create comprehensive footer types**:
+  - File: `packages/ui-core/src/types/footer.ts`
+  - **Define exact interfaces** (copy from template analysis):
+    ```typescript
+    export interface FooterLink {
+      href: string;
+      label: string;
+      external?: boolean;
+    }
+    
+    export interface FooterContact {
+      email?: string;
+      business?: string;
+      support?: string;
+      location?: string;
+    }
+    
+    export interface FooterCopyright {
+      attribution: string; // HTML string
+      notice: string;
+      lastUpdated: string;
+    }
+    
+    export interface FooterSections {
+      quickLinks: FooterLink[];
+      resources: FooterLink[];
+      socialProfessional: FooterLink[];
+      socialCommunity: FooterLink[];
+      legal: FooterLink[];
+      professionalLinks?: FooterLink[];
+      professionalContact: FooterContact;
+      primaryContact: FooterContact;
+      copyright: FooterCopyright;
+    }
+    
+    export interface FooterProps {
+      sections: FooterSections;
+      variant?: 'default' | 'compact';
+      LinkComponent?: React.ComponentType<any>;
+      className?: string;
+    }
+    ```
+
+**PHASE 2: Component Migration (HIGH COMPLEXITY)**
+
+#### Step 5.7.3: Create FooterLinkComponent Abstraction
+- [ ] **Extract link rendering logic**:
+  - **Source reference**: DefaultFooter.tsx lines 7-19 (FooterLinkComponent)
+  - **Target**: `packages/ui-core/src/components/footers/FooterLinkComponent.tsx`
+  - **Preserve exact styling**: text-sm, text-muted-foreground, hover states, flex items-center gap-1
+  - **Abstract Link component**: Accept LinkComponent via dependency injection
+  - **Preserve external link logic**: conditional ExternalLink icon rendering
+  - **Handle link types**: external (with target="_blank") vs internal routing
+
+#### Step 5.7.4: Migrate DefaultFooter with Full Complexity
+- [ ] **Create DefaultFooter component**:
+  - File: `packages/ui-core/src/components/footers/DefaultFooter.tsx`
+  - **Source**: `templates/nextjs/src/components/footers/DefaultFooter.tsx`
+  
+- [ ] **Handle complex imports and dependencies**:
+  - [ ] Replace `import Link from 'next/link';` with LinkComponent prop
+  - [ ] Replace `import { getFooterContent } from '@/lib/footerContent';` with sections prop
+  - [ ] Update ThemeToggle import to use ui-core version
+  - [ ] Keep lucide-react icons: `ExternalLink, Mail, MapPin`
+  - [ ] Update cn utility import path
+
+- [ ] **Preserve exact layout complexity**:
+  - [ ] **4-column responsive grid**: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8`
+  - [ ] **Column 1 - Quick Links + Contact**: quickLinks array + primaryContact (email, location)
+  - [ ] **Column 2 - Resources**: resources array  
+  - [ ] **Column 3 - Social**: socialProfessional + socialCommunity arrays
+  - [ ] **Column 4 - Legal + Professional**: legal array + conditional professionalLinks/Contact
+  - [ ] **Bottom section**: copyright + theme toggle with responsive flex layout
+
+- [ ] **Preserve conditional rendering logic**:
+  - [ ] **Professional links vs contact**: `(s.professionalLinks && s.professionalLinks.length > 0)` condition
+  - [ ] **Contact information display**: conditional email and location rendering  
+  - [ ] **Copyright HTML**: `dangerouslySetInnerHTML` for attribution
+  - [ ] **Icon integration**: Mail and MapPin icons for contact info
+
+- [ ] **Maintain exact styling and accessibility**:
+  - [ ] All Tailwind classes preserved exactly
+  - [ ] All hover states and transitions maintained
+  - [ ] All responsive breakpoints identical
+  - [ ] Screen reader support for external links maintained
+
+#### Step 5.7.5: Create CompactFooter (if exists) or Design Minimal Version
+- [ ] **Investigate CompactFooter existence**:
+  - Check if `templates/nextjs/src/components/footers/CompactFooter.tsx` exists
+  
+- [ ] **If exists - migrate exactly**:
+  - Follow same dependency injection pattern as DefaultFooter
+  - Preserve minimal layout and essential elements only
+  
+- [ ] **If doesn't exist - create minimal version**:
+  - Single-row layout with copyright + essential links + theme toggle
+  - Use same FooterSections interface but render subset
+  - Responsive design for mobile optimization
+
+#### Step 5.7.6: Create Footer Wrapper with Variant Selection
+- [ ] **Create footer wrapper**:
+  - File: `packages/ui-core/src/components/footers/Footer.tsx`
+  - **Source logic**: `templates/nextjs/src/components/footer.tsx`
+  
+- [ ] **Abstract variant selection**:
+  - [ ] Accept `variant` prop instead of reading siteConfig
+  - [ ] Support 'default' (DefaultFooter) and 'compact' (CompactFooter) 
+  - [ ] Pass through all props to selected footer variant
+  - [ ] Maintain same conditional rendering pattern
+
+**PHASE 3: Integration and Testing (CRITICAL)**
+
+#### Step 5.7.7: Update Export Structure with Full Footer System
+- [ ] **Create comprehensive footer exports**:
+  - File: `packages/ui-core/src/components/footers/index.ts`
+  - Export: `DefaultFooter`, `CompactFooter`, `Footer`, `FooterLinkComponent`
+  
+- [ ] **Update main component exports**:
+  - File: `packages/ui-core/src/components/index.ts`
+  - Add: `export * from './footers';`
+  
+- [ ] **Update types exports**:
+  - File: `packages/ui-core/src/types/index.ts` 
+  - Add: `export * from './footer';`
+
+#### Step 5.7.8: Complex Test Cards Integration 
+- [ ] **Import all footer variants**:
+  - File: `templates/nextjs/src/app/test-cards/page.tsx`
+  - Add template import: `import TemplateFooter from '@/components/footer';`
+  - Add ui-core imports: `import { Footer as UiCoreFooter } from '@manta-templates/ui-core';`
+  - Import content loader: `import { getFooterContent } from '@/lib/footerContent';`
+
+- [ ] **Create footer comparison sections**:
+  - [ ] **Challenge**: Footers are very large - need special layout treatment
+  - [ ] **Default footer comparison**: Side-by-side DefaultFooter versions
+  - [ ] **Compact footer comparison**: Side-by-side CompactFooter versions  
+  - [ ] **Load footer content at server level**: Use getFooterContent()
+  - [ ] **Template version**: `<TemplateFooter />` (uses siteConfig variant)
+  - [ ] **UI-Core versions**: Test both 'default' and 'compact' variants explicitly
+  - [ ] Use full-width sections, not card grid layout
+
+#### Step 5.7.9: Comprehensive Build and Integration Testing
+- [ ] **TypeScript compilation verification**:
+  - [ ] Run `pnpm build` in ui-core package
+  - [ ] Resolve complex type dependencies (FooterSections, FooterLink interfaces)
+  - [ ] Ensure all footer variant exports are typed correctly
+  - [ ] Verify dependency injection types work correctly
+  
+- [ ] **Template integration testing**:
+  - [ ] Run `pnpm build` in templates/nextjs
+  - [ ] Verify test-cards page renders all footer variants
+  - [ ] Test that variant switching works (default vs compact)
+  - [ ] Test all footer links work correctly
+  - [ ] Test external link indicators appear and function
+  - [ ] Test responsive behavior across all breakpoints
+  - [ ] Test theme toggle integration in footer
+  - [ ] Test contact information display (email, location)
+  - [ ] Test copyright attribution HTML rendering
+
+**Success Criteria - COMPREHENSIVE**:
+- [ ] **Visual Parity**: Both footer variants look identical to template versions
+- [ ] **Content Fidelity**: All sections render correctly (quickLinks, resources, social, legal, professional)
+- [ ] **Conditional Logic**: Professional links vs contact switching works correctly  
+- [ ] **Link Functionality**: All footer links work with dependency injection
+- [ ] **External Link Indicators**: ExternalLink icons appear for external links
+- [ ] **Contact Display**: Email and location information render with icons
+- [ ] **Copyright Rendering**: HTML attribution renders correctly
+- [ ] **Responsive Design**: All 4 responsive breakpoints work identically
+- [ ] **Theme Integration**: ThemeToggle placement and functionality preserved
+- [ ] **Variant Selection**: Footer wrapper correctly switches between variants
+- [ ] **Framework Independence**: No Next.js dependencies in ui-core components
+- [ ] **Type Safety**: All complex interfaces properly typed
+- [ ] **Test Integration**: All footer variants appear and function in test-cards
+- [ ] **Build Success**: Both packages build without errors
+- [ ] **Accessibility**: All ARIA attributes and screen reader support maintained
+
+**CRITICAL PITFALLS FOR JUNIOR AI - SPECIAL ATTENTION**:
+- 🚨 **DO NOT simplify the content structure** - FooterSections interface is complex for a reason
+- 🚨 **Preserve ALL conditional rendering logic** - professional links vs contact switching is critical
+- 🚨 **Don't break responsive grid layout** - 4-column responsive behavior must work exactly
+- 🚨 **Handle external links correctly** - ExternalLink icons and target="_blank" are essential  
+- 🚨 **Preserve copyright HTML rendering** - dangerouslySetInnerHTML is intentional
+- 🚨 **Footer is too large for card layout** - needs special test-cards page treatment
+- 🚨 **Test both footer variants** - don't just test DefaultFooter
+- 🚨 **ThemeToggle integration is complex** - footer controls theme toggle placement
+- 🚨 **Content loading is async** - maintain server component patterns for content
+- 🚨 **Don't modify contact icons or styling** - Mail/MapPin icon usage is specific
+
+### Task 5.8: Migrate ComingSoonOverlay Component
+**Owner**: Junior AI  
+**Complexity**: 2 (Simple-Moderate)  
+**Dependencies**: Task 5.7  
 
 **Objective**: Migrate coming soon overlay component with updates for reusability.
 
@@ -503,10 +999,10 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 - [ ] Optional features configurable
 - [ ] Component appears in test-cards page
 
-### Task 5.8: Migrate Container Component
+### Task 5.9: Migrate Container Component
 **Owner**: Junior AI  
 **Complexity**: 2 (Simple-Moderate)  
-**Dependencies**: Task 5.7  
+**Dependencies**: Task 5.8  
 
 **Objective**: Migrate container layout component for consistent width constraints.
 
@@ -535,7 +1031,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ### Task 6.1: Comprehensive Component Testing
 **Owner**: Junior AI (use tester agent)  
 **Estimated Time**: 4 hours  
-**Dependencies**: Task 5.1  
+**Dependencies**: Task 5.9  
 
 **Objective**: Create comprehensive test suite for all migrated components.
 
@@ -593,7 +1089,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 ## Success Metrics
 
 ### Technical Metrics
-- [x] **Component Parity**: In progress - 4/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, BlogIndexCard, and TechnologyScroller)
+- [x] **Component Parity**: In progress - 5/11 Priority 1 components successfully migrated to ui-core (SidebarPostCard, Adapter Cleanup, BlogIndexCard, TechnologyScroller, and ThemeProvider)
 - [ ] **Framework Support**: All components work in Next.js with adapters
 - [ ] **Type Safety**: Zero TypeScript errors across all packages
 - [ ] **Performance**: <5% performance overhead from abstraction
