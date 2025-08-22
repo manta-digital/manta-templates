@@ -8,6 +8,7 @@ import TemplateQuoteCard from '@/components/cards/QuoteCard';
 import TemplateSidebarPostCard from '@/components/cards/SidebarPostCard';
 import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
 import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/ui/TechnologyScroller';
+import TemplateBrandMark from '@/components/ui/brand-mark';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -15,6 +16,7 @@ import { QuoteCard as UiCoreQuoteCard } from '@manta-templates/ui-core';
 import { SidebarPostCard as UiCoreSidebarPostCard } from '@manta-templates/ui-core';
 import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
 import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates/ui-core';
+import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -211,6 +213,37 @@ export default function TestCardsPage() {
                   direction="left"
                   ImageComponent={Image}
                 />
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* BrandMark Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="BrandMark" type="template">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">Template BrandMark</h3>
+                  <div className="flex items-center justify-center space-x-4">
+                    <TemplateBrandMark size={24} />
+                    <TemplateBrandMark size={36} />
+                    <TemplateBrandMark size={48} />
+                  </div>
+                </div>
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="BrandMark" type="ui-core">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">UI-Core BrandMark</h3>
+                  <div className="flex items-center justify-center space-x-4">
+                    <UiCoreBrandMark size={24} />
+                    <UiCoreBrandMark size={36} />
+                    <UiCoreBrandMark size={48} />
+                  </div>
+                </div>
               </UiCoreBaseCard>
             </CardComparisonWrapper>
           </GridItem>
