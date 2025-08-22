@@ -1,9 +1,11 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard } from '@manta-templates/ui-core';
-import BackgroundVideo from '@/components/ui/background-video';
+import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard } from '@manta-templates/ui-core';
 import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
 import ArticleCard from '@/components/cards/articles/ArticleCard';
+import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
 import { getArticleBySlug } from '@/lib/content/loader';
 
 // Mock content loading function (replace with actual content loading)
@@ -106,14 +108,46 @@ export default async function TestExample2Page() {
               }}
             />
 
-            {/* Background video content loaded from markdown */}
-            <BaseCard className="h-full overflow-hidden relative !border-0 p-0">
-              <BackgroundVideo full src="https://www.w3schools.com/html/mov_bbb.mp4" poster="/image/blog-sample-image.png" className="w-full h-full" autoplay>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
+            {/* Background video content using VideoCard with Link wrapper */}
+            {(() => {
+              const gameHref = "https://tanks.erikcorkran.com/"; // Example game link
+              const videoCard = (
+                <div className="relative w-full h-full">
+                  <VideoCard
+                    className="p-0 h-full"
+                    title="Tank Battle Game"
+                    thumbnailUrl="https://picsum.photos/400/225?random=7"
+                    videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    content={{
+                      title: "Tank Battle Game",
+                      description: "Epic multiplayer tank warfare",
+                      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                      displayMode: "background",
+                      autoplay: true,
+                      controls: false
+                    }}
+                    overlay={false}
+                    ImageComponent={Image}
+                    LinkComponent={Link}
+                    BackgroundVideoComponent={BackgroundVideoComponent}
+                  />
+                  {/* Text overlay positioned outside VideoCard for reliable visibility */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/60 via-40% to-transparent pointer-events-none min-h-[50%] flex flex-col justify-end z-50">
+                    <h3 className="text-white text-lg md:text-xl font-bold leading-tight">Tank Battle Game</h3>
+                    <p className="text-white/90 text-sm md:text-base mt-2 leading-relaxed">Epic multiplayer tank warfare</p>
+                  </div>
                 </div>
-              </BackgroundVideo>
-            </BaseCard>
+              );
+              
+              // Apply your erikcorkran.com pattern: conditional Link wrapper
+              return gameHref ? (
+                <Link href={gameHref} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                  {videoCard}
+                </Link>
+              ) : (
+                videoCard
+              );
+            })()}
           </CardCarousel>
         </GridItem>
 
