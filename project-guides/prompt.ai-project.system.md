@@ -151,6 +151,7 @@ Work carefully and ensure that each task is verified complete before proceeding 
 Check off completed tasks in the task file when verified complete. When all tasks for the slice are complete, proceed to Phase 8 (integration) with Project Manager approval.
 
 Notes: 
+* Use the task-checker to manage lists if it is available to you
 * Ignore case sensitivity in all file and directory names
 * If you cannot locate referenced files, STOP and request information from Project Manager
 * Do not guess, assume, or proceed without required files
@@ -248,6 +249,15 @@ You will need to consult specific knowledge for {tool}, which should be availabl
    results, then search the web.
 ```
 
+##### Summarize Context
+*Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.*
+```markdown
+* Preserve the initial context describing what we are working on.
+* Summarize current project state at time of this compaction.
+* Include any open todo list items and work in progress.
+* add the tag --COMPACTED-- after inserting this information. 
+```
+
 ##### Maintenance Item (Slice Context)
 ```markdown
 Continue operating in your role as Senior AI. Add {item} to maintenance-tasks.md, following existing file format and markdown rules.
@@ -277,7 +287,6 @@ Active slice work: {slice} (if applicable)
 
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
-
 ```markdown
 Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
