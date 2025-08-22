@@ -7,12 +7,14 @@ import { BaseCard as TemplateBaseCard } from '@/components/cards/BaseCard';
 import TemplateQuoteCard from '@/components/cards/QuoteCard';
 import TemplateSidebarPostCard from '@/components/cards/SidebarPostCard';
 import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
+import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/ui/TechnologyScroller';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
 import { QuoteCard as UiCoreQuoteCard } from '@manta-templates/ui-core';
 import { SidebarPostCard as UiCoreSidebarPostCard } from '@manta-templates/ui-core';
 import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
+import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -41,6 +43,15 @@ const sampleBlogPosts = [
     pubDate: '2024-01-05',
     thumbnail: 'https://picsum.photos/80/80?random=3',
   },
+];
+
+// Sample technology data for ui-core testing
+const sampleTechnologies = [
+  { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
+  { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+  { name: 'React', svg: 'react.svg', invertOnDark: true },
+  { name: 'TypeScript', svg: 'typescript.svg', color: '#3178C6' },
+  { name: 'Node.js', svg: 'nodedotjs.svg', invertOnDark: true },
 ];
 
 /**
@@ -175,6 +186,32 @@ export default function TestCardsPage() {
                 ImageComponent={Image}
                 LinkComponent={Link}
               />
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* TechnologyScroller Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="TechnologyScroller" type="template">
+              <UiCoreBaseCard className="h-full w-full flex flex-col justify-center">
+                <TemplateTechnologyScroller 
+                  items={sampleTechnologies}
+                  speed="fast"
+                  direction="left"
+                />
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="TechnologyScroller" type="ui-core">
+              <UiCoreBaseCard className="h-full w-full flex flex-col justify-center">
+                <UiCoreTechnologyScroller 
+                  items={sampleTechnologies}
+                  speed="fast"
+                  direction="left"
+                  ImageComponent={Image}
+                />
+              </UiCoreBaseCard>
             </CardComparisonWrapper>
           </GridItem>
 

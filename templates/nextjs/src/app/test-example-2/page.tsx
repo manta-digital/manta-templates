@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard } from '@manta-templates/ui-core';
-import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
+import { TechnologyScroller } from '@manta-templates/ui-core';
 import ArticleCard from '@/components/cards/articles/ArticleCard';
 import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
 import { getArticleBySlug } from '@/lib/content/loader';
@@ -185,14 +185,16 @@ export default async function TestExample2Page() {
 
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
-            <TechnologyScroller items={[
-            { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
-            { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
-            { name: 'React', svg: 'react.svg', invertOnDark: true },
-          ]}
-          speed="fast"
-          direction="left"
-          />
+            <TechnologyScroller 
+              items={[
+                { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
+                { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+                { name: 'React', svg: 'react.svg', invertOnDark: true },
+              ]}
+              speed="fast"
+              direction="left"
+              ImageComponent={Image}
+            />
           </BaseCard>
         </GridItem>
 

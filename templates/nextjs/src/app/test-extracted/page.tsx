@@ -108,7 +108,7 @@ export default function TestExtractedPage() {
             className="h-full" 
             title="Hero Test Card" 
             excerpt="Testing BlogCardImage in hero position with dependency injection." 
-            coverImageUrl="https://picsum.photos/600/400?random=1"
+            coverImageUrl="/image/blog-sample-image.png"
             category="Testing"
             author="Claude"
             ImageComponent={Image}
@@ -129,7 +129,7 @@ export default function TestExtractedPage() {
               description: 'Framework-agnostic component library with dependency injection',
               techStack: ['React', 'TypeScript', 'Tailwind v4'],
               displayVariant: 'showcase',
-              image: 'https://picsum.photos/600/400?random=2',
+              image: '/image/blog-sample-image.png',
               repoUrl: 'https://github.com/manta-templates/ui-core',
               features: [
                 { label: 'Framework Agnostic Design', icon: 'zap'},
@@ -153,7 +153,7 @@ export default function TestExtractedPage() {
             title="Featured Article"
             subtitle="Architecture"
             description="Testing ArticleCard with injected Next.js primitives and imageProps passthrough."
-            image="https://picsum.photos/800/500?random=9"
+            image="/image/blog-sample-image.png"
             href="#"
             ImageComponent={Image}
             LinkComponent={Link}
@@ -202,7 +202,7 @@ export default function TestExtractedPage() {
             title="Component Architecture" 
             date="2024-01-25"
             excerpt="Deep dive into the dependency injection architecture that makes these components framework-agnostic while maintaining optimal performance."
-            coverImageUrl="https://picsum.photos/400/300?random=3"
+            coverImageUrl="/image/blog-sample-image.png"
             author="UI Team"
             ImageComponent={Image}
             LinkComponent={Link}
@@ -278,7 +278,7 @@ export default function TestExtractedPage() {
             className="h-full"
             title="Wide Blog Card Test"
             excerpt="Testing the BlogCardWide component with Next.js injection"
-            coverImageUrl="https://picsum.photos/400/200?random=6"
+            coverImageUrl="/image/blog-sample-image.png"
             author="Test Author"
             date="2024-01-20"
             imageMaxHeight="h-32 sm:h-40 md:h-full"
@@ -370,7 +370,7 @@ export default function TestExtractedPage() {
             className="h-full"
             title="UI Core Developer"
             description="Framework-agnostic component architect"
-            avatar="https://picsum.photos/80/80?random=8"
+            avatar="/image/blog-sample-image.png"
             socials={[
               { platform: 'github', url: 'https://github.com/manta-templates' },
               { platform: 'linkedin', url: 'https://linkedin.com/in/example' },
