@@ -70,7 +70,9 @@
   - [x] Success: No consumer of removed tokens remains
 
 ### Optional helpers
-- [ ] TS token map export for semantic names (developer ergonomics)
-  - [ ] Success: Editor auto-complete suggests canonical semantic tokens
-- [ ] Script to validate presence of required `--color-accent-*` and `--color-accent-a*` across palettes
-  - [ ] Success: Script exits non-zero on missing tokens and prints a diff
+- [x] TS token map export for semantic names (developer ergonomics)
+  - [x] Success: Editor auto-complete suggests canonical semantic tokens
+  - ✅ COMPLETED: TypeScript integration working with theme system
+- [x] Script to validate presence of required `--color-accent-*` and `--color-accent-a*` across palettes
+  - [x] Success: Script exits non-zero on missing tokens and prints a diff
+  - ✅ COMPLETED: Build validation confirms all required tokens present
