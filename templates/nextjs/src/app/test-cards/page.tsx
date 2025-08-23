@@ -25,7 +25,8 @@ import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
 import { Header as UiCoreHeader, Container as UiCoreContainer } from '@manta-templates/ui-core';
 import { Footer as UiCoreFooter } from '@manta-templates/ui-core';
 import { ComingSoonOverlay as UiCoreComingSoonOverlay } from '@manta-templates/ui-core';
-import { ColorSelector } from '@/components/themetoggle';
+import { ColorSelector as TemplateColorSelector } from '@/components/themetoggle';
+import { ColorSelector as UiCoreColorSelector } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -120,7 +121,7 @@ export default async function TestCardsPage() {
                 BrandMarkComponent={UiCoreBrandMark}
                 ContainerComponent={UiCoreContainer}
                 ThemeToggleComponent={UiCoreThemeToggle}
-                ColorSelectorComponent={ColorSelector}
+                ColorSelectorComponent={TemplateColorSelector}
               />
             </div>
           </div>
@@ -425,6 +426,39 @@ export default async function TestCardsPage() {
                   </div>
                 </UiCoreBaseCard>
               </UiCoreComingSoonOverlay>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* ColorSelector Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ColorSelector" type="template">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">Template ColorSelector</h3>
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                    Click to cycle through accent colors. Uses template ThemeProvider.
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <TemplateColorSelector />
+                  </div>
+                </div>
+              </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ColorSelector" type="ui-core">
+              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center">UI-Core ColorSelector</h3>
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                    Click to cycle through accent colors. Uses ui-core ThemeProvider.
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <UiCoreColorSelector />
+                  </div>
+                </div>
+              </UiCoreBaseCard>
             </CardComparisonWrapper>
           </GridItem>
 
