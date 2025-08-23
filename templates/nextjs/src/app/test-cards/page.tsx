@@ -12,6 +12,7 @@ import TemplateBrandMark from '@/components/ui/brand-mark';
 import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
 import TemplateHeader from '@/components/header';
 import TemplateFooter from '@/components/footer';
+import { ComingSoonOverlay as TemplateComingSoonOverlay } from '@/components/overlays/ComingSoonOverlay';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -23,6 +24,7 @@ import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
 import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
 import { Header as UiCoreHeader, Container as UiCoreContainer } from '@manta-templates/ui-core';
 import { Footer as UiCoreFooter } from '@manta-templates/ui-core';
+import { ComingSoonOverlay as UiCoreComingSoonOverlay } from '@manta-templates/ui-core';
 import { ColorSelector } from '@/components/themetoggle';
 
 // Next.js components for dependency injection
@@ -386,6 +388,43 @@ export default async function TestCardsPage() {
                   </div>
                 </div>
               </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* ComingSoonOverlay Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ComingSoonOverlay" type="template">
+              <TemplateComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
+                <UiCoreBaseCard className="h-full p-6">
+                  <h3 className="text-lg font-semibold mb-2">Template Content</h3>
+                  <p className="text-muted-foreground">
+                    This content is behind the coming soon overlay from the template version.
+                  </p>
+                  <div className="mt-4 space-y-2">
+                    <div className="h-2 bg-muted rounded"></div>
+                    <div className="h-2 bg-muted rounded w-3/4"></div>
+                    <div className="h-2 bg-muted rounded w-1/2"></div>
+                  </div>
+                </UiCoreBaseCard>
+              </TemplateComingSoonOverlay>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="ComingSoonOverlay" type="ui-core">
+              <UiCoreComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
+                <UiCoreBaseCard className="h-full p-6">
+                  <h3 className="text-lg font-semibold mb-2">UI-Core Content</h3>
+                  <p className="text-muted-foreground">
+                    This content is behind the coming soon overlay from ui-core version.
+                  </p>
+                  <div className="mt-4 space-y-2">
+                    <div className="h-2 bg-muted rounded"></div>
+                    <div className="h-2 bg-muted rounded w-3/4"></div>
+                    <div className="h-2 bg-muted rounded w-1/2"></div>
+                  </div>
+                </UiCoreBaseCard>
+              </UiCoreComingSoonOverlay>
             </CardComparisonWrapper>
           </GridItem>
 

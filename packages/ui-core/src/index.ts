@@ -8,6 +8,7 @@ export * from './components/ui';
 export * from './components/primitives';
 export * from './components/headers';
 export * from './components/footers';
+export * from './components/overlays';
 
 // Utilities
 export * from './utils';
