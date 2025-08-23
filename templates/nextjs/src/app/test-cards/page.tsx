@@ -13,6 +13,7 @@ import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
 import TemplateHeader from '@/components/header';
 import TemplateFooter from '@/components/footer';
 import { ComingSoonOverlay as TemplateComingSoonOverlay } from '@/components/overlays/ComingSoonOverlay';
+import TemplateAboutCard from '@/components/cards/people/AboutCard';
 
 // UI-Core components  
 import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
@@ -27,14 +28,38 @@ import { Footer as UiCoreFooter } from '@manta-templates/ui-core';
 import { ComingSoonOverlay as UiCoreComingSoonOverlay } from '@manta-templates/ui-core';
 import { ColorSelector as TemplateColorSelector } from '@/components/themetoggle';
 import { ColorSelector as UiCoreColorSelector } from '@manta-templates/ui-core';
+import { AboutCard as UiCoreAboutCard } from '@manta-templates/ui-core';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
 import Link from 'next/link';
+import { Github, Linkedin, Mail, X } from 'lucide-react';
 
 // Header content for testing
 import { getHeaderContent } from '@/lib/headerContent';
 import { getFooterContent } from '@/lib/footerContent';
+
+// Sample content for AboutCard testing
+const sampleAboutContent = {
+  title: "Jane Developer",
+  description: "Full-stack developer passionate about creating beautiful user experiences",
+  avatar: "/window.svg",
+  socials: [
+    { platform: "github" as const, url: "https://github.com/janedev" },
+    { platform: "linkedin" as const, url: "https://linkedin.com/in/janedev" },
+    { platform: "mail" as const, url: "jane@example.com" }
+  ],
+  contentHtml: `<p>I'm a passionate full-stack developer with over 5 years of experience building web applications. I love working with React, TypeScript, and modern web technologies.</p><p>When I'm not coding, you can find me hiking, reading tech blogs, or contributing to open source projects.</p>`
+};
+
+// Social icons for ui-core AboutCard
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  x: X,
+  twitter: X,
+  mail: Mail,
+};
 
 // Sample blog posts for ui-core testing
 const sampleBlogPosts = [
@@ -459,6 +484,36 @@ export default async function TestCardsPage() {
                   </div>
                 </div>
               </UiCoreBaseCard>
+            </CardComparisonWrapper>
+          </GridItem>
+
+          {/* AboutCard Comparison */}
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="AboutCard" type="template">
+              <TemplateAboutCard
+                className="h-full"
+                title={sampleAboutContent.title}
+                description={sampleAboutContent.description}
+                avatar={sampleAboutContent.avatar}
+                socials={sampleAboutContent.socials}
+                contentHtml={sampleAboutContent.contentHtml}
+              />
+            </CardComparisonWrapper>
+          </GridItem>
+
+          <GridItem colSpan="col-span-3">
+            <CardComparisonWrapper title="AboutCard" type="ui-core">
+              <UiCoreAboutCard
+                className="h-full"
+                title={sampleAboutContent.title}
+                description={sampleAboutContent.description}
+                avatar={sampleAboutContent.avatar}
+                socials={sampleAboutContent.socials}
+                contentHtml={sampleAboutContent.contentHtml}
+                ImageComponent={Image}
+                LinkComponent={Link}
+                socialIcons={socialIcons}
+              />
             </CardComparisonWrapper>
           </GridItem>
 
