@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '../../utils/cn';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Default breakpoints - can be overridden via props
 const DEFAULT_BREAKPOINTS = {
@@ -423,19 +424,12 @@ export function CardCarousel({
     ? `calc(${baseTranslateX} + ${dragOffset}px)`
     : `calc(${baseTranslateX})`;
   
-  // Use MotionComponent if provided, otherwise use div with CSS transitions
-  const AnimationComponent = MotionComponent || 'div';
-  const animationProps = MotionComponent 
-    ? {
-        animate: { x: translateX },
-        transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 }
-      }
-    : {
-        style: {
-          transform: `translateX(${translateX})`,
-          transition: (isTransitioning || isDraggingRef.current) ? 'none' : 'transform 0.3s ease-out'
-        }
-      };
+  // Use framer-motion by default for consistent behavior
+  const AnimationComponent = motion.div;
+  const animationProps = {
+    animate: { x: translateX },
+    transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 }
+  };
 
   return (
     <div className={cn('relative w-full h-full', className)}>
@@ -448,7 +442,6 @@ export function CardCarousel({
           style={{
             gap: `${gap}px`,
             ...(cardHeight !== undefined && { height: `${cardHeight}px` }),
-            ...animationProps.style,
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -487,7 +480,22 @@ export function CardCarousel({
         <>
           <ButtonComponent
             type={typeof ButtonComponent === 'string' ? 'button' : undefined}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center border border-0 rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a9),transparent_50%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ 
+              position: 'absolute', 
+              left: '8px', 
+              top: '50%', 
+              transform: 'translateY(-50%)', 
+              zIndex: 20,
+              width: '40px',
+              height: '40px',
+              border: 'none',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255,255,255,0.8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer'
+            }}
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
             aria-label="Previous slide"
@@ -496,7 +504,22 @@ export function CardCarousel({
           </ButtonComponent>
           <ButtonComponent
             type={typeof ButtonComponent === 'string' ? 'button' : undefined}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 aspect-square flex items-center justify-center border border-0 rounded-full pointer-events-auto backdrop-blur-sm !bg-[color-mix(in_oklab,var(--color-accent-3),transparent_90%)] hover:!bg-[color-mix(in_oklab,var(--color-accent-a4),transparent_50%)] !border-[var(--color-border-accent)] !text-[var(--color-accent-11)] dark:!bg-[var(--color-accent-a3)] dark:hover:!bg-[var(--color-accent-4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ 
+              position: 'absolute', 
+              right: '8px', 
+              top: '50%', 
+              transform: 'translateY(-50%)', 
+              zIndex: 20,
+              width: '40px',
+              height: '40px',
+              border: 'none',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255,255,255,0.8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer'
+            }}
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
             aria-label="Next slide"
