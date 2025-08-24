@@ -2,9 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
-import { DefaultHeader, Footer, BrandMark, Container, ThemeToggle, ColorSelector } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
-import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
+import { Header, Footer, BrandMark, Container, ThemeToggle, ColorSelector } from '@manta-templates/ui-core';
+import { getHeaderContent } from '@/lib/headerContent';
+import { getFooterContent } from '@/lib/footerContent';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -53,15 +53,14 @@ export default async function RootLayout({
   let footerSections = null;
 
   try {
-    const header = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main-grid');
-    headerContent = header.frontmatter;
+    headerContent = await getHeaderContent();
   } catch (error: unknown) {
     console.error('Error loading header content:', error);
   }
 
   try {
-    const footer = await nextjsContentProvider.loadContent<NextjsFooterContent>('footer-content', 'presets/mit/footer');
-    footerSections = footer.frontmatter;
+    const footerData = await getFooterContent();
+    footerSections = footerData.sections;
   } catch (error: unknown) {
     console.error('Error loading footer content:', error);
   }
@@ -94,7 +93,7 @@ export default async function RootLayout({
         >
           <div className="min-h-screen flex flex-col">
             {headerContent && (
-              <DefaultHeader
+              <Header
                 content={headerContent}
                 ImageComponent={Image}
                 LinkComponent={Link}

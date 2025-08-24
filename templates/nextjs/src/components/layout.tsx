@@ -1,21 +1,23 @@
 import React from 'react';
-import Footer from './footer';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
+/**
+ * Legacy Layout Component
+ * 
+ * Used by pages that haven't been fully migrated to the app router layout yet.
+ * The header and footer are now provided by app/layout.tsx globally, so this
+ * component just provides the main content wrapper.
+ */
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  // Note: Actual meta tag setting might need to happen in page.tsx or layout.tsx
-  // using Next.js metadata APIs, not directly via these props in this component.
-
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header is provided globally in app/layout.tsx; keep this component for legacy pages */}
+      {/* Header and Footer are provided globally in app/layout.tsx */}
       <main className="grow">
         {children}
       </main>
-      <Footer />
     </div>
   );
 };

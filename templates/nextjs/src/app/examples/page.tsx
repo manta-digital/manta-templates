@@ -1,18 +1,21 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BentoLayout } from '@/components/layouts/bento-layout';
-import GridItem from '@/components/layouts/grid-layout/grid-item';
-import { GradientCard } from '@/components/cards/variants/GradientCard';
-import ArticleCard from '@/components/cards/articles/ArticleCard';
-import BlogCardImage from '@/components/cards/BlogCardImage';
-import ProjectCard from '@/components/cards/ProjectCard';
-import { BaseCard } from '@/components/cards/BaseCard';
+import { 
+  BentoLayout,
+  GridItem,
+  GradientCard,
+  ArticleCard,
+  BlogCardImage,
+  ProjectCard,
+  BaseCard,
+  QuoteCard,
+  CardCarousel,
+  CosineTerrainCard,
+  TechnologyScroller
+} from '@manta-templates/ui-core';
 import BackgroundVideo from '@/components/ui/background-video';
-import QuoteCard from '@/components/cards/QuoteCard';
-// import VideoCard from '@/components/cards/VideoCard';
-import { CardCarousel } from '@/components/cards/layouts/CardCarousel';
-import CosineTerrainCard from '@/components/cards/math/CosineTerrainCard';
-import { TechnologyScroller } from '@/components/ui/TechnologyScroller';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ExamplesPage() {
   return (
@@ -28,9 +31,11 @@ export default function ExamplesPage() {
           <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showDots={false} showControls={false}>
 
             {/* Simple article sample inside carousel to test image hover */}
-            <ArticleCard className="h-full" title="Carousel Article" subtitle="Demo" description="Testing image hover inside carousel." image="/image/blog-sample-image.png" href="/blog/sample-post" />
+            <ArticleCard className="h-full" ImageComponent={Image} LinkComponent={Link} title="Carousel Article" subtitle="Demo" description="Testing image hover inside carousel." image="/image/blog-sample-image.png" href="/blog/sample-post" imageProps={{ width: 600, height: 400 }} />
             <ProjectCard
               className="h-full"
+              ImageComponent={Image}
+              LinkComponent={Link}
               content={{
                 title: 'Semantic Colors',
                 description: 'Cards using accent and foreground tokens',
@@ -63,12 +68,12 @@ export default function ExamplesPage() {
 
         {/* Featured article */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
-          <ArticleCard className="h-full" title="Colors and Themes" subtitle="Research" description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." image="/image/blog-sample-image.png" href="/blog/sample-post" />
+          <ArticleCard className="h-full" ImageComponent={Image} LinkComponent={Link} title="Colors and Themes" subtitle="Research" description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." image="/image/blog-sample-image.png" href="/blog/sample-post" imageProps={{ width: 600, height: 400 }} />
         </GridItem>
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
-          <BlogCardImage title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
+          <BlogCardImage ImageComponent={Image} LinkComponent={Link} title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
         </GridItem>
 
         {/* Cosine terrain visual */}

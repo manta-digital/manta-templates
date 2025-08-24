@@ -1,19 +1,34 @@
 import React from 'react';
-import { getPresetContent } from '@/lib/presetContent';
-import { siteConfig } from '@/content/site.config';
-import ContentCard from '@/components/layouts/ContentCard';
+import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+
+interface PrivacyContent {
+  title?: string;
+}
 
 export default async function PrivacyPage() {
-  const content = await getPresetContent<{ title?: string }>('legal', 'privacy', siteConfig.presets.legal);
+  let content: ContentData<PrivacyContent> | null = null;
+  
+  try {
+    content = await nextjsContentProvider.loadContent<PrivacyContent>('privacy', 'legal');
+  } catch (error: unknown) {
+    console.error('Error loading privacy content:', error);
+    // Fallback content
+    content = {
+      slug: 'privacy',
+      frontmatter: { title: 'Privacy Policy' },
+      contentHtml: '<p>Privacy policy content not available.</p>'
+    };
+  }
   return (
-    <main className="min-h-screen bg-background px-4 py-10">
+    <Container className="py-16">
       <ContentCard>
-        {content.frontmatter.title && (
+        {content?.frontmatter.title && (
           <h1 className="mb-4">{content.frontmatter.title}</h1>
         )}
-        <div dangerouslySetInnerHTML={{ __html: content.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: content?.contentHtml || '' }} />
       </ContentCard>
-    </main>
+    </Container>
   );
 }
 

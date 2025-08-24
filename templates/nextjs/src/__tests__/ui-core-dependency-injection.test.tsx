@@ -1,20 +1,61 @@
 import { render } from '@testing-library/react';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
 
+interface MockImageProps {
+  src: string;
+  alt: string;
+  [key: string]: unknown;
+}
+
+interface MockLinkProps {
+  href: string;
+  children: React.ReactNode;
+  [key: string]: unknown;
+}
+
+interface MockSocial {
+  platform: string;
+  url: string;
+}
+
+interface MockArticleCardProps {
+  ImageComponent?: React.ComponentType<MockImageProps>;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+}
+
+interface MockProjectCardProps {
+  LinkComponent?: React.ComponentType<MockLinkProps>;
+  title: string;
+  description: string;
+  repoUrl: string;
+  demoUrl?: string;
+}
+
+interface MockAboutCardProps {
+  ImageComponent?: React.ComponentType<MockImageProps>;
+  LinkComponent?: React.ComponentType<MockLinkProps>;
+  socialIcons?: Record<string, React.ComponentType>;
+  title: string;
+  socials?: MockSocial[];
+}
+
 // Mock Next.js components for testing
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => <img src={src} alt={alt} {...props} />,
+  default: ({ src, alt, ...props }: MockImageProps) => <img src={src} alt={alt} {...props} />,
 }));
 
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ href, children, ...props }: any) => <a href={href} {...props}>{children}</a>,
+  default: ({ href, children, ...props }: MockLinkProps) => <a href={href} {...props}>{children}</a>,
 }));
 
 // Mock ui-core components to avoid import issues in test environment
 jest.mock('@manta-templates/ui-core', () => ({
-  ArticleCard: ({ ImageComponent, title, description, image, href }: any) => (
+  ArticleCard: ({ ImageComponent, title, description, image, href }: MockArticleCardProps) => (
     <div data-testid="article-card">
       <h2>{title}</h2>
       <p>{description}</p>
@@ -22,7 +63,7 @@ jest.mock('@manta-templates/ui-core', () => ({
       <a href={href}>Read more</a>
     </div>
   ),
-  ProjectCard: ({ LinkComponent, title, description, repoUrl, demoUrl }: any) => (
+  ProjectCard: ({ LinkComponent, title, description, repoUrl, demoUrl }: MockProjectCardProps) => (
     <div data-testid="project-card">
       <h2>{title}</h2>
       <p>{description}</p>
@@ -30,10 +71,10 @@ jest.mock('@manta-templates/ui-core', () => ({
       {demoUrl && <a href={demoUrl}>Demo</a>}
     </div>
   ),
-  AboutCard: ({ ImageComponent, LinkComponent, socialIcons, title, socials }: any) => (
+  AboutCard: ({ LinkComponent, socialIcons, title, socials }: MockAboutCardProps) => (
     <div data-testid="about-card">
       <h2>{title}</h2>
-      {socials?.map((social: any, idx: number) => (
+      {socials?.map((social: MockSocial, idx: number) => (
         <div key={idx}>
           {socialIcons?.[social.platform] && <span data-testid={`icon-${social.platform}`}>Icon</span>}
           {LinkComponent && <LinkComponent href={social.url}>{social.platform}</LinkComponent>}
@@ -44,9 +85,9 @@ jest.mock('@manta-templates/ui-core', () => ({
 }));
 
 // Import the mocked components
-const { ArticleCard, ProjectCard, AboutCard } = require('@manta-templates/ui-core');
-const Image = require('next/image').default;
-const Link = require('next/link').default;
+import { ArticleCard, ProjectCard, AboutCard } from '@manta-templates/ui-core';
+import Image from 'next/image';
+import Link from 'next/link';
 
 describe('UI-Core Dependency Injection', () => {
   describe('Image Component Injection', () => {

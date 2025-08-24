@@ -1,5 +1,4 @@
-import { BentoLayout } from '@/components/layouts/bento-layout';
-import { BaseCard } from '@/components/cards';
+import { BentoLayout, BaseCard } from '@manta-templates/ui-core';
 import { cn } from '@/lib/utils';
 
 const cardColors = [

@@ -1,19 +1,34 @@
 import React from 'react';
-import { getPresetContent } from '@/lib/presetContent';
-import { siteConfig } from '@/content/site.config';
-import ContentCard from '@/components/layouts/ContentCard';
+import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+
+interface TermsContent {
+  title?: string;
+}
 
 export default async function TermsPage() {
-  const content = await getPresetContent<{ title?: string }>('legal', 'terms', siteConfig.presets.legal);
+  let content: ContentData<TermsContent> | null = null;
+  
+  try {
+    content = await nextjsContentProvider.loadContent<TermsContent>('terms', 'legal');
+  } catch (error: unknown) {
+    console.error('Error loading terms content:', error);
+    // Fallback content
+    content = {
+      slug: 'terms',
+      frontmatter: { title: 'Terms of Service' },
+      contentHtml: '<p>Terms of service content not available.</p>'
+    };
+  }
   return (
-    <main className="min-h-screen bg-background px-4 py-10">
+    <Container className="py-16">
       <ContentCard>
-        {content.frontmatter.title && (
+        {content?.frontmatter.title && (
           <h1 className="mb-4">{content.frontmatter.title}</h1>
         )}
-        <div dangerouslySetInnerHTML={{ __html: content.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: content?.contentHtml || '' }} />
       </ContentCard>
-    </main>
+    </Container>
   );
 }
 

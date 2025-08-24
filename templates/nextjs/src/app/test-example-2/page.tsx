@@ -2,11 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard, ArticleCard } from '@manta-templates/ui-core';
-import { TechnologyScroller } from '@manta-templates/ui-core';
-import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
+import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard, ArticleCard, TechnologyScroller } from '@manta-templates/ui-core';
 import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
 import type { ArticleContent } from '@manta-templates/ui-core';
+import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
 
 // Mock content loading function (replace with actual content loading)
 async function loadExampleContent() {

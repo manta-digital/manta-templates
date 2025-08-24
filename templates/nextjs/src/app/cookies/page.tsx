@@ -1,19 +1,34 @@
 import React from 'react';
-import { getPresetContent } from '@/lib/presetContent';
-import { siteConfig } from '@/content/site.config';
-import ContentCard from '@/components/layouts/ContentCard';
+import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+
+interface CookiesContent {
+  title?: string;
+}
 
 export default async function CookiesPage() {
-  const content = await getPresetContent<{ title?: string }>('legal', 'cookies', siteConfig.presets.legal);
+  let content: ContentData<CookiesContent> | null = null;
+  
+  try {
+    content = await nextjsContentProvider.loadContent<CookiesContent>('cookies', 'legal');
+  } catch (error: unknown) {
+    console.error('Error loading cookies content:', error);
+    // Fallback content
+    content = {
+      slug: 'cookies',
+      frontmatter: { title: 'Cookie Policy' },
+      contentHtml: '<p>Cookie policy content not available.</p>'
+    };
+  }
   return (
-    <main className="min-h-screen bg-background px-4 py-10">
+    <Container className="py-16">
       <ContentCard>
-        {content.frontmatter.title && (
+        {content?.frontmatter.title && (
           <h1 className="mb-4">{content.frontmatter.title}</h1>
         )}
-        <div dangerouslySetInnerHTML={{ __html: content.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: content?.contentHtml || '' }} />
       </ContentCard>
-    </main>
+    </Container>
   );
 }
 
