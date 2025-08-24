@@ -57,8 +57,8 @@ async function loadExampleContent() {
     themeGuideArticle: themeGuideArticle ? {
       title: themeGuideArticle.title,
       subtitle: (themeGuideArticle as { tags?: string[] }).tags?.[0] || 'Design',
-      description: themeGuideArticle.description,
-      image: themeGuideArticle.image,
+      description: themeGuideArticle.description || (themeGuideArticle as { excerpt?: string }).excerpt || '',
+      image: (themeGuideArticle as { coverImage?: string }).coverImage || themeGuideArticle.image,
       href: `/articles/theme-guide`
     } : null
   };

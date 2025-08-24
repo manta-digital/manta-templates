@@ -77,12 +77,19 @@ export default function ExamplesPage() {
         </GridItem>
 
         {/* Blog image card */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
-          <BlogCardImage ImageComponent={Image} LinkComponent={Link} title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
+        <GridItem className="h-full col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
+          <BlogCardImage 
+            className="h-full"
+            ImageComponent={Image} 
+            LinkComponent={Link} 
+            title="Foreground and Borders" 
+            excerpt="This card validates text-card-foreground and border tokens over imagery." 
+            coverImageUrl="/image/blog-sample-image.png" 
+            textColorClassName="text-white" />
         </GridItem>
 
         {/* Cosine terrain visual */}
-        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
+        <GridItem className="col-span-8 md:col-span-8 row-span-2 md:row-span-2 lg:col-span-5 lg:row-span-1">
           <CosineTerrainCard className="h-full" variant="card" renderPreset="wireframe" materialType="basic" />
         </GridItem>
 

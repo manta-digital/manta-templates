@@ -131,15 +131,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       >
         <div className="relative z-10 flex flex-col h-full">
           {image && (
-            <div className="relative mb-4 rounded-lg overflow-hidden h-40">
+            <div className="relative mb-4 rounded-sm overflow-hidden h-40">
               {ImageComponent ? (
                 <ImageComponent
                   src={image}
                   alt={showTitle || 'Project image'}
-                  fill="true"
+                  width={600}
+                  height={400}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover object-top"
-                  priority="true"
+                  className="object-cover object-top w-full h-full"
+                  priority={true}
                 />
               ) : (
                 <img
