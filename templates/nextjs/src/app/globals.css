@@ -1,8 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
-@import "../styles/radixCustomColors.css";
-@import "../styles/semanticColors.css";
+@import "@manta-templates/ui-core/dist/styles/index.css";
 /* cardThemes.css removed; card variables sourced via semantic tokens */
 
 @custom-variant dark (&:is(.dark *));

@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { QuoteContent } from '../../types/content';
 import { cn } from '../../utils';
 import { BaseCard } from './BaseCard';
@@ -14,14 +16,12 @@ interface QuoteCardProps {
   className?: string;
   /** Visual style variant */
   variant?: 'primary' | 'secondary';
-  /** Optional theme override */
-  theme?: 'light' | 'dark';
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
 }
 
 /**
- * A visually appealing quote card with gradient borders
+ * A visually appealing quote card with gradient borders and shimmer effect
  */
 const QuoteCard: React.FC<QuoteCardProps> = ({
   content,
@@ -29,14 +29,25 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
   author,
   className,
   variant = 'primary',
-  theme = 'light',
   ImageComponent,
   LinkComponent,
 }) => {
-  // Define accent color classes based on variant
-  const accentColors = {
-    primary: 'text-purple-400',
-    secondary: 'text-blue-400'
+  const setShimmerPosition = useState(0)[1];
+  
+  // Shimmer animation effect
+  useEffect(() => {
+    const animateShimmer = () => {
+      setShimmerPosition(prev => (prev >= 100 ? 0 : prev + 0.5));
+    };
+    
+    const interval = setInterval(animateShimmer, 50);
+    return () => clearInterval(interval);
+  }, [setShimmerPosition]);
+
+  // Define accent color styles using CSS custom properties that work with our semantic color system
+  const accentColorStyles = {
+    primary: { color: 'var(--color-accent-9)' },
+    secondary: { color: 'var(--color-accent-10)' }
   };
 
   const displayQuote = content?.quote ?? quote;
@@ -45,21 +56,22 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
 
   return (
     <BaseCard 
-      className={cn('relative rounded-lg overflow-hidden p-4', 
-        'bg-white dark:bg-gray-800',
-        className)}
+      className={cn(
+        'relative rounded-lg overflow-hidden p-4',
+        'bg-card text-card-foreground', // Use semantic card colors
+        className
+      )}
       ImageComponent={ImageComponent}
       LinkComponent={LinkComponent}
     >
       {/* Outer container with border gradient and shimmer effect */}
       <div className="relative overflow-hidden rounded-lg">
         
-        {/* Inner card content with radial gradient */}
+        {/* Inner card content with proper padding and semantic colors */}
         <div 
           className={cn(
             'relative rounded-lg p-16',
-            'bg-white dark:bg-gray-800',
-            'text-gray-800 dark:text-gray-300',
+            'bg-card text-card-foreground', // Explicit semantic colors
             'transition-colors duration-200'
           )}
         >
@@ -68,21 +80,15 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
             <p 
               className={cn(
                 'text-lg italic font-normal text-center',
-                'text-gray-700 dark:text-gray-300',
-                'transition-colors duration-200',
-                theme === 'dark' ? 'opacity-90' : 'opacity-95'
+                'text-card-foreground transition-colors duration-200',
+                'opacity-95'
               )}
-              style={{
-                textShadow: theme === 'dark'
-                  ? '0 0 1px rgba(139, 92, 246, 0.1)'
-                  : '0 0 1px rgba(0,0,0,0.05)'
-              }}
             >
-              <span className={cn('text-2xl mr-1', accentColors[variant])}>
+              <span className="text-2xl mr-1" style={accentColorStyles[variant]}>
                 &ldquo;
               </span>
               {displayQuote}
-              <span className={cn('text-2xl ml-1', accentColors[variant])}>
+              <span className="text-2xl ml-1" style={accentColorStyles[variant]}>
                 &rdquo;
               </span>
             </p>
