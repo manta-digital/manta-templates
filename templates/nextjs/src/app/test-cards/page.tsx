@@ -1,8 +1,7 @@
 import React from 'react';
 import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Container, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard } from '@manta-templates/ui-core';
 import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
-import type { NextjsHeaderContent } from '@manta-templates/ui-adapters-nextjs';
-import { getFooterContent } from '@/lib/footerContent';
+import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -84,8 +83,8 @@ export default async function TestCardsPage() {
   }
 
   try {
-    const footerData = await getFooterContent();
-    footerSections = footerData.sections;
+    const footer = await nextjsContentProvider.loadContent<NextjsFooterContent>('footer-content', 'presets/mit/footer');
+    footerSections = footer.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading footer content:', error);
   }

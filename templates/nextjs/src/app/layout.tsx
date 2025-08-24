@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
 import { DefaultHeader, Footer, BrandMark, Container, ThemeToggle, ColorSelector } from '@manta-templates/ui-core';
-import { getHeaderContent } from '@/lib/headerContent';
-import { getFooterContent } from '@/lib/footerContent';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -53,14 +53,15 @@ export default async function RootLayout({
   let footerSections = null;
 
   try {
-    headerContent = await getHeaderContent();
+    const header = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main-grid');
+    headerContent = header.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading header content:', error);
   }
 
   try {
-    const footerData = await getFooterContent();
-    footerSections = footerData.sections;
+    const footer = await nextjsContentProvider.loadContent<NextjsFooterContent>('footer-content', 'presets/mit/footer');
+    footerSections = footer.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading footer content:', error);
   }
