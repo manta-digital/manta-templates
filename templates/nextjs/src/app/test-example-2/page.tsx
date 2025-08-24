@@ -2,16 +2,22 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard, ArticleCard } from '@manta-templates/ui-core';
 import { TechnologyScroller } from '@manta-templates/ui-core';
-import ArticleCard from '@/components/cards/articles/ArticleCard';
 import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
-import { getArticleBySlug } from '@/lib/content/loader';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import type { ArticleContent } from '@manta-templates/ui-core';
 
 // Mock content loading function (replace with actual content loading)
 async function loadExampleContent() {
-  // Load real article content from markdown
-  const themeGuideArticle = await getArticleBySlug('theme-guide');
+  // Load real article content using ui-adapters pattern
+  let themeGuideArticle = null;
+  try {
+    const article = await nextjsContentProvider.loadContent<ArticleContent>('theme-guide', 'articles');
+    themeGuideArticle = article.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading article content:', error);
+  }
   
   return {
     carouselHero: {
@@ -49,13 +55,13 @@ async function loadExampleContent() {
       author: "Manta Templates",
       role: "Design Philosophy"
     },
-    themeGuideArticle: {
-      title: themeGuideArticle.frontmatter.title,
-      subtitle: themeGuideArticle.frontmatter.tags?.[0] || 'Design',
-      description: themeGuideArticle.frontmatter.excerpt,
-      image: themeGuideArticle.frontmatter.coverImage,
-      href: `/articles/${themeGuideArticle.slug}`
-    }
+    themeGuideArticle: themeGuideArticle ? {
+      title: themeGuideArticle.title,
+      subtitle: (themeGuideArticle as { tags?: string[] }).tags?.[0] || 'Design',
+      description: themeGuideArticle.description,
+      image: themeGuideArticle.image,
+      href: `/articles/theme-guide`
+    } : null
   };
 }
 
@@ -94,6 +100,8 @@ export default async function TestExample2Page() {
               date={content.carouselHero.date}
               slug="/content/example-2/carousel-hero"
               textColorClassName="text-white"
+              ImageComponent={Image}
+              LinkComponent={Link}
             />
             <ProjectCard
               className="h-full"
@@ -106,6 +114,8 @@ export default async function TestExample2Page() {
                 displayVariant: content.carouselProject.displayVariant,
                 features: content.carouselProject.features,
               }}
+              ImageComponent={Image}
+              LinkComponent={Link}
             />
 
             {/* Background video content using VideoCard with Link wrapper */}
@@ -153,14 +163,23 @@ export default async function TestExample2Page() {
 
         {/* Featured article loaded from server */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
-          <ArticleCard 
-            className="h-full"
-            title={content.themeGuideArticle.title}
-            subtitle={content.themeGuideArticle.subtitle}
-            description={content.themeGuideArticle.description}
-            image={content.themeGuideArticle.image}
-            href={content.themeGuideArticle.href}
-          />
+          {content.themeGuideArticle ? (
+            <ArticleCard 
+              className="h-full"
+              title={content.themeGuideArticle.title}
+              subtitle={content.themeGuideArticle.subtitle}
+              description={content.themeGuideArticle.description}
+              image={content.themeGuideArticle.image}
+              href={content.themeGuideArticle.href}
+              ImageComponent={Image}
+              LinkComponent={Link}
+              imageProps={{ width: 600, height: 400, sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' }}
+            />
+          ) : (
+            <BaseCard className="h-full p-6 flex items-center justify-center">
+              <p className="text-muted-foreground">Article content not available</p>
+            </BaseCard>
+          )}
         </GridItem>
 
         {/* Blog image card */}
@@ -175,6 +194,8 @@ export default async function TestExample2Page() {
               date={content.featuredArticle.date}
               slug="/articles/theme-guide"
               textColorClassName="text-white"
+              ImageComponent={Image}
+              LinkComponent={Link}
             />
         </GridItem>
 

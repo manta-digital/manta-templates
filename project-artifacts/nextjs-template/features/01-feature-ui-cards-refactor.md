@@ -1,48 +1,127 @@
-# Feature: ui-cards-refactor
+# Architecture: UI-Core + UI-Adapters Content Loading System
 
-Role: Technical Fellow
-Project Guide: `project-documents/project-guides/guide.ai-project.00-process.md`
+Role: Technical Fellow  
+Project Guide: `project-documents/project-guides/guide.ai-project.00-process.md`  
+Status: **ACTIVE** - Current migration architecture
 
-## Goal
-Refactor card components to be framework-agnostic (React + Tailwind + ShadCN + Radix) so they can be consumed without Next.js, while keeping themes/tokens app-owned.
+## Architecture Overview
 
-## Scope (Phase 1-2, near-term)
-- Package: `packages/ui-core` (no Next.js)
-  - Primitives: `Card`, `CardHeader|Content|Footer|Title|Description`, `BaseCard`, `Button`, `cn`, `cardVariants`.
-  - No CSS/tokens exported.
-- Migrate cards that don’t require Next features:
-  - Round 1: `AboutCard`, `BlogCard`, `ProjectCard` (core variants), `QuoteCard`, `BlogCardImage` (replace Next `<Image>` with standard `<img>` or injected renderer prop).
-  - Round 2: container/wrappers that are React-only (e.g., `FeatureCardContainer`) and list/virtualized layouts where feasible.
-- Keep template-owned:
-  - Any component using `next/link`, `next/image`, route loaders, server-only code, or `next/dynamic` SSR nuances (e.g., `VideoPlayer`).
+The manta-templates monorepo uses a 3-layer architecture for UI components and content loading:
 
-## Theming & Tokens
-- Radix color scales and semantic tokens remain in the consuming app (template).
-- ui-core relies on CSS variables/classes only.
+### **Layer 1: UI-Core (`@manta-templates/ui-core`)**
+**Purpose**: Framework-agnostic React components with dependency injection  
+**Location**: `packages/ui-core/src/`
 
-## API Adjustments to Decouple Next.js
-- Image usage: Prefer `img` with alt + sizing or accept a `renderImage?: (props) => ReactNode` injection for templates to pass Next `<Image>`.
-- Links: Accept `asChild` or `renderLink?: (p) => ReactNode` so templates can inject `next/link`.
-- Assets: Accept `assetBaseUrl` or require full asset URLs from callers (e.g., `TechnologyScroller`).
+- **Components**: All cards, layouts, primitives (BaseCard, QuoteCard, ArticleCard, etc.)
+- **Content System**: Framework-agnostic interfaces and base classes
+  - `ContentProvider<T>` interface - standardized content loading contract
+  - `BaseContentProvider<T>` - abstract base with retry logic, caching, validation
+  - Content types: `ContentData<T>`, `ContentMeta<T>` with type-safe frontmatter
+- **Dependency Injection**: Components accept `ImageComponent`, `LinkComponent` props
+- **No Framework Dependencies**: No Next.js, no filesystem access, no direct markdown processing
 
-## File Moves (initial)
-- Move to `packages/ui-core/src/components/cards/`:
-  - `AboutCard.tsx`, `BlogCard.tsx`, `BlogCardImage.tsx`, `ProjectCard.tsx`, `QuoteCard.tsx` (strip Next-only pieces or gate with injected renderers).
-- Keep in template:
-  - `VideoPlayer.tsx`, any `next/image`-hard dependency until renderer injection is added.
+### **Layer 2: UI-Adapters (`@manta-templates/ui-adapters-nextjs`)**  
+**Purpose**: Framework-specific content providers implementing ui-core interfaces  
+**Location**: `packages/ui-adapters/nextjs/src/`
 
-## Import Rewrite Plan
-- Update template imports for moved components to `@manta/ui-core`.
-- Validate pages compile and visually match (spot-check Examples page).
+- **NextjsContentProvider**: Extends `BaseContentProvider` from ui-core
+- **Features**: Filesystem-based markdown loading, server-side caching, content processing
+- **Pipeline**: Full markdown processing with rehype-pretty-code, syntax highlighting
+- **Compatibility**: Works with Next.js patterns (cwd-relative paths, server components)
 
-## Risks
-- Hidden Next.js coupling via `next/image`, `Link`, or server imports.
-- Style drift if tokens accidentally leak into ui-core. Mitigation: no CSS export from ui-core.
+### **Layer 3: Template (`templates/nextjs`)**
+**Purpose**: Next.js application consuming ui-core components with ui-adapters content  
+**Location**: `templates/nextjs/src/`
 
-## Acceptance
-- Build green across workspace.
-- Examples page renders with ui-core cards without regressions.
-- No Next.js imports inside ui-core.
+- **Component Usage**: Imports from `@manta-templates/ui-core` with dependency injection
+- **Content Loading**: Uses `nextjsContentProvider.loadContent()` from ui-adapters
+- **Dependency Injection**: Passes `Image` (Next.js), `Link` (Next.js), icons to ui-core components
 
-## References
-- Concept: `templates/nextjs/examples/our-project/feature.ui-cards-refactor.md`
+## Content Loading Pattern
+
+### **Recommended Pattern** ✅
+```typescript
+import { QuoteCard } from '@manta-templates/ui-core';
+import { nextjsQuoteContentProvider } from '@manta-templates/ui-adapters-nextjs';
+
+export default async function Page() {
+  // Load content using ui-adapters
+  let quoteContent = null;
+  try {
+    const quote = await nextjsQuoteContentProvider.loadContent('sample-quote', 'quotes');
+    quoteContent = quote.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading quote content:', error);
+  }
+
+  return (
+    <main>
+      {quoteContent && <QuoteCard content={quoteContent} />}
+    </main>
+  );
+}
+```
+
+### **Legacy Pattern** ❌ (Being Migrated)
+```typescript
+import QuoteCard from '@/components/cards/QuoteCard';           // LOCAL IMPORT
+import { getContentBySlug } from '@/lib/content';              // LEGACY LOADER
+```
+
+## Migration Strategy
+
+### **Current State**
+- **ui-core**: ✅ Complete - All components migrated with dependency injection
+- **ui-adapters**: ✅ Complete - NextjsContentProvider with full markdown processing
+- **Template Migration**: 🔄 In Progress - Replacing local imports with ui-core + ui-adapters
+
+### **Key Benefits**
+1. **Separation of Concerns**: UI components, content loading, framework integration are separate
+2. **Type Safety**: Generic frontmatter types with Zod validation  
+3. **Framework Agnostic**: ui-core can work with any React framework
+4. **Performance**: Server-side content loading with caching
+5. **Maintainability**: Single source of truth for components and content interfaces
+
+### **Component Dependency Injection**
+All ui-core components use dependency injection for framework-specific features:
+
+```typescript
+// Required injections vary by component
+<ArticleCard 
+  ImageComponent={Image}      // Next.js Image
+  LinkComponent={Link}        // Next.js Link
+  content={articleContent}
+/>
+
+<AboutCard
+  ImageComponent={Image}
+  LinkComponent={Link}  
+  socialIcons={{ Github, Linkedin, Mail, X }}  // Lucide icons
+  content={aboutContent}
+/>
+```
+
+### **Content Schema**
+Updated schema supports both legacy and new field names:
+- **Legacy**: `description`, `pubDate`, `image`, `author`
+- **New**: `excerpt`, `publishedAt`, `coverImage` 
+- **Validation**: Requires at least one from each group
+
+## Implementation Status
+
+### ✅ **Completed**
+- UI-core component library with dependency injection
+- UI-adapters NextjsContentProvider with full markdown pipeline  
+- Homepage migration (app/page.tsx) using new pattern
+- Updated ArticleSchema with author field and backward compatibility
+
+### 🔄 **In Progress** 
+- **Task 2.01**: Fix test-example-2 content loading (mixed patterns)
+- **Task 2.1**: Complete app router pages migration
+- **Task 2.2**: Header/Footer migration with content loading
+
+### 📋 **Acceptance Criteria**
+- No `@/components/*` imports in template (use `@manta-templates/ui-core`)
+- No direct `@/lib/content` usage (use ui-adapters providers)
+- All ui-core components have proper dependency injection
+- Build green, functionality identical to pre-migration

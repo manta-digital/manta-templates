@@ -2,8 +2,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
-import Header from '@/components/header';
-import Footer from '@/components/footer';
+import { DefaultHeader, Footer, BrandMark, Container, ThemeToggle, ColorSelector } from '@manta-templates/ui-core';
+import { getHeaderContent } from '@/lib/headerContent';
+import { getFooterContent } from '@/lib/footerContent';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,11 +43,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Load header and footer content server-side
+  let headerContent = null;
+  let footerSections = null;
+
+  try {
+    headerContent = await getHeaderContent();
+  } catch (error: unknown) {
+    console.error('Error loading header content:', error);
+  }
+
+  try {
+    const footerData = await getFooterContent();
+    footerSections = footerData.sections;
+  } catch (error: unknown) {
+    console.error('Error loading footer content:', error);
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -72,11 +92,29 @@ export default function RootLayout({
           storageKey="ui-theme"
         >
           <div className="min-h-screen flex flex-col">
-            <Header />
+            {headerContent && (
+              <DefaultHeader
+                content={headerContent}
+                ImageComponent={Image}
+                LinkComponent={Link}
+                BrandMarkComponent={BrandMark}
+                ContainerComponent={Container}
+                ThemeToggleComponent={ThemeToggle}
+                ColorSelectorComponent={ColorSelector}
+              />
+            )}
             <main className="flex-1">
               {children}
             </main>
-            <Footer />
+            {footerSections && (
+              <Footer
+                variant="compact"
+                legalPreset="mit"
+                sections={footerSections}
+                LinkComponent={Link}
+                ThemeToggleComponent={ThemeToggle}
+              />
+            )}
           </div>
         </ThemeProvider>
       </body>

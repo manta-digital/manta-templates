@@ -1,7 +1,17 @@
-import { Container } from '@/components';
-import QuoteCardContainer from '@/components/cards/QuoteCardContainer';
+import { Container, QuoteCard } from '@manta-templates/ui-core';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import type { QuoteContent } from '@manta-templates/ui-core';
 
-export default function Home() {
+export default async function Home() {
+  // Load quote content using ui-adapters
+  let quoteContent = null;
+  try {
+    const quote = await nextjsContentProvider.loadContent<QuoteContent>('sample-quote', 'quotes');
+    quoteContent = quote.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading quote content:', error);
+  }
+
   return (
     <>
       {/* Hero */}
@@ -14,7 +24,7 @@ export default function Home() {
 
       {/* Sample Content */}
       <Container className="pb-20">
-        <QuoteCardContainer slug="sample-quote" />
+        {quoteContent && <QuoteCard content={quoteContent} />}
       </Container>
     </>
   );

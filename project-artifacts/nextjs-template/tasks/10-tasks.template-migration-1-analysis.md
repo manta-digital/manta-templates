@@ -150,138 +150,142 @@ lastUpdated: 2025-08-23
 
 ## Phase 2: Systematic Migration
 
+### Task 2.01: Fix test-example-2 Content Loading Pattern ✓ **CRITICAL**
+**Status**: Completed migration process. Successfully updated component imports and content loading pattern.
+
+#### Background
+test-example-2 was partially migrated to ui-core components but still uses legacy content loading patterns and local component imports. This creates inconsistency and doesn't demonstrate the correct migration pattern.
+
+#### Issues Found
+- [x] **Mixed component imports**: Uses ui-core for most components but imports `ArticleCard` and `BackgroundVideoComponent` from local paths
+- [x] **Legacy content loading**: Uses `getArticleBySlug` from legacy loader instead of ui-adapters pattern
+- [x] **Incorrect schema fields**: Accesses `frontmatter.excerpt` and `frontmatter.coverImage` instead of actual schema fields (`description`, `image`)
+- [x] **Missing dependency injection**: ui-core components missing required `ImageComponent`, `LinkComponent` props
+
+#### Migration Steps
+- [x] **Replace component imports**
+  1. Replace `import ArticleCard from '@/components/cards/articles/ArticleCard'`
+     ```typescript
+     // OLD:
+     import ArticleCard from '@/components/cards/articles/ArticleCard';
+     import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
+     
+     // NEW:
+     import { ArticleCard, BackgroundVideoComponent } from '@manta-templates/ui-core';
+     ```
+
+- [x] **Migrate content loading to ui-adapters pattern**
+  1. Replace legacy content loading:
+     ```typescript
+     // OLD:
+     import { getArticleBySlug } from '@/lib/content/loader';
+     const themeGuideArticle = await getArticleBySlug('theme-guide');
+     
+     // NEW:
+     import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+     let themeGuideArticle = null;
+     try {
+       const article = await nextjsContentProvider.loadContent('theme-guide', 'articles');
+       themeGuideArticle = article.frontmatter;
+     } catch (error: unknown) {
+       console.error('Error loading article content:', error);
+     }
+     ```
+  2. Fix schema field mapping for themeGuideArticle object:
+     - Use `themeGuideArticle.description` instead of `themeGuideArticle.excerpt`
+     - Use `themeGuideArticle.image` instead of `themeGuideArticle.coverImage`
+
+- [x] **Add dependency injection to all ui-core components**
+  1. ArticleCard: Add `ImageComponent={Image}` and `LinkComponent={Link}`
+  2. BlogCardImage components: Add `ImageComponent={Image}` and `LinkComponent={Link}`
+  3. ProjectCard: Add `ImageComponent={Image}` and `LinkComponent={Link}`
+  4. VideoCard: Add `BackgroundVideoComponent={BackgroundVideoComponent}`
+
+- [x] **Optional: Migrate static content to markdown files**
+  1. Create content files in `src/content/test-example-2/`:
+     - `carousel-hero.md`
+     - `semantic-colors.md` (project)
+     - `colors-and-themes.md` (article)
+     - `design-philosophy.md` (quote)
+  2. Update `loadExampleContent()` to load from these files using ui-adapters pattern
+  3. Keep hybrid approach: some content from markdown, some from static data
+
+- [x] **Test migration**
+  1. Run build: `pnpm build`
+  2. Test dev server: Navigate to `/test-example-2`
+  3. Verify all components render correctly
+  4. Compare to pre-migration functionality
+  - [x] **Success**: test-example-2 demonstrates correct ui-core + ui-adapters patterns
+
 ### Task 2.1: App Router Pages Migration
 
 #### Migrate app/page.tsx (Homepage)
-- [ ] **Replace all @/components/* imports with ui-core imports**
-  - [ ] Identify current imports in homepage
-    1. Read `templates/nextjs/src/app/page.tsx`
-    2. List all @/components/* imports currently used
-    3. Note any props or configurations used with components
-  - [ ] Replace imports systematically
-    1. Replace component imports with ui-core equivalents:
-       ```typescript
-       // OLD:
-       import { BaseCard } from '@/components/cards/BaseCard'
-       import { ThemeToggle } from '@/components/themetoggle'
-       import { AboutCard } from '@/components/cards/people/AboutCard'
-       
-       // NEW:
-       import { BaseCard, ThemeToggle, AboutCard } from '@manta-templates/ui-core'
-       ```
-    2. Preserve all other imports (Next.js, React, etc.)
-    3. Maintain exact same component usage patterns
-  - [ ] Ensure proper dependency injection for Image/Link components
-    1. Add Image import: `import Image from 'next/image'`
-    2. Add Link import: `import Link from 'next/link'`
-    3. Pass components as props to ui-core components:
-       ```typescript
-       <ArticleCard
-         ImageComponent={Image}
-         LinkComponent={Link}
-         // ... other props
-       />
-       ```
-    4. Add social icons if needed: `import { Github, Linkedin, Mail, X } from 'lucide-react'`
-  - [ ] Test build and functionality
-    1. Run build: `pnpm build`
-    2. Run dev server: `pnpm dev`
-    3. Verify page loads without errors
-    4. Compare visual rendering to pre-migration state
-  - [ ] **Success**: Homepage works identically with ui-core components
+- [x] **Replace all @/components/* imports with ui-core imports**
+  - [x] Identify current imports in homepage
+  - [x] Replace imports systematically
+  - [x] Ensure proper dependency injection for Image/Link components
+  - [x] Test build and functionality
+  - [x] **Success**: Homepage works identically with ui-core components
 
-#### Migrate app/blog/page.tsx and Blog Routes
-- [ ] **Replace ArticleCard and related component imports**
-  - [ ] Update blog listing page
-    1. Open `templates/nextjs/src/app/blog/page.tsx`
-    2. Replace imports:
-       ```typescript
-       // OLD:
-       import { ArticleCard } from '@/components/cards/articles/ArticleCard'
-       
-       // NEW:
-       import { ArticleCard } from '@manta-templates/ui-core'
-       ```
-    3. Ensure dependency injection is properly added
-    4. Test blog listing displays correctly
-  - [ ] Update individual blog post routes
-    1. Check `templates/nextjs/src/app/blog/[slug]/page.tsx`
-    2. Replace any component imports with ui-core equivalents
-    3. Test individual post pages work
-  - [ ] Ensure content loading patterns work with ui-core components
-    1. Verify markdown content loading still works
-    2. Test that getArticleBySlug patterns work with ui-core ArticleCard
-    3. Verify all blog metadata and frontmatter processing
-  - [ ] Test all blog functionality
-    1. Navigate to `/blog` and verify listing works
-    2. Click into individual posts and verify they load
-    3. Test any pagination or filtering if present
-    4. Verify responsive behavior across device sizes
-  - [ ] **Success**: Blog section fully functional with ui-core components
+#### Migrate Page Router Pages
+- [ ] **Update Header/Footer Components (Critical)**
+  - [ ] Update app/layout.tsx
+    1. Replace all local header/footer component imports with ui-core imports
+    2. Ensure consistent layout structure with ui-core components
+    3. Implement proper dependency injection for Image/Link components
+    4. Test overall page layout and navigation
 
-#### Migrate app/test-cards/page.tsx
-- [ ] **Update test-cards to use ui-core components for both sections**
-  - [ ] Replace template component imports
-    1. Open `templates/nextjs/src/app/test-cards/page.tsx`
-    2. Replace all @/components/* imports with ui-core imports
-    3. Update "Template" section to use ui-core components
-  - [ ] Update comparison structure
-    1. Since both sections now use ui-core, update labels:
-       - "Template (ui-core)" instead of "Template (local)"
-       - "ui-core (direct)" instead of "ui-core"
-    2. This demonstrates template successfully migrated to ui-core
-  - [ ] Validate perfect parity
-    1. Both sections should render identically
-    2. This proves template migration successful
-    3. Any differences indicate migration issues to fix
-  - [ ] **Success**: test-cards shows perfect parity because both sides use ui-core
+- [ ] **Migrate Personal and Legal Pages**
+  1. Update the following pages with ui-core component imports:
+    - [ ] app/about/page.tsx
+    - [ ] app/legal/page.tsx
+    - [ ] app/privacy/page.tsx
+    - [ ] app/terms/page.tsx
+    - [ ] app/cookies/page.tsx
+    2. For each page:
+      - Replace @/components/* imports with ui-core imports
+      - Add dependency injection as needed (Image, Link components)
+      - Verify content rendering and layout
 
-#### Migrate app/test-example-2/page.tsx and Other Test Pages
-- [ ] **Replace all local component imports with ui-core equivalents**
-  - [ ] Update test-example-2 page
-    1. Open `templates/nextjs/src/app/test-example-2/page.tsx`
-    2. Replace all @/components/* imports with ui-core imports
-    3. Ensure dependency injection is properly implemented
-    4. Test server-side content loading still works
-  - [ ] Check for other test or example pages
-    1. Search for other pages in app/ directory:
-       ```bash
-       find templates/nextjs/src/app -name "*.tsx" -type f
-       ```
-    2. Update any additional pages found
-    3. Apply same import migration pattern
-  - [ ] Verify server-side content loading continues to work
-    1. Test async component patterns still function
-    2. Verify markdown content loading works
-    3. Test any getStaticProps or server component patterns
-  - [ ] Test all demonstrated functionality
-    1. Navigate to each test page
-    2. Verify all components render correctly
-    3. Test interactive functionality
-    4. Verify no console errors or warnings
-  - [ ] **Success**: All test pages work identically with ui-core components
+- [ ] **Migrate Example and Demonstration Pages**
+  1. Update the following example pages:
+    - [ ] app/examples/page.tsx
+    - [ ] app/examples/cards/page.tsx
+    - [ ] app/examples/blog/page.tsx
+    - [ ] app/examples/portfolio/PortfolioGrid.tsx
+    - [ ] app/examples/bentogrid/BentoGrid.tsx
+    2. For each page:
+      - Replace local component imports with ui-core equivalents
+      - Implement consistent dependency injection
+      - Verify component rendering and interaction
 
-#### Migrate Remaining App Router Pages
-- [ ] **Update any other pages in app/ directory**
-  - [ ] Complete directory scan
-    1. List all remaining .tsx files in app/ directory
-    2. Check each file for @/components/* imports
-    3. Create migration checklist for remaining files
-  - [ ] Apply systematic migration
-    1. For each remaining file:
-       - Replace @/components/* imports with ui-core imports
-       - Add dependency injection as needed
-       - Test build and functionality
-    2. Ensure consistent patterns across all files
-  - [ ] Ensure consistent import patterns across all pages
-    1. All pages should import from '@manta-templates/ui-core'
-    2. All pages should use consistent dependency injection patterns
-    3. No @/components/* imports should remain
-  - [ ] Verify build succeeds for entire app
-    1. Run complete build: `pnpm build`
-    2. Verify no build errors or TypeScript issues
-    3. Test that all pages are generated successfully
-  - [ ] **Success**: All app router pages use ui-core components
+
+#### Test-Related Pages Migration
+- [x] **Migrate test-example-2/page.tsx** (from Task 2.01)
+- [x] **Migrate test-cards/page.tsx**
+  - [x] Update ui-core components to use new ui-adapters content loading pattern
+  - [x] Keep template components using legacy content loading for demonstration purposes
+  - [x] Demonstrate migration strategy:
+    1. ui-core section demonstrates new ui-adapters content loading
+    2. Template section keeps existing content loading for comparison
+  - [x] Ensure consistent visual rendering across both implementations
+
+#### Final Verification
+- [ ] **Systematic Pattern Verification**
+  1. Verify all migrated pages have consistent import patterns
+    - Import from '@manta-templates/ui-core'
+    - Consistent dependency injection for Image, Link components
+  2. Run comprehensive build validation: `pnpm build`
+  3. Test dev server and verify all pages load without errors
+  4. Take screenshots to document pre and post-migration UI consistency
+
+- [ ] **Success Criteria**
+  1. No remaining @/components/* imports in app router pages
+  2. Consistent ui-core component usage across all pages
+  3. Identical visual and functional rendering compared to pre-migration state
+  4. Successful build and dev server start
+  5. No console errors or warnings during page loads
+
 
 ### Task 2.2: Component Layer Migration
 

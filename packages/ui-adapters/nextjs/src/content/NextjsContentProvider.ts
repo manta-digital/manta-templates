@@ -34,12 +34,12 @@ interface NextjsContentProviderConfig {
  * the existing getContentBySlug() and getAllContent() patterns while
  * integrating with the ui-core content provider interface.
  */
-export class NextjsContentProvider<T = unknown> extends BaseContentProvider<T> {
+export class NextjsContentProvider extends BaseContentProvider<unknown> {
   private contentRoot: string;
   private enableCaching: boolean;
   private codeTheme: string;
   private processingCache = new Map<string, string>();
-  private contentCache = new Map<string, ContentData<T>>();
+  private contentCache = new Map<string, ContentData<any>>();
 
   // Custom schema for rehype-sanitize to allow styles from rehype-pretty-code
   private static readonly customSanitizeSchema: typeof defaultSchema = {
@@ -148,12 +148,12 @@ export class NextjsContentProvider<T = unknown> extends BaseContentProvider<T> {
   /**
    * Override content loading to use Next.js optimized markdown processing
    */
-  async loadContent(slug: string, contentType: string): Promise<ContentData<T>> {
+  async loadContent<T = unknown>(slug: string, contentType: string): Promise<ContentData<T>> {
     const cacheKey = `${contentType}:${slug}`;
     
     // Check cache first if enabled
     if (this.enableCaching && this.contentCache.has(cacheKey)) {
-      return this.contentCache.get(cacheKey)!;
+      return this.contentCache.get(cacheKey)! as ContentData<T>;
     }
 
     try {
@@ -172,7 +172,7 @@ export class NextjsContentProvider<T = unknown> extends BaseContentProvider<T> {
 
       // Cache the result
       if (this.enableCaching) {
-        this.contentCache.set(cacheKey, result);
+        this.contentCache.set(cacheKey, result as ContentData<any>);
       }
 
       return result;

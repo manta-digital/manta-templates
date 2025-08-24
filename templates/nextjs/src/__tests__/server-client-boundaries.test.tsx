@@ -145,7 +145,7 @@ describe('Server/Client Component Boundaries', () => {
       // In real usage, we would destructure to exclude non-serializable props:
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { onClick, ...serializableProps } = propsWithFunction as { onClick?: () => void; title: string; coverImageUrl: string };
-      expect(serializableProps.onClick).toBeUndefined();
+      expect('onClick' in serializableProps).toBe(false);
       expect(serializableProps.title).toBe('Function Test');
     });
   });

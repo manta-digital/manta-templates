@@ -292,8 +292,11 @@ describe('Server Component Content Loading', () => {
         frontmatter: {
           title: 'Theme Guide',
           description: 'A comprehensive theming guide',
+          pubDate: '2024-01-01',
           author: 'Test Author',
-          date: '2024-01-01'
+          image: '/image/blog-sample.jpg',
+          tags: ['design', 'theme'],
+          featured: true
         },
         contentHtml: '<h1>Theme Guide</h1>'
       };
@@ -307,15 +310,36 @@ describe('Server Component Content Loading', () => {
       expect(frontmatter.title).toBeDefined();
       expect(typeof frontmatter.title).toBe('string');
       
-      // Optional fields should have proper types when present
+      // Should have either description or excerpt
+      expect(frontmatter.description || frontmatter.excerpt).toBeDefined();
       if (frontmatter.description) {
         expect(typeof frontmatter.description).toBe('string');
       }
+      
+      // Should have either pubDate or publishedAt
+      expect(frontmatter.pubDate || frontmatter.publishedAt).toBeDefined();
+      if (frontmatter.pubDate) {
+        expect(typeof frontmatter.pubDate).toBe('string');
+      }
+      
+      // Should have at least one image field
+      expect(frontmatter.image || frontmatter.thumbnail || frontmatter.coverImage).toBeDefined();
+      if (frontmatter.image) {
+        expect(typeof frontmatter.image).toBe('string');
+      }
+      
+      // Author field should be present and valid
       if (frontmatter.author) {
         expect(typeof frontmatter.author).toBe('string');
       }
-      if (frontmatter.date) {
-        expect(typeof frontmatter.date).toBe('string');
+      
+      // Optional fields should have proper types when present
+      if (frontmatter.tags) {
+        expect(Array.isArray(frontmatter.tags)).toBe(true);
+        expect(frontmatter.tags.every(tag => typeof tag === 'string')).toBe(true);
+      }
+      if (frontmatter.featured !== undefined) {
+        expect(typeof frontmatter.featured).toBe('boolean');
       }
     });
 
@@ -384,8 +408,10 @@ describe('Server Component Content Loading', () => {
         frontmatter: {
           title: 'Theme Guide',
           description: 'A comprehensive theming guide',
+          pubDate: '2024-01-01',
           author: 'Test Author',
-          date: '2024-01-01'
+          image: '/image/blog-sample.jpg',
+          tags: ['design', 'theme']
         },
         contentHtml: '<h1>Theme Guide</h1>'
       };
@@ -396,13 +422,15 @@ describe('Server Component Content Loading', () => {
       const frontmatter = article.frontmatter;
       
       // Test that we can destructure for component props
-      const { title, description, author, date } = frontmatter;
+      const { title, description, pubDate, author, image, tags } = frontmatter;
       
       expect(title).toBeDefined();
-      // These should be undefined or have valid values (no broken references)
-      expect(description === undefined || typeof description === 'string').toBe(true);
-      expect(author === undefined || typeof author === 'string').toBe(true);
-      expect(date === undefined || typeof date === 'string').toBe(true);
+      expect(description).toBeDefined(); 
+      expect(pubDate).toBeDefined();
+      expect(author).toBeDefined();
+      expect(image).toBeDefined();
+      // Tags is optional
+      expect(tags === undefined || Array.isArray(tags)).toBe(true);
     });
 
     test('should support the test-example-2 content loading pattern', async () => {

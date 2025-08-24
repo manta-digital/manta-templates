@@ -2,15 +2,36 @@ import { z } from 'zod';
 
 /**
  * Schema for article content type (blog posts, articles, etc.)
+ * Supports both legacy field names and new standardized names
  */
 export const ArticleSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  excerpt: z.string().min(1, 'Excerpt is required'),
-  coverImage: z.string().min(1, 'Cover image is required'),
-  publishedAt: z.string().transform(str => new Date(str)),
+  // Support both description (legacy) and excerpt (new)
+  description: z.string().min(1, 'Description is required').optional(),
+  excerpt: z.string().min(1, 'Excerpt is required').optional(),
+  // Support both pubDate (legacy) and publishedAt (new)
+  pubDate: z.string().optional(),
+  publishedAt: z.string().optional(),
+  // Support multiple image field names
+  image: z.string().optional(),
+  thumbnail: z.string().optional(), 
+  coverImage: z.string().optional(),
+  // Author field (essential for articles)
+  author: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  featured: z.boolean().optional()
-});
+  featured: z.boolean().optional(),
+  contentType: z.string().optional(),
+  cardSize: z.string().optional()
+}).refine(
+  (data) => data.description || data.excerpt,
+  { message: "Either description or excerpt is required" }
+).refine(
+  (data) => data.pubDate || data.publishedAt, 
+  { message: "Either pubDate or publishedAt is required" }
+).refine(
+  (data) => data.image || data.thumbnail || data.coverImage,
+  { message: "At least one image field (image, thumbnail, or coverImage) is required" }
+);
 
 /**
  * Schema for project content type

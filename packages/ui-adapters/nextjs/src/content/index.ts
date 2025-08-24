@@ -3,20 +3,9 @@ import type { ArticleContent, ProjectContent, QuoteContent } from '@manta-templa
 
 export { NextjsContentProvider };
 
-// Default Next.js content provider instance with standard configuration
-export const nextjsContentProvider = new NextjsContentProvider<ArticleContent>({
-  enableCaching: true,
-  codeTheme: 'github-dark'
-});
-
-// Project content provider instance for ProjectContent types
-export const nextjsProjectContentProvider = new NextjsContentProvider<ProjectContent>({
-  enableCaching: true,
-  codeTheme: 'github-dark'
-});
-
-// Quote content provider instance for QuoteContent types  
-export const nextjsQuoteContentProvider = new NextjsContentProvider<QuoteContent>({
+// Single configurable Next.js content provider instance
+// Use with generic typing: nextjsContentProvider.loadContent<ArticleContent>('slug', 'articles')
+export const nextjsContentProvider = new NextjsContentProvider({
   enableCaching: true,
   codeTheme: 'github-dark'
 });
@@ -50,4 +39,43 @@ export interface NextjsBlogContent {
   author?: string;
   tags?: string[];
   readingTime?: string;
+}
+
+// Header content interface for Next.js specific header structures
+export interface NextjsHeaderContent {
+  logo?: string;
+  logoDark?: string;
+  title?: string;
+  links: Array<{
+    href: string;
+    label: string;
+    external?: boolean;
+  }>;
+}
+
+// Footer content interface for Next.js specific footer structures
+export interface NextjsFooterContent {
+  quickLinks: Array<{ label: string; href: string; external?: boolean }>;
+  resources: Array<{ label: string; href: string; external?: boolean }>;
+  legal: Array<{ label: string; href: string; external?: boolean }>;
+  socialProfessional: Array<{ label: string; href: string; external?: boolean }>;
+  socialCommunity: Array<{ label: string; href: string; external?: boolean }>;
+  primaryContact: {
+    email?: string;
+    location?: string;
+    business?: string;
+    support?: string;
+  };
+  professionalContact: {
+    email?: string;
+    location?: string;
+    business?: string;
+    support?: string;
+  };
+  professionalLinks?: Array<{ label: string; href: string; external?: boolean }>;
+  copyright: {
+    notice: string;
+    attribution: string;
+    lastUpdated: string;
+  };
 }
