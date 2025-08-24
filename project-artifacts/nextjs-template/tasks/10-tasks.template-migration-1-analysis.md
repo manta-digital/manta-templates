@@ -219,41 +219,41 @@ test-example-2 was partially migrated to ui-core components but still uses legac
 
 ### Task 2.1: App Router Pages Migration
 
-#### Migrate app/page.tsx (Homepage)
+#### Migrate app/page.tsx (Homepage) ✓
 - [x] **Replace all @/components/* imports with ui-core imports**
   - [x] Identify current imports in homepage
   - [x] Replace imports systematically
   - [x] Ensure proper dependency injection for Image/Link components
   - [x] Test build and functionality
-  - [x] **Success**: Homepage works identically with ui-core components
+  - [x] **Success**: Homepage works identically with ui-core components ✅
 
 #### Migrate Page Router Pages
-- [ ] **Update Header/Footer Components (Critical)**
-  - [ ] Update app/layout.tsx
-    1. Replace all local header/footer component imports with ui-core imports
-    2. Ensure consistent layout structure with ui-core components
-    3. Implement proper dependency injection for Image/Link components
-    4. Test overall page layout and navigation
+- [x] **Update Header/Footer Components (Critical)**
+  - [x] Update app/layout.tsx
+    1. Replace all local header/footer component imports with ui-core imports ✅
+    2. Ensure consistent layout structure with ui-core components ✅
+    3. Implement proper dependency injection for Image/Link components ✅
+    4. Test overall page layout and navigation ✅
 
-- [ ] **Migrate Personal and Legal Pages**
+- [x] **Migrate Personal and Legal Pages**
   1. Update the following pages with ui-core component imports:
-    - [ ] app/about/page.tsx
-    - [ ] app/legal/page.tsx
-    - [ ] app/privacy/page.tsx
-    - [ ] app/terms/page.tsx
-    - [ ] app/cookies/page.tsx
+    - [x] app/about/page.tsx
+    - [x] app/legal/page.tsx
+    - [x] app/privacy/page.tsx
+    - [x] app/terms/page.tsx
+    - [x] app/cookies/page.tsx
     2. For each page:
       - Replace @/components/* imports with ui-core imports
       - Add dependency injection as needed (Image, Link components)
       - Verify content rendering and layout
 
-- [ ] **Migrate Example and Demonstration Pages**
+- [x] **Migrate Example and Demonstration Pages**
   1. Update the following example pages:
-    - [ ] app/examples/page.tsx
-    - [ ] app/examples/cards/page.tsx
-    - [ ] app/examples/blog/page.tsx
-    - [ ] app/examples/portfolio/PortfolioGrid.tsx
-    - [ ] app/examples/bentogrid/BentoGrid.tsx
+    - [x] app/examples/page.tsx
+    - [x] app/examples/cards/page.tsx
+    - [x] app/examples/blog/page.tsx
+    - [x] app/examples/portfolio/PortfolioGrid.tsx
+    - [x] app/examples/bentogrid/BentoGrid.tsx
     2. For each page:
       - Replace local component imports with ui-core equivalents
       - Implement consistent dependency injection
@@ -271,7 +271,7 @@ test-example-2 was partially migrated to ui-core components but still uses legac
   - [x] Ensure consistent visual rendering across both implementations
 
 #### Final Verification
-- [ ] **Systematic Pattern Verification**
+- [x] **Systematic Pattern Verification**
   1. Verify all migrated pages have consistent import patterns
     - Import from '@manta-templates/ui-core'
     - Consistent dependency injection for Image, Link components
@@ -279,7 +279,7 @@ test-example-2 was partially migrated to ui-core components but still uses legac
   3. Test dev server and verify all pages load without errors
   4. Take screenshots to document pre and post-migration UI consistency
 
-- [ ] **Success Criteria**
+- [x] **Success Criteria**
   1. No remaining @/components/* imports in app router pages
   2. Consistent ui-core component usage across all pages
   3. Identical visual and functional rendering compared to pre-migration state
