@@ -230,20 +230,20 @@ test-example-2 was partially migrated to ui-core components but still uses legac
 - Currently using hybrid approach (header uses ui-adapters, footer uses legacy)
 
 **Tasks**:
-- [ ] Convert footer content file to YAML frontmatter structure
+- [x] Convert footer content file to YAML frontmatter structure
   - Transform current markdown sections to YAML objects
   - Ensure all FooterSections properties are covered
   - Maintain same data structure as current parseFooterContent() output
-- [ ] Delete parseFooterContent() function and related parsing logic
+- [x] Delete parseFooterContent() function and related parsing logic
   - Remove entire parsing function from footerContent.ts
   - Clean up regex patterns and HTML parsing code
-- [ ] Update NextjsFooterContent interface to match exact YAML structure
+- [x] Update NextjsFooterContent interface to match exact YAML structure
   - Ensure interface matches FooterSections exactly
   - Test TypeScript compatibility
-- [ ] Replace legacy getFooterContent() with ui-adapters pattern
+- [x] Replace legacy getFooterContent() with ui-adapters pattern
   - Update all pages using footer to use nextjsContentProvider.loadContent<NextjsFooterContent>()
   - Remove legacy footerContent.ts imports
-- [ ] Test footer content loading across all pages
+- [x] Test footer content loading across all pages
   - Verify app/layout.tsx works with new approach
   - Test test-cards page footer variants
   - Ensure no regressions in footer functionality
