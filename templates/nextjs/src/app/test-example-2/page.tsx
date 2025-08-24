@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { BentoLayout, GridItem, GradientCard, BaseCard, CosineTerrainCard, CardCarousel, BlogCardImage, ProjectCard, QuoteCard, VideoCard, ArticleCard, TechnologyScroller } from '@manta-templates/ui-core';
 import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
 import type { ArticleContent } from '@manta-templates/ui-core';
-import BackgroundVideoComponent from '@/components/ui/BackgroundVideoComponent';
+import { BackgroundVideoComponent } from '@manta-templates/ui-adapters-nextjs';
 
 // Mock content loading function (replace with actual content loading)
 async function loadExampleContent() {

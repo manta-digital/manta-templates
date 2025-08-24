@@ -10,6 +10,7 @@ interface VideoCardProps {
   content?: VideoContent;
   className?: string;
   overlay?: boolean;
+  displayMode?: 'thumbnail' | 'background' | 'player';
   children?: React.ReactNode;
   // Dependency injection props
   ImageComponent?: React.ComponentType<any>;
@@ -26,6 +27,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
   content,
   className,
   overlay = false,
+  displayMode = 'thumbnail',
   children,
   ImageComponent = 'img',
   LinkComponent = 'a',
@@ -36,13 +38,13 @@ const VideoCard: React.FC<VideoCardProps> = ({
   const cardTitle = content?.title || title || '';
   const cardThumbnailUrl = content?.thumbnailUrl || thumbnailUrl || '';
   const cardVideoUrl = content?.videoUrl || videoUrl || '';
-  const displayMode = content?.displayMode || 'thumbnail';
+  const finalDisplayMode = content?.displayMode || displayMode;
   const autoplay = content?.autoplay ?? true;
   const controls = content?.controls ?? true;
   const poster = content?.poster;
 
   // Background video mode (requires BackgroundVideoComponent injection)
-  if (displayMode === 'background' && BackgroundVideoComponent) {
+  if (finalDisplayMode === 'background' && BackgroundVideoComponent) {
     return (
       <BaseCard className={cn('overflow-hidden h-full relative p-0', className)}>
         <BackgroundVideoComponent
@@ -68,7 +70,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
   }
 
   // Interactive player mode (requires VideoPlayerComponent injection)
-  if (displayMode === 'player' && VideoPlayerComponent) {
+  if (finalDisplayMode === 'player' && VideoPlayerComponent) {
     return (
       <BaseCard className={cn('overflow-hidden h-full', className)}>
         <div className="w-full h-full">
@@ -102,8 +104,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
           <ImageComponent
             src={cardThumbnailUrl}
             alt={`Thumbnail for ${cardTitle}`}
-            fill={ImageComponent !== 'img'}
             className="object-cover w-full h-full"
+            {...(ImageComponent !== 'img' && { fill: true })}
             {...(ImageComponent === 'img' && { 
               style: { width: '100%', height: '100%', objectFit: 'cover' }
             })}

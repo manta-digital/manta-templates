@@ -11,9 +11,10 @@ import {
   QuoteCard,
   CardCarousel,
   CosineTerrainCard,
-  TechnologyScroller
+  TechnologyScroller,
+  VideoCard
 } from '@manta-templates/ui-core';
-import BackgroundVideo from '@/components/ui/background-video';
+import { BackgroundVideoComponent } from '@manta-templates/ui-adapters-nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -55,14 +56,18 @@ export default function ExamplesPage() {
               }}
             />
 
-            {/* Background video sample (from landing page) - use BackgroundVideo inside a BaseCard to match working layout */}
-            <BaseCard className="h-full overflow-hidden relative !border-0 p-0">
-              <BackgroundVideo full src="https://www.w3schools.com/html/mov_bbb.mp4" poster="/image/blog-sample-image.png" className="w-full h-full" autoplay>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
-                </div>
-              </BackgroundVideo>
-            </BaseCard>
+            {/* Background video sample using ui-core VideoCard with Next.js BackgroundVideoComponent */}
+            <VideoCard
+              className="h-full"
+              displayMode="background"
+              videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
+              thumbnailUrl="/image/blog-sample-image.png"
+              BackgroundVideoComponent={BackgroundVideoComponent}
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
+              </div>
+            </VideoCard>
           </CardCarousel>
         </GridItem>
 

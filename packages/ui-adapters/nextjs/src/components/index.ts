@@ -1,6 +1,3 @@
-// Legacy adapter components have been removed
-// Current architecture uses direct dependency injection pattern
-// Example: <BlogCard ImageComponent={Image} LinkComponent={Link} />
+// Next.js-specific UI components for dependency injection into ui-core components
 
-// Placeholder file - consider removing entire ui-adapters package if no longer needed
-export {};
+export { default as BackgroundVideoComponent } from './ui/BackgroundVideoComponent';
