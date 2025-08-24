@@ -1,43 +1,13 @@
 import React from 'react';
-import { BentoLayout } from '@/components/layouts/bento-layout';
-import GridItem from '@/components/layouts/grid-layout/grid-item';
-
-// Template components
-import { BaseCard as TemplateBaseCard } from '@/components/cards/BaseCard';
-import TemplateQuoteCard from '@/components/cards/QuoteCard';
-import TemplateSidebarPostCard from '@/components/cards/SidebarPostCard';
-import TemplateBlogIndexCard from '@/components/cards/articles/BlogIndexCard';
-import { TechnologyScroller as TemplateTechnologyScroller } from '@/components/ui/TechnologyScroller';
-import TemplateBrandMark from '@/components/ui/brand-mark';
-import { ThemeToggle as TemplateThemeToggle } from '@/components/themetoggle';
-import TemplateHeader from '@/components/header';
-import TemplateFooter from '@/components/footer';
-import { ComingSoonOverlay as TemplateComingSoonOverlay } from '@/components/overlays/ComingSoonOverlay';
-import TemplateAboutCard from '@/components/cards/people/AboutCard';
-
-// UI-Core components  
-import { BaseCard as UiCoreBaseCard } from '@manta-templates/ui-core';
-import { QuoteCard as UiCoreQuoteCard } from '@manta-templates/ui-core';
-import { SidebarPostCard as UiCoreSidebarPostCard } from '@manta-templates/ui-core';
-import { BlogIndexCard as UiCoreBlogIndexCard } from '@manta-templates/ui-core';
-import { TechnologyScroller as UiCoreTechnologyScroller } from '@manta-templates/ui-core';
-import { BrandMark as UiCoreBrandMark } from '@manta-templates/ui-core';
-import { ThemeToggle as UiCoreThemeToggle } from '@manta-templates/ui-core';
-import { Header as UiCoreHeader, Container as UiCoreContainer } from '@manta-templates/ui-core';
-import { Footer as UiCoreFooter } from '@manta-templates/ui-core';
-import { ComingSoonOverlay as UiCoreComingSoonOverlay } from '@manta-templates/ui-core';
-import { ColorSelector as TemplateColorSelector } from '@/components/themetoggle';
-import { ColorSelector as UiCoreColorSelector } from '@manta-templates/ui-core';
-import { AboutCard as UiCoreAboutCard } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Container, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard } from '@manta-templates/ui-core';
+import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import type { NextjsHeaderContent } from '@manta-templates/ui-adapters-nextjs';
+import { getFooterContent } from '@/lib/footerContent';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
-
-// Header content for testing
-import { getHeaderContent } from '@/lib/headerContent';
-import { getFooterContent } from '@/lib/footerContent';
 
 // Sample content for AboutCard testing
 const sampleAboutContent = {
@@ -96,209 +66,146 @@ const sampleTechnologies = [
 ];
 
 /**
- * Test Cards Page
+ * Test Cards Page - UI-Core Components Only
  * 
- * Provides a testing environment for comparing template components with ui-core components
- * during the migration process. Each component comparison is displayed side-by-side
- * in a consistent 6-column grid layout.
+ * Showcases all ui-core components with proper dependency injection
+ * and ui-adapters content loading patterns.
  */
 export default async function TestCardsPage() {
-  const headerContent = await getHeaderContent();
-  const { sections: footerSections } = await getFooterContent();
+  // Load header and footer content using ui-adapters pattern
+  let headerContent = null;
+  let footerSections = null;
+
+  try {
+    const header = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main-grid');
+    headerContent = header.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading header content:', error);
+  }
+
+  try {
+    const footerData = await getFooterContent();
+    footerSections = footerData.sections;
+  } catch (error: unknown) {
+    console.error('Error loading footer content:', error);
+  }
+
   return (
     <main className="min-h-screen p-6 md:p-10">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-4">
-            Component Migration Test Cards
+            UI-Core Component Showcase
           </h1>
           <p className="text-muted-foreground text-lg">
-            Side-by-side comparison of template components and their ui-core equivalents.
-            Each row shows template version (left) and ui-core version (right).
+            All components from @manta-templates/ui-core with proper dependency injection
+            and ui-adapters content loading patterns.
           </p>
         </div>
 
-        {/* Header Component Comparison - Full Width */}
-        <div className="mb-8 space-y-8">
-          <h2 className="text-2xl font-semibold text-foreground">Header Components</h2>
-          
-          {/* Template Header */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 w-fit">
-              Template Header
-            </div>
+        {/* Header Component Showcase */}
+        {headerContent && (
+          <div className="mb-8 space-y-4">
+            <h2 className="text-2xl font-semibold text-foreground">Header Component</h2>
             <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <TemplateHeader />
-            </div>
-          </div>
-          
-          {/* UI-Core Header */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
-              UI-Core Header
-            </div>
-            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <UiCoreHeader 
+              <Header 
                 content={headerContent}
                 ImageComponent={Image}
                 LinkComponent={Link}
-                BrandMarkComponent={UiCoreBrandMark}
-                ContainerComponent={UiCoreContainer}
-                ThemeToggleComponent={UiCoreThemeToggle}
-                ColorSelectorComponent={TemplateColorSelector}
+                BrandMarkComponent={BrandMark}
+                ContainerComponent={Container}
+                ThemeToggleComponent={ThemeToggle}
+                ColorSelectorComponent={ColorSelector}
               />
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Footer Component Comparison - Full Width */}
-        <div className="mb-8 space-y-8">
-          <h2 className="text-2xl font-semibold text-foreground">Footer Components</h2>
-          
-          {/* Template Footer - Default Variant */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 w-fit">
-              Template Footer (Default)
+        {/* Footer Component Showcase */}
+        {footerSections && (
+          <div className="mb-8 space-y-8">
+            <h2 className="text-2xl font-semibold text-foreground">Footer Components</h2>
+            
+            {/* Default Footer */}
+            <div>
+              <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+                Default Footer
+              </div>
+              <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+                <Footer 
+                  sections={footerSections}
+                  variant="default"
+                  LinkComponent={Link}
+                  ThemeToggleComponent={ThemeToggle}
+                />
+              </div>
             </div>
-            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <TemplateFooter />
+
+            {/* Compact Footer */}
+            <div>
+              <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+                Compact Footer
+              </div>
+              <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
+                <Footer 
+                  sections={footerSections}
+                  variant="compact"
+                  legalPreset="mit"
+                  LinkComponent={Link}
+                  version="0.1.0"
+                />
+              </div>
             </div>
           </div>
-          
-          {/* UI-Core Footer - Default Variant */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
-              UI-Core Footer (Default)
-            </div>
-            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <UiCoreFooter 
-                sections={footerSections}
-                variant="default"
-                LinkComponent={Link}
-                ThemeToggleComponent={UiCoreThemeToggle}
-              />
-            </div>
-          </div>
+        )}
 
-          {/* UI-Core Footer - Default with Full Legal */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
-              UI-Core Footer (Default + Full Legal)
-            </div>
-            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <UiCoreFooter 
-                sections={footerSections}
-                variant="default"
-                legalPreset="mit"
-                LinkComponent={Link}
-                ThemeToggleComponent={UiCoreThemeToggle}
-              />
-            </div>
-          </div>
-
-          {/* UI-Core Footer - Compact Variant */}
-          <div>
-            <div className="text-sm font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
-              UI-Core Footer (Compact)
-            </div>
-            <div className="border border-border/40 rounded-lg overflow-hidden bg-background">
-              <UiCoreFooter 
-                sections={footerSections}
-                variant="compact"
-                legalPreset="mit"
-                LinkComponent={Link}
-                version="0.1.0"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Test Grid Layout */}
+        {/* Component Grid */}
         <BentoLayout 
-          columns="grid-cols-6" 
+          columns="grid-cols-4" 
           gap={4}
           rowHeight="minmax(16rem, auto)"
           className="test-cards-grid"
         >
           
-          {/* Legend/Guide */}
-          <GridItem colSpan="col-span-6" className="mb-4">
+          {/* Guide */}
+          <GridItem colSpan="col-span-4" className="mb-4">
             <div className="bg-muted/50 rounded-lg p-4 border border-border/40">
-              <h2 className="text-xl font-semibold mb-2">Testing Guide</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div>
-                  <h3 className="font-medium text-blue-600 dark:text-blue-400">Template Version (Left)</h3>
-                  <p className="text-muted-foreground">Original component from templates/nextjs/src/components/</p>
-                </div>
-                <div>
-                  <h3 className="font-medium text-green-600 dark:text-green-400">UI-Core Version (Right)</h3>
-                  <p className="text-muted-foreground">Migrated component from packages/ui-core/src/components/</p>
-                </div>
-              </div>
+              <h2 className="text-xl font-semibold mb-2">UI-Core Component Testing</h2>
+              <p className="text-muted-foreground text-sm">
+                All components use proper dependency injection (ImageComponent, LinkComponent) 
+                and follow the ui-core + ui-adapters architecture pattern.
+              </p>
             </div>
           </GridItem>
 
-          {/* BaseCard Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BaseCard" type="template">
-              <TemplateBaseCard className="h-full p-6">
-                <h3 className="text-lg font-semibold mb-2">Template BaseCard</h3>
-                <p className="text-muted-foreground">
-                  This is the BaseCard from templates/nextjs/src/components/cards/BaseCard.tsx
-                </p>
-              </TemplateBaseCard>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BaseCard" type="ui-core">
-              <UiCoreBaseCard className="h-full p-6">
+          {/* BaseCard */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="BaseCard">
+              <BaseCard className="h-full p-6">
                 <h3 className="text-lg font-semibold mb-2">UI-Core BaseCard</h3>
                 <p className="text-muted-foreground">
-                  This is the BaseCard from packages/ui-core/src/components/ui/BaseCard.tsx
+                  This is the BaseCard from @manta-templates/ui-core
                 </p>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
+              </BaseCard>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* QuoteCard Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="QuoteCard" type="template">
-              <TemplateQuoteCard 
+          {/* QuoteCard */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="QuoteCard">
+              <QuoteCard 
                 quote="Make the easy path the right path—semantic tokens everywhere."
                 author="Manta Templates"
                 className="h-full"
               />
-            </CardComparisonWrapper>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="QuoteCard" type="ui-core">
-              <UiCoreQuoteCard 
-                quote="Make the easy path the right path—semantic tokens everywhere."
-                author="Manta Templates"
-                className="h-full"
-              />
-            </CardComparisonWrapper>
-          </GridItem>
-
-
-          {/* SidebarPostCard Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="SidebarPostCard" type="template">
-              <TemplateSidebarPostCard 
-                title="Getting Started with Next.js"
-                excerpt="Learn the fundamentals of Next.js and build your first application with this comprehensive guide."
-                imageUrl="https://picsum.photos/96/96?random=1"
-                href="/blog/getting-started-nextjs"
-              />
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="SidebarPostCard" type="ui-core">
-              <UiCoreSidebarPostCard 
+          {/* SidebarPostCard */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="SidebarPostCard">
+              <SidebarPostCard 
                 title="Getting Started with Next.js"
                 excerpt="Learn the fundamentals of Next.js and build your first application with this comprehensive guide."
                 imageUrl="https://picsum.photos/96/96?random=1"
@@ -306,204 +213,108 @@ export default async function TestCardsPage() {
                 ImageComponent={Image}
                 LinkComponent={Link}
               />
-            </CardComparisonWrapper>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* BlogIndexCard Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BlogIndexCard" type="template">
-              <TemplateBlogIndexCard postLimit={3} />
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BlogIndexCard" type="ui-core">
-              <UiCoreBlogIndexCard 
+          {/* BlogIndexCard */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="BlogIndexCard">
+              <BlogIndexCard 
                 posts={sampleBlogPosts}
                 postLimit={3}
                 ImageComponent={Image}
                 LinkComponent={Link}
               />
-            </CardComparisonWrapper>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* TechnologyScroller Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="TechnologyScroller" type="template">
-              <UiCoreBaseCard className="h-full w-full flex flex-col justify-center">
-                <TemplateTechnologyScroller 
-                  items={sampleTechnologies}
-                  speed="fast"
-                  direction="left"
-                />
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="TechnologyScroller" type="ui-core">
-              <UiCoreBaseCard className="h-full w-full flex flex-col justify-center">
-                <UiCoreTechnologyScroller 
+          {/* TechnologyScroller */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="TechnologyScroller">
+              <BaseCard className="h-full w-full flex flex-col justify-center">
+                <TechnologyScroller 
                   items={sampleTechnologies}
                   speed="fast"
                   direction="left"
                   ImageComponent={Image}
                 />
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
+              </BaseCard>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* BrandMark Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BrandMark" type="template">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">Template BrandMark</h3>
-                  <div className="flex items-center justify-center space-x-4">
-                    <TemplateBrandMark size={24} />
-                    <TemplateBrandMark size={36} />
-                    <TemplateBrandMark size={48} />
-                  </div>
-                </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="BrandMark" type="ui-core">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+          {/* BrandMark */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="BrandMark">
+              <BaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-center">UI-Core BrandMark</h3>
                   <div className="flex items-center justify-center space-x-4">
-                    <UiCoreBrandMark size={24} />
-                    <UiCoreBrandMark size={36} />
-                    <UiCoreBrandMark size={48} />
+                    <BrandMark size={24} />
+                    <BrandMark size={36} />
+                    <BrandMark size={48} />
                   </div>
                 </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
+              </BaseCard>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* ThemeToggle Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ThemeToggle" type="template">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+          {/* ThemeToggle */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="ThemeToggle">
+              <BaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">Template ThemeToggle</h3>
+                  <h3 className="text-lg font-semibold text-center">Theme Toggle</h3>
                   <p className="text-sm text-muted-foreground text-center mb-4">
-                    Click to toggle light/dark theme. Uses template context.
+                    Click to toggle light/dark theme.
                   </p>
                   <div className="flex items-center justify-center">
-                    <TemplateThemeToggle />
+                    <ThemeToggle />
                   </div>
                 </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
+              </BaseCard>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ThemeToggle" type="ui-core">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
+          {/* ColorSelector */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="ColorSelector">
+              <BaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">UI-Core ThemeToggle</h3>
+                  <h3 className="text-lg font-semibold text-center">Color Selector</h3>
                   <p className="text-sm text-muted-foreground text-center mb-4">
-                    Click to toggle light/dark theme. Uses ui-core ThemeProvider.
+                    Click to cycle through accent colors.
                   </p>
                   <div className="flex items-center justify-center">
-                    <UiCoreThemeToggle />
+                    <ColorSelector />
                   </div>
                 </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
+              </BaseCard>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* ComingSoonOverlay Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ComingSoonOverlay" type="template">
-              <TemplateComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
-                <UiCoreBaseCard className="h-full p-6">
-                  <h3 className="text-lg font-semibold mb-2">Template Content</h3>
+          {/* ComingSoonOverlay */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="ComingSoonOverlay">
+              <ComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
+                <BaseCard className="h-full p-6">
+                  <h3 className="text-lg font-semibold mb-2">Overlay Content</h3>
                   <p className="text-muted-foreground">
-                    This content is behind the coming soon overlay from the template version.
+                    This content is behind the coming soon overlay.
                   </p>
                   <div className="mt-4 space-y-2">
                     <div className="h-2 bg-muted rounded"></div>
                     <div className="h-2 bg-muted rounded w-3/4"></div>
                     <div className="h-2 bg-muted rounded w-1/2"></div>
                   </div>
-                </UiCoreBaseCard>
-              </TemplateComingSoonOverlay>
-            </CardComparisonWrapper>
+                </BaseCard>
+              </ComingSoonOverlay>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ComingSoonOverlay" type="ui-core">
-              <UiCoreComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
-                <UiCoreBaseCard className="h-full p-6">
-                  <h3 className="text-lg font-semibold mb-2">UI-Core Content</h3>
-                  <p className="text-muted-foreground">
-                    This content is behind the coming soon overlay from ui-core version.
-                  </p>
-                  <div className="mt-4 space-y-2">
-                    <div className="h-2 bg-muted rounded"></div>
-                    <div className="h-2 bg-muted rounded w-3/4"></div>
-                    <div className="h-2 bg-muted rounded w-1/2"></div>
-                  </div>
-                </UiCoreBaseCard>
-              </UiCoreComingSoonOverlay>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          {/* ColorSelector Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ColorSelector" type="template">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">Template ColorSelector</h3>
-                  <p className="text-sm text-muted-foreground text-center mb-4">
-                    Click to cycle through accent colors. Uses template ThemeProvider.
-                  </p>
-                  <div className="flex items-center justify-center">
-                    <TemplateColorSelector />
-                  </div>
-                </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="ColorSelector" type="ui-core">
-              <UiCoreBaseCard className="h-full w-full flex flex-col items-center justify-center p-8">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-center">UI-Core ColorSelector</h3>
-                  <p className="text-sm text-muted-foreground text-center mb-4">
-                    Click to cycle through accent colors. Uses ui-core ThemeProvider.
-                  </p>
-                  <div className="flex items-center justify-center">
-                    <UiCoreColorSelector />
-                  </div>
-                </div>
-              </UiCoreBaseCard>
-            </CardComparisonWrapper>
-          </GridItem>
-
-          {/* AboutCard Comparison */}
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="AboutCard" type="template">
-              <TemplateAboutCard
-                className="h-full"
-                title={sampleAboutContent.title}
-                description={sampleAboutContent.description}
-                avatar={sampleAboutContent.avatar}
-                socials={sampleAboutContent.socials}
-                contentHtml={sampleAboutContent.contentHtml}
-              />
-            </CardComparisonWrapper>
-          </GridItem>
-
-          <GridItem colSpan="col-span-3">
-            <CardComparisonWrapper title="AboutCard" type="ui-core">
-              <UiCoreAboutCard
+          {/* AboutCard */}
+          <GridItem colSpan="col-span-2">
+            <ComponentShowcaseWrapper title="AboutCard">
+              <AboutCard
                 className="h-full"
                 title={sampleAboutContent.title}
                 description={sampleAboutContent.description}
@@ -514,7 +325,7 @@ export default async function TestCardsPage() {
                 LinkComponent={Link}
                 socialIcons={socialIcons}
               />
-            </CardComparisonWrapper>
+            </ComponentShowcaseWrapper>
           </GridItem>
 
         </BentoLayout>
@@ -524,25 +335,20 @@ export default async function TestCardsPage() {
 }
 
 /**
- * Card Comparison Wrapper
+ * Component Showcase Wrapper
  * 
- * Wraps individual cards with a label indicating template vs ui-core version.
+ * Wraps individual components with a label.
  */
-interface CardComparisonWrapperProps {
+interface ComponentShowcaseWrapperProps {
   title: string;
-  type: 'template' | 'ui-core';
   children: React.ReactNode;
 }
 
-function CardComparisonWrapper({ title, type, children }: CardComparisonWrapperProps) {
-  const labelColor = type === 'template' 
-    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' 
-    : 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/50';
-  
+function ComponentShowcaseWrapper({ title, children }: ComponentShowcaseWrapperProps) {
   return (
     <div className="h-full flex flex-col">
-      <div className={`text-xs font-medium mb-2 px-2 py-1 rounded text-center ${labelColor}`}>
-        {title} ({type === 'template' ? 'Template' : 'UI-Core'})
+      <div className="text-xs font-medium mb-2 px-2 py-1 rounded text-center bg-green-50 dark:bg-green-950/50 text-green-600 dark:text-green-400 w-fit">
+        {title}
       </div>
       <div className="flex-1">
         {children}
@@ -550,4 +356,3 @@ function CardComparisonWrapper({ title, type, children }: CardComparisonWrapperP
     </div>
   );
 }
-
