@@ -53,7 +53,8 @@ export interface NextjsHeaderContent {
   }>;
 }
 
-// Footer content interface for Next.js specific footer structures
+// Footer content interface for Next.js specific footer structures  
+// Matches FooterSections interface exactly for seamless ui-adapters integration
 export interface NextjsFooterContent {
   quickLinks: Array<{ label: string; href: string; external?: boolean }>;
   resources: Array<{ label: string; href: string; external?: boolean }>;

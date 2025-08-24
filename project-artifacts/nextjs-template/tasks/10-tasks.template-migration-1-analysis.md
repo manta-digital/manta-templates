@@ -219,6 +219,37 @@ test-example-2 was partially migrated to ui-core components but still uses legac
 
 ### Task 2.1: App Router Pages Migration
 
+### Task 2.1.1: Footer Content Loading Architecture Migration
+
+**Background**: The current footer content system uses complex HTML parsing with regex patterns to extract structured data from markdown content. This doesn't align with the ui-adapters architecture that expects YAML frontmatter. We need to convert the footer content to proper YAML structure to eliminate the parsing complexity.
+
+**Current Issue**: 
+- Footer uses `parseFooterContent()` function with regex parsing of HTML 
+- Expects markdown like `### Quick Links\n- [About](/about)` 
+- ui-adapters expects YAML frontmatter structure
+- Currently using hybrid approach (header uses ui-adapters, footer uses legacy)
+
+**Tasks**:
+- [ ] Convert footer content file to YAML frontmatter structure
+  - Transform current markdown sections to YAML objects
+  - Ensure all FooterSections properties are covered
+  - Maintain same data structure as current parseFooterContent() output
+- [ ] Delete parseFooterContent() function and related parsing logic
+  - Remove entire parsing function from footerContent.ts
+  - Clean up regex patterns and HTML parsing code
+- [ ] Update NextjsFooterContent interface to match exact YAML structure
+  - Ensure interface matches FooterSections exactly
+  - Test TypeScript compatibility
+- [ ] Replace legacy getFooterContent() with ui-adapters pattern
+  - Update all pages using footer to use nextjsContentProvider.loadContent<NextjsFooterContent>()
+  - Remove legacy footerContent.ts imports
+- [ ] Test footer content loading across all pages
+  - Verify app/layout.tsx works with new approach
+  - Test test-cards page footer variants
+  - Ensure no regressions in footer functionality
+
+**Success**: Complete elimination of HTML parsing complexity, consistent ui-adapters pattern for both header and footer content loading.
+
 #### Migrate app/page.tsx (Homepage) ✓
 - [x] **Replace all @/components/* imports with ui-core imports**
   - [x] Identify current imports in homepage
