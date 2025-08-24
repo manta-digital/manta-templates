@@ -488,13 +488,15 @@ export function CardCarousel({
               zIndex: 20,
               width: '40px',
               height: '40px',
-              border: 'none',
+              border: '1px solid var(--color-card-border)',
               borderRadius: '50%',
-              backgroundColor: 'rgba(255,255,255,0.8)',
+              backgroundColor: 'var(--color-accent-a3)',
+              color: 'var(--color-card-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              backdropFilter: 'blur(4px)'
             }}
             onClick={prevSlide}
             disabled={!infinite && currentIndex === 0}
@@ -512,13 +514,15 @@ export function CardCarousel({
               zIndex: 20,
               width: '40px',
               height: '40px',
-              border: 'none',
+              border: '1px solid var(--color-card-border)',
               borderRadius: '50%',
-              backgroundColor: 'rgba(255,255,255,0.8)',
+              backgroundColor: 'var(--color-accent-a3)',
+              color: 'var(--color-card-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              backdropFilter: 'blur(4px)'
             }}
             onClick={nextSlide}
             disabled={!infinite && currentIndex >= maxIndex}
