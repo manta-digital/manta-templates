@@ -55,6 +55,10 @@
   /* Better surface colors for accessibility */
   --card-surface-accessible: var(--color-accent-2);
   --card-surface-text: var(--color-accent-12);
+  
+  /* Border colors for light mode */
+  --color-border-accent: var(--color-accent-7);
+  --color-border-accent-hover: var(--color-accent-8);
 }
 
 /* Dark-mode border tuning: use a slightly stronger step for borders */
