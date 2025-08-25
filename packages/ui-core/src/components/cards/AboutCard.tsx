@@ -96,7 +96,7 @@ export function AboutCard({
               href: s.platform === 'mail' ? `mailto:${s.url}` : s.url,
               target: s.platform === 'mail' ? undefined : '_blank',
               rel: "noopener noreferrer",
-              className: "p-2 bg-muted hover:bg-muted/80 rounded text-foreground/80 hover:text-foreground transition-colors"
+              className: "p-2 bg-white/20 hover:bg-white/30 rounded text-white hover:text-white transition-colors backdrop-blur-sm border border-white/30"
             }, React.createElement(Icon, { className: "w-5 h-5 transition-colors duration-200" }));
           })}
         </div>

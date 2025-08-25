@@ -1,21 +1,16 @@
 import React from 'react';
-import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
-
-interface LegalContent {
-  title?: string;
-}
+import { ContentCard, Container } from '@manta-templates/ui-core';
+import { getPresetContent } from '@/lib/presetContent';
 
 export default async function LegalPage() {
-  let content: ContentData<LegalContent> | null = null;
+  let content: { frontmatter: { title?: string }; contentHtml: string } | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<LegalContent>('legal', 'legal');
+    content = await getPresetContent('legal', 'legal', 'mit');
   } catch (error: unknown) {
     console.error('Error loading legal content:', error);
     // Fallback content
     content = {
-      slug: 'legal',
       frontmatter: { title: 'Legal Information' },
       contentHtml: '<p>Legal content not available.</p>'
     };

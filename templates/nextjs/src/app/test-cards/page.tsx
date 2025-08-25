@@ -1,5 +1,5 @@
 import React from 'react';
-import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Container, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Container, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard, GradientCard } from '@manta-templates/ui-core';
 import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
 import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
 
@@ -310,11 +310,14 @@ export default async function TestCardsPage() {
             </ComponentShowcaseWrapper>
           </GridItem>
 
-          {/* AboutCard */}
-          <GridItem colSpan="col-span-2">
-            <ComponentShowcaseWrapper title="AboutCard">
+          {/* AboutCard with Gradient */}
+          <GridItem colSpan="col-span-3" className="h-full">
+            <GradientCard 
+              className="h-full p-0 rounded-lg border-none"
+              customGradient="linear-gradient(135deg, var(--color-accent-9), var(--color-accent-11))"
+            >
               <AboutCard
-                className="h-full"
+                className="h-full bg-transparent text-white border-1 border-white/30"
                 title={sampleAboutContent.title}
                 description={sampleAboutContent.description}
                 avatar={sampleAboutContent.avatar}
@@ -324,7 +327,7 @@ export default async function TestCardsPage() {
                 LinkComponent={Link}
                 socialIcons={socialIcons}
               />
-            </ComponentShowcaseWrapper>
+            </GradientCard>
           </GridItem>
 
         </BentoLayout>

@@ -57,7 +57,9 @@ How to customize:
 - Change `site.name` and `site.domain` (or `site.url`) in `site.config.ts`
 - Tweak typography/colors in `opengraph-image.tsx`
 
-Tip: Test previews with social debuggers (e.g., Facebook Sharing Debugger, LinkedIn Post Inspector). After deploying, paste your site URL and “Scrape Again/Refresh”.
+Tip: Test previews with social debuggers (e.g., Facebook Sharing Debugger, LinkedIn Post Inspector). After deploying, paste your site URL and "Scrape Again/Refresh".
+
+**Note**: This is template-specific functionality using Next.js `next/og` and edge runtime. It's intentionally not part of `@manta-templates/ui-core` since OG image generation varies by framework and deployment target.
 
 Footer behavior summary:
 - `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`). Page content comes from `presets.legal` ('default' → neutral, 'mit' → MIT).
