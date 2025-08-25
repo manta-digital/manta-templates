@@ -3,8 +3,9 @@ import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
 import { Header, Footer } from '@manta-templates/ui-core';
-import { nextjsContentProvider, NextjsHeaderContent } from '@manta-templates/ui-adapters-nextjs';
-import { getFooterContent } from '@/lib/footerContent';
+import { nextjsContentProvider, NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
+import { getDefaultFooterSections } from '@manta-templates/ui-core';
+import { siteConfig } from '@/content/site.config';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,7 +20,6 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.digital';
-import { siteConfig } from '@/content/site.config';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -67,10 +67,12 @@ export default async function RootLayout({
   }
 
   try {
-    const footerData = await getFooterContent();
-    footerSections = footerData.sections;
+    const content = await nextjsContentProvider.loadContent<NextjsFooterContent>('footer-content', 'footer');
+    footerSections = content.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading footer content:', error);
+    // Use framework-agnostic fallback content from ui-core
+    footerSections = getDefaultFooterSections();
   }
 
   return (
@@ -113,7 +115,7 @@ export default async function RootLayout({
             {footerSections && (
               <Footer
                 variant="compact"
-                legalPreset="mit"
+                legalPreset={siteConfig.presets.legal === 'mit' ? 'mit' : 'full'}
                 sections={footerSections}
                 LinkComponent={Link}
               />

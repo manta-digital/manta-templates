@@ -59,3 +59,35 @@ export interface FooterLinkComponentProps {
   LinkComponent?: React.ComponentType<any>;
   className?: string;
 }
+
+/**
+ * Get default footer sections for fallback content
+ * Framework-agnostic fallback content that works across all templates
+ */
+export function getDefaultFooterSections(): FooterSections {
+  return {
+    quickLinks: [
+      { label: 'About', href: '/about' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Examples', href: '/examples' },
+    ],
+    resources: [
+      { label: 'Guides', href: '/guides' },
+      { label: 'Docs', href: '/docs' },
+    ],
+    legal: [
+      { label: 'Privacy', href: '/privacy' },
+      { label: 'Terms', href: '/terms' },
+      { label: 'Cookies', href: '/cookies' },
+    ],
+    socialProfessional: [],
+    socialCommunity: [],
+    primaryContact: { email: '', location: '' },
+    professionalContact: { business: '', support: '' },
+    copyright: {
+      notice: '© 2025 manta.digital. MIT licensed.',
+      attribution: 'Built with Next.js, Tailwind CSS, and Manta Templates.',
+      lastUpdated: '2025',
+    },
+  };
+}
