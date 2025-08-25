@@ -70,8 +70,21 @@ These slices established the project foundation and are now complete:
   - Production build verification with ui-core imports
 - **Success Criteria**: Template is deployment-ready using ui-core package
 
-#### Slice 11: Advanced Testing Infrastructure  
-- **Dependencies**: Slice 10 (template migration)
+#### Slice 11: TechnologyScroller Migration
+- **Status**: 🟡 IN DESIGN
+- **Dependencies**: Slice 09 (component parity) ✅ COMPLETED
+- **Design**: project-artifacts/nextjs-template/slices/11-slice.technology-scroller.md
+- **Scope**: Fix and migrate TechnologyScroller component to ui-core with proper adapter pattern
+- **Context**: Previous migration attempts failed due to CSS masking and build pipeline issues
+- **Key Deliverables**:
+  - Fixed TechnologyScroller in ui-core with self-contained animations
+  - Next.js adapter for image optimization
+  - Fallback rendering for non-Next.js frameworks
+  - Proper dependency injection pattern
+- **Success Criteria**: Component works identically in ui-core as in templates/nextjs
+
+#### Slice 12: Advanced Testing Infrastructure  
+- **Dependencies**: Slice 10 (template migration), Slice 11 (technology scroller)
 - **Scope**: Comprehensive testing for multi-framework components
 - **Key Deliverables**:
   - Unit/integration tests for ui-core components
@@ -79,8 +92,8 @@ These slices established the project foundation and are now complete:
   - Visual regression testing setup
   - Performance testing and optimization
 
-#### Slice 12: Astro Template Development
-- **Dependencies**: Slice 08 (content system), Slice 11 (testing)
+#### Slice 13: Astro Template Development
+- **Dependencies**: Slice 08 (content system), Slice 12 (testing)
 - **Scope**: Create production-ready Astro template using ui-core
 - **Key Deliverables**:
   - templates/astro/ directory with full template
@@ -88,8 +101,8 @@ These slices established the project foundation and are now complete:
   - Content collection integration
   - React island configuration
 
-#### Slice 13: React Router Template Development  
-- **Dependencies**: Slice 08 (content system), Slice 11 (testing)
+#### Slice 14: React Router Template Development  
+- **Dependencies**: Slice 08 (content system), Slice 12 (testing)
 - **Scope**: Create production-ready React Router template using ui-core
 - **Key Deliverables**:
   - templates/react-router/ directory with full template
@@ -97,8 +110,8 @@ These slices established the project foundation and are now complete:
   - Client-side routing patterns
   - Bundle optimization
 
-#### Slice 14: Template Distribution System
-- **Dependencies**: Slice 12 (Astro template), Slice 13 (React Router template)
+#### Slice 15: Template Distribution System
+- **Dependencies**: Slice 13 (Astro template), Slice 14 (React Router template)
 - **Scope**: Automated template bundling and distribution
 - **Key Deliverables**:
   - Component usage analysis and bundling system
@@ -114,14 +127,15 @@ Slice 08 (Markdown Content) [✅ COMPLETED]
     ↓
 Slice 09 (Component Parity) [✅ COMPLETED]
     ↓
-Slice 10 (Template Migration) [🚨 CRITICAL - NEXT]
+    ├─ Slice 10 (Template Migration) [🚨 CRITICAL - BLOCKS DEPLOYMENT]
+    └─ Slice 11 (TechnologyScroller Migration) [🟡 IN DESIGN]
     ↓
-Slice 11 (Testing Infrastructure) [FUTURE]
+Slice 12 (Testing Infrastructure) [FUTURE]
     ↓
-┌─ Slice 12 (Astro Template) [FUTURE]
-└─ Slice 13 (React Router Template) [FUTURE]
+┌─ Slice 13 (Astro Template) [FUTURE]
+└─ Slice 14 (React Router Template) [FUTURE]
     ↓
-Slice 14 (Distribution System) [FUTURE]
+Slice 15 (Distribution System) [FUTURE]
 ```
 
 ## Risk Management

@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/styles dist/styles",
     "dev": "tsc --watch", 
     "clean": "rimraf dist",
     "test": "tsx src/__tests__/content.test.ts",

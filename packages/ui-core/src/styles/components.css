@@ -1,0 +1,23 @@
+/* UI-Core Component Styles */
+
+/* TechnologyScroller Animation Classes */
+@layer utilities {
+  /* Duplicate content scroll: animate two concatenated lists exactly one list width */
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-scroll-slow {
+    animation: scroll 50s linear infinite;
+  }
+  .animate-scroll-normal {
+    animation: scroll 20s linear infinite;
+  }
+  .animate-scroll-fast {
+    animation: scroll 8s linear infinite;
+  }
+  .animate-reverse {
+    animation-direction: reverse;
+  }
+}

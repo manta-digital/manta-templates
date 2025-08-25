@@ -79,10 +79,10 @@
     1. Replace `<Link` with `<LinkComponent` or fallback to `<a`
   - [x] Update imports to use ui-core utilities
     1. Change `import { cn } from '@/lib/utils'` to relative import from ui-core utils
-- [x] Move ProjectCard with abstracted dependencies
+- [x] Move ProjectCard with abstracted dependencies ✅ COMPLETED: Added imageProps support and simplified display variant modes
   - [x] Copy templates/nextjs/src/components/cards/ProjectCard.tsx to packages/ui-core/src/components/cards/ProjectCard.tsx
   - [x] Apply same dependency injection pattern as BlogCard
-  - [x] Abstract Next.js Link and Image usage
+  - [x] Abstract Next.js Link and Image usage ✅ COMPLETED: Fixed icon colors and spacing, primary colors and yellow default colors working properly
   - [x] Update utility imports to use ui-core paths
 - [x] Move QuoteCard (minimal abstraction needed)
   - [x] Copy templates/nextjs/src/components/cards/QuoteCard.tsx to packages/ui-core/src/components/cards/QuoteCard.tsx
@@ -296,7 +296,7 @@
   4. Article-specific interactions — [n/a] none in original
 - [x] Update utility imports to use ui-core relative paths
 - [x] Test article functionality with Next.js components injected (using `templates/nextjs/src/app/test-extracted/page.tsx`)
-- [x] Success: ArticleCard maintains exact article functionality and appearance
+- [x] Success: ArticleCard maintains exact article functionality and appearance ✅ COMPLETED: ArticleCard image display fixed with Next.js Image component, rendering correctly
 
 - [x] Comprehensive testing of extracted cards
   - [x] Build ui-core package: `pnpm build-ui` (built via `pnpm -C packages/ui-core build`)

@@ -34,11 +34,7 @@ interface TechnologyScrollerProps {
  * Supports both colored SVGs (via CSS masks) and regular images with dark mode inversion.
  * 
  * Framework-agnostic with dependency injection for Image components.
- * 
- * Note: This component relies on CSS animations that should be defined by the consuming application:
- * - @keyframes scroll: { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
- * - .animate-scroll-fast, .animate-scroll-normal, .animate-scroll-slow classes
- * - .animate-reverse class for direction control
+ * CSS animations are included in ui-core styles.
  */
 const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   items,
@@ -49,51 +45,45 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   iconBasePath = '/assets/icons/tech/',
   ImageComponent = 'img',
 }) => {
-  const getAnimationStyle = () => {
-    const duration = speed === 'fast' ? '20s' : speed === 'slow' ? '80s' : '40s';
-    const animDirection = direction === 'right' ? 'reverse' : 'normal';
-    
-    return {
-      animation: `technology-scroll ${duration} linear infinite`,
-      animationDirection: animDirection,
-    };
+  const getSpeedClass = () => {
+    switch (speed) {
+      case 'fast': return 'animate-scroll-fast';
+      case 'slow': return 'animate-scroll-slow';
+      default: return 'animate-scroll-normal';
+    }
   };
 
   const TechIcon: React.FC<{ item: Technology }> = ({ item }) => {
     const iconUrl = `${iconBasePath}${item.svg}`;
 
+    // CSS masking for colored icons - IT WORKS!
     if (item.color) {
-      // Use CSS mask for colored icons
       return (
         <>
-          <span
+          <div 
             style={{
+              width: '32px',
+              height: '32px',
               backgroundColor: item.color,
               maskImage: `url(${iconUrl})`,
               maskSize: 'contain',
               maskRepeat: 'no-repeat',
               maskPosition: 'center',
-              WebkitMaskImage: `url(${iconUrl})`,
-              WebkitMaskSize: 'contain',
-              WebkitMaskRepeat: 'no-repeat',
-              WebkitMaskPosition: 'center',
             }}
-            className="h-8 w-8 block dark:hidden"
+            className="block dark:hidden"
             aria-hidden="true"
           />
-          <span
+          <div 
             style={{
+              width: '32px',
+              height: '32px',
               backgroundColor: item.colorDark || item.color,
               maskImage: `url(${iconUrl})`,
               maskSize: 'contain',
               maskRepeat: 'no-repeat',
               maskPosition: 'center',
-              WebkitMaskImage: `url(${iconUrl})`,
-              WebkitMaskSize: 'contain',
-              WebkitMaskRepeat: 'no-repeat',
-              WebkitMaskPosition: 'center',
             }}
-            className="h-8 w-8 hidden dark:block"
+            className="hidden dark:block"
             aria-hidden="true"
           />
         </>
@@ -139,30 +129,32 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
         className
       )}
     >
-      {/* Inline keyframes definition for framework-agnostic usage */}
-      <style>
-        {`
-          @keyframes technology-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}
-      </style>
-      
       <ul
         className={cn(
-          'flex min-w-full shrink-0 py-4 w-max flex-nowrap will-change-transform',
+          'flex min-w-full shrink-0 py-4 flex-nowrap will-change-transform',
+          getSpeedClass(),
+          direction === 'right' ? 'animate-reverse' : '',
           pauseOnHover && 'hover:[animation-play-state:paused]'
         )}
-        style={getAnimationStyle()}
+        style={{ width: 'max-content' }}
       >
         {items.concat(items).map((item, idx) => (
           <li
-            className="flex-none flex items-center justify-center gap-2 pl-12"
             key={`${item.name}-${idx}`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexShrink: 0,
+              marginRight: '3rem'
+            }}
           >
-            <TechIcon item={item} />
-            <span className="text-lg font-medium text-muted-foreground">
+            <div style={{ marginRight: '0.5rem' }}>
+              <TechIcon item={item} />
+            </div>
+            <span 
+              className="text-lg font-medium text-muted-foreground"
+              style={{ whiteSpace: 'nowrap' }}
+            >
               {item.name}
             </span>
           </li>
