@@ -4,13 +4,13 @@ docType: tasks
 slice: component-parity
 project: manta-templates
 lldReference: project-artifacts/nextjs-template/slices/09-slice.component-parity.md
+status: complete
 dependencies: 
   - slice-08-markdown-content
 currentState: |
-  - ui-refactor infrastructure complete (Phase 1-2)
-  - VideoCard architecture and TypeScript cleanup complete
-  - Template has 53 components, ui-core has 23 components (~30 components missing)
-  - Ready for Priority 1 essential card migration
+  - All Priority 1 components migrated to ui-core with framework-agnostic architecture
+  - Tailwind v4 support and theming fixes completed 
+  - Test-cards page demonstrates visual parity and build validation successful
 ---
 
 # Tasks: Slice 09 - UI-Core Component Parity
@@ -262,6 +262,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 - [x] Filtering and limiting functional
 - [x] Date sorting preserved
 - [x] Server component compatibility maintained
+- [x] **THEMING FIXES COMPLETED**: Fixed BlogIndexCard hover theming with light/dark mode variants
 
 **Files to Create**:
 - `packages/ui-core/src/components/cards/BlogIndexCard.tsx`
@@ -754,7 +755,9 @@ Based on code analysis, here are the Priority 1 components and their necessity:
    - Contact information with Mail/MapPin icons
    - Copyright HTML rendering with dangerouslySetInnerHTML
    - ThemeToggle integration in bottom section
-✅ Created CompactFooter with minimal single-row design
+✅ Created CompactFooter with minimal single-row design + **THEMING FIXES COMPLETED**:
+  - Fixed hardcoded colors to semantic tokens in CompactFooter
+  - Properly integrated with theme system for light/dark mode support
 ✅ Created Footer wrapper with variant selection ('default', 'compact')
 ✅ Updated all export structures (footers, types, main index)
 ✅ Added comprehensive footer comparison to test-cards page showing template + both ui-core variants
@@ -819,7 +822,10 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 - [x] Optional features configurable
 - [x] Component appears in test-cards page
 
-✅ Completed with full feature preservation and comprehensive test coverage
+✅ **COMPLETED with Additional Theming Fixes**:
+- Fixed ComingSoonOverlay height issues for proper full-screen display
+- Resolved overlay positioning and sizing problems
+- Comprehensive test coverage and feature preservation maintained
 
 ### Task 5.9: Migrate Container Component
 **Owner**: Junior AI  
@@ -921,6 +927,7 @@ Based on code analysis, here are the Priority 1 components and their necessity:
 - [x] **Framework Support**: All components work with Next.js via dependency injection
 - [x] **Complete Theme System**: ThemeProvider + ThemeToggle + ColorSelector integrated
 - [x] **Build Success**: Both ui-core and template packages build without errors
+- [x] **TAILWIND V4 SUPPORT COMPLETED**: Added comprehensive Tailwind CSS v4 support to ui-core package
 - [ ] **Type Safety**: Zero TypeScript errors (some test-related errors remain)
 
 ### Quality Metrics  

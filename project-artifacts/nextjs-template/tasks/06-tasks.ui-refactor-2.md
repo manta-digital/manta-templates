@@ -188,6 +188,7 @@
   - [x] Update utility imports to use ui-core relative paths
   - [x] Test gradient rendering across different themes/modes
   - [x] Success: GradientCard renders with exact gradients and styling
+  - [x] **THEMING FIX COMPLETED**: Fixed overlay colors from bg-black to bg-foreground/80 for proper semantic theming
 
 - [x] Extract AboutCard to ui-core
   - [x] Copy templates/nextjs/src/components/cards/people/AboutCard.tsx to packages/ui-core/src/components/cards/AboutCard.tsx
@@ -197,6 +198,7 @@
   - [x] Update utility imports to use ui-core relative paths
   - [x] Test with person data and profile images
   - [x] Success: AboutCard renders identically to original with dependency injection
+  - [x] **THEMING FIX COMPLETED**: Fixed hardcoded bg-gray-300 to bg-muted for proper theme integration
 
 ### Extract Media Cards (Complex)
 - [x] Extract VideoCard to ui-core

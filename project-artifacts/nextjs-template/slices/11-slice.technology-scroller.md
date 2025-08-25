@@ -2,13 +2,34 @@
 layer: project
 docType: slice-design
 slice: technology-scroller
-status: in-design
+status: ready
+readyDate: 2025-01-25
+dependencies:
+  - Slice 09: Component Parity (✅ COMPLETED - January 25, 2025)
 ---
 
 # Slice 11: TechnologyScroller Migration to ui-core
 
 ## Overview
 Migrate the TechnologyScroller component from templates/nextjs to ui-core package, resolving CSS masking issues and establishing a pattern for framework-specific image optimization through dependency injection.
+
+## Current State - READY TO PROCEED ✅
+**Status:** Ready for implementation (January 25, 2025)
+**Dependency:** Slice 09 Component Parity provides foundation for ui-core component migration
+
+### Prerequisites Completed:
+- ✅ ui-core package has proven framework-agnostic component architecture 
+- ✅ Dependency injection patterns established for Image components
+- ✅ Tailwind v4 integration complete in ui-core
+- ✅ CSS handling patterns proven working in ui-core build pipeline
+- ✅ Test validation framework established with test-cards page
+
+### Updated Migration Strategy:
+With Slice 09 complete, TechnologyScroller can now follow the established migration pattern:
+- Use proven dependency injection approach for ImageComponent
+- Leverage working ui-core Tailwind v4 CSS pipeline  
+- Apply same CSS-in-JS approach used for other ui-core components
+- Follow established adapter pattern for Next.js optimization
 
 ## Problem Statement
 The TechnologyScroller component currently works perfectly in templates/nextjs but fails when moved to ui-core:
@@ -162,8 +183,8 @@ If the CSS masking approach continues to fail:
    - **Mitigation**: Make iconBasePath fully configurable with sensible defaults
 
 ## Dependencies
-- Slice 09 (Component Parity) - ✅ Completed
-- No blocking dependencies on other slices
+- ✅ Slice 09 (Component Parity) - COMPLETED (August 25, 2025) 
+- No other blocking dependencies
 
 ## Testing Requirements
 1. Visual regression tests comparing original vs migrated component

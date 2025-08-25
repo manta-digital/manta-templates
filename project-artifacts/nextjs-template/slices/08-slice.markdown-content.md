@@ -1,6 +1,7 @@
 ---
 layer: project
 docType: slice-design
+status: completed
 ---
 
 # Slice 08: Markdown-Driven Content for ui-core
@@ -472,8 +473,9 @@ interface EnhancedCardProps {
 - **Risk**: Existing Next.js usage disrupted
 - **Mitigation**: Additive changes only, maintain existing ContentLoader pattern alongside new system
 
-## Dependencies
-- **Prerequisite**: ui-refactor (Phase 2) - ui-core cards with dependency injection
+## Dependencies - SATISFIED ✅
+- ✅ **Prerequisite**: ui-refactor (Phase 2) - COMPLETED via Slice 09 Component Parity (August 25, 2025)
+- ✅ **ui-core cards with dependency injection**: Available and proven working
 - **Concurrent**: Framework adapter development
 - **Blocks**: Template bundling system, multi-framework template distribution
 

@@ -1,7 +1,9 @@
 - [ ] In `src/app/blog/[slug]/page.tsx` (around line 39): Consider replacing `<img>` with `next/image`'s `<Image />` component for better performance and optimization. (Warning: Using `<img>` could result in slower LCP and higher bandwidth.)
 - [ ] Refactor all instances of string template literals (e.g., `className={`...${...}`}`) for CSS class assignments to use the `cn` utility for improved clarity, consistency, and to leverage `tailwind-merge` capabilities.
 - [ ] Document the new `autoFlow` prop (values: 'row', 'column', default: 'row') in the `BentoLayout` component. Explain how it maps to `grid-auto-flow` and its impact on item placement.
-- [ ] Resolve inconsistent styles between cards.  BaseCard appears to use darker border than FeatureCardWrapper.
+- [x] Resolve inconsistent styles between cards.  BaseCard appears to use darker border than FeatureCardWrapper.
+  - **COMPLETED**: Standardized card border radius from rounded-sm to rounded-lg across all card components
+  - **COMPLETED**: Fixed card border styling consistency issues throughout ui-core package
 - [x] Connect all monorepo links in `src/components/cards/GuidesFeatureCard.tsx` to https://github.com/manta-digital/manta-templates so they will at least resolve somewhere.
 - [x] Make background video autoplay without hover
 - [ ] interactive card in card variants test needs transition
