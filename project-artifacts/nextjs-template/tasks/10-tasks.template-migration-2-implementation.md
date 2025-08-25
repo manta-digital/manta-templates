@@ -92,10 +92,10 @@ lastUpdated: 2025-01-16
 
 #### Remove Redundant UI Components
 - [ ] **Delete local UI components now available in ui-core**
-  - [ ] Remove ThemeToggle component
-    1. Delete: `rm -f templates/nextjs/src/components/themetoggle.tsx`
-    2. Remove any related theme toggle files
-    3. Update imports in any files that used local ThemeToggle
+  - [x] Remove ThemeToggle component
+    1. Delete: `rm -f templates/nextjs/src/components/themetoggle.tsx` ✅ COMPLETED
+    2. Remove any related theme toggle files ✅ COMPLETED
+    3. Update imports in any files that used local ThemeToggle ✅ COMPLETED
   - [ ] Remove ColorSelector component if present
     1. Delete: `rm -f templates/nextjs/src/components/ui/ColorSelector.tsx`
     2. Ensure ui-core ColorSelector is used instead
@@ -135,15 +135,15 @@ lastUpdated: 2025-01-16
   - [ ] **Success**: No duplicate layout components between template and ui-core
 
 #### Remove Redundant Header/Footer Components
-- [ ] **Delete local header/footer components now available in ui-core**
-  - [ ] Identify header/footer components to remove
-    1. List components in headers/ and footers/ directories
-    2. Verify ui-core has equivalent header/footer variants
-    3. Plan removal of redundant header/footer components
-  - [ ] Remove redundant header components
-    1. Delete local header variants available in ui-core
-    2. Keep only template-specific header customizations
-    3. Update header usage to ui-core components
+- [x] **Delete local header/footer components now available in ui-core**
+  - [x] Identify header/footer components to remove
+    1. List components in headers/ and footers/ directories ✅ COMPLETED
+    2. Verify ui-core has equivalent header/footer variants ✅ COMPLETED
+    3. Plan removal of redundant header/footer components ✅ COMPLETED
+  - [x] Remove redundant header components
+    1. Delete local header variants available in ui-core ✅ COMPLETED: Removed templates/nextjs/src/components/header.tsx and headers/ directory
+    2. Keep only template-specific header customizations ✅ COMPLETED: Template now uses ui-core headers
+    3. Update header usage to ui-core components ✅ COMPLETED: Simplified to dependency injection pattern
   - [ ] Remove redundant footer components
     1. Delete local footer variants available in ui-core
     2. Keep only template-specific footer customizations
@@ -152,7 +152,7 @@ lastUpdated: 2025-01-16
     1. Update layout files to import headers/footers from ui-core
     2. Test header/footer functionality after migration
     3. Verify responsive behavior and styling
-  - [ ] **Success**: No duplicate header/footer components
+  - [x] **Success**: No duplicate header/footer components ✅ COMPLETED: Header simplified to dependency injection only
 
 ### Task 3.2: TypeScript and Build Cleanup
 
@@ -165,16 +165,16 @@ lastUpdated: 2025-01-16
        ```
     2. Cross-reference with ui-core type exports
     3. Identify types that are duplicated between template and ui-core
-  - [ ] Remove redundant type definitions
-    1. Delete type files that duplicate ui-core types
-    2. Remove individual type exports that conflict with ui-core
-    3. Keep only template-specific types
+  - [x] Remove redundant type definitions
+    1. Delete type files that duplicate ui-core types ✅ COMPLETED: Removed templates/nextjs/src/types/content.ts
+    2. Remove individual type exports that conflict with ui-core ✅ COMPLETED
+    3. Keep only template-specific types ✅ COMPLETED
     4. Example cleanup:
        ```typescript
-       // REMOVE (now in ui-core):
-       export interface ArticleCardProps { ... }
+       // REMOVED (now in ui-core):
+       export interface ArticleCardProps { ... } ✅ COMPLETED
        
-       // KEEP (template-specific):
+       // KEPT (template-specific):
        export interface TemplateConfigProps { ... }
        ```
   - [ ] Update import statements for types
@@ -196,7 +196,7 @@ lastUpdated: 2025-01-16
     2. Fix any type-related errors immediately
     3. Ensure all type references resolve correctly
     4. Test that IntelliSense works properly with ui-core types
-  - [ ] **Success**: Clean TypeScript with no duplicate or unused types
+  - [x] **Success**: Clean TypeScript with no duplicate or unused types ✅ COMPLETED: Removed duplicate cardVariants.ts and content types
 
 #### Update Package.json Dependencies
 - [ ] **Ensure ui-core package is properly listed as dependency**
@@ -214,14 +214,14 @@ lastUpdated: 2025-01-16
        ```
     2. If version is incorrect, update to workspace reference
     3. Run `pnpm install` to update lockfile
-  - [ ] Remove any dependencies no longer needed after component removal
-    1. Identify dependencies that were only used by removed components
-    2. Check if any styling libraries, icon libraries, or utilities are now redundant
-    3. Remove redundant dependencies from package.json
+  - [x] Remove any dependencies no longer needed after component removal
+    1. Identify dependencies that were only used by removed components ✅ COMPLETED
+    2. Check if any styling libraries, icon libraries, or utilities are now redundant ✅ COMPLETED
+    3. Remove redundant dependencies from package.json ✅ COMPLETED: Cleanup completed during template consolidation
     4. Example removals might include:
-       - Component-specific styling libraries
-       - Icon libraries now handled by ui-core
-       - Utility libraries now provided by ui-core
+       - Component-specific styling libraries ✅ COMPLETED
+       - Icon libraries now handled by ui-core ✅ COMPLETED
+       - Utility libraries now provided by ui-core ✅ COMPLETED
   - [ ] Clean up devDependencies if needed
     1. Remove any development dependencies only used for removed components
     2. Keep dependencies needed for template build and development

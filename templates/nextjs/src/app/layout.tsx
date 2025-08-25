@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
-import { Header, Footer, BrandMark, Container, ThemeToggle, ColorSelector } from '@manta-templates/ui-core';
+import { Header, Footer } from '@manta-templates/ui-core';
 import { getHeaderContent } from '@/lib/headerContent';
 import { getFooterContent } from '@/lib/footerContent';
 import Image from 'next/image';
@@ -97,10 +97,6 @@ export default async function RootLayout({
                 content={headerContent}
                 ImageComponent={Image}
                 LinkComponent={Link}
-                BrandMarkComponent={BrandMark}
-                ContainerComponent={Container}
-                ThemeToggleComponent={ThemeToggle}
-                ColorSelectorComponent={ColorSelector}
               />
             )}
             <main className="flex-1">
@@ -112,7 +108,6 @@ export default async function RootLayout({
                 legalPreset="mit"
                 sections={footerSections}
                 LinkComponent={Link}
-                ThemeToggleComponent={ThemeToggle}
               />
             )}
           </div>

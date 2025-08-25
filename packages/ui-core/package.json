@@ -12,8 +12,10 @@
     "build:css": "tailwindcss --input src/styles/index.css --output dist/styles/index.css",
     "dev": "tsc --watch", 
     "clean": "rimraf dist",
-    "test": "tsx src/__tests__/content.test.ts",
-    "test:watch": "tsx watch src/__tests__/content.test.ts"
+    "test": "tsx src/__tests__/content.test.ts && tsx src/__tests__/header.test.ts",
+    "test:watch": "tsx watch src/__tests__/content.test.ts",
+    "test:header": "tsx src/__tests__/header.test.ts",
+    "test:header:watch": "tsx watch src/__tests__/header.test.ts"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

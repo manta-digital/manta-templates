@@ -18,10 +18,6 @@ export interface HeaderProps {
   content: HeaderContent;
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
-  BrandMarkComponent?: React.ComponentType<any>;
-  ContainerComponent?: React.ComponentType<any>;
-  ThemeToggleComponent?: React.ComponentType<any>;
-  ColorSelectorComponent?: React.ComponentType<any>;
   className?: string;
 }
 
@@ -30,9 +26,5 @@ export interface HeaderWrapperProps {
   variant?: 'default';
   ImageComponent?: React.ComponentType<any>;
   LinkComponent?: React.ComponentType<any>;
-  BrandMarkComponent?: React.ComponentType<any>;
-  ContainerComponent?: React.ComponentType<any>;
-  ThemeToggleComponent?: React.ComponentType<any>;
-  ColorSelectorComponent?: React.ComponentType<any>;
   className?: string;
 }

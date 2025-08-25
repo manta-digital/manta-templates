@@ -1,5 +1,5 @@
 import React from 'react';
-import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Container, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard, GradientCard } from '@manta-templates/ui-core';
+import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard, GradientCard } from '@manta-templates/ui-core';
 import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
 import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
 
@@ -112,10 +112,6 @@ export default async function TestCardsPage() {
                 content={headerContent}
                 ImageComponent={Image}
                 LinkComponent={Link}
-                BrandMarkComponent={BrandMark}
-                ContainerComponent={Container}
-                ThemeToggleComponent={ThemeToggle}
-                ColorSelectorComponent={ColorSelector}
               />
             </div>
           </div>
@@ -136,7 +132,6 @@ export default async function TestCardsPage() {
                   sections={footerSections}
                   variant="default"
                   LinkComponent={Link}
-                  ThemeToggleComponent={ThemeToggle}
                 />
               </div>
             </div>
@@ -172,7 +167,7 @@ export default async function TestCardsPage() {
             <div className="bg-muted/50 rounded-lg p-4 border border-border/40">
               <h2 className="text-xl font-semibold mb-2">UI-Core Component Testing</h2>
               <p className="text-muted-foreground text-sm">
-                All components use proper dependency injection (ImageComponent, LinkComponent) 
+                All components use simplified dependency injection (only framework-specific ImageComponent, LinkComponent) 
                 and follow the ui-core + ui-adapters architecture pattern.
               </p>
             </div>
