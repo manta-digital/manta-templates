@@ -12,7 +12,6 @@ export function Footer({
   legalPreset = 'full',
   sections,
   LinkComponent,
-  ThemeToggleComponent,
   className,
   ...props 
 }: FooterWrapperProps) {
@@ -34,7 +33,6 @@ export function Footer({
           sections={sections}
           legalPreset={legalPreset}
           LinkComponent={LinkComponent}
-          ThemeToggleComponent={ThemeToggleComponent}
           className={className}
         />
       );

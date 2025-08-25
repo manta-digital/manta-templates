@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@manta-templates/ui-core";
 import { Header, Footer } from '@manta-templates/ui-core';
-import { getHeaderContent } from '@/lib/headerContent';
+import { nextjsContentProvider, NextjsHeaderContent } from '@manta-templates/ui-adapters-nextjs';
 import { getFooterContent } from '@/lib/footerContent';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,9 +53,17 @@ export default async function RootLayout({
   let footerSections = null;
 
   try {
-    headerContent = await getHeaderContent();
+    const content = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main-grid');
+    headerContent = content.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading header content:', error);
+    // Fallback header content
+    headerContent = {
+      title: '',
+      links: [
+        { href: '/', label: 'Home' },
+      ],
+    };
   }
 
   try {

@@ -1,13 +1,13 @@
 import React from 'react';
 import { DefaultFooterProps } from '../../types/footer';
 import { FooterLinkComponent } from './FooterLinkComponent';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import { cn } from '../../utils/cn';
 
 export function DefaultFooter({ 
   sections, 
   legalPreset = 'full',
   LinkComponent, 
-  ThemeToggleComponent,
   className 
 }: DefaultFooterProps) {
   // Apply legal preset logic
@@ -166,7 +166,7 @@ export function DefaultFooter({
             <p className="mt-1 text-xs text-muted-foreground">Last updated: {s.copyright.lastUpdated}</p>
           </div>
           <div className="flex items-center gap-4">
-            {ThemeToggleComponent && <ThemeToggleComponent />}
+            <ThemeToggle />
           </div>
         </div>
       </div>

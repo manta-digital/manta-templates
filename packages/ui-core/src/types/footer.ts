@@ -36,7 +36,6 @@ export interface FooterProps {
   variant?: 'default' | 'compact';
   legalPreset?: 'mit' | 'full';
   LinkComponent?: React.ComponentType<any>;
-  ThemeToggleComponent?: React.ComponentType<any>;
   className?: string;
 }
 
@@ -44,7 +43,6 @@ export interface DefaultFooterProps {
   sections: FooterSections;
   legalPreset?: 'mit' | 'full';
   LinkComponent?: React.ComponentType<any>;
-  ThemeToggleComponent?: React.ComponentType<any>;
   className?: string;
 }
 
