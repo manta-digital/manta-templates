@@ -135,7 +135,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <div className="relative z-10 flex flex-col h-full">
         {image && (
-          <div className="relative mb-4 rounded-sm overflow-hidden h-40">
+          <div className="relative mb-4 rounded-lg overflow-hidden h-40">
             {ImageComponent ? (
               <ImageComponent
                 src={image}
@@ -169,7 +169,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
         
         {!!features.length && (
-          <div className="space-y-2 mt-0.5 mb-6 pb-4">
+          <div className="space-y-2 mt-0.5 mb-6">
             {features.slice(0,4).map((f) => (
               <div key={f.label} className="flex items-center text-muted-foreground">
                 <Zap 

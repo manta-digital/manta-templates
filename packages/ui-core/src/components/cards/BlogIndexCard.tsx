@@ -81,14 +81,14 @@ const BlogIndexCard: React.FC<BlogIndexCardProps> = ({
     
     if (typeof LinkComponent === 'string') {
       return (
-        <a href={href} className="block p-3 rounded-lg hover:bg-white/5 transition-colors">
+        <a href={href} className="block p-3 rounded-lg hover:bg-[var(--color-accent-3)] dark:hover:bg-[var(--color-accent-4)] transition-colors">
           {children}
         </a>
       );
     }
     
     return (
-      <LinkComponent href={href} className="block p-3 rounded-lg hover:bg-white/5 transition-colors">
+      <LinkComponent href={href} className="block p-3 rounded-lg hover:bg-[var(--color-accent-3)] dark:hover:bg-[var(--color-accent-4)] transition-colors">
         {children}
       </LinkComponent>
     );

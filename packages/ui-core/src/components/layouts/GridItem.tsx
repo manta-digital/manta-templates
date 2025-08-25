@@ -103,7 +103,7 @@ const GridItem: React.FC<GridItemProps> = ({
   return (
     <div
       className={cn(
-        'rounded-sm p-0', // Changed from 'rounded' to 'rounded-sm'
+        'rounded-lg p-0', // Changed from 'rounded-sm' to 'rounded-lg'
         // 'border border-[var(--grid-item-border-color)]', // Border removed
         finalSpanClasses, // Apply explicit or size-based span classes
         className

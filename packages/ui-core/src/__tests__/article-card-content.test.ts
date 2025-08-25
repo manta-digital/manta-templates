@@ -10,7 +10,7 @@
 
 import { MockContentProvider } from '../content/MockContentProvider';
 import type { ContentData } from '../content/types';
-import type { ArticleContent } from '../components/cards/ArticleCard';
+import type { ArticleContent } from '../components/cards/ArticleCard.tsx';
 
 interface ArticleTestContent extends ArticleContent {
   pubDate?: string;

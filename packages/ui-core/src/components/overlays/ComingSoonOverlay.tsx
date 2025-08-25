@@ -95,9 +95,9 @@ export const ComingSoonOverlay: React.FC<ComingSoonOverlayProps> = ({
   const blurMap = { sm: 'backdrop-blur-[2px]', md: 'backdrop-blur-[4px]', lg: 'backdrop-blur' };
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    <div className={cn("relative overflow-hidden h-full", className)}>
       {/* Underlying content */}
-      <div aria-disabled className={cn("pointer-events-none select-none")}>  
+      <div aria-disabled className={cn("pointer-events-none select-none h-full")}>  
         {children}
       </div>
 

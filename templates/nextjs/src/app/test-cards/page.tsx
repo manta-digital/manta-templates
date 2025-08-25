@@ -292,7 +292,7 @@ export default async function TestCardsPage() {
           </GridItem>
 
           {/* ComingSoonOverlay */}
-          <GridItem colSpan="col-span-2">
+          <GridItem colSpan="col-span-2" className="h-full">
             <ComponentShowcaseWrapper title="ComingSoonOverlay">
               <ComingSoonOverlay color="teal" label="Coming Soon" blurAmount="md">
                 <BaseCard className="h-full p-6">

@@ -24,7 +24,7 @@ export default function ExamplesPage() {
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
         {/* Hero */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-2 xl:row-span-2">
-          <GradientCard className="h-full" title="Theme Test Grid" description="Switch palette and dark/light to validate tokens" gradient="teal" />
+          <GradientCard className="h-full rounded-lg" title="Theme Test Grid" description="Switch palette and dark/light to validate tokens" gradient="teal" />
         </GridItem>
 
         {/* Project spotlight / carousel */}
@@ -88,7 +88,7 @@ export default function ExamplesPage() {
         </GridItem>
 
         {/* Featured article */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-2">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-3">
           <ArticleCard 
             className="h-full" 
             ImageComponent={Image} 
@@ -106,12 +106,12 @@ export default function ExamplesPage() {
         </GridItem>
 
         {/* Blog image card */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-3">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-5">
           <BlogCardImage ImageComponent={Image} LinkComponent={Link} className='h-full' title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
         </GridItem>
 
         {/* Cosine terrain visual */}
-        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
+        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-4 lg:row-span-1">
           <CosineTerrainCard className="h-full" variant="card" renderPreset="wireframe" materialType="basic" />
         </GridItem>
 

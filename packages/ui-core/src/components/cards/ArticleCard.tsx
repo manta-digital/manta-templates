@@ -68,7 +68,9 @@ export function ArticleCard({
               />
             )}
           </MotionDiv>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none" />
+          <div 
+            className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none" 
+          />
           <div className="absolute bottom-0 left-0 right-0 p-4 pb-6 sm:p-5 md:p-6 text-white pointer-events-none">
             {subtitle && (
               <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-white/80">

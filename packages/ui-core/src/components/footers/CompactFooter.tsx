@@ -46,7 +46,7 @@ export function CompactFooter({
   const AnchorComponent = LinkComponent || 'a';
 
   return (
-    <footer className={cn("bg-gray-100 dark:bg-gray-900 border-t border-border mt-auto", className)}>
+    <footer className={cn("bg-muted border-t border-border mt-auto", className)}>
       <div className="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-muted-foreground flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
         <AnchorComponent 
           href="https://github.com/manta-digital/manta-templates"

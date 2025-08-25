@@ -97,7 +97,7 @@ export function GradientCard({
 
   // Build overlay classes
   const overlayClasses = overlayOpacity > 0 
-    ? 'relative after:absolute after:inset-0 after:bg-black after:pointer-events-none'
+    ? 'relative after:absolute after:inset-0 after:bg-foreground/80 after:pointer-events-none'
     : '';
 
   // Custom styles for custom gradient and overlay
@@ -133,7 +133,7 @@ export function GradientCard({
       {/* Overlay for better text readability */}
       {overlayOpacity > 0 && (
         <div 
-          className="absolute inset-0 bg-black pointer-events-none rounded-[inherit]"
+          className="absolute inset-0 bg-foreground/80 pointer-events-none rounded-[inherit]"
           style={{ opacity: overlayOpacity }}
         />
       )}
