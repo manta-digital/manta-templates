@@ -175,6 +175,34 @@
   --green-a10: oklch(0.582 0.14 130 / 0.8);
   --green-a11: oklch(0.512 0.125 130 / 0.9);
   --green-a12: oklch(0.156 0.028 130 / 0.95);
+
+  /* Gray color scale - neutral colors for UI elements */
+  --gray-1: oklch(0.995 0.002 225);
+  --gray-2: oklch(0.984 0.003 225);      /* Matches #f3f4f6 - light track */
+  --gray-3: oklch(0.968 0.004 225);
+  --gray-4: oklch(0.946 0.005 225);
+  --gray-5: oklch(0.918 0.006 225);
+  --gray-6: oklch(0.877 0.007 225);      /* Matches #d1d5db - light thumb */
+  --gray-7: oklch(0.719 0.008 225);      /* Matches #9ca3af - light thumb hover */
+  --gray-8: oklch(0.609 0.009 225);
+  --gray-9: oklch(0.537 0.01 225);
+  --gray-10: oklch(0.481 0.011 225);
+  --gray-11: oklch(0.395 0.012 225);
+  --gray-12: oklch(0.156 0.020 225);
+
+  /* Gray alpha variants */
+  --gray-a1: oklch(0.995 0.002 225 / 0.05);
+  --gray-a2: oklch(0.984 0.003 225 / 0.1);
+  --gray-a3: oklch(0.968 0.004 225 / 0.15);
+  --gray-a4: oklch(0.946 0.005 225 / 0.2);
+  --gray-a5: oklch(0.918 0.006 225 / 0.3);
+  --gray-a6: oklch(0.877 0.007 225 / 0.4);
+  --gray-a7: oklch(0.719 0.008 225 / 0.5);
+  --gray-a8: oklch(0.609 0.009 225 / 0.6);
+  --gray-a9: oklch(0.537 0.01 225 / 0.7);
+  --gray-a10: oklch(0.481 0.011 225 / 0.8);
+  --gray-a11: oklch(0.395 0.012 225 / 0.9);
+  --gray-a12: oklch(0.156 0.020 225 / 0.95);
 }
 
 /* Dark mode adjustments for all colors */
@@ -262,4 +290,18 @@
   --green-10: oklch(0.65 0.12 130);
   --green-11: oklch(0.72 0.13 130);
   --green-12: oklch(0.95 0.015 130);
+
+  /* Gray dark mode */
+  --gray-1: oklch(0.156 0.020 225);
+  --gray-2: oklch(0.181 0.018 225);
+  --gray-3: oklch(0.247 0.016 225);      /* Matches #374151 - dark track */
+  --gray-4: oklch(0.309 0.014 225);
+  --gray-5: oklch(0.395 0.012 225);      /* Matches #6b7280 - dark thumb */
+  --gray-6: oklch(0.481 0.011 225);
+  --gray-7: oklch(0.537 0.01 225);       
+  --gray-8: oklch(0.719 0.008 225);      /* Matches #9ca3af - dark thumb hover */
+  --gray-9: oklch(0.799 0.007 225);
+  --gray-10: oklch(0.877 0.007 225);
+  --gray-11: oklch(0.918 0.006 225);
+  --gray-12: oklch(0.995 0.002 225);
 }
