@@ -330,16 +330,18 @@ Process:
 
 *Create tasks based on codebase analysis.  While we don't yet have a generic analysis prompt, we do have the following modified task-creation prompt for use with analysis results.*
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the P0/P1 issues from {analysis-file} into granular, actionable tasks if they are not already.  
+We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the issues from {analysis-file} into granular, actionable tasks if they are not already.  Keep them in priority order (P0/P1/P2/P3). 
+
+If the tasks are already sufficiently granular and in checklist format, you do not need to modify them. Note that each success criteria needs a checkbox.
 
 Your role is Senior AI. Use the specified analysis document `private/maintenance/nn-analysis.{project-name}{.subproject?}.00.md` as input.  Note that subproject is optional (hence the ?).  Avoid adding extra `.` characters to filename if subproject is not present.
 
-Create task file at `private/tasks/nn-analysis.{.subproject?}-{date}.md` with:
-1. YAML front matter including slice or subproject name, project, YYYYMMDD date, LLD reference, dependencies, and current project state
+Create task file at `private/tasks/nn-analysis{.subproject?}-{date}.md` with:
+1. YAML front matter including slice or subproject name, project, YYYYMMDD date, main analysis file reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
 4. Keep success criteria with their respective task
-5. Always use checklist format described in 
+5. Always use checklist format described in guide.ai-project.00-process under Task Files.
 
 For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
@@ -348,6 +350,77 @@ Each task must be completable by a junior AI with clear success criteria. If ins
 This is a project planning task, not a coding task.
 ```
 
+##### Analysis to LLD
+```markdown
+We need to create a Low-Level Design (LLD) for {feature/component} identified during codebase analysis or task planning in project {project}.  It may be an expansion of an initial task section identified during analysis.
+
+Your role is Technical Fellow as described in the Process Guide. This LLD will bridge the gap between high-level understanding and implementable tasks.
+
+**Context:**
+- Analysis document: `private/maintenance/nn-analysis.{project-name}{.subproject 
+  or analysis topic?}` (or specify location)
+- Related task file: `private/tasks/nn-analysis{.subproject?}-{date}.md` (if 
+  exists)
+- Current issue: {brief description of what analysis revealed}
+
+**Create LLD document at:** `private/features/nn-lld.{feature-name}.md`
+
+**Required YAML front matter:**
+```yaml
+---
+layer: project
+docType: lld
+feature: {feature-name}
+project: {project}
+triggeredBy: analysis|task-breakdown|architecture-review
+sourceDocument: {path-to-analysis-or-task-file}
+dependencies: [list-any-prerequisites]
+affects: [list-components-or-slices-impacted]
+complexity: low|medium|high
+lastUpdated: YYYY-MM-DD
+---
+
+**Guidelines for creating LLD:**
+
+**Cross-Reference Requirements:**
+
+- Update source analysis/task document to reference this LLD
+- Add back-reference in this LLD to triggering document
+- Note any slice designs or existing features this affects
+
+**Focus Areas:**
+
+- Keep design concrete and implementation-ready
+- Include code examples or pseudocode where helpful
+- Reference specific files, classes, or components by name
+- Address both immediate needs and future extensibility
+
+If you need more context about the analysis findings or existing system architecture, stop and request from Project Manager.
+
+Note: This creates implementation-ready technical designs, not high-level planning documents.
+```
+
+##### Analysis Task Implementation
+*Phase 7 Task Implementation customized for analysis files. *
+```markdown
+We are working on the analysis file {analysis} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
+
+Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nn-analysis.{project}{date-from-{analysis}}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
+
+The analysis overview is available at {analysis} for additional context.
+
+STOP and confer with Project Manager after each task, unless directed otherwise by the Project Manager. Do not update any progress files until confirmation from Project Manager.
+
+Work carefully and ensure that each task is verified complete before proceeding to the next. If an attempted solution does not work or you find reason to try another approach, do not make more than three attempts without stopping and obtaining confirmation from Project Manager.
+
+Check off completed tasks in the task file when verified complete. When all tasks for the slice are complete, proceed to Phase 8 (integration) with Project Manager approval.
+
+Notes: 
+* Use the task-checker to manage lists if it is available to you
+* Ignore case sensitivity in all file and directory names
+* If you cannot locate referenced files, STOP and request information from Project Manager
+* Do not guess, assume, or proceed without required files
+```
 
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
