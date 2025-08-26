@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { BaseContentProvider } from '@manta-templates/ui-core';
 import { ContentNotFoundError, ContentLoadError } from '@manta-templates/ui-core';
-import type { ContentData } from '@manta-templates/ui-core';
+import type { ContentData, TokenProvider, TokenConfig } from '@manta-templates/ui-core';
 import { remark } from 'remark';
 import gfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
@@ -40,6 +40,7 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
   private codeTheme: string;
   private processingCache = new Map<string, string>();
   private contentCache = new Map<string, ContentData<any>>();
+  private tokenCache: Map<string, Record<string, string>> = new Map();
 
   // Custom schema for rehype-sanitize to allow styles from rehype-pretty-code
   private static readonly customSanitizeSchema: typeof defaultSchema = {
@@ -146,9 +147,31 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
   }
 
   /**
-   * Override content loading to use Next.js optimized markdown processing
+   * Override content loading to use Next.js optimized markdown processing with optional token interpolation
+   * 
+   * @param slug - The content identifier
+   * @param contentType - The type/category of content
+   * @param options - Loading options including token configuration
+   * @param options.tokenConfig - Token interpolation configuration
+   * @returns Promise resolving to processed content data
+   * 
+   * @example
+   * // Load content without tokens
+   * const content = await provider.loadContent('my-post', 'articles');
+   * 
+   * // Load content with token interpolation
+   * const content = await provider.loadContent('legal', 'legal', {
+   *   tokenConfig: {
+   *     enableTokens: true,
+   *     tokenProvider: new NextjsTokenProvider(siteConfig)
+   *   }
+   * });
    */
-  async loadContent<T = unknown>(slug: string, contentType: string): Promise<ContentData<T>> {
+  async loadContent<T = unknown>(
+    slug: string, 
+    contentType: string,
+    options?: { tokenConfig?: TokenConfig }
+  ): Promise<ContentData<T>> {
     const cacheKey = `${contentType}:${slug}`;
     
     // Check cache first if enabled
@@ -160,15 +183,33 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
       const rawContent = await this.loadRawContent(slug, contentType);
       const { data: frontmatter, content } = matter(rawContent);
 
-      // Use Next.js optimized markdown processing
-      const contentHtml = await this.processMarkdownContent(content);
+      // Apply token interpolation to content before markdown processing if requested
+      let processedContent = content;
+      let tokens: Record<string, string> | undefined;
+      
+      if (options?.tokenConfig?.enableTokens === true) {
+        const tokenData = await this.getTokensForInterpolation(options.tokenConfig.tokenProvider);
+        
+        if (tokenData && Object.keys(tokenData).length > 0) {
+          processedContent = this.applyTokens(content, tokenData);
+          tokens = tokenData;
+        }
+      }
 
-      const result = {
+      // Use Next.js optimized markdown processing with potentially tokenized content
+      const contentHtml = await this.processMarkdownContent(processedContent);
+
+      const result: ContentData<T> = {
         slug,
         frontmatter: frontmatter as T,
         contentHtml,
         rawContent
       };
+
+      // Add tokens to result if interpolation was applied
+      if (tokens) {
+        result.tokens = tokens;
+      }
 
       // Cache the result
       if (this.enableCaching) {
@@ -237,12 +278,103 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
   }
 
   /**
+   * Apply token interpolation to content using the same logic as presetContent.ts
+   * 
+   * @param content - The content string to process
+   * @param tokens - Record of token names to replacement values
+   * @returns Content with tokens replaced
+   */
+  private applyTokens(content: string, tokens: Record<string, string>): string {
+    try {
+      let processedContent = content;
+      
+      for (const [key, value] of Object.entries(tokens)) {
+        if (value === null || value === undefined) {
+          console.warn(`Token '${key}' has null/undefined value, skipping replacement`);
+          continue;
+        }
+        
+        // Escape special regex characters in the key (same logic as presetContent.ts)
+        const escapedKey = key.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+        // Create regex pattern for {{key}} format
+        const tokenRegex = new RegExp(`\\{\\{${escapedKey}\\}\\}`, 'g');
+        processedContent = processedContent.replace(tokenRegex, String(value));
+      }
+      
+      return processedContent;
+    } catch (error) {
+      console.warn('Error applying tokens to content:', error);
+      return content; // Return original content on error
+    }
+  }
+
+  /**
+   * Generate cache key for token provider
+   */
+  private generateTokenCacheKey(tokenProvider?: TokenProvider): string {
+    // Simple cache key strategy - could be enhanced with provider-specific hashing
+    return tokenProvider ? 'custom-provider' : 'no-provider';
+  }
+
+  /**
+   * Get cached tokens for a given provider
+   */
+  private getCachedTokens(tokenProvider?: TokenProvider): Record<string, string> | null {
+    if (!this.enableCaching) return null;
+    const cacheKey = this.generateTokenCacheKey(tokenProvider);
+    return this.tokenCache.get(cacheKey) || null;
+  }
+
+  /**
+   * Set cached tokens for a given provider
+   */
+  private setCachedTokens(tokens: Record<string, string>, tokenProvider?: TokenProvider): void {
+    if (!this.enableCaching) return;
+    const cacheKey = this.generateTokenCacheKey(tokenProvider);
+    this.tokenCache.set(cacheKey, tokens);
+  }
+
+  /**
+   * Get tokens for interpolation with caching and error handling
+   */
+  private async getTokensForInterpolation(tokenProvider?: TokenProvider): Promise<Record<string, string> | null> {
+    try {
+      // Check cache first
+      const cachedTokens = this.getCachedTokens(tokenProvider);
+      if (cachedTokens) {
+        return cachedTokens;
+      }
+      
+      // Build tokens using provided provider
+      if (tokenProvider) {
+        const tokens = tokenProvider.buildTokens();
+        this.setCachedTokens(tokens, tokenProvider);
+        return tokens;
+      } else {
+        console.warn('Token interpolation requested but no tokenProvider provided');
+        return null;
+      }
+    } catch (error) {
+      console.warn('Error building tokens for interpolation:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Clear token cache
+   */
+  public clearTokenCache(): void {
+    this.tokenCache.clear();
+  }
+
+  /**
    * Clear all caches (both content and processing)
    */
   clearCache(): void {
     super.clearCache();
     this.contentCache.clear();
     this.processingCache.clear();
+    this.tokenCache.clear();
   }
 
   /**
@@ -252,6 +384,7 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
     return {
       contentCacheSize: this.contentCache.size,
       processingCacheSize: this.processingCache.size,
+      tokenCacheSize: this.tokenCache.size,
       cachingEnabled: this.enableCaching
     };
   }

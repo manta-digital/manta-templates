@@ -21,7 +21,9 @@ export type {
   ContentProvider,
   ContentData,
   ContentMeta,
-  ContentError
+  ContentError,
+  TokenProvider,
+  TokenConfig
 } from './content/types';
 export {
   ContentLoadError,

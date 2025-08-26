@@ -52,7 +52,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
               <img
                 src={coverImageUrl}
                 alt={title}
-                className="rounded-lg object-cover w-full h-full object-cover"
+                className="rounded-lg w-full h-full object-cover"
               />
             )}
           </div>

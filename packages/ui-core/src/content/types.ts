@@ -43,6 +43,8 @@ export interface ContentData<T> {
   contentHtml?: string;
   /** Raw markdown content for further processing */
   rawContent?: string;
+  /** Token interpolation results */
+  tokens?: Record<string, string>;
 }
 
 /**
@@ -121,4 +123,30 @@ export class ContentNotFoundError extends Error implements ContentError {
     this.name = 'ContentNotFoundError';
     this.cause = cause;
   }
+}
+
+/**
+ * Token Provider Interface
+ * 
+ * Provider interface for building token replacements for content interpolation.
+ * Allows framework-specific implementations to provide site-specific tokens.
+ */
+export interface TokenProvider {
+  /**
+   * Build tokens for content interpolation
+   * @returns Record of token names to replacement values
+   */
+  buildTokens(): Record<string, string>;
+}
+
+/**
+ * Token Configuration
+ * 
+ * Configuration for token interpolation in content loading.
+ */
+export interface TokenConfig {
+  /** Whether to enable token interpolation */
+  enableTokens?: boolean;
+  /** Provider for building tokens */
+  tokenProvider?: TokenProvider;
 }

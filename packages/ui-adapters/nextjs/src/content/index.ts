@@ -2,6 +2,7 @@ import { NextjsContentProvider } from './NextjsContentProvider';
 import type { ArticleContent, ProjectContent, QuoteContent } from '@manta-templates/ui-core';
 
 export { NextjsContentProvider };
+export { NextjsTokenProvider, buildTokens } from './tokenBuilder';
 
 // Single configurable Next.js content provider instance
 // Use with generic typing: nextjsContentProvider.loadContent<ArticleContent>('slug', 'articles')

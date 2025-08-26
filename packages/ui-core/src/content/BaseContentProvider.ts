@@ -1,4 +1,4 @@
-import { ContentProvider, ContentData, ContentMeta, ContentLoadError, ContentNotFoundError } from './types';
+import { ContentProvider, ContentData, ContentMeta, ContentLoadError, ContentNotFoundError, TokenConfig } from './types';
 import { ContentProcessor, ProcessorConfig } from './processor';
 
 /**
@@ -46,13 +46,27 @@ export abstract class BaseContentProvider<T = unknown> implements ContentProvide
   abstract loadAllRawContent(contentType: string): Promise<{ slug: string; content: string }[]>;
 
   /**
-   * Load and process a single piece of content with caching
+   * Load and process a single piece of content with caching and optional token interpolation
    * 
    * @param slug - The content identifier
    * @param contentType - The type/category of content
+   * @param options - Loading options including token configuration
+   * @param options.tokenConfig - Token interpolation configuration
    * @returns Promise resolving to processed content data
+   * 
+   * @example
+   * // Load content without tokens
+   * const content = await provider.loadContent('my-post', 'articles');
+   * 
+   * // Load content with token interpolation
+   * const content = await provider.loadContent('my-post', 'articles', {
+   *   tokenConfig: { 
+   *     enableTokens: true, 
+   *     tokenProvider: myTokenProvider 
+   *   }
+   * });
    */
-  async loadContent(slug: string, contentType: string): Promise<ContentData<T>> {
+  async loadContent(slug: string, contentType: string, options?: { tokenConfig?: TokenConfig }): Promise<ContentData<T>> {
     const cacheKey = `${contentType}:${slug}`;
     
     // Check cache first
