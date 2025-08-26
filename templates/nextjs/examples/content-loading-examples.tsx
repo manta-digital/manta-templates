@@ -192,9 +192,93 @@ export function ContentLoadingExamples() {
         </div>
       </section>
 
-      {/* Example 8: Markdown Format */}
+      {/* Example 8: Token Interpolation */}
+      <section className="border-b pb-8">
+        <h2 className="text-2xl font-semibold mb-4">8. Token Interpolation</h2>
+        <p className="text-gray-600 mb-4">
+          Use dynamic tokens in your markdown content for site-specific information
+        </p>
+        
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-mono text-sm text-gray-500 mb-2">Markdown with tokens:</h3>
+          <pre className="text-sm">
+{`---
+title: "Privacy Policy"
+---
+
+Last updated: {{copyright.lastUpdated}}
+
+## Contact Information
+
+For privacy questions, contact {{contacts.primaryEmail}}.
+Visit {{site.url}} for more information about {{site.name}}.
+
+© {{copyright.year}} {{copyright.holder}}. All rights reserved.`}
+          </pre>
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg mt-4">
+          <h3 className="font-mono text-sm text-gray-500 mb-2">Load content with token interpolation:</h3>
+          <pre className="text-sm">
+{`import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
+
+const content = await nextjsContentProvider.loadContent('privacy', 'legal/presets/mit', {
+  tokenConfig: {
+    enableTokens: true,
+    tokenProvider: new NextjsTokenProvider(siteConfig)
+  }
+});`}
+          </pre>
+        </div>
+
+        <div className="bg-green-50 p-4 rounded-lg mt-4">
+          <p className="text-sm"><strong>Supported tokens:</strong> site.name, site.url, author.name, contacts.primaryEmail, copyright.year, copyright.lastUpdated, copyright.holder</p>
+        </div>
+      </section>
+
+      {/* Example 9: Legal Content System */}
+      <section className="border-b pb-8">
+        <h2 className="text-2xl font-semibold mb-4">9. Legal Content System</h2>
+        <p className="text-gray-600 mb-4">
+          Framework-agnostic legal content with automatic token interpolation
+        </p>
+        
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-mono text-sm text-gray-500 mb-2">Legal page implementation:</h3>
+          <pre className="text-sm">
+{`export default async function PrivacyPage() {
+  const content = await nextjsContentProvider.loadContent<PrivacyContent>(
+    'privacy', 
+    'legal/presets/mit',
+    {
+      tokenConfig: {
+        enableTokens: true,
+        tokenProvider: new NextjsTokenProvider(siteConfig)
+      }
+    }
+  );
+
+  return (
+    <Container>
+      <ContentCard>
+        <h1>{content.frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: content.contentHtml }} />
+      </ContentCard>
+    </Container>
+  );
+}`}
+          </pre>
+        </div>
+
+        <div className="bg-purple-50 p-4 rounded-lg mt-4">
+          <p className="text-sm"><strong>Available presets:</strong> legal/presets/mit, legal/presets/full, legal/default</p>
+        </div>
+      </section>
+
+      {/* Example 10: Markdown Format */}
       <section>
-        <h2 className="text-2xl font-semibold mb-4">8. Markdown File Format</h2>
+        <h2 className="text-2xl font-semibold mb-4">10. Markdown File Format</h2>
         <p className="text-gray-600 mb-4">
           Required frontmatter format for content files
         </p>

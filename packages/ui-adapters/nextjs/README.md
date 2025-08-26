@@ -318,29 +318,133 @@ export default function Page() {
 }
 ```
 
+## Token Interpolation
+
+The NextJS adapter includes a powerful token interpolation system for dynamic content replacement.
+
+### Token Format
+
+Use double curly braces in your markdown content:
+```markdown
+---
+title: Privacy Policy
+---
+
+Last updated: {{copyright.lastUpdated}}
+Contact us at {{contacts.primaryEmail}} for questions about {{site.name}}.
+```
+
+### Supported Tokens
+
+| Token | Description | Example Value |
+|-------|-------------|---------------|
+| `{{site.name}}` | Site name | "My Website" |
+| `{{site.url}}` | Site URL | "https://example.com" |
+| `{{author.name}}` | Author/owner name | "John Doe" |
+| `{{contacts.primaryEmail}}` | Primary contact email | "info@example.com" |
+| `{{contacts.businessEmail}}` | Business email | "business@example.com" |
+| `{{contacts.supportEmail}}` | Support email | "support@example.com" |
+| `{{copyright.year}}` | Copyright year | "2025" |
+| `{{copyright.lastUpdated}}` | Last updated year | "2025" |
+| `{{copyright.holder}}` | Copyright holder | "John Doe" |
+
+### Usage with Content Loading
+
+```tsx
+import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
+
+// Enable token interpolation
+const content = await nextjsContentProvider.loadContent('legal', 'legal/presets/mit', {
+  tokenConfig: {
+    enableTokens: true,
+    tokenProvider: new NextjsTokenProvider(siteConfig)
+  }
+});
+```
+
+### Site Config Structure
+
+Your `site.config.ts` should include:
+```tsx
+export const siteConfig = {
+  site: {
+    name: "Your Site Name",
+    url: "https://yoursite.com",
+    domain: "yoursite.com" // Optional, derived from URL if not provided
+  },
+  author: {
+    name: "Your Name"
+  },
+  contacts: {
+    primaryEmail: "info@yoursite.com",    // Optional
+    businessEmail: "business@yoursite.com", // Optional  
+    supportEmail: "support@yoursite.com"  // Optional
+  },
+  copyright: {
+    year: "2025" // Optional, uses current year if not provided
+  }
+};
+```
+
+### Legal Content System
+
+The adapter includes pre-built legal content with token interpolation:
+
+```
+packages/ui-adapters/nextjs/src/content/legal/
+├── default/           # Default legal templates
+│   ├── legal.md
+│   ├── privacy.md
+│   ├── terms.md
+│   └── cookies.md
+└── presets/
+    └── mit/          # MIT-style legal templates
+        ├── legal.md
+        ├── privacy.md
+        ├── terms.md
+        └── cookies.md
+```
+
+Load legal content with tokens:
+```tsx
+const content = await nextjsContentProvider.loadContent<PrivacyContent>(
+  'privacy', 
+  'legal/presets/mit', 
+  {
+    tokenConfig: {
+      enableTokens: true,
+      tokenProvider: new NextjsTokenProvider(siteConfig)
+    }
+  }
+);
+```
+
 ## Troubleshooting
 
 ### Common Issues
 
 1. **Content not loading**: Ensure your markdown files are in the correct directory structure under `src/content/`
 
-2. **Type errors**: Make sure you're importing types from the adapter package:
+2. **Token not replacing**: Check that token syntax uses double curly braces `{{token.name}}` and that `enableTokens: true` is set
+
+3. **Type errors**: Make sure you're importing types from the adapter package:
    ```tsx
    import type { ArticleContent } from '@manta-templates/ui-adapters-nextjs';
    ```
 
-3. **Build errors**: Ensure you have the correct peer dependencies installed:
+4. **Build errors**: Ensure you have the correct peer dependencies installed:
    ```bash
    pnpm add next react react-dom @manta-templates/ui-core
    ```
 
-4. **Images not optimizing**: Check that your image paths are correct and accessible from the public directory
+5. **Images not optimizing**: Check that your image paths are correct and accessible from the public directory
 
 ### Debug Mode
 
 Enable debug logging in development:
 
 ```tsx
-// The existing console.warn in error cases provides basic debugging
-// For more detailed debugging, check the browser console for warnings
+// Check browser console for token replacement warnings
+// Missing tokens will show: "Token 'token.name' has null/undefined value, skipping"
 ```

@@ -320,133 +320,133 @@ lastUpdated: 2025-08-26
 ### Task 7: Move Legal Content from Template to ui-adapters-nextjs
 
 #### Create content directory structure
-- [ ] **Set up legal content directories in ui-adapters-nextjs**
-  - [ ] Create `/packages/ui-adapters/nextjs/src/content/legal/` directory
-  - [ ] Create subdirectories: `default/` and `presets/mit/`
-  - [ ] Mirror existing template structure
-  - [ ] Success: Directory structure created
+- [x] **Set up legal content directories in ui-adapters-nextjs**
+  - [x] Create `/packages/ui-adapters/nextjs/src/content/legal/` directory
+  - [x] Create subdirectories: `default/` and `presets/mit/`
+  - [x] Mirror existing template structure
+  - [x] Success: Directory structure created
 
 #### Copy legal content files
-- [ ] **Move legal markdown files**
-  - [ ] Copy `/templates/nextjs/src/content/legal/*.md` to `ui-adapters-nextjs/src/content/legal/default/`
-  - [ ] Copy `/templates/nextjs/src/content/presets/mit/legal/*.md` to `ui-adapters-nextjs/src/content/legal/presets/mit/`
-  - [ ] Include all files: legal.md, privacy.md, terms.md, cookies.md
-  - [ ] Preserve token placeholders and frontmatter exactly
-  - [ ] Success: Legal content moved to ui-adapters-nextjs
+- [x] **Move legal markdown files**
+  - [x] Copy `/templates/nextjs/src/content/legal/*.md` to `ui-adapters-nextjs/src/content/legal/default/`
+  - [x] Copy `/templates/nextjs/src/content/presets/mit/legal/*.md` to `ui-adapters-nextjs/src/content/legal/presets/mit/`
+  - [x] Include all files: legal.md, privacy.md, terms.md, cookies.md
+  - [x] Preserve token placeholders and frontmatter exactly
+  - [x] Success: Legal content moved to ui-adapters-nextjs
 
 #### Update NextjsContentProvider content path
-- [ ] **Configure NextjsContentProvider to load from new location**
-  - [ ] Update contentRoot path to point to ui-adapters-nextjs content directory
-  - [ ] Adjust preset path logic for new structure
-  - [ ] Test that content loads from new location
-  - [ ] Ensure template can still override if needed (backward compatibility)
-  - [ ] Success: Content loads from ui-adapters-nextjs, maintains flexibility
+- [x] **Configure NextjsContentProvider to load from new location**
+  - [x] Update contentRoot path to point to ui-adapters-nextjs content directory
+  - [x] Adjust preset path logic for new structure
+  - [x] Test that content loads from new location
+  - [x] Ensure template can still override if needed (backward compatibility)
+  - [x] Success: Content loads from ui-adapters-nextjs, maintains flexibility
 
 ### Task 8: Create getDefaultLegalContent Helper in ui-core
 
 #### Create legal content helper
-- [ ] **Add `/packages/ui-core/src/content/legalContent.ts`**
-  - [ ] Create function signature:
+- [x] **Add `/packages/ui-core/src/content/legalContent.ts`**
+  - [x] Create function signature:
     ```typescript
     export function getDefaultLegalContent(
       type: 'legal' | 'privacy' | 'terms' | 'cookies', 
       preset: 'mit' | 'full'
     ): ContentData
     ```
-  - [ ] Include hardcoded fallback content for each legal page type
-  - [ ] Support both MIT and full legal presets
-  - [ ] Success: Legal content helper created
+  - [x] Include hardcoded fallback content for each legal page type
+  - [x] Support both MIT and full legal presets
+  - [x] Success: Legal content helper created
 
 #### Add TypeScript interfaces
-- [ ] **Define legal content types**
-  - [ ] Create `LegalContentType` and `LegalPreset` types
-  - [ ] Add `DefaultLegalContent` interface matching ContentData structure
-  - [ ] Include proper frontmatter types for legal pages
-  - [ ] Success: Type definitions added
+- [x] **Define legal content types**
+  - [x] Create `LegalContentType` and `LegalPreset` types
+  - [x] Add `DefaultLegalContent` interface matching ContentData structure
+  - [x] Include proper frontmatter types for legal pages
+  - [x] Success: Type definitions added
 
 #### Update exports
-- [ ] **Export from ui-core**
-  - [ ] Add exports to `/packages/ui-core/src/content/index.ts`
-  - [ ] Update main ui-core index.ts exports
-  - [ ] Add JSDoc documentation for the helper function
-  - [ ] Test import from external package
-  - [ ] Success: Framework-agnostic legal fallback content available
+- [x] **Export from ui-core**
+  - [x] Add exports to `/packages/ui-core/src/content/index.ts`
+  - [x] Update main ui-core index.ts exports
+  - [x] Add JSDoc documentation for the helper function
+  - [x] Test import from external package
+  - [x] Success: Framework-agnostic legal fallback content available
 
 ### Task 9: Remove presetContent.ts Dependency from Template
 
 #### Audit remaining usage
-- [ ] **Search for remaining presetContent.ts dependencies**
-  - [ ] Use grep/search to find `getPresetContent` imports in `/templates/nextjs/src/`
-  - [ ] Check if any other files depend on presetContent.ts functions
-  - [ ] Verify content.ts (getContentBySlug) is still needed for other content
-  - [ ] Success: Complete audit of presetContent.ts usage
+- [x] **Search for remaining presetContent.ts dependencies**
+  - [x] Use grep/search to find `getPresetContent` imports in `/templates/nextjs/src/`
+  - [x] Check if any other files depend on presetContent.ts functions
+  - [x] Verify content.ts (getContentBySlug) is still needed for other content
+  - [x] Success: Complete audit of presetContent.ts usage
 
 #### Update remaining legal pages
-- [ ] **Update other legal pages (privacy, terms, cookies) if needed**
-  - [ ] Apply same changes as done to /legal page in Task 6
-  - [ ] Replace getPresetContent calls with nextjsContentProvider.loadContent
-  - [ ] Add token interpolation support
-  - [ ] Test each page works correctly
-  - [ ] Success: All legal pages use new system
+- [x] **Update other legal pages (privacy, terms, cookies) if needed**
+  - [x] Apply same changes as done to /legal page in Task 6
+  - [x] Replace getPresetContent calls with nextjsContentProvider.loadContent
+  - [x] Add token interpolation support
+  - [x] Test each page works correctly
+  - [x] Success: All legal pages use new system
 
 #### Clean up unused code
-- [ ] **Remove presetContent.ts if no longer needed**
-  - [ ] Delete `/templates/nextjs/src/lib/presetContent.ts`
-  - [ ] Remove any presetContent-specific dependencies from package.json
-  - [ ] Update any remaining imports that referenced presetContent
-  - [ ] Run build to verify no broken references
-  - [ ] Success: presetContent.ts removed cleanly, no broken imports
+- [x] **Remove presetContent.ts if no longer needed**
+  - [x] Delete `/templates/nextjs/src/lib/presetContent.ts`
+  - [x] Remove any presetContent-specific dependencies from package.json
+  - [x] Update any remaining imports that referenced presetContent
+  - [x] Run build to verify no broken references
+  - [x] Success: presetContent.ts removed cleanly, no broken imports
 
 ## Phase 3: Testing & Finalization
 
 ### Task 10: Test All Legal Pages Work with New System
 
 #### Test individual legal pages
-- [ ] **Verify each legal page loads correctly**
-  - [ ] Navigate to `/legal` and verify content loads with tokens replaced
-  - [ ] Navigate to `/privacy` and verify nextjsContentProvider works
-  - [ ] Navigate to `/terms` and verify nextjsContentProvider works
-  - [ ] Navigate to `/cookies` and verify nextjsContentProvider works
-  - [ ] Success: All legal pages load correctly
+- [x] **Verify each legal page loads correctly**
+  - [x] Navigate to `/legal` and verify content loads with tokens replaced
+  - [x] Navigate to `/privacy` and verify nextjsContentProvider works
+  - [x] Navigate to `/terms` and verify nextjsContentProvider works
+  - [x] Navigate to `/cookies` and verify nextjsContentProvider works
+  - [x] Success: All legal pages load correctly
 
 #### Verify token interpolation
-- [ ] **Check token replacement across all pages**
-  - [ ] Verify `{{site.url}}` shows correct site URL
-  - [ ] Verify `{{copyright.holder}}` shows correct owner name
-  - [ ] Verify `{{contacts.primaryEmail}}` shows correct email
-  - [ ] Check `{{copyright.lastUpdated}}` shows current year
-  - [ ] Success: All tokens interpolated correctly on all pages
+- [x] **Check token replacement across all pages**
+  - [x] Verify `{{site.url}}` shows correct site URL
+  - [x] Verify `{{copyright.holder}}` shows correct owner name
+  - [x] Verify `{{contacts.primaryEmail}}` shows correct email
+  - [x] Check `{{copyright.lastUpdated}}` shows current year
+  - [x] Success: All tokens interpolated correctly on all pages
 
 #### Test error scenarios
-- [ ] **Verify error handling and fallbacks**
-  - [ ] Test behavior when legal content files are missing
-  - [ ] Test when token interpolation fails (graceful degradation)
-  - [ ] Verify fallback content from getDefaultLegalContent works
-  - [ ] Test both MIT and full legal presets if applicable
-  - [ ] Success: Error handling works, fallbacks function properly
+- [x] **Verify error handling and fallbacks**
+  - [x] Test behavior when legal content files are missing
+  - [x] Test when token interpolation fails (graceful degradation)
+  - [x] Verify fallback content from getDefaultLegalContent works
+  - [x] Test both MIT and full legal presets if applicable
+  - [x] Success: Error handling works, fallbacks function properly
 
 ### Task 11: Build and Commit Legal Migration
 
 #### Run comprehensive build
-- [ ] **Execute full project build**
-  - [ ] Run `pnpm build` from project root
-  - [ ] Verify ui-core package builds successfully
-  - [ ] Verify ui-adapters/nextjs package builds successfully
-  - [ ] Verify templates/nextjs builds successfully
-  - [ ] Success: All packages build without errors
+- [x] **Execute full project build**
+  - [x] Run `pnpm build` from project root
+  - [x] Verify ui-core package builds successfully
+  - [x] Verify ui-adapters/nextjs package builds successfully
+  - [x] Verify templates/nextjs builds successfully
+  - [x] Success: All packages build without errors
 
 #### Fix any issues
-- [ ] **Resolve build problems if any**
-  - [ ] Fix TypeScript compilation errors
-  - [ ] Resolve missing imports or exports
-  - [ ] Address linting issues
-  - [ ] Update dependencies if needed
-  - [ ] Success: Clean build with no errors or warnings
+- [x] **Resolve build problems if any**
+  - [x] Fix TypeScript compilation errors
+  - [x] Resolve missing imports or exports
+  - [x] Address linting issues
+  - [x] Update dependencies if needed
+  - [x] Success: Clean build with no errors or warnings
 
 #### Create git commit
-- [ ] **Commit all changes**
-  - [ ] Stage changes: `git add .`
-  - [ ] Create detailed commit message:
+- [x] **Commit all changes**
+  - [x] Stage changes: `git add .`
+  - [x] Create detailed commit message:
     ```
     feat: implement token interpolation system and migrate legal content
     
@@ -460,41 +460,41 @@ lastUpdated: 2025-08-26
     
     Co-Authored-By: Claude <noreply@anthropic.com>
     ```
-  - [ ] Reference feature document: project-artifacts/nextjs-template/features/03-feature-token-and-legal.md
-  - [ ] Success: Comprehensive commit created with clear message
+  - [x] Reference feature document: project-artifacts/nextjs-template/features/03-feature-token-and-legal.md
+  - [x] Success: Comprehensive commit created with clear message
 
 ### Task 12: Update Documentation and Examples
 
 #### Update package documentation
-- [ ] **Add token system docs to ui-adapters README**
-  - [ ] Document NextjsTokenProvider usage in `/packages/ui-adapters/nextjs/README.md`
-  - [ ] Include examples of token interpolation
-  - [ ] List supported token types (site.*, author.*, etc.)
-  - [ ] Add migration guide for other frameworks
-  - [ ] Success: Package documentation updated
+- [x] **Add token system docs to ui-adapters README**
+  - [x] Document NextjsTokenProvider usage in `/packages/ui-adapters/nextjs/README.md`
+  - [x] Include examples of token interpolation
+  - [x] List supported token types (site.*, author.*, etc.)
+  - [x] Add migration guide for other frameworks
+  - [x] Success: Package documentation updated
 
 #### Update template documentation
-- [ ] **Document new system in template**
-  - [ ] Update `/templates/nextjs/examples/migration-guide.md` with token examples
-  - [ ] Document how to customize legal content
-  - [ ] Show framework-agnostic legal content usage patterns
-  - [ ] Success: Template documentation comprehensive
+- [x] **Document new system in template**
+  - [x] Update `/templates/nextjs/examples/migration-guide.md` with token examples
+  - [x] Document how to customize legal content
+  - [x] Show framework-agnostic legal content usage patterns
+  - [x] Success: Template documentation comprehensive
 
 #### Create usage examples
-- [ ] **Add practical examples**
-  - [ ] Add token interpolation examples to `/templates/nextjs/examples/content-loading-examples.tsx`
-  - [ ] Show nextjsContentProvider usage with tokens
-  - [ ] Demonstrate legal content loading patterns
-  - [ ] Include error handling examples
-  - [ ] Success: Comprehensive usage examples created
+- [x] **Add practical examples**
+  - [x] Add token interpolation examples to `/templates/nextjs/examples/content-loading-examples.tsx`
+  - [x] Show nextjsContentProvider usage with tokens
+  - [x] Demonstrate legal content loading patterns
+  - [x] Include error handling examples
+  - [x] Success: Comprehensive usage examples created
 
 #### Final documentation review
-- [ ] **Verify documentation completeness**
-  - [ ] Check all new APIs are documented
-  - [ ] Ensure examples work as written
-  - [ ] Verify migration instructions are clear
-  - [ ] Test documentation with fresh perspective
-  - [ ] Success: Complete documentation for token system and legal content migration
+- [x] **Verify documentation completeness**
+  - [x] Check all new APIs are documented
+  - [x] Ensure examples work as written
+  - [x] Verify migration instructions are clear
+  - [x] Test documentation with fresh perspective
+  - [x] Success: Complete documentation for token system and legal content migration
 
 ---
 

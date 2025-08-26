@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/content dist/",
     "dev": "tsc --watch",
     "clean": "rm -rf dist"
   },

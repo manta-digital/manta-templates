@@ -364,14 +364,71 @@ If you need to rollback a migration:
    />
    ```
 
+## Token Interpolation Migration
+
+The new system includes powerful token interpolation for dynamic content:
+
+### Adding Token Support to Existing Content
+
+**Before:**
+```markdown
+---
+title: Privacy Policy
+---
+
+Last updated: 2024
+Contact us at info@example.com for questions.
+```
+
+**After:**
+```markdown
+---
+title: Privacy Policy
+---
+
+Last updated: {{copyright.lastUpdated}}
+Contact us at {{contacts.primaryEmail}} for questions about {{site.name}}.
+```
+
+### Legal Pages Migration
+
+Legal pages now use token interpolation automatically:
+
+```tsx
+// Legal pages (privacy, terms, cookies) now include:
+const content = await nextjsContentProvider.loadContent<LegalContent>(
+  'privacy', 
+  'legal/presets/mit', 
+  {
+    tokenConfig: {
+      enableTokens: true,
+      tokenProvider: new NextjsTokenProvider(siteConfig)
+    }
+  }
+);
+```
+
+### Available Tokens
+
+| Token | Replaces |
+|-------|----------|
+| `{{site.name}}` | Your site name |
+| `{{site.url}}` | Your site URL |
+| `{{author.name}}` | Author/owner name |
+| `{{contacts.primaryEmail}}` | Primary contact email |
+| `{{copyright.year}}` | Copyright year |
+| `{{copyright.lastUpdated}}` | Last updated year |
+| `{{copyright.holder}}` | Copyright holder name |
+
 ## Next Steps
 
 After successful migration:
 
 1. **Remove unused code:** Clean up old content loading utilities if no longer needed
-2. **Optimize content structure:** Organize content files by type for better maintainability
-3. **Explore advanced features:** Custom content providers, error handling, loading states
-4. **Consider other frameworks:** The same content can be used with Astro, React Router, etc.
+2. **Optimize content structure:** Organize content files by type for better maintainability  
+3. **Add token interpolation:** Update content with dynamic tokens for site-specific information
+4. **Explore advanced features:** Custom content providers, error handling, loading states
+5. **Consider other frameworks:** The same content can be used with Astro, React Router, etc.
 
 ## Support
 
