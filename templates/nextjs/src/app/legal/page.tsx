@@ -1,12 +1,49 @@
 import React from 'react';
 import { ContentCard, Container } from '@manta-templates/ui-core';
-import { getPresetContent } from '@/lib/presetContent';
+import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
 
 export default async function LegalPage() {
-  let content: { frontmatter: { title?: string }; contentHtml: string } | null = null;
+  let content: { frontmatter: { title?: string }; contentHtml: string; tokens?: Record<string, string> } | null = null;
   
   try {
-    content = await getPresetContent('legal', 'legal', 'mit');
+    // Determine legal content path based on preset configuration
+    const preset = siteConfig.presets.legal || 'mit';
+    let contentData;
+    
+    if (preset === 'mit') {
+      // Try loading from presets/mit/legal first
+      try {
+        contentData = await nextjsContentProvider.loadContent('legal', 'presets/mit/legal', {
+          tokenConfig: {
+            enableTokens: true,
+            tokenProvider: new NextjsTokenProvider(siteConfig)
+          }
+        });
+      } catch {
+        // Fallback to default legal content
+        contentData = await nextjsContentProvider.loadContent('legal', 'legal', {
+          tokenConfig: {
+            enableTokens: true,
+            tokenProvider: new NextjsTokenProvider(siteConfig)
+          }
+        });
+      }
+    } else {
+      // Load from default legal directory
+      contentData = await nextjsContentProvider.loadContent('legal', 'legal', {
+        tokenConfig: {
+          enableTokens: true,
+          tokenProvider: new NextjsTokenProvider(siteConfig)
+        }
+      });
+    }
+    
+    content = {
+      frontmatter: contentData.frontmatter as { title?: string },
+      contentHtml: contentData.contentHtml || '',
+      tokens: contentData.tokens
+    };
   } catch (error: unknown) {
     console.error('Error loading legal content:', error);
     // Fallback content

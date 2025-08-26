@@ -77,7 +77,7 @@ export function AboutCard({
         </div>
         <div className="flex-1 flex flex-col justify-center">
           <h3 className="text-xl font-bold text-foreground">{title}</h3>
-          {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+          {description && <p className="text-sm text-foreground mt-1">{description}</p>}
         </div>
       </div>
 
