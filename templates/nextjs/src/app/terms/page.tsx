@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
 
 interface TermsContent {
   title?: string;
@@ -10,7 +11,12 @@ export default async function TermsPage() {
   let content: ContentData<TermsContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<TermsContent>('terms', 'legal');
+    content = await nextjsContentProvider.loadContent<TermsContent>('terms', 'legal/presets/mit', {
+      tokenConfig: {
+        enableTokens: true,
+        tokenProvider: new NextjsTokenProvider(siteConfig)
+      }
+    });
   } catch (error: unknown) {
     console.error('Error loading terms content:', error);
     // Fallback content

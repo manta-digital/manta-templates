@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
 
 interface CookiesContent {
   title?: string;
@@ -10,7 +11,12 @@ export default async function CookiesPage() {
   let content: ContentData<CookiesContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<CookiesContent>('cookies', 'legal');
+    content = await nextjsContentProvider.loadContent<CookiesContent>('cookies', 'legal/presets/mit', {
+      tokenConfig: {
+        enableTokens: true,
+        tokenProvider: new NextjsTokenProvider(siteConfig)
+      }
+    });
   } catch (error: unknown) {
     console.error('Error loading cookies content:', error);
     // Fallback content

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContentCard, Container, ContentData } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
+import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { siteConfig } from '@/content/site.config';
 
 interface PrivacyContent {
   title?: string;
@@ -10,7 +11,12 @@ export default async function PrivacyPage() {
   let content: ContentData<PrivacyContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<PrivacyContent>('privacy', 'legal');
+    content = await nextjsContentProvider.loadContent<PrivacyContent>('privacy', 'legal/presets/mit', {
+      tokenConfig: {
+        enableTokens: true,
+        tokenProvider: new NextjsTokenProvider(siteConfig)
+      }
+    });
   } catch (error: unknown) {
     console.error('Error loading privacy content:', error);
     // Fallback content

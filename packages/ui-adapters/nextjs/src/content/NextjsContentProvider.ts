@@ -17,6 +17,10 @@ interface NextjsContentProviderConfig {
    */
   contentRoot?: string;
   /**
+   * Additional content roots to search for files (searched in order)
+   */
+  additionalContentRoots?: string[];
+  /**
    * Enable server-side caching for improved performance
    */
   enableCaching?: boolean;
@@ -36,6 +40,7 @@ interface NextjsContentProviderConfig {
  */
 export class NextjsContentProvider extends BaseContentProvider<unknown> {
   private contentRoot: string;
+  private additionalContentRoots: string[];
   private enableCaching: boolean;
   private codeTheme: string;
   private processingCache = new Map<string, string>();
@@ -76,64 +81,82 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
   constructor(config: NextjsContentProviderConfig = {}) {
     super();
     this.contentRoot = config.contentRoot || path.join(process.cwd(), 'src', 'content');
+    this.additionalContentRoots = config.additionalContentRoots || [];
     this.enableCaching = config.enableCaching ?? true;
     this.codeTheme = config.codeTheme || 'github-dark';
   }
 
   /**
-   * Load raw markdown content from filesystem
+   * Load raw markdown content from filesystem with multi-location support
    */
   async loadRawContent(slug: string, contentType: string): Promise<string> {
-    const contentDir = path.join(this.contentRoot, contentType);
-    const fullPath = path.join(contentDir, `${slug}.md`);
+    // Create list of all content roots to search (primary + additional)
+    const contentRoots = [this.contentRoot, ...this.additionalContentRoots];
+    
+    let lastError: Error | null = null;
+    
+    // Try each content root in order
+    for (const contentRoot of contentRoots) {
+      const contentDir = path.join(contentRoot, contentType);
+      const fullPath = path.join(contentDir, `${slug}.md`);
 
-    try {
-      if (!fs.existsSync(fullPath)) {
-        throw new ContentNotFoundError(`Content not found: ${contentType}/${slug}`);
+      try {
+        if (fs.existsSync(fullPath)) {
+          const fileContents = fs.readFileSync(fullPath, 'utf8');
+          return fileContents;
+        }
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error('Unknown error');
+        // Continue to next content root
+        continue;
       }
-
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      return fileContents;
-    } catch (error) {
-      if (error instanceof ContentNotFoundError) {
-        throw error;
-      }
-      throw new ContentLoadError(
-        `Failed to load content ${contentType}/${slug}: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        error instanceof Error ? error : undefined
-      );
     }
+
+    // If we get here, file wasn't found in any content root
+    throw new ContentNotFoundError(`Content not found: ${contentType}/${slug} (searched ${contentRoots.length} locations)`);
   }
 
   /**
-   * Load raw content for all items of a given type
+   * Load raw content for all items of a given type from all content roots
    */
   async loadAllRawContent(contentType: string): Promise<{ slug: string; content: string }[]> {
-    const contentDir = path.join(this.contentRoot, contentType);
+    const contentRoots = [this.contentRoot, ...this.additionalContentRoots];
+    const results: { slug: string; content: string }[] = [];
+    const processedSlugs = new Set<string>(); // Avoid duplicates
     
     try {
-      if (!fs.existsSync(contentDir)) {
-        console.warn(`Content directory not found: ${contentDir}`);
-        return [];
-      }
-
-      const fileNames = fs.readdirSync(contentDir);
-      const results: { slug: string; content: string }[] = [];
-
-      for (const fileName of fileNames) {
-        if (!fileName.endsWith('.md')) {
-          continue;
+      // Search through all content roots
+      for (const contentRoot of contentRoots) {
+        const contentDir = path.join(contentRoot, contentType);
+        
+        if (!fs.existsSync(contentDir)) {
+          continue; // Skip non-existent directories
         }
 
-        const slug = fileName.replace(/\.md$/, '');
-        const fullPath = path.join(contentDir, fileName);
-        
-        try {
-          const content = fs.readFileSync(fullPath, 'utf8');
-          results.push({ slug, content });
-        } catch (error) {
-          console.warn(`Failed to read content file ${fullPath}:`, error);
-          // Continue processing other files
+        const fileNames = fs.readdirSync(contentDir);
+
+        for (const fileName of fileNames) {
+          if (!fileName.endsWith('.md')) {
+            continue;
+          }
+
+          const slug = fileName.replace(/\.md$/, '');
+          
+          // Skip if we've already processed this slug (first match wins)
+          if (processedSlugs.has(slug)) {
+            continue;
+          }
+          
+          const fullPath = path.join(contentDir, fileName);
+          
+          try {
+            const content = fs.readFileSync(fullPath, 'utf8');
+            results.push({ slug, content });
+            processedSlugs.add(slug);
+          } catch (error) {
+            console.warn(`Failed to read content file ${fullPath}:`, error);
+            // Continue processing other files
+          }
         }
       }
 

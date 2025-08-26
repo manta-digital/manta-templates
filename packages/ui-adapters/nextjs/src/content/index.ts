@@ -1,5 +1,6 @@
 import { NextjsContentProvider } from './NextjsContentProvider';
 import type { ArticleContent, ProjectContent, QuoteContent } from '@manta-templates/ui-core';
+import path from 'path';
 
 export { NextjsContentProvider };
 export { NextjsTokenProvider, buildTokens } from './tokenBuilder';
@@ -8,7 +9,17 @@ export { NextjsTokenProvider, buildTokens } from './tokenBuilder';
 // Use with generic typing: nextjsContentProvider.loadContent<ArticleContent>('slug', 'articles')
 export const nextjsContentProvider = new NextjsContentProvider({
   enableCaching: true,
-  codeTheme: 'github-dark'
+  codeTheme: 'github-dark',
+  // Add ui-adapters-nextjs content directory as additional search location
+  // Use fallback strategy: try to find content in source directory during development
+  additionalContentRoots: [
+    // Try the built location first (for production)
+    path.join(__dirname, '../content'),
+    // Fallback to source location (for development with monorepo structure)
+    path.resolve(__dirname, '../../src/content'),
+    // Additional fallback for when running from different locations
+    path.resolve(process.cwd(), 'packages/ui-adapters/nextjs/src/content'),
+  ]
 });
 
 // Types for Next.js specific content structures
