@@ -153,14 +153,14 @@ This will allow themes to have their own tinted neutral scales while maintaining
 
 ### Task 5: Visual Regression Testing
 **Priority**: P0 (Critical - quality gate)
-- [ ] **Test all theme combinations**
+- [x] **Test all theme combinations**
   - Screenshot existing ui-core themes (teal, mintteal, blue, purple, orange)
   - Screenshot new user theme examples
   - Verify ColorSelector works with extended theme list
-- [ ] **Multi-browser testing**
+- [x] **Multi-browser testing**
   - Test Chrome, Firefox, Safari rendering
   - Verify color accuracy across browsers
-- [ ] **Light/dark mode testing**
+- [x] **Light/dark mode testing**
   - Test theme switching works correctly for all themes
   - Verify both ui-core and user themes work in dark mode
 - **Success**: All themes work correctly across browsers and modes
