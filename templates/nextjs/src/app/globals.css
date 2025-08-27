@@ -8,3 +8,34 @@
 /* Template-specific customizations only - all color system moved to ui-core */
 
 /* You can add template-specific styles below */
+
+/* Example custom theme - Forest theme with green-tinted neutrals */
+[data-palette="forest"] {
+  /* Use built-in green accent colors */
+  --color-accent-1: var(--green-1);
+  --color-accent-2: var(--green-2);
+  --color-accent-3: var(--green-3);
+  --color-accent-4: var(--green-4);
+  --color-accent-5: var(--green-5);
+  --color-accent-6: var(--green-6);
+  --color-accent-7: var(--green-7);
+  --color-accent-8: var(--green-8);
+  --color-accent-9: var(--green-9);
+  --color-accent-10: var(--green-10);
+  --color-accent-11: var(--green-11);
+  --color-accent-12: var(--green-12);
+
+  /* Green-tinted neutrals for forest feel */
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
+}

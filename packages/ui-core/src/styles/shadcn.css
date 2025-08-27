@@ -6,24 +6,24 @@
   --radius: 1.5rem;
   
   /* Light mode color system */
-  --background: var(--gray-1);
-  --foreground: var(--gray-12);
-  --card: var(--gray-1);
-  --card-foreground: var(--gray-12);
-  --popover: var(--gray-1);
-  --popover-foreground: var(--gray-12);
+  --background: var(--color-neutral-1);
+  --foreground: var(--color-neutral-12);
+  --card: var(--color-neutral-1);
+  --card-foreground: var(--color-neutral-12);
+  --popover: var(--color-neutral-1);
+  --popover-foreground: var(--color-neutral-12);
   --primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
-  --primary-foreground: var(--gray-1);
-  --secondary: var(--gray-2);
-  --secondary-foreground: var(--gray-12);
-  --muted: var(--gray-2);
-  --muted-foreground: var(--gray-8);
-  --accent: var(--gray-2);
-  --accent-foreground: var(--gray-12);
+  --primary-foreground: var(--color-neutral-1);
+  --secondary: var(--color-neutral-2);
+  --secondary-foreground: var(--color-neutral-12);
+  --muted: var(--color-neutral-2);
+  --muted-foreground: var(--color-neutral-8);
+  --accent: var(--color-neutral-2);
+  --accent-foreground: var(--color-neutral-12);
   --destructive: oklch(0.577 0.245 27.325);  /* Keep red for errors */
   --border: var(--color-border-accent);
-  --input: var(--gray-3);
-  --ring: var(--gray-7);
+  --input: var(--color-neutral-3);
+  --ring: var(--color-neutral-7);
   
   /* Chart colors for data visualization - themed */
   --chart-1: var(--color-accent-9);    /* Primary brand */
@@ -33,47 +33,47 @@
   --chart-5: var(--destructive);       /* Error/negative */
   
   /* Sidebar system for complex layouts */
-  --sidebar: var(--gray-1);
-  --sidebar-foreground: var(--gray-12);
+  --sidebar: var(--color-neutral-1);
+  --sidebar-foreground: var(--color-neutral-12);
   --sidebar-primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
-  --sidebar-primary-foreground: var(--gray-1);
-  --sidebar-accent: var(--gray-2);
-  --sidebar-accent-foreground: var(--gray-12);
-  --sidebar-border: var(--gray-5);
-  --sidebar-ring: var(--gray-7);
+  --sidebar-primary-foreground: var(--color-neutral-1);
+  --sidebar-accent: var(--color-neutral-2);
+  --sidebar-accent-foreground: var(--color-neutral-12);
+  --sidebar-border: var(--color-neutral-5);
+  --sidebar-ring: var(--color-neutral-7);
 }
 
 /* Dark mode color adjustments */
 .dark {
-  --background: var(--gray-1);
-  --foreground: var(--gray-12);
-  --card: var(--gray-2);
-  --card-foreground: var(--gray-12);
-  --popover: var(--gray-2);
-  --popover-foreground: var(--gray-12);
+  --background: var(--color-neutral-1);
+  --foreground: var(--color-neutral-12);
+  --card: var(--color-neutral-2);
+  --card-foreground: var(--color-neutral-12);
+  --popover: var(--color-neutral-2);
+  --popover-foreground: var(--color-neutral-12);
   --primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
-  --primary-foreground: var(--gray-1);
-  --secondary: var(--gray-3);
-  --secondary-foreground: var(--gray-12);
-  --muted: var(--gray-3);
-  --muted-foreground: var(--gray-8);
-  --accent: var(--gray-3);
-  --accent-foreground: var(--gray-12);
+  --primary-foreground: var(--color-neutral-1);
+  --secondary: var(--color-neutral-3);
+  --secondary-foreground: var(--color-neutral-12);
+  --muted: var(--color-neutral-3);
+  --muted-foreground: var(--color-neutral-8);
+  --accent: var(--color-neutral-3);
+  --accent-foreground: var(--color-neutral-12);
   --destructive: oklch(0.704 0.191 22.216);
   --border: var(--color-border-accent);
-  --input: var(--gray-1);  /* Use solid background instead of alpha */
-  --ring: var(--gray-7);
+  --input: var(--color-neutral-1);  /* Use solid background instead of alpha */
+  --ring: var(--color-neutral-7);
   
   /* Chart colors - themed (same in dark mode) */
   /* Colors automatically adjust via semantic variables */
   
   /* Sidebar dark mode adjustments */
-  --sidebar: var(--gray-2);
-  --sidebar-foreground: var(--gray-12);
+  --sidebar: var(--color-neutral-2);
+  --sidebar-foreground: var(--color-neutral-12);
   --sidebar-primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
-  --sidebar-primary-foreground: var(--gray-12);
-  --sidebar-accent: var(--gray-3);
-  --sidebar-accent-foreground: var(--gray-12);
-  --sidebar-border: var(--gray-4);
-  --sidebar-ring: var(--gray-7);
+  --sidebar-primary-foreground: var(--color-neutral-12);
+  --sidebar-accent: var(--color-neutral-3);
+  --sidebar-accent-foreground: var(--color-neutral-12);
+  --sidebar-border: var(--color-neutral-4);
+  --sidebar-ring: var(--color-neutral-7);
 }

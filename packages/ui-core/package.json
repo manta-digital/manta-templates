@@ -15,7 +15,14 @@
     "test": "tsx src/__tests__/content.test.ts && tsx src/__tests__/header.test.ts",
     "test:watch": "tsx watch src/__tests__/content.test.ts",
     "test:header": "tsx src/__tests__/header.test.ts",
-    "test:header:watch": "tsx watch src/__tests__/header.test.ts"
+    "test:header:watch": "tsx watch src/__tests__/header.test.ts",
+    "test:baseline": "tsx src/__tests__/run-baseline-tests.ts",
+    "test:neutral-colors": "tsx src/__tests__/styles/neutral-colors-baseline.test.ts && tsx src/__tests__/styles/neutral-colors-mapping.test.ts && tsx src/__tests__/styles/theme-neutral-cascade.test.ts",
+    "test:visual-regression": "tsx src/__tests__/visual/neutral-colors-regression.test.ts",
+    "test:build": "tsx src/__tests__/build/css-compilation.test.ts",
+    "test:integration": "tsx src/__tests__/integration/color-cascade-resolution.test.ts",
+    "test:all-colors": "npm run test:neutral-colors && npm run test:visual-regression && npm run test:build && npm run test:integration",
+    "test:validate-migration": "npm run test:baseline && npm run test:all-colors"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -42,10 +49,12 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",
     "@types/jest": "^29.5.5",
+    "@types/jsdom": "^21.1.6",
     "@types/node": "^20.0.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/three": "^0.170.0",
+    "jsdom": "^25.0.1",
     "rimraf": "^5.0.5",
     "tsx": "^4.20.4",
     "typescript": "^5.8.3"

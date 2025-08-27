@@ -6,6 +6,7 @@
       "DOM.Iterable",
       "ES2017"
     ],
+    "module": "es2020",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -31,6 +32,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "src/__tests__"
   ]
 }

@@ -176,6 +176,50 @@
   --green-a11: oklch(0.512 0.125 130 / 0.9);
   --green-a12: oklch(0.156 0.028 130 / 0.95);
 
+  /* Theme-specific neutral color scales for custom neutrals */
+  
+  /* Green neutral scale - subtle green-tinted grays for "forest" themes */
+  --green-n1: oklch(0.995 0.003 130);
+  --green-n2: oklch(0.984 0.004 130);
+  --green-n3: oklch(0.968 0.005 130);
+  --green-n4: oklch(0.946 0.006 130);
+  --green-n5: oklch(0.918 0.007 130);
+  --green-n6: oklch(0.877 0.008 130);
+  --green-n7: oklch(0.719 0.009 130);
+  --green-n8: oklch(0.609 0.010 130);
+  --green-n9: oklch(0.537 0.011 130);
+  --green-n10: oklch(0.481 0.012 130);
+  --green-n11: oklch(0.395 0.013 130);
+  --green-n12: oklch(0.156 0.025 130);
+
+  /* Orange neutral scale - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.995 0.003 50);
+  --orange-n2: oklch(0.984 0.004 50);
+  --orange-n3: oklch(0.968 0.005 50);
+  --orange-n4: oklch(0.946 0.006 50);
+  --orange-n5: oklch(0.918 0.007 50);
+  --orange-n6: oklch(0.877 0.008 50);
+  --orange-n7: oklch(0.719 0.009 50);
+  --orange-n8: oklch(0.609 0.010 50);
+  --orange-n9: oklch(0.537 0.011 50);
+  --orange-n10: oklch(0.481 0.012 50);
+  --orange-n11: oklch(0.395 0.013 50);
+  --orange-n12: oklch(0.156 0.025 50);
+
+  /* Purple neutral scale - cool-tinted grays for "twilight" themes */
+  --purple-n1: oklch(0.995 0.003 300);
+  --purple-n2: oklch(0.984 0.004 300);
+  --purple-n3: oklch(0.968 0.005 300);
+  --purple-n4: oklch(0.946 0.006 300);
+  --purple-n5: oklch(0.918 0.007 300);
+  --purple-n6: oklch(0.877 0.008 300);
+  --purple-n7: oklch(0.719 0.009 300);
+  --purple-n8: oklch(0.609 0.010 300);
+  --purple-n9: oklch(0.537 0.011 300);
+  --purple-n10: oklch(0.481 0.012 300);
+  --purple-n11: oklch(0.395 0.013 300);
+  --purple-n12: oklch(0.156 0.025 300);
+
   /* Gray color scale - neutral colors for UI elements */
   --gray-1: oklch(0.995 0.002 225);
   --gray-2: oklch(0.984 0.003 225);      /* Matches #f3f4f6 - light track */
@@ -290,6 +334,50 @@
   --green-10: oklch(0.65 0.12 130);
   --green-11: oklch(0.72 0.13 130);
   --green-12: oklch(0.95 0.015 130);
+
+  /* Theme-specific neutral colors dark mode */
+  
+  /* Green neutral dark mode - subtle green-tinted grays for "forest" themes */
+  --green-n1: oklch(0.156 0.025 130);
+  --green-n2: oklch(0.181 0.023 130);
+  --green-n3: oklch(0.247 0.021 130);
+  --green-n4: oklch(0.309 0.019 130);
+  --green-n5: oklch(0.395 0.017 130);
+  --green-n6: oklch(0.481 0.016 130);
+  --green-n7: oklch(0.537 0.015 130);
+  --green-n8: oklch(0.719 0.013 130);
+  --green-n9: oklch(0.799 0.012 130);
+  --green-n10: oklch(0.877 0.012 130);
+  --green-n11: oklch(0.918 0.011 130);
+  --green-n12: oklch(0.995 0.007 130);
+
+  /* Orange neutral dark mode - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.156 0.025 50);
+  --orange-n2: oklch(0.181 0.023 50);
+  --orange-n3: oklch(0.247 0.021 50);
+  --orange-n4: oklch(0.309 0.019 50);
+  --orange-n5: oklch(0.395 0.017 50);
+  --orange-n6: oklch(0.481 0.016 50);
+  --orange-n7: oklch(0.537 0.015 50);
+  --orange-n8: oklch(0.719 0.013 50);
+  --orange-n9: oklch(0.799 0.012 50);
+  --orange-n10: oklch(0.877 0.012 50);
+  --orange-n11: oklch(0.918 0.011 50);
+  --orange-n12: oklch(0.995 0.007 50);
+
+  /* Purple neutral dark mode - cool-tinted grays for "twilight" themes */
+  --purple-n1: oklch(0.156 0.025 300);
+  --purple-n2: oklch(0.181 0.023 300);
+  --purple-n3: oklch(0.247 0.021 300);
+  --purple-n4: oklch(0.309 0.019 300);
+  --purple-n5: oklch(0.395 0.017 300);
+  --purple-n6: oklch(0.481 0.016 300);
+  --purple-n7: oklch(0.537 0.015 300);
+  --purple-n8: oklch(0.719 0.013 300);
+  --purple-n9: oklch(0.799 0.012 300);
+  --purple-n10: oklch(0.877 0.012 300);
+  --purple-n11: oklch(0.918 0.011 300);
+  --purple-n12: oklch(0.995 0.007 300);
 
   /* Gray dark mode */
   --gray-1: oklch(0.156 0.020 225);

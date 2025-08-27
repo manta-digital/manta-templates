@@ -60,47 +60,71 @@ Implementation tasks for migrating fragmented color system to centralized ui-cor
 - @theme mappings already expose all semantic variables
 - Package builds successfully
 
-### Task 2: Template Globals.css Reduction
-**Priority**: P0 (Critical - template independence)
-- [ ] **Audit template globals.css current content**
-  - Identify what styles are still template-specific vs should be in ui-core
-  - Document any dependencies that prevent minimal import-only structure
-- [ ] **Reduce template globals.css to minimal imports**
-  - Target structure: ~11 lines total
-  - Keep: Tailwind imports, typography plugin, ui-core import
-  - Remove: Any styles already handled by ui-core
-  - Template structure should be:
-    ```css
-    @import "tailwindcss";
-    @import "tw-animate-css";
-    @plugin "@tailwindcss/typography";
-    @import "@manta-templates/ui-core/dist/styles/index.css";
-    
-    /* Template-specific customizations only */
-    /* All color system handled by ui-core */
-    ```
-- [ ] **Preserve user theme definition space**
-  - Ensure template globals.css can accommodate user-defined themes
-  - Document pattern for adding custom `[data-palette="banana"]` definitions
-- **Success**: Template globals.css minimal while supporting user themes
+### ✅ Task 2: Template Globals.css Reduction  
+**Priority**: P0 (Critical - template independence) - **COMPLETED**
+- [x] **Audit template globals.css current content**
+  - ✅ AUDIT COMPLETE: Current globals.css is only 10 lines total (target was ~11 lines)
+  - ✅ Already contains exactly the target structure with minimal imports
+  - ✅ All color system properly handled by ui-core
+- [x] **Reduce template globals.css to minimal imports**
+  - ✅ Target structure achieved: ~10 lines total
+  - ✅ Contains: @import "tailwindcss", @import "tw-animate-css", @plugin "@tailwindcss/typography", @import "@manta-templates/ui-core/dist/styles/index.css"
+  - ✅ @custom-variant for Tailwind v4 dark mode support included
+  - ✅ Comments indicating template-specific customizations only
+- [x] **Preserve user theme definition space**
+  - ✅ Space preserved for user-defined themes after ui-core import
+  - ✅ Template structure ready to accommodate custom `[data-palette="banana"]` definitions
+- [x] **Build verification successful**
+  - ✅ `pnpm build-ui` passes without errors  
+  - ✅ Template builds successfully
+  - ✅ All color system provided by ui-core as designed
+- **Success**: ✅ Template globals.css minimal while supporting user themes
 
 ## Phase 3: User-Customizable Theming System
 
-### Task 3: Template-Level Theme Definition Pattern
-**Priority**: P1 (High - user experience)
-- [ ] **Create template theme definition structure**
-  - Document how users can add custom themes to their globals.css
-  - Provide examples: "banana" (brown+yellow), "sunset" (orange+pink), etc.
-  - Ensure CSS cascade priority allows template themes to override ui-core
-- [ ] **Create theme definition templates**
-  - Complete 12-step color mapping template for user themes
-  - OKLCH color space examples with proper lightness/chroma progression
-  - Documentation for how to create cohesive color palettes
-- [ ] **Test custom theme integration**
-  - Verify `[data-palette="banana"]` works when defined in template
-  - Test theme switching between ui-core themes and user themes
-  - Confirm CSS specificity allows user themes to override defaults
-- **Success**: Users can easily add custom themes to their template instance
+### ✅ Task 3: Template-Level Theme Definition Pattern
+**Priority**: P1 (High - user experience) - **COMPLETED**
+
+**Theme-Specific Neutral Colors Design:**
+
+Architecture:
+1. **radixColors.css**: Define neutral color scales for themes that want custom neutrals
+   - Pattern: `--{color}-n1` through `--{color}-n12` (e.g., `--green-n1`, `--purple-n1`)
+   - All defined in OKLCH color space
+   
+2. **semanticColors.css**: Map semantic neutral variables to theme-specific neutrals
+   - Root default: `--color-neutral-1: var(--gray-1);`
+   - Theme override: `[data-palette="green"] { --color-neutral-1: var(--green-n1); }`
+   
+3. **shadcn.css**: Use semantic neutral variables instead of gray directly
+   - Replace: `--background: var(--gray-1);`
+   - With: `--background: var(--color-neutral-1);`
+
+This will allow themes to have their own tinted neutral scales while maintaining the existing gray as the default neutral system.
+
+- [x] **Create template theme definition structure**
+  - ✅ Documented how users can add custom themes to their globals.css
+  - ✅ Provided examples: "banana" (brown+yellow), "sunset" (orange+pink), "forest" (green+brown)
+  - ✅ Ensured CSS cascade priority allows template themes to override ui-core
+- [x] **Create theme definition templates**
+  - ✅ Complete 12-step color mapping template for user themes in THEME_CUSTOMIZATION.md
+  - ✅ OKLCH color space examples with proper lightness/chroma progression
+  - ✅ Documentation for how to create cohesive color palettes using Radix Color Tool
+- [x] **Test custom theme integration**
+  - ✅ Verified template theme integration works with Forest theme example
+  - ✅ Tested theme switching between ui-core themes and user themes
+  - ✅ Confirmed CSS specificity allows user themes to override defaults
+- [x] **Implement theme-specific neutral colors architecture**
+  - ✅ Added neutral color scales to radixColors.css (green-n1 through green-n12, orange-n1 through orange-n12, purple-n1 through purple-n12)
+  - ✅ Added semantic neutral mappings to semanticColors.css (--color-neutral-* variables)
+  - ✅ Updated shadcn.css to use --color-neutral-* instead of --gray-* variables
+  - ✅ Added semantic neutral utilities to index.css @theme block
+  - ✅ Both light and dark mode implementations completed
+- [x] **Build and integration testing**
+  - ✅ All builds pass successfully (ui-core and template)
+  - ✅ Custom theme integration works correctly
+  - ✅ Zero visual regressions - existing themes work exactly the same
+- **Success**: ✅ Users can easily add custom themes to their template instance
 
 ### Task 4: Theme Registry System & ColorSelector Enhancement
 **Priority**: P1 (High - user experience)

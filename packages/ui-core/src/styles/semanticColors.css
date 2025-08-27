@@ -16,6 +16,20 @@
   --color-accent-11: var(--teal-11);
   --color-accent-12: var(--teal-12);
 
+  /* Default semantic neutral colors - using standard gray */
+  --color-neutral-1: var(--gray-1);
+  --color-neutral-2: var(--gray-2);
+  --color-neutral-3: var(--gray-3);
+  --color-neutral-4: var(--gray-4);
+  --color-neutral-5: var(--gray-5);
+  --color-neutral-6: var(--gray-6);
+  --color-neutral-7: var(--gray-7);
+  --color-neutral-8: var(--gray-8);
+  --color-neutral-9: var(--gray-9);
+  --color-neutral-10: var(--gray-10);
+  --color-neutral-11: var(--gray-11);
+  --color-neutral-12: var(--gray-12);
+
   /* Card-specific semantic colors */
   --color-card-accent: var(--color-accent-9);
   --color-card-accent-subtle: var(--color-accent-3);
@@ -215,6 +229,59 @@
   --color-accent-a11: var(--orange-a11);
   --color-accent-a12: var(--orange-a12);
 }
+
+/* Example theme-specific neutral colors (commented out by default) */
+
+/* Forest theme example - uncomment to enable green-tinted neutrals
+[data-palette="green"] {
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
+}
+*/
+
+/* Sunset theme example - uncomment to enable warm-tinted neutrals
+[data-palette="orange"] {
+  --color-neutral-1: var(--orange-n1);
+  --color-neutral-2: var(--orange-n2);
+  --color-neutral-3: var(--orange-n3);
+  --color-neutral-4: var(--orange-n4);
+  --color-neutral-5: var(--orange-n5);
+  --color-neutral-6: var(--orange-n6);
+  --color-neutral-7: var(--orange-n7);
+  --color-neutral-8: var(--orange-n8);
+  --color-neutral-9: var(--orange-n9);
+  --color-neutral-10: var(--orange-n10);
+  --color-neutral-11: var(--orange-n11);
+  --color-neutral-12: var(--orange-n12);
+}
+*/
+
+/* Twilight theme example - uncomment to enable purple-tinted neutrals
+[data-palette="purple"] {
+  --color-neutral-1: var(--purple-n1);
+  --color-neutral-2: var(--purple-n2);
+  --color-neutral-3: var(--purple-n3);
+  --color-neutral-4: var(--purple-n4);
+  --color-neutral-5: var(--purple-n5);
+  --color-neutral-6: var(--purple-n6);
+  --color-neutral-7: var(--purple-n7);
+  --color-neutral-8: var(--purple-n8);
+  --color-neutral-9: var(--purple-n9);
+  --color-neutral-10: var(--purple-n10);
+  --color-neutral-11: var(--purple-n11);
+  --color-neutral-12: var(--purple-n12);
+}
+*/
 
 /* Smooth transitions between palette changes */
 html[data-palette] * {
