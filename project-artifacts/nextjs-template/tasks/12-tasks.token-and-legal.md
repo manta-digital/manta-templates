@@ -4,7 +4,8 @@ project: manta-templates
 lld: project-artifacts/nextjs-template/features/03-feature-token-and-legal.md
 dependencies: []
 projectState: ui-core and ui-adapters-nextjs packages established, header/footer content migration completed, legal pages exist but use inconsistent content loading patterns
-lastUpdated: 2025-08-26
+status: completed
+lastUpdated: 2025-08-27
 ---
 
 ## Context Summary

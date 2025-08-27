@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '../../utils';
 
 interface Technology {
@@ -45,6 +45,23 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   iconBasePath = '/assets/icons/tech/',
   ImageComponent = 'img',
 }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    
+    checkDarkMode();
+    
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    return () => observer.disconnect();
+  }, []);
   const getSpeedClass = () => {
     switch (speed) {
       case 'fast': return 'animate-scroll-fast';
@@ -92,14 +109,27 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
 
     // Use regular image with optional dark mode inversion
     if (typeof ImageComponent === 'string') {
+      if (item.invertOnDark) {
+        return (
+          <div 
+            style={{
+              width: '32px',
+              height: '32px',
+              backgroundColor: isDark ? 'white' : 'black',
+              maskImage: `url(${iconUrl})`,
+              maskSize: 'contain',
+              maskRepeat: 'no-repeat',
+              maskPosition: 'center',
+            }}
+            aria-hidden="true"
+          />
+        );
+      }
       return (
         <img
           src={iconUrl}
           alt={item.name}
-          className={cn(
-            'h-8 w-auto object-contain',
-            item.invertOnDark && 'dark:invert'
-          )}
+          className="h-8 w-auto object-contain"
           width="32"
           height="32"
           loading="lazy"
