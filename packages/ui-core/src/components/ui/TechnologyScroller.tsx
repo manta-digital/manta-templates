@@ -65,9 +65,9 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   }, []);
   const getSpeedClass = () => {
     switch (speed) {
-      case 'fast': return 'animate-scroll-fast';
-      case 'slow': return 'animate-scroll-slow';
-      default: return 'animate-scroll-normal';
+      case 'fast': return 'tech-scroll-fast';
+      case 'slow': return 'tech-scroll-slow';
+      default: return 'tech-scroll-normal';
     }
   };
 
@@ -153,18 +153,31 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   };
 
   return (
-    <div
-      className={cn(
-        'relative max-w-full overflow-hidden',
-        '[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]',
-        className
-      )}
-    >
+    <>
+      <style>
+        {`
+          @keyframes tech-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.3%); }
+          }
+          .tech-scroll-slow { animation: tech-scroll 50s linear infinite; }
+          .tech-scroll-normal { animation: tech-scroll 20s linear infinite; }
+          .tech-scroll-fast { animation: tech-scroll 8s linear infinite; }
+          .tech-scroll-reverse { animation-direction: reverse; }
+        `}
+      </style>
+      <div
+        className={cn(
+          'relative max-w-full overflow-hidden',
+          '[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]',
+          className
+        )}
+      >
       <ul
         className={cn(
           'flex min-w-full shrink-0 py-4 flex-nowrap will-change-transform',
           getSpeedClass(),
-          direction === 'right' ? 'animate-reverse' : '',
+          direction === 'right' ? 'tech-scroll-reverse' : '',
           pauseOnHover && 'hover:[animation-play-state:paused]'
         )}
         style={{ width: 'max-content' }}
@@ -186,7 +199,8 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
           </li>
         ))}
       </ul>
-    </div>
+      </div>
+    </>
   );
 };
 
