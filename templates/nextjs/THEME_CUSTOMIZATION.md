@@ -133,11 +133,23 @@ The ui-core provides pre-built neutral scales for common themes:
 
 - `--green-n1` through `--green-n12` - Subtle green-tinted grays
 - `--orange-n1` through `--orange-n12` - Warm orange-tinted grays  
+- `--blue-n1` through `--blue-n12` - Cool blue-tinted grays
 - `--purple-n1` through `--purple-n12` - Cool purple-tinted grays
 
 Use these for quick neutral customization:
 
 ```css
+[data-palette="oceanic"] {
+  /* Use built-in blue accents */
+  --color-accent-1: var(--blue-1);
+  /* ... other accent colors ... */
+  
+  /* Use pre-built blue-tinted neutrals */
+  --color-neutral-1: var(--blue-n1);
+  --color-neutral-2: var(--blue-n2);
+  /* ... other neutral colors ... */
+}
+
 [data-palette="twilight"] {
   /* Use built-in purple accents */
   --color-accent-1: var(--purple-1);
