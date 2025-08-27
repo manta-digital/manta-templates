@@ -83,6 +83,26 @@
   --color-neutral-11: var(--color-neutral-11);
   --color-neutral-12: var(--color-neutral-12);
   
+  /* Semantic neutral alpha system */
+  --color-neutral-a1: var(--color-neutral-a1);
+  --color-neutral-a2: var(--color-neutral-a2);
+  --color-neutral-a3: var(--color-neutral-a3);
+  --color-neutral-a4: var(--color-neutral-a4);
+  --color-neutral-a5: var(--color-neutral-a5);
+  --color-neutral-a6: var(--color-neutral-a6);
+  --color-neutral-a7: var(--color-neutral-a7);
+  --color-neutral-a8: var(--color-neutral-a8);
+  --color-neutral-a9: var(--color-neutral-a9);
+  --color-neutral-a10: var(--color-neutral-a10);
+  --color-neutral-a11: var(--color-neutral-a11);
+  --color-neutral-a12: var(--color-neutral-a12);
+  
+  /* Special semantic colors */
+  --color-neutral-contrast: var(--color-neutral-contrast);
+  --color-neutral-surface: var(--color-neutral-surface);
+  --color-neutral-indicator: var(--color-neutral-indicator);
+  --color-neutral-track: var(--color-neutral-track);
+  
   /* Neutral gray system */
   --color-gray-1: var(--gray-1);
   --color-gray-2: var(--gray-2);
@@ -96,4 +116,20 @@
   --color-gray-10: var(--gray-10);
   --color-gray-11: var(--gray-11);
   --color-gray-12: var(--gray-12);
+}
+
+/* Theme Registry System - Controls which themes appear in UI */
+:root {
+  /* Available themes (comma-separated list) */
+  --ui-themes: "teal,mintteal,blue,purple,orange";
+  
+  /* Theme display names (semicolon-separated) - emojis available but stripped for clean UI */
+  --ui-theme-names: "🌊 Teal;🌿 Mint Teal;💙 Blue;💜 Purple;🔥 Orange";
+  
+  /* Default theme selection */
+  --ui-default-theme: "teal";
+  
+  /* User themes can be added by templates */
+  --user-themes: "";
+  --user-theme-names: "";
 }

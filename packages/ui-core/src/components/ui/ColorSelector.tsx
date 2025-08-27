@@ -2,13 +2,10 @@
 
 import React from "react";
 import { useTheme } from "../../hooks/useTheme";
+import { useAvailableThemes } from "../../hooks/useAvailableThemes";
 import { Button } from "./button";
 import { Droplet } from "lucide-react";
 import { cn } from "../../utils/cn";
-
-const ACCENTS = ["teal", "mintteal", "blue", "purple", "orange"] as const;
-
-type AccentKey = (typeof ACCENTS)[number];
 
 export interface ColorSelectorProps {
   className?: string;
@@ -16,12 +13,17 @@ export interface ColorSelectorProps {
 
 export const ColorSelector: React.FC<ColorSelectorProps> = ({ className }) => {
   const { accent, setAccent } = useTheme();
+  const availableThemes = useAvailableThemes();
 
   const cycleAccent = () => {
-    const idx = ACCENTS.indexOf(accent as AccentKey);
-    const next = ACCENTS[(idx + 1) % ACCENTS.length];
-    setAccent(next as AccentKey);
+    const currentIndex = availableThemes.findIndex(theme => theme.id === accent);
+    const nextIndex = (currentIndex + 1) % availableThemes.length;
+    const nextTheme = availableThemes[nextIndex];
+    setAccent(nextTheme.id);
   };
+
+  const currentTheme = availableThemes.find(theme => theme.id === accent);
+  const displayName = currentTheme?.displayName || accent;
 
   return (
     <Button
@@ -36,12 +38,12 @@ export const ColorSelector: React.FC<ColorSelectorProps> = ({ className }) => {
         "hover:!text-[var(--color-accent-12)] hover:!border-[var(--color-border-accent-hover)]",
         className
       )}
-      title={`Accent: ${accent}`}
-      aria-label="Toggle accent palette"
+      title={`Theme: ${displayName}`}
+      aria-label="Cycle through available themes"
     >
       <Droplet className="h-4 w-4" />
-      <span className="capitalize">{accent}</span>
-      <span className="sr-only">Toggle accent palette</span>
+      <span>{displayName}</span>
+      <span className="sr-only">Cycle through available themes</span>
     </Button>
   );
 };

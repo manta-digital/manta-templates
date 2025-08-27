@@ -1,7 +1,7 @@
 // Framework-agnostic theme types and interfaces
 
 export type Theme = 'light' | 'dark';
-export type Accent = 'teal' | 'mintteal' | 'blue' | 'purple' | 'orange';
+export type Accent = 'teal' | 'mintteal' | 'blue' | 'purple' | 'orange' | 'forest' | 'banana' | 'sunset';
 
 export interface ThemeProviderProps {
   children: React.ReactNode;

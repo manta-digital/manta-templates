@@ -66,6 +66,26 @@
   --color-accent-indicator: var(--teal-indicator);
   --color-accent-track: var(--teal-track);
   
+  /* Neutral alpha variants for overlays and subtle effects */
+  --color-neutral-a1: var(--teal-na1);
+  --color-neutral-a2: var(--teal-na2);
+  --color-neutral-a3: var(--teal-na3);
+  --color-neutral-a4: var(--teal-na4);
+  --color-neutral-a5: var(--teal-na5);
+  --color-neutral-a6: var(--teal-na6);
+  --color-neutral-a7: var(--teal-na7);
+  --color-neutral-a8: var(--teal-na8);
+  --color-neutral-a9: var(--teal-na9);
+  --color-neutral-a10: var(--teal-na10);
+  --color-neutral-a11: var(--teal-na11);
+  --color-neutral-a12: var(--teal-na12);
+
+  /* Special neutral colors for Radix compatibility */
+  --color-neutral-contrast: var(--teal-ncontrast);
+  --color-neutral-surface: var(--teal-nsurface);
+  --color-neutral-indicator: var(--teal-nindicator);
+  --color-neutral-track: var(--teal-ntrack);
+  
   /* Better surface colors for accessibility */
   --card-surface-accessible: var(--color-accent-2);
   --card-surface-text: var(--color-accent-12);
@@ -124,6 +144,26 @@
   --color-neutral-10: var(--mintteal-n10);
   --color-neutral-11: var(--mintteal-n11);
   --color-neutral-12: var(--mintteal-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--mintteal-na1);
+  --color-neutral-a2: var(--mintteal-na2);
+  --color-neutral-a3: var(--mintteal-na3);
+  --color-neutral-a4: var(--mintteal-na4);
+  --color-neutral-a5: var(--mintteal-na5);
+  --color-neutral-a6: var(--mintteal-na6);
+  --color-neutral-a7: var(--mintteal-na7);
+  --color-neutral-a8: var(--mintteal-na8);
+  --color-neutral-a9: var(--mintteal-na9);
+  --color-neutral-a10: var(--mintteal-na10);
+  --color-neutral-a11: var(--mintteal-na11);
+  --color-neutral-a12: var(--mintteal-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--mintteal-ncontrast);
+  --color-neutral-surface: var(--mintteal-nsurface);
+  --color-neutral-indicator: var(--mintteal-nindicator);
+  --color-neutral-track: var(--mintteal-ntrack);
 }
 
 /* Standard Radix palette options (when @radix-ui/colors is installed) */
@@ -167,6 +207,26 @@
   --color-neutral-10: var(--blue-n10);
   --color-neutral-11: var(--blue-n11);
   --color-neutral-12: var(--blue-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--blue-na1);
+  --color-neutral-a2: var(--blue-na2);
+  --color-neutral-a3: var(--blue-na3);
+  --color-neutral-a4: var(--blue-na4);
+  --color-neutral-a5: var(--blue-na5);
+  --color-neutral-a6: var(--blue-na6);
+  --color-neutral-a7: var(--blue-na7);
+  --color-neutral-a8: var(--blue-na8);
+  --color-neutral-a9: var(--blue-na9);
+  --color-neutral-a10: var(--blue-na10);
+  --color-neutral-a11: var(--blue-na11);
+  --color-neutral-a12: var(--blue-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--blue-ncontrast);
+  --color-neutral-surface: var(--blue-nsurface);
+  --color-neutral-indicator: var(--blue-nindicator);
+  --color-neutral-track: var(--blue-ntrack);
 }
 
 [data-palette="purple"] {
@@ -209,6 +269,26 @@
   --color-neutral-10: var(--purple-n10);
   --color-neutral-11: var(--purple-n11);
   --color-neutral-12: var(--purple-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--purple-na1);
+  --color-neutral-a2: var(--purple-na2);
+  --color-neutral-a3: var(--purple-na3);
+  --color-neutral-a4: var(--purple-na4);
+  --color-neutral-a5: var(--purple-na5);
+  --color-neutral-a6: var(--purple-na6);
+  --color-neutral-a7: var(--purple-na7);
+  --color-neutral-a8: var(--purple-na8);
+  --color-neutral-a9: var(--purple-na9);
+  --color-neutral-a10: var(--purple-na10);
+  --color-neutral-a11: var(--purple-na11);
+  --color-neutral-a12: var(--purple-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--purple-ncontrast);
+  --color-neutral-surface: var(--purple-nsurface);
+  --color-neutral-indicator: var(--purple-nindicator);
+  --color-neutral-track: var(--purple-ntrack);
 }
 
 [data-palette="green"] {
@@ -251,6 +331,26 @@
   --color-neutral-10: var(--green-n10);
   --color-neutral-11: var(--green-n11);
   --color-neutral-12: var(--green-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--green-na1);
+  --color-neutral-a2: var(--green-na2);
+  --color-neutral-a3: var(--green-na3);
+  --color-neutral-a4: var(--green-na4);
+  --color-neutral-a5: var(--green-na5);
+  --color-neutral-a6: var(--green-na6);
+  --color-neutral-a7: var(--green-na7);
+  --color-neutral-a8: var(--green-na8);
+  --color-neutral-a9: var(--green-na9);
+  --color-neutral-a10: var(--green-na10);
+  --color-neutral-a11: var(--green-na11);
+  --color-neutral-a12: var(--green-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--green-ncontrast);
+  --color-neutral-surface: var(--green-nsurface);
+  --color-neutral-indicator: var(--green-nindicator);
+  --color-neutral-track: var(--green-ntrack);
 }
 
 [data-palette="orange"] {
@@ -293,6 +393,26 @@
   --color-neutral-10: var(--orange-n10);
   --color-neutral-11: var(--orange-n11);
   --color-neutral-12: var(--orange-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--orange-na1);
+  --color-neutral-a2: var(--orange-na2);
+  --color-neutral-a3: var(--orange-na3);
+  --color-neutral-a4: var(--orange-na4);
+  --color-neutral-a5: var(--orange-na5);
+  --color-neutral-a6: var(--orange-na6);
+  --color-neutral-a7: var(--orange-na7);
+  --color-neutral-a8: var(--orange-na8);
+  --color-neutral-a9: var(--orange-na9);
+  --color-neutral-a10: var(--orange-na10);
+  --color-neutral-a11: var(--orange-na11);
+  --color-neutral-a12: var(--orange-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--orange-ncontrast);
+  --color-neutral-surface: var(--orange-nsurface);
+  --color-neutral-indicator: var(--orange-nindicator);
+  --color-neutral-track: var(--orange-ntrack);
 }
 
 /* Example theme-specific neutral colors (commented out by default) */
