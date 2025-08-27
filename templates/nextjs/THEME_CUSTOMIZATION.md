@@ -129,12 +129,14 @@ Add your theme definition to your `globals.css` file. Here are complete examples
 
 ### Step 2: Using Pre-built Neutral Scales
 
-The ui-core provides pre-built neutral scales for common themes:
+The ui-core provides pre-built neutral scales for all themes:
 
-- `--green-n1` through `--green-n12` - Subtle green-tinted grays
-- `--orange-n1` through `--orange-n12` - Warm orange-tinted grays  
+- `--teal-n1` through `--teal-n12` - Professional teal-tinted grays
+- `--mintteal-n1` through `--mintteal-n12` - Fresh mint-tinted grays
 - `--blue-n1` through `--blue-n12` - Cool blue-tinted grays
 - `--purple-n1` through `--purple-n12` - Cool purple-tinted grays
+- `--green-n1` through `--green-n12` - Subtle green-tinted grays
+- `--orange-n1` through `--orange-n12` - Warm orange-tinted grays
 
 Use these for quick neutral customization:
 
