@@ -20,10 +20,10 @@ This document contains prepared prompts useful in applying the `guide.ai-project
   slice,
   section, 
   subsection,
-  framework,
+  framework/language,
   tools,
   apis,
-  monorepo
+  monorepo,
 }
 ```
 
@@ -232,7 +232,7 @@ If you were previously assigned a role, continue in that role. If not, assume ro
 *Add the following to existing prompt when working with {tool}.*
 
 ```markdown
-You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.
+You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.  Use these tools proactively.
 
 1. Consult Overview: Start with the specific `AI Tool Overview 
    [toolname].md` in the `project-documents/tool-
@@ -250,7 +250,7 @@ You will need to consult specific knowledge for {tool}, which should be availabl
 ```
 
 ##### Summarize Context
-*Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.  Currently it appears that at best Claude will output the `[ ]` information into the new context. *
+*Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.  Currently it appears that at best Claude will output the `[ ]` information into the new context.*
 ```markdown
 Perform the following items and add their output to the compacted context:
 * Preserve the initial context describing what we are working on.

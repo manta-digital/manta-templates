@@ -12,7 +12,6 @@ alwaysApply: false
 - Use optional chaining, union types (no enums).
 
 ## tRPC Routers
-
 - **enabled**: as needed
 - Routers in `src/lib/api/routers`, compose in `src/lib/api/root.ts`.
 - `publicProcedure` or `protectedProcedure` with Zod.
