@@ -31,7 +31,7 @@
   --teal-a12: oklch(0.15 0.02 174 / 0.95);
 
   /* Teal special colors */
-  --teal-contrast: #ffffff;
+  --teal-contrast: oklch(1 0 0);
   --teal-surface: oklch(0.99 0.005 180 / 0.8);
   --teal-indicator: oklch(0.7 0.1 174);
   --teal-track: oklch(0.7 0.1 174 / 0.3);
