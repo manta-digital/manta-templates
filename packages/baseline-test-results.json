@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-08-27T06:14:23.721Z",
+  "totalDuration": 806.206625,
+  "passedTests": 4,
+  "failedTests": 3,
+  "testResults": [
+    {
+      "name": "Gray Variables Baseline Capture",
+      "success": false,
+      "duration": 508.302375,
+      "errors": [
+        "Light mode --gray-1 is not a valid OKLCH value: "
+      ],
+      "warnings": []
+    },
+    {
+      "name": "ShadCN Variable Resolution",
+      "success": false,
+      "duration": 12.166917000000012,
+      "errors": [
+        "ShadCN --background does not resolve to OKLCH: "
+      ],
+      "warnings": []
+    },
+    {
+      "name": "Theme Context Validation",
+      "success": false,
+      "duration": 8.911042000000066,
+      "errors": [
+        "Teal accent color not resolved: "
+      ],
+      "warnings": []
+    },
+    {
+      "name": "CSS Cascade Resolution",
+      "success": true,
+      "duration": 9.042374999999993,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "Build System Validation",
+      "success": true,
+      "duration": 0.21641699999997854,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "TypeScript Compilation",
+      "success": true,
+      "duration": 10.94454200000007,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "name": "Performance Baseline",
+      "success": true,
+      "duration": 255.84799999999996,
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "summary": {
+    "colorSystemBaseline": false,
+    "buildSystemValidation": true,
+    "cssResolution": true,
+    "typeScriptCompilation": true,
+    "overallSuccess": false
+  }
+}

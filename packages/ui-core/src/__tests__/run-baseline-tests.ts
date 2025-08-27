@@ -162,8 +162,8 @@ class BaselineTestRunner {
     ]
 
     // Verify gray variables resolve correctly
-    const lightValues = this.captureVariables(lightElement, grayVariables, dom.window)
-    const darkValues = this.captureVariables(darkElement, grayVariables, dom.window)
+    const lightValues = this.captureVariables(lightElement, grayVariables, dom.window as unknown as Window)
+    const darkValues = this.captureVariables(darkElement, grayVariables, dom.window as unknown as Window)
 
     // All gray variables should have OKLCH values
     grayVariables.forEach(variable => {
@@ -214,8 +214,8 @@ class BaselineTestRunner {
       '--muted', '--input', '--ring'
     ]
 
-    const lightValues = this.captureVariables(lightElement, shadcnVariables, dom.window)
-    const darkValues = this.captureVariables(darkElement, shadcnVariables, dom.window)
+    const lightValues = this.captureVariables(lightElement, shadcnVariables, dom.window as unknown as Window)
+    const darkValues = this.captureVariables(darkElement, shadcnVariables, dom.window as unknown as Window)
 
     // Verify ShadCN variables resolve to OKLCH values
     shadcnVariables.forEach(variable => {

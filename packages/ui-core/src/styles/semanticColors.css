@@ -16,19 +16,19 @@
   --color-accent-11: var(--teal-11);
   --color-accent-12: var(--teal-12);
 
-  /* Default semantic neutral colors - using standard gray */
-  --color-neutral-1: var(--gray-1);
-  --color-neutral-2: var(--gray-2);
-  --color-neutral-3: var(--gray-3);
-  --color-neutral-4: var(--gray-4);
-  --color-neutral-5: var(--gray-5);
-  --color-neutral-6: var(--gray-6);
-  --color-neutral-7: var(--gray-7);
-  --color-neutral-8: var(--gray-8);
-  --color-neutral-9: var(--gray-9);
-  --color-neutral-10: var(--gray-10);
-  --color-neutral-11: var(--gray-11);
-  --color-neutral-12: var(--gray-12);
+  /* Default semantic neutral colors - using teal-tinted grays */
+  --color-neutral-1: var(--teal-n1);
+  --color-neutral-2: var(--teal-n2);
+  --color-neutral-3: var(--teal-n3);
+  --color-neutral-4: var(--teal-n4);
+  --color-neutral-5: var(--teal-n5);
+  --color-neutral-6: var(--teal-n6);
+  --color-neutral-7: var(--teal-n7);
+  --color-neutral-8: var(--teal-n8);
+  --color-neutral-9: var(--teal-n9);
+  --color-neutral-10: var(--teal-n10);
+  --color-neutral-11: var(--teal-n11);
+  --color-neutral-12: var(--teal-n12);
 
   /* Card-specific semantic colors */
   --color-card-accent: var(--color-accent-9);
@@ -111,6 +111,19 @@
   --color-accent-a10: var(--mintteal-a10);
   --color-accent-a11: var(--mintteal-a11);
   --color-accent-a12: var(--mintteal-a12);
+
+  --color-neutral-1: var(--mintteal-n1);
+  --color-neutral-2: var(--mintteal-n2);
+  --color-neutral-3: var(--mintteal-n3);
+  --color-neutral-4: var(--mintteal-n4);
+  --color-neutral-5: var(--mintteal-n5);
+  --color-neutral-6: var(--mintteal-n6);
+  --color-neutral-7: var(--mintteal-n7);
+  --color-neutral-8: var(--mintteal-n8);
+  --color-neutral-9: var(--mintteal-n9);
+  --color-neutral-10: var(--mintteal-n10);
+  --color-neutral-11: var(--mintteal-n11);
+  --color-neutral-12: var(--mintteal-n12);
 }
 
 /* Standard Radix palette options (when @radix-ui/colors is installed) */
@@ -141,6 +154,19 @@
   --color-accent-a10: var(--blue-a10);
   --color-accent-a11: var(--blue-a11);
   --color-accent-a12: var(--blue-a12);
+
+  --color-neutral-1: var(--blue-n1);
+  --color-neutral-2: var(--blue-n2);
+  --color-neutral-3: var(--blue-n3);
+  --color-neutral-4: var(--blue-n4);
+  --color-neutral-5: var(--blue-n5);
+  --color-neutral-6: var(--blue-n6);
+  --color-neutral-7: var(--blue-n7);
+  --color-neutral-8: var(--blue-n8);
+  --color-neutral-9: var(--blue-n9);
+  --color-neutral-10: var(--blue-n10);
+  --color-neutral-11: var(--blue-n11);
+  --color-neutral-12: var(--blue-n12);
 }
 
 [data-palette="purple"] {
@@ -170,6 +196,19 @@
   --color-accent-a10: var(--purple-a10);
   --color-accent-a11: var(--purple-a11);
   --color-accent-a12: var(--purple-a12);
+
+  --color-neutral-1: var(--purple-n1);
+  --color-neutral-2: var(--purple-n2);
+  --color-neutral-3: var(--purple-n3);
+  --color-neutral-4: var(--purple-n4);
+  --color-neutral-5: var(--purple-n5);
+  --color-neutral-6: var(--purple-n6);
+  --color-neutral-7: var(--purple-n7);
+  --color-neutral-8: var(--purple-n8);
+  --color-neutral-9: var(--purple-n9);
+  --color-neutral-10: var(--purple-n10);
+  --color-neutral-11: var(--purple-n11);
+  --color-neutral-12: var(--purple-n12);
 }
 
 [data-palette="green"] {
@@ -199,6 +238,19 @@
   --color-accent-a10: var(--green-a10);
   --color-accent-a11: var(--green-a11);
   --color-accent-a12: var(--green-a12);
+
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
 }
 
 [data-palette="orange"] {
@@ -228,6 +280,19 @@
   --color-accent-a10: var(--orange-a10);
   --color-accent-a11: var(--orange-a11);
   --color-accent-a12: var(--orange-a12);
+
+  --color-neutral-1: var(--orange-n1);
+  --color-neutral-2: var(--orange-n2);
+  --color-neutral-3: var(--orange-n3);
+  --color-neutral-4: var(--orange-n4);
+  --color-neutral-5: var(--orange-n5);
+  --color-neutral-6: var(--orange-n6);
+  --color-neutral-7: var(--orange-n7);
+  --color-neutral-8: var(--orange-n8);
+  --color-neutral-9: var(--orange-n9);
+  --color-neutral-10: var(--orange-n10);
+  --color-neutral-11: var(--orange-n11);
+  --color-neutral-12: var(--orange-n12);
 }
 
 /* Example theme-specific neutral colors (commented out by default) */

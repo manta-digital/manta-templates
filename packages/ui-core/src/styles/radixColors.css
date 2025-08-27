@@ -148,6 +148,62 @@
   --orange-a11: oklch(0.598 0.125 50 / 0.9);
   --orange-a12: oklch(0.156 0.028 50 / 0.95);
 
+  /* Orange neutral scale - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.995 0.003 50);
+  --orange-n2: oklch(0.984 0.004 50);
+  --orange-n3: oklch(0.968 0.005 50);
+  --orange-n4: oklch(0.946 0.006 50);
+  --orange-n5: oklch(0.918 0.007 50);
+  --orange-n6: oklch(0.877 0.008 50);
+  --orange-n7: oklch(0.719 0.009 50);
+  --orange-n8: oklch(0.609 0.010 50);
+  --orange-n9: oklch(0.537 0.011 50);
+  --orange-n10: oklch(0.481 0.012 50);
+  --orange-n11: oklch(0.395 0.013 50);
+  --orange-n12: oklch(0.156 0.025 50);
+
+  /* Blue neutral scale - cool blue-tinted grays for "oceanic" themes */
+  --blue-n1: oklch(0.995 0.003 233);
+  --blue-n2: oklch(0.984 0.004 233);
+  --blue-n3: oklch(0.968 0.005 233);
+  --blue-n4: oklch(0.946 0.006 233);
+  --blue-n5: oklch(0.918 0.007 233);
+  --blue-n6: oklch(0.877 0.008 233);
+  --blue-n7: oklch(0.719 0.009 233);
+  --blue-n8: oklch(0.609 0.010 233);
+  --blue-n9: oklch(0.537 0.011 233);
+  --blue-n10: oklch(0.481 0.012 233);
+  --blue-n11: oklch(0.395 0.013 233);
+  --blue-n12: oklch(0.156 0.025 233);
+
+  /* Teal neutral scale - balanced teal-tinted grays for professional themes */
+  --teal-n1: oklch(0.995 0.003 174);
+  --teal-n2: oklch(0.984 0.004 174);
+  --teal-n3: oklch(0.968 0.005 174);
+  --teal-n4: oklch(0.946 0.006 174);
+  --teal-n5: oklch(0.918 0.007 174);
+  --teal-n6: oklch(0.877 0.008 174);
+  --teal-n7: oklch(0.719 0.009 174);
+  --teal-n8: oklch(0.609 0.010 174);
+  --teal-n9: oklch(0.537 0.011 174);
+  --teal-n10: oklch(0.481 0.012 174);
+  --teal-n11: oklch(0.395 0.013 174);
+  --teal-n12: oklch(0.156 0.025 174);
+
+  /* Mintteal neutral scale - mint-tinted grays for fresh/modern themes */
+  --mintteal-n1: oklch(0.995 0.003 166);
+  --mintteal-n2: oklch(0.984 0.004 166);
+  --mintteal-n3: oklch(0.968 0.005 166);
+  --mintteal-n4: oklch(0.946 0.006 166);
+  --mintteal-n5: oklch(0.918 0.007 166);
+  --mintteal-n6: oklch(0.877 0.008 166);
+  --mintteal-n7: oklch(0.719 0.009 166);
+  --mintteal-n8: oklch(0.609 0.010 166);
+  --mintteal-n9: oklch(0.537 0.011 166);
+  --mintteal-n10: oklch(0.481 0.012 166);
+  --mintteal-n11: oklch(0.395 0.013 166);
+  --mintteal-n12: oklch(0.156 0.025 166);
+
   /* Green color scale */
   --green-1: oklch(0.993 0.005 130);
   --green-2: oklch(0.976 0.012 130);
@@ -176,8 +232,6 @@
   --green-a11: oklch(0.512 0.125 130 / 0.9);
   --green-a12: oklch(0.156 0.028 130 / 0.95);
 
-  /* Theme-specific neutral color scales for custom neutrals */
-  
   /* Green neutral scale - subtle green-tinted grays for "forest" themes */
   --green-n1: oklch(0.995 0.003 130);
   --green-n2: oklch(0.984 0.004 130);
@@ -192,19 +246,6 @@
   --green-n11: oklch(0.395 0.013 130);
   --green-n12: oklch(0.156 0.025 130);
 
-  /* Orange neutral scale - warm-tinted grays for "sunset" themes */
-  --orange-n1: oklch(0.995 0.003 50);
-  --orange-n2: oklch(0.984 0.004 50);
-  --orange-n3: oklch(0.968 0.005 50);
-  --orange-n4: oklch(0.946 0.006 50);
-  --orange-n5: oklch(0.918 0.007 50);
-  --orange-n6: oklch(0.877 0.008 50);
-  --orange-n7: oklch(0.719 0.009 50);
-  --orange-n8: oklch(0.609 0.010 50);
-  --orange-n9: oklch(0.537 0.011 50);
-  --orange-n10: oklch(0.481 0.012 50);
-  --orange-n11: oklch(0.395 0.013 50);
-  --orange-n12: oklch(0.156 0.025 50);
 
   /* Purple neutral scale - cool-tinted grays for "twilight" themes */
   --purple-n1: oklch(0.995 0.003 300);
@@ -293,6 +334,20 @@
   --blue-11: oklch(0.75 0.11 233);
   --blue-12: oklch(0.95 0.015 233);
 
+  /* Blue neutral dark mode - cool blue-tinted grays for "oceanic" themes */
+  --blue-n1: oklch(0.156 0.025 233);
+  --blue-n2: oklch(0.181 0.023 233);
+  --blue-n3: oklch(0.247 0.021 233);
+  --blue-n4: oklch(0.309 0.019 233);
+  --blue-n5: oklch(0.395 0.017 233);
+  --blue-n6: oklch(0.481 0.016 233);
+  --blue-n7: oklch(0.537 0.015 233);
+  --blue-n8: oklch(0.719 0.013 233);
+  --blue-n9: oklch(0.799 0.012 233);
+  --blue-n10: oklch(0.877 0.012 233);
+  --blue-n11: oklch(0.918 0.011 233);
+  --blue-n12: oklch(0.995 0.007 233);
+  
   /* Purple dark mode */
   --purple-1: oklch(0.15 0.02 300);
   --purple-2: oklch(0.18 0.025 300);
@@ -307,6 +362,20 @@
   --purple-11: oklch(0.75 0.11 300);
   --purple-12: oklch(0.95 0.015 300);
 
+  /* Purple neutral dark mode - cool-tinted grays for "twilight" themes */
+  --purple-n1: oklch(0.156 0.025 300);
+  --purple-n2: oklch(0.181 0.023 300);
+  --purple-n3: oklch(0.247 0.021 300);
+  --purple-n4: oklch(0.309 0.019 300);
+  --purple-n5: oklch(0.395 0.017 300);
+  --purple-n6: oklch(0.481 0.016 300);
+  --purple-n7: oklch(0.537 0.015 300);
+  --purple-n8: oklch(0.719 0.013 300);
+  --purple-n9: oklch(0.799 0.012 300);
+  --purple-n10: oklch(0.877 0.012 300);
+  --purple-n11: oklch(0.918 0.011 300);
+  --purple-n12: oklch(0.995 0.007 300);
+  
   /* Orange dark mode */
   --orange-1: oklch(0.15 0.02 50);
   --orange-2: oklch(0.18 0.025 50);
@@ -321,6 +390,48 @@
   --orange-11: oklch(0.78 0.14 50);
   --orange-12: oklch(0.95 0.015 50);
 
+  /* Orange neutral dark mode - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.156 0.025 50);
+  --orange-n2: oklch(0.181 0.023 50);
+  --orange-n3: oklch(0.247 0.021 50);
+  --orange-n4: oklch(0.309 0.019 50);
+  --orange-n5: oklch(0.395 0.017 50);
+  --orange-n6: oklch(0.481 0.016 50);
+  --orange-n7: oklch(0.537 0.015 50);
+  --orange-n8: oklch(0.719 0.013 50);
+  --orange-n9: oklch(0.799 0.012 50);
+  --orange-n10: oklch(0.877 0.012 50);
+  --orange-n11: oklch(0.918 0.011 50);
+  --orange-n12: oklch(0.995 0.007 50);
+  
+  /* Teal neutral dark mode - balanced teal-tinted grays for professional themes */
+  --teal-n1: oklch(0.156 0.025 174);
+  --teal-n2: oklch(0.181 0.023 174);
+  --teal-n3: oklch(0.247 0.021 174);
+  --teal-n4: oklch(0.309 0.019 174);
+  --teal-n5: oklch(0.395 0.017 174);
+  --teal-n6: oklch(0.481 0.016 174);
+  --teal-n7: oklch(0.537 0.015 174);
+  --teal-n8: oklch(0.719 0.013 174);
+  --teal-n9: oklch(0.799 0.012 174);
+  --teal-n10: oklch(0.877 0.012 174);
+  --teal-n11: oklch(0.918 0.011 174);
+  --teal-n12: oklch(0.995 0.007 174);
+  
+  /* Mintteal neutral dark mode - mint-tinted grays for fresh/modern themes */
+  --mintteal-n1: oklch(0.156 0.025 166);
+  --mintteal-n2: oklch(0.181 0.023 166);
+  --mintteal-n3: oklch(0.247 0.021 166);
+  --mintteal-n4: oklch(0.309 0.019 166);
+  --mintteal-n5: oklch(0.395 0.017 166);
+  --mintteal-n6: oklch(0.481 0.016 166);
+  --mintteal-n7: oklch(0.537 0.015 166);
+  --mintteal-n8: oklch(0.719 0.013 166);
+  --mintteal-n9: oklch(0.799 0.012 166);
+  --mintteal-n10: oklch(0.877 0.012 166);
+  --mintteal-n11: oklch(0.918 0.011 166);
+  --mintteal-n12: oklch(0.995 0.007 166);
+  
   /* Green dark mode */
   --green-1: oklch(0.15 0.02 130);
   --green-2: oklch(0.18 0.025 130);
@@ -335,8 +446,6 @@
   --green-11: oklch(0.72 0.13 130);
   --green-12: oklch(0.95 0.015 130);
 
-  /* Theme-specific neutral colors dark mode */
-  
   /* Green neutral dark mode - subtle green-tinted grays for "forest" themes */
   --green-n1: oklch(0.156 0.025 130);
   --green-n2: oklch(0.181 0.023 130);
@@ -350,34 +459,6 @@
   --green-n10: oklch(0.877 0.012 130);
   --green-n11: oklch(0.918 0.011 130);
   --green-n12: oklch(0.995 0.007 130);
-
-  /* Orange neutral dark mode - warm-tinted grays for "sunset" themes */
-  --orange-n1: oklch(0.156 0.025 50);
-  --orange-n2: oklch(0.181 0.023 50);
-  --orange-n3: oklch(0.247 0.021 50);
-  --orange-n4: oklch(0.309 0.019 50);
-  --orange-n5: oklch(0.395 0.017 50);
-  --orange-n6: oklch(0.481 0.016 50);
-  --orange-n7: oklch(0.537 0.015 50);
-  --orange-n8: oklch(0.719 0.013 50);
-  --orange-n9: oklch(0.799 0.012 50);
-  --orange-n10: oklch(0.877 0.012 50);
-  --orange-n11: oklch(0.918 0.011 50);
-  --orange-n12: oklch(0.995 0.007 50);
-
-  /* Purple neutral dark mode - cool-tinted grays for "twilight" themes */
-  --purple-n1: oklch(0.156 0.025 300);
-  --purple-n2: oklch(0.181 0.023 300);
-  --purple-n3: oklch(0.247 0.021 300);
-  --purple-n4: oklch(0.309 0.019 300);
-  --purple-n5: oklch(0.395 0.017 300);
-  --purple-n6: oklch(0.481 0.016 300);
-  --purple-n7: oklch(0.537 0.015 300);
-  --purple-n8: oklch(0.719 0.013 300);
-  --purple-n9: oklch(0.799 0.012 300);
-  --purple-n10: oklch(0.877 0.012 300);
-  --purple-n11: oklch(0.918 0.011 300);
-  --purple-n12: oklch(0.995 0.007 300);
 
   /* Gray dark mode */
   --gray-1: oklch(0.156 0.020 225);

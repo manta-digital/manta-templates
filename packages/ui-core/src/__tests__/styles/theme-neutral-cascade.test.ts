@@ -563,9 +563,10 @@ describe('Theme-Specific Neutral Color Cascade', () => {
    * Test: Verify dark mode cascade behavior
    */
   test('validates dark mode cascade maintains theme consistency', () => {
-    const darkModeResults: { [palette: string]: any } = {}
+    const darkModeResults: Record<string, any> = {}
     
-    ['teal', 'blue', 'green'].forEach(palette => {
+    const palettes = ['teal', 'blue', 'green']
+    palettes.forEach((palette: string) => {
       const lightElement = document.getElementById(`${palette}-light`)!
       const darkElement = document.getElementById(`${palette}-dark`)!
       
@@ -596,7 +597,10 @@ describe('Theme-Specific Neutral Color Cascade', () => {
   test('validates cascade resolution performance', () => {
     const performanceTest = {
       startTime: performance.now(),
-      results: [] as any[]
+      results: [] as any[],
+      endTime: 0,
+      duration: 0,
+      avgPerSwitch: 0
     }
     
     // Test rapid theme switching
@@ -620,9 +624,9 @@ describe('Theme-Specific Neutral Color Cascade', () => {
       })
     }
     
-    performanceTest['endTime'] = performance.now()
-    performanceTest['duration'] = performanceTest.endTime - performanceTest.startTime
-    performanceTest['avgPerSwitch'] = performanceTest.duration / switchCount
+    performanceTest.endTime = performance.now()
+    performanceTest.duration = performanceTest.endTime - performanceTest.startTime
+    performanceTest.avgPerSwitch = performanceTest.duration / switchCount
     
     // All results should be valid
     expect(performanceTest.results.every((r: any) => r.isValid)).toBe(true)
