@@ -126,30 +126,33 @@ This will allow themes to have their own tinted neutral scales while maintaining
   - ✅ Zero visual regressions - existing themes work exactly the same
 - **Success**: ✅ Users can easily add custom themes to their template instance
 
-### Task 4: Theme Registry System & ColorSelector Enhancement
-**Priority**: P1 (High - user experience)
-- [ ] **Implement theme registry pattern**
-  - Add support for `--user-themes` CSS variable in ColorSelector
-  - Add support for `--theme-names` for display names with emojis
-  - Add support for `--default-theme` for initial selection
-  - Ensure registry controls which themes appear in UI
-- [ ] **Enhance ColorSelector component**
-  - Add `useAvailableThemes()` hook to read theme registry
-  - Merge ui-core built-in themes with user-defined themes
-  - Support display names (e.g., "🍌 Banana" instead of "banana")
-  - Test theme cycling includes all registered themes
-- [ ] **Create comprehensive theming guide**
-  - Document theme registry pattern for developer control
-  - Show real-world Radix Color Tool integration workflow
-  - Include client presentation scenarios (staging themes)
-  - Document multi-color theming (accent + neutral override)
-  - OKLCH color space explanation and best practices
-- [ ] **Create theme showcase examples**
-  - "Banana" theme with yellow accents + brown neutrals
-  - "Sunset" theme with orange-to-pink gradient
-  - "Forest" theme with green accents + brown neutrals
-  - Show themes defined but not exposed in registry
-- **Success**: Professional theme system with developer control and automatic UI integration
+### ✅ Task 4: Theme Registry System & ColorSelector Enhancement
+**Priority**: P1 (High - user experience) - **COMPLETED**
+- [x] **Implement theme registry pattern**
+  - ✅ Added support for `--ui-themes` and `--user-themes` CSS variables in ColorSelector
+  - ✅ Added support for `--theme-names` for display names with emojis
+  - ✅ Added support for `--default-theme` for initial selection
+  - ✅ Registry controls which themes appear in UI
+- [x] **Enhance ColorSelector component**
+  - ✅ Added `useAvailableThemes()` hook to read theme registry from CSS variables
+  - ✅ Merges ui-core built-in themes with user-defined themes dynamically
+  - ✅ Supports clean display names (emojis stripped for UI display)
+  - ✅ Theme cycling includes all registered themes automatically
+- [x] **Create comprehensive theming guide**
+  - ✅ Documented theme registry pattern for developer control in THEME_CUSTOMIZATION.md
+  - ✅ Shows real-world Radix Theme Creator integration workflow
+  - ✅ Includes client presentation scenarios and staging themes
+  - ✅ Documents multi-color theming (accent + neutral override)
+  - ✅ OKLCH color space explanation and best practices included
+- [x] **Create theme showcase examples**
+  - ✅ "Forest" theme with green accents + brown neutrals
+  - ✅ "Banana" theme with yellow accents + brown neutrals  
+  - ✅ "Sunset" theme with orange-to-pink gradient
+  - ✅ Shows themes defined but not exposed in registry
+  - ✅ Fixed CSS selector issue (.dark[data-palette] vs .dark [data-palette])
+  - ✅ Full Radix Theme Creator integration with semantic neutral variables
+  - ✅ Alpha variants and special colors support
+- **Success**: ✅ Professional theme system with developer control and automatic UI integration
 
 ### Task 5: Visual Regression Testing
 **Priority**: P0 (Critical - quality gate)
