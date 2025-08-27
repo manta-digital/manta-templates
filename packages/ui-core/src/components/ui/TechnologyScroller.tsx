@@ -47,6 +47,7 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
 }) => {
   const [isDark, setIsDark] = useState(false);
 
+  // React kludge to fix dark mode that was causing inordinate amounts of difficulty.
   useEffect(() => {
     const checkDarkMode = () => {
       setIsDark(document.documentElement.classList.contains('dark'));
@@ -168,22 +169,17 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
         )}
         style={{ width: 'max-content' }}
       >
-        {items.concat(items).map((item, idx) => (
+        {/* Fairly horrid kluge to avoid gaps.  Open issue but need to move on. */}
+        {[...items, ...items, ...items].map((item, idx) => (
           <li
             key={`${item.name}-${idx}`}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexShrink: 0,
-              marginRight: '3rem'
-            }}
+            className="flex items-center gap-2 pr-12"
           >
-            <div style={{ marginRight: '0.5rem' }}>
+            <div>
               <TechIcon item={item} />
             </div>
             <span 
-              className="text-lg font-medium text-muted-foreground"
-              style={{ whiteSpace: 'nowrap' }}
+              className="text-lg font-medium text-muted-foreground whitespace-nowrap"
             >
               {item.name}
             </span>

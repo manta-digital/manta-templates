@@ -20,7 +20,7 @@
   /* Duplicate content scroll: animate two concatenated lists exactly one list width */
   @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-33.3%); }
   }
 
   .animate-scroll-slow {
