@@ -6,16 +6,16 @@
   --radius: 1.5rem;
   
   /* Light mode color system */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --background: var(--gray-1);
+  --foreground: var(--gray-12);
+  --card: var(--gray-1);
+  --card-foreground: var(--gray-12);
+  --popover: var(--gray-1);
+  --popover-foreground: var(--gray-12);
+  --primary: oklch(0.208 0.042 265.755);  /* Keep primary as branded color */
+  --primary-foreground: var(--gray-1);
+  --secondary: var(--gray-2);
+  --secondary-foreground: var(--gray-12);
   --muted: var(--gray-2);
   --muted-foreground: var(--gray-8);
   --accent: var(--gray-2);
@@ -33,36 +33,36 @@
   --chart-5: oklch(0.769 0.188 70.08);
   
   /* Sidebar system for complex layouts */
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --sidebar: var(--gray-1);
+  --sidebar-foreground: var(--gray-12);
+  --sidebar-primary: oklch(0.208 0.042 265.755);  /* Keep primary as branded color */
+  --sidebar-primary-foreground: var(--gray-1);
+  --sidebar-accent: var(--gray-2);
+  --sidebar-accent-foreground: var(--gray-12);
+  --sidebar-border: var(--gray-5);
+  --sidebar-ring: var(--gray-7);
 }
 
 /* Dark mode color adjustments */
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
+  --background: var(--gray-1);
+  --foreground: var(--gray-12);
+  --card: var(--gray-2);
+  --card-foreground: var(--gray-12);
+  --popover: var(--gray-2);
+  --popover-foreground: var(--gray-12);
+  --primary: var(--gray-11);  /* Use high contrast gray for dark mode primary */
+  --primary-foreground: var(--gray-1);
+  --secondary: var(--gray-3);
+  --secondary-foreground: var(--gray-12);
+  --muted: var(--gray-3);
+  --muted-foreground: var(--gray-8);
+  --accent: var(--gray-3);
+  --accent-foreground: var(--gray-12);
   --destructive: oklch(0.704 0.191 22.216);
   --border: var(--color-border-accent);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
+  --input: var(--gray-1);  /* Use solid background instead of alpha */
+  --ring: var(--gray-7);
   
   /* Chart colors optimized for dark mode */
   --chart-1: oklch(0.488 0.243 264.376);
@@ -72,12 +72,12 @@
   --chart-5: oklch(0.645 0.246 16.439);
   
   /* Sidebar dark mode adjustments */
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --sidebar: var(--gray-2);
+  --sidebar-foreground: var(--gray-12);
+  --sidebar-primary: oklch(0.488 0.243 264.376);  /* Keep branded accent color */
+  --sidebar-primary-foreground: var(--gray-12);
+  --sidebar-accent: var(--gray-3);
+  --sidebar-accent-foreground: var(--gray-12);
+  --sidebar-border: var(--gray-4);
+  --sidebar-ring: var(--gray-7);
 }
