@@ -1,4 +1,4 @@
-import type { TokenProvider } from '@manta-templates/ui-core';
+import type { TokenProvider } from '@/lib/ui-core';
 
 /**
  * Site configuration interface for token building

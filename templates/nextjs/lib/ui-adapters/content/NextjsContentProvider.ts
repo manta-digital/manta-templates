@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { BaseContentProvider } from '@manta-templates/ui-core';
-import { ContentNotFoundError, ContentLoadError } from '@manta-templates/ui-core';
-import type { ContentData, TokenProvider, TokenConfig } from '@manta-templates/ui-core';
+import { BaseContentProvider } from '@/lib/ui-core';
+import { ContentNotFoundError, ContentLoadError } from '@/lib/ui-core';
+import type { ContentData, TokenProvider, TokenConfig } from '@/lib/ui-core';
 import { remark } from 'remark';
 import gfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';

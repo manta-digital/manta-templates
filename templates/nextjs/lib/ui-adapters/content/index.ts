@@ -1,5 +1,5 @@
 import { NextjsContentProvider } from './NextjsContentProvider';
-import type { ArticleContent, ProjectContent, QuoteContent } from '@manta-templates/ui-core';
+import type { ArticleContent, ProjectContent, QuoteContent } from '@/lib/ui-core';
 import path from 'path';
 
 export { NextjsContentProvider };

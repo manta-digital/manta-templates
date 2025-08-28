@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from 'react';
-import { cn } from '@manta-templates/ui-core';
+import { cn } from '@/lib/ui-core';
 
 interface BackgroundVideoComponentProps {
   src: string;

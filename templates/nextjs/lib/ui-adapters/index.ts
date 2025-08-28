@@ -10,10 +10,10 @@ export type {
   ContentData, 
   ContentMeta,
   ContentError 
-} from '@manta-templates/ui-core';
+} from '@/lib/ui-core';
 
 export { 
   ContentLoadError,
   ContentProcessError,
   ContentNotFoundError 
-} from '@manta-templates/ui-core';
+} from '@/lib/ui-core';

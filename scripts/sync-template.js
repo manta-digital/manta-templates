@@ -55,6 +55,10 @@ function syncTemplate(templateName) {
       execSync(`rm -rf "${uiAdaptersTarget}"`);
     }
     execSync(`cp -r "${uiAdaptersSource}" "${uiAdaptersTarget}"`);
+    
+    // Fix imports within ui-adapters to reference local ui-core
+    console.log(`🔧 Updating imports within ui-adapters...`);
+    execSync(`find "${uiAdaptersTarget}" -type f \\( -name "*.ts" -o -name "*.tsx" \\) -exec sed -i '' "s|@manta-templates/ui-core|@/lib/ui-core|g" {} +`);
   }
 
   // Update package.json to remove workspace dependencies
