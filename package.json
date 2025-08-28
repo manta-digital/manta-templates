@@ -28,17 +28,24 @@
         "url": "git+https://github.com/manta-digital/manta-templates.git"
     },
     "keywords": [],
+    "pnpm": {
+        "overrides": {
+            "brace-expansion": "^2.0.2",
+            "form-data": "4.0.4"
+        },
+        "onlyBuiltDependencies": [
+            "@parcel/watcher",
+            "@tailwindcss/oxide",
+            "esbuild",
+            "sharp",
+            "unrs-resolver"
+        ]
+    },
     "author": "",
     "license": "ISC",
     "type": "commonjs",
     "bugs": {
         "url": "https://github.com/manta-digital/manta-templates/issues"
     },
-    "homepage": "https://github.com/manta-digital/manta-templates#readme",
-    "pnpm": {
-        "overrides": {
-            "brace-expansion": "^2.0.2",
-            "form-data": "4.0.4"
-        }
-    }
+    "homepage": "https://github.com/manta-digital/manta-templates#readme"
 }

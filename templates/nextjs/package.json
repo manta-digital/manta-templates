@@ -84,11 +84,6 @@
     "tailwindcss": "^4.1.10",
     "ts-jest": "^29.4.1",
     "tw-animate-css": "^1.3.4",
-    "typescript": "^5.8.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "form-data": "4.0.4"
-    }
+    "typescript": "^5.9.2"
   }
 }
