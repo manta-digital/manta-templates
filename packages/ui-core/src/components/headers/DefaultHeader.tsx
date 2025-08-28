@@ -18,7 +18,7 @@ export function DefaultHeader({
   const { logo, logoDark, title, links } = content;
 
   return (
-    <header className={cn("py-3 pt-3 bg-transparent", className)}>
+    <header className={cn("py-5 bg-transparent", className)}>
       <Container className="flex items-center justify-between">
         <AnchorComponent href="/" className="flex items-center space-x-3 text-accent-11">
           {/* Use theme-aware brand mark by default; fall back to provided images if present */}

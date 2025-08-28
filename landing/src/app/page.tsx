@@ -1,4 +1,4 @@
-import { Container, ProjectCard, ArticleCard, BentoLayout, GridItem } from '@/lib/ui-core';
+import { Container, ProjectCard, ArticleCard, BentoLayout, GridItem, ComingSoonOverlay } from '@/lib/ui-core';
 import { nextjsContentProvider } from '@/lib/ui-adapters';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,6 +36,12 @@ interface ProjectContent {
   demoUrl: string;
   features: Array<{ label: string }>;
   actions: Array<{ label: string; href: string; variant?: 'primary' | 'outline' | 'secondary' }>;
+  comingSoon?: boolean;
+  comingSoonOverlay?: {
+    color?: 'teal' | 'purple' | 'amber';
+    label?: string;
+    blurAmount?: 'sm' | 'md' | 'lg';
+  };
 }
 
 export default async function Home() {
@@ -70,9 +76,9 @@ export default async function Home() {
             }}
             content={{
               title: 'Next.js Starter',
-              description: 'Modern full-stack starter with responsive grid layouts.',
+              description: 'Modern full-stack Next.js starter template with responsive grid layouts and theming that actually works.',
               techStack: ['Next.js 15', 'Tailwind 4', 'shadcn/radix'],
-              image: '/image/blog-sample-image.png',
+              image: '/image/nextjs-template.png',
               repoUrl: 'https://github.com/manta-digital/manta-templates/tree/main/templates/nextjs',
               features: [
                 { label: 'Fast & modern React framework', icon: 'zap' },
@@ -89,18 +95,31 @@ export default async function Home() {
           className="md:row-start-2 lg:row-start-2"
         >
           {astroContent ? (
-            <ProjectCard
-              ImageComponent={Image}
-              LinkComponent={Link}
-              imageProps={{
-                width: 600,
-                height: 400
-              }}
-              content={{
-                ...astroContent,
-                image: '/image/blog-sample-image.png',
-              }}
-            />
+            <div className="h-full relative">
+              <ProjectCard
+                ImageComponent={() => (
+                  <div className="w-full h-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+                    <div className="text-white/80 text-4xl font-bold">🚀</div>
+                  </div>
+                )}
+                LinkComponent={Link}
+                content={{
+                  ...astroContent,
+                  image: '/image/placeholder-astro.png', // fallback
+                }}
+              />
+              {astroContent.comingSoon && (
+                <div className="absolute inset-0 z-10">
+                  <ComingSoonOverlay 
+                    color={astroContent.comingSoonOverlay?.color || "purple"}
+                    label={astroContent.comingSoonOverlay?.label || "Coming Soon"}
+                    blurAmount={astroContent.comingSoonOverlay?.blurAmount || "md"}
+                  >
+                    <div className="w-full h-full" />
+                  </ComingSoonOverlay>
+                </div>
+              )}
+            </div>
           ) : (
             <ArticleCard 
               className="h-full" 
