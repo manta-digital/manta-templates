@@ -59,6 +59,28 @@ function syncTemplate(templateName) {
     // Fix imports within ui-adapters to reference local ui-core
     console.log(`🔧 Updating imports within ui-adapters...`);
     execSync(`find "${uiAdaptersTarget}" -type f \\( -name "*.ts" -o -name "*.tsx" \\) -exec sed -i '' "s|@manta-templates/ui-core|@/lib/ui-core|g" {} +`);
+    
+    // Fix content provider configuration to use local paths
+    const contentIndexPath = path.join(uiAdaptersTarget, 'content', 'index.ts');
+    if (fs.existsSync(contentIndexPath)) {
+      let contentIndexContent = fs.readFileSync(contentIndexPath, 'utf8');
+      
+      // Replace the additionalContentRoots array with local lib paths
+      const newContentRoots = `additionalContentRoots: [
+    // Local ui-adapters content directory
+    path.join(process.cwd(), 'lib/ui-adapters/content'),
+    // Fallback to src/content for template-specific content
+    path.join(process.cwd(), 'src/content'),
+  ]`;
+      
+      contentIndexContent = contentIndexContent.replace(
+        /additionalContentRoots:\s*\[[\s\S]*?\]/m,
+        newContentRoots
+      );
+      
+      fs.writeFileSync(contentIndexPath, contentIndexContent);
+      console.log(`📝 Updated content provider configuration`);
+    }
   }
 
   // Update package.json to remove workspace dependencies

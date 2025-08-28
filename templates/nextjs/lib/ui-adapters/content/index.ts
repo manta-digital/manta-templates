@@ -13,14 +13,10 @@ export const nextjsContentProvider = new NextjsContentProvider({
   // Add ui-adapters-nextjs content directory as additional search location
   // Use fallback strategy: try to find content in source directory during development
   additionalContentRoots: [
-    // Try the built location first (for production)
-    path.join(__dirname, '../content'),
-    // Fallback to source location (for development with monorepo structure)
-    path.resolve(__dirname, '../../src/content'),
-    // Additional fallback for when running from different locations
-    path.resolve(process.cwd(), 'packages/ui-adapters/nextjs/src/content'),
-    // Absolute path to ui-adapters content for monorepo builds
-    path.resolve(process.cwd(), '../../packages/ui-adapters/nextjs/dist/content'),
+    // Local ui-adapters content directory
+    path.join(process.cwd(), 'lib/ui-adapters/content'),
+    // Fallback to src/content for template-specific content
+    path.join(process.cwd(), 'src/content'),
   ]
 });
 
