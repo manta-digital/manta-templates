@@ -13,7 +13,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@manta-templates/ui-core": "workspace:*",
+    "@manta-templates/ui-core": "file:../../ui-core",
     "gray-matter": "^4.0.3",
     "rehype-pretty-code": "^0.14.1",
     "rehype-sanitize": "^6.0.0",

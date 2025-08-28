@@ -133,7 +133,7 @@ importers:
   packages/ui-adapters/nextjs:
     dependencies:
       '@manta-templates/ui-core':
-        specifier: workspace:*
+        specifier: file:../../ui-core
         version: link:../../ui-core
       gray-matter:
         specifier: ^4.0.3
