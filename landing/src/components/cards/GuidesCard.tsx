@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseCard, BentoLayout, GridItem, ComingSoonOverlay } from '@/lib/ui-core';
-import { BookOpen, Cpu, GitBranch, Code, Terminal, ExternalLink } from 'lucide-react';
+import { BookOpen, Cpu, GitBranch, Code, Terminal, ExternalLink, Palette, FileText } from 'lucide-react';
 
 interface GuidesContent {
   title: string;
@@ -8,7 +8,9 @@ interface GuidesContent {
   comingSoonFeature: {
     title: string;
     icon: string;
+    description?: string;
     codeExample: string;
+    highlightAs?: string;
   };
   features: Array<{
     icon: string;
@@ -37,6 +39,22 @@ const iconMap = {
   'code': Code,
   'terminal': Terminal,
   'book-open': BookOpen,
+  'palette': Palette,
+  'file-text': FileText,
+};
+
+// Simple syntax highlighting for common shell commands.  Temporary workaround.
+const highlightCode = (code: string, language?: string) => {
+  if (language === 'shell') {
+    return code
+      .replace(/#[^\n\r]*/g, '<span class="text-muted-foreground">$&</span>') // Comments in muted color
+      .replace(/(pnpm|npm|npx|yarn|dlx)\b/g, '<span class="text-emerald-500">$1</span>')
+      .replace(/\b(degit|create|install|build|dev|start|setup-guides)\b/g, '<span class="text-blue-400">$1</span>')
+      .replace(/(manta-digital\/[^\s]+)/g, '<span class="text-purple-400">$1</span>')
+      .replace(/\b(my-[\w-]+)\b/g, '<span class="text-cyan-400">$1</span>')
+      .replace(/\n/g, '<br>'); // Convert newlines to HTML line breaks
+  }
+  return code;
 };
 
 export default function GuidesCard({ content, className }: GuidesCardProps) {
@@ -60,18 +78,28 @@ export default function GuidesCard({ content, className }: GuidesCardProps) {
             <Cpu size={18} className="mr-2 text-primary" />
             {content.comingSoonFeature.title}
           </h3>
+
+          {content.comingSoonFeature.description && (
+            <div>
+              <p className="text-muted-foreground text-sm">{content.comingSoonFeature.description}</p>
+            </div>
+          )}
           
           <div className="min-h-[120px]">
-            <ComingSoonOverlay color="purple" blurAmount="sm">
               <div className="bg-muted/50 rounded-lg p-4 border border-border h-full">
-                <div className="text-xs text-muted-foreground mb-2">Quick start</div>
+                <div className="text-sm text-muted-foreground mb-2">Quick start</div>
                 <div className="font-mono text-sm bg-muted p-3 rounded overflow-x-auto">
-                  <span className="text-emerald-500">npx</span>{' '}
-                  <span className="text-primary">create-manta-app</span>{' '}
-                  <span className="text-blue-500">my-ai-project</span>
+                  <code 
+                    className="text-foreground" 
+                    dangerouslySetInnerHTML={{
+                      __html: highlightCode(
+                        content.comingSoonFeature.codeExample,
+                        content.comingSoonFeature.highlightAs
+                      )
+                    }}
+                  />
                 </div>
               </div>
-            </ComingSoonOverlay>
           </div>
 
           {/* Features List */}
@@ -99,25 +127,51 @@ export default function GuidesCard({ content, className }: GuidesCardProps) {
             <BentoLayout columns="grid-cols-2" gap={3} rowHeight="minmax(100px, auto)">
               {content.documentation.map((doc, index) => (
                 <GridItem key={index} colSpan="col-span-1">
-                  <a
-                    href={doc.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-full"
-                  >
-                    <div className="bg-muted/50 hover:bg-muted p-4 rounded-lg border border-border transition-colors group cursor-pointer h-full flex flex-col">
-                      <div className="text-primary mb-2 group-hover:text-primary/80">
-                        {doc.title}
+                  {index === 2 ? (
+                    // API Reference with Coming Soon overlay
+                    <ComingSoonOverlay color="purple" blurAmount="sm">
+                      <a
+                        href={doc.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full"
+                      >
+                        <div className="bg-muted/50 hover:bg-muted p-4 rounded-lg border border-border transition-colors group cursor-pointer h-full flex flex-col">
+                          <div className="text-primary mb-2 group-hover:text-primary/60">
+                            {doc.title}
+                          </div>
+                          <p className="text-xs text-muted-foreground flex-grow">
+                            {doc.description}
+                          </p>
+                          <div className="mt-3 text-xs text-primary flex items-center">
+                            <span>{doc.action}</span>
+                            <ExternalLink size={10} className="ml-1" />
+                          </div>
+                        </div>
+                      </a>
+                    </ComingSoonOverlay>
+                  ) : (
+                    // Regular documentation card
+                    <a
+                      href={doc.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block h-full"
+                    >
+                      <div className="bg-muted/50 hover:bg-muted p-4 rounded-lg border border-border transition-colors group cursor-pointer h-full flex flex-col">
+                        <div className="text-primary mb-2 group-hover:text-primary/80">
+                          {doc.title}
+                        </div>
+                        <p className="text-xs text-muted-foreground flex-grow">
+                          {doc.description}
+                        </p>
+                        <div className="mt-3 text-xs text-primary flex items-center">
+                          <span>{doc.action}</span>
+                          <ExternalLink size={10} className="ml-1" />
+                        </div>
                       </div>
-                      <p className="text-xs text-muted-foreground flex-grow">
-                        {doc.description}
-                      </p>
-                      <div className="mt-3 text-xs text-primary flex items-center">
-                        <span>{doc.action}</span>
-                        <ExternalLink size={10} className="ml-1" />
-                      </div>
-                    </div>
-                  </a>
+                    </a>
+                  )}
                 </GridItem>
               ))}
             </BentoLayout>
@@ -125,12 +179,12 @@ export default function GuidesCard({ content, className }: GuidesCardProps) {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-border pt-4 flex justify-center flex-none">
+        <div className="pt-4 flex justify-center flex-none">
           <a
             href={content.footerAction.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full max-w-2xl py-2 px-4 bg-primary/10 text-primary rounded-lg border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-colors flex items-center justify-center"
+            className="w-full max-w-2xl py-2 px-4 bg-primary/10 text-primary rounded-lg border border-primary/60 hover:bg-primary/20 hover:border-primary/30 transition-colors flex items-center justify-center"
           >
             <span>{content.footerAction.text}</span>
             <ExternalLink size={14} className="ml-2" />
