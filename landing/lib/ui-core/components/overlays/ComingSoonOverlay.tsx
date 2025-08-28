@@ -89,9 +89,11 @@ export const ComingSoonOverlay: React.FC<ComingSoonOverlayProps> = ({
   patternLines = 12,
   className,
   children,
-  mode = 'dark',
+  mode,
 }) => {
-  const c = colorMap[color][mode];
+  // Default to dark mode if mode not provided, but allow override
+  const currentMode = mode || 'dark';
+  const c = colorMap[color]?.[currentMode] || colorMap[color].dark;
   const blurMap = { sm: 'backdrop-blur-[2px]', md: 'backdrop-blur-[4px]', lg: 'backdrop-blur' };
 
   return (
@@ -105,7 +107,7 @@ export const ComingSoonOverlay: React.FC<ComingSoonOverlayProps> = ({
       <div
         role="presentation"
         className={cn(
-          "absolute inset-0 rounded-[0.5em] flex items-center justify-center backdrop-filter",
+          "absolute inset-0 rounded-lg flex items-center justify-center backdrop-filter border",
           blurMap[blurAmount],
           c.border,
           "z-10 overflow-hidden"
