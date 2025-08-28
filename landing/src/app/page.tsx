@@ -1,6 +1,5 @@
-import { Container, QuoteCard, ProjectCard, ArticleCard, BentoLayout, GridItem } from '@/lib/ui-core';
+import { Container, ProjectCard, ArticleCard, BentoLayout, GridItem } from '@/lib/ui-core';
 import { nextjsContentProvider } from '@/lib/ui-adapters';
-import type { QuoteContent } from '@/lib/ui-core';
 import Image from 'next/image';
 import Link from 'next/link';
 import GuidesCard from '@/components/cards/GuidesCard';
@@ -29,17 +28,20 @@ interface GuidesContent {
   };
 }
 
+interface ProjectContent {
+  title: string;
+  description: string;
+  techStack: string[];
+  repoUrl: string;
+  demoUrl: string;
+  features: Array<{ label: string }>;
+  actions: Array<{ label: string; href: string; variant?: 'primary' | 'outline' | 'secondary' }>;
+}
+
 export default async function Home() {
   // Load content using ui-adapters
-  let quoteContent: QuoteContent | null = null;
   let guidesContent: GuidesContent | null = null;
-  
-  try {
-    const quote = await nextjsContentProvider.loadContent<QuoteContent>('sample-quote', 'quotes');
-    quoteContent = quote.frontmatter;
-  } catch (error: unknown) {
-    console.error('Error loading quote content:', error);
-  }
+  let astroContent: ProjectContent | null = null;
 
   try {
     const guides = await nextjsContentProvider.loadContent('guides-docs', 'main');
@@ -48,10 +50,17 @@ export default async function Home() {
     console.error('Error loading guides content:', error);
   }
 
+  try {
+    const astro = await nextjsContentProvider.loadContent('astro-starter', 'main');
+    astroContent = astro.frontmatter as ProjectContent;
+  } catch (error: unknown) {
+    console.error('Error loading astro content:', error);
+  }
+
   return (
-    <Container className="py-20">
+    <Container className="pb-20">
       <BentoLayout gap={8} columns="grid-cols-6">
-        <GridItem colSpan="col-span-full md:col-span-2 lg:col-span-4">
+        <GridItem colSpan="col-span-full md:col-span-3">
           <ProjectCard
             ImageComponent={Image}
             LinkComponent={Link}
@@ -76,28 +85,42 @@ export default async function Home() {
           />
         </GridItem>
         <GridItem
-          colSpan="col-span-full md:col-span-2 lg:col-span-4"
-          className="md:row-start-2"
+          colSpan="col-span-full row-span-1 md:col-span-3"
+          className="md:row-start-2 lg:row-start-2"
         >
-          <ArticleCard 
-            className="h-full" 
-            ImageComponent={Image} 
-            LinkComponent={Link} 
-            title="Astro Starter" 
-            subtitle="Template" 
-            description="Modern static site generator with island architecture for optimal performance." 
-            image="/image/blog-sample-image.png" 
-            href="https://astro.build" 
-            imageProps={{ 
-              width: 600, 
-              height: 400 
-            }} 
-          />
+          {astroContent ? (
+            <ProjectCard
+              ImageComponent={Image}
+              LinkComponent={Link}
+              imageProps={{
+                width: 600,
+                height: 400
+              }}
+              content={{
+                ...astroContent,
+                image: '/image/blog-sample-image.png',
+              }}
+            />
+          ) : (
+            <ArticleCard 
+              className="h-full" 
+              ImageComponent={Image} 
+              LinkComponent={Link} 
+              title="Astro Starter" 
+              subtitle="Template" 
+              description="Modern static site generator with island architecture for optimal performance." 
+              image="/image/blog-sample-image.png" 
+              href="https://astro.build" 
+              imageProps={{ 
+                width: 600, 
+                height: 400 
+              }} 
+            />
+          )}
         </GridItem>
         <GridItem
-          colSpan="col-span-full md:col-span-4 lg:col-span-2"
-          rowSpan="md:row-span-2 lg:row-span-3"
-          className="lg:row-start-1 md:col-start-3 lg:col-start-5"
+          colSpan="col-span-full md:col-span-3"
+          rowSpan="md:row-span-2"
         >
           {guidesContent && guidesContent.title && guidesContent.features ? (
             <GuidesCard content={guidesContent} className="h-full" />
@@ -118,6 +141,7 @@ export default async function Home() {
             />
           )}
         </GridItem>
+        {/* Quote Card 
         <GridItem
           colSpan="col-span-full md:col-span-6 lg:col-span-4"
           className="h-full"
@@ -126,6 +150,7 @@ export default async function Home() {
             {quoteContent && <QuoteCard content={quoteContent} />}
           </div>
         </GridItem>
+        */}
       </BentoLayout>
     </Container>
   );
