@@ -1,6 +1,6 @@
-import { Container, QuoteCard } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
-import type { QuoteContent } from '@manta-templates/ui-core';
+import { Container, QuoteCard } from '@/lib/ui-core';
+import { nextjsContentProvider } from '@/lib/ui-adapters';
+import type { QuoteContent } from '@/lib/ui-core';
 
 export default async function Home() {
   // Load quote content using ui-adapters

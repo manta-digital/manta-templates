@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/ui-core/utils';
 import { 
   BentoLayout,
   GridItem,
@@ -13,8 +13,8 @@ import {
   CosineTerrainCard,
   TechnologyScroller,
   VideoCard
-} from '@manta-templates/ui-core';
-import { BackgroundVideoComponent } from '@manta-templates/ui-adapters-nextjs';
+} from '@/lib/ui-core';
+import { BackgroundVideoComponent } from '@/lib/ui-adapters';
 import Image from 'next/image';
 import Link from 'next/link';
 

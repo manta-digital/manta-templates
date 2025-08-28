@@ -54,7 +54,7 @@ jest.mock('next/link', () => ({
 }));
 
 // Mock ui-core components to avoid import issues in test environment
-jest.mock('@manta-templates/ui-core', () => ({
+jest.mock('@/lib/ui-core', () => ({
   ArticleCard: ({ ImageComponent, title, description, image, href }: MockArticleCardProps) => (
     <div data-testid="article-card">
       <h2>{title}</h2>
@@ -85,7 +85,7 @@ jest.mock('@manta-templates/ui-core', () => ({
 }));
 
 // Import the mocked components
-import { ArticleCard, ProjectCard, AboutCard } from '@manta-templates/ui-core';
+import { ArticleCard, ProjectCard, AboutCard } from '@/lib/ui-core';
 import Image from 'next/image';
 import Link from 'next/link';
 

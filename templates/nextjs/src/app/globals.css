@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
-@import "@manta-templates/ui-core/dist/styles/index.css";
+@import "../../lib/ui-core/styles/index.css";
 
 @custom-variant dark (&:is(.dark *));
 

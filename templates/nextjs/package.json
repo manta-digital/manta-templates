@@ -37,7 +37,6 @@
     "dev-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm dev"
   },
   "dependencies": {
-    "@manta-templates/ui-core": "workspace:*",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",

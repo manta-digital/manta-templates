@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ProjectCard, QuoteCard, BlogCardImage } from '@manta-templates/ui-core';
+import { ProjectCard, QuoteCard, BlogCardImage } from '@/lib/ui-core';
 
 // Mock Next.js Image and Link for testing
 jest.mock('next/image', () => ({

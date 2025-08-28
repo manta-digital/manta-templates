@@ -2,6 +2,8 @@
 
 This template is designed to be approachable and flexible. Start simple, then stretch technically when you're ready.
 
+**Self-contained**: All UI components and utilities are embedded locally in `lib/` - no external UI package dependencies required.
+
 ## Quick Start
 
 1. Install dependencies and run dev:
@@ -59,7 +61,7 @@ How to customize:
 
 Tip: Test previews with social debuggers (e.g., Facebook Sharing Debugger, LinkedIn Post Inspector). After deploying, paste your site URL and "Scrape Again/Refresh".
 
-**Note**: This is template-specific functionality using Next.js `next/og` and edge runtime. It's intentionally not part of `@manta-templates/ui-core` since OG image generation varies by framework and deployment target.
+**Note**: This is template-specific functionality using Next.js `next/og` and edge runtime. It's intentionally not part of the embedded UI core since OG image generation varies by framework and deployment target.
 
 Footer behavior summary:
 - `variants.footer = 'compact'` always shows a single “Legal” link (points to `/legal`). Page content comes from `presets.legal` ('default' → neutral, 'mit' → MIT).
@@ -144,8 +146,8 @@ Have fun, keep it readable, and don’t be afraid to tinker. Small steps add up 
 # Recommended: Install pnpm (one-time setup)
 npm install -g pnpm
 
-# Create your project from the template
-pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-project
+# Create your project from the template  
+npx degit manta-templates/manta-templates/templates/nextjs my-project
 cd my-project
 
 # Install dependencies
@@ -169,8 +171,9 @@ Open [http://localhost:3000](http://localhost:3000) - you'll see a minimal start
 | **Next.js 15** (App Router) | Strict TS, Turbopack dev server, optimized images |
 | **Tailwind CSS v4** | Dark/Light mode, no config files needed |
 | **ShadCN UI + Radix** | Pre-wired, accessible components |
-| **Layout Components** | Flexible grid system with examples |
+| **Layout Components** | Flexible grid system with examples |  
 | **Markdown Content** | Gray-matter frontmatter, code highlighting |
+| **Self-Contained** | All UI components embedded locally, no external UI deps |
 | **Clean Structure** | Minimal examples, ready for your content |
 
 ---
@@ -184,6 +187,10 @@ src/
 ├── content/            # Your markdown content (replace samples)
 ├── lib/                # Utilities and shared logic
 └── types/              # TypeScript type definitions
+
+lib/                    # Embedded UI packages (no external dependencies)
+├── ui-core/            # Core UI components and utilities
+└── ui-adapters/        # Next.js-specific adapters
 
 examples/
 ├── sample-content/     # Sample markdown files (replace these)

@@ -34,7 +34,7 @@ describe('Build Validation', () => {
       // Test that client components are imported and used correctly
       const clientComponentUsage = `
         'use client';
-        import { BlogCardImage } from '@manta-templates/ui-core';
+        import { BlogCardImage } from '@/lib/ui-core';
         import { motion } from 'framer-motion';
         
         export function ClientWrapper({ content }: { content: any }) {
@@ -163,13 +163,13 @@ describe('Build Validation', () => {
           'framer-motion', 'react', 'react-dom'
         ],
         treeshakeableModules: [
-          '@manta-templates/ui-core'
+          '@/lib/ui-core'
         ],
       };
 
       expect(bundleAnalysis.serverOnlyModules).toContain('fs');
       expect(bundleAnalysis.clientModules).toContain('framer-motion');
-      expect(bundleAnalysis.treeshakeableModules).toContain('@manta-templates/ui-core');
+      expect(bundleAnalysis.treeshakeableModules).toContain('@/lib/ui-core');
     });
 
     test('should support code splitting correctly', () => {
@@ -283,11 +283,11 @@ describe('Build Validation', () => {
     test('should import ui-core components correctly', () => {
       // Test workspace package imports
       const workspaceImports = {
-        uiCore: '@manta-templates/ui-core',
+        uiCore: '@/lib/ui-core',
         resolutionStrategy: 'workspace:*',
       };
 
-      expect(workspaceImports.uiCore).toBe('@manta-templates/ui-core');
+      expect(workspaceImports.uiCore).toBe('@/lib/ui-core');
       expect(workspaceImports.resolutionStrategy).toBe('workspace:*');
     });
 
@@ -295,7 +295,7 @@ describe('Build Validation', () => {
       // Test dependency resolution
       const dependencyResolution = {
         internalDependencies: [
-          '@manta-templates/ui-core'
+          '@/lib/ui-core'
         ],
         externalDependencies: [
           'next', 'react', 'framer-motion'
@@ -305,7 +305,7 @@ describe('Build Validation', () => {
         ],
       };
 
-      expect(dependencyResolution.internalDependencies).toContain('@manta-templates/ui-core');
+      expect(dependencyResolution.internalDependencies).toContain('@/lib/ui-core');
       expect(dependencyResolution.externalDependencies).toContain('next');
       expect(dependencyResolution.devDependencies).toContain('jest');
     });

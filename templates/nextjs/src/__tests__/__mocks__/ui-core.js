@@ -1,5 +1,5 @@
 /**
- * Mock for @manta-templates/ui-core to avoid ESM import issues with remark
+ * Mock for @/lib/ui-core to avoid ESM import issues with remark
  * 
  * This mock provides simplified versions of ui-core components for testing
  * without pulling in the complex content processing dependencies.

@@ -71,7 +71,7 @@ describe('Server/Client Component Boundaries', () => {
   describe('Client Component Interactivity', () => {
     test('should handle client components with framer-motion', async () => {
       // Test that BlogCardImage (client component) works with server props
-      const { BlogCardImage } = await import('@manta-templates/ui-core');
+      const { BlogCardImage } = await import('@/lib/ui-core');
       
       const serverProps = {
         title: 'Interactive Article',
@@ -91,7 +91,7 @@ describe('Server/Client Component Boundaries', () => {
 
     test('should handle server components without client features', async () => {
       // Test that ProjectCard (server component) works without client hooks
-      const { ProjectCard } = await import('@manta-templates/ui-core');
+      const { ProjectCard } = await import('@/lib/ui-core');
       
       const serverProps = {
         title: 'Server Project',
@@ -121,7 +121,7 @@ describe('Server/Client Component Boundaries', () => {
         techStack: ['React', 'Next.js'],
       };
 
-      const { BlogCardImage } = await import('@manta-templates/ui-core');
+      const { BlogCardImage } = await import('@/lib/ui-core');
       
       render(<BlogCardImage {...complexProps} />);
       

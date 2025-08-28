@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { BaseCard, Container } from '@manta-templates/ui-core';
+import { BaseCard, Container } from '@/lib/ui-core';
 
 const AboutPage: React.FC = () => {
   return (

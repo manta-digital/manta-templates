@@ -1,10 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@manta-templates/ui-core";
-import { Header, Footer } from '@manta-templates/ui-core';
-import { nextjsContentProvider, NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
-import { getDefaultFooterSections } from '@manta-templates/ui-core';
+import { ThemeProvider } from "@/lib/ui-core";
+import { Header, Footer } from '@/lib/ui-core';
+import { nextjsContentProvider, NextjsHeaderContent, NextjsFooterContent } from '@/lib/ui-adapters';
+import { getDefaultFooterSections } from '@/lib/ui-core';
 import { siteConfig } from '@/content/site.config';
 import Image from 'next/image';
 import Link from 'next/link';

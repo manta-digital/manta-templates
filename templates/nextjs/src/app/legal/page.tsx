@@ -1,6 +1,6 @@
 import React from 'react';
-import { ContentCard, Container } from '@manta-templates/ui-core';
-import { nextjsContentProvider, NextjsTokenProvider } from '@manta-templates/ui-adapters-nextjs';
+import { ContentCard, Container } from '@/lib/ui-core';
+import { nextjsContentProvider, NextjsTokenProvider } from '@/lib/ui-adapters';
 import { siteConfig } from '@/content/site.config';
 
 export default async function LegalPage() {

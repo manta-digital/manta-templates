@@ -1,7 +1,7 @@
 import React from 'react';
-import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard, GradientCard } from '@manta-templates/ui-core';
-import { nextjsContentProvider } from '@manta-templates/ui-adapters-nextjs';
-import type { NextjsHeaderContent, NextjsFooterContent } from '@manta-templates/ui-adapters-nextjs';
+import { BentoLayout, GridItem, BaseCard, QuoteCard, SidebarPostCard, BlogIndexCard, TechnologyScroller, BrandMark, ThemeToggle, Header, Footer, ComingSoonOverlay, ColorSelector, AboutCard, GradientCard } from '@/lib/ui-core';
+import { nextjsContentProvider } from '@/lib/ui-adapters';
+import type { NextjsHeaderContent, NextjsFooterContent } from '@/lib/ui-adapters';
 
 // Next.js components for dependency injection
 import Image from 'next/image';
@@ -98,7 +98,7 @@ export default async function TestCardsPage() {
             UI-Core Component Showcase
           </h1>
           <p className="text-muted-foreground text-lg">
-            All components from @manta-templates/ui-core with proper dependency injection
+            All components from @/lib/ui-core with proper dependency injection
             and ui-adapters content loading patterns.
           </p>
         </div>
@@ -179,7 +179,7 @@ export default async function TestCardsPage() {
               <BaseCard className="h-full p-6">
                 <h3 className="text-lg font-semibold mb-2">UI-Core BaseCard</h3>
                 <p className="text-muted-foreground">
-                  This is the BaseCard from @manta-templates/ui-core
+                  This is the BaseCard from @/lib/ui-core
                 </p>
               </BaseCard>
             </ComponentShowcaseWrapper>

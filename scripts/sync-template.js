@@ -1,0 +1,208 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+
+/**
+ * Sync script to copy ui-core and ui-adapters packages into templates for distribution
+ * Usage: node scripts/sync-template.js [template-name]
+ * Example: node scripts/sync-template.js nextjs
+ */
+
+const TEMPLATES_DIR = path.join(__dirname, '..', 'templates');
+const PACKAGES_DIR = path.join(__dirname, '..', 'packages');
+
+function syncTemplate(templateName) {
+  const templateDir = path.join(TEMPLATES_DIR, templateName);
+  const uiCoreSource = path.join(PACKAGES_DIR, 'ui-core', 'src');
+  const uiAdaptersSource = path.join(PACKAGES_DIR, 'ui-adapters', templateName, 'src');
+  
+  if (!fs.existsSync(templateDir)) {
+    console.error(`❌ Template not found: ${templateDir}`);
+    process.exit(1);
+  }
+
+  if (!fs.existsSync(uiCoreSource)) {
+    console.error(`❌ ui-core source not found: ${uiCoreSource}`);
+    process.exit(1);
+  }
+
+  console.log(`🚀 Syncing packages to template: ${templateName}`);
+
+  // Create lib directory in template
+  const libDir = path.join(templateDir, 'lib');
+  if (!fs.existsSync(libDir)) {
+    fs.mkdirSync(libDir, { recursive: true });
+  }
+
+  // Copy ui-core using system cp command for reliability
+  const uiCoreTarget = path.join(libDir, 'ui-core');
+  console.log(`📦 Copying ui-core: ${uiCoreSource} → ${uiCoreTarget}`);
+  
+  // Remove existing and copy fresh
+  if (fs.existsSync(uiCoreTarget)) {
+    execSync(`rm -rf "${uiCoreTarget}"`);
+  }
+  execSync(`cp -r "${uiCoreSource}" "${uiCoreTarget}"`);
+
+  // Copy ui-adapters if it exists
+  if (fs.existsSync(uiAdaptersSource)) {
+    const uiAdaptersTarget = path.join(libDir, 'ui-adapters');
+    console.log(`📦 Copying ui-adapters: ${uiAdaptersSource} → ${uiAdaptersTarget}`);
+    
+    if (fs.existsSync(uiAdaptersTarget)) {
+      execSync(`rm -rf "${uiAdaptersTarget}"`);
+    }
+    execSync(`cp -r "${uiAdaptersSource}" "${uiAdaptersTarget}"`);
+  }
+
+  // Update package.json to remove workspace dependencies
+  updatePackageJson(templateDir);
+
+  // Update import paths to use local lib
+  updateImportPaths(templateDir);
+
+  console.log(`✅ Template ${templateName} synced successfully!`);
+  console.log(`📁 UI packages copied to: ${path.join(templateDir, 'lib')}`);
+}
+
+function updatePackageJson(templateDir) {
+  const packageJsonPath = path.join(templateDir, 'package.json');
+  
+  if (!fs.existsSync(packageJsonPath)) {
+    console.warn(`⚠️  No package.json found at: ${packageJsonPath}`);
+    return;
+  }
+
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+  let modified = false;
+
+  // Remove workspace dependencies
+  if (packageJson.dependencies) {
+    const workspaceDeps = Object.keys(packageJson.dependencies).filter(dep => 
+      packageJson.dependencies[dep].startsWith('workspace:')
+    );
+    
+    if (workspaceDeps.length > 0) {
+      console.log(`🔧 Removing workspace dependencies: ${workspaceDeps.join(', ')}`);
+      workspaceDeps.forEach(dep => {
+        delete packageJson.dependencies[dep];
+      });
+      modified = true;
+    }
+  }
+
+  if (modified) {
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+    console.log(`📝 Updated package.json`);
+  }
+}
+
+function updateImportPaths(templateDir) {
+  console.log('🔧 Updating import paths to use local lib...');
+  
+  const srcDir = path.join(templateDir, 'src');
+  const globalsPath = path.join(srcDir, 'app', 'globals.css');
+  
+  // Update TypeScript/JavaScript files
+  try {
+    execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@manta-templates/ui-core|@/lib/ui-core|g" {} +`);
+    execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@manta-templates/ui-adapters-nextjs|@/lib/ui-adapters|g" {} +`);
+    
+    // Also update any @/lib/utils imports to use ui-core utils  
+    execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@/lib/utils|@/lib/ui-core/utils|g" {} +`);
+    
+    console.log('📝 Updated TypeScript/JavaScript import paths');
+  } catch (error) {
+    console.warn('⚠️  Warning: Could not update some import paths');
+  }
+
+  // Update CSS import in globals.css
+  if (fs.existsSync(globalsPath)) {
+    const globalsContent = fs.readFileSync(globalsPath, 'utf8');
+    const updatedContent = globalsContent.replace(
+      /@import "@manta-templates\/ui-core\/dist\/styles\/index\.css";/g,
+      '@import "../../lib/ui-core/styles/index.css";'
+    );
+    if (updatedContent !== globalsContent) {
+      fs.writeFileSync(globalsPath, updatedContent);
+      console.log('📝 Updated CSS import path in globals.css');
+    }
+  }
+
+  // Update tsconfig.json and eslint.config.mjs
+  updateProjectConfig(templateDir);
+}
+
+function updateProjectConfig(templateDir) {
+  console.log('🔧 Updating project configuration...');
+
+  // Update tsconfig.json
+  const tsconfigPath = path.join(templateDir, 'tsconfig.json');
+  if (fs.existsSync(tsconfigPath)) {
+    const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
+    
+    // Add lib path mapping
+    if (!tsconfig.compilerOptions) tsconfig.compilerOptions = {};
+    if (!tsconfig.compilerOptions.paths) tsconfig.compilerOptions.paths = {};
+    
+    tsconfig.compilerOptions.paths["@/lib/*"] = ["./lib/*"];
+    
+    // Exclude lib directory
+    if (!tsconfig.exclude) tsconfig.exclude = [];
+    if (!tsconfig.exclude.includes("lib")) {
+      tsconfig.exclude.push("lib");
+    }
+
+    fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2) + '\n');
+    console.log('📝 Updated tsconfig.json');
+  }
+
+  // Update eslint.config.mjs
+  const eslintConfigPath = path.join(templateDir, 'eslint.config.mjs');
+  if (fs.existsSync(eslintConfigPath)) {
+    let eslintContent = fs.readFileSync(eslintConfigPath, 'utf8');
+    
+    // Add lib ignore if not present
+    if (!eslintContent.includes('ignores: ["lib/**/*"]')) {
+      const insertPoint = eslintContent.indexOf('const eslintConfig = [');
+      if (insertPoint !== -1) {
+        const beforeInsert = eslintContent.substring(0, insertPoint);
+        const afterInsert = eslintContent.substring(insertPoint);
+        
+        const updatedAfterInsert = afterInsert.replace(
+          /const eslintConfig = \[\n  \.\.\.compat\.extends\([^)]+\),\n\];/,
+          `const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    ignores: ["lib/**/*"],
+  },
+];`
+        );
+
+        if (updatedAfterInsert !== afterInsert) {
+          fs.writeFileSync(eslintConfigPath, beforeInsert + updatedAfterInsert);
+          console.log('📝 Updated eslint.config.mjs');
+        }
+      }
+    }
+  }
+}
+
+// Main execution
+const templateName = process.argv[2];
+
+if (!templateName) {
+  console.error('❌ Please specify a template name');
+  console.log('Usage: node scripts/sync-template.js [template-name]');
+  console.log('Example: node scripts/sync-template.js nextjs');
+  process.exit(1);
+}
+
+try {
+  syncTemplate(templateName);
+} catch (error) {
+  console.error(`❌ Sync failed: ${error.message}`);
+  process.exit(1);
+}
