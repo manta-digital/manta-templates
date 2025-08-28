@@ -1,8 +1,9 @@
 ---
-title: My Sample Blog Post
-description: A brief description of this sample post.
-image: /image/blog-sample-image.png
-pubDate: 2025-05-16
+title: "My Sample Blog Post"
+description: "A brief description of this sample post."
+image: "/image/blog-sample-image.png"
+thumbnail: "/image/blog-sample-image.png"
+pubDate: "2024-01-20"
 contentType: blog
 cardSize: medium 
 tags: # Optional, as per guide.markdown.md

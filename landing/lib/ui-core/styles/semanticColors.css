@@ -1,0 +1,497 @@
+/* Semantic Color System - Hybrid Approach */
+/* Maps semantic roles to specific color scales, allowing easy palette switching */
+
+:root {
+  /* Default semantic colors - using your custom Radix teal */
+  --color-accent-1: var(--teal-1);
+  --color-accent-2: var(--teal-2);
+  --color-accent-3: var(--teal-3);
+  --color-accent-4: var(--teal-4);
+  --color-accent-5: var(--teal-5);
+  --color-accent-6: var(--teal-6);
+  --color-accent-7: var(--teal-7);
+  --color-accent-8: var(--teal-8);
+  --color-accent-9: var(--teal-9);
+  --color-accent-10: var(--teal-10);
+  --color-accent-11: var(--teal-11);
+  --color-accent-12: var(--teal-12);
+
+  /* Default semantic neutral colors - using teal-tinted grays */
+  --color-neutral-1: var(--teal-n1);
+  --color-neutral-2: var(--teal-n2);
+  --color-neutral-3: var(--teal-n3);
+  --color-neutral-4: var(--teal-n4);
+  --color-neutral-5: var(--teal-n5);
+  --color-neutral-6: var(--teal-n6);
+  --color-neutral-7: var(--teal-n7);
+  --color-neutral-8: var(--teal-n8);
+  --color-neutral-9: var(--teal-n9);
+  --color-neutral-10: var(--teal-n10);
+  --color-neutral-11: var(--teal-n11);
+  --color-neutral-12: var(--teal-n12);
+
+  /* Card-specific semantic colors */
+  --color-card-accent: var(--color-accent-9);
+  --color-card-accent-subtle: var(--color-accent-3);
+  --color-card-accent-emphasis: var(--color-accent-10);
+  --color-card-border: var(--color-accent-7);
+  --color-card-border-hover: var(--color-accent-8);
+  --color-card-text-accent: var(--color-accent-11);
+  --color-card-text-primary: var(--color-accent-12);
+
+  /* Interactive states */
+  --color-interactive-bg: var(--color-accent-3);
+  --color-interactive-bg-hover: var(--color-accent-4);
+  --color-interactive-bg-active: var(--color-accent-5);
+  --color-interactive-border: var(--color-accent-7);
+  --color-interactive-border-hover: var(--color-accent-8);
+
+  /* Alpha variants for overlays and subtle effects */
+  --color-accent-a1: var(--teal-a1);
+  --color-accent-a2: var(--teal-a2);
+  --color-accent-a3: var(--teal-a3);
+  --color-accent-a4: var(--teal-a4);
+  --color-accent-a5: var(--teal-a5);
+  --color-accent-a6: var(--teal-a6);
+  --color-accent-a7: var(--teal-a7);
+  --color-accent-a8: var(--teal-a8);
+  --color-accent-a9: var(--teal-a9);
+  --color-accent-a10: var(--teal-a10);
+  --color-accent-a11: var(--teal-a11);
+  --color-accent-a12: var(--teal-a12);
+
+  /* Special Radix colors */
+  --color-accent-contrast: var(--teal-contrast);
+  --color-accent-surface: var(--teal-surface);
+  --color-accent-indicator: var(--teal-indicator);
+  --color-accent-track: var(--teal-track);
+  
+  /* Neutral alpha variants for overlays and subtle effects */
+  --color-neutral-a1: var(--teal-na1);
+  --color-neutral-a2: var(--teal-na2);
+  --color-neutral-a3: var(--teal-na3);
+  --color-neutral-a4: var(--teal-na4);
+  --color-neutral-a5: var(--teal-na5);
+  --color-neutral-a6: var(--teal-na6);
+  --color-neutral-a7: var(--teal-na7);
+  --color-neutral-a8: var(--teal-na8);
+  --color-neutral-a9: var(--teal-na9);
+  --color-neutral-a10: var(--teal-na10);
+  --color-neutral-a11: var(--teal-na11);
+  --color-neutral-a12: var(--teal-na12);
+
+  /* Special neutral colors for Radix compatibility */
+  --color-neutral-contrast: var(--teal-ncontrast);
+  --color-neutral-surface: var(--teal-nsurface);
+  --color-neutral-indicator: var(--teal-nindicator);
+  --color-neutral-track: var(--teal-ntrack);
+  
+  /* Better surface colors for accessibility */
+  --card-surface-accessible: var(--color-accent-2);
+  --card-surface-text: var(--color-accent-12);
+  
+  /* Border colors for light mode */
+  --color-border-accent: var(--color-accent-7);
+  --color-border-accent-hover: var(--color-accent-8);
+}
+
+/* Dark-mode border tuning: use a slightly stronger step for borders */
+.dark {
+  --color-card-border: var(--color-accent-8);
+  --color-card-border-hover: var(--color-accent-9);
+  --color-border-accent: var(--color-accent-8);
+  --color-border-accent-hover: var(--color-accent-9);
+}
+
+/* Mintteal palette variant - your existing brand color */
+[data-palette="mintteal"] {
+  --color-accent-1: var(--mintteal-1);
+  --color-accent-2: var(--mintteal-2);
+  --color-accent-3: var(--mintteal-3);
+  --color-accent-4: var(--mintteal-4);
+  --color-accent-5: var(--mintteal-5);
+  --color-accent-6: var(--mintteal-6);
+  --color-accent-7: var(--mintteal-7);
+  --color-accent-8: var(--mintteal-8);
+  --color-accent-9: var(--mintteal-9);
+  --color-accent-10: var(--mintteal-10);
+  --color-accent-11: var(--mintteal-11);
+  --color-accent-12: var(--mintteal-12);
+
+  /* Alpha steps to tint UI with active palette */
+  --color-accent-a1: var(--mintteal-a1);
+  --color-accent-a2: var(--mintteal-a2);
+  --color-accent-a3: var(--mintteal-a3);
+  --color-accent-a4: var(--mintteal-a4);
+  --color-accent-a5: var(--mintteal-a5);
+  --color-accent-a6: var(--mintteal-a6);
+  --color-accent-a7: var(--mintteal-a7);
+  --color-accent-a8: var(--mintteal-a8);
+  --color-accent-a9: var(--mintteal-a9);
+  --color-accent-a10: var(--mintteal-a10);
+  --color-accent-a11: var(--mintteal-a11);
+  --color-accent-a12: var(--mintteal-a12);
+
+  --color-neutral-1: var(--mintteal-n1);
+  --color-neutral-2: var(--mintteal-n2);
+  --color-neutral-3: var(--mintteal-n3);
+  --color-neutral-4: var(--mintteal-n4);
+  --color-neutral-5: var(--mintteal-n5);
+  --color-neutral-6: var(--mintteal-n6);
+  --color-neutral-7: var(--mintteal-n7);
+  --color-neutral-8: var(--mintteal-n8);
+  --color-neutral-9: var(--mintteal-n9);
+  --color-neutral-10: var(--mintteal-n10);
+  --color-neutral-11: var(--mintteal-n11);
+  --color-neutral-12: var(--mintteal-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--mintteal-na1);
+  --color-neutral-a2: var(--mintteal-na2);
+  --color-neutral-a3: var(--mintteal-na3);
+  --color-neutral-a4: var(--mintteal-na4);
+  --color-neutral-a5: var(--mintteal-na5);
+  --color-neutral-a6: var(--mintteal-na6);
+  --color-neutral-a7: var(--mintteal-na7);
+  --color-neutral-a8: var(--mintteal-na8);
+  --color-neutral-a9: var(--mintteal-na9);
+  --color-neutral-a10: var(--mintteal-na10);
+  --color-neutral-a11: var(--mintteal-na11);
+  --color-neutral-a12: var(--mintteal-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--mintteal-ncontrast);
+  --color-neutral-surface: var(--mintteal-nsurface);
+  --color-neutral-indicator: var(--mintteal-nindicator);
+  --color-neutral-track: var(--mintteal-ntrack);
+}
+
+/* Standard Radix palette options (when @radix-ui/colors is installed) */
+[data-palette="blue"] {
+  --color-accent-1: var(--blue-1);
+  --color-accent-2: var(--blue-2);
+  --color-accent-3: var(--blue-3);
+  --color-accent-4: var(--blue-4);
+  --color-accent-5: var(--blue-5);
+  --color-accent-6: var(--blue-6);
+  --color-accent-7: var(--blue-7);
+  --color-accent-8: var(--blue-8);
+  --color-accent-9: var(--blue-9);
+  --color-accent-10: var(--blue-10);
+  --color-accent-11: var(--blue-11);
+  --color-accent-12: var(--blue-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--blue-a1);
+  --color-accent-a2: var(--blue-a2);
+  --color-accent-a3: var(--blue-a3);
+  --color-accent-a4: var(--blue-a4);
+  --color-accent-a5: var(--blue-a5);
+  --color-accent-a6: var(--blue-a6);
+  --color-accent-a7: var(--blue-a7);
+  --color-accent-a8: var(--blue-a8);
+  --color-accent-a9: var(--blue-a9);
+  --color-accent-a10: var(--blue-a10);
+  --color-accent-a11: var(--blue-a11);
+  --color-accent-a12: var(--blue-a12);
+
+  --color-neutral-1: var(--blue-n1);
+  --color-neutral-2: var(--blue-n2);
+  --color-neutral-3: var(--blue-n3);
+  --color-neutral-4: var(--blue-n4);
+  --color-neutral-5: var(--blue-n5);
+  --color-neutral-6: var(--blue-n6);
+  --color-neutral-7: var(--blue-n7);
+  --color-neutral-8: var(--blue-n8);
+  --color-neutral-9: var(--blue-n9);
+  --color-neutral-10: var(--blue-n10);
+  --color-neutral-11: var(--blue-n11);
+  --color-neutral-12: var(--blue-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--blue-na1);
+  --color-neutral-a2: var(--blue-na2);
+  --color-neutral-a3: var(--blue-na3);
+  --color-neutral-a4: var(--blue-na4);
+  --color-neutral-a5: var(--blue-na5);
+  --color-neutral-a6: var(--blue-na6);
+  --color-neutral-a7: var(--blue-na7);
+  --color-neutral-a8: var(--blue-na8);
+  --color-neutral-a9: var(--blue-na9);
+  --color-neutral-a10: var(--blue-na10);
+  --color-neutral-a11: var(--blue-na11);
+  --color-neutral-a12: var(--blue-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--blue-ncontrast);
+  --color-neutral-surface: var(--blue-nsurface);
+  --color-neutral-indicator: var(--blue-nindicator);
+  --color-neutral-track: var(--blue-ntrack);
+}
+
+[data-palette="purple"] {
+  --color-accent-1: var(--purple-1);
+  --color-accent-2: var(--purple-2);
+  --color-accent-3: var(--purple-3);
+  --color-accent-4: var(--purple-4);
+  --color-accent-5: var(--purple-5);
+  --color-accent-6: var(--purple-6);
+  --color-accent-7: var(--purple-7);
+  --color-accent-8: var(--purple-8);
+  --color-accent-9: var(--purple-9);
+  --color-accent-10: var(--purple-10);
+  --color-accent-11: var(--purple-11);
+  --color-accent-12: var(--purple-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--purple-a1);
+  --color-accent-a2: var(--purple-a2);
+  --color-accent-a3: var(--purple-a3);
+  --color-accent-a4: var(--purple-a4);
+  --color-accent-a5: var(--purple-a5);
+  --color-accent-a6: var(--purple-a6);
+  --color-accent-a7: var(--purple-a7);
+  --color-accent-a8: var(--purple-a8);
+  --color-accent-a9: var(--purple-a9);
+  --color-accent-a10: var(--purple-a10);
+  --color-accent-a11: var(--purple-a11);
+  --color-accent-a12: var(--purple-a12);
+
+  --color-neutral-1: var(--purple-n1);
+  --color-neutral-2: var(--purple-n2);
+  --color-neutral-3: var(--purple-n3);
+  --color-neutral-4: var(--purple-n4);
+  --color-neutral-5: var(--purple-n5);
+  --color-neutral-6: var(--purple-n6);
+  --color-neutral-7: var(--purple-n7);
+  --color-neutral-8: var(--purple-n8);
+  --color-neutral-9: var(--purple-n9);
+  --color-neutral-10: var(--purple-n10);
+  --color-neutral-11: var(--purple-n11);
+  --color-neutral-12: var(--purple-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--purple-na1);
+  --color-neutral-a2: var(--purple-na2);
+  --color-neutral-a3: var(--purple-na3);
+  --color-neutral-a4: var(--purple-na4);
+  --color-neutral-a5: var(--purple-na5);
+  --color-neutral-a6: var(--purple-na6);
+  --color-neutral-a7: var(--purple-na7);
+  --color-neutral-a8: var(--purple-na8);
+  --color-neutral-a9: var(--purple-na9);
+  --color-neutral-a10: var(--purple-na10);
+  --color-neutral-a11: var(--purple-na11);
+  --color-neutral-a12: var(--purple-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--purple-ncontrast);
+  --color-neutral-surface: var(--purple-nsurface);
+  --color-neutral-indicator: var(--purple-nindicator);
+  --color-neutral-track: var(--purple-ntrack);
+}
+
+[data-palette="green"] {
+  --color-accent-1: var(--green-1);
+  --color-accent-2: var(--green-2);
+  --color-accent-3: var(--green-3);
+  --color-accent-4: var(--green-4);
+  --color-accent-5: var(--green-5);
+  --color-accent-6: var(--green-6);
+  --color-accent-7: var(--green-7);
+  --color-accent-8: var(--green-8);
+  --color-accent-9: var(--green-9);
+  --color-accent-10: var(--green-10);
+  --color-accent-11: var(--green-11);
+  --color-accent-12: var(--green-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--green-a1);
+  --color-accent-a2: var(--green-a2);
+  --color-accent-a3: var(--green-a3);
+  --color-accent-a4: var(--green-a4);
+  --color-accent-a5: var(--green-a5);
+  --color-accent-a6: var(--green-a6);
+  --color-accent-a7: var(--green-a7);
+  --color-accent-a8: var(--green-a8);
+  --color-accent-a9: var(--green-a9);
+  --color-accent-a10: var(--green-a10);
+  --color-accent-a11: var(--green-a11);
+  --color-accent-a12: var(--green-a12);
+
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--green-na1);
+  --color-neutral-a2: var(--green-na2);
+  --color-neutral-a3: var(--green-na3);
+  --color-neutral-a4: var(--green-na4);
+  --color-neutral-a5: var(--green-na5);
+  --color-neutral-a6: var(--green-na6);
+  --color-neutral-a7: var(--green-na7);
+  --color-neutral-a8: var(--green-na8);
+  --color-neutral-a9: var(--green-na9);
+  --color-neutral-a10: var(--green-na10);
+  --color-neutral-a11: var(--green-na11);
+  --color-neutral-a12: var(--green-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--green-ncontrast);
+  --color-neutral-surface: var(--green-nsurface);
+  --color-neutral-indicator: var(--green-nindicator);
+  --color-neutral-track: var(--green-ntrack);
+}
+
+[data-palette="orange"] {
+  --color-accent-1: var(--orange-1);
+  --color-accent-2: var(--orange-2);
+  --color-accent-3: var(--orange-3);
+  --color-accent-4: var(--orange-4);
+  --color-accent-5: var(--orange-5);
+  --color-accent-6: var(--orange-6);
+  --color-accent-7: var(--orange-7);
+  --color-accent-8: var(--orange-8);
+  --color-accent-9: var(--orange-9);
+  --color-accent-10: var(--orange-10);
+  --color-accent-11: var(--orange-11);
+  --color-accent-12: var(--orange-12);
+
+  /* Alpha steps */
+  --color-accent-a1: var(--orange-a1);
+  --color-accent-a2: var(--orange-a2);
+  --color-accent-a3: var(--orange-a3);
+  --color-accent-a4: var(--orange-a4);
+  --color-accent-a5: var(--orange-a5);
+  --color-accent-a6: var(--orange-a6);
+  --color-accent-a7: var(--orange-a7);
+  --color-accent-a8: var(--orange-a8);
+  --color-accent-a9: var(--orange-a9);
+  --color-accent-a10: var(--orange-a10);
+  --color-accent-a11: var(--orange-a11);
+  --color-accent-a12: var(--orange-a12);
+
+  --color-neutral-1: var(--orange-n1);
+  --color-neutral-2: var(--orange-n2);
+  --color-neutral-3: var(--orange-n3);
+  --color-neutral-4: var(--orange-n4);
+  --color-neutral-5: var(--orange-n5);
+  --color-neutral-6: var(--orange-n6);
+  --color-neutral-7: var(--orange-n7);
+  --color-neutral-8: var(--orange-n8);
+  --color-neutral-9: var(--orange-n9);
+  --color-neutral-10: var(--orange-n10);
+  --color-neutral-11: var(--orange-n11);
+  --color-neutral-12: var(--orange-n12);
+
+  /* Neutral alpha variants */
+  --color-neutral-a1: var(--orange-na1);
+  --color-neutral-a2: var(--orange-na2);
+  --color-neutral-a3: var(--orange-na3);
+  --color-neutral-a4: var(--orange-na4);
+  --color-neutral-a5: var(--orange-na5);
+  --color-neutral-a6: var(--orange-na6);
+  --color-neutral-a7: var(--orange-na7);
+  --color-neutral-a8: var(--orange-na8);
+  --color-neutral-a9: var(--orange-na9);
+  --color-neutral-a10: var(--orange-na10);
+  --color-neutral-a11: var(--orange-na11);
+  --color-neutral-a12: var(--orange-na12);
+
+  /* Special neutral colors */
+  --color-neutral-contrast: var(--orange-ncontrast);
+  --color-neutral-surface: var(--orange-nsurface);
+  --color-neutral-indicator: var(--orange-nindicator);
+  --color-neutral-track: var(--orange-ntrack);
+}
+
+/* Example theme-specific neutral colors (commented out by default) */
+
+/* Forest theme example - uncomment to enable green-tinted neutrals
+[data-palette="green"] {
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
+}
+*/
+
+/* Sunset theme example - uncomment to enable warm-tinted neutrals
+[data-palette="orange"] {
+  --color-neutral-1: var(--orange-n1);
+  --color-neutral-2: var(--orange-n2);
+  --color-neutral-3: var(--orange-n3);
+  --color-neutral-4: var(--orange-n4);
+  --color-neutral-5: var(--orange-n5);
+  --color-neutral-6: var(--orange-n6);
+  --color-neutral-7: var(--orange-n7);
+  --color-neutral-8: var(--orange-n8);
+  --color-neutral-9: var(--orange-n9);
+  --color-neutral-10: var(--orange-n10);
+  --color-neutral-11: var(--orange-n11);
+  --color-neutral-12: var(--orange-n12);
+}
+*/
+
+/* Twilight theme example - uncomment to enable purple-tinted neutrals
+[data-palette="purple"] {
+  --color-neutral-1: var(--purple-n1);
+  --color-neutral-2: var(--purple-n2);
+  --color-neutral-3: var(--purple-n3);
+  --color-neutral-4: var(--purple-n4);
+  --color-neutral-5: var(--purple-n5);
+  --color-neutral-6: var(--purple-n6);
+  --color-neutral-7: var(--purple-n7);
+  --color-neutral-8: var(--purple-n8);
+  --color-neutral-9: var(--purple-n9);
+  --color-neutral-10: var(--purple-n10);
+  --color-neutral-11: var(--purple-n11);
+  --color-neutral-12: var(--purple-n12);
+}
+*/
+
+/* Smooth transitions between palette changes */
+html[data-palette] * {
+  /* Smooth palette fade without affecting component transforms */
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Disable transitions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* High-contrast mode adjustments */
+@media (prefers-contrast: more) {
+  :root {
+    /* Strengthen borders and text for visibility */
+    --color-border-accent: var(--color-accent-9);
+    --color-border-accent-hover: var(--color-accent-10);
+  }
+  .dark {
+    --color-border-accent: var(--color-accent-10);
+    --color-border-accent-hover: var(--color-accent-11);
+  }
+}

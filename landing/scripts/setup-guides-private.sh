@@ -1,25 +1,42 @@
 #!/usr/bin/env bash
 set -e
 
-# Where private guides should live
-TARGET="project-documents/private"
+TMP="tmp-guides"
 
-mkdir -p "$TARGET"
-
-# Check if we're in a monorepo with access to private guides
-LOCAL_PRIVATE="../../project-documents/private"
-
-if [ -d "$LOCAL_PRIVATE" ]; then
-  # Monorepo user: copy from local private guides
-  echo "🔒 Copying private guides from monorepo..."
-  rsync -a --delete "$LOCAL_PRIVATE/" "$TARGET/"
-  echo "✅ Private guides copied from monorepo"
-else
-  # Stand-alone user: fetch from private repository
-  echo "🔒 Fetching private guides from repository..."
-  # Note: Update this URL to your private guides repository
-  git clone --depth 1 git@github.com:ecorkran/ai-project-guides-private.git tmp &&
-    rsync -a --delete --exclude='.git' tmp/ "$TARGET/" &&
-    rm -rf tmp
-  echo "✅ Private guides fetched from repository"
+# Load .env file if it exists
+if [ -f ".env" ]; then
+  echo "📄 Loading configuration from .env file..."
+  export $(cat .env | grep -v '^#' | xargs)
 fi
+
+# Make sure public docs are already in place
+# (you've already run setup-guides.sh)
+
+# Check for private guides repository URL
+PRIVATE_GUIDES_URL="${PRIVATE_GUIDES_URL:-}"
+if [ -z "$PRIVATE_GUIDES_URL" ]; then
+  echo "ℹ️  No PRIVATE_GUIDES_URL environment variable set"
+  echo "   Organization private guides are an advanced feature"
+  echo "   Set PRIVATE_GUIDES_URL in your .env file or environment"
+  echo "   Example: PRIVATE_GUIDES_URL=git@github.com:your-org/private-guides.git"
+  exit 0
+fi
+
+# Clone your private repo (fail silently if not available)
+if git clone --depth 1 "$PRIVATE_GUIDES_URL" "$TMP" 2>/dev/null; then
+  echo "🔒 Copying organization private guides..."
+  
+  # Create private directory if it doesn't exist
+  mkdir -p project-documents/private
+  
+  # **Overlay** private docs **without deleting** public ones
+  rsync -a --exclude='.git' "$TMP/" project-documents/private/
+  
+  echo "✅ Organization private guides copied"
+else
+  echo "⚠️  Could not clone private guides from: $PRIVATE_GUIDES_URL"
+  echo "   Check your repository URL and SSH access"
+fi
+
+# Cleanup
+rm -rf "$TMP" 2>/dev/null || true

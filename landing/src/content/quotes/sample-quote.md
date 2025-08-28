@@ -5,5 +5,3 @@ author: "Rich Hickey"
 featured: true
 order: 1
 ---
-
-
