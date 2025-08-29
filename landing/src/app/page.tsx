@@ -187,7 +187,7 @@ export default async function Home() {
               height: 400,
             }}
             content={{
-              title: "Next.js Starter",
+              title: "Next.js Template",
               description:
                 "Modern full-stack Next.js starter template with responsive grid layouts and theming that actually works.",
               techStack: ["Next.js 15", "Tailwind 4", "shadcn/radix"],

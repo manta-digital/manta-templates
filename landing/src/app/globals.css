@@ -9,12 +9,15 @@
 
 /* Theme Registry - Control which themes appear in ColorSelector */
 :root {
+
+  --ui-themes: "teal,blue,purple,orange";
+  --ui-theme-names: "🌊 Teal;💙 Blue;� Purple;🔥 Orange";
   /* Add custom themes to the UI-core themes */
   --user-themes: "forest,banana,sunset";
   --user-theme-names: "Forest;🍌 Banana; Sunset";
   
   /* You can also override the default theme selection */
-  --ui-default-theme: "teal";
+  --ui-default-theme: "orange";
 }
 
 /* You can add template-specific styles below */

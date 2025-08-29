@@ -132,7 +132,7 @@ export default function GuidesFeatureCard({ mode = 'dark', content }: GuidesFeat
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block"
-                  aria-label="Templates: Available project templates and usage"
+                  aria-label="AI Project Guide accelerated AI-Assisted Development"
                 >
                   <div className={`${textClasses.cardBg} p-4 rounded-[0.5em] border ${textClasses.cardBorder} transition-colors group cursor-pointer`}>
                       <div className={`${textClasses.cardText} mb-2`}>Templates</div>
