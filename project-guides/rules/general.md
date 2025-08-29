@@ -25,6 +25,7 @@ alwaysApply: true
 - Use checklist format for all task files.  Each item and subitem should have a `[ ]` "checkbox".
 - After completing a task or subtask, make sure it is checked off in the appropriate file(s).  If so directed in current project, wait for Project Manager verification before checking box.
 - Keep 'success summaries' concise and minimal -- they burn a lot of output tokens.
+* never include usernames, passwords, API keys, or similar sensitive information in any source code or comments.  At the very least it must be loaded from environment variables, and the .env used must be included in .gitignore.  If you find any code in violation of this, you must raise an issue with Project Manager.
 
 ## MCP (Model Context Protocol)
 - Always use context7 (if available) to locate current relevant documentation for specific technologies or tools in use.
