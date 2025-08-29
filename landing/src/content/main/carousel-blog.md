@@ -4,7 +4,7 @@ title: "Carousel Article"
 category: "Demo"
 excerpt: "Testing image hover inside carousel."
 coverImageUrl: "/image/blog-sample-image.png"
-slug: "/blog/sample-post"
+slug: "/"
 ---
 
 # Carousel Article

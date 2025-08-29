@@ -255,7 +255,7 @@ export default async function Home() {
               subtitle="Template"
               description="Modern static site generator with island architecture for optimal performance."
               image="/image/blog-sample-image.png"
-              href="https://astro.build"
+              href="/"
               imageProps={{
                 width: 600,
                 height: 400,
@@ -275,7 +275,7 @@ export default async function Home() {
               subtitle="Resources"
               description="Comprehensive documentation and guides for getting started with modern web development."
               image="/image/blog-sample-image.png"
-              href="/examples"
+              href="/"
               imageProps={{
                 width: 600,
                 height: 400,
@@ -364,7 +364,7 @@ export default async function Home() {
             subtitle="Research" 
             description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." 
             image="/image/blog-sample-image.png" 
-            href="/blog/sample-post" 
+            href="/" 
             imageProps={{ 
               width: 600, 
               height: 400 
