@@ -10,10 +10,25 @@ export const size = {
 
 export const contentType = 'image/png';
 
+// Theme color mappings for opengraph generation
+const themeGradients = {
+  teal: { from: '#14b8a6', to: '#0891b2' },
+  forest: { from: '#22c55e', to: '#16a34a' },
+  banana: { from: '#eab308', to: '#f59e0b' },
+  sunset: { from: '#f97316', to: '#dc2626' },
+  purple: { from: '#8b5cf6', to: '#7c3aed' },
+  blue: { from: '#3b82f6', to: '#2563eb' },
+  default: { from: '#14b8a6', to: '#22c55e' }, // fallback
+};
+
 export default function Image() {
   const { width, height } = size;
   const title = siteConfig.site.name || 'Website';
   const tagline = siteConfig.site.domain || siteConfig.site.url.replace(/^https?:\/\//, '');
+  
+  // Get the theme from site config
+  const currentTheme = siteConfig.theme?.primary || 'teal';
+  const gradient = themeGradients[currentTheme as keyof typeof themeGradients] || themeGradients.default;
 
   const nameFontSize = 112;
   const taglineFontSize = 40;
@@ -34,7 +49,7 @@ export default function Image() {
           justifyContent: 'center',
           alignItems: 'center',
           padding: '80px',
-          backgroundImage: 'linear-gradient(135deg, #14b8a6 0%, #22c55e 100%)',
+          backgroundImage: `linear-gradient(135deg, ${gradient.from} 0%, ${gradient.to} 100%)`,
           position: 'relative',
           color: '#ffffff',
           fontFamily:

@@ -2,9 +2,9 @@ export type PresetKey = 'default' | 'mit';
 
 export const siteConfig = {
   site: {
-    name: 'Manta Next.js Template',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
-    domain: 'example.com',
+    name: 'Manta Templates',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://templates.manta.digital',
+    domain: 'manta.digital',
   },
   author: {
     name: '',
@@ -21,6 +21,10 @@ export const siteConfig = {
   variants: {
     footer: 'default', // 'default' | 'compact'
   },
+  // Theme configuration
+  theme: {
+    primary: 'teal', // 'teal' | 'forest' | 'banana' | 'sunset' | 'purple' | 'blue'
+  },
   // Optional copyright settings (e.g., "2022–2025"). If omitted, current year is used.
   copyright: {
     year: '',
@@ -28,7 +32,7 @@ export const siteConfig = {
 };
 
 export function deriveContacts(cfg = siteConfig) {
-  const domain = cfg.site.domain || 'example.com';
+  const domain = cfg.site.domain || 'manta.digital';
   const primary = cfg.contacts.primaryEmail || `info@${domain}`;
   const business = cfg.contacts.businessEmail || `business@${domain}`;
   const support = cfg.contacts.supportEmail || `support@${domain}`;
