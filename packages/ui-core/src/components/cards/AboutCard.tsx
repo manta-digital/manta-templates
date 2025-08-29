@@ -66,7 +66,7 @@ export function AboutCard({
   return (
     <BaseCard className={cn('h-full overflow-hidden flex flex-col p-4 md:p-6', className)}>
       <div className="flex pb-4 border-b border-border/40">
-        <div className="w-20 h-20 mr-4 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
+        <div className="w-20 h-20 mr-4 flex-shrink-0 rounded-md overflow-hidden bg-muted">
           {React.createElement(ImageComponent, {
             src: avatar,
             alt: title || 'Profile',

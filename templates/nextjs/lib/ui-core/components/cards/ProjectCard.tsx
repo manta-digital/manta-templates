@@ -135,7 +135,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <div className="relative z-10 flex flex-col h-full">
         {image && (
-          <div className="relative mb-4 rounded-lg overflow-hidden h-40">
+          <div className="relative mb-4 rounded-md overflow-hidden h-40">
             {ImageComponent ? (
               <ImageComponent
                 src={image}
