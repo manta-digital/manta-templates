@@ -1,4 +1,4 @@
-import { Container, ProjectCard, ArticleCard, BentoLayout, GridItem, ComingSoonOverlay, CosineTerrainCard, BaseCard, TechnologyScroller, cn, AboutCard, GradientCard, CardCarousel, VideoCard, QuoteCard, ThreeJSCard } from '@/lib/ui-core';
+import { Container, ProjectCard, ArticleCard, BentoLayout, GridItem, ComingSoonOverlay, CosineTerrainCard, BaseCard, TechnologyScroller, cn, AboutCard, GradientCard, CardCarousel, VideoCard, QuoteCard, ThreeJSCard, BlogCardImage } from '@/lib/ui-core';
 import { BackgroundVideoComponent, nextjsContentProvider } from '@/lib/ui-adapters';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -104,7 +104,7 @@ export default async function Home() {
   }
 
   try {
-    const quote = await nextjsContentProvider.loadContent('sample-quote', 'quotes');
+    const quote = await nextjsContentProvider.loadContent('sample-quote', 'main');
     quoteContent = quote.frontmatter as QuoteContent;
   } catch (error: unknown) {
     console.error('Error loading quote content:', error);
@@ -218,20 +218,10 @@ export default async function Home() {
             />
           )}
         </GridItem>
-        {/* Quote Card 
-        <GridItem
-          colSpan="col-span-full md:col-span-6 lg:col-span-4"
-          className="h-full"
-        >
-          <div className="h-full">
-            {quoteContent && <QuoteCard content={quoteContent} />}
-          </div>
-        </GridItem>
-        */}
       </BentoLayout>
 
       {/* Section separator */}
-      <div className="py-12">
+      <div className="pt-24 pb-8 pl-2">
         <h2 className="text-2xl font-bold mb-2">Component Gallery</h2>
         <p className="text-muted-foreground">
           Interactive showcases of components and layouts
@@ -254,20 +244,16 @@ export default async function Home() {
         <GridItem className="col-span-8 md:col-span-5 md:row-span-2 lg:row-span-2 xl:row-span-2">
           <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showDots={false} showControls={false}>
 
-            {/* Simple article sample inside carousel to test image hover */}
-            <ArticleCard 
+            {/* Simple blog card sample inside carousel */}
+            <BlogCardImage 
               className="h-full" 
               ImageComponent={Image} 
               LinkComponent={Link} 
               title="Carousel Article" 
-              subtitle="Demo" 
-              description="Testing image hover inside carousel." 
-              image="/image/blog-sample-image.png" 
-              href="/blog/sample-post" 
-              imageProps={{ 
-                width: 600, 
-                height: 400 
-              }} 
+              category="Demo" 
+              excerpt="Testing image hover inside carousel." 
+              coverImageUrl="/image/blog-sample-image.png" 
+              slug="/blog/sample-post" 
             />
             <ProjectCard
               className="h-full"

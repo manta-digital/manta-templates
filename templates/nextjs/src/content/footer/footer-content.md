@@ -44,8 +44,8 @@ professionalContact:
   business: "business@example.com"
   support: "support@example.com"
 copyright:
-  notice: "© 2025 Manta Templates. MIT Licensed."
-  attribution: "Built with <a href=\"https://nextjs.org\" target=\"_blank\" rel=\"noopener noreferrer\">Next.js</a>, <a href=\"https://tailwindcss.com\" target=\"_blank\" rel=\"noopener noreferrer\">Tailwind CSS</a>, and <a href=\"https://templates.manta.digital\" target=\"_blank\" rel=\"noopener noreferrer\">Manta Templates</a>."
+  notice: "© 2025 manta.digital. MIT Licensed."
+  attribution: "Built with <a href=\"https://nextjs.org\" target=\"_blank\" rel=\"noopener noreferrer\">Next.js</a>, <a href=\"https://tailwindcss.com\" target=\"_blank\" rel=\"noopener noreferrer\">Tailwind CSS</a>, and <a href=\"https://templates.manta.digital\" target=\"_blank\" rel=\"noopener noreferrer\">manta.digital</a>."
   lastUpdated: "August 2025"
 ---
 

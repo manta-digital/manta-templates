@@ -55,7 +55,7 @@ const SidebarPostCard: React.FC<SidebarPostCardProps> = ({
             src={imageUrl}
             alt={`Thumbnail for ${title}`}
             fill
-            className="object-cover rounded-l-sm"
+            className="object-cover rounded-l-lg"
           />
         )}
       </div>

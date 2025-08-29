@@ -12,6 +12,7 @@ techs:
   - { name: Python, svg: python.svg, color: "#3776ab" }
 ---
 
-We build with a modern, pragmatic stack. Swap, remove, or extend this list in the frontmatter above.
+Note: this file is not in use, but can be used to load technology scroller items from markdown.
+
 
 

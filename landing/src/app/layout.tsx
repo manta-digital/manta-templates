@@ -53,7 +53,7 @@ export default async function RootLayout({
   let footerSections = null;
 
   try {
-    const content = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main-grid');
+    const content = await nextjsContentProvider.loadContent<NextjsHeaderContent>('header', 'main');
     headerContent = content.frontmatter;
   } catch (error: unknown) {
     console.error('Error loading header content:', error);
