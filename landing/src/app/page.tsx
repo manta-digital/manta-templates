@@ -63,6 +63,39 @@ interface QuoteContent {
   order?: number;
 }
 
+interface BlogContent {
+  type: 'blog';
+  title: string;
+  category?: string;
+  excerpt?: string;
+  coverImageUrl?: string;
+  slug?: string;
+}
+
+interface VideoContent {
+  type: 'video';
+  displayMode?: 'background' | 'thumbnail' | 'player';
+  videoUrl: string;
+  thumbnailUrl?: string;
+  title?: string;
+}
+
+interface TechnologyItem {
+  name: string;
+  svg: string;
+  color?: string;
+  colorDark?: string;
+  invertOnDark?: boolean;
+}
+
+interface TechnologyContent {
+  title: string;
+  description: string;
+  items: TechnologyItem[];
+  speed?: 'slow' | 'normal' | 'fast';
+  direction?: 'left' | 'right';
+}
+
 // Social icons mapping - using Lucide React icons
 const socialIcons = {
   github: Github,
@@ -78,6 +111,10 @@ export default async function Home() {
   let astroContent: ProjectContent | null = null;
   let aboutContent: AboutContent & { contentHtml?: string } | null = null;
   let quoteContent: QuoteContent | null = null;
+  let carouselBlogContent: BlogContent | null = null;
+  let carouselProjectContent: ProjectContent | null = null;
+  let carouselVideoContent: VideoContent | null = null;
+  let technologyContent: TechnologyContent | null = null;
 
   try {
     const guides = await nextjsContentProvider.loadContent('guides-docs', 'main');
@@ -108,6 +145,34 @@ export default async function Home() {
     quoteContent = quote.frontmatter as QuoteContent;
   } catch (error: unknown) {
     console.error('Error loading quote content:', error);
+  }
+
+  try {
+    const carouselBlog = await nextjsContentProvider.loadContent('carousel-blog', 'main');
+    carouselBlogContent = carouselBlog.frontmatter as BlogContent;
+  } catch (error: unknown) {
+    console.error('Error loading carousel blog content:', error);
+  }
+
+  try {
+    const carouselProject = await nextjsContentProvider.loadContent('carousel-project', 'main');
+    carouselProjectContent = carouselProject.frontmatter as ProjectContent;
+  } catch (error: unknown) {
+    console.error('Error loading carousel project content:', error);
+  }
+
+  try {
+    const carouselVideo = await nextjsContentProvider.loadContent('carousel-video', 'main');
+    carouselVideoContent = carouselVideo.frontmatter as VideoContent;
+  } catch (error: unknown) {
+    console.error('Error loading carousel video content:', error);
+  }
+
+  try {
+    const technologies = await nextjsContentProvider.loadContent('technologies', 'main');
+    technologyContent = technologies.frontmatter as TechnologyContent;
+  } catch (error: unknown) {
+    console.error('Error loading technology content:', error);
   }
 
   return (
@@ -244,55 +309,48 @@ export default async function Home() {
         <GridItem className="col-span-8 md:col-span-5 md:row-span-2 lg:row-span-2 xl:row-span-2">
           <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showDots={false} showControls={false}>
 
-            {/* Simple blog card sample inside carousel */}
-            <BlogCardImage 
-              className="h-full" 
-              ImageComponent={Image} 
-              LinkComponent={Link} 
-              title="Carousel Article" 
-              category="Demo" 
-              excerpt="Testing image hover inside carousel." 
-              coverImageUrl="/image/blog-sample-image.png" 
-              slug="/blog/sample-post" 
-            />
-            <ProjectCard
-              className="h-full"
-              ImageComponent={Image}
-              LinkComponent={Link}
-              imageProps={{
-                width: 600,
-                height: 400
-              }}
-              content={{
-                title: 'Semantic Colors',
-                description: 'Cards using accent and foreground tokens',
-                techStack: ['Next.js', 'Tailwind v4', 'Radix'],
-                image: '/image/blog-sample-image.png',
-                repoUrl: 'https://github.com/manta-templates/semantic-colors',
-                features: [
-                  { label: 'Structured and Customizable Project Phases', icon: 'zap'},
-                  { label: 'AI-driven Task Discovery and Expansion', icon: 'zap', color: 'primary' },
-                  { label: 'Parameterized Prompts', icon: 'zap', color: 'primary' },
-                  { label: 'Automated Code Reviews', icon: 'zap', color: 'primary' },
-                ],
-                actions: [
-                  { label: 'View on GitHub', href: 'https://github.com/ecorkran/ai-project-guide', variant: 'outline' },
-                ],
-              }}
-            />
+            {/* Blog card from markdown */}
+            {carouselBlogContent && (
+              <BlogCardImage 
+                className="h-full" 
+                ImageComponent={Image} 
+                LinkComponent={Link} 
+                title={carouselBlogContent.title}
+                category={carouselBlogContent.category}
+                excerpt={carouselBlogContent.excerpt}
+                coverImageUrl={carouselBlogContent.coverImageUrl}
+                slug={carouselBlogContent.slug}
+              />
+            )}
 
-            {/* Background video sample using ui-core VideoCard with Next.js BackgroundVideoComponent */}
-            <VideoCard
-              className="h-full"
-              displayMode="background"
-              videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
-              thumbnailUrl="/image/blog-sample-image.png"
-              BackgroundVideoComponent={BackgroundVideoComponent}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
-              </div>
-            </VideoCard>
+            {/* Project card from markdown */}
+            {carouselProjectContent && (
+              <ProjectCard
+                className="h-full"
+                ImageComponent={Image}
+                LinkComponent={Link}
+                imageProps={{
+                  width: 600,
+                  height: 400
+                }}
+                content={carouselProjectContent}
+              />
+            )}
+
+            {/* Video card from markdown */}
+            {carouselVideoContent && (
+              <VideoCard
+                className="h-full"
+                displayMode={carouselVideoContent.displayMode || "background"}
+                videoUrl={carouselVideoContent.videoUrl}
+                thumbnailUrl={carouselVideoContent.thumbnailUrl}
+                BackgroundVideoComponent={BackgroundVideoComponent}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-card-foreground text-xl font-semibold">{carouselVideoContent.title}</h3>
+                </div>
+              </VideoCard>
+            )}
           </CardCarousel>
         </GridItem>
 
@@ -365,36 +423,30 @@ export default async function Home() {
           <BaseCard
             className={cn("h-full w-full flex flex-col justify-center")}
           >
-            <TechnologyScroller
-              items={[
-                { name: "Next.js", svg: "nextdotjs.svg", invertOnDark: true },
-                {
-                  name: "Tailwind CSS",
-                  svg: "tailwindcss.svg",
-                  color: "#38BDF8",
-                  colorDark: "#38BDF8",
-                },
-                { name: "React", svg: "react.svg", invertOnDark: true },
-                { name: "Docker", svg: "docker.svg", invertOnDark: true },
-                { name: "Figma", svg: "figma-color.svg" },
-                { name: "Python", svg: "python.svg", invertOnDark: true },
-                {
-                  name: "TensorFlow",
-                  svg: "tensorflow.svg",
-                  invertOnDark: true,
-                },
-                { name: "Linux", svg: "linux.svg", invertOnDark: true },
-                {
-                  name: "LangChain",
-                  svg: "langchain.svg",
-                  color: "#1C3C3C",
-                  colorDark: "#FFFFFF",
-                },
-                { name: "TypeScript", svg: "typescript.svg", color: "#3178C6" },
-              ]}
-              speed="fast"
-              direction="left"
-            />
+            {technologyContent ? (
+              <TechnologyScroller
+                items={technologyContent.items}
+                speed={technologyContent.speed || "fast"}
+                direction={technologyContent.direction || "left"}
+              />
+            ) : (
+              <TechnologyScroller
+                items={[
+                  { name: "Next.js", svg: "nextdotjs.svg", invertOnDark: true },
+                  { name: "Tailwind CSS", svg: "tailwindcss.svg", color: "#38BDF8", colorDark: "#38BDF8" },
+                  { name: "React", svg: "react.svg", invertOnDark: true },
+                  { name: "Docker", svg: "docker.svg", invertOnDark: true },
+                  { name: "Figma", svg: "figma-color.svg" },
+                  { name: "Python", svg: "python.svg", invertOnDark: true },
+                  { name: "TensorFlow", svg: "tensorflow.svg", invertOnDark: true },
+                  { name: "Linux", svg: "linux.svg", invertOnDark: true },
+                  { name: "LangChain", svg: "langchain.svg", color: "#1C3C3C", colorDark: "#FFFFFF" },
+                  { name: "TypeScript", svg: "typescript.svg", color: "#3178C6" },
+                ]}
+                speed="fast"
+                direction="left"
+              />
+            )}
           </BaseCard>
         </GridItem>
       </BentoLayout>
