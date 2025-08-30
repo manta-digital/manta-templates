@@ -69,13 +69,13 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 **Objective**: Implement theme-aware colors in templates/nextjs version for rapid testing
 **Effort**: 4/5
 
-- [ ] Modify CosineTerrainCard in `templates/nextjs/` with theme defaults
-- [ ] Implement `backgroundColor` and `foregroundColor` override props
-- [ ] Add CSS custom property integration (`var(--color-background)`, `var(--color-foreground)`)
-- [ ] Implement color resolution hierarchy (custom → theme → fallback)
-- [ ] Add prop type definitions for new color props
-- [ ] Ensure existing usage continues to work without changes
-- [ ] **Success**: Working theme-aware implementation in template with hot reload testing
+- [x] Modify CosineTerrainCard in `templates/nextjs/` with theme defaults
+- [x] Implement `backgroundColor` and `foregroundColor` override props
+- [x] Add CSS custom property integration (`var(--color-background)`, `var(--color-foreground)`)
+- [x] Implement color resolution hierarchy (custom → theme → fallback)
+- [x] Add prop type definitions for new color props
+- [x] Ensure existing usage continues to work without changes
+- [x] **Success**: Working theme-aware implementation in template with hot reload testing
 
 ### Task 5: Cross-Theme Testing and Refinement
 **Objective**: Test implementation across all theme variants and refine for optimal appearance
