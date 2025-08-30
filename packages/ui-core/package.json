@@ -1,6 +1,6 @@
 {
   "name": "@manta-templates/ui-core",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "description": "Framework-agnostic UI components for manta-templates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
