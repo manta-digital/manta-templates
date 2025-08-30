@@ -28,8 +28,18 @@ Note: Multiple roles can be combined in a single contributor (human or AI), and 
 #### Project Phases
 Each project phase must be approved by Project Manager & Tech Lead before moving on to the next phase. When working on project phases, ensure you have all required information first. If in doubt, request and obtain the required information from the Project Manager before proceeding. Do not guess or make assumptions.
 
-**Note:** Most non-trivial projects follow the slice-based approach (Phases 1-3, then slice execution). Simple projects or individual features may use the traditional full-project approach.
+##### Slice vs Feature 
+**Note:** Most non-trivial projects follow the slice-based approach (Phases 1-3, then slice execution). Simple projects or individual features may use the traditional full-project approach.  If in doubt, use this criteria to determine whether something should be a feature or a slice:
 
+**Slices** are vertical cuts through your project architecture - complete user workflows that deliver independent value. They include all layers needed for that functionality: UI, business logic, data storage, testing. A slice can be demonstrated and used on its own.
+
+**Features** are horizontal additions or modifications to existing functionality. They typically extend or modify existing slices rather than creating new end-to-end workflows.
+
+For an app example:
+- **Slice**: "User Authentication" - complete login/logout workflow from UI to database
+- **Feature**: "Remember me checkbox" - extends the existing authentication slice
+
+##### Phases Detail
 1. **Phase 1: Concept**
    - Project Manager provides an initial product concept in plain language.
    - Collaborate with the Technical Fellow (AI) to refine the vision, identify challenges, and define the core product concept.
