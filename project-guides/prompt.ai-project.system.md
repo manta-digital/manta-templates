@@ -129,14 +129,16 @@ Stop and request clarification if you need more information to complete the slic
 ```
 
 ##### Slice | Feature Task Breakdown (Phase 5)
-```markdown
-We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.
+*This should be usable for Slice or Feature task breakdown.*
 
-Your role is Senior AI. Use one of the following as input (only one will be relevant.
+```markdown
+We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.  Note that this request can be used for *slice* or *feature*, but only one will be applicable to a particular request.
+
+Your role is Senior AI. Use exactly one of the following as input:
 1. The slice design document `private/slices/{nn}-slice.{slice}.md`.
 2. The feature design document 'private/features/{nn}-feature.{feature}.md'.
 
-Create task file at `private/tasks/nn-tasks.{slice}.md`.  
+Create task file at `private/tasks/nn-tasks.{slice|feature}.md`.  
 
 Include:
 1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
@@ -173,25 +175,34 @@ Output results by updating the existing task file. Success: All tasks have been 
 Note: This is a project planning task, not a coding task.
 ```
 
-##### Slice Implementation (Phase 7)
+##### Slice | Feature Implementation (Phase 7)
 ```markdown
-We are working on the {slice} slice in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
+We are working on {slice | feature} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
 
-Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nn-tasks.{slice}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
+Your job is to complete the tasks in the `/project-documents/private/tasks/{nn}-tasks.{slice|feature}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the relevant provided rules (`rules/`, `CLAUDE.md`, etc).  Your role is "Senior AI". 
 
-The slice design is available at `private/slices/nn-slice.{slice}.md` for additional context.
+Use exactly one of the following (only one match should exist):
+- The slice design at `private/slices/{nn}-slice.{slice}.md`.
+- The feature design at `private/features/{nn}-feature.{feature}.md`.
 
-STOP and confer with Project Manager after each task, unless directed otherwise by the Project Manager. Do not update any progress files until confirmation from Project Manager.
+Always git commit at least once per task but ideally after every section of items containing a 'Success:' criteria.  For example, if a file contains Task 1.2, Task 1.2.1, commit after each task.  If 1.2.1 contains multiple checklists each with its own 'Success:' criteria, commit after any section containing Success.  STOP and confer with Project Manager after each task, unless directed otherwise 
 
 Work carefully and ensure that each task is verified complete before proceeding to the next. If an attempted solution does not work or you find reason to try another approach, do not make more than three attempts without stopping and obtaining confirmation from Project Manager.
 
-Check off completed tasks in the task file when verified complete. When all tasks for the slice are complete, proceed to Phase 8 (integration) with Project Manager approval.
+Be sure to check off tasks as they are completed.  If a parent file (ex: `03-slices.{project}.md`) contains checklist items, check off parent items after all child items are complete.  
+
+Maintain the YAML frontmatter including:
+- Status: not-started, in-progress, complete, not-applicable
+- Date updated
 
 Notes: 
-* Use the task-checker to manage lists if it is available to you
-* Ignore case sensitivity in all file and directory names
-* If you cannot locate referenced files, STOP and request information from Project Manager
-* Do not guess, assume, or proceed without required files
+- Use the task-checker to manage lists if it is available to you.
+- Ignore case sensitivity in all file and directory names.
+- Use the directory-structure and file-naming-conventions guides.
+- If you are mising required information, STOP and obtain from PM.
+- If you cannot locate referenced files, STOP and request information from 
+  Project Manager.
+- Do not guess, assume, or proceed without required files.
 ```
 
 
@@ -240,27 +251,6 @@ Avoid:
    effort scale.
 
 If you need more information about the feature requirements, stop and request from Project Manager.
-```
-
-
-##### Ad-Hoc Slice Design
-*Note: this is mostly obsolete as it is now handled by the main Slice Design prompt.*
-```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have complex functionality to add to the project and we want to create a slice for it.   
-
-Create a detailed design for slice: {slice} in project {project}.  Use {description} (either from file or project-manager) as input.  Your role is Technical Fellow.
-
-Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
-
-- Detailed technical decisions for this slice
-- Data flows and component interactions
-- UI mockups or detailed specifications (if applicable)
-- Cross-slice dependencies and interfaces
-- Any conflicts or considerations discovered
-
-If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
-
-Stop and request clarification if you need more information to complete the slice design.
 ```
 
 
@@ -505,7 +495,7 @@ Notes:
 * Use the task-checker to manage lists if it is available to you
 * Ignore case sensitivity in all file and directory names
 * If you cannot locate referenced files, STOP and request information from Project Manager
-* Do not guess, assume, or proceed without required files
+* Do not guess, assume, or proceed without required files.
 ```
 
 ##### Analyze Codebase
@@ -659,5 +649,25 @@ Specifically, do the following:
 * Perform the Phase 3 procedure for our {feature}, using our feature file described above as the spec for this work.
 
 Continue to follow all process guidelines, and remember to use `directory-structure.md` to resolve any file or directory naming or location issues. If any required files are not present or you do not have sufficient information, stop and request update from Project Manager before continuing. 
+```
+
+##### Ad-Hoc Slice Design
+*Note: this is mostly obsolete as it is now handled by the main Slice Design prompt.*
+```markdown
+We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have complex functionality to add to the project and we want to create a slice for it.   
+
+Create a detailed design for slice: {slice} in project {project}.  Use {description} (either from file or project-manager) as input.  Your role is Technical Fellow.
+
+Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
+
+- Detailed technical decisions for this slice
+- Data flows and component interactions
+- UI mockups or detailed specifications (if applicable)
+- Cross-slice dependencies and interfaces
+- Any conflicts or considerations discovered
+
+If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
+
+Stop and request clarification if you need more information to complete the slice design.
 ```
 
