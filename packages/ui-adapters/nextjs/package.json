@@ -1,6 +1,6 @@
 {
   "name": "@manta-templates/ui-adapters-nextjs",
-  "version": "0.1.0",
+  "version": "0.7.4",
   "description": "Next.js adapter for manta-templates ui-core content system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

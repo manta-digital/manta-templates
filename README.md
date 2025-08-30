@@ -168,46 +168,7 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ## 📋 Changelog
 
-### v0.7.4
-- **site.config.ts** - configures metadata, policy, author, and components.
-- **Headers and Footers** - configurable, choice of default/compact
-- **Policy Text** - added canned policy text (helper, *not legal advice*).
-- **OpenGraph** - dynamic OG image/card created from react component.
-
-### v0.7.3
-- **Fixed sync-guides script** - Now pulls from `main` branch instead of `public-only` to get latest guides
-
-### v0.7.2
-- **Directory structure migration** - Migrated from `our-project/` to `private/` throughout all guides
-- **Setup script fixes** - Template instances now create `project-documents/private/` correctly
-- **Git submodule warnings eliminated** - Added `.git` exclusion to all setup scripts
-- **Documentation consistency** - Updated 13 files across the guide system for new structure
-- **Migration guide added** - Clear instructions for updating older projects
-
-### v0.7.1
-- **Private guides workflow** - Environment-based configuration for organization private guides
-- **.env file support** - Simple configuration via `.env` files (like Python!)
-- **Project files preservation** - Update scripts now properly preserve project-specific content
-- **Cross-platform compatibility** - Improved Node.js scripts for better Windows support
-- **Template development workflow** - Clarified development vs distribution separation
-
-### v0.7.0
-- **Monorepo structure cleanup** - Clean separation between templates and development artifacts
-- **Fixed sync-guides workflow** - Fresh monorepo clones now work out of the box
-- **Template distribution improvements** - Templates ship clean without project-documents
-- **Updated template README** - Correct user workflow with `pnpm dlx degit`
-- **Cross-platform compatibility** - Better support for different development environments
-- **Repository structure flattening** - Consistent `project-documents/` structure across monorepo and standalone usage
-
-### v0.6.0
-- Next.js 15 upgrade
-- Tailwind CSS v4 integration
-- Enhanced card component system
-
-### v0.5.x
-- Initial template development
-- Basic project structure
-- Core component library
+See [CHANGELOG.md](./CHANGELOG.md) for detailed release notes.
 
 ---
 

@@ -9,6 +9,38 @@ import type { CardVariantProps } from '../../types/cardVariants';
 
 /**
  * Props for the GradientCard component
+ * 
+ * ## Gradient Systems
+ * 
+ * GradientCard provides three gradient control methods (use only one):
+ * 
+ * ### 1. Simple Range-Based Gradients
+ * Use the `range` prop for background-to-accent gradients:
+ * ```tsx
+ * <GradientCard range={50}>Content</GradientCard>  // Moderate gradient
+ * <GradientCard range={100}>Content</GradientCard> // Strong gradient
+ * ```
+ * 
+ * ### 2. Advanced Accent-to-Accent Gradients  
+ * Use `from` and `to` props for precise control:
+ * ```tsx
+ * <GradientCard from="accent-7" to="accent-10">Content</GradientCard>
+ * <GradientCard from="neutral-3" to="accent-8">Content</GradientCard>
+ * ```
+ * 
+ * ### 3. Custom Gradients
+ * Use `customGradient` for complete control:
+ * ```tsx
+ * <GradientCard customGradient="linear-gradient(135deg, red, blue)">Content</GradientCard>
+ * ```
+ * 
+ * ## Theme Awareness
+ * All gradients automatically adapt to the current theme's color palette and light/dark mode.
+ * 
+ * ## Migration from Legacy API
+ * - `gradient="teal"` → `from="accent-7" to="accent-10"`
+ * - `gradient="blue"` → `from="accent-6" to="accent-10"`  
+ * - `gradient="purple"` → `from="accent-7" to="accent-11"`
  */
 export interface GradientCardProps extends React.HTMLAttributes<HTMLDivElement>, CardVariantProps {
   /**
@@ -123,7 +155,41 @@ const getAdvancedGradientClass = (from: string, to: string): string => {
 };
 
 /**
- * GradientCard component with sophisticated gradient backgrounds and accessibility features
+ * GradientCard component with theme-aware gradient backgrounds and accessibility features.
+ * 
+ * Provides a dual gradient system that automatically adapts to theme changes:
+ * - Simple range-based gradients (background → accent-X)
+ * - Advanced accent-to-accent gradients (accent-X → accent-Y)  
+ * - Full custom gradient support
+ * 
+ * Features:
+ * - 🎨 Theme-aware color adaptation (light/dark modes)
+ * - 🎯 Dual control system (simple + advanced)
+ * - ⚡ Memoized gradient computation for performance
+ * - ✅ Full TypeScript support with validation
+ * - ♿ Accessibility-first design
+ * - ✨ Optional shimmer animation
+ * 
+ * @example
+ * ```tsx
+ * // Simple gradient
+ * <GradientCard range={75}>Simple content</GradientCard>
+ * 
+ * // Advanced gradient  
+ * <GradientCard from="accent-7" to="accent-10">Advanced content</GradientCard>
+ * 
+ * // With additional features
+ * <GradientCard 
+ *   from="accent-9" 
+ *   to="accent-11"
+ *   shimmer={true}
+ *   overlayOpacity={0.1}
+ *   title="Card Title"
+ *   description="Card description"
+ * >
+ *   Card content
+ * </GradientCard>
+ * ```
  */
 export function GradientCard({
   range,

@@ -1,6 +1,6 @@
 {
   "name": "@manta-templates/ui-core",
-  "version": "0.1.0",
+  "version": "0.7.4",
   "description": "Framework-agnostic UI components for manta-templates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,10 +10,13 @@
   "scripts": {
     "build": "npm run build:css && tsc && cp -r src/styles dist/styles",
     "build:css": "tailwindcss --input src/styles/index.css --output dist/styles/index.css",
-    "dev": "tsc --watch", 
+    "dev": "tsc --watch",
     "clean": "rimraf dist",
-    "test": "tsx src/__tests__/content.test.ts && tsx src/__tests__/header.test.ts",
-    "test:watch": "tsx watch src/__tests__/content.test.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:legacy": "tsx src/__tests__/content.test.ts && tsx src/__tests__/header.test.ts",
+    "test:legacy:watch": "tsx watch src/__tests__/content.test.ts",
     "test:header": "tsx src/__tests__/header.test.ts",
     "test:header:watch": "tsx watch src/__tests__/header.test.ts",
     "test:baseline": "tsx src/__tests__/run-baseline-tests.ts",
@@ -48,6 +51,9 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.5",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.0.0",
@@ -57,6 +63,7 @@
     "jsdom": "^25.0.1",
     "rimraf": "^5.0.5",
     "tsx": "^4.20.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }
