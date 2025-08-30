@@ -17,13 +17,9 @@ MONOREPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CURRENT_VERSION=""
 NEW_VERSION=""
 
-# Package paths
-declare -A PACKAGES=(
-  ["ui-core"]="packages/ui-core/package.json"
-  ["ui-adapters-nextjs"]="packages/ui-adapters/nextjs/package.json" 
-  ["template-nextjs"]="templates/nextjs/package.json"
-  ["landing"]="landing/package.json"
-)
+# Package paths - using arrays for macOS bash compatibility
+PACKAGE_NAMES=("ui-core" "ui-adapters-nextjs" "template-nextjs" "landing")
+PACKAGE_PATHS=("packages/ui-core/package.json" "packages/ui-adapters/nextjs/package.json" "templates/nextjs/package.json" "landing/package.json")
 
 # Functions
 print_header() {
@@ -43,8 +39,9 @@ get_current_version() {
 
 show_package_versions() {
   echo -e "\n${BLUE}Current package versions:${NC}"
-  for name in "${!PACKAGES[@]}"; do
-    local package_file="${PACKAGES[$name]}"
+  for i in "${!PACKAGE_NAMES[@]}"; do
+    local name="${PACKAGE_NAMES[$i]}"
+    local package_file="${PACKAGE_PATHS[$i]}"
     if [[ -f "$package_file" ]]; then
       local version=$(grep '"version"' "$package_file" | sed 's/.*"version": *"\([^"]*\)".*/\1/')
       echo -e "  ${name}: ${version}"
@@ -79,8 +76,10 @@ update_all_versions() {
   local version="$1"
   echo -e "\n${BLUE}Updating all packages to v${version}...${NC}"
   
-  for name in "${!PACKAGES[@]}"; do
-    update_package_version "${PACKAGES[$name]}" "$version" "$name"
+  for i in "${!PACKAGE_NAMES[@]}"; do
+    local name="${PACKAGE_NAMES[$i]}"
+    local package_file="${PACKAGE_PATHS[$i]}"
+    update_package_version "$package_file" "$version" "$name"
   done
 }
 
