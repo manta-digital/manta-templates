@@ -6,7 +6,7 @@ featureRef: features/15-feature.cosine-theming.md
 github: https://github.com/manta-digital/manta-templates/issues/55
 dependencies: [theme-system, ui-core]
 projectState: v0.8.0 - Framework-agnostic UI architecture with theme-aware gradient system established
-status: not started
+status: in-progress
 lastUpdated: 2025-08-30
 ---
 
@@ -31,13 +31,13 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 **Objective**: Locate CosineTerrainCard component and understand current implementation
 **Effort**: 2/5
 
-- [ ] Find CosineTerrainCard in `packages/ui-core/src/components/`
-- [ ] Locate corresponding copy in `templates/nextjs/`  
-- [ ] Document current component API and props interface
-- [ ] Identify how colors are currently configured (hardcoded values, props, CSS)
-- [ ] Note any existing color-related props or styling patterns
-- [ ] Document component usage examples in template/landing pages
-- [ ] **Success**: Clear understanding of current implementation and color system
+- [x] Find CosineTerrainCard in `packages/ui-core/src/components/`
+- [x] Locate corresponding copy in `templates/nextjs/`  
+- [x] Document current component API and props interface
+- [x] Identify how colors are currently configured (hardcoded values, props, CSS)
+- [x] Note any existing color-related props or styling patterns
+- [x] Document component usage examples in template/landing pages
+- [x] **Success**: Clear understanding of current implementation and color system
 
 ### Task 2: Current Color Configuration Audit  
 **Objective**: Document existing color usage and identify integration points
