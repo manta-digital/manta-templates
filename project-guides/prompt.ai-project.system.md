@@ -175,6 +175,53 @@ If framework or platform are specified, guide(s) for the framework(s) should be 
 
 Stop and request clarification if you need more information to complete the slice design.
 ```
+
+##### Ad-Hoc Feature
+*Use this to create a feature file for an ad-hoc feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
+
+```markdown
+We're adding a new feature to project {project}. Name this feature as described or, if creating from a github issue, create a concise but descriptive name from the issue title.
+
+Use relevant methodology from `guide.ai-project.00-process` to create the design for the feature.  Keep this concise and minimal.  Your role is Technical Fellow.
+
+The feature description should be provided by the Project Manager. Additionally consider the existing project context including.  
+
+- High-level design (03-hld.{project}.md)  
+- Current project state
+
+Create:
+1. Add indexed section in tasks/91-adhoc-features.  Create file if needed.  
+2. Title the section {nn}-feature.{feature}.md.
+3. Concise feature design document (features/{nn}-feature.{feature}.md). 
+
+Add YAML FrontMatter to your created file:
+```yaml
+---
+item: {item-name}
+project: {project}
+type: feature
+github: {url of github issue, if one is related}
+dependencies: [list-if-any]
+projectState: brief current state
+status: not started
+lastUpdated: YYYY-MM-DD
+---
+```
+``` markdown
+Follow dependency management - identify what foundation work project elements may depend on or be affected by this change.
+
+Guidelines:
+1. Stick to relevant information only.  
+2. Avoid vague fluff about future performance testing or involved benchmarking, 
+   unless this is specifically relevant.  
+3. Avoid vague or speculative Risk Items.
+4. Do not add a time estimate in hours/days etc.  You may use 1-5 relative 
+   effort scale.
+5. Follow Phase 4 guidelines substituting 'feauture' for 'slice' as needed.
+
+If you need more information about the feature requirements, stop and request from Project Manager.
+```
+
 ##### Ad-Hoc Tasks (Feature/Maintenance)
 ```markdown
 Create tasks for {feature/maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
@@ -197,27 +244,6 @@ lastUpdated: YYYY-MM-DD
 Skip LLD creation - go directly from description to implementable tasks. Each task should be completable by a junior AI with clear success criteria.
 
 If the item is too complex for this approach, recommend creating a proper slice instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
-```
-
-##### Feature Design 
-*Use this to add a new slice to an existing project.*
-```markdown
-We're adding a new feature slice to project {project}. This slice will be called {slice}.
-
-We will use our slice-based methodology from `guide.ai-project.00-process` to design and implement this feature. Your role is Technical Fellow.
-
-The feature description should be provided by the Project Manager. Use the existing project context including:
-- High-level design (03-hld.{project}.md)  
-- Existing slice plan (03-slices.{project}.md)
-- Current project state
-
-Create:
-1. Updated slice plan adding this slice to the appropriate position
-2. Slice design document (nn-slice.{slice}.md) 
-
-Follow dependency management - identify what foundation work or other slices this depends on, and what future slices might depend on this.
-
-If you need more information about the feature requirements, stop and request from Project Manager.
 ```
 
 ##### Model Change or Context Refresh 
