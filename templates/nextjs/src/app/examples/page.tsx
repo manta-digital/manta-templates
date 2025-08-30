@@ -112,7 +112,13 @@ export default function ExamplesPage() {
 
         {/* Cosine terrain visual */}
         <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
-          <CosineTerrainCard className="h-full" variant="card" renderPreset="wireframe" materialType="basic" />
+          <CosineTerrainCard 
+            className="h-full" 
+            variant="card" 
+            renderPreset="wireframe" 
+            materialType="basic"
+            backgroundColor="var(--color-background)"
+          />
         </GridItem>
 
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
