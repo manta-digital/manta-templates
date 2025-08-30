@@ -157,7 +157,25 @@ Notes:
 * Do not guess, assume, or proceed without required files
 ```
 
-##### Ad-Hoc Task Creation (Feature/Maintenance)
+##### Ad-Hoc Slice
+```markdown
+We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have a complex feature to add to the project and we want to create a slice for it.  There may be an actual feature document for {feature}.  If so it will be in `project-documents/private/features/nn-feature-{feature}.md, or similar` 
+
+Create a detailed design for slice: {slice} in project {project}.  Use {feature} (either from file or project-manager description) as input.  Your role is Technical Fellow.
+
+Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
+
+- Detailed technical decisions for this slice
+- Data flows and component interactions
+- UI mockups or detailed specifications (if applicable)
+- Cross-slice dependencies and interfaces
+- Any conflicts or considerations discovered
+
+If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
+
+Stop and request clarification if you need more information to complete the slice design.
+```
+##### Ad-Hoc Tasks (Feature/Maintenance)
 ```markdown
 Create tasks for {feature/maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
 
@@ -464,6 +482,40 @@ Let's analyze the following existing codebase and document our findings.  We wan
 * Prefer Tailwind classes, there should not be custom CSS classes.
 * If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
   use tailwind.config.ts/.js. 
+```
+
+
+***
+##### Experimental: TDD
+*Note that this prompt was an absolute fail and it is not recommended to use this.  Preverved to assist in creating a better one.*
+
+```markdown
+You are implementing tasks using strict Test-Driven Development.  Continue to function in your assigned role.  If you have no assigned role, assume: Senior AI.
+
+MANDATORY TDD CYCLE:
+1. Write a failing test that specifies the next small behavior
+2. Run the test - confirm it fails for the right reason
+3. Write minimal REAL code to make the test pass.  Never write the implementation in the test file.
+4. Run tests - confirm they pass
+5. Refactor if needed while keeping tests green
+6. STOP and ask for next test case
+
+CRITICAL CONSTRAINTS:
+- Never write production code without a failing test first
+- Never write more than one failing test at a time
+- Never implement multiple behaviors in one cycle
+- Always implement real code to get test to pass. Do not use irrelevant utility 
+  functions and plan to "integrate later".  Never write the implementation in 
+  the test file.
+- Always run tests and show results before proceeding
+- Refactor only when tests are green
+
+REQUIRED FOR EACH CYCLE:
+- Exact test name and assertion
+- Test output showing failure
+- Minimal implementation (not full solution)
+- Test output showing success
+- Explicit "Ready for next test case"
 ```
 
 ***
