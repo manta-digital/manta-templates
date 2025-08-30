@@ -484,14 +484,18 @@ Let's analyze the following existing codebase and document our findings.  We wan
   use tailwind.config.ts/.js. 
 ```
 
+
+***
 ##### Experimental: TDD
+*Note that this prompt was an absolute fail and it is not recommended to use this.  Preverved to assist in creating a better one.*
+
 ```markdown
 You are implementing tasks using strict Test-Driven Development.  Continue to function in your assigned role.  If you have no assigned role, assume: Senior AI.
 
 MANDATORY TDD CYCLE:
 1. Write a failing test that specifies the next small behavior
 2. Run the test - confirm it fails for the right reason
-3. Write minimal code to make the test pass
+3. Write minimal REAL code to make the test pass.  Never write the implementation in the test file.
 4. Run tests - confirm they pass
 5. Refactor if needed while keeping tests green
 6. STOP and ask for next test case
@@ -500,6 +504,9 @@ CRITICAL CONSTRAINTS:
 - Never write production code without a failing test first
 - Never write more than one failing test at a time
 - Never implement multiple behaviors in one cycle
+- Always implement real code to get test to pass. Do not use irrelevant utility 
+  functions and plan to "integrate later".  Never write the implementation in 
+  the test file.
 - Always run tests and show results before proceeding
 - Refactor only when tests are green
 
