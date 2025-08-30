@@ -84,34 +84,69 @@ Note: This is a design and planning task, not a coding task.
 
 ##### Slice Design (Phase 4)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project}.
+We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project} by following the instructions here. These instructions may be used for adding a new slice with provided description, or designing {slice} included in the project slice plan.
 
-Use the high-level design (03-hld.{project}.md) and slice plan (03-slices.{project}.md) as inputs. Your role is Technical Fellow.
+Use the following inputs:
+1. The project high-level design (03-hld.{project}.md)
+2. One of the following (only one will be applicable):
+	1. Slice description provided with this request.
+	2. The project slice plan at `03-slices.{project}.md`.
 
-Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
+Note: if you are using the slice plan, it must contain information on this slice.
 
+Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Your role is Technical Fellow.
+
+Include:
+- YAML frontmatter as described below.
 - Detailed technical decisions for this slice
 - Data flows and component interactions
 - UI mockups or detailed specifications (if applicable)
 - Cross-slice dependencies and interfaces
 - Any conflicts or considerations discovered
 
+Avoid:
+- Time estimates in hours/days/etc.  You may use a 1-5 relative effort scale.
+- Extensive benchmarking tasks unless actually relevant to this effort.
+- Extensive or speculative risk items.  Include only if truly relevant.
+
+YAML Frontmatter Detils:
+```yaml
+---
+item: {item-name}
+project: {project}
+type: slice
+github: {url of github issue, if one is related}
+dependencies: [list-if-any]
+projectState: brief current state
+status: not started
+lastUpdated: YYYY-MM-DD
+---
+```
+```
 If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
 
 Stop and request clarification if you need more information to complete the slice design.
 ```
 
-##### Slice Task Breakdown (Phase 5)
+##### Slice | Feature Task Breakdown (Phase 5)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the slice design for {slice} in project {project} into granular, actionable tasks.
+We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.
 
-Your role is Senior AI. Use the slice design document `private/slices/nn-slice.{slice}.md` as input.
+Your role is Senior AI. Use one of the following as input (only one will be relevant.
+1. The slice design document `private/slices/{nn}-slice.{slice}.md`.
+2. The feature design document 'private/features/{nn}-feature.{feature}.md'.
 
-Create task file at `private/tasks/nn-tasks.{slice}.md` with:
-
+Create task file at `private/tasks/nn-tasks.{slice}.md`.  Include:
 1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
+4. Organize so that tasks can be completed sequentially.
+5. Use checklist format for all task files.
+
+Avoid:
+- Time estimates in hours/days/etc.  You may use a 1-5 relative effort scale.
+- Extensive benchmarking tasks unless actually relevant to this effort.
+- Extensive or speculative risk items.  Include only if truly relevant.
 
 For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
@@ -157,28 +192,9 @@ Notes:
 * Do not guess, assume, or proceed without required files
 ```
 
-##### Ad-Hoc Slice
-```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have a complex feature to add to the project and we want to create a slice for it.  There may be an actual feature document for {feature}.  If so it will be in `project-documents/private/features/nn-feature-{feature}.md, or similar` 
 
-Create a detailed design for slice: {slice} in project {project}.  Use {feature} (either from file or project-manager description) as input.  Your role is Technical Fellow.
-
-Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
-
-- Detailed technical decisions for this slice
-- Data flows and component interactions
-- UI mockups or detailed specifications (if applicable)
-- Cross-slice dependencies and interfaces
-- Any conflicts or considerations discovered
-
-If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
-
-Stop and request clarification if you need more information to complete the slice design.
-```
-
-##### Ad-Hoc Feature
-*Use this to create a feature file for an ad-hoc feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
-
+##### Feature Design
+*Use this to create a feature file for a feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
 ```markdown
 We're adding a new feature to project {project}. Name this feature as described or, if creating from a github issue, create a concise but descriptive name from the issue title.
 
@@ -212,19 +228,43 @@ Follow dependency management - identify what foundation work project elements ma
 
 Guidelines:
 1. Stick to relevant information only.  
-2. Avoid vague fluff about future performance testing or involved benchmarking, 
+2. Follow Phase 4 guidelines substituting 'feauture' for 'slice' as needed.
+
+Avoid:
+1. Vague fluff about future performance testing or involved benchmarking, 
    unless this is specifically relevant.  
-3. Avoid vague or speculative Risk Items.
-4. Do not add a time estimate in hours/days etc.  You may use 1-5 relative 
+2. Avoid vague or speculative Risk Items.
+3. Do not add a time estimate in hours/days etc.  You may use 1-5 relative 
    effort scale.
-5. Follow Phase 4 guidelines substituting 'feauture' for 'slice' as needed.
 
 If you need more information about the feature requirements, stop and request from Project Manager.
 ```
 
-##### Ad-Hoc Tasks (Feature/Maintenance)
+
+##### Ad-Hoc Slice Design
+*Note: this is mostly obsolete as it is now handled by the main Slice Design prompt.*
 ```markdown
-Create tasks for {feature/maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
+We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have complex functionality to add to the project and we want to create a slice for it.   
+
+Create a detailed design for slice: {slice} in project {project}.  Use {description} (either from file or project-manager) as input.  Your role is Technical Fellow.
+
+Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
+
+- Detailed technical decisions for this slice
+- Data flows and component interactions
+- UI mockups or detailed specifications (if applicable)
+- Cross-slice dependencies and interfaces
+- Any conflicts or considerations discovered
+
+If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
+
+Stop and request clarification if you need more information to complete the slice design.
+```
+
+
+##### Ad-Hoc Tasks (Feature | Maintenance)
+```markdown
+Create tasks for {feature | maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
 
 Your role is Senior AI. Analyze the {feature/maintenance item} and create a task file at `private/tasks/nn-tasks.{item-name}.md` with:
 
@@ -232,18 +272,18 @@ Your role is Senior AI. Analyze the {feature/maintenance item} and create a task
 ---
 item: {item-name}
 project: {project}
-type: feature|maintenance|bugfix
+type: feature|maintenance|bugfix tasks
 dependencies: [list-if-any]
 projectState: brief current state
 lastUpdated: YYYY-MM-DD
 ---
 
-2.  Context summary explaining the work
+2. Context summary explaining the work
 3. Granular tasks following Phase 5 guidelines
 
 Skip LLD creation - go directly from description to implementable tasks. Each task should be completable by a junior AI with clear success criteria.
 
-If the item is too complex for this approach, recommend creating a proper slice instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
+If the item is too complex for this approach, recommend creating a design file instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
 ```
 
 ##### Model Change or Context Refresh 
