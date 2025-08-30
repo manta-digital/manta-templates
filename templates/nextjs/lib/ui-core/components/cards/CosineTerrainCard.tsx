@@ -64,7 +64,7 @@ export interface CosineTerrainCardProps {
   cameraFarPlane?: number;
   showTerrainLogs?: boolean;
   // Material / render
-  materialColor?: number;
+  materialColor?: number | string;
   wireframe?: boolean;
   materialType?: 'basic' | 'standard';
   /** quick preset for material look */
@@ -118,7 +118,7 @@ export interface TilingSettings {
 export interface MaterialSettings {
   renderPreset?: 'wireframe' | 'solid';
   materialType?: 'basic' | 'standard';
-  materialColor?: number;
+  materialColor?: number | string;
   materialOpacity?: number;
   /** PBR: 0..1 */
   metalness?: number;

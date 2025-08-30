@@ -55,15 +55,15 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 **Objective**: Design the theme-aware color system and API changes
 **Effort**: 3/5
 
-- [ ] Design prop interface for theme-aware colors:
+- [x] Design prop interface for theme-aware colors:
   - `backgroundColor?: string` (overrides theme default)
   - `foregroundColor?: string` (overrides theme default) 
-- [ ] Plan CSS custom property integration approach
-- [ ] Design fallback mechanism: custom props → theme colors → hardcoded fallback
-- [ ] Consider intensity/opacity adjustments for wireframe visibility
-- [ ] Plan backward compatibility approach (no breaking changes)
-- [ ] Document the color resolution hierarchy
-- [ ] **Success**: Clear API design with implementation approach documented
+- [x] Plan CSS custom property integration approach
+- [x] Design fallback mechanism: custom props → theme colors → hardcoded fallback
+- [x] Consider intensity/opacity adjustments for wireframe visibility
+- [x] Plan backward compatibility approach (no breaking changes)
+- [x] Document the color resolution hierarchy
+- [x] **Success**: Clear API design with implementation approach documented
 
 ### Task 4: Prototype Implementation in Template
 **Objective**: Implement theme-aware colors in templates/nextjs version for rapid testing
