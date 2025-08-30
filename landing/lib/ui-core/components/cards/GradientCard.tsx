@@ -1,25 +1,42 @@
-import React from 'react';
+'use client';
+
+import React, { useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { cn } from '../../utils/cn';
 import { cardVariants } from '../../utils/cardVariants';
 import type { CardVariantProps } from '../../types/cardVariants';
 
-/**
- * Gradient preset definitions for the GradientCard component
- */
-export type GradientPreset = 'teal' | 'blue' | 'purple' | 'sunset' | 'ocean';
 
 /**
  * Props for the GradientCard component
  */
 export interface GradientCardProps extends React.HTMLAttributes<HTMLDivElement>, CardVariantProps {
   /**
-   * Predefined gradient preset to use
-   * @default 'teal'
+   * Simple gradient range from background to accent (0-100)
+   * 0 = barely visible (background → accent-1)
+   * 25 = soft (background → accent-4)
+   * 50 = moderate (background → accent-8) 
+   * 75 = strong (background → accent-10)
+   * 100 = maximum (background → accent-12)
    */
-  gradient?: GradientPreset;
+  range?: number;
+  
   /**
-   * Custom gradient definition (overrides preset)
+   * Advanced gradient: color scale to start from
+   * Supports: "accent-1" through "accent-12", "neutral-1" through "neutral-12"
+   * Must be used with `to` prop
+   */
+  from?: string;
+  
+  /**
+   * Advanced gradient: color scale to end at
+   * Supports: "accent-1" through "accent-12", "neutral-1" through "neutral-12"
+   * Must be used with `from` prop
+   */
+  to?: string;
+  
+  /**
+   * Custom gradient definition (overrides all other gradient props)
    * Example: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
    */
   customGradient?: string;
@@ -56,21 +73,62 @@ export interface GradientCardProps extends React.HTMLAttributes<HTMLDivElement>,
 }
 
 /**
- * Gradient preset configurations
+ * Maps a 0-100 range value to an accent level (1-12)
  */
-const gradientPresets: Record<GradientPreset, string> = {
-  teal: 'bg-gradient-to-br from-[var(--color-accent-7)] to-[var(--color-accent-10)]',
-  blue: 'bg-gradient-to-br from-[var(--color-accent-6)] to-[var(--color-accent-10)]',
-  purple: 'bg-gradient-to-br from-[var(--color-accent-7)] to-[var(--color-accent-11)]',
-  sunset: 'bg-gradient-to-br from-[var(--color-accent-5)] to-[var(--color-accent-9)]',
-  ocean: 'bg-gradient-to-br from-[var(--color-accent-6)] to-[var(--color-accent-10)]',
+const rangeToAccentLevel = (range: number): number => {
+  // Clamp range to 0-100
+  const clampedRange = Math.max(0, Math.min(100, range));
+  // Map 0-100 to accent levels 1-12
+  return Math.round(1 + (clampedRange / 100) * 11);
+};
+
+/**
+ * Generates Tailwind class for simple background-to-accent gradients
+ */
+const getSimpleGradientClass = (range: number): string => {
+  const accentLevel = rangeToAccentLevel(range);
+  return `bg-gradient-to-br from-[var(--background)] to-[var(--color-accent-${accentLevel})]`;
+};
+
+/**
+ * Parses color scale string and returns CSS variable name
+ */
+const parseColorScale = (colorScale: string): string => {
+  // Validate format: "accent-1" to "accent-12", "neutral-1" to "neutral-12"
+  const match = colorScale.match(/^(accent|neutral)-(\d+)$/);
+  if (!match) {
+    console.warn(`Invalid color scale format: "${colorScale}". Expected format: "accent-1" to "accent-12" or "neutral-1" to "neutral-12"`);
+    return 'var(--color-accent-8)'; // fallback
+  }
+  
+  const [, type, level] = match;
+  const levelNum = parseInt(level, 10);
+  
+  // Validate level range
+  if (levelNum < 1 || levelNum > 12) {
+    console.warn(`Invalid color level: ${level}. Must be between 1-12`);
+    return 'var(--color-accent-8)'; // fallback
+  }
+  
+  return `var(--color-${type}-${levelNum})`;
+};
+
+/**
+ * Generates Tailwind class for advanced accent-to-accent gradients
+ */
+const getAdvancedGradientClass = (from: string, to: string): string => {
+  const fromVar = parseColorScale(from);
+  const toVar = parseColorScale(to);
+  return `bg-gradient-to-br from-[${fromVar}] to-[${toVar}]`;
 };
 
 /**
  * GradientCard component with sophisticated gradient backgrounds and accessibility features
  */
 export function GradientCard({
-  gradient = 'teal',
+  range,
+  from,
+  to,
   customGradient,
   shimmer = true,
   overlayOpacity = 0,
@@ -85,10 +143,36 @@ export function GradientCard({
   style,
   ...props
 }: GradientCardProps) {
-  // Build the gradient classes
-  const gradientClasses = customGradient 
-    ? '' 
-    : gradientPresets[gradient];
+  // Prop validation for gradient systems
+  React.useEffect(() => {
+    // Warn if both systems used simultaneously
+    if (range !== undefined && (from !== undefined || to !== undefined)) {
+      console.warn('GradientCard: Cannot use both range and from/to props. Range will be ignored.');
+    }
+    
+    // Validate incomplete advanced gradient props
+    if ((from !== undefined && to === undefined) || (from === undefined && to !== undefined)) {
+      console.warn('GradientCard: Both from and to props must be provided together for advanced gradients.');
+    }
+  }, [range, from, to]);
+
+  // Build the gradient classes with memoization
+  const gradientClasses = useMemo(() => {
+    if (customGradient) return '';
+    
+    // Advanced: from/to gradients (highest precedence after customGradient)
+    if (from !== undefined && to !== undefined) {
+      return getAdvancedGradientClass(from, to);
+    } 
+    
+    // Simple: range-based gradients
+    if (range !== undefined) {
+      return getSimpleGradientClass(range);
+    }
+    
+    // Default fallback
+    return 'bg-gradient-to-br from-[var(--background)] to-[var(--color-accent-8)]';
+  }, [customGradient, range, from, to]);
 
   // Build shimmer classes
   const shimmerClasses = shimmer 

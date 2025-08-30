@@ -355,7 +355,7 @@ export default async function Home() {
         </GridItem>
 
         {/* Featured article */}
-        <GridItem className="col-span-8 md:col-span-3 md:row-span-2 lg:col-span-3 lg:row-span-2 xl:col-span-3">
+        <GridItem className="col-span-8 row-span-2 md:col-span-3 md:row-span-2 lg:col-span-3 lg:row-span-2 xl:col-span-3">
           <ArticleCard 
             className="h-full" 
             ImageComponent={Image} 
@@ -392,7 +392,7 @@ export default async function Home() {
           {/* The wrapped card caused CSS nightmares but let AI write these. */}
           <GradientCard
             className="h-full p-0 rounded-lg border-none [&>div:last-child]:h-full [&>div:last-child>div]:h-full [&>div:last-child>div]:p-0"
-            customGradient="linear-gradient(135deg, var(--color-accent-9), var(--color-accent-11))"
+            from="accent-9" to="accent-11"
           >
             {aboutContent && (
               <AboutCard
