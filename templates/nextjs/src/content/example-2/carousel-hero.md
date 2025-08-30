@@ -1,7 +1,7 @@
 ---
 title: "Carousel Article"
 excerpt: "Testing image hover inside carousel."
-coverImage: "/image/blog-sample-image.png"
+coverImage: "/image/blog/blog-sample-image.png"
 publishedAt: "2024-01-15"
 tags: ["carousel", "testing", "ui"]
 ---

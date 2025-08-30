@@ -39,7 +39,7 @@ export default function ExamplesPage() {
               title="Carousel Article" 
               subtitle="Demo" 
               description="Testing image hover inside carousel." 
-              image="/image/blog-sample-image.png" 
+              image="/image/blog/blog-sample-image.png" 
               href="/blog/sample-post" 
               imageProps={{ 
                 width: 600, 
@@ -58,7 +58,7 @@ export default function ExamplesPage() {
                 title: 'Semantic Colors',
                 description: 'Cards using accent and foreground tokens',
                 techStack: ['Next.js', 'Tailwind v4', 'Radix'],
-                image: '/image/blog-sample-image.png',
+                image: '/image/blog/blog-sample-image.png',
                 repoUrl: 'https://github.com/manta-templates/semantic-colors',
                 features: [
                   { label: 'Structured and Customizable Project Phases', icon: 'zap'},
@@ -77,7 +77,7 @@ export default function ExamplesPage() {
               className="h-full"
               displayMode="background"
               videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
-              thumbnailUrl="/image/blog-sample-image.png"
+              thumbnailUrl="/image/blog/blog-sample-image.png"
               BackgroundVideoComponent={BackgroundVideoComponent}
             >
               <div className="absolute inset-0 flex items-center justify-center">
@@ -96,7 +96,7 @@ export default function ExamplesPage() {
             title="Colors and Themes" 
             subtitle="Research" 
             description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." 
-            image="/image/blog-sample-image.png" 
+            image="/image/blog/blog-sample-image.png" 
             href="/blog/sample-post" 
             imageProps={{ 
               width: 600, 
@@ -107,7 +107,7 @@ export default function ExamplesPage() {
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-5">
-          <BlogCardImage ImageComponent={Image} LinkComponent={Link} className='h-full' title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog-sample-image.png" textColorClassName="text-white" />
+          <BlogCardImage ImageComponent={Image} LinkComponent={Link} className='h-full' title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog/blog-sample-image.png" textColorClassName="text-white" />
         </GridItem>
 
         {/* Cosine terrain visual */}

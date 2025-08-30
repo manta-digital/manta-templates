@@ -82,7 +82,7 @@ export class MockContentProvider extends BaseContentProvider {
     this.mockData.set('blog:sample-post', `---
 title: My Sample Blog Post
 description: A brief description of this sample post.
-image: /image/blog-sample-image.png
+image: /image/blog/blog-sample-image.png
 pubDate: 2025-05-16
 contentType: blog
 cardSize: medium 
@@ -131,7 +131,7 @@ And an inline \`code\` example.`);
     this.mockData.set('blog:second-post', `---
 title: Second Blog Post
 description: Another example blog post for testing.
-image: /image/blog-sample-image.png
+image: /image/blog/blog-sample-image.png
 pubDate: 2025-05-17
 contentType: blog
 cardSize: large
@@ -158,7 +158,7 @@ repoUrl: "https://github.com/example/sample-project"
 demoUrl: "https://sample-project.demo.com"
 featured: true
 order: 1
-image: "/image/blog-sample-image.png"
+image: "/image/blog/blog-sample-image.png"
 ---
 
 # Sample Project

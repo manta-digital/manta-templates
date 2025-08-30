@@ -1,8 +1,8 @@
 ---
 title: "My Sample Blog Post"
 description: "A brief description of this sample post."
-image: "/image/blog-sample-image.png"
-thumbnail: "/image/blog-sample-image.png"
+image: "/image/blog/blog-sample-image.png"
+thumbnail: "/image/blog/blog-sample-image.png"
 pubDate: "2024-01-20"
 contentType: blog
 cardSize: medium 

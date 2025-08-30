@@ -2,7 +2,7 @@
 title: "Semantic Colors"
 description: "Cards using accent and foreground tokens with comprehensive theming support"
 techStack: ["Next.js", "Tailwind v4", "Radix"]
-image: "/image/blog-sample-image.png"
+image: "/image/blog/blog-sample-image.png"
 repoUrl: "https://github.com/manta-templates/semantic-colors"
 features:
   - label: "Structured and Customizable Project Phases"

@@ -3,7 +3,7 @@ type: "blog"
 title: "Carousel Article"
 category: "Demo"
 excerpt: "Testing image hover inside carousel."
-coverImageUrl: "/image/blog-sample-image.png"
+coverImageUrl: "/image/blog/blog-sample-image.png"
 slug: "/"
 ---
 

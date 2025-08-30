@@ -2,7 +2,7 @@
 type: "video"
 displayMode: "background"
 videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
-thumbnailUrl: "/image/blog-sample-image.png"
+thumbnailUrl: "/image/blog/blog-sample-image.png"
 title: "Background Video Demo"
 ---
 
