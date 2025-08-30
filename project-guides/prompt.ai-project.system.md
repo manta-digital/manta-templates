@@ -136,7 +136,9 @@ Your role is Senior AI. Use one of the following as input (only one will be rele
 1. The slice design document `private/slices/{nn}-slice.{slice}.md`.
 2. The feature design document 'private/features/{nn}-feature.{feature}.md'.
 
-Create task file at `private/tasks/nn-tasks.{slice}.md`.  Include:
+Create task file at `private/tasks/nn-tasks.{slice}.md`.  
+
+Include:
 1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
