@@ -118,7 +118,7 @@ export default function ExamplesPage() {
             renderPreset="wireframe" 
             materialType="basic"
             backgroundColor="var(--color-background)"
-            materialColor="var(--color-foreground)"
+            materialColor="var(--color-accent-11)"
           />
         </GridItem>
 

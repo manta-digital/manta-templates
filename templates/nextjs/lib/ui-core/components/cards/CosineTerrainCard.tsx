@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Scene,
   PerspectiveCamera,
@@ -17,6 +17,46 @@ import {
 import type { ColorRepresentation } from 'three';
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
+
+/**
+ * Convert OKLCH color to RGB
+ * OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360)
+ * Returns: RGB values 0-255
+ */
+function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
+  // Convert hue from degrees to radians
+  const h = (H * Math.PI) / 180;
+  
+  // Convert OKLCH to OKLab
+  const a = C * Math.cos(h);
+  const b = C * Math.sin(h);
+  
+  // Convert OKLab to linear RGB (D65 illuminant)
+  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
+  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
+  const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
+  
+  const l = l_ * l_ * l_;
+  const m = m_ * m_ * m_;
+  const s = s_ * s_ * s_;
+  
+  // Linear RGB to sRGB
+  let r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
+  let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
+  let b_val = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
+  
+  // Apply gamma correction for sRGB
+  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
+  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
+  b_val = b_val > 0.0031308 ? 1.055 * Math.pow(b_val, 1 / 2.4) - 0.055 : 12.92 * b_val;
+  
+  // Clamp to 0-255 range
+  return {
+    r: Math.max(0, Math.min(255, r * 255)),
+    g: Math.max(0, Math.min(255, g * 255)),
+    b: Math.max(0, Math.min(255, b_val * 255))
+  };
+}
 
 /**
  * Animated cosine-terrain renderer using Three.js.
@@ -224,6 +264,75 @@ const DEFAULT_SETTINGS: {
 };
 
 const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, variant = 'raw', settings, ...flat }) => {
+  
+  // Track resolved colors to trigger re-renders when themes change
+  const [resolvedColors, setResolvedColors] = useState({ 
+    material: '', 
+    background: '',
+    timestamp: Date.now()
+  });
+  
+  // Helper to resolve CSS custom properties to actual color values
+  const resolveCSSColor = (color: string | number | undefined): string | number => {    
+    if (typeof color !== 'string') {
+      return color || 0x90ffc0;
+    }
+    
+    if (!color.startsWith('var(')) {
+      return color;
+    }
+    
+    // Extract the CSS variable name
+    const varName = color.slice(4, -1); // Remove 'var(' and ')'
+    
+    // Get computed style from document element
+    if (typeof window !== 'undefined') {
+      const computedStyle = getComputedStyle(document.documentElement);
+      const resolvedValue = computedStyle.getPropertyValue(varName).trim();
+      
+      
+      if (resolvedValue) {
+        // Convert CSS color values to formats Three.js understands
+        // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
+        if (resolvedValue.startsWith('#')) {
+          return resolvedValue;
+        } else if (resolvedValue.startsWith('rgb')) {
+          // Convert rgb(r,g,b) to hex format for Three.js
+          const rgbMatch = resolvedValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1]);
+            const g = parseInt(rgbMatch[2]);
+            const b = parseInt(rgbMatch[3]);
+            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+            return hexColor;
+          }
+        } else if (resolvedValue.startsWith('oklch')) {
+          // Parse oklch and convert to RGB mathematically
+          const oklchMatch = resolvedValue.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
+          if (oklchMatch) {
+            let L = parseFloat(oklchMatch[1]);
+            // Handle percentage values (convert 88.7% to 0.887)
+            if (oklchMatch[1].includes('%')) {
+              L = L / 100;
+            }
+            const C = parseFloat(oklchMatch[2]);
+            const H = parseFloat(oklchMatch[3]);
+            
+            // Convert OKLCH to RGB
+            const rgb = oklchToRgb(L, C, H);
+            const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
+            return hexColor;
+          }
+        }
+        return resolvedValue;
+      } else {
+        return color;
+      }
+    }
+    
+    return color;
+  };
+
   // Normalize grouped settings type for safe access
   const s = (settings || {}) as Partial<{
     camera: CameraSettings;
@@ -333,6 +442,40 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     },
   } as const;
   const mountRef = useRef<HTMLDivElement>(null);
+  
+  // Effect to watch for theme changes and update resolved colors
+  useEffect(() => {
+    const checkColors = () => {
+      if (typeof window === 'undefined') return;
+      
+      const newMaterial = resolveCSSColor(cfg.material.materialColor);
+      const newBackground = resolveCSSColor(cfg.background.backgroundColor);
+      
+      if (newMaterial !== resolvedColors.material || newBackground !== resolvedColors.background) {
+        setResolvedColors({
+          material: String(newMaterial),
+          background: String(newBackground),
+          timestamp: Date.now()
+        });
+      }
+    };
+    
+    // Check immediately and then periodically
+    checkColors();
+    const interval = setInterval(checkColors, 1000);
+    
+    // Listen for storage events (theme changes)
+    const handleStorageChange = () => {
+      setTimeout(checkColors, 100); // Small delay to let DOM update
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
 
   const TILE_RECYCLING_THRESHOLD = 3.5;
   const TILE_BUFFER_DISTANCE = 1.5;
@@ -407,9 +550,11 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     renderer.setPixelRatio(pixelRatio);
     // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
     const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
-    const bgColor = cfg.background.backgroundColor as ColorRepresentation | undefined;
-    if (bgColor !== undefined) {
-      renderer.setClearColor(bgColor, bgAlpha);
+    const resolvedBgColor = resolveCSSColor(cfg.background.backgroundColor);
+    
+    
+    if (resolvedBgColor !== undefined) {
+      renderer.setClearColor(resolvedBgColor as ColorRepresentation, bgAlpha);
     } else {
       renderer.setClearColor(0x000000, bgAlpha);
     }
@@ -441,7 +586,12 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     const createMaterial = () => {
       const finalRenderPreset = cfg.material.renderPreset;
       const isWireframe = finalRenderPreset === 'wireframe';
-      const common = { color: cfg.material.materialColor, wireframe: isWireframe } as const;
+      
+      // Resolve color inside useEffect where DOM is available
+      const resolvedMaterialColor = resolveCSSColor(cfg.material.materialColor);
+      
+      
+      const common = { color: resolvedMaterialColor, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
       const finalMaterialType = cfg.material.materialType;
@@ -748,8 +898,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       });
       material.dispose();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
   const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;
 

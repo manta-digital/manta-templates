@@ -6,8 +6,8 @@ featureRef: features/15-feature.cosine-theming.md
 github: https://github.com/manta-digital/manta-templates/issues/55
 dependencies: [theme-system, ui-core]
 projectState: v0.8.0 - Framework-agnostic UI architecture with theme-aware gradient system established
-status: in-progress
-lastUpdated: 2025-08-30
+status: mostly-complete
+lastUpdated: 2025-08-31
 ---
 
 # Tasks: Cosine Terrain Card Theme-Awareness
@@ -81,14 +81,14 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 **Objective**: Test implementation across all theme variants and refine for optimal appearance
 **Effort**: 3/5
 
-- [ ] Test component with light/dark theme switching
-- [ ] Test across all color palettes (teal, blue, purple, orange, etc.)
-- [ ] Verify wireframe visibility and contrast in all themes
-- [ ] Test custom color overrides work correctly
-- [ ] Check accessibility contrast ratios where applicable  
-- [ ] Adjust intensity/opacity if needed for wireframe clarity
-- [ ] Test component in landing/examples pages with real content
-- [ ] **Success**: Component looks good and functions properly across all themes
+- [x] Test component with light/dark theme switching
+- [x] Test across all color palettes (teal, blue, purple, orange, etc.)
+- [x] Verify wireframe visibility and contrast in all themes
+- [x] Test custom color overrides work correctly
+- [x] Check accessibility contrast ratios where applicable  
+- [x] Adjust intensity/opacity if needed for wireframe clarity
+- [x] Test component in landing/examples pages with real content
+- [x] **Success**: Component looks good and functions properly across all themes
 
 ### Task 6: Documentation and Examples Update
 **Objective**: Update component documentation with new theme-aware behavior  
@@ -106,13 +106,13 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 **Objective**: Copy working implementation to packages/ui-core and verify propagation
 **Effort**: 2/5
 
-- [ ] Copy implemented changes from templates/nextjs to packages/ui-core/src/components/
-- [ ] Verify prop types and interfaces match
-- [ ] Run `pnpm build-ui` to propagate changes to template copies
-- [ ] Test that built version works identically to prototype
-- [ ] Verify no build errors or type issues in ui-core package
-- [ ] Confirm all template/landing usage still works correctly
-- [ ] **Success**: Changes properly promoted to canonical source with verified propagation
+- [x] Copy implemented changes from templates/nextjs to packages/ui-core/src/components/
+- [x] Verify prop types and interfaces match
+- [x] Run `pnpm build-ui` to propagate changes to template copies
+- [x] Test that built version works identically to prototype
+- [x] Verify no build errors or type issues in ui-core package
+- [x] Confirm all template/landing usage still works correctly
+- [x] **Success**: Changes properly promoted to canonical source with verified propagation
 
 ### Task 8: Final Integration Testing
 **Objective**: Comprehensive testing of the complete implementation
@@ -129,11 +129,11 @@ Making the CosineTerrainCard component theme-aware by integrating it with the es
 ## Completion Criteria
 
 All tasks completed with:
-- [ ] CosineTerrainCard responds to theme changes automatically
-- [ ] Custom color override props work correctly
-- [ ] No breaking changes to existing usage
-- [ ] Component works across all theme variants
-- [ ] Changes properly promoted to ui-core canonical source
+- [x] CosineTerrainCard responds to theme changes automatically
+- [x] Custom color override props work correctly
+- [x] No breaking changes to existing usage
+- [x] Component works across all theme variants
+- [x] Changes properly promoted to ui-core canonical source
 - [ ] Documentation updated with new capabilities
 - [ ] GitHub issue #55 can be marked resolved
 
