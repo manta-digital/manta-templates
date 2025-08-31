@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **CosineTerrainCard theme-awareness** - Complete theme integration with CSS custom property support and OKLCH color conversion
+- **FPS meter theme sync** - Performance indicator automatically adapts to component theme colors
+
+### Changed
+- **CosineTerrainCard color system** - Enhanced prop interface to support theme CSS variables alongside existing color formats
+
 ## [0.8.0] - 2025-08-30
 
 ### Added

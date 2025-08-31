@@ -104,6 +104,7 @@ export interface CosineTerrainCardProps {
   cameraFarPlane?: number;
   showTerrainLogs?: boolean;
   // Material / render
+  /** wireframe/material color; supports theme CSS custom properties (e.g. 'var(--color-accent-11)') */
   materialColor?: number | string;
   wireframe?: boolean;
   materialType?: 'basic' | 'standard';
@@ -113,7 +114,7 @@ export interface CosineTerrainCardProps {
   maxPixelRatio?: number;
   // Limits
   maxTilesX?: number;
-  /** renderer clear color; pass 'transparent' via backgroundAlpha */
+  /** renderer clear color; supports theme CSS custom properties (e.g. 'var(--color-background)'); pass 'transparent' via backgroundAlpha */
   backgroundColor?: number | string;
   /** clear alpha 0..1; 0 = transparent */
   backgroundAlpha?: number;
@@ -792,10 +793,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       fpsElement.style.position = 'absolute';
       fpsElement.style.top = '10px';
       fpsElement.style.left = '10px';
-      fpsElement.style.color = '#00ff00';
+      fpsElement.style.color = resolvedColors.material || '#00ff00';
       fpsElement.style.fontFamily = 'monospace';
       fpsElement.style.fontSize = '16px';
-      fpsElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
+      fpsElement.style.backgroundColor = resolvedColors.background ? `${resolvedColors.background}cc` : 'rgba(0,0,0,0.7)';
       fpsElement.style.padding = '5px';
       fpsElement.style.borderRadius = '3px';
       fpsElement.style.zIndex = '1000';

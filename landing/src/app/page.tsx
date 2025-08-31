@@ -302,6 +302,8 @@ export default async function Home() {
             variant="card"
             renderPreset="wireframe"
             materialType="basic"
+            backgroundColor="var(--color-background)"
+            materialColor="var(--color-accent-11)"
           />
         </GridItem>
 
