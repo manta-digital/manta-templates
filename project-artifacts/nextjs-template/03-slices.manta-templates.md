@@ -119,6 +119,22 @@ These slices established the project foundation and are now complete:
   - Automated distribution pipeline
   - Template instantiation validation
 
+#### Slice 16: React Components (Standard HTML Elements) 🆕
+- **Dependencies**: ui-core package (completed)
+- **Scope**: Enable ui-core components to work seamlessly in standard React environments
+- **Key Deliverables**:
+  - Standard video components (StandardBackgroundVideo, StandardVideoPlayer)  
+  - Enhanced component defaults for non-Next.js usage
+  - Framework adapters for Electron and Vite
+  - Comprehensive documentation and examples
+  - Test coverage for standard React environments
+- **Target Environments**: Electron, Vite, Create React App, React Router
+- **Key Features**: 
+  - Background video support without Next.js injection
+  - Zero-configuration usage with standard HTML elements
+  - Framework-agnostic video autoplay handling
+  - Electron-specific link handling optimizations
+
 ## Dependency Graph
 ```
 Slice 01-07 (UI Refactor Foundation) [✅ COMPLETED]
@@ -133,9 +149,9 @@ Slice 09 (Component Parity) [✅ COMPLETED]
 Slice 12 (Testing Infrastructure) [FUTURE]
     ↓
 ┌─ Slice 13 (Astro Template) [FUTURE]
-└─ Slice 14 (React Router Template) [FUTURE]
-    ↓
-Slice 15 (Distribution System) [FUTURE]
+├─ Slice 14 (React Router Template) [FUTURE]  
+├─ Slice 16 (React Components) [🟡 READY TO START]
+└─ Slice 15 (Distribution System) [FUTURE]
 ```
 
 ## Risk Management
