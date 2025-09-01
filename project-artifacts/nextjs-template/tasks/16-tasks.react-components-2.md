@@ -46,7 +46,7 @@ Implementing standard React support for ui-core components by creating templates
 
 #### Implement Hero Section
 - [x] Port hero section with React-specific messaging
-  - [x] Update title to "React Components Template"
+  - [x] Update title to "React Template"
   - [x] Update description to emphasize standard React usage
   - [x] Verify hero section styles render correctly
   - [x] **Success**: Hero section displays React template branding
@@ -226,6 +226,60 @@ Implementing standard React support for ui-core components by creating templates
   - [ ] Test tablet viewport (768px-1199px)
   - [ ] Test mobile viewport (<768px)
   - [ ] **Success**: Responsive design works across all viewports
+
+### Task 6.5: Layout Infrastructure Implementation
+**Objective**: Add missing Header/Footer/ThemeProvider layout components to React template
+**Effort**: 2/5
+**Status**: COMPLETED ✅
+
+#### Create Layout Content Files
+- [x] Create header content file
+  - [x] Create src/content/headerContent.ts with React template navigation
+  - [x] Include Home and Examples links matching React Router structure
+  - [x] Add type definitions for HeaderContent interface
+  - [x] **Success**: Header content ready for React template
+
+- [x] Create footer content file  
+  - [x] Create src/content/footerContent.ts with React-specific content
+  - [x] Include React/Vite/Tailwind technology attribution
+  - [x] Add appropriate footer sections (quickLinks, resources, legal)
+  - [x] **Success**: Footer content configured for React template
+
+- [x] Update content index exports
+  - [x] Add headerContent and footerContent to src/content/index.ts
+  - [x] Ensure proper TypeScript exports for layout content
+  - [x] **Success**: Layout content properly exported
+
+#### Implement Complete Layout Structure
+- [x] Update App.tsx with layout wrapper
+  - [x] Add ThemeProvider wrapper with ui-theme storage key
+  - [x] Add Header component with React Router Link injection
+  - [x] Add Footer component with compact variant and MIT preset
+  - [x] Add proper flex layout structure (header/main/footer)
+  - [x] **Success**: Complete layout infrastructure implemented
+
+- [x] Add theme persistence functionality
+  - [x] Add useEffect for localStorage theme handling
+  - [x] Add system theme detection for initial load
+  - [x] Add proper theme class management on document.documentElement
+  - [x] Match Next.js template theme persistence behavior exactly
+  - [x] **Success**: Theme persistence works identically to Next.js template
+
+#### Validate Layout Integration
+- [x] Test Header component renders with navigation
+  - [x] Verify React Router Link components work in Header
+  - [x] Test navigation between Home and Examples pages
+  - [x] **Success**: Header navigation functional
+
+- [x] Test Footer component renders correctly
+  - [x] Verify footer sections display properly
+  - [x] Test external links open in new tabs
+  - [x] **Success**: Footer displays complete site information
+
+- [x] Test ThemeProvider functionality
+  - [x] Verify theme switching works across all pages
+  - [x] Test theme persistence across page refreshes  
+  - [x] **Success**: Theme system fully functional
 
 ### Task 7: Standard Video Components Creation
 **Objective**: Create framework-agnostic video components for standard React environments

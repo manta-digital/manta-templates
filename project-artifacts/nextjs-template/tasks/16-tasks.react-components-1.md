@@ -214,13 +214,13 @@ Implementing standard React support for ui-core components by creating templates
 #### Port Home Page Content
 - [x] Create homeContent.ts with page-level content
   - [x] Port Next.js home page content to hardcoded objects
-  - [x] Replace "Next.js Starter Template" with "React Components Template"
+  - [x] Replace "Next.js Starter Template" with "React Template"
   - [x] Update hero section messaging for React/Vite context
   - [x] Create homeContent object:
     ```typescript
     export const homeContent = {
       hero: {
-        title: "React Components Template",
+        title: "React Template",
         description: "Standard React template with ui-core components working without injection",
         actions: [
           { label: "View Examples", href: "/examples" }

@@ -1,6 +1,6 @@
 export const homeContent = {
   hero: {
-    title: "React Components Template",
+    title: "React Template",
     description: "Standard React template with ui-core components working without injection",
     subtitle: "Demonstrates framework-agnostic component usage in Vite + React environment",
     actions: [
@@ -36,6 +36,6 @@ export const homeContent = {
 };
 
 export const pageMetadata = {
-  title: "React Components Template | UI-Core Showcase",
+  title: "React Template | UI-Core Showcase",
   description: "Standard React template demonstrating ui-core components working without framework injection in Vite environment."
 };

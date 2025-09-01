@@ -18,7 +18,7 @@ import { StandardBackgroundVideo } from '../lib/ui-core/components/video';
 
 export default function ExamplesPage() {
   return (
-    <main className="min-h-screen p-6 md:p-10">
+    <main className="min-h-screen px-6 pt-0 pb-6 md:px-10 md:pt-0 md:pb-10">
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
         {/* Hero */}
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-2">

@@ -42,3 +42,7 @@ export {
   categories,
   performanceStats 
 } from './technologyContent';
+
+// Layout content
+export { headerContent } from './headerContent';
+export { footerContent } from './footerContent';
