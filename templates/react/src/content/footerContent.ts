@@ -7,6 +7,7 @@ export const footerContent: FooterSections = {
     { label: 'Examples', href: '/examples' }
   ],
   resources: [
+    { label: 'manta-templates', href: 'https://github.com/manta-digital/manta-templates', external: true },
     { label: 'React', href: 'https://reactjs.org', external: true },
     { label: 'Vite', href: 'https://vitejs.dev', external: true },
     { label: 'Tailwind CSS', href: 'https://tailwindcss.com', external: true }
@@ -27,7 +28,7 @@ export const footerContent: FooterSections = {
   },
   copyright: {
     notice: '© 2025 manta.digital. MIT Licensed.',
-    attribution: 'Built with <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">React</a>, <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">Vite</a>, and <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">Tailwind CSS</a>.',
+    attribution: 'Built with <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">React</a>, <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">Vite</a>, and <a href="https://github.com/manta-digital/manta-templates" target="_blank" rel="noopener noreferrer">manta-templates</a>.',
     lastUpdated: 'September 2025'
   }
 };

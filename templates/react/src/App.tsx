@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { ThemeProvider, Footer } from './lib/ui-core'
-import { ReactHeader } from './components/ReactHeader'
+import { ThemeProvider } from './lib/ui-core'
+import { ReactHeader, ReactFooter } from './components'
 import { headerContent, footerContent } from './content'
 import HomePage from './pages/HomePage'
 import ExamplesPage from './pages/ExamplesPage'
@@ -37,7 +37,7 @@ function App() {
               <Route path="/examples" element={<ExamplesPage />} />
             </Routes>
           </main>
-          <Footer
+          <ReactFooter
             variant="compact"
             legalPreset="mit"
             sections={footerContent}
