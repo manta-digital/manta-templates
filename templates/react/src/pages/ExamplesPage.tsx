@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '../lib/ui-core/utils';
 import { 
   BentoLayout,
@@ -15,15 +14,11 @@ import {
   VideoCard
 } from '../lib/ui-core/components/cards';
 import { TechnologyScroller } from '../lib/ui-core/components/ui';
-import { StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core/components/video';
+import { StandardBackgroundVideo } from '../lib/ui-core/components/video';
 import { 
-  reactProjectContent, 
   showcaseProjects, 
-  sampleQuote, 
-  testimonialQuotes,
-  featuredArticle, 
-  relatedArticles,
-  techStack
+  sampleQuote,
+  featuredArticle
 } from '../content';
 
 export default function ExamplesPage() {
