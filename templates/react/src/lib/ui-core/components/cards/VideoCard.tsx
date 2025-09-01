@@ -2,6 +2,7 @@ import React from 'react';
 import { cn } from '../../utils/cn';
 import { BaseCard } from './BaseCard';
 import { VideoContent } from '../../types/content';
+import { StandardBackgroundVideo, StandardVideoPlayer } from '../video';
 
 interface VideoCardProps {
   title?: string;
@@ -31,8 +32,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
   children,
   ImageComponent = 'img',
   LinkComponent = 'a',
-  VideoPlayerComponent,
-  BackgroundVideoComponent,
+  VideoPlayerComponent = StandardVideoPlayer,
+  BackgroundVideoComponent = StandardBackgroundVideo,
 }) => {
   // Use content prop if provided, otherwise fall back to individual props
   const cardTitle = content?.title || title || '';
@@ -43,8 +44,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
   const controls = content?.controls ?? true;
   const poster = content?.poster;
 
-  // Background video mode (requires BackgroundVideoComponent injection)
-  if (finalDisplayMode === 'background' && BackgroundVideoComponent) {
+  // Background video mode (uses StandardBackgroundVideo by default)
+  if (finalDisplayMode === 'background') {
     return (
       <BaseCard className={cn('overflow-hidden h-full relative p-0', className)}>
         <BackgroundVideoComponent
@@ -69,8 +70,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
     );
   }
 
-  // Interactive player mode (requires VideoPlayerComponent injection)
-  if (finalDisplayMode === 'player' && VideoPlayerComponent) {
+  // Interactive player mode (uses StandardVideoPlayer by default)
+  if (finalDisplayMode === 'player') {
     return (
       <BaseCard className={cn('overflow-hidden h-full', className)}>
         <div className="w-full h-full">

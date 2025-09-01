@@ -1,6 +1,6 @@
 import { Container } from '../lib/ui-core/components/layouts'
-import { QuoteCard, ProjectCard } from '../lib/ui-core/components/cards'
-import { homeContent, sampleQuote, reactProjectContent } from '../content'
+import { QuoteCard } from '../lib/ui-core/components/cards'
+import { sampleQuote } from '../content'
 
 export default function HomePage() {
   return (

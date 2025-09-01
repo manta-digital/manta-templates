@@ -14,7 +14,6 @@ import {
   TechnologyScroller,
   VideoCard
 } from '../lib/ui-core';
-import { StandardBackgroundVideo } from '../lib/ui-core/components/video';
 
 export default function ExamplesPage() {
   return (
@@ -58,13 +57,12 @@ export default function ExamplesPage() {
               }}
             />
 
-            {/* Background video sample using ui-core VideoCard with StandardBackgroundVideo */}
+            {/* Background video sample using ui-core VideoCard (no injection needed!) */}
             <VideoCard
               className="h-full"
               displayMode="background"
               videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
               thumbnailUrl="/image/blog/blog-sample-image.png"
-              BackgroundVideoComponent={StandardBackgroundVideo}
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
