@@ -1,0 +1,136 @@
+/* UI-Core Styles - Tailwind v4 */
+@import "tailwindcss";
+
+/* Import color system in proper order (critical for CSS cascade) */
+@import './radixColors.css';     /* 1. Raw color palettes first */
+@import './semanticColors.css';  /* 2. Semantic mappings second */
+@import './shadcn.css';          /* 3. Design system third */
+@import './components.css';      /* 4. Components & utilities last */
+
+@theme {
+  /* Core design tokens */
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  
+  /* Radius system using CSS variables */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  
+  /* Expose semantic colors as Tailwind utilities */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* Chart colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  /* Sidebar colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Semantic accent system (palette-aware) */
+  --color-accent-1: var(--color-accent-1);
+  --color-accent-2: var(--color-accent-2);
+  --color-accent-3: var(--color-accent-3);
+  --color-accent-4: var(--color-accent-4);
+  --color-accent-5: var(--color-accent-5);
+  --color-accent-6: var(--color-accent-6);
+  --color-accent-7: var(--color-accent-7);
+  --color-accent-8: var(--color-accent-8);
+  --color-accent-9: var(--color-accent-9);
+  --color-accent-10: var(--color-accent-10);
+  --color-accent-11: var(--color-accent-11);
+  --color-accent-12: var(--color-accent-12);
+  
+  /* Semantic neutral system (theme-aware) */
+  --color-neutral-1: var(--color-neutral-1);
+  --color-neutral-2: var(--color-neutral-2);
+  --color-neutral-3: var(--color-neutral-3);
+  --color-neutral-4: var(--color-neutral-4);
+  --color-neutral-5: var(--color-neutral-5);
+  --color-neutral-6: var(--color-neutral-6);
+  --color-neutral-7: var(--color-neutral-7);
+  --color-neutral-8: var(--color-neutral-8);
+  --color-neutral-9: var(--color-neutral-9);
+  --color-neutral-10: var(--color-neutral-10);
+  --color-neutral-11: var(--color-neutral-11);
+  --color-neutral-12: var(--color-neutral-12);
+  
+  /* Semantic neutral alpha system */
+  --color-neutral-a1: var(--color-neutral-a1);
+  --color-neutral-a2: var(--color-neutral-a2);
+  --color-neutral-a3: var(--color-neutral-a3);
+  --color-neutral-a4: var(--color-neutral-a4);
+  --color-neutral-a5: var(--color-neutral-a5);
+  --color-neutral-a6: var(--color-neutral-a6);
+  --color-neutral-a7: var(--color-neutral-a7);
+  --color-neutral-a8: var(--color-neutral-a8);
+  --color-neutral-a9: var(--color-neutral-a9);
+  --color-neutral-a10: var(--color-neutral-a10);
+  --color-neutral-a11: var(--color-neutral-a11);
+  --color-neutral-a12: var(--color-neutral-a12);
+  
+  /* Special semantic colors */
+  --color-neutral-contrast: var(--color-neutral-contrast);
+  --color-neutral-surface: var(--color-neutral-surface);
+  --color-neutral-indicator: var(--color-neutral-indicator);
+  --color-neutral-track: var(--color-neutral-track);
+  
+  /* Neutral gray system */
+  --color-gray-1: var(--gray-1);
+  --color-gray-2: var(--gray-2);
+  --color-gray-3: var(--gray-3);
+  --color-gray-4: var(--gray-4);
+  --color-gray-5: var(--gray-5);
+  --color-gray-6: var(--gray-6);
+  --color-gray-7: var(--gray-7);
+  --color-gray-8: var(--gray-8);
+  --color-gray-9: var(--gray-9);
+  --color-gray-10: var(--gray-10);
+  --color-gray-11: var(--gray-11);
+  --color-gray-12: var(--gray-12);
+}
+
+/* Theme Registry System - Controls which themes appear in UI */
+:root {
+  /* Available themes (comma-separated list) */
+  --ui-themes: "teal,mintteal,blue,purple,orange";
+  
+  /* Theme display names (semicolon-separated) - emojis available but stripped for clean UI */
+  --ui-theme-names: "🌊 Teal;🌿 Mint Teal;💙 Blue;💜 Purple;🔥 Orange";
+  
+  /* Default theme selection */
+  --ui-default-theme: "teal";
+  
+  /* User themes can be added by templates */
+  --user-themes: "";
+  --user-theme-names: "";
+}
