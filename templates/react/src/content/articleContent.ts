@@ -11,7 +11,7 @@ export const featuredArticle = {
   publishedAt: "2024-12-15",
   readingTime: "8 min read",
   tags: ["React", "Architecture", "Components", "Framework Agnostic"],
-  image: "/images/articles/framework-agnostic-components.jpg",
+  image: "/image/blog/blog-sample-image.png",
   category: "Tutorial",
   slug: "building-framework-agnostic-react-components",
   featured: true,

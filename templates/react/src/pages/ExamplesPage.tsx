@@ -118,10 +118,9 @@ export default function ExamplesPage() {
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
             <TechnologyScroller items={[
-              { name: 'React', svg: '/assets/icons/tech/react.svg', invertOnDark: true },
-              { name: 'TypeScript', svg: '/assets/icons/tech/typescript.svg', color: '#3178C6', colorDark: '#3178C6' },
-              { name: 'Vite', svg: '/assets/icons/tech/nextdotjs.svg', color: '#646CFF', colorDark: '#646CFF' },
-              { name: 'Tailwind CSS', svg: '/assets/icons/tech/tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+              { name: 'React', svg: 'react.svg', invertOnDark: true },
+              { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+              { name: 'TypeScript', svg: 'typescript.svg', invertOnDark: true },
             ]}
             speed="fast"
             direction="left"
