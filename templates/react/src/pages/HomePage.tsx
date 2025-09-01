@@ -1,40 +1,57 @@
 import { Container } from '../lib/ui-core/components/layouts'
+import { QuoteCard, ProjectCard } from '../lib/ui-core/components/cards'
+import { homeContent, sampleQuote, reactProjectContent } from '../content'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
-      <Container>
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            React Components Template
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Welcome to the React Components Template with ui-core integration
-          </p>
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              ✅ Container Component Working
-            </h2>
-            <p className="text-gray-600">
-              This content is wrapped in a ui-core Container component, which provides:
-            </p>
-            <ul className="text-left mt-4 space-y-2 text-gray-700">
-              <li>• Responsive horizontal centering (mx-auto)</li>
-              <li>• Responsive padding (px-4 sm:px-6 lg:px-8)</li> 
-              <li>• Maximum width constraint (max-w-7xl)</li>
-              <li>• Standard layout container functionality</li>
-            </ul>
-          </div>
-          <div className="mt-8">
-            <a 
-              href="/examples" 
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              View Examples →
-            </a>
-          </div>
+    <>
+      {/* Hero */}
+      <Container className="pt-20 pb-10 text-center space-y-4">
+        <h1 className="text-5xl font-bold">{homeContent.hero.title}</h1>
+        <p className="text-muted-foreground text-lg">
+          {homeContent.hero.description}
+        </p>
+        <p className="text-muted-foreground">
+          {homeContent.hero.subtitle}
+        </p>
+        <div className="pt-4">
+          <a 
+            href={homeContent.hero.actions[0].href}
+            className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            {homeContent.hero.actions[0].label} →
+          </a>
         </div>
       </Container>
-    </div>
+
+      {/* Features Grid */}
+      <Container className="py-10">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {homeContent.features.map((feature, index) => (
+            <div key={index} className="text-center">
+              <div className="text-4xl mb-4">
+                {feature.icon === 'zap' && '⚡'}
+                {feature.icon === 'layers' && '📚'}
+                {feature.icon === 'check-circle' && '✅'}
+              </div>
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+
+      {/* Sample Components */}
+      <Container className="pb-20 space-y-8">
+        {/* Project Card Demo */}
+        <div>
+          <h2 className="text-2xl font-bold mb-6 text-center">Component Showcase</h2>
+          <ProjectCard content={reactProjectContent} />
+        </div>
+
+        {/* Quote Card Demo */}
+        <QuoteCard content={sampleQuote} />
+      </Container>
+    </>
   )
 }

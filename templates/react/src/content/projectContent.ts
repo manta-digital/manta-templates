@@ -37,8 +37,7 @@ export const reactProjectContent = {
     {
       label: "View Source",
       href: "https://github.com/manta-digital/manta-templates/tree/main/templates/react",
-      variant: "ghost" as const,
-      external: true
+      variant: "secondary" as const
     }
   ],
   status: "active" as const,
