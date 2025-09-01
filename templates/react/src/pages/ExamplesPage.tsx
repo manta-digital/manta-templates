@@ -1,4 +1,5 @@
-import { Container, StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core'
+import { Container } from '../lib/ui-core/components/layouts'
+import { StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core/components/video'
 
 export default function ExamplesPage() {
   return (

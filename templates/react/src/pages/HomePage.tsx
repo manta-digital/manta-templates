@@ -1,4 +1,4 @@
-import { Container } from '../lib/ui-core'
+import { Container } from '../lib/ui-core/components/layouts'
 
 export default function HomePage() {
   return (
