@@ -1,117 +1,185 @@
-import { Container } from '../lib/ui-core/components/layouts'
-import { StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core/components/video'
+import React from 'react';
+import { cn } from '../lib/ui-core/utils';
+import { 
+  BentoLayout,
+  GridItem,
+  CardCarousel
+} from '../lib/ui-core/components/layouts';
+import { 
+  GradientCard,
+  ArticleCard,
+  ProjectCard,
+  BaseCard,
+  QuoteCard,
+  CosineTerrainCard,
+  VideoCard
+} from '../lib/ui-core/components/cards';
+import { TechnologyScroller } from '../lib/ui-core/components/ui';
+import { StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core/components/video';
+import { 
+  reactProjectContent, 
+  showcaseProjects, 
+  sampleQuote, 
+  testimonialQuotes,
+  featuredArticle, 
+  relatedArticles,
+  techStack
+} from '../content';
 
 export default function ExamplesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 py-12">
-      <Container>
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            UI-Core Examples
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            This page will showcase all ui-core components in standard React
-          </p>
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-              🚧 Coming Soon (Task 5)
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6 text-left">
-              <div>
-                <h3 className="font-semibold text-lg mb-3">Layout Components</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• BentoLayout with GridItems</li>
-                  <li>• Container (already working!)</li>
-                  <li>• CardCarousel</li>
-                  <li>• GridContainer</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-3">Card Components</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• GradientCard with theme colors</li>
-                  <li>• ProjectCard with content data</li>
-                  <li>• ArticleCard with img defaults</li>
-                  <li>• QuoteCard with styling</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-3">UI Components</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• TechnologyScroller</li>
-                  <li>• ThemeToggle</li>
-                  <li>• ColorSelector</li>
-                  <li>• CosineTerrainCard (3D)</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-3">Coming in Task 7-9</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• VideoCard with StandardBackgroundVideo</li>
-                  <li>• Background video autoplay</li>
-                  <li>• Cross-browser video support</li>
-                  <li>• Framework-agnostic video players</li>
-                </ul>
-              </div>
+    <main className="min-h-screen p-6 md:p-10">
+      <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
+        {/* Hero */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-2 xl:row-span-2">
+          <GradientCard 
+            className="h-full rounded-lg" 
+            title="React Template" 
+            description="UI-core components working without injection" 
+            from="accent-7" 
+            to="accent-10" 
+          />
+        </GridItem>
+
+        {/* Project Card Carousel */}
+        <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-2">
+          <CardCarousel 
+            className="h-full" 
+            itemClassName="h-full" 
+            visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} 
+            autoPlay={6000} 
+            infinite 
+            showArrows 
+            showDots={false} 
+            showControls={false}
+          >
+            <ArticleCard 
+              className="h-full" 
+              title="Framework Agnostic Components" 
+              subtitle="React Template" 
+              description="Testing standard HTML elements without Next.js injection." 
+              image="/images/blog/react-components.png" 
+              href="/blog/framework-agnostic-components"
+            />
+            <ProjectCard
+              className="h-full"
+              content={{
+                title: 'UI-Core Showcase',
+                description: 'Components using standard HTML defaults',
+                techStack: ['React', 'Vite', 'Standard HTML'],
+                image: '/images/projects/ui-core-showcase.png',
+                repoUrl: 'https://github.com/manta-templates/react',
+                actions: [
+                  { label: 'View Demo', href: '/examples', variant: 'primary' }
+                ]
+              }}
+            />
+          </CardCarousel>
+        </GridItem>
+
+        {/* Video Card with Background Video */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4 xl:col-span-2 xl:row-span-2">
+          <VideoCard
+            className="h-full"
+            displayMode="background"
+            videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            title="Background Video Demo"
+            overlay={true}
+            BackgroundVideoComponent={StandardBackgroundVideo}
+            content={{
+              title: "Background Video Mode",
+              description: "StandardBackgroundVideo working without Next.js injection",
+              videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              thumbnailUrl: "/images/video-thumbnails/bigbuckbunny.jpg",
+              displayMode: "background" as const,
+              autoplay: true
+            }}
+          />
+        </GridItem>
+
+        {/* Quote Card */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4 xl:col-span-3">
+          <QuoteCard content={sampleQuote} className="h-full" />
+        </GridItem>
+
+        {/* Article Card */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4 xl:col-span-3">
+          <ArticleCard 
+            className="h-full"
+            title={featuredArticle.title}
+            subtitle={featuredArticle.category}
+            description={featuredArticle.description}
+            image={featuredArticle.image}
+            href={`/blog/${featuredArticle.slug}`}
+          />
+        </GridItem>
+
+        {/* Technology Scroller */}
+        <GridItem className="col-span-8">
+          <div className="bg-card rounded-lg p-6 h-full">
+            <h3 className="text-lg font-semibold mb-4 text-center">Technology Stack</h3>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {techStack.slice(0, 4).map((tech, index) => (
+                <div key={index} className="flex items-center gap-2 bg-muted rounded-lg px-4 py-2">
+                  <span className="text-2xl">
+                    {tech.name === 'React' && '⚛️'}
+                    {tech.name === 'TypeScript' && '🔷'}
+                    {tech.name === 'Vite' && '⚡'}
+                    {tech.name === 'Tailwind CSS' && '🎨'}
+                  </span>
+                  <div>
+                    <div className="font-semibold text-sm">{tech.name}</div>
+                    <div className="text-xs text-muted-foreground">v{tech.version}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          
-          {/* Video Components Demo */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-              🎬 Video Components Demo
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Background Video Example */}
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="font-semibold text-lg mb-3">StandardBackgroundVideo</h3>
-                <div className="w-full h-48 bg-gray-100 rounded-lg overflow-hidden relative">
-                  <StandardBackgroundVideo
-                    src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                    autoplay={true}
-                    className="rounded-lg"
-                  >
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <h4 className="text-lg font-semibold">Background Video Mode</h4>
-                        <p className="text-sm opacity-90">Autoplay, looped, muted</p>
-                      </div>
-                    </div>
-                  </StandardBackgroundVideo>
-                </div>
-                <p className="text-sm text-gray-600 mt-3">
-                  ✅ Framework-agnostic background video with autoplay handling
-                </p>
-              </div>
-              
-              {/* Video Player Example */}
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="font-semibold text-lg mb-3">StandardVideoPlayer</h3>
-                <div className="w-full h-48 bg-gray-900 rounded-lg overflow-hidden">
-                  <StandardVideoPlayer
-                    url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-                    title="Sample Video"
-                    controls={true}
-                    className="rounded-lg"
-                  />
-                </div>
-                <p className="text-sm text-gray-600 mt-3">
-                  ✅ Custom video player with seek bar, time display, and controls
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-8">
-            <a 
-              href="/" 
-              className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
-            >
-              ← Back to Home
-            </a>
-          </div>
-        </div>
-      </Container>
-    </div>
+        </GridItem>
+
+        {/* Additional Project Cards */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
+          <ProjectCard
+            className="h-full"
+            content={showcaseProjects[0]}
+          />
+        </GridItem>
+
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
+          <ProjectCard
+            className="h-full"
+            content={showcaseProjects[1]}
+          />
+        </GridItem>
+
+        {/* CosineTerrainCard for 3D demonstration */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
+          <CosineTerrainCard 
+            className="h-full"
+            variant="card"
+            speed={2}
+            cameraHeight={3}
+          />
+        </GridItem>
+
+        {/* VideoCard in player mode */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
+          <VideoCard
+            className="h-full"
+            displayMode="player"
+            videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+            title="Video Player Demo"
+            VideoPlayerComponent={StandardVideoPlayer}
+            content={{
+              title: "Video Player Mode",
+              description: "StandardVideoPlayer with custom controls",
+              videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+              displayMode: "player" as const,
+              controls: true
+            }}
+          />
+        </GridItem>
+      </BentoLayout>
+    </main>
   )
 }
