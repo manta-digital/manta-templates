@@ -1,69 +1,49 @@
-# React + TypeScript + Vite
+# React Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application using Vite and TypeScript that demonstrates the ui-core component library. The components work without framework-specific injection - they use standard HTML elements by default but can be customized for different frameworks like Next.js.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open http://localhost:5173. Build with `pnpm build`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Components
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The component library lives in `src/lib/ui-core/`. These are copied from the main `packages/ui-core` package. You get cards, layouts, themes, and interactive components that work in any React app.
+
+To use a component, just import it:
+
+```typescript
+import { ArticleCard, ProjectCard } from './lib/ui-core';
+
+<ArticleCard title="Title" image="/image.jpg" href="/article" />
+<ProjectCard content={projectData} />
 ```
+
+The components default to standard HTML elements (`<img>`, `<a>`, etc.) so they work without any setup. For React Router navigation, use the adapter components in `src/components/` that handle the href→to conversion.
+
+To add your own components, put them in `src/components/` or modify the ui-core files directly.
+
+## Themes
+
+The theme system uses CSS custom properties. Colors are defined as CSS variables like `--color-background`, `--color-foreground`, etc. When you switch themes, these variables change.
+
+To add a new color theme:
+
+1. Edit `src/index.css` and add new theme classes:
+```css
+.purple-theme {
+  --color-background: #2d1b47;
+  --color-foreground: #e2d9f0;
+  --color-accent-9: #8b5cf6;
+  /* ... other color variables */
+}
+```
+
+2. Add the theme option to the ThemeProvider or ColorSelector component.
+
+The theme system automatically applies to all components that use the CSS custom properties. Check the existing light/dark themes in `index.css` to see all the available color variables.
