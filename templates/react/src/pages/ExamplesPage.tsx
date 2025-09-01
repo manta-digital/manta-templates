@@ -115,26 +115,18 @@ export default function ExamplesPage() {
         </GridItem>
 
         {/* Technology Scroller */}
-        <GridItem className="col-span-8">
-          <div className="bg-card rounded-lg p-6 h-full">
-            <h3 className="text-lg font-semibold mb-4 text-center">Technology Stack</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              {techStack.slice(0, 4).map((tech, index) => (
-                <div key={index} className="flex items-center gap-2 bg-muted rounded-lg px-4 py-2">
-                  <span className="text-2xl">
-                    {tech.name === 'React' && '⚛️'}
-                    {tech.name === 'TypeScript' && '🔷'}
-                    {tech.name === 'Vite' && '⚡'}
-                    {tech.name === 'Tailwind CSS' && '🎨'}
-                  </span>
-                  <div>
-                    <div className="font-semibold text-sm">{tech.name}</div>
-                    <div className="text-xs text-muted-foreground">v{tech.version}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+          <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
+            <TechnologyScroller items={[
+              { name: 'React', svg: '/assets/icons/tech/react.svg', invertOnDark: true },
+              { name: 'TypeScript', svg: '/assets/icons/tech/typescript.svg', color: '#3178C6', colorDark: '#3178C6' },
+              { name: 'Vite', svg: '/assets/icons/tech/nextdotjs.svg', color: '#646CFF', colorDark: '#646CFF' },
+              { name: 'Tailwind CSS', svg: '/assets/icons/tech/tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+            ]}
+            speed="fast"
+            direction="left"
+            />
+          </BaseCard>
         </GridItem>
 
         {/* Additional Project Cards */}
@@ -153,29 +145,32 @@ export default function ExamplesPage() {
         </GridItem>
 
         {/* CosineTerrainCard for 3D demonstration */}
-        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
+        <GridItem className="col-span-8 md:col-span-8 md:row-span-2 lg:col-span-5 lg:row-span-1">
           <CosineTerrainCard 
-            className="h-full"
-            variant="card"
+            className="h-full" 
+            variant="card" 
+            renderPreset="wireframe" 
+            materialType="basic"
             speed={2}
             cameraHeight={3}
           />
         </GridItem>
 
-        {/* VideoCard in player mode */}
+        {/* VideoCard in background mode */}
         <GridItem className="col-span-8 md:col-span-4 lg:col-span-4">
           <VideoCard
             className="h-full"
-            displayMode="player"
+            displayMode="background"
             videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-            title="Video Player Demo"
-            VideoPlayerComponent={StandardVideoPlayer}
+            title="Second Background Video"
+            overlay={true}
+            BackgroundVideoComponent={StandardBackgroundVideo}
             content={{
-              title: "Video Player Mode",
-              description: "StandardVideoPlayer with custom controls",
+              title: "Another Background Video",
+              description: "Second StandardBackgroundVideo demonstration",
               videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-              displayMode: "player" as const,
-              controls: true
+              displayMode: "background" as const,
+              autoplay: true
             }}
           />
         </GridItem>
