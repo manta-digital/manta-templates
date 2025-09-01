@@ -9,6 +9,7 @@ export * from './components/primitives';
 export * from './components/headers';
 export * from './components/footers';
 export * from './components/overlays';
+export * from './components/video';
 
 // Utilities
 export * from './utils';

@@ -1,4 +1,4 @@
-import { Container } from '../lib/ui-core'
+import { Container, StandardBackgroundVideo, StandardVideoPlayer } from '../lib/ui-core'
 
 export default function ExamplesPage() {
   return (
@@ -54,6 +54,53 @@ export default function ExamplesPage() {
               </div>
             </div>
           </div>
+          
+          {/* Video Components Demo */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+              🎬 Video Components Demo
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Background Video Example */}
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="font-semibold text-lg mb-3">StandardBackgroundVideo</h3>
+                <div className="w-full h-48 bg-gray-100 rounded-lg overflow-hidden relative">
+                  <StandardBackgroundVideo
+                    src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    autoplay={true}
+                    className="rounded-lg"
+                  >
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <h4 className="text-lg font-semibold">Background Video Mode</h4>
+                        <p className="text-sm opacity-90">Autoplay, looped, muted</p>
+                      </div>
+                    </div>
+                  </StandardBackgroundVideo>
+                </div>
+                <p className="text-sm text-gray-600 mt-3">
+                  ✅ Framework-agnostic background video with autoplay handling
+                </p>
+              </div>
+              
+              {/* Video Player Example */}
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="font-semibold text-lg mb-3">StandardVideoPlayer</h3>
+                <div className="w-full h-48 bg-gray-900 rounded-lg overflow-hidden">
+                  <StandardVideoPlayer
+                    url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+                    title="Sample Video"
+                    controls={true}
+                    className="rounded-lg"
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-3">
+                  ✅ Custom video player with seek bar, time display, and controls
+                </p>
+              </div>
+            </div>
+          </div>
+          
           <div className="mt-8">
             <a 
               href="/" 
