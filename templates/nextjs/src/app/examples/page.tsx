@@ -55,6 +55,7 @@ export default function ExamplesPage() {
                 height: 400
               }}
               content={{
+                type: 'project',
                 title: 'Semantic Colors',
                 description: 'Cards using accent and foreground tokens',
                 techStack: ['Next.js', 'Tailwind v4', 'Radix'],

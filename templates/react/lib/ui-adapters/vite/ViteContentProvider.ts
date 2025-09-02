@@ -3,31 +3,26 @@ import type { ContentEngine, ContentResult, ContentFilters } from '@/lib/ui-core
 export class ViteContentProvider implements ContentEngine {
   private contentCache = new Map<string, ContentResult<any>>();
   private inflightRequests = new Map<string, Promise<ContentResult<any>>>();
-  
-  // CRITICAL: Static import.meta.glob for Vite build-time analysis
-  private modules = import.meta.glob('@manta-templates/content/**/*.md', { eager: false });
+  private modules: Record<string, () => Promise<any>>;
 
   constructor() {
-    const moduleKeys = Object.keys(this.modules);
-    console.log('ViteContentProvider: Initialized with', moduleKeys.length, 'content modules');
+    // CRITICAL: Configure import.meta.glob without 'as: raw' to get precompiled ESM modules
+    try {
+      if (typeof import.meta !== 'undefined' && import.meta.glob) {
+        this.modules = import.meta.glob('@manta-templates/content/**/*.md', { eager: false });
+        console.log('ViteContentProvider: Successfully initialized with', Object.keys(this.modules).length, 'content files');
+      } else {
+        console.error('ViteContentProvider: import.meta.glob not available - content loading will fail');
+        this.modules = {};
+      }
+    } catch (error) {
+      console.error('ViteContentProvider: Failed to initialize import.meta.glob:', error);
+      this.modules = {};
+    }
   }
 
   // Generate consistent key for module lookup
   private keyFor(slug: string): string {
-    // The actual keys from import.meta.glob might have different format
-    // Try both potential formats
-    const potentialKeys = [
-      `@manta-templates/content/${slug}.md`,
-      `/content/${slug}.md`
-    ];
-    
-    for (const key of potentialKeys) {
-      if (this.modules[key]) {
-        return key;
-      }
-    }
-    
-    // If neither format works, return the expected format for error reporting
     return `@manta-templates/content/${slug}.md`;
   }
 
@@ -72,17 +67,7 @@ export class ViteContentProvider implements ContentEngine {
   async loadContentCollection<T = Record<string, any>>(filters?: ContentFilters): Promise<ContentResult<T>[]> {
     // Load all content using static analysis
     const allSlugs = Object.keys(this.modules)
-      .map(key => {
-        // Handle both possible key formats
-        if (key.startsWith('@manta-templates/content/')) {
-          return key.replace('@manta-templates/content/', '').replace('.md', '');
-        } else if (key.startsWith('/content/')) {
-          return key.replace('/content/', '').replace('.md', '');
-        } else {
-          // Fallback: remove any leading slash and .md extension
-          return key.replace(/^\//, '').replace('.md', '');
-        }
-      });
+      .map(key => key.replace('@manta-templates/content/', '').replace('.md', ''));
     
     const results = await Promise.all(
       allSlugs.map(slug => this.loadContent<T>(slug))
