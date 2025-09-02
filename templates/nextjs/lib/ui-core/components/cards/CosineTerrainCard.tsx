@@ -515,6 +515,34 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     };
   }, [cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
 
+  // Separate useEffect to update Three.js objects when resolved colors change
+  // This needs access to the Three.js objects created in the main useEffect
+  const materialRef = useRef<MeshBasicMaterial | MeshStandardMaterial | null>(null);
+  const rendererRef = useRef<WebGLRenderer | null>(null);
+  const backgroundAlphaRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (materialRef.current && rendererRef.current) {
+      // Update material color
+      const materialColorToUse = resolvedColors.material || resolveCSSColor(cfg.material.materialColor);
+      if (materialColorToUse) {
+        materialRef.current.color.set(materialColorToUse as ColorRepresentation);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🔄 Updated Three.js material color:', materialColorToUse);
+        }
+      }
+
+      // Update renderer background
+      const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
+      if (backgroundColorToUse && backgroundColorToUse !== '' && backgroundColorToUse !== 'undefined') {
+        rendererRef.current.setClearColor(backgroundColorToUse as ColorRepresentation, backgroundAlphaRef.current);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🔄 Updated Three.js renderer background:', backgroundColorToUse);
+        }
+      }
+    }
+  }, [resolvedColors.timestamp, cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
+
   const TILE_RECYCLING_THRESHOLD = 3.5;
   const TILE_BUFFER_DISTANCE = 1.5;
   const GAP_DETECTION_ENABLED = false;
@@ -591,6 +619,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     renderer.setPixelRatio(pixelRatio);
     // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
     const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
+    backgroundAlphaRef.current = bgAlpha;
     
     // Use resolved background color from state (already processed by color-watching useEffect)
     const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
@@ -615,11 +644,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     if (backgroundColorToUse && backgroundColorToUse !== '' && backgroundColorToUse !== 'undefined') {
       renderer.setClearColor(backgroundColorToUse as ColorRepresentation, bgAlpha);
     } else {
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('🎮 Using fallback background color');
-      }
       renderer.setClearColor(0x000000, bgAlpha);
     }
+    rendererRef.current = renderer;
+    
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
@@ -687,6 +715,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     };
 
     const material = createMaterial();
+    materialRef.current = material;
     const terrainTiles: Mesh[] = [];
 
     const detectAndFillGaps = () => {
@@ -975,6 +1004,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
         tile.geometry.dispose();
       });
       material.dispose();
+      // Clear refs
+      materialRef.current = null;
+      rendererRef.current = null;
     };
   }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
