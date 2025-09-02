@@ -3,7 +3,7 @@ type: project
 title: Next.js Template
 description: A comprehensive Next.js template with modern development practices, including TypeScript, Tailwind CSS, and advanced component patterns.
 techStack: ["Next.js", "TypeScript", "Tailwind CSS", "React"]
-image: "/images/projects/nextjs-template.webp"
+image: "/image/blog/blog-sample-image.png"
 repoUrl: "https://github.com/manta-templates/nextjs-template"
 liveUrl: "https://nextjs-template.manta-templates.dev"
 features:
@@ -22,7 +22,7 @@ features:
 actions:
   - label: "View Demo"
     href: "https://nextjs-template.manta-templates.dev"
-    variant: "default"
+    variant: "primary"
   - label: "Source Code"
     href: "https://github.com/manta-templates/nextjs-template"
     variant: "outline"

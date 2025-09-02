@@ -3,12 +3,22 @@ import type { ContentEngine, ContentResult, ContentFilters } from '@manta-templa
 export class ViteContentProvider implements ContentEngine {
   private contentCache = new Map<string, ContentResult<any>>();
   private inflightRequests = new Map<string, Promise<ContentResult<any>>>();
-
-  // CRITICAL: Configure import.meta.glob without 'as: raw' to get precompiled ESM modules
-  private modules = import.meta.glob('@manta-templates/content/**/*.md', { eager: false });
+  private modules: Record<string, () => Promise<any>>;
 
   constructor() {
-    // Provider initialization
+    // CRITICAL: Configure import.meta.glob without 'as: raw' to get precompiled ESM modules
+    try {
+      if (typeof import.meta !== 'undefined' && import.meta.glob) {
+        this.modules = import.meta.glob('@manta-templates/content/**/*.md', { eager: false });
+        console.log('ViteContentProvider: Successfully initialized with', Object.keys(this.modules).length, 'content files');
+      } else {
+        console.error('ViteContentProvider: import.meta.glob not available - content loading will fail');
+        this.modules = {};
+      }
+    } catch (error) {
+      console.error('ViteContentProvider: Failed to initialize import.meta.glob:', error);
+      this.modules = {};
+    }
   }
 
   // Generate consistent key for module lookup

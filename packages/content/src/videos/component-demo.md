@@ -2,9 +2,9 @@
 type: video
 title: Interactive Component Showcase
 description: Comprehensive walkthrough of ui-core components, demonstrating theming, interactions, and responsive behavior across different screen sizes.
-thumbnail: "/images/videos/component-demo-thumbnail.webp"
-videoUrl: "https://video.manta-templates.dev/component-demo.mp4"
-displayMode: "player"
+thumbnail: "/image/blog/blog-sample-image.png"
+videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+displayMode: "background"
 autoplay: false
 loop: false
 ---

@@ -494,28 +494,28 @@ export default compiled;`;
   - [x] Success: Content provider singleton configured
 
 #### Replace Hardcoded Content in HomePage
-- [ ] Update HomePage component to use content hooks
-  - [ ] Import content hooks and provider:
+- [x] Update HomePage component to use content hooks
+  - [x] Import content hooks and provider:
     ```typescript
     import { useContent, useContentCollection } from '@manta-templates/ui-core/content/hooks';
     import { contentProvider } from '../lib/content';
     import type { ProjectContent } from '@manta-templates/ui-core/content/schemas';
     ```
-  - [ ] Replace hardcoded project content:
+  - [x] Replace hardcoded project content:
     ```typescript
     const { content: projectContent, loading, error } = useContent<ProjectContent>(
       'projects/react-template', 
       contentProvider
     );
     ```
-  - [ ] Add loading and error states:
+  - [x] Add loading and error states:
     ```typescript
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     if (!projectContent) return <div>No content found</div>;
     ```
-  - [ ] Update component to use `projectContent.frontmatter`
-  - [ ] Success: HomePage uses markdown-driven content
+  - [x] Update component to use `projectContent.frontmatter`
+  - [x] Success: HomePage uses markdown-driven content
 
 #### Replace Hardcoded Content in ExamplesPage
 - [ ] Update ExamplesPage component for multiple content types

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { cn } from '../lib/ui-core/utils';
 import { 
   BentoLayout,
@@ -14,8 +14,58 @@ import {
   TechnologyScroller,
   VideoCard
 } from '../lib/ui-core';
+import { useContentCollection } from '../lib/ui-core/content/hooks';
+import { contentProvider } from '../lib/content';
+import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content/schemas';
 
 export default function ExamplesPage() {
+  // Memoize filter objects to prevent infinite re-renders
+  const projectFilters = useMemo(() => ({ type: 'project' as const }), []);
+  const quoteFilters = useMemo(() => ({ type: 'quote' as const }), []);
+  const videoFilters = useMemo(() => ({ type: 'video' as const }), []);
+
+  // Load content collections with memoized filters
+  const { content: projects, loading: projectsLoading, error: projectsError } = useContentCollection<ProjectContent>(
+    projectFilters, 
+    contentProvider
+  );
+
+  const { content: quotes, loading: quotesLoading, error: quotesError } = useContentCollection<QuoteContent>(
+    quoteFilters, 
+    contentProvider
+  );
+
+  const { content: videos, loading: videosLoading, error: videosError } = useContentCollection<VideoContent>(
+    videoFilters, 
+    contentProvider
+  );
+
+  // Debug states
+  console.log('Content states:', {
+    projects: { data: projects, loading: projectsLoading, error: projectsError },
+    quotes: { data: quotes, loading: quotesLoading, error: quotesError },
+    videos: { data: videos, loading: videosLoading, error: videosError }
+  });
+
+  // Handle errors first
+  if (projectsError) {
+    console.error('Projects error:', projectsError);
+    return <div>Error loading projects: {projectsError.message}</div>;
+  }
+  if (quotesError) {
+    console.error('Quotes error:', quotesError);
+    return <div>Error loading quotes: {quotesError.message}</div>;
+  }
+  if (videosError) {
+    console.error('Videos error:', videosError);
+    return <div>Error loading videos: {videosError.message}</div>;
+  }
+
+  // Handle loading state
+  if (projectsLoading || quotesLoading || videosLoading) {
+    return <div>Loading content...</div>;
+  }
+
   return (
     <main className="min-h-screen px-6 pt-0 pb-6 md:px-10 md:pt-0 md:pb-10">
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
@@ -37,37 +87,34 @@ export default function ExamplesPage() {
               image="/image/blog/blog-sample-image.png" 
               href="/blog/sample-post" 
             />
-            <ProjectCard
-              className="h-full"
-              content={{
-                title: 'Semantic Colors',
-                description: 'Cards using accent and foreground tokens',
-                techStack: ['Next.js', 'Tailwind v4', 'Radix'],
-                image: '/image/blog/blog-sample-image.png',
-                repoUrl: 'https://github.com/manta-templates/semantic-colors',
-                features: [
-                  { label: 'Structured and Customizable Project Phases', icon: 'zap'},
-                  { label: 'AI-driven Task Discovery and Expansion', icon: 'zap', color: 'primary' },
-                  { label: 'Parameterized Prompts', icon: 'zap', color: 'primary' },
-                  { label: 'Automated Code Reviews', icon: 'zap', color: 'primary' },
-                ],
-                actions: [
-                  { label: 'View on GitHub', href: 'https://github.com/ecorkran/ai-project-guide', variant: 'outline' },
-                ],
-              }}
-            />
+            {projects && projects.length > 0 && (
+              <ProjectCard
+                className="h-full"
+                content={{
+                  title: projects[0].frontmatter.title,
+                  description: projects[0].frontmatter.description,
+                  techStack: projects[0].frontmatter.techStack,
+                  image: projects[0].frontmatter.image,
+                  repoUrl: projects[0].frontmatter.repoUrl,
+                  features: projects[0].frontmatter.features,
+                  actions: projects[0].frontmatter.actions,
+                }}
+              />
+            )}
 
             {/* Background video sample using ui-core VideoCard (no injection needed!) */}
-            <VideoCard
-              className="h-full"
-              displayMode="background"
-              videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
-              thumbnailUrl="/image/blog/blog-sample-image.png"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
-              </div>
-            </VideoCard>
+            {videos && videos.length > 0 && (
+              <VideoCard
+                className="h-full"
+                displayMode={videos[0].frontmatter.displayMode}
+                videoUrl={videos[0].frontmatter.videoUrl}
+                thumbnailUrl={videos[0].frontmatter.thumbnail}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-card-foreground text-xl font-semibold">{videos[0].frontmatter.title}</h3>
+                </div>
+              </VideoCard>
+            )}
           </CardCarousel>
         </GridItem>
 
@@ -115,7 +162,12 @@ export default function ExamplesPage() {
 
         {/* Quote */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
+          {quotes && quotes.length > 0 && (
+            <QuoteCard 
+              quote={quotes[0].frontmatter.quote} 
+              author={quotes[0].frontmatter.author} 
+            />
+          )}
         </GridItem>
       </BentoLayout>
     </main>
