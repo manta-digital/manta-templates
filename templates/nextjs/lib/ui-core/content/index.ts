@@ -44,9 +44,13 @@ export {
   ProjectContentSchema,
   QuoteContentSchema,
   VideoContentSchema,
+  ArticleContentSchema,
+  TechnologyContentSchema,
   type ProjectContent,
   type QuoteContent,
-  type VideoContent
+  type VideoContent,
+  type ArticleContent,
+  type TechnologyContent
 } from './schemas';
 
 export { useContent, useContentCollection } from './hooks';

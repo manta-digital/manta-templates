@@ -10,8 +10,6 @@ export * from './quoteContent';
 // Article and blog content
 export * from './articleContent';
 
-// Technology stack and build tool content
-export * from './technologyContent';
 
 // Re-export common content collections for easy usage
 export { 
@@ -36,12 +34,6 @@ export {
   draftArticles 
 } from './articleContent';
 
-export { 
-  techStack,
-  buildTools,
-  categories,
-  performanceStats 
-} from './technologyContent';
 
 // Layout content
 export { headerContent } from './headerContent';

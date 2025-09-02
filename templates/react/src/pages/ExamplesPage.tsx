@@ -12,11 +12,12 @@ import {
   CardCarousel,
   CosineTerrainCard,
   TechnologyScroller,
-  VideoCard
+  VideoCard,
+  AboutCard
 } from '../lib/ui-core';
-import { useContentCollection } from '../lib/ui-core/content/hooks';
+import { useContentCollection, useContent } from '../lib/ui-core/content/hooks';
 import { contentProvider } from '../lib/content';
-import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content';
+import type { ProjectContent, QuoteContent, VideoContent, AboutContent } from '../lib/ui-core/content';
 
 export default function ExamplesPage() {
   // Memoize filter objects to prevent infinite re-renders
@@ -49,6 +50,11 @@ export default function ExamplesPage() {
 
   const { content: articles, loading: articlesLoading } = useContentCollection<any>(
     articleFilters, 
+    contentProvider
+  );
+
+  const { content: aboutContent } = useContent<AboutContent>(
+    'about/sample-profile',
     contentProvider
   );
 
@@ -159,7 +165,36 @@ export default function ExamplesPage() {
           />
         </GridItem>
 
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+        {/* Quote */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4 h-full">
+          {quotes && quotes.length > 0 && (
+            <QuoteCard 
+              className="md:col-span-4 h-full"
+              quote={quotes[0].frontmatter.quote} 
+              author={quotes[0].frontmatter.author} 
+            />
+          )}
+        </GridItem>
+        
+        <GridItem className="col-span-8 row-span-2 md:col-span-4">
+            <GradientCard
+              className="h-full p-0 rounded-lg border-none [&>div:last-child]:h-full [&>div:last-child>div]:h-full [&>div:last-child>div]:p-0"
+              from="accent-9" to="accent-11"
+            >
+              {aboutContent && (
+                <AboutCard
+                  className="h-full bg-transparent text-white border-1 border-white/30"
+                  title={aboutContent.frontmatter.title}
+                  description={aboutContent.frontmatter.description}
+                  avatar={aboutContent.frontmatter.avatar}
+                  socials={aboutContent.frontmatter.socials}
+                  contentHtml={aboutContent.contentHtml}
+                />
+              )}
+            </GradientCard>
+          </GridItem>
+
+          <GridItem className="col-span-8 md:col-span-8 lg:col-span-8">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
             {technologies && technologies.length > 0 && (
               <TechnologyScroller 
@@ -171,15 +206,6 @@ export default function ExamplesPage() {
           </BaseCard>
         </GridItem>
 
-        {/* Quote */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          {quotes && quotes.length > 0 && (
-            <QuoteCard 
-              quote={quotes[0].frontmatter.quote} 
-              author={quotes[0].frontmatter.author} 
-            />
-          )}
-        </GridItem>
       </BentoLayout>
     </main>
   );

@@ -66,9 +66,21 @@ export const TechnologyContentSchema = z.object({
   direction: z.enum(['left', 'right']).optional()
 });
 
+export const AboutContentSchema = z.object({
+  type: z.literal('about'),
+  title: z.string(),
+  description: z.string(),
+  avatar: z.string().optional(),
+  socials: z.array(z.object({
+    platform: z.string(),
+    url: z.string()
+  })).optional()
+});
+
 // Export inferred types for perfect TypeScript DX
 export type ProjectContent = z.infer<typeof ProjectContentSchema>;
 export type QuoteContent = z.infer<typeof QuoteContentSchema>;
 export type VideoContent = z.infer<typeof VideoContentSchema>;
 export type ArticleContent = z.infer<typeof ArticleContentSchema>;
 export type TechnologyContent = z.infer<typeof TechnologyContentSchema>;
+export type AboutContent = z.infer<typeof AboutContentSchema>;

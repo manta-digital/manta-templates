@@ -83,6 +83,30 @@ function syncTemplate(templateName) {
     }
   }
 
+  // For React template, also copy Vite adapter 
+  if (templateName === 'react') {
+    const viteAdapterSource = path.join(PACKAGES_DIR, 'ui-adapters', 'vite');
+    if (fs.existsSync(viteAdapterSource)) {
+      const viteAdapterTarget = path.join(libDir, 'ui-adapters', 'vite');
+      console.log(`📦 Copying Vite adapter: ${viteAdapterSource} → ${viteAdapterTarget}`);
+      
+      if (fs.existsSync(viteAdapterTarget)) {
+        execSync(`rm -rf "${viteAdapterTarget}"`);
+      }
+      
+      // Copy only the TypeScript files, not node_modules 
+      fs.mkdirSync(viteAdapterTarget, { recursive: true });
+      execSync(`cp "${viteAdapterSource}"/*.ts "${viteAdapterTarget}"/`);
+      
+      // Fix imports within vite adapter to reference local ui-core
+      console.log(`🔧 Updating imports within Vite adapter...`);
+      execSync(`find "${viteAdapterTarget}" -type f \\( -name "*.ts" -o -name "*.tsx" \\) -exec sed -i '' "s|@manta-templates/ui-core|@/lib/ui-core|g" {} +`);
+    }
+  }
+
+  // Copy content from packages/content/src to template content directory
+  syncContent(templateName, templateDir);
+
   // Update package.json to remove workspace dependencies
   updatePackageJson(templateDir);
 
@@ -91,6 +115,31 @@ function syncTemplate(templateName) {
 
   console.log(`✅ Template ${templateName} synced successfully!`);
   console.log(`📁 UI packages copied to: ${path.join(templateDir, 'lib')}`);
+}
+
+function syncContent(templateName, templateDir) {
+  const contentSource = path.join(PACKAGES_DIR, 'content', 'src');
+  const contentTarget = path.join(templateDir, 'content');
+  
+  if (!fs.existsSync(contentSource)) {
+    console.warn(`⚠️  No content source found: ${contentSource}`);
+    return;
+  }
+
+  console.log(`📝 Copying content: ${contentSource} → ${contentTarget}`);
+  
+  // Create content directory in template
+  if (!fs.existsSync(contentTarget)) {
+    fs.mkdirSync(contentTarget, { recursive: true });
+  }
+  
+  // Remove existing content and copy fresh
+  if (fs.existsSync(contentTarget)) {
+    execSync(`rm -rf "${contentTarget}"/*`);
+  }
+  execSync(`cp -r "${contentSource}"/* "${contentTarget}"/`);
+  
+  console.log(`📁 Content copied to: ${contentTarget}`);
 }
 
 function updatePackageJson(templateDir) {

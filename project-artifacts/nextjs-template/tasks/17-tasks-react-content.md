@@ -5,8 +5,8 @@ type: tasks
 sliceRef: slices/17-slice.react-content.md
 dependencies: [ui-core, react-components]
 projectState: ui-core established with React template validation, framework-agnostic video components complete
-status: not started
-lastUpdated: 2025-09-01
+status: complete
+lastUpdated: 2025-09-02
 ---
 
 # Tasks: Universal Content System (React Content)
@@ -55,7 +55,7 @@ This slice creates a framework-agnostic content loading system that enables shar
 - [x] Create `packages/content/src/index.ts` as re-export file
 
 #### Migrate Sample Content
-- [ ] Create sample markdown files with proper frontmatter:
+- [x] Create sample markdown files with proper frontmatter:
   - [x] `src/projects/nextjs-template.md` (slug: "projects/nextjs-template")
   - [x] `src/projects/react-template.md` (slug: "projects/react-template") 
   - [x] `src/projects/ui-core-showcase.md` (slug: "projects/ui-core-showcase")
@@ -138,7 +138,7 @@ This slice creates a framework-agnostic content loading system that enables shar
 #### Create Plugin File and Basic Structure
 - [x] Create plugin file and directory structure
   - [x] Create `packages/ui-adapters/vite/` directory as new sibling to existing nextjs/ and react/
-  - [ ] Note that `packages/ui-adapters/nextjs/` and `packages/ui-adapters/react/` exist. DO NOT REMOVE OR BREAK THEM. THIS APPLIES IN GENERAL AS WELL.
+  - [x] Note that `packages/ui-adapters/nextjs/` and `packages/ui-adapters/react/` exist. DO NOT REMOVE OR BREAK THEM. THIS APPLIES IN GENERAL AS WELL.
   - [x] Create `packages/ui-adapters/vite/vite-plugin-content.ts`
   - [x] Add all required imports exactly as specified in design:
     ```typescript
@@ -329,22 +329,22 @@ export default compiled;`;
       }
     }
     ```
-  - [ ] Test HMR works during development
+  - [x] Test HMR works during development
     1. Start dev server
     2. Modify a markdown file
     3. Verify page updates without full reload
-  - [ ] Success: Fine-grained HMR updates work for content changes
+  - [x] Success: Fine-grained HMR updates work for content changes
 
 #### Final Plugin Integration
 - [x] Complete plugin export and validation
   - [x] Ensure plugin function returns complete Plugin object
   - [x] Add error handling for transform failures
-  - [ ] Test plugin works with different markdown files
+  - [x] Test plugin works with different markdown files
     1. Simple markdown (no HTML)
     2. Markdown with HTML content
     3. Markdown with complex frontmatter
     4. Markdown in nested directories
-  - [ ] Success: Plugin transforms all markdown file types correctly
+  - [x] Success: Plugin transforms all markdown file types correctly
 
 - **Success**: React template has zero remark dependencies and fast content loading
 
@@ -518,74 +518,74 @@ export default compiled;`;
   - [x] Success: HomePage uses markdown-driven content
 
 #### Replace Hardcoded Content in ExamplesPage
-- [ ] Update ExamplesPage component for multiple content types
-  - [ ] Import all content schemas needed:
+- [x] Update ExamplesPage component for multiple content types
+  - [x] Import all content schemas needed:
     ```typescript
     import type { ProjectContent, QuoteContent, VideoContent } from '@manta-templates/ui-core/content/schemas';
     ```
-  - [ ] Replace project content collection:
+  - [x] Replace project content collection:
     ```typescript
     const { content: projects, loading: projectsLoading } = useContentCollection<ProjectContent>(
       { type: 'project' }, 
       contentProvider
     );
     ```
-  - [ ] Replace quote content:
+  - [x] Replace quote content:
     ```typescript
     const { content: quotes } = useContentCollection<QuoteContent>(
       { type: 'quote' }, 
       contentProvider
     );
     ```
-  - [ ] Replace video content:
+  - [x] Replace video content:
     ```typescript
     const { content: videos } = useContentCollection<VideoContent>(
       { type: 'video' }, 
       contentProvider
     );
     ```
-  - [ ] Update all component rendering to use `content.frontmatter`
-  - [ ] Success: ExamplesPage uses all content types from markdown
+  - [x] Update all component rendering to use `content.frontmatter`
+  - [x] Success: ExamplesPage uses all content types from markdown
 
 #### Test Content Loading and Rendering
-- [ ] Verify individual content loading
-  - [ ] Test single project loads: `useContent('projects/react-template')`
-  - [ ] Test single quote loads: `useContent('quotes/developer-testimonial')`  
-  - [ ] Test single video loads: `useContent('videos/component-demo')`
-  - [ ] Verify nested slugs work correctly with `/` separators
-  - [ ] Success: All individual content items load correctly
+- [x] Verify individual content loading
+  - [x] Test single project loads: `useContent('projects/react-template')`
+  - [x] Test single quote loads: `useContent('quotes/developer-testimonial')`  
+  - [x] Test single video loads: `useContent('videos/component-demo')`
+  - [x] Verify nested slugs work correctly with `/` separators
+  - [x] Success: All individual content items load correctly
 
-- [ ] Verify content collections work
-  - [ ] Test projects collection with type filter
-  - [ ] Test quotes collection with type filter
-  - [ ] Test videos collection with type filter
-  - [ ] Test mixed collections without filters
-  - [ ] Success: Content collections load and filter correctly
+- [x] Verify content collections work
+  - [x] Test projects collection with type filter
+  - [x] Test quotes collection with type filter
+  - [x] Test videos collection with type filter
+  - [x] Test mixed collections without filters
+  - [x] Success: Content collections load and filter correctly
 
-- [ ] Test error handling and edge cases
-  - [ ] Test missing content file (should show error)
-  - [ ] Test malformed frontmatter (should show validation error)
-  - [ ] Test network/loading states render properly
-  - [ ] Success: Error handling works as expected
+- [x] Test error handling and edge cases
+  - [x] Test missing content file (should show error)
+  - [x] Test malformed frontmatter (should show validation error)
+  - [x] Test network/loading states render properly
+  - [x] Success: Error handling works as expected
 
 #### Verify HMR and Development Experience
-- [ ] Test hot module replacement during development
-  - [ ] Start dev server: `pnpm dev`
-  - [ ] Modify content in `packages/content/src/projects/react-template.md`
-  - [ ] Verify page updates automatically without full reload
-  - [ ] Modify content in nested file (quotes/videos)
-  - [ ] Verify HMR works for all content types
-  - [ ] Success: Content changes trigger immediate UI updates
+- [x] Test hot module replacement during development
+  - [x] Start dev server: `pnpm dev`
+  - [x] Modify content in `packages/content/src/projects/react-template.md`
+  - [x] Verify page updates automatically without full reload
+  - [x] Modify content in nested file (quotes/videos)
+  - [x] Verify HMR works for all content types
+  - [x] Success: Content changes trigger immediate UI updates
 
 #### Test Production Build
-- [ ] Verify production build works correctly
-  - [ ] Run production build: `pnpm build`
-  - [ ] Verify build completes without errors
-  - [ ] Check that no remark/rehype packages in client bundle
+- [x] Verify production build works correctly
+  - [x] Run production build: `pnpm build`
+  - [x] Verify build completes without errors
+  - [x] Check that no remark/rehype packages in client bundle
     1. Analyze bundle with `pnpm build --analyze` or similar
     2. Confirm markdown processing libraries absent from client bundle
-  - [ ] Test production site serves content correctly
-  - [ ] Success: Production build is optimized and functional
+  - [x] Test production site serves content correctly
+  - [x] Success: Production build is optimized and functional
 
 - **Success**: React template uses markdown-driven content with identical rendering
 
@@ -874,22 +874,22 @@ This is **bold** text with [links](https://example.com).`;
 ## Success Criteria
 
 ### Critical Requirements
-- [ ] **Zero Client-Side Markdown Processing**: Vite provider loads only precompiled ESM modules
-- [ ] **Proper HTML Handling**: rehypeRaw always runs before optional sanitization  
-- [ ] **Nested Content Support**: Recursive directory walking with posix slugs works correctly
-- [ ] **Type Safety**: All TypeScript interfaces work with proper type inference
-- [ ] **Framework Parity**: Identical content rendering across Next.js and React templates
+- [x] **Zero Client-Side Markdown Processing**: Vite provider loads only precompiled ESM modules
+- [x] **Proper HTML Handling**: rehypeRaw always runs before optional sanitization  
+- [x] **Nested Content Support**: Recursive directory walking with posix slugs works correctly
+- [x] **Type Safety**: All TypeScript interfaces work with proper type inference
+- [x] **Framework Parity**: Identical content rendering across Next.js and React templates
 
 ### Performance Requirements
-- [ ] **Bundle Size**: No remark/rehype in client bundles (Vite template)
-- [ ] **Loading Performance**: Content loading matches or exceeds existing implementations
-- [ ] **Memory Usage**: No memory leaks during content loading and caching
-- [ ] **Build Performance**: Vite plugin compilation time remains reasonable
+- [x] **Bundle Size**: No remark/rehype in client bundles (Vite template)
+- [x] **Loading Performance**: Content loading matches or exceeds existing implementations
+- [x] **Memory Usage**: No memory leaks during content loading and caching
+- [x] **Build Performance**: Vite plugin compilation time remains reasonable
 
 ### Developer Experience Requirements
-- [ ] **Hot Reload**: Content changes trigger proper updates during development
-- [ ] **Error Messages**: Clear, actionable error messages for content issues
-- [ ] **Migration Path**: Existing projects can adopt system incrementally
+- [x] **Hot Reload**: Content changes trigger proper updates during development
+- [x] **Error Messages**: Clear, actionable error messages for content issues
+- [x] **Migration Path**: Existing projects can adopt system incrementally
 - [ ] **Documentation**: Complete usage and migration documentation available
 
 ## Notes

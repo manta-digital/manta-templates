@@ -309,45 +309,31 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       
       
       if (resolvedValue) {
-        // Convert CSS color values to formats Three.js understands
-        // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
-        if (resolvedValue.startsWith('#')) {
-          return resolvedValue;
-        } else if (resolvedValue.startsWith('rgb')) {
-          // Convert rgb(r,g,b) to hex format for Three.js
-          const rgbMatch = resolvedValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-          if (rgbMatch) {
-            const r = parseInt(rgbMatch[1]);
-            const g = parseInt(rgbMatch[2]);
-            const b = parseInt(rgbMatch[3]);
-            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-            return hexColor;
-          }
-        } else if (resolvedValue.startsWith('oklch')) {
-          // Parse oklch and convert to RGB mathematically
-          const oklchMatch = resolvedValue.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
-          if (oklchMatch) {
-            let L = parseFloat(oklchMatch[1]);
-            // Handle percentage values (convert 88.7% to 0.887)
-            if (oklchMatch[1].includes('%')) {
-              L = L / 100;
+        try {
+          let hex;
+          if (resolvedValue.startsWith('lab(')) {
+            // Parse LAB string to object format for colord
+            const labMatch = resolvedValue.match(/lab\(([\d.-]+)%?\s+([\d.-]+)\s+([\d.-]+)\)/);
+            if (labMatch) {
+              let l = parseFloat(labMatch[1]);
+              if (labMatch[1].includes('%')) {
+                l = l; // Keep percentage as-is for LAB
+              }
+              const a = parseFloat(labMatch[2]);
+              const b = parseFloat(labMatch[3]);
+              hex = colord({ l, a, b }).toHex();
+            } else {
+              hex = '#ffffff';
             }
-            const C = parseFloat(oklchMatch[2]);
-            const H = parseFloat(oklchMatch[3]);
-            
-            // Convert OKLCH to RGB using colord
-            const oklchStr = `oklch(${L} ${C} ${H})`;
-            try {
-              const hexColor = colord(oklchStr).toHex();
-              return hexColor;
-            } catch {
-              // Fallback if colord can't parse
-              console.warn('Failed to parse OKLCH color:', oklchStr);
-              return '#ffffff';
-            }
+          } else {
+            hex = colord(resolvedValue).toHex();
           }
+          console.log(`Converting: ${resolvedValue} -> ${hex}`);
+          return hex;
+        } catch (e) {
+          console.log(`Failed to convert: ${resolvedValue}`, e);
+          return '#ffffff';
         }
-        return resolvedValue;
       } else {
         return color;
       }

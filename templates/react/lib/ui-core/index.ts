@@ -39,3 +39,19 @@ export { ContentProcessor } from './content/processor';
 export type { ProcessorConfig } from './content/processor';
 export { BaseContentProvider } from './content/BaseContentProvider';
 export { MockContentProvider } from './content/MockContentProvider';
+
+// Content schemas and types
+export type {
+  ProjectContent,
+  QuoteContent,
+  VideoContent,
+  ArticleContent,
+  TechnologyContent
+} from './content/schemas';
+export {
+  ProjectContentSchema,
+  QuoteContentSchema,
+  VideoContentSchema,
+  ArticleContentSchema,
+  TechnologyContentSchema
+} from './content/schemas';
