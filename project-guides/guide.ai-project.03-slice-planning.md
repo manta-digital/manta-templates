@@ -111,7 +111,7 @@ For each major feature area:
 **Risk Level:** Low/Medium/High based on technical complexity
 ```
 
-**Start Small:** Begin with 3-5 slices. You can always add more later.
+Use as many slices as needed to fully capture the project's functionality and scope.  Use the Example Slice Breakdown to guide you.
 
 ##### Step 4: Plan Implementation Order
 Order slices by:

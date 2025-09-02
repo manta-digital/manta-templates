@@ -87,7 +87,7 @@ Note: This is a design and planning task, not a coding task.
 We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project} by following the instructions here. These instructions may be used for adding a new slice with provided description, or designing {slice} included in the project slice plan.
 
 Use the following inputs:
-1. The project high-level design (03-hld.{project}.md)
+1. The project high-level design (03-hld.{project}.md) if applicable.
 2. One of the following (only one will be applicable):
 	1. Slice description provided with this request.
 	2. The project slice plan at `03-slices.{project}.md`.
@@ -144,8 +144,9 @@ Include:
 1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
-4. Organize so that tasks can be completed sequentially.
-5. Use checklist format for all task files.
+4. Create separate sub-tasks for each similar component.
+5. Organize so that tasks can be completed sequentially.
+6. Use checklist format for all task files.
 
 Avoid:
 - Time estimates in hours/days/etc.  You may use a 1-5 relative effort scale.
@@ -159,6 +160,22 @@ Each task must be completable by a junior AI with clear success criteria. If ins
 This is a project planning task, not a coding task.
 ```
 
+##### Slice | Feature Task Breakdown - Explicit Follow (Phase 5 - Extra)
+*Use this when you have a detailed slice design especially one containing code that may have been iterated on in order to solve complex or subtle design problems.  Add this to the regular Slice | Feature Task Breakdown*
+
+```markdown
+Note that our slice design is intricate, detailed, and has been refined extensively in order to address complex and/or subtle issues.  The slice design contains code, and we *need* to use this code in our task planning.
+
+As you are planning tasks, proceed *carefully* through the slice design, creating tasks to accomplish the design *exactly* as presented.  Once you complete the task breakdown, review it in light of the slice design to ensure that:
+1. You completely addressed the design.  If there are similar items, for example numerous wrapper components, ensure that your tasks explicitly address creation of each one.  
+2. You did not miss any details.  This is critical.  Do not "gloss over", simplify, or add workarounds to any coding sections of the design even though they may be difficult.
+   
+Note also that tasks may reference the relevant design document.  You do not need to replicate large pieces of the design document all over the task list.  Ensure that references are accurate.  Do not assume or guess anywhere in this task.
+
+After creation of task list, you must review the entire list against the slice design to ensure that these requirements are met.
+```
+
+
 ##### Slice Task Expansion (Phase 6)
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
@@ -166,9 +183,11 @@ We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and 
 Use `guide.ai-project.06-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
 
 Your role is Senior AI. For each task:
-- If it would benefit from expansion or subdivision, enhance it
-- If it's already appropriate, output it verbatim
-- Ensure all tasks are accounted for
+- If it would benefit from expansion or subdivision, enhance it.
+- If it's already appropriate, output it verbatim.
+- Ensure all tasks are accounted for.
+
+After any expansion, review it against the original unexpanded task and ensure that your expansion is a detailed representation of the original task, not a reinterpretation or change of the original task.
 
 Output results by updating the existing task file. Success: All tasks have been processed and either output as is, or enhanced and divided into further subtasks.
 
@@ -187,9 +206,11 @@ Use exactly one of the following (only one match should exist):
 
 Always git commit at least once per task but ideally after every section of items containing a 'Success:' criteria.  For example, if a file contains Task 1.2, Task 1.2.1, commit after each task.  If 1.2.1 contains multiple checklists each with its own 'Success:' criteria, commit after any section containing Success.  STOP and confer with Project Manager after each task, unless directed otherwise 
 
-Work carefully and ensure that each task is verified complete before proceeding to the next. If an attempted solution does not work or you find reason to try another approach, do not make more than three attempts without stopping and obtaining confirmation from Project Manager.
+Work carefully and sequentially through the tasks, ensuring that each task is verified complete before proceeding to the next.  You should write unit tests for code as you work through the task. Ensure that tests pass and task is complete before moving to the next.
 
-Be sure to check off tasks as they are completed.  If a parent file (ex: `03-slices.{project}.md`) contains checklist items, check off parent items after all child items are complete.  
+If an attempted solution does not work or you find reason to try another approach, do not make more than three attempts without stopping and obtaining confirmation from Project Manager.
+
+Be sure to check off tasks as they are completed.  If a parent file (ex: `03-slices.{project}.md`) contains checklist items, check off parent items after all child items are complete. If a `task-checker` tool|agent is available to you, use it.
 
 Maintain the YAML frontmatter including:
 - Status: not-started, in-progress, complete, not-applicable
