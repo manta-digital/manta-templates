@@ -202,6 +202,48 @@ importers:
         specifier: ^5.8.3
         version: 5.9.2
 
+  packages/ui-adapters/vite:
+    dependencies:
+      '@manta-templates/ui-core':
+        specifier: workspace:*
+        version: link:../../ui-core
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
+      rehype-autolink-headings:
+        specifier: ^7.1.0
+        version: 7.1.0
+      rehype-external-links:
+        specifier: ^3.0.0
+        version: 3.0.0
+      rehype-raw:
+        specifier: ^7.0.0
+        version: 7.0.0
+      rehype-sanitize:
+        specifier: ^6.0.0
+        version: 6.0.0
+      rehype-slug:
+        specifier: ^6.0.0
+        version: 6.0.0
+      rehype-stringify:
+        specifier: ^10.0.1
+        version: 10.0.1
+      remark:
+        specifier: ^15.0.1
+        version: 15.0.1
+      remark-gfm:
+        specifier: ^4.0.1
+        version: 4.0.1
+      remark-rehype:
+        specifier: ^11.1.2
+        version: 11.1.2
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+      vite:
+        specifier: ^7.0.0
+        version: 7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)(tsx@4.20.4)
+
   packages/ui-core:
     dependencies:
       '@radix-ui/colors':
@@ -467,6 +509,15 @@ importers:
 
   templates/react:
     dependencies:
+      '@manta-templates/content':
+        specifier: workspace:*
+        version: link:../../packages/content
+      '@manta-templates/ui-adapters-vite':
+        specifier: workspace:*
+        version: link:../../packages/ui-adapters/vite
+      '@manta-templates/ui-core':
+        specifier: workspace:*
+        version: link:../../packages/ui-core
       '@radix-ui/colors':
         specifier: ^3.0.0
         version: 3.0.0
@@ -494,9 +545,6 @@ importers:
       framer-motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
       lucide-react:
         specifier: ^0.507.0
         version: 0.507.0(react@19.1.1)
@@ -509,24 +557,6 @@ importers:
       react-router-dom:
         specifier: ^7.8.2
         version: 7.8.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      rehype-pretty-code:
-        specifier: ^0.14.1
-        version: 0.14.1(shiki@3.11.0)
-      rehype-sanitize:
-        specifier: ^6.0.0
-        version: 6.0.0
-      rehype-stringify:
-        specifier: ^10.0.1
-        version: 10.0.1
-      remark:
-        specifier: ^15.0.1
-        version: 15.0.1
-      remark-gfm:
-        specifier: ^4.0.1
-        version: 4.0.1
-      remark-rehype:
-        specifier: ^11.1.2
-        version: 11.1.2
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1

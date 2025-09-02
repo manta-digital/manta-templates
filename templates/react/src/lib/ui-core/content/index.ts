@@ -1,4 +1,16 @@
-// Content system exports
+// React template content system exports
+// Only includes what's needed for content consumption, not processing
+
+// Content hooks for React components
+export { useContent, useContentCollection } from './hooks';
+
+// Content type interfaces
+export type { ContentEngine, ContentResult, ContentFilters } from './contentTypes';
+
+// Content schemas (TypeScript interfaces only)
+export type { ProjectContent, QuoteContent, VideoContent } from './schemas';
+
+// Legacy types (kept for compatibility if needed)
 export type {
   ContentProvider,
   ContentData,
@@ -14,13 +26,7 @@ export {
   ContentNotFoundError
 } from './types';
 
-export { ContentProcessor } from './processor';
-export type { ProcessorConfig } from './processor';
-
-export { BaseContentProvider } from './BaseContentProvider';
-export { MockContentProvider } from './MockContentProvider';
-
-// Legal content helper
+// Legal content helper (if available)
 export {
   getDefaultLegalContent,
   type LegalContentType,

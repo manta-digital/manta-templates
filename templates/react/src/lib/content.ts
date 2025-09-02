@@ -1,3 +1,3 @@
-import { getViteContentProvider } from '@manta-templates/ui-adapters-vite';
+import { getViteContentProvider } from './adapters/ViteContentProvider';
 
 export const contentProvider = getViteContentProvider();

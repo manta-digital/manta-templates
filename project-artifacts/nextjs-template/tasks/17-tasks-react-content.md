@@ -467,31 +467,31 @@ export default compiled;`;
 - **Reference**: Content loading patterns from design
 
 #### Update Template Dependencies and Configuration
-- [ ] Add required packages to React template
-  - [ ] Update `templates/react/package.json` to include:
+- [x] Add required packages to React template
+  - [x] Update `templates/react/package.json` to include:
     ```json
     {
       "dependencies": {
         "@manta-templates/content": "workspace:*",
         "@manta-templates/ui-core": "workspace:*",
-        "@manta-templates/ui-adapters": "workspace:*"
+        "@manta-templates/ui-adapters-vite": "workspace:*"
       }
     }
     ```
-  - [ ] Run `pnpm install` to install new dependencies
-  - [ ] Verify workspace packages resolve correctly
-  - [ ] Success: All content system packages available in React template
+  - [x] Run `pnpm install` to install new dependencies
+  - [x] Verify workspace packages resolve correctly
+  - [x] Success: All content system packages available in React template
 
 #### Configure Content Provider
-- [ ] Set up Vite content provider singleton
-  - [ ] Create `src/lib/content.ts` configuration file:
+- [x] Set up Vite content provider singleton
+  - [x] Create `src/lib/content.ts` configuration file:
     ```typescript
     import { getViteContentProvider } from '@manta-templates/ui-adapters/vite';
     
     export const contentProvider = getViteContentProvider();
     ```
-  - [ ] Test provider imports work correctly
-  - [ ] Success: Content provider singleton configured
+  - [x] Test provider imports work correctly
+  - [x] Success: Content provider singleton configured
 
 #### Replace Hardcoded Content in HomePage
 - [ ] Update HomePage component to use content hooks

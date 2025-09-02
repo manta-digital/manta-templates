@@ -28,3 +28,6 @@ export {
   type LegalFrontmatter,
   type DefaultLegalContent
 } from './legalContent';
+
+// Note: Universal content engine (Slice 17) is not available in Next.js template
+// Next.js template uses its own NextjsContentProvider via ui-adapters

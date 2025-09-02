@@ -1,0 +1,476 @@
+/* Radix Colors - Base color definitions for ui-core */
+/* Includes all color scales needed for palette switching */
+
+:root {
+  /* Teal color scale */
+  --teal-1: oklch(0.99 0.005 180);
+  --teal-2: oklch(0.97 0.013 174);
+  --teal-3: oklch(0.94 0.02 174);
+  --teal-4: oklch(0.91 0.03 174);
+  --teal-5: oklch(0.88 0.04 174);
+  --teal-6: oklch(0.84 0.05 174);
+  --teal-7: oklch(0.8 0.06 174);
+  --teal-8: oklch(0.75 0.08 174);
+  --teal-9: oklch(0.7 0.1 174);
+  --teal-10: oklch(0.64 0.12 174);
+  --teal-11: oklch(0.57 0.14 174);
+  --teal-12: oklch(0.15 0.02 174);
+
+  /* Teal alpha variants */
+  --teal-a1: oklch(0.99 0.005 180 / 0.05);
+  --teal-a2: oklch(0.97 0.013 174 / 0.1);
+  --teal-a3: oklch(0.94 0.02 174 / 0.15);
+  --teal-a4: oklch(0.91 0.03 174 / 0.2);
+  --teal-a5: oklch(0.88 0.04 174 / 0.3);
+  --teal-a6: oklch(0.84 0.05 174 / 0.4);
+  --teal-a7: oklch(0.8 0.06 174 / 0.5);
+  --teal-a8: oklch(0.75 0.08 174 / 0.6);
+  --teal-a9: oklch(0.7 0.1 174 / 0.7);
+  --teal-a10: oklch(0.64 0.12 174 / 0.8);
+  --teal-a11: oklch(0.57 0.14 174 / 0.9);
+  --teal-a12: oklch(0.15 0.02 174 / 0.95);
+
+  /* Teal special colors */
+  --teal-contrast: oklch(1 0 0);
+  --teal-surface: oklch(0.99 0.005 180 / 0.8);
+  --teal-indicator: oklch(0.7 0.1 174);
+  --teal-track: oklch(0.7 0.1 174 / 0.3);
+
+  /* Mintteal color scale (custom brand color) */
+  --mintteal-1: oklch(0.994 0.005 166);
+  --mintteal-2: oklch(0.978 0.01 166);
+  --mintteal-3: oklch(0.956 0.016 166);
+  --mintteal-4: oklch(0.928 0.024 166);
+  --mintteal-5: oklch(0.896 0.032 166);
+  --mintteal-6: oklch(0.858 0.042 166);
+  --mintteal-7: oklch(0.812 0.054 166);
+  --mintteal-8: oklch(0.756 0.07 166);
+  --mintteal-9: oklch(0.649 0.098 166);
+  --mintteal-10: oklch(0.602 0.106 166);
+  --mintteal-11: oklch(0.548 0.114 166);
+  --mintteal-12: oklch(0.156 0.022 166);
+
+  /* Mintteal alpha variants */
+  --mintteal-a1: oklch(0.994 0.005 166 / 0.05);
+  --mintteal-a2: oklch(0.978 0.01 166 / 0.1);
+  --mintteal-a3: oklch(0.956 0.016 166 / 0.15);
+  --mintteal-a4: oklch(0.928 0.024 166 / 0.2);
+  --mintteal-a5: oklch(0.896 0.032 166 / 0.3);
+  --mintteal-a6: oklch(0.858 0.042 166 / 0.4);
+  --mintteal-a7: oklch(0.812 0.054 166 / 0.5);
+  --mintteal-a8: oklch(0.756 0.07 166 / 0.6);
+  --mintteal-a9: oklch(0.649 0.098 166 / 0.7);
+  --mintteal-a10: oklch(0.602 0.106 166 / 0.8);
+  --mintteal-a11: oklch(0.548 0.114 166 / 0.9);
+  --mintteal-a12: oklch(0.156 0.022 166 / 0.95);
+
+  /* Blue color scale */
+  --blue-1: oklch(0.993 0.003 233);
+  --blue-2: oklch(0.976 0.008 233);
+  --blue-3: oklch(0.946 0.018 233);
+  --blue-4: oklch(0.905 0.032 233);
+  --blue-5: oklch(0.857 0.048 233);
+  --blue-6: oklch(0.799 0.067 233);
+  --blue-7: oklch(0.729 0.09 233);
+  --blue-8: oklch(0.648 0.116 233);
+  --blue-9: oklch(0.592 0.129 233);
+  --blue-10: oklch(0.549 0.115 233);
+  --blue-11: oklch(0.467 0.094 233);
+  --blue-12: oklch(0.156 0.022 233);
+
+  /* Blue alpha variants */
+  --blue-a1: oklch(0.993 0.003 233 / 0.05);
+  --blue-a2: oklch(0.976 0.008 233 / 0.1);
+  --blue-a3: oklch(0.946 0.018 233 / 0.15);
+  --blue-a4: oklch(0.905 0.032 233 / 0.2);
+  --blue-a5: oklch(0.857 0.048 233 / 0.3);
+  --blue-a6: oklch(0.799 0.067 233 / 0.4);
+  --blue-a7: oklch(0.729 0.09 233 / 0.5);
+  --blue-a8: oklch(0.648 0.116 233 / 0.6);
+  --blue-a9: oklch(0.592 0.129 233 / 0.7);
+  --blue-a10: oklch(0.549 0.115 233 / 0.8);
+  --blue-a11: oklch(0.467 0.094 233 / 0.9);
+  --blue-a12: oklch(0.156 0.022 233 / 0.95);
+
+  /* Purple color scale */
+  --purple-1: oklch(0.993 0.005 300);
+  --purple-2: oklch(0.976 0.012 300);
+  --purple-3: oklch(0.946 0.025 300);
+  --purple-4: oklch(0.905 0.042 300);
+  --purple-5: oklch(0.857 0.062 300);
+  --purple-6: oklch(0.799 0.085 300);
+  --purple-7: oklch(0.729 0.112 300);
+  --purple-8: oklch(0.648 0.142 300);
+  --purple-9: oklch(0.592 0.155 300);
+  --purple-10: oklch(0.549 0.140 300);
+  --purple-11: oklch(0.467 0.118 300);
+  --purple-12: oklch(0.156 0.028 300);
+
+  /* Purple alpha variants */
+  --purple-a1: oklch(0.993 0.005 300 / 0.05);
+  --purple-a2: oklch(0.976 0.012 300 / 0.1);
+  --purple-a3: oklch(0.946 0.025 300 / 0.15);
+  --purple-a4: oklch(0.905 0.042 300 / 0.2);
+  --purple-a5: oklch(0.857 0.062 300 / 0.3);
+  --purple-a6: oklch(0.799 0.085 300 / 0.4);
+  --purple-a7: oklch(0.729 0.112 300 / 0.5);
+  --purple-a8: oklch(0.648 0.142 300 / 0.6);
+  --purple-a9: oklch(0.592 0.155 300 / 0.7);
+  --purple-a10: oklch(0.549 0.140 300 / 0.8);
+  --purple-a11: oklch(0.467 0.118 300 / 0.9);
+  --purple-a12: oklch(0.156 0.028 300 / 0.95);
+
+  /* Orange color scale */
+  --orange-1: oklch(0.993 0.005 50);
+  --orange-2: oklch(0.976 0.012 50);
+  --orange-3: oklch(0.946 0.025 50);
+  --orange-4: oklch(0.905 0.042 50);
+  --orange-5: oklch(0.857 0.062 50);
+  --orange-6: oklch(0.799 0.085 50);
+  --orange-7: oklch(0.729 0.112 50);
+  --orange-8: oklch(0.648 0.142 50);
+  --orange-9: oklch(0.710 0.15 50);
+  --orange-10: oklch(0.665 0.14 50);
+  --orange-11: oklch(0.598 0.125 50);
+  --orange-12: oklch(0.156 0.028 50);
+
+  /* Orange alpha variants */
+  --orange-a1: oklch(0.993 0.005 50 / 0.05);
+  --orange-a2: oklch(0.976 0.012 50 / 0.1);
+  --orange-a3: oklch(0.946 0.025 50 / 0.15);
+  --orange-a4: oklch(0.905 0.042 50 / 0.2);
+  --orange-a5: oklch(0.857 0.062 50 / 0.3);
+  --orange-a6: oklch(0.799 0.085 50 / 0.4);
+  --orange-a7: oklch(0.729 0.112 50 / 0.5);
+  --orange-a8: oklch(0.648 0.142 50 / 0.6);
+  --orange-a9: oklch(0.710 0.15 50 / 0.7);
+  --orange-a10: oklch(0.665 0.14 50 / 0.8);
+  --orange-a11: oklch(0.598 0.125 50 / 0.9);
+  --orange-a12: oklch(0.156 0.028 50 / 0.95);
+
+  /* Orange neutral scale - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.995 0.003 50);
+  --orange-n2: oklch(0.984 0.004 50);
+  --orange-n3: oklch(0.968 0.005 50);
+  --orange-n4: oklch(0.946 0.006 50);
+  --orange-n5: oklch(0.918 0.007 50);
+  --orange-n6: oklch(0.877 0.008 50);
+  --orange-n7: oklch(0.719 0.009 50);
+  --orange-n8: oklch(0.609 0.010 50);
+  --orange-n9: oklch(0.537 0.011 50);
+  --orange-n10: oklch(0.481 0.012 50);
+  --orange-n11: oklch(0.395 0.013 50);
+  --orange-n12: oklch(0.156 0.025 50);
+
+  /* Blue neutral scale - cool blue-tinted grays for "oceanic" themes */
+  --blue-n1: oklch(0.995 0.003 233);
+  --blue-n2: oklch(0.984 0.004 233);
+  --blue-n3: oklch(0.968 0.005 233);
+  --blue-n4: oklch(0.946 0.006 233);
+  --blue-n5: oklch(0.918 0.007 233);
+  --blue-n6: oklch(0.877 0.008 233);
+  --blue-n7: oklch(0.719 0.009 233);
+  --blue-n8: oklch(0.609 0.010 233);
+  --blue-n9: oklch(0.537 0.011 233);
+  --blue-n10: oklch(0.481 0.012 233);
+  --blue-n11: oklch(0.395 0.013 233);
+  --blue-n12: oklch(0.156 0.025 233);
+
+  /* Teal neutral scale - balanced teal-tinted grays for professional themes */
+  --teal-n1: oklch(0.995 0.003 174);
+  --teal-n2: oklch(0.984 0.004 174);
+  --teal-n3: oklch(0.968 0.005 174);
+  --teal-n4: oklch(0.946 0.006 174);
+  --teal-n5: oklch(0.918 0.007 174);
+  --teal-n6: oklch(0.877 0.008 174);
+  --teal-n7: oklch(0.719 0.009 174);
+  --teal-n8: oklch(0.609 0.010 174);
+  --teal-n9: oklch(0.537 0.011 174);
+  --teal-n10: oklch(0.481 0.012 174);
+  --teal-n11: oklch(0.395 0.013 174);
+  --teal-n12: oklch(0.156 0.025 174);
+
+  /* Mintteal neutral scale - mint-tinted grays for fresh/modern themes */
+  --mintteal-n1: oklch(0.995 0.003 166);
+  --mintteal-n2: oklch(0.984 0.004 166);
+  --mintteal-n3: oklch(0.968 0.005 166);
+  --mintteal-n4: oklch(0.946 0.006 166);
+  --mintteal-n5: oklch(0.918 0.007 166);
+  --mintteal-n6: oklch(0.877 0.008 166);
+  --mintteal-n7: oklch(0.719 0.009 166);
+  --mintteal-n8: oklch(0.609 0.010 166);
+  --mintteal-n9: oklch(0.537 0.011 166);
+  --mintteal-n10: oklch(0.481 0.012 166);
+  --mintteal-n11: oklch(0.395 0.013 166);
+  --mintteal-n12: oklch(0.156 0.025 166);
+
+  /* Green color scale */
+  --green-1: oklch(0.993 0.005 130);
+  --green-2: oklch(0.976 0.012 130);
+  --green-3: oklch(0.946 0.025 130);
+  --green-4: oklch(0.905 0.042 130);
+  --green-5: oklch(0.857 0.062 130);
+  --green-6: oklch(0.799 0.085 130);
+  --green-7: oklch(0.729 0.112 130);
+  --green-8: oklch(0.648 0.142 130);
+  --green-9: oklch(0.626 0.15 130);
+  --green-10: oklch(0.582 0.14 130);
+  --green-11: oklch(0.512 0.125 130);
+  --green-12: oklch(0.156 0.028 130);
+
+  /* Green alpha variants */
+  --green-a1: oklch(0.993 0.005 130 / 0.05);
+  --green-a2: oklch(0.976 0.012 130 / 0.1);
+  --green-a3: oklch(0.946 0.025 130 / 0.15);
+  --green-a4: oklch(0.905 0.042 130 / 0.2);
+  --green-a5: oklch(0.857 0.062 130 / 0.3);
+  --green-a6: oklch(0.799 0.085 130 / 0.4);
+  --green-a7: oklch(0.729 0.112 130 / 0.5);
+  --green-a8: oklch(0.648 0.142 130 / 0.6);
+  --green-a9: oklch(0.626 0.15 130 / 0.7);
+  --green-a10: oklch(0.582 0.14 130 / 0.8);
+  --green-a11: oklch(0.512 0.125 130 / 0.9);
+  --green-a12: oklch(0.156 0.028 130 / 0.95);
+
+  /* Green neutral scale - subtle green-tinted grays for "forest" themes */
+  --green-n1: oklch(0.995 0.003 130);
+  --green-n2: oklch(0.984 0.004 130);
+  --green-n3: oklch(0.968 0.005 130);
+  --green-n4: oklch(0.946 0.006 130);
+  --green-n5: oklch(0.918 0.007 130);
+  --green-n6: oklch(0.877 0.008 130);
+  --green-n7: oklch(0.719 0.009 130);
+  --green-n8: oklch(0.609 0.010 130);
+  --green-n9: oklch(0.537 0.011 130);
+  --green-n10: oklch(0.481 0.012 130);
+  --green-n11: oklch(0.395 0.013 130);
+  --green-n12: oklch(0.156 0.025 130);
+
+
+  /* Purple neutral scale - cool-tinted grays for "twilight" themes */
+  --purple-n1: oklch(0.995 0.003 300);
+  --purple-n2: oklch(0.984 0.004 300);
+  --purple-n3: oklch(0.968 0.005 300);
+  --purple-n4: oklch(0.946 0.006 300);
+  --purple-n5: oklch(0.918 0.007 300);
+  --purple-n6: oklch(0.877 0.008 300);
+  --purple-n7: oklch(0.719 0.009 300);
+  --purple-n8: oklch(0.609 0.010 300);
+  --purple-n9: oklch(0.537 0.011 300);
+  --purple-n10: oklch(0.481 0.012 300);
+  --purple-n11: oklch(0.395 0.013 300);
+  --purple-n12: oklch(0.156 0.025 300);
+
+  /* Gray color scale - neutral colors for UI elements */
+  --gray-1: oklch(0.995 0.002 225);
+  --gray-2: oklch(0.984 0.003 225);      /* Matches #f3f4f6 - light track */
+  --gray-3: oklch(0.968 0.004 225);
+  --gray-4: oklch(0.946 0.005 225);
+  --gray-5: oklch(0.918 0.006 225);
+  --gray-6: oklch(0.877 0.007 225);      /* Matches #d1d5db - light thumb */
+  --gray-7: oklch(0.719 0.008 225);      /* Matches #9ca3af - light thumb hover */
+  --gray-8: oklch(0.609 0.009 225);
+  --gray-9: oklch(0.537 0.01 225);
+  --gray-10: oklch(0.481 0.011 225);
+  --gray-11: oklch(0.395 0.012 225);
+  --gray-12: oklch(0.156 0.020 225);
+
+  /* Gray alpha variants */
+  --gray-a1: oklch(0.995 0.002 225 / 0.05);
+  --gray-a2: oklch(0.984 0.003 225 / 0.1);
+  --gray-a3: oklch(0.968 0.004 225 / 0.15);
+  --gray-a4: oklch(0.946 0.005 225 / 0.2);
+  --gray-a5: oklch(0.918 0.006 225 / 0.3);
+  --gray-a6: oklch(0.877 0.007 225 / 0.4);
+  --gray-a7: oklch(0.719 0.008 225 / 0.5);
+  --gray-a8: oklch(0.609 0.009 225 / 0.6);
+  --gray-a9: oklch(0.537 0.01 225 / 0.7);
+  --gray-a10: oklch(0.481 0.011 225 / 0.8);
+  --gray-a11: oklch(0.395 0.012 225 / 0.9);
+  --gray-a12: oklch(0.156 0.020 225 / 0.95);
+}
+
+/* Dark mode adjustments for all colors */
+.dark {
+  /* Teal dark mode */
+  --teal-1: oklch(0.15 0.02 174);
+  --teal-2: oklch(0.18 0.025 174);
+  --teal-3: oklch(0.21 0.03 174);
+  --teal-4: oklch(0.24 0.035 174);
+  --teal-5: oklch(0.27 0.04 174);
+  --teal-6: oklch(0.3 0.045 174);
+  --teal-7: oklch(0.35 0.05 174);
+  --teal-8: oklch(0.42 0.06 174);
+  --teal-9: oklch(0.55 0.08 174);
+  --teal-10: oklch(0.62 0.09 174);
+  --teal-11: oklch(0.75 0.11 174);
+  --teal-12: oklch(0.95 0.015 174);
+
+  /* Mintteal dark mode */
+  --mintteal-1: oklch(0.15 0.02 166);
+  --mintteal-2: oklch(0.18 0.025 166);
+  --mintteal-3: oklch(0.21 0.03 166);
+  --mintteal-4: oklch(0.24 0.035 166);
+  --mintteal-5: oklch(0.27 0.04 166);
+  --mintteal-6: oklch(0.3 0.045 166);
+  --mintteal-7: oklch(0.35 0.05 166);
+  --mintteal-8: oklch(0.42 0.06 166);
+  --mintteal-9: oklch(0.55 0.08 166);
+  --mintteal-10: oklch(0.62 0.09 166);
+  --mintteal-11: oklch(0.75 0.11 166);
+  --mintteal-12: oklch(0.95 0.015 166);
+
+  /* Blue dark mode */
+  --blue-1: oklch(0.15 0.02 233);
+  --blue-2: oklch(0.18 0.025 233);
+  --blue-3: oklch(0.21 0.03 233);
+  --blue-4: oklch(0.24 0.035 233);
+  --blue-5: oklch(0.27 0.04 233);
+  --blue-6: oklch(0.3 0.045 233);
+  --blue-7: oklch(0.35 0.05 233);
+  --blue-8: oklch(0.42 0.06 233);
+  --blue-9: oklch(0.55 0.08 233);
+  --blue-10: oklch(0.62 0.09 233);
+  --blue-11: oklch(0.75 0.11 233);
+  --blue-12: oklch(0.95 0.015 233);
+
+  /* Blue neutral dark mode - cool blue-tinted grays for "oceanic" themes */
+  --blue-n1: oklch(0.156 0.025 233);
+  --blue-n2: oklch(0.181 0.023 233);
+  --blue-n3: oklch(0.247 0.021 233);
+  --blue-n4: oklch(0.309 0.019 233);
+  --blue-n5: oklch(0.395 0.017 233);
+  --blue-n6: oklch(0.481 0.016 233);
+  --blue-n7: oklch(0.537 0.015 233);
+  --blue-n8: oklch(0.719 0.013 233);
+  --blue-n9: oklch(0.799 0.012 233);
+  --blue-n10: oklch(0.877 0.012 233);
+  --blue-n11: oklch(0.918 0.011 233);
+  --blue-n12: oklch(0.995 0.007 233);
+  
+  /* Purple dark mode */
+  --purple-1: oklch(0.15 0.02 300);
+  --purple-2: oklch(0.18 0.025 300);
+  --purple-3: oklch(0.21 0.03 300);
+  --purple-4: oklch(0.24 0.035 300);
+  --purple-5: oklch(0.27 0.04 300);
+  --purple-6: oklch(0.3 0.045 300);
+  --purple-7: oklch(0.35 0.05 300);
+  --purple-8: oklch(0.42 0.06 300);
+  --purple-9: oklch(0.55 0.08 300);
+  --purple-10: oklch(0.62 0.09 300);
+  --purple-11: oklch(0.75 0.11 300);
+  --purple-12: oklch(0.95 0.015 300);
+
+  /* Purple neutral dark mode - cool-tinted grays for "twilight" themes */
+  --purple-n1: oklch(0.156 0.025 300);
+  --purple-n2: oklch(0.181 0.023 300);
+  --purple-n3: oklch(0.247 0.021 300);
+  --purple-n4: oklch(0.309 0.019 300);
+  --purple-n5: oklch(0.395 0.017 300);
+  --purple-n6: oklch(0.481 0.016 300);
+  --purple-n7: oklch(0.537 0.015 300);
+  --purple-n8: oklch(0.719 0.013 300);
+  --purple-n9: oklch(0.799 0.012 300);
+  --purple-n10: oklch(0.877 0.012 300);
+  --purple-n11: oklch(0.918 0.011 300);
+  --purple-n12: oklch(0.995 0.007 300);
+  
+  /* Orange dark mode */
+  --orange-1: oklch(0.15 0.02 50);
+  --orange-2: oklch(0.18 0.025 50);
+  --orange-3: oklch(0.21 0.03 50);
+  --orange-4: oklch(0.24 0.035 50);
+  --orange-5: oklch(0.27 0.04 50);
+  --orange-6: oklch(0.3 0.045 50);
+  --orange-7: oklch(0.35 0.05 50);
+  --orange-8: oklch(0.42 0.06 50);
+  --orange-9: oklch(0.65 0.12 50);
+  --orange-10: oklch(0.72 0.13 50);
+  --orange-11: oklch(0.78 0.14 50);
+  --orange-12: oklch(0.95 0.015 50);
+
+  /* Orange neutral dark mode - warm-tinted grays for "sunset" themes */
+  --orange-n1: oklch(0.156 0.025 50);
+  --orange-n2: oklch(0.181 0.023 50);
+  --orange-n3: oklch(0.247 0.021 50);
+  --orange-n4: oklch(0.309 0.019 50);
+  --orange-n5: oklch(0.395 0.017 50);
+  --orange-n6: oklch(0.481 0.016 50);
+  --orange-n7: oklch(0.537 0.015 50);
+  --orange-n8: oklch(0.719 0.013 50);
+  --orange-n9: oklch(0.799 0.012 50);
+  --orange-n10: oklch(0.877 0.012 50);
+  --orange-n11: oklch(0.918 0.011 50);
+  --orange-n12: oklch(0.995 0.007 50);
+  
+  /* Teal neutral dark mode - balanced teal-tinted grays for professional themes */
+  --teal-n1: oklch(0.156 0.025 174);
+  --teal-n2: oklch(0.181 0.023 174);
+  --teal-n3: oklch(0.247 0.021 174);
+  --teal-n4: oklch(0.309 0.019 174);
+  --teal-n5: oklch(0.395 0.017 174);
+  --teal-n6: oklch(0.481 0.016 174);
+  --teal-n7: oklch(0.537 0.015 174);
+  --teal-n8: oklch(0.719 0.013 174);
+  --teal-n9: oklch(0.799 0.012 174);
+  --teal-n10: oklch(0.877 0.012 174);
+  --teal-n11: oklch(0.918 0.011 174);
+  --teal-n12: oklch(0.995 0.007 174);
+  
+  /* Mintteal neutral dark mode - mint-tinted grays for fresh/modern themes */
+  --mintteal-n1: oklch(0.156 0.025 166);
+  --mintteal-n2: oklch(0.181 0.023 166);
+  --mintteal-n3: oklch(0.247 0.021 166);
+  --mintteal-n4: oklch(0.309 0.019 166);
+  --mintteal-n5: oklch(0.395 0.017 166);
+  --mintteal-n6: oklch(0.481 0.016 166);
+  --mintteal-n7: oklch(0.537 0.015 166);
+  --mintteal-n8: oklch(0.719 0.013 166);
+  --mintteal-n9: oklch(0.799 0.012 166);
+  --mintteal-n10: oklch(0.877 0.012 166);
+  --mintteal-n11: oklch(0.918 0.011 166);
+  --mintteal-n12: oklch(0.995 0.007 166);
+  
+  /* Green dark mode */
+  --green-1: oklch(0.15 0.02 130);
+  --green-2: oklch(0.18 0.025 130);
+  --green-3: oklch(0.21 0.03 130);
+  --green-4: oklch(0.24 0.035 130);
+  --green-5: oklch(0.27 0.04 130);
+  --green-6: oklch(0.3 0.045 130);
+  --green-7: oklch(0.35 0.05 130);
+  --green-8: oklch(0.42 0.06 130);
+  --green-9: oklch(0.58 0.11 130);
+  --green-10: oklch(0.65 0.12 130);
+  --green-11: oklch(0.72 0.13 130);
+  --green-12: oklch(0.95 0.015 130);
+
+  /* Green neutral dark mode - subtle green-tinted grays for "forest" themes */
+  --green-n1: oklch(0.156 0.025 130);
+  --green-n2: oklch(0.181 0.023 130);
+  --green-n3: oklch(0.247 0.021 130);
+  --green-n4: oklch(0.309 0.019 130);
+  --green-n5: oklch(0.395 0.017 130);
+  --green-n6: oklch(0.481 0.016 130);
+  --green-n7: oklch(0.537 0.015 130);
+  --green-n8: oklch(0.719 0.013 130);
+  --green-n9: oklch(0.799 0.012 130);
+  --green-n10: oklch(0.877 0.012 130);
+  --green-n11: oklch(0.918 0.011 130);
+  --green-n12: oklch(0.995 0.007 130);
+
+  /* Gray dark mode */
+  --gray-1: oklch(0.156 0.020 225);
+  --gray-2: oklch(0.181 0.018 225);
+  --gray-3: oklch(0.247 0.016 225);      /* Matches #374151 - dark track */
+  --gray-4: oklch(0.309 0.014 225);
+  --gray-5: oklch(0.395 0.012 225);      /* Matches #6b7280 - dark thumb */
+  --gray-6: oklch(0.481 0.011 225);
+  --gray-7: oklch(0.537 0.01 225);       
+  --gray-8: oklch(0.719 0.008 225);      /* Matches #9ca3af - dark thumb hover */
+  --gray-9: oklch(0.799 0.007 225);
+  --gray-10: oklch(0.877 0.007 225);
+  --gray-11: oklch(0.918 0.006 225);
+  --gray-12: oklch(0.995 0.002 225);
+}

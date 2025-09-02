@@ -1,0 +1,68 @@
+/* UI-Core Component Styles */
+
+/* Base layer framework-agnostic styles */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Typography plugin customizations */
+  .prose-lg h1 {
+    font-size: 2.5rem !important;
+  }
+}
+
+
+/* Gradient utilities using semantic accent system */
+.gradient-teal,
+.gradient-blue,
+.gradient-purple,
+.gradient-sunset,
+.gradient-ocean,
+.gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-7) 0%,
+    var(--color-accent-10) 100%
+  );
+}
+
+/* Custom scrollbar styles using neutral colors (2025 best practices) */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--gray-6);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-7);
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: var(--gray-2);
+  border-radius: 3px;
+}
+
+/* Dark mode scrollbar adjustments */
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--gray-5);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-8);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-track {
+  background-color: var(--gray-3);
+}
