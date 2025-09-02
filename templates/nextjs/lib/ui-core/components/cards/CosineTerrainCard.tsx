@@ -17,6 +17,11 @@ import {
 import type { ColorRepresentation } from 'three';
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
+import { colord, extend } from 'colord';
+import labPlugin from 'colord/plugins/lab';
+
+// Enable LAB color space support
+extend([labPlugin]);
 
 /**
  * Convert OKLCH color to RGB
@@ -291,7 +296,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const computedStyle = getComputedStyle(document.documentElement);
       const resolvedValue = computedStyle.getPropertyValue(varName).trim();
       
-      
       if (resolvedValue) {
         // Convert CSS color values to formats Three.js understands
         // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
@@ -323,6 +327,31 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
             const rgb = oklchToRgb(L, C, H);
             const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
             return hexColor;
+          }
+        } else if (resolvedValue.startsWith('lab')) {
+          // Parse lab() values manually and convert via colord
+          const labMatch = resolvedValue.match(/lab\(\s*([\d.]+%?)\s+([-\d.]+)\s+([-\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
+          if (labMatch) {
+            let L = parseFloat(labMatch[1]);
+            // Handle percentage values for L
+            if (labMatch[1].includes('%')) {
+              L = L; // Keep as percentage value for colord
+            }
+            const A = parseFloat(labMatch[2]);
+            const B = parseFloat(labMatch[3]);
+            
+            try {
+              // Use colord with LAB object for reliable conversion
+              const hexColor = colord({ l: L, a: A, b: B }).toHex();
+              return hexColor;
+            } catch (error) {
+              // Fallback to string parsing if object approach fails
+              try {
+                return colord(resolvedValue).toHex();
+              } catch (stringError) {
+                return resolvedValue; // Final fallback - return original value
+              }
+            }
           }
         }
         return resolvedValue;
@@ -615,7 +644,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       
       // Resolve color inside useEffect where DOM is available
       const resolvedMaterialColor = resolveCSSColor(cfg.material.materialColor);
-      
       
       const common = { color: resolvedMaterialColor, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
