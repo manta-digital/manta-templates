@@ -561,6 +561,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
+    
+    // Scene creation can proceed - colors will be resolved through the dependency system
+    
     mount.innerHTML = '';
     let frameId: number;
 
@@ -591,6 +594,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     
     // Use resolved background color from state (already processed by color-watching useEffect)
     const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
+    
+    // Debug background color resolution in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔧 Background Color Resolution:', {
+        'resolvedColors.background': resolvedColors.background,
+        'cfg.background.backgroundColor': cfg.background.backgroundColor,
+        'backgroundColorToUse': backgroundColorToUse
+      });
+    }
     
     if (process.env.NODE_ENV === 'development') {
       console.log('🎮 Three.js renderer setup:', {
@@ -639,6 +651,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       
       // Use resolved material color from state (already processed by color-watching useEffect)
       const materialColorToUse = resolvedColors.material || resolveCSSColor(cfg.material.materialColor);
+      
+      // Debug material color resolution in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔧 Material Color Resolution:', {
+          'resolvedColors.material': resolvedColors.material,
+          'cfg.material.materialColor': cfg.material.materialColor,
+          'materialColorToUse': materialColorToUse
+        });
+      }
       
       if (process.env.NODE_ENV === 'development') {
         console.log('🎨 Three.js material setup:', {
