@@ -28,3 +28,25 @@ export {
   type LegalFrontmatter,
   type DefaultLegalContent
 } from './legalContent';
+
+// New universal content engine (Slice 17)
+export type {
+  ContentEngine,
+  ContentFilters,
+  ContentResult,
+  RenderOptions,
+  ValidationResult
+} from './ContentEngine';
+
+export { processMarkdownContent } from './ContentEngine';
+
+export {
+  ProjectContentSchema,
+  QuoteContentSchema,
+  VideoContentSchema,
+  type ProjectContent,
+  type QuoteContent,
+  type VideoContent
+} from './schemas';
+
+export { useContent, useContentCollection } from './hooks';
