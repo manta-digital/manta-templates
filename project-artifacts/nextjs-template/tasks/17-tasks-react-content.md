@@ -90,16 +90,16 @@ This slice creates a framework-agnostic content loading system that enables shar
 - Document expected behavior through test cases
 
 #### Create Content Engine Interface
-- [ ] Create `packages/ui-core/src/content/` directory
-- [ ] Create `packages/ui-core/src/content/ContentEngine.ts` with exact interfaces from design:
-  - [ ] `ContentEngine` interface with proper method signatures
-  - [ ] `ContentResult<T>` interface with meta.headings array
-  - [ ] `ContentFilters` interface with type/tags/category
-  - [ ] `ValidationResult<S extends z.ZodTypeAny>` type
-  - [ ] `RenderOptions` interface with all security options
+- [x] Create `packages/ui-core/src/content/` directory
+- [x] Create `packages/ui-core/src/content/ContentEngine.ts` with exact interfaces from design:
+  - [x] `ContentEngine` interface with proper method signatures
+  - [x] `ContentResult<T>` interface with meta.headings array
+  - [x] `ContentFilters` interface with type/tags/category
+  - [x] `ValidationResult<S extends z.ZodTypeAny>` type
+  - [x] `RenderOptions` interface with all security options
 
 #### Implement Content Processing Function
-- [ ] Add all required imports exactly as specified in design:
+- [x] Add all required imports exactly as specified in design:
   ```typescript
   import matter from 'gray-matter';
   import { remark } from 'remark';
@@ -114,20 +114,20 @@ This slice creates a framework-agnostic content loading system that enables shar
   import { visit } from 'unist-util-visit';
   import { z } from 'zod';
   ```
-- [ ] Implement `processMarkdownContent` function with exact pipeline from design:
-  - [ ] Proper remark → rehype bridge with `remarkRehype({ allowDangerousHtml: options.allowHtml || false })`
-  - [ ] Always run `rehypeRaw` when `options.allowHtml` is true
-  - [ ] Optional `rehypeSanitize` based on `options.sanitize`
-  - [ ] Heading collection using `visit(tree, 'element', ...)` exactly as specified
-  - [ ] External link handling with proper rel attributes
-  - [ ] Metadata calculation with proper word counting
+- [x] Implement `processMarkdownContent` function with exact pipeline from design:
+  - [x] Proper remark → rehype bridge with `remarkRehype({ allowDangerousHtml: options.allowHtml || false })`
+  - [x] Always run `rehypeRaw` when `options.allowHtml` is true
+  - [x] Optional `rehypeSanitize` based on `options.sanitize`
+  - [x] Heading collection using `visit(tree, 'element', ...)` exactly as specified
+  - [x] External link handling with proper rel attributes
+  - [x] Metadata calculation with proper word counting
 
 #### Create Content Schemas
-- [ ] Create `packages/ui-core/src/content/schemas.ts` with Zod schemas from design:
-  - [ ] `ProjectContentSchema` with all fields and validations
-  - [ ] `QuoteContentSchema` with theme enum
-  - [ ] `VideoContentSchema` with displayMode enum  
-  - [ ] Export inferred types: `ProjectContent`, `QuoteContent`, `VideoContent`
+- [x] Create `packages/ui-core/src/content/schemas.ts` with Zod schemas from design:
+  - [x] `ProjectContentSchema` with all fields and validations
+  - [x] `QuoteContentSchema` with theme enum
+  - [x] `VideoContentSchema` with displayMode enum  
+  - [x] Export inferred types: `ProjectContent`, `QuoteContent`, `VideoContent`
 
 - **Success**: Secure, type-safe content engine with identical behavior across frameworks
 
@@ -136,10 +136,11 @@ This slice creates a framework-agnostic content loading system that enables shar
 - **Reference**: Design section "Vite Plugin: Build-Time Markdown Compilation"
 
 #### Create Plugin File and Basic Structure
-- [ ] Create plugin file and directory structure
-  - [ ] Create `packages/ui-adapters/src/vite/` directory if it doesn't exist
-  - [ ] Create `packages/ui-adapters/src/vite/vite-plugin-content.ts`
-  - [ ] Add all required imports exactly as specified in design:
+- [x] Create plugin file and directory structure
+  - [x] Create `packages/ui-adapters/vite/` directory as new sibling to existing nextjs/ and react/
+  - [ ] Note that `packages/ui-adapters/nextjs/` and `packages/ui-adapters/react/` exist. DO NOT REMOVE OR BREAK THEM. THIS APPLIES IN GENERAL AS WELL.
+  - [x] Create `packages/ui-adapters/vite/vite-plugin-content.ts`
+  - [x] Add all required imports exactly as specified in design:
     ```typescript
     import type { Plugin, ResolvedConfig } from 'vite';
     import path from 'node:path';
@@ -156,18 +157,18 @@ This slice creates a framework-agnostic content loading system that enables shar
     import rehypeStringify from 'rehype-stringify';
     import { visit } from 'unist-util-visit';
     ```
-  - [ ] Success: Plugin file created with all required imports
+  - [x] Success: Plugin file created with all required imports
 
 #### Create Plugin Interface and Options
-- [ ] Define plugin options interface
-  - [ ] Create `ViteContentPluginOptions` interface:
+- [x] Define plugin options interface
+  - [x] Create `ViteContentPluginOptions` interface:
     ```typescript
     export interface ViteContentPluginOptions {
       sanitize?: boolean;
       contentAlias?: string;
     }
     ```
-  - [ ] Create `viteContentPlugin` function signature:
+  - [x] Create `viteContentPlugin` function signature:
     ```typescript
     export function viteContentPlugin({
       sanitize = true,
@@ -177,22 +178,22 @@ This slice creates a framework-agnostic content loading system that enables shar
       contentAlias?: string;
     } = {}): Plugin
     ```
-  - [ ] Add helper function for path normalization:
+  - [x] Add helper function for path normalization:
     ```typescript
     function toPosix(p: string) { 
       return p.split(path.sep).join('/'); 
     }
     ```
-  - [ ] Success: Plugin interface and basic structure defined
+  - [x] Success: Plugin interface and basic structure defined
 
 #### Implement Configuration Resolution
-- [ ] Add config resolution for alias handling
-  - [ ] Define config variables:
+- [x] Add config resolution for alias handling
+  - [x] Define config variables:
     ```typescript
     let config: ResolvedConfig;
     let aliasRootAbs: string | null = null;
     ```
-  - [ ] Implement `configResolved` hook:
+  - [x] Implement `configResolved` hook:
     ```typescript
     configResolved(c) {
       config = c;
@@ -202,30 +203,30 @@ This slice creates a framework-agnostic content loading system that enables shar
       aliasRootAbs = alias ? (alias.replacement as string) : null;
     }
     ```
-  - [ ] Success: Plugin can resolve content alias absolute path
+  - [x] Success: Plugin can resolve content alias absolute path
 
 #### Build Markdown Processing Pipeline
-- [ ] Create transform method structure
-  - [ ] Implement basic transform method signature:
+- [x] Create transform method structure
+  - [x] Implement basic transform method signature:
     ```typescript
     async transform(code, id) {
       if (!id.endsWith('.md')) return null;
       // Processing logic will go here
     }
     ```
-  - [ ] Parse frontmatter and content:
+  - [x] Parse frontmatter and content:
     ```typescript
     const { data: frontmatter, content, excerpt } = matter(code, { excerpt: true });
     ```
-  - [ ] Success: Transform method structure ready for processing pipeline
+  - [x] Success: Transform method structure ready for processing pipeline
 
 #### Implement Remark/Rehype Processing Chain
-- [ ] Build headings collection system
-  - [ ] Initialize headings array: 
+- [x] Build headings collection system
+  - [x] Initialize headings array: 
     ```typescript
     const headings: { depth: number; text: string; id: string }[] = [];
     ```
-  - [ ] Create headings collection plugin:
+  - [x] Create headings collection plugin:
     ```typescript
     .use(() => (tree: any) => {
       visit(tree, 'element', (node: any) => {
@@ -241,64 +242,64 @@ This slice creates a framework-agnostic content loading system that enables shar
       });
     })
     ```
-  - [ ] Success: Headings collection system implemented
+  - [x] Success: Headings collection system implemented
 
-- [ ] Build complete remark processor pipeline
-  - [ ] Create base processor with remark-gfm:
+- [x] Build complete remark processor pipeline
+  - [x] Create base processor with remark-gfm:
     ```typescript
     let p = remark()
       .use(remarkGfm)
       .use(remarkRehype, { allowDangerousHtml: true });
     ```
-  - [ ] **CRITICAL**: Always add rehypeRaw for HTML parsing:
+  - [x] **CRITICAL**: Always add rehypeRaw for HTML parsing:
     ```typescript
     p = p.use(rehypeRaw);
     ```
-  - [ ] Add optional sanitization:
+  - [x] Add optional sanitization:
     ```typescript
     if (sanitize) p = p.use(rehypeSanitize);
     ```
-  - [ ] Add heading processing:
+  - [x] Add heading processing:
     ```typescript
     p = p.use(rehypeSlug)
          .use(rehypeAutolinkHeadings);
     ```
-  - [ ] Add external link handling:
+  - [x] Add external link handling:
     ```typescript
     p = p.use(rehypeExternalLinks, { 
       target: '_blank', 
       rel: ['noopener','noreferrer'] 
     });
     ```
-  - [ ] Add headings collection plugin (from above)
-  - [ ] Add final stringify step: `p = p.use(rehypeStringify);`
-  - [ ] Success: Complete processing pipeline implemented
+  - [x] Add headings collection plugin (from above)
+  - [x] Add final stringify step: `p = p.use(rehypeStringify);`
+  - [x] Success: Complete processing pipeline implemented
 
 #### Generate Compiled ESM Output
-- [ ] Process content and generate HTML
-  - [ ] Process markdown content: `const html = String(await p.process(content));`
-  - [ ] Calculate accurate word count: 
+- [x] Process content and generate HTML
+  - [x] Process markdown content: `const html = String(await p.process(content));`
+  - [x] Calculate accurate word count: 
     ```typescript
     const wordCount = (content.trim().match(/\S+/g) ?? []).length;
     const readingTime = Math.ceil(wordCount / 200);
     ```
-  - [ ] Get file modification time: `const stats = await fs.stat(id);`
-  - [ ] Success: Content processed and metadata calculated
+  - [x] Get file modification time: `const stats = await fs.stat(id);`
+  - [x] Success: Content processed and metadata calculated
 
-- [ ] Generate nested slug from file path
-  - [ ] Create relative path from alias root:
+- [x] Generate nested slug from file path
+  - [x] Create relative path from alias root:
     ```typescript
     const rel = aliasRootAbs ? path.relative(aliasRootAbs, id) : path.basename(id);
     ```
-  - [ ] Convert to posix slug:
+  - [x] Convert to posix slug:
     ```typescript
     const slug = rel.split(path.sep).join('/').replace(/\.md$/, '');
     ```
-  - [ ] Success: Nested slug generation implemented
+  - [x] Success: Nested slug generation implemented
 
-- [ ] Generate ESM module with proper Date constructor
-  - [ ] Create ISO date string: `const iso = stats.mtime.toISOString();`
-  - [ ] Generate complete ESM export:
+- [x] Generate ESM module with proper Date constructor
+  - [x] Create ISO date string: `const iso = stats.mtime.toISOString();`
+  - [x] Generate complete ESM export:
     ```typescript
     const js = `
 const compiled = {
@@ -315,12 +316,12 @@ const compiled = {
 };
 export default compiled;`;
     ```
-  - [ ] Return compiled result: `return { code: js, map: null };`
-  - [ ] Success: ESM module generation with proper Date objects
+  - [x] Return compiled result: `return { code: js, map: null };`
+  - [x] Success: ESM module generation with proper Date objects
 
 #### Implement HMR Support
-- [ ] Add hot module replacement handling
-  - [ ] Implement `handleHotUpdate` method:
+- [x] Add hot module replacement handling
+  - [x] Implement `handleHotUpdate` method:
     ```typescript
     handleHotUpdate(ctx) {
       if (ctx.file.endsWith('.md')) {
@@ -335,9 +336,9 @@ export default compiled;`;
   - [ ] Success: Fine-grained HMR updates work for content changes
 
 #### Final Plugin Integration
-- [ ] Complete plugin export and validation
-  - [ ] Ensure plugin function returns complete Plugin object
-  - [ ] Add error handling for transform failures
+- [x] Complete plugin export and validation
+  - [x] Ensure plugin function returns complete Plugin object
+  - [x] Add error handling for transform failures
   - [ ] Test plugin works with different markdown files
     1. Simple markdown (no HTML)
     2. Markdown with HTML content
@@ -347,92 +348,25 @@ export default compiled;`;
 
 - **Success**: React template has zero remark dependencies and fast content loading
 
-### Task 4: Next.js Content Provider Enhancement (Effort: 2/5)
-- **Objective**: Enhance Next.js provider with recursive directory support and proper caching
-- **Reference**: Design section "Next.js Content Provider (Server-Side Optimized)"
-
-#### Update Provider Structure
-- [ ] Create `packages/ui-adapters/src/nextjs/NextjsContentProvider.ts` 
-- [ ] Add all required imports including `createRequire` from 'node:module'
-- [ ] Implement constructor with proper package path resolution:
-  ```typescript
-  constructor(contentPackage: string = '@manta-templates/content') {
-    const require = createRequire(import.meta.url);
-    const pkgJsonPath = require.resolve(`${contentPackage}/package.json`);
-    const pkgRoot = path.dirname(pkgJsonPath);
-    this.contentRoot = path.join(pkgRoot, 'src');
-  }
-  ```
-
-#### Implement Recursive Directory Walking
-- [ ] Create `private async *walk(dir: string): AsyncGenerator<string>` method exactly as specified:
-  ```typescript
-  private async *walk(dir: string): AsyncGenerator<string> {
-    for (const d of await fs.readdir(dir, { withFileTypes: true })) {
-      const res = path.join(dir, d.name);
-      if (d.isDirectory()) yield* this.walk(res);
-      else if (d.isFile() && res.endsWith('.md')) yield res;
-    }
-  }
-  ```
-- [ ] Create `slugFrom` method with proper posix separator handling:
-  ```typescript
-  private slugFrom(absPath: string) {
-    const relativePath = path.relative(this.contentRoot, absPath);
-    return relativePath.split(path.sep).join('/').replace(/\.md$/, '');
-  }
-  ```
-
-#### Update Content Loading Methods
-- [ ] Enhance `loadContent` with file-based caching using mtime and proper RenderOptions:
-  ```typescript
-  const result = await processMarkdownContent(rawContent, slug, {
-    allowHtml: true,
-    sanitize: true, 
-    generateHeadingIds: true,
-    externalLinkTarget: '_blank'
-  });
-  ```
-- [ ] Update `loadContentCollection` to use recursive walking:
-  ```typescript
-  async loadContentCollection<T>(filters?: ContentFilters): Promise<ContentResult<T>[]> {
-    const files: string[] = [];
-    for await (const f of this.walk(this.contentRoot)) {
-      files.push(f);
-    }
-    const results = await Promise.all(files.map(async f => {
-      const slug = this.slugFrom(f);
-      return this.loadContent<T>(slug);
-    }));
-    // Apply filters logic exactly as specified
-  }
-  ```
-
-#### Add Runtime Safety
-- [ ] Add JSDoc comment: `// NOTE: This provider requires runtime: 'nodejs' - not Edge compatible`
-- [ ] Ensure all fs operations use proper error handling
-
-- **Success**: Next.js provider performs optimally with enhanced features and recursive support
-
-### Task 5: Vite Content Provider Creation (Effort: 3/5)
+### Task 4: Vite Content Provider Creation (Effort: 3/5)
 - **Objective**: Create optimized provider using precompiled content modules  
 - **Reference**: Design section "Vite Content Provider (Build-Time Compiled)"
 
 #### Create Provider Class
-- [ ] Create `packages/ui-adapters/src/vite/ViteContentProvider.ts`
-- [ ] Add correct import: `import type { ContentEngine, ContentResult, ContentFilters } from '@manta-templates/ui-core/content';`
-- [ ] Create class with proper cache and inflight request maps
+- [x] Create `packages/ui-adapters/vite/ViteContentProvider.ts`
+- [x] Add correct import: `import type { ContentEngine, ContentResult, ContentFilters } from '@manta-templates/ui-core/content';`
+- [x] Create class with proper cache and inflight request maps (contentCache and inflightRequests)
 
 #### Implement Static Module Loading
-- [ ] **CRITICAL**: Configure `import.meta.glob` without `'as: raw'`:
+- [x] **CRITICAL**: Configure `import.meta.glob` without `'as: raw'`:
   ```typescript
   private modules = import.meta.glob('@manta-templates/content/**/*.md', { eager: false });
   ```
-- [ ] Implement `keyFor` method for consistent key generation
-- [ ] Create `loadContent` method with inflight request deduplication
+- [x] Implement `keyFor` method for consistent key generation
+- [x] Create `loadContent` method with inflight request deduplication
 
 #### Implement Content Loading Logic
-- [ ] **CRITICAL**: Load precompiled ESM modules, not raw content:
+- [x] **CRITICAL**: Load precompiled ESM modules, not raw content:
   ```typescript
   const p = (async () => {
     const mod: any = await loader();
@@ -442,18 +376,18 @@ export default compiled;`;
     return result;
   })();
   ```
-- [ ] Implement `loadContentCollection` with proper filtering logic
-- [ ] Add `invalidate` method for cache management
+- [x] Implement `loadContentCollection` with proper filtering logic
+- [x] Add `invalidate` method for cache management
 
 #### Add HMR Integration
-- [ ] Create singleton pattern with proper factory function:
+- [x] Create singleton pattern with proper factory function:
   ```typescript
   let singleton: ViteContentProvider | null = null;
   export function getViteContentProvider() {
     return (singleton ??= new ViteContentProvider());
   }
   ```
-- [ ] Add HMR integration that invalidates singleton cache:
+- [x] Add HMR integration that invalidates singleton cache:
   ```typescript
   if (import.meta.hot) {
     import.meta.hot.accept(
@@ -463,15 +397,15 @@ export default compiled;`;
   }
   ```
 
-- **Success**: React template loads precompiled content with optimal performance
+- [x] **Success**: React template loads precompiled content with optimal performance
 
-### Task 6: Universal Content Hooks Implementation (Effort: 2/5)
+### Task 5: Universal Content Hooks Implementation (Effort: 2/5)
 - **Objective**: Create framework-agnostic React hooks for content loading
 - **Reference**: Design section "Universal Content Hooks"
 
 #### Create Content Hooks
-- [ ] Create `packages/ui-core/src/content/hooks.ts`
-- [ ] Implement `useContent` hook with exact signature from design:
+- [x] Create `packages/ui-core/src/content/hooks.ts`
+- [x] Implement `useContent` hook with exact signature from design:
   ```typescript
   export const useContent = <T = Record<string, any>>(
     filename: string, 
@@ -480,7 +414,7 @@ export default compiled;`;
     // Implementation exactly as specified in design
   }
   ```
-- [ ] Implement `useContentCollection` hook with ContentFilters parameter:
+- [x] Implement `useContentCollection` hook with ContentFilters parameter:
   ```typescript
   export const useContentCollection = <T = Record<string, any>>(
     filters: ContentFilters,
@@ -491,20 +425,21 @@ export default compiled;`;
   ```
 
 #### Add Error Handling and Loading States
-- [ ] Implement proper error boundaries with descriptive error messages
-- [ ] Add loading states and refetch capabilities
-- [ ] Ensure hooks work with both provider types
+- [x] Implement proper error boundaries with descriptive error messages
+- [x] Add loading states and refetch capabilities
+- [x] Ensure hooks work with both provider types
 
 - **Success**: Universal hooks provide consistent content loading API
 
-### Task 7: Vite Configuration Setup (Effort: 1/5)
+### Task 6: Vite Configuration Setup (Effort: 1/5)
 - **Objective**: Configure Vite alias and plugin for React template
 - **Reference**: Design section "Vite Configuration for Content Alias"
 
 #### Configure Vite Alias
-- [ ] Update `templates/react/vite.config.ts` to include:
+- [x] Update `templates/react/vite.config.ts` to include:
   ```typescript
   import { fileURLToPath } from 'node:url';
+  import { viteContentPlugin } from '@manta-templates/ui-adapters/vite';
   
   export default defineConfig({
     resolve: {
@@ -522,12 +457,12 @@ export default compiled;`;
     ]
   });
   ```
-- [ ] Verify alias resolution works with `import.meta.glob`
-- [ ] Test that plugin transforms `.md` files correctly
+- [x] Verify alias resolution works with `import.meta.glob`
+- [x] Test that plugin transforms `.md` files correctly
 
 - **Success**: Vite properly resolves content alias and processes markdown at build time
 
-### Task 8: React Template Integration (Effort: 2/5)
+### Task 7: React Template Integration (Effort: 3/5)
 - **Objective**: Integrate content system into React template
 - **Reference**: Content loading patterns from design
 
@@ -653,6 +588,73 @@ export default compiled;`;
   - [ ] Success: Production build is optimized and functional
 
 - **Success**: React template uses markdown-driven content with identical rendering
+
+### Task 8: Next.js Content Provider Enhancement (Effort: 2/5)
+- **Objective**: Enhance Next.js provider with recursive directory support and proper caching
+- **Reference**: Design section "Next.js Content Provider (Server-Side Optimized)"
+
+#### Update Provider Structure
+- [ ] Create `packages/ui-adapters/nextjs/NextjsContentProvider.ts` (enhance existing nextjs adapter) 
+- [ ] Add all required imports including `createRequire` from 'node:module'
+- [ ] Implement constructor with proper package path resolution:
+  ```typescript
+  constructor(contentPackage: string = '@manta-templates/content') {
+    const require = createRequire(import.meta.url);
+    const pkgJsonPath = require.resolve(`${contentPackage}/package.json`);
+    const pkgRoot = path.dirname(pkgJsonPath);
+    this.contentRoot = path.join(pkgRoot, 'src');
+  }
+  ```
+
+#### Implement Recursive Directory Walking
+- [ ] Create `private async *walk(dir: string): AsyncGenerator<string>` method exactly as specified:
+  ```typescript
+  private async *walk(dir: string): AsyncGenerator<string> {
+    for (const d of await fs.readdir(dir, { withFileTypes: true })) {
+      const res = path.join(dir, d.name);
+      if (d.isDirectory()) yield* this.walk(res);
+      else if (d.isFile() && res.endsWith('.md')) yield res;
+    }
+  }
+  ```
+- [ ] Create `slugFrom` method with proper posix separator handling:
+  ```typescript
+  private slugFrom(absPath: string) {
+    const relativePath = path.relative(this.contentRoot, absPath);
+    return relativePath.split(path.sep).join('/').replace(/\.md$/, '');
+  }
+  ```
+
+#### Update Content Loading Methods
+- [ ] Enhance `loadContent` with file-based caching using mtime and proper RenderOptions:
+  ```typescript
+  const result = await processMarkdownContent(rawContent, slug, {
+    allowHtml: true,
+    sanitize: true, 
+    generateHeadingIds: true,
+    externalLinkTarget: '_blank'
+  });
+  ```
+- [ ] Update `loadContentCollection` to use recursive walking:
+  ```typescript
+  async loadContentCollection<T>(filters?: ContentFilters): Promise<ContentResult<T>[]> {
+    const files: string[] = [];
+    for await (const f of this.walk(this.contentRoot)) {
+      files.push(f);
+    }
+    const results = await Promise.all(files.map(async f => {
+      const slug = this.slugFrom(f);
+      return this.loadContent<T>(slug);
+    }));
+    // Apply filters logic exactly as specified
+  }
+  ```
+
+#### Add Runtime Safety
+- [ ] Add JSDoc comment: `// NOTE: This provider requires runtime: 'nodejs' - not Edge compatible`
+- [ ] Ensure all fs operations use proper error handling
+
+- **Success**: Next.js provider performs optimally with enhanced features and recursive support
 
 ### Task 9: Next.js Template Migration (Effort: 2/5)
 - **Objective**: Migrate Next.js template to use shared content package
