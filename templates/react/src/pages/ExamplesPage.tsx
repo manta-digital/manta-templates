@@ -90,15 +90,7 @@ export default function ExamplesPage() {
             {projects && projects.length > 0 && (
               <ProjectCard
                 className="h-full"
-                content={{
-                  title: projects[0].frontmatter.title,
-                  description: projects[0].frontmatter.description,
-                  techStack: projects[0].frontmatter.techStack,
-                  image: projects[0].frontmatter.image,
-                  repoUrl: projects[0].frontmatter.repoUrl,
-                  features: projects[0].frontmatter.features,
-                  actions: projects[0].frontmatter.actions,
-                }}
+                content={projects[0].frontmatter as any}
               />
             )}
 
