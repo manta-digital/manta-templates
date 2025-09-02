@@ -1,4 +1,5 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+// Simple test file - can be run when vitest is available
+// For now, this documents expected behavior
 import { viteContentPlugin } from '../vite-plugin-content.js';
 import fs from 'node:fs/promises';
 

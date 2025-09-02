@@ -1,4 +1,4 @@
-import type { Plugin, ResolvedConfig } from 'vite';
+import type { Plugin } from 'vite';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import matter from 'gray-matter';
@@ -25,13 +25,11 @@ export function viteContentPlugin({
   sanitize?: boolean; 
   contentAlias?: string;
 } = {}): Plugin {
-  let config: ResolvedConfig;
   let aliasRootAbs: string | null = null;
 
   return {
     name: 'vite-plugin-content',
     configResolved(c) {
-      config = c;
       const alias = c.resolve.alias.find(a =>
         typeof a.find === 'string' && a.find === contentAlias
       );
@@ -43,66 +41,56 @@ export function viteContentPlugin({
       try {
         // Parse frontmatter and content
         const { data: frontmatter, content, excerpt } = matter(code, { excerpt: true });
-      
-      // Initialize headings array
-      const headings: { depth: number; text: string; id: string }[] = [];
-      
-      // Build complete remark processor pipeline
-      let p = remark()
-        .use(remarkGfm)
-        .use(remarkRehype, { allowDangerousHtml: true });
-      
-      // CRITICAL: Always add rehypeRaw for HTML parsing
-      p = p.use(rehypeRaw);
-      
-      // Add optional sanitization
-      if (sanitize) p = p.use(rehypeSanitize);
-      
-      // Add heading processing
-      p = p.use(rehypeSlug)
-           .use(rehypeAutolinkHeadings);
-      
-      // Add external link handling
-      p = p.use(rehypeExternalLinks, { 
-        target: '_blank', 
-        rel: ['noopener','noreferrer'] 
-      });
-      
-      // Add headings collection plugin
-      p = p.use(() => (tree: any) => {
-        visit(tree, 'element', (node: any) => {
-          if (/^h[1-6]$/.test(node.tagName)) {
-            const depth = Number(node.tagName[1]);
-            const id = node.properties?.id ?? '';
-            const text = (node.children ?? [])
-              .filter((c: any) => c.type === 'text')
-              .map((c: any) => c.value)
-              .join('');
-            headings.push({ depth, text, id });
-          }
-        });
-      });
-      
-      // Add final stringify step
-      p = p.use(rehypeStringify);
-      
-      // Process content and generate HTML
-      const html = String(await p.process(content));
-      
-      // Calculate accurate word count
-      const wordCount = (content.trim().match(/\S+/g) ?? []).length;
-      const readingTime = Math.ceil(wordCount / 200);
-      
-      // Get file modification time
-      const stats = await fs.stat(id);
-      
-      // Generate nested slug from file path
-      const rel = aliasRootAbs ? path.relative(aliasRootAbs, id) : path.basename(id);
-      const slug = rel.split(path.sep).join('/').replace(/\.md$/, '');
-      
-      // Generate ESM module with proper Date constructor
-      const iso = stats.mtime.toISOString();
-      const js = `
+        
+        // Initialize headings array
+        const headings: { depth: number; text: string; id: string }[] = [];
+        
+        // Build remark processor pipeline properly
+        const processor = remark()
+          .use(remarkGfm)
+          .use(remarkRehype, { allowDangerousHtml: true })
+          // All rehype plugins must be chained after remarkRehype
+          .use(rehypeRaw) // CRITICAL: Always parse raw HTML
+          .use(sanitize ? rehypeSanitize : () => {}) // Optional sanitization
+          .use(rehypeSlug) // Generate heading IDs
+          .use(rehypeAutolinkHeadings) // Add autolinks to headings
+          .use(rehypeExternalLinks, { 
+            target: '_blank', 
+            rel: ['noopener','noreferrer'] 
+          })
+          // Headings collection plugin
+          .use(() => (tree) => {
+            visit(tree, 'element', (node: any) => {
+              if (/^h[1-6]$/.test(node.tagName)) {
+                const depth = Number(node.tagName[1]);
+                const id = (node.properties?.id as string) ?? '';
+                const text = (node.children ?? [])
+                  .filter((c: any) => c.type === 'text')
+                  .map((c: any) => c.value)
+                  .join('');
+                headings.push({ depth, text, id });
+              }
+            });
+          })
+          .use(rehypeStringify); // Final stringify step
+        
+        // Process content and generate HTML
+        const html = String(await processor.process(content));
+        
+        // Calculate accurate word count
+        const wordCount = (content.trim().match(/\S+/g) ?? []).length;
+        const readingTime = Math.ceil(wordCount / 200);
+        
+        // Get file modification time
+        const stats = await fs.stat(id);
+        
+        // Generate nested slug from file path
+        const rel = aliasRootAbs ? path.relative(aliasRootAbs, id) : path.basename(id);
+        const slug = rel.split(path.sep).join('/').replace(/\.md$/, '');
+        
+        // Generate ESM module with proper Date constructor
+        const iso = stats.mtime.toISOString();
+        const js = `
 const compiled = {
   frontmatter: ${JSON.stringify(frontmatter)},
   contentHtml: ${JSON.stringify(html)},
@@ -116,8 +104,8 @@ const compiled = {
   }
 };
 export default compiled;`;
-      
-      return { code: js, map: null };
+        
+        return { code: js, map: null };
       } catch (error) {
         console.error(`Error processing markdown file ${id}:`, error);
         throw error;
@@ -129,8 +117,4 @@ export default compiled;`;
       }
     }
   };
-}
-
-function toPosix(p: string) { 
-  return p.split(path.sep).join('/'); 
 }
