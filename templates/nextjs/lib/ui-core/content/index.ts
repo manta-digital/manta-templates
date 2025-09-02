@@ -29,5 +29,24 @@ export {
   type DefaultLegalContent
 } from './legalContent';
 
-// Note: Universal content engine (Slice 17) is not available in Next.js template
-// Next.js template uses its own NextjsContentProvider via ui-adapters
+// New universal content engine (Slice 17)
+export type {
+  ContentEngine,
+  ContentFilters,
+  ContentResult,
+  RenderOptions,
+  ValidationResult
+} from './ContentEngine';
+
+export { processMarkdownContent } from './ContentEngine';
+
+export {
+  ProjectContentSchema,
+  QuoteContentSchema,
+  VideoContentSchema,
+  type ProjectContent,
+  type QuoteContent,
+  type VideoContent
+} from './schemas';
+
+export { useContent, useContentCollection } from './hooks';
