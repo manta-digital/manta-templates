@@ -14,11 +14,67 @@ import {
   TechnologyScroller,
   VideoCard
 } from '@/lib/ui-core';
-import { BackgroundVideoComponent } from '@/lib/ui-adapters';
+import { BackgroundVideoComponent, nextjsContentProvider } from '@/lib/ui-adapters';
+import type { 
+  ProjectContent, 
+  QuoteContent, 
+  VideoContent, 
+  ArticleContent, 
+  TechnologyContent 
+} from '@/lib/ui-core';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ExamplesPage() {
+export default async function ExamplesPage() {
+  // Load content using ui-adapters
+  let carouselArticleContent: ArticleContent | null = null;
+  let featuredArticleContent: ArticleContent | null = null;
+  let projectContent: ProjectContent | null = null;
+  let quoteContent: QuoteContent | null = null;
+  let videoContent: VideoContent | null = null;
+  let technologyContent: TechnologyContent | null = null;
+
+  try {
+    const carouselArticle = await nextjsContentProvider.loadContent<ArticleContent>('carousel-article', 'articles');
+    carouselArticleContent = carouselArticle.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading carousel article content:', error);
+  }
+
+  try {
+    const featuredArticle = await nextjsContentProvider.loadContent<ArticleContent>('colors-themes', 'articles');
+    featuredArticleContent = featuredArticle.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading featured article content:', error);
+  }
+
+  try {
+    const project = await nextjsContentProvider.loadContent<ProjectContent>('nextjs-template', 'projects');
+    projectContent = project.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading project content:', error);
+  }
+
+  try {
+    const quote = await nextjsContentProvider.loadContent<QuoteContent>('framework-comparison', 'quotes');
+    quoteContent = quote.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading quote content:', error);
+  }
+
+  try {
+    const video = await nextjsContentProvider.loadContent<VideoContent>('component-demo', 'videos');
+    videoContent = video.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading video content:', error);
+  }
+
+  try {
+    const technology = await nextjsContentProvider.loadContent<TechnologyContent>('tech-stack', 'technologies');
+    technologyContent = technology.frontmatter;
+  } catch (error: unknown) {
+    console.error('Error loading technology content:', error);
+  }
   return (
     <main className="min-h-screen p-6 pt-0 md:p-10 md:pt-0">
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
@@ -31,14 +87,131 @@ export default function ExamplesPage() {
         <GridItem className="col-span-8 md:col-span-4 md:row-span-2 lg:row-span-2 xl:col-span-4 xl:row-span-2">
           <CardCarousel className="h-full" itemClassName="h-full" visibleCards={{ mobile: 1, tablet: 1, desktop: 1 }} autoPlay={6000} infinite showArrows showDots={false} showControls={false}>
 
-            {/* Simple article sample inside carousel to test image hover */}
+            {/* Article sample inside carousel from markdown */}
+            {carouselArticleContent ? (
+              <ArticleCard 
+                className="h-full" 
+                ImageComponent={Image} 
+                LinkComponent={Link} 
+                title={carouselArticleContent.title} 
+                subtitle={carouselArticleContent.subtitle} 
+                description={carouselArticleContent.description} 
+                image={carouselArticleContent.image} 
+                href={carouselArticleContent.href} 
+                imageProps={{ 
+                  width: 600, 
+                  height: 400 
+                }} 
+              />
+            ) : (
+              <ArticleCard 
+                className="h-full" 
+                ImageComponent={Image} 
+                LinkComponent={Link} 
+                title="Carousel Article" 
+                subtitle="Demo" 
+                description="Testing image hover inside carousel." 
+                image="/image/blog/blog-sample-image.png" 
+                href="/blog/sample-post" 
+                imageProps={{ 
+                  width: 600, 
+                  height: 400 
+                }} 
+              />
+            )}
+            {projectContent ? (
+              <ProjectCard
+                className="h-full"
+                ImageComponent={Image}
+                LinkComponent={Link}
+                imageProps={{
+                  width: 600,
+                  height: 400
+                }}
+                content={projectContent}
+              />
+            ) : (
+              <ProjectCard
+                className="h-full"
+                ImageComponent={Image}
+                LinkComponent={Link}
+                imageProps={{
+                  width: 600,
+                  height: 400
+                }}
+                content={{
+                  title: 'Semantic Colors',
+                  description: 'Cards using accent and foreground tokens',
+                  techStack: ['Next.js', 'Tailwind v4', 'Radix'],
+                  image: '/image/blog/blog-sample-image.png',
+                  repoUrl: 'https://github.com/manta-templates/semantic-colors',
+                  features: [
+                    { label: 'Structured and Customizable Project Phases', icon: 'zap'},
+                    { label: 'AI-driven Task Discovery and Expansion', icon: 'zap', color: 'primary' },
+                    { label: 'Parameterized Prompts', icon: 'zap', color: 'primary' },
+                    { label: 'Automated Code Reviews', icon: 'zap', color: 'primary' },
+                  ],
+                  actions: [
+                    { label: 'View on GitHub', href: 'https://github.com/ecorkran/ai-project-guide', variant: 'outline' },
+                  ],
+                }}
+              />
+            )}
+
+            {/* Background video sample from markdown content */}
+            {videoContent ? (
+              <VideoCard
+                className="h-full"
+                displayMode={videoContent.displayMode}
+                videoUrl={videoContent.videoUrl}
+                thumbnailUrl={videoContent.thumbnail}
+                BackgroundVideoComponent={BackgroundVideoComponent}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-card-foreground text-xl font-semibold">{videoContent.title}</h3>
+                </div>
+              </VideoCard>
+            ) : (
+              <VideoCard
+                className="h-full"
+                displayMode="background"
+                videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
+                thumbnailUrl="/image/blog/blog-sample-image.png"
+                BackgroundVideoComponent={BackgroundVideoComponent}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
+                </div>
+              </VideoCard>
+            )}
+          </CardCarousel>
+        </GridItem>
+
+        {/* Featured article */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-3">
+          {featuredArticleContent ? (
             <ArticleCard 
               className="h-full" 
               ImageComponent={Image} 
               LinkComponent={Link} 
-              title="Carousel Article" 
-              subtitle="Demo" 
-              description="Testing image hover inside carousel." 
+              title={featuredArticleContent.title} 
+              subtitle={featuredArticleContent.subtitle} 
+              description={featuredArticleContent.description} 
+              image={featuredArticleContent.image} 
+              href={featuredArticleContent.href} 
+              imageProps={{ 
+                width: 600, 
+                height: 400 
+              }} 
+            />
+          ) : (
+            <ArticleCard 
+              className="h-full" 
+              ImageComponent={Image} 
+              LinkComponent={Link} 
+              title="Colors and Themes" 
+              subtitle="Research" 
+              description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." 
               image="/image/blog/blog-sample-image.png" 
               href="/blog/sample-post" 
               imageProps={{ 
@@ -46,63 +219,7 @@ export default function ExamplesPage() {
                 height: 400 
               }} 
             />
-            <ProjectCard
-              className="h-full"
-              ImageComponent={Image}
-              LinkComponent={Link}
-              imageProps={{
-                width: 600,
-                height: 400
-              }}
-              content={{
-                title: 'Semantic Colors',
-                description: 'Cards using accent and foreground tokens',
-                techStack: ['Next.js', 'Tailwind v4', 'Radix'],
-                image: '/image/blog/blog-sample-image.png',
-                repoUrl: 'https://github.com/manta-templates/semantic-colors',
-                features: [
-                  { label: 'Structured and Customizable Project Phases', icon: 'zap'},
-                  { label: 'AI-driven Task Discovery and Expansion', icon: 'zap', color: 'primary' },
-                  { label: 'Parameterized Prompts', icon: 'zap', color: 'primary' },
-                  { label: 'Automated Code Reviews', icon: 'zap', color: 'primary' },
-                ],
-                actions: [
-                  { label: 'View on GitHub', href: 'https://github.com/ecorkran/ai-project-guide', variant: 'outline' },
-                ],
-              }}
-            />
-
-            {/* Background video sample using ui-core VideoCard with Next.js BackgroundVideoComponent */}
-            <VideoCard
-              className="h-full"
-              displayMode="background"
-              videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
-              thumbnailUrl="/image/blog/blog-sample-image.png"
-              BackgroundVideoComponent={BackgroundVideoComponent}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-card-foreground text-xl font-semibold">Background Video Demo</h3>
-              </div>
-            </VideoCard>
-          </CardCarousel>
-        </GridItem>
-
-        {/* Featured article */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3 lg:row-span-2 xl:col-span-3">
-          <ArticleCard 
-            className="h-full" 
-            ImageComponent={Image} 
-            LinkComponent={Link} 
-            title="Colors and Themes" 
-            subtitle="Research" 
-            description="Radix scales with semantic aliasing and palette switching.  Testing making this a longer description to see how it handles the card layout." 
-            image="/image/blog/blog-sample-image.png" 
-            href="/blog/sample-post" 
-            imageProps={{ 
-              width: 600, 
-              height: 400 
-            }} 
-          />
+          )}
         </GridItem>
 
         {/* Blog image card */}
@@ -125,20 +242,32 @@ export default function ExamplesPage() {
 
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
-            <TechnologyScroller items={[
-            { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
-            { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
-            { name: 'React', svg: 'react.svg', invertOnDark: true },
-          ]}
-          speed="fast"
-          direction="left"
-          />
+            {technologyContent ? (
+              <TechnologyScroller 
+                items={technologyContent.items}
+                speed={technologyContent.speed || "fast"}
+                direction={technologyContent.direction || "left"}
+              />
+            ) : (
+              <TechnologyScroller items={[
+                { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
+                { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
+                { name: 'React', svg: 'react.svg', invertOnDark: true },
+              ]}
+              speed="fast"
+              direction="left"
+              />
+            )}
           </BaseCard>
         </GridItem>
 
         {/* Quote */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
+          {quoteContent ? (
+            <QuoteCard quote={quoteContent.quote} author={quoteContent.author} />
+          ) : (
+            <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
+          )}
         </GridItem>
       </BentoLayout>
     </main>
