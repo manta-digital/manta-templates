@@ -16,7 +16,7 @@ export const ProjectContentSchema = z.object({
   actions: z.array(z.object({
     label: z.string(),
     href: z.string(),
-    variant: z.enum(['default', 'outline', 'secondary']).optional()
+    variant: z.enum(['primary', 'outline', 'secondary']).optional()
   }))
 });
 
@@ -48,25 +48,20 @@ export const ArticleContentSchema = z.object({
   description: z.string(),
   image: z.string(),
   href: z.string(),
-  category: z.string().optional(),
-  excerpt: z.string().optional(),
-  coverImageUrl: z.string().optional(),
-  slug: z.string().optional()
-});
-
-export const TechnologyItemSchema = z.object({
-  name: z.string(),
-  svg: z.string(),
-  color: z.string().optional(),
-  colorDark: z.string().optional(),
-  invertOnDark: z.boolean().optional()
+  author: z.string().optional(),
+  publishDate: z.string().optional(),
+  readTime: z.number().optional()
 });
 
 export const TechnologyContentSchema = z.object({
   type: z.literal('technology'),
-  title: z.string(),
-  description: z.string(),
-  items: z.array(TechnologyItemSchema),
+  items: z.array(z.object({
+    name: z.string(),
+    svg: z.string(),
+    color: z.string().optional(),
+    colorDark: z.string().optional(),
+    invertOnDark: z.boolean().optional()
+  })),
   speed: z.enum(['slow', 'normal', 'fast']).optional(),
   direction: z.enum(['left', 'right']).optional()
 });
@@ -76,5 +71,4 @@ export type ProjectContent = z.infer<typeof ProjectContentSchema>;
 export type QuoteContent = z.infer<typeof QuoteContentSchema>;
 export type VideoContent = z.infer<typeof VideoContentSchema>;
 export type ArticleContent = z.infer<typeof ArticleContentSchema>;
-export type TechnologyItem = z.infer<typeof TechnologyItemSchema>;
 export type TechnologyContent = z.infer<typeof TechnologyContentSchema>;

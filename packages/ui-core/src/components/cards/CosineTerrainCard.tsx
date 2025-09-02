@@ -15,13 +15,29 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
+import { colord, extend } from 'colord';
+import labPlugin from 'colord/plugins/lab';
+
+// Extend colord with LAB plugin
+extend([labPlugin]);
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
 
 /**
- * Convert OKLCH color to RGB
- * OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360)
- * Returns: RGB values 0-255
+ * Convert any CSS color to RGB using colord
+ */
+function parseColorToRgb(color: string): { r: number; g: number; b: number } {
+  try {
+    const parsed = colord(color).toRgb();
+    return { r: parsed.r / 255, g: parsed.g / 255, b: parsed.b / 255 };
+  } catch {
+    // Fallback to white if parsing fails
+    return { r: 1, g: 1, b: 1 };
+  }
+}
+
+/**
+ * Legacy OKLCH converter - kept for reference but not used
  */
 function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
   // Convert hue from degrees to radians
@@ -319,10 +335,16 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
             const C = parseFloat(oklchMatch[2]);
             const H = parseFloat(oklchMatch[3]);
             
-            // Convert OKLCH to RGB
-            const rgb = oklchToRgb(L, C, H);
-            const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
-            return hexColor;
+            // Convert OKLCH to RGB using colord
+            const oklchStr = `oklch(${L} ${C} ${H})`;
+            try {
+              const hexColor = colord(oklchStr).toHex();
+              return hexColor;
+            } catch {
+              // Fallback if colord can't parse
+              console.warn('Failed to parse OKLCH color:', oklchStr);
+              return '#ffffff';
+            }
           }
         }
         return resolvedValue;

@@ -258,12 +258,18 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      colord:
+        specifier: ^2.9.3
+        version: 2.9.3
       framer-motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      lab:
+        specifier: link:colord/plugins/lab
+        version: link:colord/plugins/lab
       lucide-react:
         specifier: ^0.507.0
         version: 0.507.0(react@19.1.1)

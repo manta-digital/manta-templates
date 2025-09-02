@@ -16,7 +16,7 @@ export const ProjectContentSchema = z.object({
   actions: z.array(z.object({
     label: z.string(),
     href: z.string(),
-    variant: z.enum(['default', 'outline', 'secondary']).optional()
+    variant: z.enum(['primary', 'outline', 'secondary']).optional()
   }))
 });
 
@@ -41,7 +41,34 @@ export const VideoContentSchema = z.object({
   loop: z.boolean().optional()
 });
 
+export const ArticleContentSchema = z.object({
+  type: z.literal('article'),
+  title: z.string(),
+  subtitle: z.string().optional(),
+  description: z.string(),
+  image: z.string(),
+  href: z.string(),
+  author: z.string().optional(),
+  publishDate: z.string().optional(),
+  readTime: z.number().optional()
+});
+
+export const TechnologyContentSchema = z.object({
+  type: z.literal('technology'),
+  items: z.array(z.object({
+    name: z.string(),
+    svg: z.string(),
+    color: z.string().optional(),
+    colorDark: z.string().optional(),
+    invertOnDark: z.boolean().optional()
+  })),
+  speed: z.enum(['slow', 'normal', 'fast']).optional(),
+  direction: z.enum(['left', 'right']).optional()
+});
+
 // Export inferred types for perfect TypeScript DX
 export type ProjectContent = z.infer<typeof ProjectContentSchema>;
 export type QuoteContent = z.infer<typeof QuoteContentSchema>;
 export type VideoContent = z.infer<typeof VideoContentSchema>;
+export type ArticleContent = z.infer<typeof ArticleContentSchema>;
+export type TechnologyContent = z.infer<typeof TechnologyContentSchema>;

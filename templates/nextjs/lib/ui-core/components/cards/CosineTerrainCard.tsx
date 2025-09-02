@@ -15,18 +15,29 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
-import { BaseCard } from './BaseCard';
-import { cn } from '../../utils/cn';
 import { colord, extend } from 'colord';
 import labPlugin from 'colord/plugins/lab';
 
-// Enable LAB color space support
+// Extend colord with LAB plugin
 extend([labPlugin]);
+import { BaseCard } from './BaseCard';
+import { cn } from '../../utils/cn';
 
 /**
- * Convert OKLCH color to RGB
- * OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360)
- * Returns: RGB values 0-255
+ * Convert any CSS color to RGB using colord
+ */
+function parseColorToRgb(color: string): { r: number; g: number; b: number } {
+  try {
+    const parsed = colord(color).toRgb();
+    return { r: parsed.r / 255, g: parsed.g / 255, b: parsed.b / 255 };
+  } catch {
+    // Fallback to white if parsing fails
+    return { r: 1, g: 1, b: 1 };
+  }
+}
+
+/**
+ * Legacy OKLCH converter - kept for reference but not used
  */
 function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
   // Convert hue from degrees to radians
@@ -296,65 +307,33 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const computedStyle = getComputedStyle(document.documentElement);
       const resolvedValue = computedStyle.getPropertyValue(varName).trim();
       
+      
       if (resolvedValue) {
-        // Convert CSS color values to formats Three.js understands
-        // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
-        if (resolvedValue.startsWith('#')) {
-          return resolvedValue;
-        } else if (resolvedValue.startsWith('rgb')) {
-          // Convert rgb(r,g,b) to hex format for Three.js
-          const rgbMatch = resolvedValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-          if (rgbMatch) {
-            const r = parseInt(rgbMatch[1]);
-            const g = parseInt(rgbMatch[2]);
-            const b = parseInt(rgbMatch[3]);
-            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-            return hexColor;
-          }
-        } else if (resolvedValue.startsWith('oklch')) {
-          // Parse oklch and convert to RGB mathematically
-          const oklchMatch = resolvedValue.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
-          if (oklchMatch) {
-            let L = parseFloat(oklchMatch[1]);
-            // Handle percentage values (convert 88.7% to 0.887)
-            if (oklchMatch[1].includes('%')) {
-              L = L / 100;
-            }
-            const C = parseFloat(oklchMatch[2]);
-            const H = parseFloat(oklchMatch[3]);
-            
-            // Convert OKLCH to RGB
-            const rgb = oklchToRgb(L, C, H);
-            const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
-            return hexColor;
-          }
-        } else if (resolvedValue.startsWith('lab')) {
-          // Parse lab() values manually and convert via colord
-          const labMatch = resolvedValue.match(/lab\(\s*([\d.]+%?)\s+([-\d.]+)\s+([-\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
-          if (labMatch) {
-            let L = parseFloat(labMatch[1]);
-            // Handle percentage values for L
-            if (labMatch[1].includes('%')) {
-              L = L; // Keep as percentage value for colord
-            }
-            const A = parseFloat(labMatch[2]);
-            const B = parseFloat(labMatch[3]);
-            
-            try {
-              // Use colord with LAB object for reliable conversion
-              const hexColor = colord({ l: L, a: A, b: B }).toHex();
-              return hexColor;
-            } catch (error) {
-              // Fallback to string parsing if object approach fails
-              try {
-                return colord(resolvedValue).toHex();
-              } catch (stringError) {
-                return resolvedValue; // Final fallback - return original value
+        try {
+          let hex;
+          if (resolvedValue.startsWith('lab(')) {
+            // Parse LAB string to object format for colord
+            const labMatch = resolvedValue.match(/lab\(([\d.-]+)%?\s+([\d.-]+)\s+([\d.-]+)\)/);
+            if (labMatch) {
+              let l = parseFloat(labMatch[1]);
+              if (labMatch[1].includes('%')) {
+                l = l; // Keep percentage as-is for LAB
               }
+              const a = parseFloat(labMatch[2]);
+              const b = parseFloat(labMatch[3]);
+              hex = colord({ l, a, b }).toHex();
+            } else {
+              hex = '#ffffff';
             }
+          } else {
+            hex = colord(resolvedValue).toHex();
           }
+          console.log(`Converting: ${resolvedValue} -> ${hex}`);
+          return hex;
+        } catch (e) {
+          console.log(`Failed to convert: ${resolvedValue}`, e);
+          return '#ffffff';
         }
-        return resolvedValue;
       } else {
         return color;
       }
@@ -507,29 +486,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     };
   }, [cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
 
-  // Separate useEffect to update Three.js objects when resolved colors change
-  const materialRef = useRef<MeshBasicMaterial | MeshStandardMaterial | null>(null);
-  const rendererRef = useRef<WebGLRenderer | null>(null);
-  const backgroundAlphaRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (materialRef.current && rendererRef.current) {
-      // Update material color
-      const materialColorToUse = resolvedColors.material || resolveCSSColor(cfg.material.materialColor);
-      
-      if (materialColorToUse) {
-        materialRef.current.color.set(materialColorToUse as ColorRepresentation);
-      }
-
-      // Update renderer background
-      const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
-      
-      if (backgroundColorToUse && backgroundColorToUse !== '' && backgroundColorToUse !== 'undefined') {
-        rendererRef.current.setClearColor(backgroundColorToUse as ColorRepresentation, backgroundAlphaRef.current);
-      }
-    }
-  }, [resolvedColors.timestamp, cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
-
   const TILE_RECYCLING_THRESHOLD = 3.5;
   const TILE_BUFFER_DISTANCE = 1.5;
   const GAP_DETECTION_ENABLED = false;
@@ -603,7 +559,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     renderer.setPixelRatio(pixelRatio);
     // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
     const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
-    backgroundAlphaRef.current = bgAlpha;
     const resolvedBgColor = resolveCSSColor(cfg.background.backgroundColor);
     
     
@@ -612,7 +567,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     } else {
       renderer.setClearColor(0x000000, bgAlpha);
     }
-    rendererRef.current = renderer;
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
@@ -645,6 +599,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       // Resolve color inside useEffect where DOM is available
       const resolvedMaterialColor = resolveCSSColor(cfg.material.materialColor);
       
+      
       const common = { color: resolvedMaterialColor, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
@@ -663,7 +618,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     };
 
     const material = createMaterial();
-    materialRef.current = material;
     const terrainTiles: Mesh[] = [];
 
     const detectAndFillGaps = () => {
@@ -952,9 +906,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
         tile.geometry.dispose();
       });
       material.dispose();
-      // Clear refs
-      materialRef.current = null;
-      rendererRef.current = null;
     };
   }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
