@@ -24,6 +24,7 @@ export default function ExamplesPage() {
   const quoteFilters = useMemo(() => ({ type: 'quote' as const }), []);
   const videoFilters = useMemo(() => ({ type: 'video' as const }), []);
   const technologyFilters = useMemo(() => ({ type: 'technology' as const }), []);
+  const articleFilters = useMemo(() => ({ type: 'article' as const }), []);
 
   // Load content collections with memoized filters
   const { content: projects, loading: projectsLoading, error: projectsError } = useContentCollection<ProjectContent>(
@@ -43,6 +44,11 @@ export default function ExamplesPage() {
 
   const { content: technologies, loading: technologiesLoading, error: technologiesError } = useContentCollection<any>(
     technologyFilters, 
+    contentProvider
+  );
+
+  const { content: articles, loading: articlesLoading } = useContentCollection<any>(
+    articleFilters, 
     contentProvider
   );
 
@@ -68,7 +74,7 @@ export default function ExamplesPage() {
   }
 
   // Handle loading state
-  if (projectsLoading || quotesLoading || videosLoading || technologiesLoading) {
+  if (projectsLoading || quotesLoading || videosLoading || technologiesLoading || articlesLoading) {
     return <div>Loading content...</div>;
   }
 
@@ -130,7 +136,15 @@ export default function ExamplesPage() {
 
         {/* Blog image card */}
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-5 xl:col-span-5">
-          <BlogCardImage className='h-full' title="Foreground and Borders" excerpt="This card validates text-card-foreground and border tokens over imagery." coverImageUrl="/image/blog/blog-sample-image.png" textColorClassName="text-white" />
+          {articles && articles.length > 0 && (
+            <BlogCardImage 
+              className='h-full' 
+              title={articles[0].frontmatter.title} 
+              excerpt={articles[0].frontmatter.description} 
+              coverImageUrl={articles[0].frontmatter.image} 
+              textColorClassName="text-white" 
+            />
+          )}
         </GridItem>
 
         {/* Cosine terrain visual */}
