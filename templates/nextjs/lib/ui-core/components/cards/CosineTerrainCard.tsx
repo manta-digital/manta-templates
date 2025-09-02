@@ -291,18 +291,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const computedStyle = getComputedStyle(document.documentElement);
       const resolvedValue = computedStyle.getPropertyValue(varName).trim();
       
-      // Debug color resolution (remove in production)
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🎨 CosineTerrainCard Color Resolution:', {
-          input: color,
-          varName,
-          resolvedValue,
-          type: typeof resolvedValue,
-          isEmpty: !resolvedValue || resolvedValue === ''
-        });
-      }
       
-      if (resolvedValue && resolvedValue !== '') {
+      if (resolvedValue) {
         // Convert CSS color values to formats Three.js understands
         // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
         if (resolvedValue.startsWith('#')) {
@@ -337,15 +327,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
         }
         return resolvedValue;
       } else {
-        console.warn('🎨 Failed to resolve CSS variable:', color, 'falling back to default');
-        // Provide sensible fallbacks for common variables
-        if (color.includes('background') || color.includes('neutral-1')) {
-          return '#fefefe'; // Very light teal
-        }
-        if (color.includes('accent-11') || color.includes('teal-11')) {
-          return '#2dd4bf'; // Teal color
-        }
-        return 0x90ffc0; // Default green
+        return color;
       }
     }
     
@@ -467,29 +449,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     const checkColors = () => {
       if (typeof window === 'undefined') return;
       
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🔄 CosineTerrainCard checking colors...', {
-          materialInput: cfg.material.materialColor,
-          backgroundInput: cfg.background.backgroundColor
-        });
-      }
-      
       const newMaterial = resolveCSSColor(cfg.material.materialColor);
       const newBackground = resolveCSSColor(cfg.background.backgroundColor);
       
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🔄 CosineTerrainCard resolved colors:', {
-          newMaterial,
-          newBackground,
-          previousMaterial: resolvedColors.material,
-          previousBackground: resolvedColors.background
-        });
-      }
-      
       if (newMaterial !== resolvedColors.material || newBackground !== resolvedColors.background) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('✅ CosineTerrainCard updating resolved colors');
-        }
         setResolvedColors({
           material: String(newMaterial),
           background: String(newBackground),
@@ -516,7 +479,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
   }, [cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
 
   // Separate useEffect to update Three.js objects when resolved colors change
-  // This needs access to the Three.js objects created in the main useEffect
   const materialRef = useRef<MeshBasicMaterial | MeshStandardMaterial | null>(null);
   const rendererRef = useRef<WebGLRenderer | null>(null);
   const backgroundAlphaRef = useRef<number>(0);
@@ -525,20 +487,16 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     if (materialRef.current && rendererRef.current) {
       // Update material color
       const materialColorToUse = resolvedColors.material || resolveCSSColor(cfg.material.materialColor);
+      
       if (materialColorToUse) {
         materialRef.current.color.set(materialColorToUse as ColorRepresentation);
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🔄 Updated Three.js material color:', materialColorToUse);
-        }
       }
 
       // Update renderer background
       const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
+      
       if (backgroundColorToUse && backgroundColorToUse !== '' && backgroundColorToUse !== 'undefined') {
         rendererRef.current.setClearColor(backgroundColorToUse as ColorRepresentation, backgroundAlphaRef.current);
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🔄 Updated Three.js renderer background:', backgroundColorToUse);
-        }
       }
     }
   }, [resolvedColors.timestamp, cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
@@ -589,9 +547,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
-    
-    // Scene creation can proceed - colors will be resolved through the dependency system
-    
     mount.innerHTML = '';
     let frameId: number;
 
@@ -620,34 +575,15 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
     const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
     backgroundAlphaRef.current = bgAlpha;
+    const resolvedBgColor = resolveCSSColor(cfg.background.backgroundColor);
     
-    // Use resolved background color from state (already processed by color-watching useEffect)
-    const backgroundColorToUse = resolvedColors.background || resolveCSSColor(cfg.background.backgroundColor);
     
-    // Debug background color resolution in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔧 Background Color Resolution:', {
-        'resolvedColors.background': resolvedColors.background,
-        'cfg.background.backgroundColor': cfg.background.backgroundColor,
-        'backgroundColorToUse': backgroundColorToUse
-      });
-    }
-    
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎮 Three.js renderer setup:', {
-        backgroundColorToUse,
-        bgAlpha,
-        resolvedColorsState: resolvedColors
-      });
-    }
-    
-    if (backgroundColorToUse && backgroundColorToUse !== '' && backgroundColorToUse !== 'undefined') {
-      renderer.setClearColor(backgroundColorToUse as ColorRepresentation, bgAlpha);
+    if (resolvedBgColor !== undefined) {
+      renderer.setClearColor(resolvedBgColor as ColorRepresentation, bgAlpha);
     } else {
       renderer.setClearColor(0x000000, bgAlpha);
     }
     rendererRef.current = renderer;
-    
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
@@ -677,27 +613,11 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const finalRenderPreset = cfg.material.renderPreset;
       const isWireframe = finalRenderPreset === 'wireframe';
       
-      // Use resolved material color from state (already processed by color-watching useEffect)
-      const materialColorToUse = resolvedColors.material || resolveCSSColor(cfg.material.materialColor);
+      // Resolve color inside useEffect where DOM is available
+      const resolvedMaterialColor = resolveCSSColor(cfg.material.materialColor);
       
-      // Debug material color resolution in development
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🔧 Material Color Resolution:', {
-          'resolvedColors.material': resolvedColors.material,
-          'cfg.material.materialColor': cfg.material.materialColor,
-          'materialColorToUse': materialColorToUse
-        });
-      }
       
-      if (process.env.NODE_ENV === 'development') {
-        console.log('🎨 Three.js material setup:', {
-          materialColorToUse,
-          isWireframe,
-          resolvedColorsState: resolvedColors
-        });
-      }
-      
-      const common = { color: materialColorToUse, wireframe: isWireframe } as const;
+      const common = { color: resolvedMaterialColor, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
       const finalMaterialType = cfg.material.materialType;
