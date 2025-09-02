@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 import { BaseCard } from './BaseCard';
-import type { AboutContent } from '../../types/content';
+import type { AboutContent } from '../../content/schemas';
 
 // Social icon component types for dependency injection
 interface SocialIcons {
