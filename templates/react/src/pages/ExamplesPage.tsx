@@ -16,13 +16,14 @@ import {
 } from '../lib/ui-core';
 import { useContentCollection } from '../lib/ui-core/content/hooks';
 import { contentProvider } from '../lib/content';
-import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content/schemas';
+import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content';
 
 export default function ExamplesPage() {
   // Memoize filter objects to prevent infinite re-renders
   const projectFilters = useMemo(() => ({ type: 'project' as const }), []);
   const quoteFilters = useMemo(() => ({ type: 'quote' as const }), []);
   const videoFilters = useMemo(() => ({ type: 'video' as const }), []);
+  const technologyFilters = useMemo(() => ({ type: 'technology' as const }), []);
 
   // Load content collections with memoized filters
   const { content: projects, loading: projectsLoading, error: projectsError } = useContentCollection<ProjectContent>(
@@ -37,6 +38,11 @@ export default function ExamplesPage() {
 
   const { content: videos, loading: videosLoading, error: videosError } = useContentCollection<VideoContent>(
     videoFilters, 
+    contentProvider
+  );
+
+  const { content: technologies, loading: technologiesLoading, error: technologiesError } = useContentCollection<any>(
+    technologyFilters, 
     contentProvider
   );
 
@@ -62,7 +68,7 @@ export default function ExamplesPage() {
   }
 
   // Handle loading state
-  if (projectsLoading || quotesLoading || videosLoading) {
+  if (projectsLoading || quotesLoading || videosLoading || technologiesLoading) {
     return <div>Loading content...</div>;
   }
 
@@ -141,14 +147,13 @@ export default function ExamplesPage() {
 
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
-            <TechnologyScroller items={[
-            { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
-            { name: 'Tailwind CSS', svg: 'tailwindcss.svg', color: '#38BDF8', colorDark: '#38BDF8' },
-            { name: 'React', svg: 'react.svg', invertOnDark: true },
-          ]}
-          speed="fast"
-          direction="left"
-          />
+            {technologies && technologies.length > 0 && (
+              <TechnologyScroller 
+                items={technologies[0].frontmatter.items}
+                speed={technologies[0].frontmatter.speed}
+                direction={technologies[0].frontmatter.direction}
+              />
+            )}
           </BaseCard>
         </GridItem>
 
