@@ -1,0 +1,10 @@
+{
+  "name": "@manta-templates/content",
+  "version": "1.0.0",
+  "type": "module",
+  "files": ["dist/**", "src/**"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  }
+}
