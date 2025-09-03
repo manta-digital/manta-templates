@@ -34,7 +34,7 @@ export default function HomePage() {
       <Container className="pt-6 sm:pt-20 pb-10 text-center space-y-4">
         <h1 className="text-5xl font-bold">Electron Starter Template</h1>
         <p className="text-muted-foreground text-lg">
-          Minimal starter built with React,Tailwind CSS v4 and ShadCN.
+          Minimal starter built with Electron, React, Tailwind, and Radix.
         </p>
       </Container>
 

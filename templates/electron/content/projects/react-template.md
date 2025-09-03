@@ -1,7 +1,7 @@
 ---
 type: project
-title: React Template
-description: A modern React template built with Vite, featuring fast development, optimal build performance, and comprehensive component architecture.
+title: Electron Template
+description: A modern Electron template featuring React UI built with Vite, featuring fast development, optimal build performance, and comprehensive component architecture.
 techStack: ["React", "Vite", "TypeScript", "Tailwind CSS"]
 image: "/images/react-template.png"
 repoUrl: "https://github.com/manta-templates/react-template"

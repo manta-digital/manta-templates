@@ -18,7 +18,11 @@
     "ai:build": "pnpm run build && pnpm run package",
     "ai:clean": "rm -rf out node_modules && pnpm install",
     "ai:test": "pnpm run typecheck && pnpm run lint",
-    "ai:setup": "pnpm install && pnpm run typecheck"
+    "ai:setup": "pnpm install && pnpm run typecheck",
+    "setup-guides": "bash scripts/setup-guides.sh",
+    "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
+    "update-guides": "bash scripts/update-guides.sh",
+    "guides": "pnpm setup-guides"
   },
   "keywords": [
     "electron",

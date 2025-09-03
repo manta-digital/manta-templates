@@ -8,7 +8,11 @@
     "build": "vite build",
     "build-with-tsc": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup-guides": "bash scripts/setup-guides.sh",
+    "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
+    "update-guides": "bash scripts/update-guides.sh",
+    "guides": "pnpm setup-guides"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
