@@ -81,10 +81,7 @@ export default function ExamplesPage() {
     return <div>Error loading videos: {videosError.message}</div>;
   }
 
-  // Handle loading state
-  if (projectsLoading || quotesLoading || videosLoading || technologiesLoading || articlesLoading) {
-    return <div>Loading content...</div>;
-  }
+  // Skip loading state to avoid annoying flash - content loads fast enough
 
   return (
     <main className="min-h-screen px-6 pt-0 pb-6 md:px-10 md:pt-0 md:pb-10">
