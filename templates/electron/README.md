@@ -73,11 +73,14 @@ src/
 - **CSP Headers**: Content Security Policy in production
 
 ### Native Menu
-The template includes a minimal native menu example (hidden by default):
+The template includes a minimal native menu example:
 
 ```typescript
-// Press Alt to show/hide menu bar
-// Keyboard shortcuts work even when hidden:
+// Platform-specific behavior:
+// - macOS: Menu appears in system menu bar (always visible)
+// - Windows/Linux: Menu hidden by default, press Alt to toggle
+
+// Keyboard shortcuts work on all platforms:
 // - Cmd/Ctrl+N: New file example
 // - Cmd/Ctrl+O: Open file example  
 // - F12: Toggle Developer Tools
@@ -98,7 +101,7 @@ const version = await window.electronAPI.getAppVersion()
 
 ### Window Management
 - Responsive window sizing (1200x800 default)
-- Auto-hide menu bar (press Alt to toggle)
+- Auto-hide menu bar (Windows/Linux: Alt to toggle, macOS: system menu bar)
 - Platform-specific behaviors
 - Ready-to-show pattern for smooth startup
 
