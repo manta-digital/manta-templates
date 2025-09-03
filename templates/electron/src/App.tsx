@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { ThemeProvider } from './lib/ui-core'
 import { ReactHeader, ReactFooter } from './components'
 import { headerContent, footerContent } from './content'
