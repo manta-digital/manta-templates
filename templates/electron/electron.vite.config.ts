@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { viteContentPlugin } from './lib/ui-adapters/vite/vite-plugin-content'
+import { viteContentPlugin } from './lib/vite/vite-plugin-content'
 
 export default defineConfig({
   main: {
