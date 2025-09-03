@@ -72,6 +72,21 @@ src/
 - **Preload Scripts**: Secure IPC communication bridge
 - **CSP Headers**: Content Security Policy in production
 
+### Native Menu
+The template includes a minimal native menu example (hidden by default):
+
+```typescript
+// Press Alt to show/hide menu bar
+// Keyboard shortcuts work even when hidden:
+// - Cmd/Ctrl+N: New file example
+// - Cmd/Ctrl+O: Open file example  
+// - F12: Toggle Developer Tools
+// - Cmd/Ctrl+R: Reload application
+// - Cmd/Ctrl+Q: Quit application
+```
+
+Extend the menu in `src/main/main.ts` for your app's specific needs.
+
 ### IPC Examples
 The template includes examples of secure communication between main and renderer:
 
@@ -83,7 +98,7 @@ const version = await window.electronAPI.getAppVersion()
 
 ### Window Management
 - Responsive window sizing (1200x800 default)
-- Auto-hide menu bar
+- Auto-hide menu bar (press Alt to toggle)
 - Platform-specific behaviors
 - Ready-to-show pattern for smooth startup
 
