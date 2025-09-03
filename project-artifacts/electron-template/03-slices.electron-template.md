@@ -48,14 +48,14 @@
 **Objective**: Finalize template for distribution and create documentation
 
 ### Tasks:
-- [ ] Create comprehensive README with quickstart
-- [ ] Add Electron-specific features (menu bar, etc.)
-- [ ] Configure electron-builder for packaging
-- [ ] Test template deployment via degit
-- [ ] Add development scripts (dev, build, package)
-- [ ] Create example content showcasing Electron features
-- [ ] Test on different platforms (if possible)
-- [ ] Document Electron-specific customization points
+- [x] Create comprehensive README with quickstart
+- [x] Add Electron-specific features (minimal native menu with keyboard shortcuts)
+- [x] Configure electron-builder for packaging
+- [ ] Test template deployment via degit (after push)
+- [x] Add development scripts (dev, build, package, lint, typecheck)
+- [x] Create example content showcasing Electron features
+- [x] Document platform-specific behavior (macOS vs Windows/Linux)
+- [x] Document Electron-specific customization points (menu deletion, IPC, security)
 
 ### Success Criteria:
 - Template deploys successfully via degit
