@@ -566,7 +566,7 @@ Let's analyze the following existing codebase and document our findings.  We wan
 
 ***
 ##### Experimental: TDD
-*Note that this prompt was an absolute fail and it is not recommended to use this.  Preverved to assist in creating a better one.*
+*Note that this prompt was an absolute fail and it is not recommended to use this.  Preserved to assist in creating a better one.*
 
 ```markdown
 You are implementing tasks using strict Test-Driven Development.  Continue to function in your assigned role.  If you have no assigned role, assume: Senior AI.
@@ -644,51 +644,7 @@ If you were previously assigned a role, continue in that role.  If not, assume r
 - The Project Manager should inform you which mode is active for the current work
 ```
 
-##### Feature Design
-*Use this to add a design for large feature or address architectural issues in an existing project.*
 
-```markdown
-We're starting work on a new feature in project {project}.  This is an abbreviated version of our Project Kickoff instruction used for large features or architectural tasks.  
 
-We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.  
 
-The actual feature description should be contained in the appropriate project-specific directory (either `project-documents/private/project-guides/feature.{feature}.md` for regular development or `project-artifacts/project-guides/feature.{feature}.md` for monorepo template development).  Request from Project Manager if you cannot find it.
-
-The first thing we need to do is to use our Project Guide together with the additional concept information to create a concise low level design for our feature.  Document this in the appropriate features directory (`private/features/` or `project-artifacts/features/`) in file `nn-feature-{feature}.md`.  Create the features/ directory if needed. Start nn at 01 if no other feature files already exist.   
-
-If at any point in this process you are missing required information, do not guess or proceed without it.  Stop and request the information from Project Manager.
-```
-
-##### Feature Create Tasks
-*Implement Phase 3 - Task Breakdown for feature.  Use the prompt above to add the feature design first.  Output of this work is a standard {section} in the 03-tasks.{project}.md file, after which point, the feature can be treated like any other set of tasks.*
-
-```markdown
-Now we need to create tasks for our feature {feature} in {project}.  Apply the Phase 3 process as described in `00-guide.ai-project.process.md` to the feature file which should be present in `features/nn-feature.{feature}.md`.  We will create a new section for our tasks in `03-tasks.{project}.md`.  
-
-Specifically, do the following:
-* Add a section to `03-tasks.{project}.md` using our {feature} as the section name.
-* Perform the Phase 3 procedure for our {feature}, using our feature file described above as the spec for this work.
-
-Continue to follow all process guidelines, and remember to use `directory-structure.md` to resolve any file or directory naming or location issues. If any required files are not present or you do not have sufficient information, stop and request update from Project Manager before continuing. 
-```
-
-##### Ad-Hoc Slice Design
-*Note: this is mostly obsolete as it is now handled by the main Slice Design prompt.*
-```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). We have complex functionality to add to the project and we want to create a slice for it.   
-
-Create a detailed design for slice: {slice} in project {project}.  Use {description} (either from file or project-manager) as input.  Your role is Technical Fellow.
-
-Create the slice design document at `private/slices/nn-slice.{slice}.md` where nn is the appropriate sequential number. Include:
-
-- Detailed technical decisions for this slice
-- Data flows and component interactions
-- UI mockups or detailed specifications (if applicable)
-- Cross-slice dependencies and interfaces
-- Any conflicts or considerations discovered
-
-If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
-
-Stop and request clarification if you need more information to complete the slice design.
-```
 
