@@ -33,7 +33,7 @@
 - [x] Ensure all UI components render correctly
 - [x] Test content hot reload functionality
 - [x] Copy all assets (icons, images) for complete visual functionality
-- [ ] Update sync-template script to support electron (pnpm sync-template electron)
+- [ ] Update sync-template script to support electron (delayed)
 
 
 ### Success Criteria:
@@ -51,7 +51,7 @@
 - [x] Create comprehensive README with quickstart
 - [x] Add Electron-specific features (minimal native menu with keyboard shortcuts)
 - [x] Configure electron-builder for packaging
-- [ ] Test template deployment via degit (after push)
+- [x] Test template deployment via degit (after push)
 - [x] Add development scripts (dev, build, package, lint, typecheck)
 - [x] Create example content showcasing Electron features
 - [x] Document platform-specific behavior (macOS vs Windows/Linux)
