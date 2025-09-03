@@ -19,7 +19,7 @@ import { useContentCollection, useContent } from '../lib/ui-core/content/hooks';
 import { contentProvider } from '../lib/content';
 //import type { ProjectContent, QuoteContent, VideoContent, AboutContent } from '../lib/ui-core/content';
 import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content';
-import type { AboutContent } from '../lib/ui-core/content/schemas';
+import type { AboutContent } from '../lib/ui-core/types/content';
 
 export default function ExamplesPage() {
   // Memoize filter objects to prevent infinite re-renders

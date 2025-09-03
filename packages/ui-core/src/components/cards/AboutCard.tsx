@@ -10,6 +10,7 @@ interface SocialIcons {
   x: React.ComponentType<any>;
   twitter: React.ComponentType<any>;
   mail: React.ComponentType<any>;
+  [key: string]: React.ComponentType<any>; // Allow any platform string
 }
 
 interface AboutCardProps extends Partial<AboutContent> {
