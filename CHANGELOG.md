@@ -7,14 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2025-09-02
+
 ### Added
+- **React template content system** - Markdown-driven content with precompiled build-time processing for zero client-side overhead
+- **Universal content hooks** - Framework-agnostic `useContent` and `useContentCollection` with TypeScript schemas
+- **Vite content plugin** - Build-time markdown compilation with proper HTML sanitization and heading extraction
 - **CosineTerrainCard theme-awareness** - Complete theme integration with CSS custom property support and OKLCH color conversion
 - **FPS meter theme sync** - Performance indicator automatically adapts to component theme colors
 
 ### Changed
 - **CosineTerrainCard color system** - Enhanced prop interface to support theme CSS variables alongside existing color formats
+- **Content architecture** - Unified content system across Next.js and React templates with identical rendering
 
-## [0.8.0] - 2025-08-30
+## [0.7.4] - 2025-08-30
 
 ### Added
 - **Theme-aware gradient system** - Complete GradientCard overhaul with dual control API (range 0-100 and accent-to-accent)
