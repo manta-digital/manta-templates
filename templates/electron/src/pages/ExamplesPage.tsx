@@ -45,12 +45,12 @@ export default function ExamplesPage() {
     contentProvider
   );
 
-  const { content: technologies, loading: technologiesLoading, error: technologiesError } = useContentCollection<any>(
+  const { content: technologies, error: technologiesError } = useContentCollection<any>(
     technologyFilters, 
     contentProvider
   );
 
-  const { content: articles, loading: articlesLoading } = useContentCollection<any>(
+  const { content: articles } = useContentCollection<any>(
     articleFilters, 
     contentProvider
   );
