@@ -5,18 +5,10 @@ import { contentProvider } from '../lib/content'
 import type { QuoteContent } from '../lib/ui-core/content/schemas'
 
 export default function HomePage() {
-  const { content: quoteContent, loading, error } = useContent<QuoteContent>(
+  const { content: quoteContent, error } = useContent<QuoteContent>(
     'quotes/developer-testimonial', 
     contentProvider
   );
-
-  if (loading) {
-    return (
-      <Container className="pt-6 sm:pt-20 pb-10 text-center">
-        <div>Loading content...</div>
-      </Container>
-    );
-  }
 
   if (error) {
     return (
