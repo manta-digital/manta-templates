@@ -1,0 +1,79 @@
+/* ShadCN Design System Colors & Variables */
+/* Framework-agnostic design system variables for consistent UI components */
+
+:root {
+  /* Core design system variables */
+  --radius: 1.5rem;
+  
+  /* Light mode color system */
+  --background: var(--color-neutral-1);
+  --foreground: var(--color-neutral-12);
+  --card: var(--color-neutral-1);
+  --card-foreground: var(--color-neutral-12);
+  --popover: var(--color-neutral-1);
+  --popover-foreground: var(--color-neutral-12);
+  --primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
+  --primary-foreground: var(--color-neutral-1);
+  --secondary: var(--color-neutral-2);
+  --secondary-foreground: var(--color-neutral-12);
+  --muted: var(--color-neutral-2);
+  --muted-foreground: var(--color-neutral-8);
+  --accent: var(--color-neutral-2);
+  --accent-foreground: var(--color-neutral-12);
+  --destructive: oklch(0.577 0.245 27.325);  /* Keep red for errors */
+  --border: var(--color-border-accent);
+  --input: var(--color-neutral-3);
+  --ring: var(--color-neutral-7);
+  
+  /* Chart colors for data visualization - themed */
+  --chart-1: var(--color-accent-9);    /* Primary brand */
+  --chart-2: var(--color-accent-7);    /* Secondary brand */
+  --chart-3: var(--green-9);           /* Success/positive */
+  --chart-4: var(--orange-9);          /* Warning/neutral */
+  --chart-5: var(--destructive);       /* Error/negative */
+  
+  /* Sidebar system for complex layouts */
+  --sidebar: var(--color-neutral-1);
+  --sidebar-foreground: var(--color-neutral-12);
+  --sidebar-primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
+  --sidebar-primary-foreground: var(--color-neutral-1);
+  --sidebar-accent: var(--color-neutral-2);
+  --sidebar-accent-foreground: var(--color-neutral-12);
+  --sidebar-border: var(--color-neutral-5);
+  --sidebar-ring: var(--color-neutral-7);
+}
+
+/* Dark mode color adjustments */
+.dark {
+  --background: var(--color-neutral-1);
+  --foreground: var(--color-neutral-12);
+  --card: var(--color-neutral-2);
+  --card-foreground: var(--color-neutral-12);
+  --popover: var(--color-neutral-2);
+  --popover-foreground: var(--color-neutral-12);
+  --primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
+  --primary-foreground: var(--color-neutral-1);
+  --secondary: var(--color-neutral-3);
+  --secondary-foreground: var(--color-neutral-12);
+  --muted: var(--color-neutral-3);
+  --muted-foreground: var(--color-neutral-8);
+  --accent: var(--color-neutral-3);
+  --accent-foreground: var(--color-neutral-12);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: var(--color-border-accent);
+  --input: var(--color-neutral-1);  /* Use solid background instead of alpha */
+  --ring: var(--color-neutral-7);
+  
+  /* Chart colors - themed (same in dark mode) */
+  /* Colors automatically adjust via semantic variables */
+  
+  /* Sidebar dark mode adjustments */
+  --sidebar: var(--color-neutral-2);
+  --sidebar-foreground: var(--color-neutral-12);
+  --sidebar-primary: var(--color-accent-9);  /* Use semantic accent for theme awareness */
+  --sidebar-primary-foreground: var(--color-neutral-12);
+  --sidebar-accent: var(--color-neutral-3);
+  --sidebar-accent-foreground: var(--color-neutral-12);
+  --sidebar-border: var(--color-neutral-4);
+  --sidebar-ring: var(--color-neutral-7);
+}
