@@ -39,6 +39,11 @@
             "esbuild",
             "sharp",
             "unrs-resolver"
+        ],
+        "ignoredBuiltDependencies": [
+            "chromedriver",
+            "electron",
+            "electron-winstaller"
         ]
     },
     "author": "",

@@ -1,15 +1,43 @@
 # React Template
 
-This is a React application using Vite and TypeScript that demonstrates the ui-core component library. The components work without framework-specific injection - they use standard HTML elements by default but can be customized for different frameworks like Next.js.
+A modern React application built with Vite, TypeScript, and Tailwind CSS that showcases the ui-core component library with a flexible content system.
 
-## Installation
+## 🚀 Quick Start
 
+### Option 1: Using degit (Recommended)
 ```bash
+npx degit manta-digital/manta-templates/templates/react my-react-app
+cd my-react-app
 pnpm install
 pnpm dev
 ```
 
-Open http://localhost:5173. Build with `pnpm build`.
+### Option 2: Clone and extract
+```bash
+git clone https://github.com/manta-digital/manta-templates.git
+cp -r manta-templates/templates/react my-react-app
+cd my-react-app
+rm -rf .git
+pnpm install
+pnpm dev
+```
+
+### Next Steps
+- Open http://localhost:5173 to see your app
+- Edit `src/pages/` to modify content
+- Customize themes in `src/index.css`
+- Add content in the `content/` directory
+- Build for production with `pnpm build`
+
+## ✨ What's Included
+
+- **React 19** with TypeScript
+- **Vite** for fast development and building
+- **Tailwind CSS 4** for styling
+- **Content System** - Markdown-based content with hot reload
+- **Theme System** - Light/dark modes with CSS custom properties
+- **Component Library** - Pre-built UI components from ui-core
+- **Router** - React Router for navigation
 
 ## Components
 
