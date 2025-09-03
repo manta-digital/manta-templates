@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 
@@ -61,6 +61,30 @@ function createWindow(): void {
 
 app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
+  
+  // Create minimal menu example (hidden by default with autoHideMenuBar: true)
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'File',
+      submenu: [
+        { label: 'New', accelerator: 'CmdOrCtrl+N', click: () => console.log('New file') },
+        { label: 'Open', accelerator: 'CmdOrCtrl+O', click: () => console.log('Open file') },
+        { type: 'separator' },
+        { label: 'Quit', accelerator: 'CmdOrCtrl+Q', role: 'quit' }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { label: 'Toggle Developer Tools', accelerator: 'F12', role: 'toggleDevTools' },
+        { label: 'Reload', accelerator: 'CmdOrCtrl+R', role: 'reload' },
+        { type: 'separator' },
+        { label: 'Toggle Menu Bar', accelerator: 'Alt', click: (_, win) => win?.setMenuBarVisibility(!win.isMenuBarVisible()) }
+      ]
+    }
+  ])
+  
+  Menu.setApplicationMenu(menu)
   createWindow()
   
   // Basic CSP in production
