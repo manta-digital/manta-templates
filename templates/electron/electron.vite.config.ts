@@ -53,7 +53,7 @@ export default defineConfig({
         '@manta-templates/content': fileURLToPath(
           new URL('./content', import.meta.url)
         ),
-        '@/lib': resolve(__dirname, 'src/lib')
+        '@/lib': resolve(__dirname, 'lib')
       }
     },
     plugins: [
