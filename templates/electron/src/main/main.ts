@@ -63,6 +63,7 @@ app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
   
   // Create minimal menu example (hidden by default with autoHideMenuBar: true)
+  // Delete this entire menu section if you don't want a native menu
   const menu = Menu.buildFromTemplate([
     {
       label: 'File',
@@ -85,6 +86,7 @@ app.whenReady().then(() => {
   ])
   
   Menu.setApplicationMenu(menu)
+  // End of menu section - delete everything above this line to remove the menu
   createWindow()
   
   // Basic CSP in production

@@ -88,7 +88,7 @@ The template includes a minimal native menu example:
 // - Cmd/Ctrl+Q: Quit application
 ```
 
-Extend the menu in `src/main/main.ts` for your app's specific needs.
+Extend the menu in `src/main/main.ts` for your app's specific needs, or delete the entire menu section if you prefer no native menu.
 
 ### IPC Examples
 The template includes examples of secure communication between main and renderer:
