@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@import "./lib/ui-core/styles/index.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Template-specific customizations only - all color system moved to ui-core */
+
+/* Theme Registry - Control which themes appear in ColorSelector */
+:root {
+  /* Add custom themes to the UI-core themes */
+  --user-themes: "forest,banana,sunset";
+  --user-theme-names: "Forest;🍌 Banana; Sunset";
+  
+  /* You can also override the default theme selection */
+  --ui-default-theme: "teal";
+}
+
+/* You can add template-specific styles below */
+
+/* Example custom theme - Forest theme with green-tinted neutrals */
+[data-palette="forest"] {
+  /* Use built-in green accent colors */
+  --color-accent-1: var(--green-1);
+  --color-accent-2: var(--green-2);
+  --color-accent-3: var(--green-3);
+  --color-accent-4: var(--green-4);
+  --color-accent-5: var(--green-5);
+  --color-accent-6: var(--green-6);
+  --color-accent-7: var(--green-7);
+  --color-accent-8: var(--green-8);
+  --color-accent-9: var(--green-9);
+  --color-accent-10: var(--green-10);
+  --color-accent-11: var(--green-11);
+  --color-accent-12: var(--green-12);
+
+  /* Green-tinted neutrals for forest feel */
+  --color-neutral-1: var(--green-n1);
+  --color-neutral-2: var(--green-n2);
+  --color-neutral-3: var(--green-n3);
+  --color-neutral-4: var(--green-n4);
+  --color-neutral-5: var(--green-n5);
+  --color-neutral-6: var(--green-n6);
+  --color-neutral-7: var(--green-n7);
+  --color-neutral-8: var(--green-n8);
+  --color-neutral-9: var(--green-n9);
+  --color-neutral-10: var(--green-n10);
+  --color-neutral-11: var(--green-n11);
+  --color-neutral-12: var(--green-n12);
+}
+
+/* Banana Theme - Warm yellow accents with brown-tinted neutrals */
+[data-palette="banana"] {
+  /* Yellow accent colors for warm, energetic feel */
+  --color-accent-1: oklch(0.995 0.008 85);
+  --color-accent-2: oklch(0.988 0.020 85);
+  --color-accent-3: oklch(0.975 0.035 85);
+  --color-accent-4: oklch(0.958 0.055 85);
+  --color-accent-5: oklch(0.935 0.080 85);
+  --color-accent-6: oklch(0.905 0.110 85);
+  --color-accent-7: oklch(0.870 0.145 85);
+  --color-accent-8: oklch(0.825 0.185 85);
+  --color-accent-9: oklch(0.775 0.230 85);
+  --color-accent-10: oklch(0.715 0.215 85);
+  --color-accent-11: oklch(0.640 0.190 85);
+  --color-accent-12: oklch(0.350 0.095 85);
+
+  /* Brown-tinted neutrals for warm, natural feel */
+  --color-neutral-1: oklch(0.995 0.003 45);
+  --color-neutral-2: oklch(0.985 0.005 45);
+  --color-neutral-3: oklch(0.972 0.008 45);
+  --color-neutral-4: oklch(0.955 0.012 45);
+  --color-neutral-5: oklch(0.935 0.018 45);
+  --color-neutral-6: oklch(0.910 0.025 45);
+  --color-neutral-7: oklch(0.880 0.035 45);
+  --color-neutral-8: oklch(0.835 0.050 45);
+  --color-neutral-9: oklch(0.765 0.075 45);
+  --color-neutral-10: oklch(0.685 0.065 45);
+  --color-neutral-11: oklch(0.585 0.055 45);
+  --color-neutral-12: oklch(0.285 0.028 45);
+}
+
+.dark[data-palette="banana"] {
+  --color-accent-1: oklch(14.2% 0.0135 107.2);
+  --color-accent-2: oklch(20.2% 0.0177 107.2);
+  --color-accent-3: oklch(25.9% 0.0397 107.2);
+  --color-accent-4: oklch(30% 0.0574 107.2);
+  --color-accent-5: oklch(34.4% 0.0696 107.2);
+  --color-accent-6: oklch(39.5% 0.0748 107.2);
+  --color-accent-7: oklch(45.6% 0.08 107.2);
+  --color-accent-8: oklch(53% 0.0936 107.2);
+  --color-accent-9: oklch(85.8% 0.1663 107.2);
+  --color-accent-10: oklch(82.7% 0.1663 107.2);
+  --color-accent-11: oklch(88.7% 0.1663 107.2);
+  --color-accent-12: oklch(94.3% 0.0794 107.2);
+
+  --color-accent-a1: color(display-p3 0 0.5255 0.9922 / 0.008);
+  --color-accent-a2: color(display-p3 0.8039 1 0.8392 / 0.057);
+  --color-accent-a3: color(display-p3 0.9451 1 0.4627 / 0.114);
+  --color-accent-a4: color(display-p3 0.9608 0.9961 0.3059 / 0.159);
+  --color-accent-a5: color(display-p3 0.9882 1 0.2824 / 0.204);
+  --color-accent-a6: color(display-p3 0.9961 0.9961 0.3725 / 0.261);
+  --color-accent-a7: color(display-p3 1 1 0.4549 / 0.33);
+  --color-accent-a8: color(display-p3 1 1 0.4627 / 0.416);
+  --color-accent-a9: color(display-p3 1 0.9804 0.4118 / 0.856);
+  --color-accent-a10: color(display-p3 1 0.9765 0.3804 / 0.815);
+  --color-accent-a11: color(display-p3 1 0.9765 0.4431 / 0.898);
+  --color-accent-a12: color(display-p3 1 0.9961 0.7686 / 0.947);
+
+  --color-accent-contrast: #24230a;
+  --color-accent-surface: color(display-p3 0.1333 0.1412 0.102 / 0.5);
+  --color-accent-indicator: oklch(85.8% 0.1663 107.2);
+  --color-accent-track: oklch(85.8% 0.1663 107.2);
+
+  --color-neutral-1: oklch(14.2% 0.0178 53.84);
+  --color-neutral-2: oklch(20.7% 0.017 53.84);
+  --color-neutral-3: oklch(25% 0.0245 53.84);
+  --color-neutral-4: oklch(28.1% 0.028 53.84);
+  --color-neutral-5: oklch(31.2% 0.0349 53.84);
+  --color-neutral-6: oklch(34.9% 0.0452 53.84);
+  --color-neutral-7: oklch(40.1% 0.0553 53.84);
+  --color-neutral-8: oklch(49% 0.0748 53.84);
+  --color-neutral-9: oklch(53.5% 0.0829 53.84);
+  --color-neutral-10: oklch(58.1% 0.0829 53.84);
+  --color-neutral-11: oklch(76.7% 0.0719 53.84);
+  --color-neutral-12: oklch(94.8% 0.0205 53.84);
+  
+  --color-neutral-a1: color(display-p3 0.9216 0 0.451 / 0.009);
+  --color-neutral-a2: color(display-p3 1 0.7647 0.7961 / 0.07);
+  --color-neutral-a3: color(display-p3 0.9961 0.7569 0.698 / 0.12);
+  --color-neutral-a4: color(display-p3 1 0.7843 0.6588 / 0.157);
+  --color-neutral-a5: color(display-p3 1 0.749 0.6275 / 0.198);
+  --color-neutral-a6: color(display-p3 1 0.7216 0.5569 / 0.252);
+  --color-neutral-a7: color(display-p3 1 0.7098 0.5373 / 0.321);
+  --color-neutral-a8: color(display-p3 0.9961 0.698 0.4902 / 0.457);
+  --color-neutral-a9: color(display-p3 1 0.6902 0.4902 / 0.527);
+  --color-neutral-a10: color(display-p3 1 0.7255 0.5333 / 0.581);
+  --color-neutral-a11: color(display-p3 1 0.8118 0.6745 / 0.807);
+  --color-neutral-a12: color(display-p3 1 0.9569 0.9137 / 0.968);
+
+  --color-neutral-contrast: #FFFFFF;
+  --color-neutral-surface: color(display-p3 0 0 0 / 5%);
+  --color-neutral-indicator: oklch(53.5% 0.0829 53.84);
+  --color-neutral-track: oklch(53.5% 0.0829 53.84);
+}
+
+/* Sunset Theme - Orange to pink gradient with warm neutrals */
+[data-palette="sunset"] {
+  /* Orange-pink accent colors for vibrant, sunset feel */
+  --color-accent-1: oklch(0.995 0.010 25);
+  --color-accent-2: oklch(0.988 0.025 25);
+  --color-accent-3: oklch(0.975 0.045 25);
+  --color-accent-4: oklch(0.958 0.070 25);
+  --color-accent-5: oklch(0.935 0.100 25);
+  --color-accent-6: oklch(0.905 0.135 25);
+  --color-accent-7: oklch(0.870 0.175 25);
+  --color-accent-8: oklch(0.825 0.220 25);
+  --color-accent-9: oklch(0.775 0.270 25);
+  --color-accent-10: oklch(0.715 0.255 25);
+  --color-accent-11: oklch(0.640 0.235 25);
+  --color-accent-12: oklch(0.350 0.120 25);
+
+  /* Warm orange-tinted neutrals */
+  --color-neutral-1: var(--orange-n1);
+  --color-neutral-2: var(--orange-n2);
+  --color-neutral-3: var(--orange-n3);
+  --color-neutral-4: var(--orange-n4);
+  --color-neutral-5: var(--orange-n5);
+  --color-neutral-6: var(--orange-n6);
+  --color-neutral-7: var(--orange-n7);
+  --color-neutral-8: var(--orange-n8);
+  --color-neutral-9: var(--orange-n9);
+  --color-neutral-10: var(--orange-n10);
+  --color-neutral-11: var(--orange-n11);
+  --color-neutral-12: var(--orange-n12);
+}
