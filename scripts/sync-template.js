@@ -239,8 +239,8 @@ function updateProjectConfig(templateDir) {
   if (fs.existsSync(eslintConfigPath)) {
     let eslintContent = fs.readFileSync(eslintConfigPath, 'utf8');
     
-    // Add lib ignore if not present
-    if (!eslintContent.includes('ignores: ["lib/**/*"]')) {
+    // Add src/lib ignore if not present
+    if (!eslintContent.includes('ignores: ["src/lib/**/*"]')) {
       const insertPoint = eslintContent.indexOf('const eslintConfig = [');
       if (insertPoint !== -1) {
         const beforeInsert = eslintContent.substring(0, insertPoint);
@@ -251,7 +251,7 @@ function updateProjectConfig(templateDir) {
           `const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    ignores: ["lib/**/*"],
+    ignores: ["src/lib/**/*"],
   },
 ];`
         );

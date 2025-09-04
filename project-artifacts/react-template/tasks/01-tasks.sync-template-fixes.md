@@ -36,11 +36,11 @@ The `scripts/sync-template.js` script has critical issues that prevent it from w
   - Update all references to `libDir` to point to `src/lib`
   - **Success:** Script creates `src/lib/` instead of root `lib/`
 
-- [in-progress] **Task 1.2: Update TypeScript configuration paths**
+- ✓ **Task 1.2: Update TypeScript configuration paths**
   - Change tsconfig path mapping from `"@/lib/*": ["./lib/*"]` to `"@/lib/*": ["./src/lib/*"]`
   - **Success:** TypeScript can resolve imports correctly from src/lib
 
-- [ ] **Task 1.3: Update ESLint configuration**
+- [in-progress] **Task 1.3: Update ESLint configuration**
   - Change ignore pattern from `"lib/**/*"` to `"src/lib/**/*"`
   - **Success:** ESLint ignores the correct directory
 
