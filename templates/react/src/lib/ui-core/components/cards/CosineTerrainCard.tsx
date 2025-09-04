@@ -15,47 +15,25 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
+import { colord, extend } from 'colord';
+import labPlugin from 'colord/plugins/lab';
+
+// Extend colord with LAB plugin
+extend([labPlugin]);
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
 
 /**
- * Convert OKLCH color to RGB
- * OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360)
- * Returns: RGB values 0-255
+ * Convert any CSS color to RGB using colord
  */
-function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
-  // Convert hue from degrees to radians
-  const h = (H * Math.PI) / 180;
-  
-  // Convert OKLCH to OKLab
-  const a = C * Math.cos(h);
-  const b = C * Math.sin(h);
-  
-  // Convert OKLab to linear RGB (D65 illuminant)
-  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
-  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
-  const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
-  
-  const l = l_ * l_ * l_;
-  const m = m_ * m_ * m_;
-  const s = s_ * s_ * s_;
-  
-  // Linear RGB to sRGB
-  let r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
-  let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
-  let b_val = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
-  
-  // Apply gamma correction for sRGB
-  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
-  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
-  b_val = b_val > 0.0031308 ? 1.055 * Math.pow(b_val, 1 / 2.4) - 0.055 : 12.92 * b_val;
-  
-  // Clamp to 0-255 range
-  return {
-    r: Math.max(0, Math.min(255, r * 255)),
-    g: Math.max(0, Math.min(255, g * 255)),
-    b: Math.max(0, Math.min(255, b_val * 255))
-  };
+function parseColorToRgb(color: string): { r: number; g: number; b: number } {
+  try {
+    const parsed = colord(color).toRgb();
+    return { r: parsed.r / 255, g: parsed.g / 255, b: parsed.b / 255 };
+  } catch {
+    // Fallback to white if parsing fails
+    return { r: 1, g: 1, b: 1 };
+  }
 }
 
 /**
@@ -280,7 +258,12 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     }
     
     if (!color.startsWith('var(')) {
-      return color;
+      // Not a CSS variable, try to convert directly with colord
+      try {
+        return colord(color).toHex();
+      } catch {
+        return color; // Return as-is if colord can't parse it
+      }
     }
     
     // Extract the CSS variable name
@@ -291,47 +274,17 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const computedStyle = getComputedStyle(document.documentElement);
       const resolvedValue = computedStyle.getPropertyValue(varName).trim();
       
-      
       if (resolvedValue) {
-        // Convert CSS color values to formats Three.js understands
-        // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
-        if (resolvedValue.startsWith('#')) {
-          return resolvedValue;
-        } else if (resolvedValue.startsWith('rgb')) {
-          // Convert rgb(r,g,b) to hex format for Three.js
-          const rgbMatch = resolvedValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-          if (rgbMatch) {
-            const r = parseInt(rgbMatch[1]);
-            const g = parseInt(rgbMatch[2]);
-            const b = parseInt(rgbMatch[3]);
-            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-            return hexColor;
-          }
-        } else if (resolvedValue.startsWith('oklch')) {
-          // Parse oklch and convert to RGB mathematically
-          const oklchMatch = resolvedValue.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
-          if (oklchMatch) {
-            let L = parseFloat(oklchMatch[1]);
-            // Handle percentage values (convert 88.7% to 0.887)
-            if (oklchMatch[1].includes('%')) {
-              L = L / 100;
-            }
-            const C = parseFloat(oklchMatch[2]);
-            const H = parseFloat(oklchMatch[3]);
-            
-            // Convert OKLCH to RGB
-            const rgb = oklchToRgb(L, C, H);
-            const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
-            return hexColor;
-          }
+        try {
+          return colord(resolvedValue).toHex();
+        } catch (e) {
+          console.log(`Failed to convert CSS variable ${varName}: ${resolvedValue}`, e);
+          return '#90ffc0'; // Fallback color
         }
-        return resolvedValue;
-      } else {
-        return color;
       }
     }
     
-    return color;
+    return '#90ffc0'; // Final fallback
   };
 
   // Normalize grouped settings type for safe access
