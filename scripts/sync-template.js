@@ -194,20 +194,52 @@ function getCSSFilePath(templateDir, templateName) {
   return null;
 }
 
+function getTemplateSpecificConfig(templateName) {
+  // Template-specific configuration
+  const templateConfigs = {
+    'nextjs': {
+      uiAdaptersPackage: '@manta-templates/ui-adapters-nextjs',
+      additionalAdapters: [],
+      supportedFeatures: ['ssr', 'app-router']
+    },
+    'react': {
+      uiAdaptersPackage: '@manta-templates/ui-adapters-react',
+      additionalAdapters: ['vite'], // React needs Vite adapter
+      supportedFeatures: ['vite', 'spa']
+    },
+    'electron': {
+      uiAdaptersPackage: '@manta-templates/ui-adapters-electron',
+      additionalAdapters: [],
+      supportedFeatures: ['desktop', 'main-renderer']
+    }
+  };
+  
+  // Return template config or default
+  return templateConfigs[templateName] || {
+    uiAdaptersPackage: `@manta-templates/ui-adapters-${templateName}`,
+    additionalAdapters: [],
+    supportedFeatures: []
+  };
+}
+
 function updateImportPaths(templateDir, templateName) {
   console.log('🔧 Updating import paths to use local lib...');
   
   const srcDir = path.join(templateDir, 'src');
+  const templateConfig = getTemplateSpecificConfig(templateName);
   
   // Update TypeScript/JavaScript files
   try {
+    // Update ui-core imports (same for all templates)
     execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@manta-templates/ui-core|@/lib/ui-core|g" {} +`);
-    execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@manta-templates/ui-adapters-nextjs|@/lib/ui-adapters|g" {} +`);
+    
+    // Update template-specific ui-adapters imports
+    execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|${templateConfig.uiAdaptersPackage}|@/lib/ui-adapters|g" {} +`);
     
     // Also update any @/lib/utils imports to use ui-core utils  
     execSync(`find "${srcDir}" -type f \\( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \\) -exec sed -i '' "s|@/lib/utils|@/lib/ui-core/utils|g" {} +`);
     
-    console.log('📝 Updated TypeScript/JavaScript import paths');
+    console.log(`📝 Updated TypeScript/JavaScript import paths for ${templateName} template`);
   } catch (error) {
     console.warn('⚠️  Warning: Could not update some import paths');
   }

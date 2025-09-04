@@ -45,12 +45,12 @@ The `scripts/sync-template.js` script has critical issues that prevent it from w
   - **Success:** ESLint ignores the correct directory
 
 ### Task 2: Remove NextJS Hard-coding (Effort: 2)
-- [in-progress] **Task 2.1: Make CSS path detection dynamic**
+- ✓ **Task 2.1: Make CSS path detection dynamic**
   - Replace hardcoded `src/app/globals.css` with template-specific detection
   - Support React's `src/index.css`, NextJS `app/globals.css`, Electron `src/index.css`
   - **Success:** CSS updates work for all template types
 
-- [ ] **Task 2.2: Create template-specific path mapping**
+- [in-progress] **Task 2.2: Create template-specific path mapping**
   - Add function to determine correct CSS file path per template
   - Add function to determine correct import paths per template
   - **Success:** All templates get appropriate path updates
