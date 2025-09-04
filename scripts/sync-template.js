@@ -111,7 +111,7 @@ function syncTemplate(templateName) {
   updatePackageJson(templateDir);
 
   // Update import paths to use local lib
-  updateImportPaths(templateDir);
+  updateImportPaths(templateDir, templateName);
 
   console.log(`✅ Template ${templateName} synced successfully!`);
   console.log(`📁 UI packages copied to: ${path.join(templateDir, 'src', 'lib')}`);
@@ -174,11 +174,30 @@ function updatePackageJson(templateDir) {
   }
 }
 
-function updateImportPaths(templateDir) {
+function getCSSFilePath(templateDir, templateName) {
+  const srcDir = path.join(templateDir, 'src');
+  
+  // Template-specific CSS file paths
+  const possiblePaths = [
+    path.join(srcDir, 'app', 'globals.css'), // NextJS
+    path.join(srcDir, 'index.css'),          // React, Electron
+    path.join(srcDir, 'main.css'),           // Alternative
+  ];
+  
+  // Find the first existing CSS file
+  for (const cssPath of possiblePaths) {
+    if (fs.existsSync(cssPath)) {
+      return cssPath;
+    }
+  }
+  
+  return null;
+}
+
+function updateImportPaths(templateDir, templateName) {
   console.log('🔧 Updating import paths to use local lib...');
   
   const srcDir = path.join(templateDir, 'src');
-  const globalsPath = path.join(srcDir, 'app', 'globals.css');
   
   // Update TypeScript/JavaScript files
   try {
@@ -193,17 +212,28 @@ function updateImportPaths(templateDir) {
     console.warn('⚠️  Warning: Could not update some import paths');
   }
 
-  // Update CSS import in globals.css
-  if (fs.existsSync(globalsPath)) {
-    const globalsContent = fs.readFileSync(globalsPath, 'utf8');
-    const updatedContent = globalsContent.replace(
+  // Update CSS import in main CSS file (dynamic detection)
+  const cssFilePath = getCSSFilePath(templateDir, templateName);
+  if (cssFilePath) {
+    const cssContent = fs.readFileSync(cssFilePath, 'utf8');
+    
+    // Calculate relative path from CSS file to ui-core styles (now in src/lib)
+    const cssFileName = path.basename(cssFilePath);
+    const relativePath = cssFilePath.includes('app/globals.css') 
+      ? '../lib/ui-core/styles/index.css'       // NextJS: src/app/globals.css -> src/lib/ui-core/styles/
+      : './lib/ui-core/styles/index.css';       // React/Electron: src/index.css -> src/lib/ui-core/styles/
+    
+    const updatedContent = cssContent.replace(
       /@import "@manta-templates\/ui-core\/dist\/styles\/index\.css";/g,
-      '@import "../../lib/ui-core/styles/index.css";'
+      `@import "${relativePath}";`
     );
-    if (updatedContent !== globalsContent) {
-      fs.writeFileSync(globalsPath, updatedContent);
-      console.log('📝 Updated CSS import path in globals.css');
+    
+    if (updatedContent !== cssContent) {
+      fs.writeFileSync(cssFilePath, updatedContent);
+      console.log(`📝 Updated CSS import path in ${cssFileName}`);
     }
+  } else {
+    console.warn('⚠️  Warning: No main CSS file found for import path updates');
   }
 
   // Update tsconfig.json and eslint.config.mjs

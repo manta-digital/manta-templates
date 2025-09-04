@@ -44,32 +44,32 @@ The `scripts/sync-template.js` script has critical issues that prevent it from w
   - Change ignore pattern from `"lib/**/*"` to `"src/lib/**/*"`
   - **Success:** ESLint ignores the correct directory
 
-### Task 2: Add Electron Template Support (Effort: 3)
-- [ ] **Task 2.1: Create electron-specific configuration**
-  - Add conditional logic for `templateName === 'electron'`
-  - Handle electron's unique build structure (main/renderer/preload)
-  - **Success:** Script recognizes electron as valid template
-
-- [ ] **Task 2.2: Update CSS import handling for electron**
-  - Add electron-specific CSS import path updates
-  - Handle electron's `src/index.css` instead of NextJS `app/globals.css`
-  - **Success:** CSS imports work correctly in electron template
-
-- [ ] **Task 2.3: Handle electron-specific dependencies**
-  - Ensure electron-specific packages remain in package.json
-  - Add electron build tool compatibility checks
-  - **Success:** Electron template remains functional after sync
-
-### Task 3: Remove NextJS Hard-coding (Effort: 2)
-- [ ] **Task 3.1: Make CSS path detection dynamic**
+### Task 2: Remove NextJS Hard-coding (Effort: 2)
+- [in-progress] **Task 2.1: Make CSS path detection dynamic**
   - Replace hardcoded `src/app/globals.css` with template-specific detection
   - Support React's `src/index.css`, NextJS `app/globals.css`, Electron `src/index.css`
   - **Success:** CSS updates work for all template types
 
-- [ ] **Task 3.2: Create template-specific path mapping**
+- [ ] **Task 2.2: Create template-specific path mapping**
   - Add function to determine correct CSS file path per template
   - Add function to determine correct import paths per template
   - **Success:** All templates get appropriate path updates
+
+### Task 3: Add Electron Template Support (Effort: 3)
+- [ ] **Task 3.1: Create electron-specific configuration**
+  - Add conditional logic for `templateName === 'electron'`
+  - Handle electron's unique build structure (main/renderer/preload)
+  - **Success:** Script recognizes electron as valid template
+
+- [ ] **Task 3.2: Update CSS import handling for electron**
+  - Add electron-specific CSS import path updates
+  - Handle electron's `src/index.css` instead of NextJS `app/globals.css`
+  - **Success:** CSS imports work correctly in electron template
+
+- [ ] **Task 3.3: Handle electron-specific dependencies**
+  - Ensure electron-specific packages remain in package.json
+  - Add electron build tool compatibility checks
+  - **Success:** Electron template remains functional after sync
 
 ### Task 4: Implement Safe Content Handling (Effort: 3)
 - [ ] **Task 4.1: Add content backup mechanism**
