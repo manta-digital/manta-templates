@@ -222,12 +222,12 @@ function updateProjectConfig(templateDir) {
     if (!tsconfig.compilerOptions) tsconfig.compilerOptions = {};
     if (!tsconfig.compilerOptions.paths) tsconfig.compilerOptions.paths = {};
     
-    tsconfig.compilerOptions.paths["@/lib/*"] = ["./lib/*"];
+    tsconfig.compilerOptions.paths["@/lib/*"] = ["./src/lib/*"];
     
-    // Exclude lib directory
+    // Exclude src/lib directory
     if (!tsconfig.exclude) tsconfig.exclude = [];
-    if (!tsconfig.exclude.includes("lib")) {
-      tsconfig.exclude.push("lib");
+    if (!tsconfig.exclude.includes("src/lib")) {
+      tsconfig.exclude.push("src/lib");
     }
 
     fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2) + '\n');
