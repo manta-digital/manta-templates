@@ -1,16 +1,4 @@
-// React template content system exports
-// Only includes what's needed for content consumption, not processing
-
-// Content hooks for React components
-export { useContent, useContentCollection } from './hooks';
-
-// Content type interfaces
-export type { ContentEngine, ContentResult, ContentFilters } from './contentTypes';
-
-// Content schemas (TypeScript interfaces only)
-export type { ProjectContent, QuoteContent, VideoContent } from './schemas';
-
-// Legacy types (kept for compatibility if needed)
+// Content system exports
 export type {
   ContentProvider,
   ContentData,
@@ -26,7 +14,13 @@ export {
   ContentNotFoundError
 } from './types';
 
-// Legal content helper (if available)
+export { ContentProcessor } from './processor';
+export type { ProcessorConfig } from './processor';
+
+export { BaseContentProvider } from './BaseContentProvider';
+export { MockContentProvider } from './MockContentProvider';
+
+// Legal content helper
 export {
   getDefaultLegalContent,
   type LegalContentType,
@@ -34,3 +28,31 @@ export {
   type LegalFrontmatter,
   type DefaultLegalContent
 } from './legalContent';
+
+// New universal content engine (Slice 17)
+export type {
+  ContentEngine,
+  ContentFilters,
+  ContentResult,
+  RenderOptions,
+  ValidationResult
+} from './ContentEngine';
+
+export { processMarkdownContent } from './ContentEngine';
+
+export {
+  ProjectContentSchema,
+  QuoteContentSchema,
+  VideoContentSchema,
+  ArticleContentSchema,
+  TechnologyContentSchema,
+  AboutContentSchema,
+  type ProjectContent,
+  type QuoteContent,
+  type VideoContent,
+  type ArticleContent,
+  type TechnologyContent,
+  type AboutContent
+} from './schemas';
+
+export { useContent, useContentCollection } from './hooks';

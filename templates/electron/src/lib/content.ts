@@ -1,3 +1,3 @@
-import { getViteContentProvider } from '@/lib/vite';
+import { getViteContentProvider } from '@/lib/ui-adapters/vite';
 
 export const contentProvider = getViteContentProvider();

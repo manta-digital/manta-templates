@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { ContentEngine, ContentResult, ContentFilters } from './contentTypes';
+import type { ContentEngine, ContentResult, ContentFilters } from './ContentEngine.js';
 
 export const useContent = <T = Record<string, any>>(
   filename: string, 

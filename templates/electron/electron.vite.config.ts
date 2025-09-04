@@ -40,11 +40,8 @@ export default defineConfig({
       outDir: 'out/renderer',
       rollupOptions: {
         input: { index: resolve(__dirname, 'index.html') },
-        output: {
-          manualChunks: {
-            'ui-core': ['./src/lib/ui-core']
-          }
-        }
+        external: ['rehype-pretty-code', 'remark', 'rehype-raw', 'rehype-sanitize', 'rehype-slug', 'rehype-autolink-headings', 'rehype-external-links', 'rehype-stringify'],
+        output: {}
       }
     },
     resolve: {
@@ -53,7 +50,7 @@ export default defineConfig({
         '@manta-templates/content': fileURLToPath(
           new URL('./content', import.meta.url)
         ),
-        '@/lib': resolve(__dirname, 'lib')
+        '@/lib': resolve(__dirname, 'src/lib')
       }
     },
     plugins: [
