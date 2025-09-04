@@ -424,8 +424,8 @@ export function CardCarousel({
     ? `calc(${baseTranslateX} + ${dragOffset}px)`
     : `calc(${baseTranslateX})`;
   
-  // Use framer-motion by default for consistent behavior
-  const AnimationComponent = motion.div;
+  // Use injected MotionComponent or framer-motion by default for consistent behavior
+  const AnimationComponent = MotionComponent || motion.div;
   const animationProps = {
     animate: { x: translateX },
     transition: { duration: (isTransitioning || isDraggingRef.current) ? 0 : 0.3 }
@@ -559,7 +559,7 @@ export function CardCarousel({
           onClick={() => setIsAutoPlaying(!isAutoPlaying)}
           aria-label={isAutoPlaying ? 'Pause autoplay' : 'Start autoplay'}
         >
-          <span className="h-3 w-3">{isAutoPlaying ? '⏸' : '▶'}</span>
+          <span className="h-3 w-3">{isAutoPlaying ? <PauseIcon /> : <PlayIcon />}</span>
         </ButtonComponent>
       )}
     </div>

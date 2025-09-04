@@ -36,7 +36,7 @@ const ThreeJSCard: React.FC<ThreeJSCardProps> = ({
       alpha: true
     });
     const canvas = canvasRef.current!;
-    const bgColor = backgroundColor ?? (theme === 'dark' ? 0x000000 : 0xffffff);
+    
     // Always transparent so the CSS background handles light/dark and border radii
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(window.devicePixelRatio);

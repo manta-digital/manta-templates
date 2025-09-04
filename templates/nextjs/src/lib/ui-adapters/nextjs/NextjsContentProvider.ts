@@ -93,8 +93,6 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
     // Create list of all content roots to search (primary + additional)
     const contentRoots = [this.contentRoot, ...this.additionalContentRoots];
     
-    let lastError: Error | null = null;
-    
     // Try each content root in order
     for (const contentRoot of contentRoots) {
       const contentDir = path.join(contentRoot, contentType);
@@ -105,8 +103,7 @@ export class NextjsContentProvider extends BaseContentProvider<unknown> {
           const fileContents = fs.readFileSync(fullPath, 'utf8');
           return fileContents;
         }
-      } catch (error) {
-        lastError = error instanceof Error ? error : new Error('Unknown error');
+      } catch {
         // Continue to next content root
         continue;
       }

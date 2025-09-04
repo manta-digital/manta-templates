@@ -24,7 +24,7 @@ export interface BaseCardProps extends React.ComponentProps<typeof ShadcnCard> {
 const BaseCard = React.forwardRef<
   React.ElementRef<typeof ShadcnCard>,
   BaseCardProps
->(({ className, ImageComponent, LinkComponent, ...props }, ref) => {
+>(({ className, ImageComponent: _ImageComponent, LinkComponent: _LinkComponent, ...props }, ref) => {
   return (
     <ShadcnCard
       ref={ref}

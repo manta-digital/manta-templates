@@ -2,10 +2,8 @@
 
 import React, {
   createContext,
-  useContext,
   useState,
   useEffect,
-  ReactNode,
 } from "react";
 import { Theme, Accent, ThemeProviderProps, ThemeProviderState } from "../types/theme";
 
