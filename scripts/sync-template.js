@@ -30,8 +30,8 @@ function syncTemplate(templateName) {
 
   console.log(`🚀 Syncing packages to template: ${templateName}`);
 
-  // Create lib directory in template
-  const libDir = path.join(templateDir, 'lib');
+  // Create src/lib directory in template
+  const libDir = path.join(templateDir, 'src', 'lib');
   if (!fs.existsSync(libDir)) {
     fs.mkdirSync(libDir, { recursive: true });
   }
@@ -114,7 +114,7 @@ function syncTemplate(templateName) {
   updateImportPaths(templateDir);
 
   console.log(`✅ Template ${templateName} synced successfully!`);
-  console.log(`📁 UI packages copied to: ${path.join(templateDir, 'lib')}`);
+  console.log(`📁 UI packages copied to: ${path.join(templateDir, 'src', 'lib')}`);
 }
 
 function syncContent(templateName, templateDir) {
