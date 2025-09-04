@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../utils';
 import { BaseCard } from './BaseCard';
 import { Button } from '../ui/button';
-import { ProjectContent } from '../../types/content';
+import type { ProjectContent } from '../../content/schemas';
 import { Zap, Code } from 'lucide-react';
 
 interface ProjectCardProps {

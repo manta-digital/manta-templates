@@ -1,4 +1,4 @@
-import type { ContentEngine, ContentResult, ContentFilters } from '@/lib/ui-core/content';
+import type { ContentEngine, ContentResult, ContentFilters } from '../../ui-core/content';
 
 export class ViteContentProvider implements ContentEngine {
   private contentCache = new Map<string, ContentResult<any>>();

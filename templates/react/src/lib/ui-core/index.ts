@@ -9,7 +9,6 @@ export * from './components/primitives';
 export * from './components/headers';
 export * from './components/footers';
 export * from './components/overlays';
-export * from './components/video';
 
 // Utilities
 export * from './utils';
@@ -36,7 +35,23 @@ export {
   ContentNotFoundError,
   getDefaultLegalContent
 } from './content';
-// Content hooks and types for React template
-export { useContent, useContentCollection } from './content/hooks';
-export type { ContentEngine, ContentResult, ContentFilters } from './content/contentTypes';
-export type { ProjectContent, QuoteContent, VideoContent } from './content/schemas';
+export { ContentProcessor } from './content/processor';
+export type { ProcessorConfig } from './content/processor';
+export { BaseContentProvider } from './content/BaseContentProvider';
+export { MockContentProvider } from './content/MockContentProvider';
+
+// Content schemas and types
+export type {
+  ProjectContent,
+  QuoteContent,
+  VideoContent,
+  ArticleContent,
+  TechnologyContent
+} from './content/schemas';
+export {
+  ProjectContentSchema,
+  QuoteContentSchema,
+  VideoContentSchema,
+  ArticleContentSchema,
+  TechnologyContentSchema
+} from './content/schemas';

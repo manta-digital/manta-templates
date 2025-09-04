@@ -89,14 +89,14 @@ The current monorepo packages structure is fundamentally broken:
 
 #### Task 3.1: Write Minimal Copy Script
 **Effort**: 2
-- [ ] Create `scripts/copy-packages.js` (replace sync-template.js)
-- [ ] Copy `packages/src/lib/ui-core` to `templates/{template}/src/lib/ui-core`
-- [ ] Copy appropriate adapter based on build tool:
+- [x] Create `scripts/copy-packages.js` (replace sync-template.js)
+- [x] Copy `packages/src/lib/ui-core` to `templates/{template}/src/lib/ui-core`
+- [x] Copy appropriate adapter based on build tool:
   - NextJS templates get `packages/src/lib/ui-adapters/nextjs/`
   - React/Electron templates get `packages/src/lib/ui-adapters/vite/` (both use Vite)
-- [ ] Copy content: `packages/src/lib/content` to `templates/{template}/content`
-- [ ] No import rewriting needed (paths already match)
-- [ ] **Success**: Simple <50 line script copies files preserving structure
+- [x] Copy content: `packages/src/lib/content` to `templates/{template}/content`
+- [x] No import rewriting needed (paths already match)
+- [x] **Success**: Simple <50 line script copies files preserving structure
 
 #### Task 3.2: Test Copy Script with All Templates
 **Effort**: 3
