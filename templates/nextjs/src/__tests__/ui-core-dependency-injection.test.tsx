@@ -45,7 +45,7 @@ interface MockAboutCardProps {
 // Mock Next.js components for testing
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: MockImageProps) => <img src={src} alt={alt} {...props} />,
+  default: ({ src, alt, ...props }: MockImageProps) => <div data-testid="next-image" data-src={src} data-alt={alt} {...props}>{alt}</div>,
 }));
 
 jest.mock('next/link', () => ({
@@ -104,7 +104,7 @@ describe('UI-Core Dependency Injection', () => {
       
       // Verify the component renders without errors
       expect(getByTestId('article-card')).toBeInTheDocument();
-      expect(container.querySelector('img')).toBeInTheDocument();
+      expect(container.querySelector('[data-testid="next-image"]')).toBeInTheDocument();
     });
   });
 

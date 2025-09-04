@@ -21,7 +21,7 @@ jest.mock('next/image', () => ({
   __esModule: true,
   default: (props: { src: string; alt: string; fill?: boolean; [key: string]: unknown }) => {
     const { src, alt, fill, ...rest } = props;
-    return <img src={src} alt={alt} data-fill={fill} {...rest} />;
+    return <div data-testid="next-image" data-src={src} data-alt={alt} data-fill={fill} {...rest}>{alt}</div>;
   },
 }));
 
