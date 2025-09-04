@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath } from 'node:url'
-import { viteContentPlugin } from './lib/ui-adapters/vite/vite-plugin-content'
+import { viteContentPlugin } from './src/lib/ui-adapters/vite/vite-plugin-content'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
         new URL('./content', import.meta.url)
       ),
       '@/lib': fileURLToPath(
-        new URL('./lib', import.meta.url)
+        new URL('./src/lib', import.meta.url)
       )
     }
   },

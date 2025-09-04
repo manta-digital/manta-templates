@@ -3,8 +3,8 @@ layer: project
 docType: tasks
 project: manta-templates
 feature: packages-structure-redesign
-status: not-started
-dateUpdated: 2025-01-09
+status: in-progress
+dateUpdated: 2025-09-04
 dependencies: []
 currentProjectState: "Templates use broken sync-template system with duplicate lib structures"
 ---
@@ -40,10 +40,10 @@ The current monorepo packages structure is fundamentally broken:
 
 #### Task 1.1: Verify React Template Current State
 **Effort**: 1
-- [ ] Document current imports in React template pointing to `/lib` vs `/src/lib`
-- [ ] Identify all files referencing `/lib/ui-core` or `/lib/ui-adapters`
-- [ ] List Vite config references to `/lib` directories
-- [ ] **Success**: Complete inventory of current lib usage
+- [x] Document current imports in React template pointing to `/lib` vs `/src/lib`
+- [x] Identify all files referencing `/lib/ui-core` or `/lib/ui-adapters`
+- [x] List Vite config references to `/lib` directories
+- [x] **Success**: Complete inventory of current lib usage
 
 #### Task 1.2: Update React Template Import Paths
 **Effort**: 2
@@ -56,15 +56,15 @@ The current monorepo packages structure is fundamentally broken:
 **Effort**: 2
 - [ ] Confirm `/src/lib/ui-core` contains all needed ui-core components
 - [ ] Confirm `/src/lib/ui-adapters/vite` contains vite adapter
-- [ ] Test that `npm run build` completes successfully
-- [ ] Test that `npm run dev` starts without errors
+- [ ] Test that `pnpm run build` completes successfully
+- [ ] Test that `pnpm run dev` starts without errors
 - [ ] **Success**: React template builds and runs using only `/src/lib` structure
 
 #### Task 1.4: Remove Root lib Directory from React Template
 **Effort**: 1
 - [ ] Delete `templates/react/lib/` directory entirely
 - [ ] Verify no broken imports or missing files
-- [ ] Test build and dev commands still work
+- [ ] Test `pnpm build` and `pnpm dev` commands still work
 - [ ] **Success**: React template works without root `/lib` directory
 
 ### Phase 2: Restructure Packages to Match src/lib
