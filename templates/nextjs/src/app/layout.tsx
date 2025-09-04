@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/ui-core";
 import { Header, Footer } from '@/lib/ui-core';
-import { nextjsContentProvider, NextjsHeaderContent, NextjsFooterContent } from '@/lib/ui-adapters';
+import { nextjsContentProvider, NextjsHeaderContent, NextjsFooterContent } from '@/lib/ui-adapters/nextjs';
 import { getDefaultFooterSections } from '@/lib/ui-core';
 import { siteConfig } from '@/content/site.config';
 import Image from 'next/image';

@@ -72,7 +72,7 @@ function copyPackages(templateName) {
       execSync(`rm -rf "${adapterTarget}"`);
     }
     fs.mkdirSync(adapterTarget, { recursive: true });
-    execSync(`cp -r "${adapterSource}" "${adapterTarget}"`);
+    execSync(`cp -r "${adapterSource}" "${adapterTarget}/"`);
     
     // Remove all test directories from adapter
     console.log(`🗑️  Removing test files from ${adapterName} adapter`);

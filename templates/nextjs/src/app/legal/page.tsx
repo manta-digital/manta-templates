@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentCard, Container } from '@/lib/ui-core';
-import { nextjsContentProvider, NextjsTokenProvider } from '@/lib/ui-adapters';
+import { nextjsContentProvider, NextjsTokenProvider } from '@/lib/ui-adapters/nextjs';
 import { siteConfig } from '@/content/site.config';
 
 export default async function LegalPage() {

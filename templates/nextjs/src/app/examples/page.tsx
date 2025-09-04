@@ -14,7 +14,7 @@ import {
   TechnologyScroller,
   VideoCard
 } from '@/lib/ui-core';
-import { BackgroundVideoComponent } from '@/lib/ui-adapters';
+import { BackgroundVideoComponent } from '@/lib/ui-adapters/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 

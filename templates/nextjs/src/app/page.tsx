@@ -1,5 +1,5 @@
 import { Container, QuoteCard } from '@/lib/ui-core';
-import { nextjsContentProvider } from '@/lib/ui-adapters';
+import { nextjsContentProvider } from '@/lib/ui-adapters/nextjs';
 import type { QuoteContent } from '@/lib/ui-core';
 
 export default async function Home() {

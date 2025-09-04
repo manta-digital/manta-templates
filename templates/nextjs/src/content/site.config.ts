@@ -15,7 +15,7 @@ export const siteConfig = {
     supportEmail: '',
   },
   presets: {
-    legal: 'mit' as PresetKey,
+    legal: 'full' as PresetKey,
   },
   // Optional UI variants; can be expanded later (e.g., header variants)
   variants: {
