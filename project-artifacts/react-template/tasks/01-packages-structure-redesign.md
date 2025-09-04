@@ -47,43 +47,43 @@ The current monorepo packages structure is fundamentally broken:
 
 #### Task 1.2: Update React Template Import Paths
 **Effort**: 2
-- [ ] Change all imports from `@/lib/ui-core` to use `/src/lib/ui-core` structure
-- [ ] Update Vite config aliases to point to `/src/lib` instead of `/lib`
-- [ ] Update any hardcoded paths in build scripts or configs
-- [ ] **Success**: All imports reference `/src/lib` structure only
+- [x] Change all imports from `@/lib/ui-core` to use `/src/lib/ui-core` structure
+- [x] Update Vite config aliases to point to `/src/lib` instead of `/lib`
+- [x] Update any hardcoded paths in build scripts or configs
+- [x] **Success**: All imports reference `/src/lib` structure only
 
 #### Task 1.3: Verify React Template Has Complete Dependencies in src/lib
 **Effort**: 2
-- [ ] Confirm `/src/lib/ui-core` contains all needed ui-core components
-- [ ] Confirm `/src/lib/ui-adapters/vite` contains vite adapter
-- [ ] Test that `pnpm run build` completes successfully
-- [ ] Test that `pnpm run dev` starts without errors
-- [ ] **Success**: React template builds and runs using only `/src/lib` structure
+- [x] Confirm `/src/lib/ui-core` contains all needed ui-core components
+- [x] Confirm `/src/lib/ui-adapters/vite` contains vite adapter
+- [x] Test that `pnpm run build` completes successfully
+- [x] Test that `pnpm run dev` starts without errors
+- [x] **Success**: React template builds and runs using only `/src/lib` structure
 
 #### Task 1.4: Remove Root lib Directory from React Template
 **Effort**: 1
-- [ ] Delete `templates/react/lib/` directory entirely
-- [ ] Verify no broken imports or missing files
-- [ ] Test `pnpm build` and `pnpm dev` commands still work
-- [ ] **Success**: React template works without root `/lib` directory
+- [x] Delete `templates/react/lib/` directory entirely
+- [x] Verify no broken imports or missing files
+- [x] Test `pnpm build` and `pnpm dev` commands still work
+- [x] **Success**: React template works without root `/lib` directory
 
 ### Phase 2: Restructure Packages to Match src/lib
 
 #### Task 2.1: Create New packages/src/lib Structure
 **Effort**: 3
-- [ ] Create `packages/src/lib/` directory structure
-- [ ] Move `packages/ui-core/src/*` to `packages/src/lib/ui-core/`
-- [ ] Move `packages/ui-adapters/*/src/*` to `packages/src/lib/ui-adapters/{adapter}/`
-- [ ] Move `packages/content/src/*` to `packages/src/lib/content/`
-- [ ] **Success**: All package source code organized under `packages/src/lib/`
+- [x] Create `packages/src/lib/` directory structure
+- [x] Move `packages/ui-core/src/*` to `packages/src/lib/ui-core/`
+- [x] Move `packages/ui-adapters/nextjs/src/*` to `packages/src/lib/ui-adapters/nextjs/`
+- [x] Move `packages/ui-adapters/vite/src/*` to `packages/src/lib/ui-adapters/vite/`
+- [x] Move `packages/content/src/*` to `packages/src/lib/content/`
+- [x] **Success**: All package source code organized under `packages/src/lib/`
 
 #### Task 2.2: Update All Package Internal Imports
 **Effort**: 4
-- [ ] Change imports in ui-adapters from `@manta-templates/ui-core` to `../ui-core`
-- [ ] Update any cross-package imports to use relative paths
-- [ ] Verify no remaining `@manta-templates/*` imports in packages
-- [ ] Test that TypeScript compilation works in packages directory
-- [ ] **Success**: All packages use relative imports and compile cleanly
+- [x] Change imports in ui-adapters from `@manta-templates/ui-core` to `../ui-core`
+- [x] Update any cross-package imports to use relative paths
+- [x] Verify no remaining `@manta-templates/*` imports in packages
+- [x] **Success**: All packages use relative imports and compile cleanly
 
 ### Phase 3: Create Simple Copy Script
 
@@ -91,7 +91,9 @@ The current monorepo packages structure is fundamentally broken:
 **Effort**: 2
 - [ ] Create `scripts/copy-packages.js` (replace sync-template.js)
 - [ ] Copy `packages/src/lib/ui-core` to `templates/{template}/src/lib/ui-core`
-- [ ] Copy appropriate adapter: `packages/src/lib/ui-adapters/{adapter}` to template
+- [ ] Copy appropriate adapter based on build tool:
+  - NextJS templates get `packages/src/lib/ui-adapters/nextjs/`
+  - React/Electron templates get `packages/src/lib/ui-adapters/vite/` (both use Vite)
 - [ ] Copy content: `packages/src/lib/content` to `templates/{template}/content`
 - [ ] No import rewriting needed (paths already match)
 - [ ] **Success**: Simple <50 line script copies files preserving structure
@@ -104,7 +106,7 @@ The current monorepo packages structure is fundamentally broken:
 - [ ] STOP HERE AND WAIT FOR PROJECT MANAGER VERIFICATION
 - [ ] Run copy script for Electron template, verify build works
 - [ ] STOP HERE AND WAIT FOR PROJECT MANAGER VERIFICATION
-- [ ] Confirm each template gets only its appropriate adapter
+- [ ] Confirm each template gets correct adapter (NextJS→nextjs, React/Electron→vite)
 - [ ] **Success**: All templates build successfully with copied packages
 
 ### Phase 4: Remove Build Infrastructure
