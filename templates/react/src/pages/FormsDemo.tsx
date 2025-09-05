@@ -138,23 +138,25 @@ export default function FormsDemo() {
                   placeholder="User search..."
                 />
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Password Toggle</label>
-                <Input
-                  leftIcon={<Lock size={16} />}
-                  rightIcon={
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="hover:text-foreground transition-colors"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  }
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password..."
-                />
-              </div>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Password Toggle</label>
+                  <Input
+                    leftIcon={<Lock size={16} />}
+                    rightIcon={
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="hover:text-foreground transition-colors"
+                      >
+                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    }
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter password..."
+                  />
+                </div>
+              </form>
             </div>
           </section>
 
@@ -170,14 +172,16 @@ export default function FormsDemo() {
                   placeholder="email@example.com"
                 />
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Password</label>
-                <Input
-                  type="password"
-                  leftIcon={<Lock size={16} />}
-                  placeholder="Password"
-                />
-              </div>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Password</label>
+                  <Input
+                    type="password"
+                    leftIcon={<Lock size={16} />}
+                    placeholder="Password"
+                  />
+                </div>
+              </form>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Number</label>
                 <Input
@@ -241,55 +245,63 @@ export default function FormsDemo() {
           <section>
             <h2 className="text-2xl font-semibold mb-6">FormField Integration</h2>
             <div className="grid gap-6 md:grid-cols-2">
-              <FormField
-                label="Email Address"
-                required
-                description="We'll never share your email with anyone else."
-              >
-                <Input
-                  type="email"
-                  placeholder="Enter your email..."
-                  leftIcon={<Mail size={16} />}
-                />
-              </FormField>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <FormField
+                  label="Email Address"
+                  required
+                  description="We'll never share your email with anyone else."
+                >
+                  <Input
+                    type="email"
+                    placeholder="Enter your email..."
+                    leftIcon={<Mail size={16} />}
+                  />
+                </FormField>
+              </form>
 
-              <FormField
-                label="Password"
-                required
-                error="Password must be at least 8 characters long"
-              >
-                <Input
-                  type="password"
-                  placeholder="Enter password..."
-                  leftIcon={<Lock size={16} />}
-                />
-              </FormField>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <FormField
+                  label="Password"
+                  required
+                  error="Password must be at least 8 characters long"
+                >
+                  <Input
+                    type="password"
+                    placeholder="Enter password..."
+                    leftIcon={<Lock size={16} />}
+                  />
+                </FormField>
+              </form>
 
-              <FormField
-                label="Full Name"
-                optional
-                description="This will be displayed on your profile"
-                spacing="compact"
-                labelSize="sm"
-              >
-                <Input
-                  type="text"
-                  placeholder="Enter your full name..."
-                  leftIcon={<User size={16} />}
-                />
-              </FormField>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <FormField
+                  label="Full Name"
+                  optional
+                  description="This will be displayed on your profile"
+                  spacing="compact"
+                  labelSize="sm"
+                >
+                  <Input
+                    type="text"
+                    placeholder="Enter your full name..."
+                    leftIcon={<User size={16} />}
+                  />
+                </FormField>
+              </form>
 
-              <FormField
-                label="Search Query"
-                description="Search through all available content"
-                spacing="loose"
-              >
-                <Input
-                  type="search"
-                  placeholder="What are you looking for..."
-                  rightIcon={<Search size={16} />}
-                />
-              </FormField>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <FormField
+                  label="Search Query"
+                  description="Search through all available content"
+                  spacing="loose"
+                >
+                  <Input
+                    type="search"
+                    placeholder="What are you looking for..."
+                    rightIcon={<Search size={16} />}
+                  />
+                </FormField>
+              </form>
             </div>
           </section>
 
