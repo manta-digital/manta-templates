@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input } from '../lib/ui-core/components/form';
+import { Input, Label } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -206,6 +206,37 @@ export default function FormsDemo() {
             </div>
           </section>
 
+          {/* Label Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Label Component</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label required>Required Field</Label>
+                <Input placeholder="This field is required..." />
+              </div>
+              <div className="space-y-2">
+                <Label optional>Optional Field</Label>
+                <Input placeholder="This field is optional..." />
+              </div>
+              <div className="space-y-2">
+                <Label state="error" required>Error State Label</Label>
+                <Input state="error" placeholder="Error input..." />
+              </div>
+              <div className="space-y-2">
+                <Label state="success">Success State Label</Label>
+                <Input state="success" placeholder="Success input..." />
+              </div>
+              <div className="space-y-2">
+                <Label size="sm">Small Label</Label>
+                <Input size="sm" placeholder="Small input..." />
+              </div>
+              <div className="space-y-2">
+                <Label size="lg">Large Label</Label>
+                <Input size="lg" placeholder="Large input..." />
+              </div>
+            </div>
+          </section>
+
           {/* Focus Testing */}
           <section>
             <h2 className="text-2xl font-semibold mb-6">Keyboard Navigation Test</h2>
@@ -213,12 +244,30 @@ export default function FormsDemo() {
               Tab through these inputs to test focus ring and keyboard navigation:
             </p>
             <div className="grid gap-4 md:grid-cols-3">
-              <Input placeholder="Input 1" />
-              <Input placeholder="Input 2" />
-              <Input placeholder="Input 3" />
-              <Input placeholder="Input 4" />
-              <Input placeholder="Input 5" />
-              <Input placeholder="Input 6" />
+              <div className="space-y-2">
+                <Label htmlFor="nav-1">Input 1</Label>
+                <Input id="nav-1" placeholder="Input 1" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="nav-2">Input 2</Label>
+                <Input id="nav-2" placeholder="Input 2" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="nav-3">Input 3</Label>
+                <Input id="nav-3" placeholder="Input 3" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="nav-4">Input 4</Label>
+                <Input id="nav-4" placeholder="Input 4" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="nav-5">Input 5</Label>
+                <Input id="nav-5" placeholder="Input 5" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="nav-6">Input 6</Label>
+                <Input id="nav-6" placeholder="Input 6" />
+              </div>
             </div>
           </section>
         </div>
