@@ -220,9 +220,8 @@ Notes:
 - Use the task-checker to manage lists if it is available to you.
 - Ignore case sensitivity in all file and directory names.
 - Use the directory-structure and file-naming-conventions guides.
-- If you are mising required information, STOP and obtain from PM.
-- If you cannot locate referenced files, STOP and request information from 
-  Project Manager.
+- If you are mising required information or referenced files, STOP and obtain 
+  from Project Manager (PM).
 - Do not guess, assume, or proceed without required files.
 ```
 
@@ -598,53 +597,38 @@ REQUIRED FOR EACH CYCLE:
 ```
 
 ***
-### Deprecated (Legacy Full-Project Approach)
+### Deprecated 
 
-##### Legacy Task Expansion
-*Note: Use slice-based approach for new projects. This is for legacy projects only.*
-```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Task expansion and Enhancement by section.  Use `guide.ai-project.06-task-expansion` with {project, section} as provided above.  If this information is missing, request it from the Project Manager.  Continue working in the role: Senior AI as described in the Process Guide.
-
-Output results into a new file private/tasks/nn-tasks-{section}.md where nn is a sequential index (01, 02, etc.). In the filename, convert {section} to lowercase, drop any special characters, and replace any ' ' with '-'.
-
-Note: this is a project and process task, not a coding task.
-```
-
-##### Legacy Task Implementation
-*Note: Use slice-based approach for new projects.*
-```markdown
-We are working on the {project, section} tasks in phase 4 of `/project-documents/project-guides/guide.ai-project.00-process`.  If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`.  If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`, for each tool or referenced.
-
-Your role is "Senior AI".  Your job is to complete the tasks in the /project-documents/private/tasks/nn-tasks-{section}.md file (where nn is the sequential index).  Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.  STOP and confer with Project Manager after each task.  Do not update windsurf-updates file until confirmation from Project Manager.
-
-Work carefully and ensure that each task is verified complete before proceeding to the next.  If an attempted solution does not work or you otherwise find reason to try another way, do not make more than three such attempts without stopping and obtaining confirmation form Project Manager, and do not proceed to additional tasks in this case.
-
-If our tasks document contains Phase 3 and Phase 4 items in our assigned area, use the Phase 4 items (with subtasks) as implementation items and Phase 3 as overview.  Don't forget to check off items when complete, and when all of the subtasks for something are complete, check off its corresponding phase 3 item, provided there is one (there should be).
-
-If you need more information, stop and wait for confirmation from the Project Manager.  Once a task is complete and *verified with the project manager*, check it off in the section tasks file.
-
-Notes: 
-* ignore case sensitivity in all file and directory names.  If you cannot locate the files referenced above STOP until receiving information from the project manager.  Do not guess, assume, or proceed without them.
-* do not mark any tasks in the 'three such attempts' or similar error state as complete.
-```
-
-##### Model Change or Context Refresh
-*Use this prompt when you need to switch models or refresh a model's understanding of the codebase and our rules.*
+Experimental: TDD
+*Note that this prompt was an absolute fail and it is not recommended to use this.  Preserved to assist in creating a better one.*
 
 ```markdown
-The following provides context on our current work, and may contain the following input: { project, section, issue or update, subtask, tool, note }.  All but { project, section } are optional, but expect some to be present.  
+You are implementing tasks using strict Test-Driven Development.  Continue to function in your assigned role.  If you have no assigned role, assume: Senior AI.
 
-Refer to the Resource Structure in `guide.ai-project.00-process` for a description of resources and their locations.  If {tool} is in use, you should receive an additional note (ideally along with this request) describing additional relevant information.  If you do not receive such information, confirm with Project Manager that this was not an accidental omission.
+MANDATORY TDD CYCLE:
+1. Write a failing test that specifies the next small behavior
+2. Run the test - confirm it fails for the right reason
+3. Write minimal REAL code to make the test pass.  Never write the implementation in the test file.
+4. Run tests - confirm they pass
+5. Refactor if needed while keeping tests green
+6. STOP and ask for next test case
 
-If you were previously assigned a role, continue in that role.  If not, assume role of Senior AI as defined in the guide mentioned in the preceding paragraph.
+CRITICAL CONSTRAINTS:
+- Never write production code without a failing test first
+- Never write more than one failing test at a time
+- Never implement multiple behaviors in one cycle
+- Always implement real code to get test to pass. Do not use irrelevant utility 
+  functions and plan to "integrate later".  Never write the implementation in 
+  the test file.
+- Always run tests and show results before proceeding
+- Refactor only when tests are green
 
-**Directory Structure by Development Type:**
-- **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files
-- **Monorepo Template Development** (working on templates or monorepo structure): Use `project-artifacts/` for project-specific files that would normally go in `private/`
-- The Project Manager should inform you which mode is active for the current work
+REQUIRED FOR EACH CYCLE:
+- Exact test name and assertion
+- Test output showing failure
+- Minimal implementation (not full solution)
+- Test output showing success
+- Explicit "Ready for next test case"
 ```
-
-
-
 
 
