@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { ThemeProvider } from './lib/ui-core'
 import { ReactHeader, ReactFooter } from './components'
-import { headerContent, footerContent } from './content'
+import { headerContent, footerContent } from './content';
+import { siteConfig } from './content/site.config';
 import HomePage from './pages/HomePage'
 import ExamplesPage from './pages/ExamplesPage'
 
@@ -38,8 +39,8 @@ function App() {
             </Routes>
           </main>
           <ReactFooter
-            variant="compact"
-            legalPreset="mit"
+            variant={siteConfig.variants.footer}
+            legalPreset={siteConfig.presets.legal}
             sections={footerContent}
             LinkComponent={Link}
           />
