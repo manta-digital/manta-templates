@@ -23,17 +23,12 @@ export type {
   ContentMeta,
   ContentError,
   TokenProvider,
-  TokenConfig,
-  LegalContentType,
-  LegalPreset,
-  LegalFrontmatter,
-  DefaultLegalContent
+  TokenConfig
 } from './content';
 export {
   ContentLoadError,
   ContentProcessError,
-  ContentNotFoundError,
-  getDefaultLegalContent
+  ContentNotFoundError
 } from './content';
 export { ContentProcessor } from './content/processor';
 export type { ProcessorConfig } from './content/processor';

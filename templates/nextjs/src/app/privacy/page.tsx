@@ -11,7 +11,7 @@ export default async function PrivacyPage() {
   let content: ContentData<PrivacyContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<PrivacyContent>('privacy', 'legal/presets/mit', {
+    content = await nextjsContentProvider.loadContent<PrivacyContent>('privacy', 'presets/mit/legal', {
       tokenConfig: {
         enableTokens: true,
         tokenProvider: new NextjsTokenProvider(siteConfig)

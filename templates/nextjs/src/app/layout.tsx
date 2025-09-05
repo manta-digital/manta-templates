@@ -114,7 +114,7 @@ export default async function RootLayout({
             </main>
             {footerSections && (
               <Footer
-                variant="compact"
+                variant={siteConfig.variants.footer}
                 legalPreset={siteConfig.presets.legal === 'mit' ? 'mit' : 'full'}
                 sections={footerSections}
                 LinkComponent={Link}

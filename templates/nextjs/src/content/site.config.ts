@@ -15,11 +15,11 @@ export const siteConfig = {
     supportEmail: '',
   },
   presets: {
-    legal: 'full' as PresetKey,
+    legal: 'mit' as PresetKey,
   },
   // Optional UI variants; can be expanded later (e.g., header variants)
   variants: {
-    footer: 'default', // 'default' | 'compact'
+    footer: 'compact', // 'default' | 'compact'
   },
   // Optional copyright settings (e.g., "2022–2025"). If omitted, current year is used.
   copyright: {

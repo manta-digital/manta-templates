@@ -11,7 +11,7 @@ export default async function TermsPage() {
   let content: ContentData<TermsContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<TermsContent>('terms', 'legal/presets/mit', {
+    content = await nextjsContentProvider.loadContent<TermsContent>('terms', 'presets/mit/legal', {
       tokenConfig: {
         enableTokens: true,
         tokenProvider: new NextjsTokenProvider(siteConfig)

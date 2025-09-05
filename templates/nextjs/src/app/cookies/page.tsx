@@ -11,7 +11,7 @@ export default async function CookiesPage() {
   let content: ContentData<CookiesContent> | null = null;
   
   try {
-    content = await nextjsContentProvider.loadContent<CookiesContent>('cookies', 'legal/presets/mit', {
+    content = await nextjsContentProvider.loadContent<CookiesContent>('cookies', 'presets/mit/legal', {
       tokenConfig: {
         enableTokens: true,
         tokenProvider: new NextjsTokenProvider(siteConfig)

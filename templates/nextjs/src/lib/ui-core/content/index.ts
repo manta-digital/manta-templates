@@ -20,14 +20,14 @@ export type { ProcessorConfig } from './processor';
 export { BaseContentProvider } from './BaseContentProvider';
 export { MockContentProvider } from './MockContentProvider';
 
-// Legal content helper
-export {
-  getDefaultLegalContent,
-  type LegalContentType,
-  type LegalPreset,
-  type LegalFrontmatter,
-  type DefaultLegalContent
-} from './legalContent';
+// Legal content helper - temporarily commented out
+// export {
+//   getDefaultLegalContent,
+//   type LegalContentType,
+//   type LegalPreset,
+//   type LegalFrontmatter,
+//   type DefaultLegalContent
+// } from './legalContent';
 
 // New universal content engine (Slice 17)
 export type {
