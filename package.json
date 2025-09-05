@@ -5,6 +5,11 @@
     "scripts": {
         "sync-guides": "bash ./scripts/sync-guides.sh",
         "sync-template": "node scripts/sync-template.js",
+        "copy-packages": "node scripts/copy-packages.js",
+        "copy-packages:nextjs": "node scripts/copy-packages.js nextjs",
+        "copy-packages:react": "node scripts/copy-packages.js react",
+        "copy-packages:electron": "node scripts/copy-packages.js electron",
+        "copy-packages:all": "node scripts/copy-packages.js nextjs && node scripts/copy-packages.js react && node scripts/copy-packages.js electron",
         "dev:template": "pnpm --filter \"./templates/nextjs\" dev",
         "dev:landing": "pnpm --filter manta-landing dev",
         "build:template": "pnpm --filter \"./templates/nextjs\" build",
