@@ -76,28 +76,28 @@ Implementing core form controls (Input, Textarea, Checkbox, Radio, Select, Label
 ## Phase 3: Label and FormField Infrastructure (Effort: 2)
 
 ### Task 3.1: Implement Label Component
-- [ ] Install `@radix-ui/react-label` if not already installed
-- [ ] Create Label component wrapping Radix primitive
-- [ ] Add size variants matching Input sizes
-- [ ] Add required indicator (*) styling
-- [ ] Add optional text suffix support
-- [ ] Add disabled state styling
+- [x] Install `@radix-ui/react-label` if not already installed
+- [x] Create Label component wrapping Radix primitive
+- [x] Add size variants matching Input sizes
+- [x] Add required indicator (*) styling
+- [x] Add optional text suffix support
+- [x] Add disabled state styling
 - **Success**: Labels properly associate with form controls
 
 ### Task 3.2: Implement FormField Wrapper
-- [ ] Create FormField component for consistent layout
-- [ ] Add label, description, and error message slots
-- [ ] Implement automatic ARIA relationships (aria-describedby, aria-labelledby)
-- [ ] Add error state propagation to child components
-- [ ] Create consistent spacing using Tailwind utilities
+- [x] Create FormField component for consistent layout
+- [x] Add label, description, and error message slots
+- [x] Implement automatic ARIA relationships (aria-describedby, aria-labelledby)
+- [x] Add error state propagation to child components
+- [x] Create consistent spacing using Tailwind utilities
 - **Success**: FormField provides consistent form layouts
 
 ### Task 3.3: Test Input with FormField
-- [ ] Update demo page with FormField-wrapped Inputs
-- [ ] Test error message display
-- [ ] Verify ARIA relationships with screen reader
-- [ ] Test required field indicators
-- [ ] Ensure proper spacing and alignment
+- [x] Update demo page with FormField-wrapped Inputs
+- [x] Test error message display
+- [x] Verify ARIA relationships with screen reader
+- [x] Test required field indicators
+- [x] Ensure proper spacing and alignment
 - **Success**: Complete Input + FormField vertical slice working
 
 ## Phase 4: Textarea Component (Effort: 2)

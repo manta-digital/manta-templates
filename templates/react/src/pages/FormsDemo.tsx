@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label } from '../lib/ui-core/components/form';
+import { Input, Label, FormField } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -237,6 +237,62 @@ export default function FormsDemo() {
             </div>
           </section>
 
+          {/* FormField Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">FormField Integration</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              <FormField
+                label="Email Address"
+                required
+                description="We'll never share your email with anyone else."
+              >
+                <Input
+                  type="email"
+                  placeholder="Enter your email..."
+                  leftIcon={<Mail size={16} />}
+                />
+              </FormField>
+
+              <FormField
+                label="Password"
+                required
+                error="Password must be at least 8 characters long"
+              >
+                <Input
+                  type="password"
+                  placeholder="Enter password..."
+                  leftIcon={<Lock size={16} />}
+                />
+              </FormField>
+
+              <FormField
+                label="Full Name"
+                optional
+                description="This will be displayed on your profile"
+                spacing="compact"
+                labelSize="sm"
+              >
+                <Input
+                  type="text"
+                  placeholder="Enter your full name..."
+                  leftIcon={<User size={16} />}
+                />
+              </FormField>
+
+              <FormField
+                label="Search Query"
+                description="Search through all available content"
+                spacing="loose"
+              >
+                <Input
+                  type="search"
+                  placeholder="What are you looking for..."
+                  rightIcon={<Search size={16} />}
+                />
+              </FormField>
+            </div>
+          </section>
+
           {/* Focus Testing */}
           <section>
             <h2 className="text-2xl font-semibold mb-6">Keyboard Navigation Test</h2>
@@ -244,30 +300,24 @@ export default function FormsDemo() {
               Tab through these inputs to test focus ring and keyboard navigation:
             </p>
             <div className="grid gap-4 md:grid-cols-3">
-              <div className="space-y-2">
-                <Label htmlFor="nav-1">Input 1</Label>
+              <FormField label="Input 1" htmlFor="nav-1">
                 <Input id="nav-1" placeholder="Input 1" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="nav-2">Input 2</Label>
+              </FormField>
+              <FormField label="Input 2" htmlFor="nav-2">
                 <Input id="nav-2" placeholder="Input 2" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="nav-3">Input 3</Label>
+              </FormField>
+              <FormField label="Input 3" htmlFor="nav-3">
                 <Input id="nav-3" placeholder="Input 3" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="nav-4">Input 4</Label>
+              </FormField>
+              <FormField label="Input 4" htmlFor="nav-4">
                 <Input id="nav-4" placeholder="Input 4" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="nav-5">Input 5</Label>
+              </FormField>
+              <FormField label="Input 5" htmlFor="nav-5">
                 <Input id="nav-5" placeholder="Input 5" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="nav-6">Input 6</Label>
+              </FormField>
+              <FormField label="Input 6" htmlFor="nav-6">
                 <Input id="nav-6" placeholder="Input 6" />
-              </div>
+              </FormField>
             </div>
           </section>
         </div>
