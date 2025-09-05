@@ -72,27 +72,41 @@ export function resolveThemeColor(
   try {
     // Check if colord can understand the format first
     const format = getFormat(resolvedColor);
-    console.log(`🔍 Color format detected: ${format} for "${resolvedColor}"`);
+    //console.log(`🔍 Color format detected: ${format} for "${resolvedColor}"`);
     
     if (resolvedColor.startsWith('oklch(')) {
       // Parse OKLCH manually since colord doesn't support it directly
-      const oklchMatch = resolvedColor.match(/oklch\(\s*([\d.-]+)\s*,?\s*([\d.-]+)\s*,?\s*([\d.-]+)\s*\)/);
+      const oklchMatch = resolvedColor.match(/oklch\(\s*([\d.-]+%?)\s*,?\s*([\d.-]+)\s*,?\s*([\d.-]+)\s*\)/);
       if (oklchMatch) {
-        const l = parseFloat(oklchMatch[1]); // lightness 0-1
+        let l = parseFloat(oklchMatch[1]); // lightness
         const c = parseFloat(oklchMatch[2]); // chroma 0-0.4  
         const h = parseFloat(oklchMatch[3]); // hue 0-360
         
-        console.log(`🔬 Parsed OKLCH: L=${l}, C=${c}, H=${h}`);
+        //console.log(`🔬 Parsed OKLCH: L=${l}${oklchMatch[1].includes('%') ? '%' : ''}, C=${c}, H=${h}`);
         
-        // Try using colord's LCH format (scale values appropriately)
-        // OKLCH lightness 0-1 -> LCH lightness 0-100
-        // OKLCH chroma 0-0.4 -> LCH chroma roughly 0-100 (scale by 250)
-        const colorObj = colord({ l: l * 100, c: c * 250, h });
-        console.log(`🟦 Colord LCH isValid: ${colorObj.isValid()}`);
+        let colorObj;
+        if (oklchMatch[1].includes('%')) {
+          // Percentage format is essentially LCH already
+          const lchL = l; // 14.2% -> 14.2 (LCH lightness 0-100)
+          const lchC = c * 100; // scale chroma appropriately for LCH
+          //console.log(`🔄 Converting to LCH: L=${lchL}, C=${lchC}, H=${h}`);
+          colorObj = colord({ l: lchL, c: lchC, h });
+        } else {
+          // Non-percentage format: OKLCH lightness 0-1 -> LCH lightness 0-100
+          const lchL = l * 100;
+          const lchC = c * 250; // scale chroma for LCH
+          //console.log(`🔄 Converting to LCH: L=${lchL}, C=${lchC}, H=${h}`);
+          colorObj = colord({ l: lchL, c: lchC, h });
+        }
+
+        if(colorObj.isDark()) {
+          colorObj = colorObj.darken(0.1);
+        }
+        //console.log(`🟦 Colord LCH isValid: ${colorObj.isValid()}`);
         
         if (colorObj.isValid()) {
           hex = colorObj.toHex();
-          console.log(`🎨 Final hex result: ${hex}`);
+          //console.log(`🎨 Final hex result: ${hex}`);
         } else {
           throw new Error('Invalid OKLCH values converted to LCH');
         }
