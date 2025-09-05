@@ -1,4 +1,5 @@
 export type PresetKey = 'default' | 'mit';
+export type FooterVariant = 'default' | 'compact';
 
 export const siteConfig = {
   site: {
@@ -19,7 +20,7 @@ export const siteConfig = {
   },
   // Optional UI variants; can be expanded later (e.g., header variants)
   variants: {
-    footer: 'compact', // 'default' | 'compact'
+    footer: 'compact' as FooterVariant, // 'default' | 'compact'
   },
   // Optional copyright settings (e.g., "2022–2025"). If omitted, current year is used.
   copyright: {

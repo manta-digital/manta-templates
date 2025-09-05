@@ -775,6 +775,9 @@ importers:
       rehype-external-links:
         specifier: ^3.0.0
         version: 3.0.0
+      rehype-pretty-code:
+        specifier: ^0.14.1
+        version: 0.14.1(shiki@3.11.0)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
