@@ -1,0 +1,25 @@
+
+## Overview
+This file contains specialized prompts specific to this project.  
+
+### Prompts
+
+##### Package Architecture
+```markdown
+Description of `packages/` structure in monorepo manta-templates.  The `packages/` directory
+contains "framework agnostic" elements that we develop, and that are propagated down to the
+individual templates by the build process (`pnpm build-ui`, etc).
+
+When working with these files and developing `packages/ui-core, packages/ui-adapters`, and even
+`packages/content', we often work inside an individual template such as `templates/nextjs`.
+We can work there in the template's `lib/` directory, copy our changes *up* to appropriate
+directory in `packages/` once they are good, knowing that these will then be propagated back
+*down* to the individual templates by the build process.
+```
+
+##### Definition of framework-agnostic for manta-templates
+```markdown
+For our purposes, framework-agnostic means independent of specific target frameworks such as
+Next.js, Astro, Vue, etc.  We may still use React, Shadcn, Tailwind, and Radix in our
+framework-agnostic packages area.
+```
