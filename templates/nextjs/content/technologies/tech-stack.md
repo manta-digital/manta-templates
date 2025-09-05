@@ -1,29 +1,42 @@
 ---
 type: technology
-title: Technology Stack
-description: Modern web development tools and frameworks
+title: My Custom Tech Stack
+description: Technologies I love working with
 speed: fast
 direction: left
 items:
-  - name: Next.js
-    svg: nextdotjs.svg
-    invertOnDark: true
-  - name: Tailwind CSS
-    svg: tailwindcss.svg
-    color: "#38BDF8"
-    colorDark: "#38BDF8"
   - name: React
     svg: react.svg
+    invertOnDark: true
+  - name: Next.js
+    svg: nextdotjs.svg
     invertOnDark: true
   - name: TypeScript
     svg: typescript.svg
     color: "#3178C6"
-  - name: Radix UI
-    svg: radix.svg
+  - name: Tailwind CSS
+    svg: tailwindcss.svg
+    color: "#38BDF8"
+    colorDark: "#38BDF8"
+  - name: Docker
+    svg: docker.svg 
     invertOnDark: true
-  - name: Three.js
-    svg: threejs.svg
+  - name: Figma
+    svg: figma-color.svg
+  - name: Python
+    svg: python.svg
     invertOnDark: true
+  - name: TensorFlow
+    svg: tensorflow.svg 
+    invertOnDark: true
+  - name: Linux
+    svg: linux.svg
+    invertOnDark: true
+  - name: LangChain
+    svg: langchain.svg
+    color: "#1C3C3C"
+    colorDark: "#FFFFFF"
+
 ---
 
 # Technology Stack

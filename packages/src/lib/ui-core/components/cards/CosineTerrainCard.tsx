@@ -15,64 +15,10 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
-import { colord, extend } from 'colord';
-import labPlugin from 'colord/plugins/lab';
-
-// Extend colord with LAB plugin
-extend([labPlugin]);
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
+import { resolveThemeColor } from '../../utils/color-resolution';
 
-/**
- * Convert any CSS color to RGB using colord
- */
-function parseColorToRgb(color: string): { r: number; g: number; b: number } {
-  try {
-    const parsed = colord(color).toRgb();
-    return { r: parsed.r / 255, g: parsed.g / 255, b: parsed.b / 255 };
-  } catch {
-    // Fallback to white if parsing fails
-    return { r: 1, g: 1, b: 1 };
-  }
-}
-
-/**
- * Legacy OKLCH converter - kept for reference but not used
- */
-function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
-  // Convert hue from degrees to radians
-  const h = (H * Math.PI) / 180;
-  
-  // Convert OKLCH to OKLab
-  const a = C * Math.cos(h);
-  const b = C * Math.sin(h);
-  
-  // Convert OKLab to linear RGB (D65 illuminant)
-  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
-  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
-  const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
-  
-  const l = l_ * l_ * l_;
-  const m = m_ * m_ * m_;
-  const s = s_ * s_ * s_;
-  
-  // Linear RGB to sRGB
-  let r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
-  let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
-  let b_val = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
-  
-  // Apply gamma correction for sRGB
-  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
-  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
-  b_val = b_val > 0.0031308 ? 1.055 * Math.pow(b_val, 1 / 2.4) - 0.055 : 12.92 * b_val;
-  
-  // Clamp to 0-255 range
-  return {
-    r: Math.max(0, Math.min(255, r * 255)),
-    g: Math.max(0, Math.min(255, g * 255)),
-    b: Math.max(0, Math.min(255, b_val * 255))
-  };
-}
 
 /**
  * Animated cosine-terrain renderer using Three.js.
@@ -289,58 +235,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     timestamp: Date.now()
   });
   
-  // Helper to resolve CSS custom properties to actual color values
-  const resolveCSSColor = (color: string | number | undefined): string | number => {    
-    if (typeof color !== 'string') {
-      return color || 0x90ffc0;
-    }
-    
-    if (!color.startsWith('var(')) {
-      return color;
-    }
-    
-    // Extract the CSS variable name
-    const varName = color.slice(4, -1); // Remove 'var(' and ')'
-    
-    // Get computed style from document element
-    if (typeof window !== 'undefined') {
-      const computedStyle = getComputedStyle(document.documentElement);
-      const resolvedValue = computedStyle.getPropertyValue(varName).trim();
-      
-      
-      if (resolvedValue) {
-        try {
-          let hex;
-          if (resolvedValue.startsWith('lab(')) {
-            // Parse LAB string to object format for colord
-            const labMatch = resolvedValue.match(/lab\(([\d.-]+)%?\s+([\d.-]+)\s+([\d.-]+)\)/);
-            if (labMatch) {
-              let l = parseFloat(labMatch[1]);
-              if (labMatch[1].includes('%')) {
-                l = l; // Keep percentage as-is for LAB
-              }
-              const a = parseFloat(labMatch[2]);
-              const b = parseFloat(labMatch[3]);
-              hex = colord({ l, a, b }).toHex();
-            } else {
-              hex = '#ffffff';
-            }
-          } else {
-            hex = colord(resolvedValue).toHex();
-          }
-          console.log(`Converting: ${resolvedValue} -> ${hex}`);
-          return hex;
-        } catch (e) {
-          console.log(`Failed to convert: ${resolvedValue}`, e);
-          return '#ffffff';
-        }
-      } else {
-        return color;
-      }
-    }
-    
-    return color;
-  };
 
   // Normalize grouped settings type for safe access
   const s = (settings || {}) as Partial<{
@@ -457,13 +351,13 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     const checkColors = () => {
       if (typeof window === 'undefined') return;
       
-      const newMaterial = resolveCSSColor(cfg.material.materialColor);
-      const newBackground = resolveCSSColor(cfg.background.backgroundColor);
+      const materialResult = resolveThemeColor(cfg.material.materialColor);
+      const backgroundResult = resolveThemeColor(cfg.background.backgroundColor);
       
-      if (newMaterial !== resolvedColors.material || newBackground !== resolvedColors.background) {
+      if (materialResult.hex !== resolvedColors.material || backgroundResult.hex !== resolvedColors.background) {
         setResolvedColors({
-          material: String(newMaterial),
-          background: String(newBackground),
+          material: materialResult.hex,
+          background: backgroundResult.hex,
           timestamp: Date.now()
         });
       }
@@ -471,18 +365,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     
     // Check immediately and then periodically
     checkColors();
-    const interval = setInterval(checkColors, 1000);
-    
-    // Listen for storage events (theme changes)
-    const handleStorageChange = () => {
-      setTimeout(checkColors, 100); // Small delay to let DOM update
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
+    const interval = setInterval(checkColors, 2000);
     
     return () => {
       clearInterval(interval);
-      window.removeEventListener('storage', handleStorageChange);
     };
   }, [cfg.material.materialColor, cfg.background.backgroundColor, resolvedColors.material, resolvedColors.background]);
 
@@ -559,14 +445,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
     renderer.setPixelRatio(pixelRatio);
     // If variant is 'card' and no explicit alpha provided, default to 0 to blend with card background
     const bgAlpha = Math.max(0, Math.min(1, cfg.background.backgroundAlpha ?? (variant === 'card' ? 0 : 1)));
-    const resolvedBgColor = resolveCSSColor(cfg.background.backgroundColor);
+    const backgroundResult = resolveThemeColor(cfg.background.backgroundColor);
     
-    
-    if (resolvedBgColor !== undefined) {
-      renderer.setClearColor(resolvedBgColor as ColorRepresentation, bgAlpha);
-    } else {
-      renderer.setClearColor(0x000000, bgAlpha);
-    }
+    renderer.setClearColor(backgroundResult.hex as ColorRepresentation, bgAlpha);
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
@@ -597,10 +478,9 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       const isWireframe = finalRenderPreset === 'wireframe';
       
       // Resolve color inside useEffect where DOM is available
-      const resolvedMaterialColor = resolveCSSColor(cfg.material.materialColor);
+      const materialResult = resolveThemeColor(cfg.material.materialColor);
       
-      
-      const common = { color: resolvedMaterialColor, wireframe: isWireframe } as const;
+      const common = { color: materialResult.hex, wireframe: isWireframe } as const;
       const transparent = cfg.material.materialOpacity < 1;
       const opacity = Math.max(0, Math.min(1, cfg.material.materialOpacity));
       const finalMaterialType = cfg.material.materialType;
@@ -907,7 +787,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       });
       material.dispose();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
   const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;

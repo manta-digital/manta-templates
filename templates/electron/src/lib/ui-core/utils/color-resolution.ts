@@ -109,29 +109,6 @@ export function resolveThemeColor(
       } else {
         throw new Error('Invalid OKLCH format');
       }
-    } else if (resolvedColor.startsWith('lab(')) {
-      // Parse LAB manually - similar pattern to OKLCH
-      const labMatch = resolvedColor.match(/lab\(\s*([\d.-]+%?)\s+([\d.-]+)\s+([\d.-]+)\s*\)/);
-      if (labMatch) {
-        const l = parseFloat(labMatch[1]); // lightness (LAB uses 0-100, percentage is already in correct range)
-        const a = parseFloat(labMatch[2]); // a component  
-        const b = parseFloat(labMatch[3]); // b component
-        
-        console.log(`🔬 Parsed LAB: L=${l}${labMatch[1].includes('%') ? '%' : ''}, A=${a}, B=${b}`);
-        
-        let colorObj = colord({ l, a, b });
-        if (colorObj.isValid()) {
-          if (colorObj.isDark()) {
-            colorObj = colorObj.darken(0.1);
-          }
-          hex = colorObj.toHex();
-          console.log(`🎨 Final hex result: ${hex}`);
-        } else {
-          throw new Error('Invalid LAB values');
-        }
-      } else {
-        throw new Error('Invalid LAB format');
-      }
     } else {
       // Use colord for standard parsing
       const colorObj = colord(resolvedColor);
