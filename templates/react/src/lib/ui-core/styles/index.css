@@ -5,7 +5,8 @@
 @import './radixColors.css';     /* 1. Raw color palettes first */
 @import './semanticColors.css';  /* 2. Semantic mappings second */
 @import './shadcn.css';          /* 3. Design system third */
-@import './components.css';      /* 4. Components & utilities last */
+@import './components.css';      /* 4. Components & utilities */
+@import './forms.css';           /* 5. Form-specific styles last */
 
 @theme {
   /* Core design tokens */

@@ -1,0 +1,177 @@
+/* Form-specific styles for manta-templates */
+/* Integrates with existing semantic color system */
+
+/* Form Control Base Styles */
+.form-control {
+  /* Base form element styling */
+  border: 1px solid var(--color-neutral-7);
+  background: var(--color-neutral-1);
+  color: var(--color-neutral-12);
+  transition: all 150ms ease-in-out;
+}
+
+.form-control:hover {
+  background: var(--color-neutral-2);
+  border-color: var(--color-neutral-8);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent-8);
+  box-shadow: 0 0 0 3px var(--color-accent-a4);
+}
+
+.form-control:disabled {
+  background: var(--color-neutral-2);
+  color: var(--color-neutral-8);
+  border-color: var(--color-neutral-6);
+  cursor: not-allowed;
+}
+
+.form-control::placeholder {
+  color: var(--color-neutral-9);
+}
+
+/* Form Control States */
+.form-control--error {
+  border-color: var(--color-destructive);
+  background: var(--color-destructive-a1);
+}
+
+.form-control--error:focus {
+  border-color: var(--color-destructive);
+  box-shadow: 0 0 0 3px var(--color-destructive-a4);
+}
+
+.form-control--success {
+  border-color: var(--color-success);
+  background: var(--color-success-a1);
+}
+
+.form-control--warning {
+  border-color: var(--color-warning);
+  background: var(--color-warning-a1);
+}
+
+/* Focus Ring System */
+.focus-ring {
+  transition: box-shadow 150ms ease-in-out;
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-a4);
+}
+
+/* Form Field Layout */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; /* 6px */
+}
+
+.form-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-neutral-12);
+}
+
+.form-field__description {
+  font-size: 0.75rem;
+  color: var(--color-neutral-10);
+}
+
+.form-field__error {
+  font-size: 0.75rem;
+  color: var(--color-destructive);
+  font-weight: 500;
+}
+
+/* Required indicator */
+.form-field__required::after {
+  content: " *";
+  color: var(--color-destructive);
+}
+
+/* Optional indicator */
+.form-field__optional::after {
+  content: " (optional)";
+  color: var(--color-neutral-9);
+  font-weight: normal;
+}
+
+/* Size variants */
+.form-control--sm {
+  height: 2rem; /* 32px */
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-control--md {
+  height: 2.5rem; /* 40px */
+  padding: 0 0.75rem;
+  font-size: 1rem;
+}
+
+.form-control--lg {
+  height: 3rem; /* 48px */
+  padding: 0 1rem;
+  font-size: 1.125rem;
+}
+
+/* Icon positioning */
+.form-control--with-left-icon {
+  padding-left: 2.25rem;
+}
+
+.form-control--with-right-icon {
+  padding-right: 2.25rem;
+}
+
+.form-control__icon--left {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-neutral-9);
+  pointer-events: none;
+}
+
+.form-control__icon--right {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-neutral-9);
+  pointer-events: none;
+}
+
+/* Checkbox and Radio specific styles */
+.form-checkbox,
+.form-radio {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--color-neutral-7);
+  background: var(--color-neutral-1);
+  transition: all 150ms ease-in-out;
+}
+
+.form-checkbox:checked,
+.form-radio:checked {
+  background: var(--color-accent-9);
+  border-color: var(--color-accent-9);
+  color: var(--color-accent-contrast);
+}
+
+.form-checkbox:focus,
+.form-radio:focus {
+  box-shadow: 0 0 0 3px var(--color-accent-a4);
+}
+
+.form-checkbox {
+  border-radius: 0.25rem;
+}
+
+.form-radio {
+  border-radius: 50%;
+}

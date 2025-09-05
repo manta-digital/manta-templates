@@ -1,0 +1,1 @@
+// Label component placeholder - to be implemented
