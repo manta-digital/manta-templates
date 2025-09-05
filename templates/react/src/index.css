@@ -19,6 +19,51 @@
 
 /* You can add template-specific styles below */
 
+/* ========================================
+   FORM COMPONENT CUSTOMIZATION GUIDE
+   ======================================== */
+
+/* 
+   Easy ways to customize form components globally:
+
+   1. BORDER RADIUS - Change rounding on all form inputs:
+   
+   :root {
+     --form-radius: 0.5rem;   // More rounded (default is 0.375rem) 
+     --form-radius: 0;        // Square corners
+     --form-radius: 1rem;     // Very rounded
+   }
+
+   2. FORM SIZES - Override form control heights:
+   
+   :root {
+     --form-height-sm: 2rem;   // Small inputs (default)
+     --form-height-md: 2.5rem; // Medium inputs (default) 
+     --form-height-lg: 3rem;   // Large inputs (default)
+   }
+
+   3. FOCUS RING - Customize focus appearance:
+   
+   :root {
+     --form-focus-width: 3px;     // Focus ring thickness
+     --form-focus-offset: 2px;    // Focus ring offset
+     --form-focus-color: var(--color-accent-a4); // Focus ring color
+   }
+
+   4. DIRECT CSS OVERRIDES - Target form components directly:
+   
+   .form-control,
+   [data-slot="input"],
+   [data-slot="textarea"],
+   [data-slot="select"] {
+     border-radius: 0.75rem !important;
+     border-width: 2px !important;
+   }
+
+   All form components automatically inherit theme colors from the semantic
+   color system. Use the theme switcher to test your customizations!
+*/
+
 /* Example custom theme - Forest theme with green-tinted neutrals */
 [data-palette="forest"] {
   /* Use built-in green accent colors */

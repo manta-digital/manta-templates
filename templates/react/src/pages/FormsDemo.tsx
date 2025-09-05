@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input } from '../lib/ui-core/components/ui/form';
+import { Input } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
+import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
 export default function FormsDemo() {
-  const { theme, setTheme, accent, setAccent, availableThemes } = useTheme();
+  const { theme, setTheme, accent, setAccent } = useTheme();
+  const availableThemes = useAvailableThemes();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -27,17 +29,17 @@ export default function FormsDemo() {
               </button>
             </div>
             <div className="flex gap-2 flex-wrap">
-              {availableThemes.map((themeOption) => (
+              {availableThemes.map((themeInfo) => (
                 <button
-                  key={themeOption}
-                  onClick={() => setAccent(themeOption)}
+                  key={themeInfo.id}
+                  onClick={() => setAccent(themeInfo.id)}
                   className={`px-3 py-1 rounded-md text-sm transition-colors ${
-                    accent === themeOption
+                    accent === themeInfo.id
                       ? 'bg-accent text-accent-foreground'
                       : 'bg-muted text-muted-foreground hover:bg-muted/80'
                   }`}
                 >
-                  {themeOption}
+                  {themeInfo.displayName}
                 </button>
               ))}
             </div>
