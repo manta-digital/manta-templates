@@ -15,29 +15,13 @@ import {
   DirectionalLight,
 } from 'three';
 import type { ColorRepresentation } from 'three';
-import { colord, extend } from 'colord';
-import labPlugin from 'colord/plugins/lab';
-
-// Extend colord with LAB plugin
-extend([labPlugin]);
 import { BaseCard } from './BaseCard';
 import { cn } from '../../utils/cn';
 
 /**
- * Convert any CSS color to RGB using colord
- */
-function parseColorToRgb(color: string): { r: number; g: number; b: number } {
-  try {
-    const parsed = colord(color).toRgb();
-    return { r: parsed.r / 255, g: parsed.g / 255, b: parsed.b / 255 };
-  } catch {
-    // Fallback to white if parsing fails
-    return { r: 1, g: 1, b: 1 };
-  }
-}
-
-/**
- * Legacy OKLCH converter - kept for reference but not used
+ * Convert OKLCH color to RGB
+ * OKLCH: L (lightness 0-1), C (chroma 0-0.4), H (hue 0-360)
+ * Returns: RGB values 0-255
  */
 function oklchToRgb(L: number, C: number, H: number): { r: number; g: number; b: number } {
   // Convert hue from degrees to radians
@@ -309,31 +293,39 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       
       
       if (resolvedValue) {
-        try {
-          let hex;
-          if (resolvedValue.startsWith('lab(')) {
-            // Parse LAB string to object format for colord
-            const labMatch = resolvedValue.match(/lab\(([\d.-]+)%?\s+([\d.-]+)\s+([\d.-]+)\)/);
-            if (labMatch) {
-              let l = parseFloat(labMatch[1]);
-              if (labMatch[1].includes('%')) {
-                l = l; // Keep percentage as-is for LAB
-              }
-              const a = parseFloat(labMatch[2]);
-              const b = parseFloat(labMatch[3]);
-              hex = colord({ l, a, b }).toHex();
-            } else {
-              hex = '#ffffff';
-            }
-          } else {
-            hex = colord(resolvedValue).toHex();
+        // Convert CSS color values to formats Three.js understands
+        // Three.js accepts hex numbers (0xRRGGBB) or hex strings ("#RRGGBB") or color names
+        if (resolvedValue.startsWith('#')) {
+          return resolvedValue;
+        } else if (resolvedValue.startsWith('rgb')) {
+          // Convert rgb(r,g,b) to hex format for Three.js
+          const rgbMatch = resolvedValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1]);
+            const g = parseInt(rgbMatch[2]);
+            const b = parseInt(rgbMatch[3]);
+            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+            return hexColor;
           }
-          console.log(`Converting: ${resolvedValue} -> ${hex}`);
-          return hex;
-        } catch (e) {
-          console.log(`Failed to convert: ${resolvedValue}`, e);
-          return '#ffffff';
+        } else if (resolvedValue.startsWith('oklch')) {
+          // Parse oklch and convert to RGB mathematically
+          const oklchMatch = resolvedValue.match(/oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\s*\)/);
+          if (oklchMatch) {
+            let L = parseFloat(oklchMatch[1]);
+            // Handle percentage values (convert 88.7% to 0.887)
+            if (oklchMatch[1].includes('%')) {
+              L = L / 100;
+            }
+            const C = parseFloat(oklchMatch[2]);
+            const H = parseFloat(oklchMatch[3]);
+            
+            // Convert OKLCH to RGB
+            const rgb = oklchToRgb(L, C, H);
+            const hexColor = `#${Math.round(rgb.r).toString(16).padStart(2, '0')}${Math.round(rgb.g).toString(16).padStart(2, '0')}${Math.round(rgb.b).toString(16).padStart(2, '0')}`;
+            return hexColor;
+          }
         }
+        return resolvedValue;
       } else {
         return color;
       }
@@ -907,7 +899,6 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       });
       material.dispose();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
   const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;
