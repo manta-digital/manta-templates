@@ -24,99 +24,14 @@ interface ProjectCardProps {
   imageProps?: Record<string, unknown>;
 }
 
-interface ProjectCardBodyProps {
-  title?: string;
-  description?: string;
-  techStack?: string[];
-  repoUrl?: string;
-  demoUrl?: string;
-  wrapperClassName?: string;
-  h3ClassName: string;
-  pClassName: string;
-  isOverlay?: boolean;
-  LinkComponent?: React.ComponentType<any>;
-  showLinks?: boolean;
-}
-
-const ProjectCardBody: React.FC<ProjectCardBodyProps> = ({
-  title,
-  description,
-  techStack = [],
-  repoUrl,
-  demoUrl,
-  wrapperClassName = '',
-  h3ClassName,
-  pClassName,
-  isOverlay = false,
-  LinkComponent,
-  showLinks = true, // Allow disabling individual links when card is wrapped
-}) => (
-  <div className={wrapperClassName}>
-    <h3 className={h3ClassName}>{title || 'Untitled Project'}</h3>
-    {description && <p className={pClassName}>{description}</p>}
-    <div className="flex flex-wrap gap-2 mb-4">
-      {techStack.map((tech) => (
-        <span
-          key={tech}
-          className={isOverlay 
-            ? "inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium leading-none backdrop-blur-sm border border-white/30"
-            : "inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium leading-none"
-          }
-        >
-          {tech}
-        </span>
-      ))}
-    </div>
-    {showLinks && (
-      <div className="mt-auto flex justify-end gap-3 pt-2 w-full">
-        {repoUrl && (
-          LinkComponent ? (
-            <LinkComponent 
-              href={repoUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={isOverlay 
-                ? "text-sm text-white/80 hover:text-white transition-colors"
-                : "text-sm text-muted-foreground hover:text-foreground transition-colors"
-              }
-            >
-              Code
-            </LinkComponent>
-          ) : (
-            <a 
-              href={repoUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={isOverlay 
-                ? "text-sm text-white/80 hover:text-white transition-colors"
-                : "text-sm text-muted-foreground hover:text-foreground transition-colors"
-              }
-            >
-              Code
-            </a>
-          )
-        )}
-        {demoUrl && (
-          <span className={isOverlay 
-            ? "text-sm text-white/80 cursor-pointer group-hover:text-white transition-colors"
-            : "text-sm text-muted-foreground cursor-pointer group-hover:text-foreground transition-colors"
-          }>Demo</span>
-        )}
-      </div>
-    )}
-  </div>
-);
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   techStack = [],
   repoUrl,
-  demoUrl,
   content,
   className,
-  children,
-  overlay = false,
   ImageComponent,
   LinkComponent,
   imageProps = {},
