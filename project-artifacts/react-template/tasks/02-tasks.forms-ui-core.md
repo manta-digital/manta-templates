@@ -4,8 +4,9 @@ project: manta-templates
 lld_reference: ../slices/020-slice-forms-ui-1.md
 dependencies: ["@radix-ui/react-checkbox", "@radix-ui/react-radio-group", "@radix-ui/react-select", "@radix-ui/react-label", "react-hook-form", "zod"]
 projectState: "Adding themed form controls to all templates with semantic color integration"
-status: in_progress
+status: phase_1_completed
 lastUpdated: 2025-09-05
+phaseCompleted: 1
 ---
 
 # Task Breakdown: Forms UI Core Slice
@@ -28,16 +29,16 @@ Implementing core form controls (Input, Textarea, Checkbox, Radio, Select, Label
 - [x] Create `templates/react/src/lib/ui-core/components/form/` directory
 - [x] Create placeholder files: `input.tsx`, `textarea.tsx`, `checkbox.tsx`
 - [x] Create placeholder files: `radio.tsx`, `select.tsx`, `label.tsx`
-- [ ] Create placeholder files: `form-field.tsx`, `form.tsx`, `index.ts`
-- [ ] Add barrel export in `form/index.ts`
+- [x] Create placeholder files: `form-field.tsx`, `form.tsx`, `index.ts`
+- [x] Add barrel export in `form/index.ts`
 - **Success**: Directory structure ready, all files created
 
 ### Task 1.3: Create Form-Specific Styles
-- [ ] Create `templates/react/src/lib/ui-core/styles/forms.css`
-- [ ] Add form-specific CSS variable mappings for semantic colors
-- [ ] Define focus ring styles using `--color-accent-a4`
-- [ ] Define error state colors using destructive tokens
-- [ ] Import forms.css in main style index
+- [x] Create `templates/react/src/lib/ui-core/styles/forms.css`
+- [x] Add form-specific CSS variable mappings for semantic colors
+- [x] Define focus ring styles using `--color-accent-a4`
+- [x] Define error state colors using destructive tokens
+- [x] Import forms.css in main style index
 - **Success**: Form styles integrated with theme system
 
 ## Phase 2: First Vertical Slice - Input Component (Effort: 3)
