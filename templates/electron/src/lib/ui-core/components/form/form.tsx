@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import * as z from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
@@ -179,6 +179,7 @@ function FormLabel({ className, ...props }: FormLabelProps) {
     <label
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        "pl-[calc(var(--radius)*0.50)]", // Dynamic padding based on radius
         className
       )}
       htmlFor={formItemId}

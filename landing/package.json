@@ -33,7 +33,6 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --coverage --watchAll=false",
     "test:server-components": "jest --testPathPattern=server-component",
-    "build-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm build",
     "dev-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm dev"
   },
   "dependencies": {

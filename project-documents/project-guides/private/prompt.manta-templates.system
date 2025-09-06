@@ -8,13 +8,13 @@ This file contains specialized prompts specific to this project.
 ```markdown
 Description of `packages/` structure in monorepo manta-templates.  The `packages/` directory
 contains "framework agnostic" elements that we develop, and that are propagated down to the
-individual templates by the build process (`pnpm build-ui`, etc).
+individual templates by the copy process (`pnpm copy-packages`, etc).
 
 When working with these files and developing `packages/ui-core, packages/ui-adapters`, and even
 `packages/content', we often work inside an individual template such as `templates/nextjs`.
 We can work there in the template's `lib/` directory, copy our changes *up* to appropriate
 directory in `packages/` once they are good, knowing that these will then be propagated back
-*down* to the individual templates by the build process.
+*down* to the individual templates by the copy process.
 ```
 
 ##### Definition of framework-agnostic for manta-templates

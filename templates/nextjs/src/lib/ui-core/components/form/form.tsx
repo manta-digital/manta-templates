@@ -81,7 +81,6 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   // Filter out ui props that shouldn't be passed to DOM
   const { ...domProps } = props;
   const formMethods = useForm({
-    // @ts-expect-error - Known type incompatibility between @hookform/resolvers 5.2.1 and Zod v4
     resolver: schema ? zodResolver(schema) : undefined,
     defaultValues,
     mode,
@@ -180,6 +179,7 @@ function FormLabel({ className, ...props }: FormLabelProps) {
     <label
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        "pl-[calc(var(--radius)*0.50)]", // Dynamic padding based on radius
         className
       )}
       htmlFor={formItemId}

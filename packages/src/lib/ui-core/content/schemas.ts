@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const ProjectContentSchema = z.object({
   type: z.literal('project'),

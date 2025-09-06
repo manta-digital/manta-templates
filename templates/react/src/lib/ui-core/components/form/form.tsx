@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import * as z from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 

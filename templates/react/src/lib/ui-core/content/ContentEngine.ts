@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
-import { z } from 'zod';
+import * as z from 'zod';
 
 export interface ContentEngine {
   loadContent<T = Record<string, any>>(slug: string): Promise<ContentResult<T>>;
