@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup, RadioGroup, RadioItem } from '../lib/ui-core/components/form';
+import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup, RadioGroup, RadioItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -911,6 +911,350 @@ export default function FormsDemo() {
                         ]}
                         defaultValue="system"
                       />
+                    </FormField>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          {/* Select Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Select Component</h2>
+            
+            {/* Basic Select */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Basic Select</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField label="Choose a framework" description="Select your preferred framework">
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a framework" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="react">React</SelectItem>
+                      <SelectItem value="vue">Vue</SelectItem>
+                      <SelectItem value="angular">Angular</SelectItem>
+                      <SelectItem value="svelte">Svelte</SelectItem>
+                      <SelectItem value="solid">SolidJS</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Select a language" description="Choose your programming language">
+                  <Select defaultValue="typescript">
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="javascript">JavaScript</SelectItem>
+                      <SelectItem value="typescript">TypeScript</SelectItem>
+                      <SelectItem value="python">Python</SelectItem>
+                      <SelectItem value="rust">Rust</SelectItem>
+                      <SelectItem value="go">Go</SelectItem>
+                      <SelectItem value="java">Java</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </div>
+            </div>
+
+            {/* Size Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
+              <div className="space-y-4">
+                <FormField label="Small Select" description="Compact size">
+                  <Select>
+                    <SelectTrigger size="sm">
+                      <SelectValue placeholder="Select option (small)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1" size="sm">Small Option 1</SelectItem>
+                      <SelectItem value="option2" size="sm">Small Option 2</SelectItem>
+                      <SelectItem value="option3" size="sm">Small Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Medium Select (Default)" description="Standard size">
+                  <Select>
+                    <SelectTrigger size="md">
+                      <SelectValue placeholder="Select option (medium)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1" size="md">Medium Option 1</SelectItem>
+                      <SelectItem value="option2" size="md">Medium Option 2</SelectItem>
+                      <SelectItem value="option3" size="md">Medium Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Large Select" description="Larger size for better accessibility">
+                  <Select>
+                    <SelectTrigger size="lg">
+                      <SelectValue placeholder="Select option (large)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1" size="lg">Large Option 1</SelectItem>
+                      <SelectItem value="option2" size="lg">Large Option 2</SelectItem>
+                      <SelectItem value="option3" size="lg">Large Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </div>
+            </div>
+
+            {/* Variant Styles */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Variant Styles</h3>
+              <div className="grid gap-6 md:grid-cols-3">
+                <FormField label="Default Variant">
+                  <Select>
+                    <SelectTrigger variant="default">
+                      <SelectValue placeholder="Default style" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Default Option 1</SelectItem>
+                      <SelectItem value="option2">Default Option 2</SelectItem>
+                      <SelectItem value="option3">Default Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Ghost Variant">
+                  <Select>
+                    <SelectTrigger variant="ghost">
+                      <SelectValue placeholder="Ghost style" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Ghost Option 1</SelectItem>
+                      <SelectItem value="option2">Ghost Option 2</SelectItem>
+                      <SelectItem value="option3">Ghost Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Filled Variant">
+                  <Select>
+                    <SelectTrigger variant="filled">
+                      <SelectValue placeholder="Filled style" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Filled Option 1</SelectItem>
+                      <SelectItem value="option2">Filled Option 2</SelectItem>
+                      <SelectItem value="option3">Filled Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </div>
+            </div>
+
+            {/* State Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">State Variants</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField 
+                  label="Error State" 
+                  error="Please select a valid option"
+                >
+                  <Select>
+                    <SelectTrigger state="error">
+                      <SelectValue placeholder="Select with error" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Option 1</SelectItem>
+                      <SelectItem value="option2">Option 2</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField 
+                  label="Success State"
+                  description="Great choice!"
+                >
+                  <Select defaultValue="option1">
+                    <SelectTrigger state="success">
+                      <SelectValue placeholder="Select with success" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Good Option 1</SelectItem>
+                      <SelectItem value="option2">Good Option 2</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField 
+                  label="Warning State"
+                  description="Please review your selection"
+                >
+                  <Select>
+                    <SelectTrigger state="warning">
+                      <SelectValue placeholder="Select with warning" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Warning Option 1</SelectItem>
+                      <SelectItem value="option2">Warning Option 2</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Disabled Select">
+                  <Select disabled>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Disabled select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="option1">Option 1</SelectItem>
+                      <SelectItem value="option2">Option 2</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </div>
+            </div>
+
+            {/* Long Lists and Scrolling */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Scrollable Lists</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField label="Many Countries" description="Scrollable list with many options">
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="us">United States</SelectItem>
+                      <SelectItem value="uk">United Kingdom</SelectItem>
+                      <SelectItem value="ca">Canada</SelectItem>
+                      <SelectItem value="au">Australia</SelectItem>
+                      <SelectItem value="de">Germany</SelectItem>
+                      <SelectItem value="fr">France</SelectItem>
+                      <SelectItem value="it">Italy</SelectItem>
+                      <SelectItem value="es">Spain</SelectItem>
+                      <SelectItem value="jp">Japan</SelectItem>
+                      <SelectItem value="kr">South Korea</SelectItem>
+                      <SelectItem value="cn">China</SelectItem>
+                      <SelectItem value="in">India</SelectItem>
+                      <SelectItem value="br">Brazil</SelectItem>
+                      <SelectItem value="mx">Mexico</SelectItem>
+                      <SelectItem value="ar">Argentina</SelectItem>
+                      <SelectItem value="cl">Chile</SelectItem>
+                      <SelectItem value="nl">Netherlands</SelectItem>
+                      <SelectItem value="se">Sweden</SelectItem>
+                      <SelectItem value="no">Norway</SelectItem>
+                      <SelectItem value="fi">Finland</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="Disabled Items" description="Some options are disabled">
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select an option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="available1">Available Option 1</SelectItem>
+                      <SelectItem value="disabled1" disabled>Disabled Option 1</SelectItem>
+                      <SelectItem value="available2">Available Option 2</SelectItem>
+                      <SelectItem value="disabled2" disabled>Disabled Option 2</SelectItem>
+                      <SelectItem value="available3">Available Option 3</SelectItem>
+                      <SelectItem value="disabled3" disabled>Disabled Option 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+              </div>
+            </div>
+
+            {/* Real-world Examples */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Real-world Examples</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-4">
+                    <FormField 
+                      label="Project Template" 
+                      required
+                      description="Choose your starting template"
+                    >
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select template" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="react-vite">React + Vite</SelectItem>
+                          <SelectItem value="react-nextjs">React + Next.js</SelectItem>
+                          <SelectItem value="vue-vite">Vue + Vite</SelectItem>
+                          <SelectItem value="vue-nuxt">Vue + Nuxt</SelectItem>
+                          <SelectItem value="svelte-kit">SvelteKit</SelectItem>
+                          <SelectItem value="astro">Astro</SelectItem>
+                          <SelectItem value="electron">Electron</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormField>
+
+                    <FormField 
+                      label="Deployment Target" 
+                      description="Where will you deploy this project?"
+                    >
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select deployment" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="vercel">Vercel</SelectItem>
+                          <SelectItem value="netlify">Netlify</SelectItem>
+                          <SelectItem value="aws">AWS</SelectItem>
+                          <SelectItem value="digitalocean">Digital Ocean</SelectItem>
+                          <SelectItem value="railway">Railway</SelectItem>
+                          <SelectItem value="render">Render</SelectItem>
+                          <SelectItem value="self-hosted">Self-hosted</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormField>
+                  </div>
+                </form>
+
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-4">
+                    <FormField 
+                      label="Time Zone" 
+                      required
+                      description="Select your time zone"
+                    >
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select time zone" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="utc-12">(UTC-12:00) Baker Island</SelectItem>
+                          <SelectItem value="utc-8">(UTC-08:00) Pacific Time</SelectItem>
+                          <SelectItem value="utc-5">(UTC-05:00) Eastern Time</SelectItem>
+                          <SelectItem value="utc+0">(UTC+00:00) London</SelectItem>
+                          <SelectItem value="utc+1">(UTC+01:00) Paris</SelectItem>
+                          <SelectItem value="utc+9">(UTC+09:00) Tokyo</SelectItem>
+                          <SelectItem value="utc+10">(UTC+10:00) Sydney</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormField>
+
+                    <FormField 
+                      label="Language Preference" 
+                      description="Choose your preferred language"
+                    >
+                      <Select defaultValue="en">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select language" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="en">English</SelectItem>
+                          <SelectItem value="es">Español</SelectItem>
+                          <SelectItem value="fr">Français</SelectItem>
+                          <SelectItem value="de">Deutsch</SelectItem>
+                          <SelectItem value="it">Italiano</SelectItem>
+                          <SelectItem value="ja">日本語</SelectItem>
+                          <SelectItem value="ko">한국어</SelectItem>
+                          <SelectItem value="zh">中文</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </FormField>
                   </div>
                 </form>

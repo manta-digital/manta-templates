@@ -18,3 +18,22 @@ export {
   type RadioGroupProps, 
   type RadioItemProps 
 } from "./radio";
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+  selectTriggerVariants,
+  selectContentVariants,
+  selectItemVariants,
+  type SelectProps,
+  type SelectTriggerProps,
+  type SelectContentProps,
+  type SelectItemProps,
+} from "./select";
