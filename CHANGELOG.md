@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Framework-agnostic form system** - Complete ContactForm implementation across React, NextJS, and Electron templates
+- **Form validation** - Zod-powered validation with TypeScript schemas and error handling
+- **CVA-prefixed components** - Resolved naming conflicts with `ui-*` prefixed class variance authority options
+- **Universal form components** - Shared Input, Textarea, Checkbox, RadioGroup, and Select components
+
+### Changed
+- **Image optimization** - Consolidated duplicate images across templates, saved ~5.3MB in Electron template
+- **Zod imports** - Standardized to `import * as z from 'zod'` across all templates
+- **Component architecture** - Enhanced dependency injection patterns for framework compatibility
+
+### Fixed
+- **TypeScript configuration** - Resolved jest/node type definition errors in NextJS template
+- **AboutCard props interface** - Fixed TypeScript errors with explicit props instead of Partial<AboutContent>
+- **Module resolution** - Fixed next/image and next/link import issues
+- **Build validation** - Eliminated import and compilation errors across all templates
+
+### Performance
+- **Template size reduction** - Significant bundle size improvements through image consolidation
+- **Build optimization** - Faster compilation with resolved TypeScript issues
+
 ## [0.8.0] - 2025-09-02
 
 ### Added
