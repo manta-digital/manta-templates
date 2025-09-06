@@ -1,5 +1,6 @@
+'use client';
 import * as React from "react";
-import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext, Controller } from "react-hook-form";
+import { useForm, FormProvider, UseFormReturn, useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -21,15 +22,15 @@ const formVariants = cva(
   }
 );
 
-export interface FormProps<TFieldValues extends FieldValues>
+export interface FormProps
   extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">,
     VariantProps<typeof formVariants> {
-  schema?: z.ZodSchema<TFieldValues>;
-  defaultValues?: UseFormProps<TFieldValues>['defaultValues'];
-  mode?: UseFormProps<TFieldValues>['mode'];
-  onSubmit: (data: TFieldValues) => void | Promise<void>;
+  schema?: z.ZodType<any>;
+  defaultValues?: any;
+  mode?: 'onSubmit' | 'onChange' | 'onBlur' | 'onTouched' | 'all';
+  onSubmit: (data: any) => void | Promise<void>;
   onError?: (errors: any) => void;
-  form?: UseFormReturn<TFieldValues>;
+  form?: UseFormReturn<any>;
 }
 
 export interface FormFieldContextValue {
@@ -66,7 +67,7 @@ export const useFormField = () => {
   };
 };
 
-function Form<TFieldValues extends FieldValues = FieldValues>({
+function Form({
   schema,
   defaultValues,
   mode = "onSubmit",
@@ -77,11 +78,11 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   className,
   children,
   ...props
-}: FormProps<TFieldValues>) {
+}: FormProps) {
   // Filter out ui props that shouldn't be passed to DOM
   const { ...domProps } = props;
   const formMethods = useForm({
-    resolver: schema ? zodResolver(schema) : undefined,
+    resolver: schema ? zodResolver(schema as any) : undefined,
     defaultValues,
     mode,
   });
@@ -237,14 +238,12 @@ function FormMessage({ className, children, ...props }: FormMessageProps) {
 }
 
 // Higher-level wrapper that combines form management with validation
-export interface ValidatedFormProps<TFieldValues extends FieldValues>
-  extends Omit<FormProps<TFieldValues>, 'schema'> {
-  schema: z.ZodSchema<TFieldValues>;
+export interface ValidatedFormProps
+  extends Omit<FormProps, 'schema'> {
+  schema: z.ZodType<any>;
 }
 
-function ValidatedForm<TFieldValues extends FieldValues = FieldValues>(
-  props: ValidatedFormProps<TFieldValues>
-) {
+function ValidatedForm(props: ValidatedFormProps) {
   return <Form {...props} />;
 }
 
