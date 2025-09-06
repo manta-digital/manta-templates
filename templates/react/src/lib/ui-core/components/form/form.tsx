@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext } from "react-hook-form";
+import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -81,7 +81,6 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   // Filter out ui props that shouldn't be passed to DOM
   const { ...domProps } = props;
   const formMethods = useForm({
-    // @ts-expect-error - zodResolver type incompatibility with different Zod versions
     resolver: schema ? zodResolver(schema) : undefined,
     defaultValues,
     mode,
@@ -129,9 +128,6 @@ function FormControlField({ name, children }: FormControlFieldProps) {
   const formDescriptionId = `${id}-form-item-description`;
   const formMessageId = `${id}-form-item-message`;
 
-  const fieldState = form.getFieldState(name);
-  const { ref, ...field } = form.register(name); // eslint-disable-line @typescript-eslint/no-unused-vars
-
   const contextValue: FormFieldContextValue = {
     name,
     formItemId,
@@ -139,20 +135,23 @@ function FormControlField({ name, children }: FormControlFieldProps) {
     formMessageId,
   };
 
-  const { onChange, onBlur, name: fieldName } = field;
-  const fieldValue = form.getValues(name);
-
   return (
     <FormFieldContext.Provider value={contextValue}>
-      {children({
-        value: fieldValue,
-        onChange,
-        onBlur: onBlur as any,
-        name: fieldName,
-        error: fieldState.error?.message,
-        isDirty: fieldState.isDirty,
-        isTouched: fieldState.isTouched,
-      })}
+      <Controller
+        name={name}
+        control={form.control}
+        render={({ field, fieldState }) => 
+          children({
+            value: field.value,
+            onChange: field.onChange,
+            onBlur: field.onBlur,
+            name: field.name,
+            error: fieldState.error?.message,
+            isDirty: fieldState.isDirty,
+            isTouched: fieldState.isTouched,
+          })
+        }
+      />
     </FormFieldContext.Provider>
   );
 }
