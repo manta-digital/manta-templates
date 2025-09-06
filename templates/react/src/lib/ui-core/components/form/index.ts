@@ -57,3 +57,4 @@ export {
   type FormMessageProps,
   type ValidatedFormProps,
 } from "./form";
+export { ContactForm } from "./ContactForm";

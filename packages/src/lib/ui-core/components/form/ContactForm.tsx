@@ -7,9 +7,9 @@ import {
   Input, 
   Textarea, 
   FormLabel
-} from '../lib/ui-core/components/form';
-import { Button } from '../lib/ui-core/components/ui/button';
-import { cn } from '../lib/ui-core/utils';
+} from '.';
+import { Button } from '../ui/button';
+import { cn } from '../../utils';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
