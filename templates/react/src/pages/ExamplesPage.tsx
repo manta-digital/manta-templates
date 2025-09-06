@@ -20,6 +20,7 @@ import { contentProvider } from '../lib/content';
 //import type { ProjectContent, QuoteContent, VideoContent, AboutContent } from '../lib/ui-core/content';
 import type { ProjectContent, QuoteContent, VideoContent } from '../lib/ui-core/content';
 import type { AboutContent } from '../lib/ui-core/types/content';
+import { ContactForm } from '../components/ContactForm';
 
 export default function ExamplesPage() {
   // Memoize filter objects to prevent infinite re-renders
@@ -45,12 +46,12 @@ export default function ExamplesPage() {
     contentProvider
   );
 
-  const { content: technologies, loading: technologiesLoading, error: technologiesError } = useContentCollection<any>(
+  const { content: technologies } = useContentCollection<any>(
     technologyFilters, 
     contentProvider
   );
 
-  const { content: articles, loading: articlesLoading } = useContentCollection<any>(
+  const { content: articles } = useContentCollection<any>(
     articleFilters, 
     contentProvider
   );
@@ -200,6 +201,18 @@ export default function ExamplesPage() {
                 direction={technologies[0].frontmatter.direction}
               />
             )}
+          </BaseCard>
+        </GridItem>
+
+        {/* Contact Form */}
+        <GridItem className="col-span-8 md:col-span-6 lg:col-span-4 xl:col-span-3">
+          <BaseCard className="h-full p-6">
+            <ContactForm 
+              className="max-w-none"
+              title="Contact Us"
+              description="Get in touch with our team"
+              submitText="Send Message"
+            />
           </BaseCard>
         </GridItem>
 

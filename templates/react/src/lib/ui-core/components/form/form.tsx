@@ -179,6 +179,7 @@ function FormLabel({ className, ...props }: FormLabelProps) {
     <label
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        "pl-[calc(var(--radius)*0.50)]", // Dynamic padding based on radius
         className
       )}
       htmlFor={formItemId}
