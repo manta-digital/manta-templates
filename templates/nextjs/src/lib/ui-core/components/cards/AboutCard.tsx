@@ -1,7 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 import { BaseCard } from './BaseCard';
-import type { AboutContent } from '../../content/schemas';
 
 // Social icon component types for dependency injection
 interface SocialIcons {
@@ -13,7 +12,14 @@ interface SocialIcons {
   [key: string]: React.ComponentType<any>; // Allow any platform string
 }
 
-interface AboutCardProps extends Partial<AboutContent> {
+interface AboutCardProps {
+  title?: string;
+  description?: string;
+  avatar?: string;
+  socials?: Array<{
+    platform: string;
+    url: string;
+  }>;
   contentHtml?: string;
   className?: string;
   // Dependency injection props
