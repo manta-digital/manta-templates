@@ -268,6 +268,19 @@ Implementing core form controls (Input, Textarea, Checkbox, Radio, Select, Label
 
 ## Phase 9: Cross-Template Testing (Effort: 2)
 
+### Task 9.0: Refactor CVA Variants to Use UI Prefixes (Effort: 2)
+Replace all CVA variant prop names with "ui" prefixes to avoid HTML/Radix conflicts
+- [x] Update Input: `size` → `uiSize`, `variant` → `uiVariant`, `state` → `uiState`
+- [x] Update Label: `size` → `uiSize`, `state` → `uiState`
+- [x] Update Textarea: `size` → `uiSize`, `variant` → `uiVariant`, `state` → `uiState`  
+- [x] Update Checkbox: `size` → `uiSize`, `variant` → `uiVariant` (including CheckboxGroup orientation → `uiOrientation`)
+- [x] Update RadioGroup: `orientation` → `uiOrientation`, `size` → `uiSize`
+- [x] Update Select: `position` → `uiPosition`, `size` → `uiSize`, `variant` → `uiVariant`
+- [ ] Update FormField: `spacing` → `uiSpacing`
+- [ ] Remove all `Omit<>` type exclusions from interfaces
+- [ ] Update FormsDemo page to use new prop names
+- **Success**: All form components use ui-prefixed variants with no type conflicts
+
 ### Task 9.1: Copy to Packages Directory
 - [ ] Copy all form components to `packages/src/lib/ui-core/components/form/`
 - [ ] Copy form styles to `packages/src/lib/ui-core/styles/`

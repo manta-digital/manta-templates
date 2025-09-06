@@ -6,17 +6,17 @@ const textareaVariants = cva(
   "flex min-h-[80px] w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 transition-all resize-none",
   {
     variants: {
-      uiVariant: {
+      variant: {
         default: "border-border text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         ghost: "border-transparent bg-transparent hover:bg-accent/50 focus-visible:bg-background focus-visible:border-border focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         filled: "border-transparent bg-muted hover:bg-muted/80 focus-visible:bg-background focus-visible:border-border focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       },
-      uiSize: {
+      size: {
         sm: "min-h-[60px] px-2 py-1 text-xs",
         md: "min-h-[80px] px-3 py-2 text-sm", 
         lg: "min-h-[100px] px-4 py-3 text-base",
       },
-      uiState: {
+      state: {
         default: "",
         error: "border-destructive ring-destructive/20 focus-visible:ring-destructive",
         success: "border-green-500 ring-green-500/20 focus-visible:ring-green-500",
@@ -24,9 +24,9 @@ const textareaVariants = cva(
       }
     },
     defaultVariants: {
-      uiVariant: "default",
-      uiSize: "md",
-      uiState: "default",
+      variant: "default",
+      size: "md",
+      state: "default",
     },
   }
 );
@@ -40,7 +40,7 @@ export interface TextareaProps
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, uiVariant, uiSize, uiState, autoResize, minRows = 3, maxRows, ...props }, ref) => {
+  ({ className, variant, size, state, autoResize, minRows = 3, maxRows, ...props }, ref) => {
     // Filter out React Hook Form props that shouldn't be passed to DOM
     const { 
       isDirty, 
@@ -97,7 +97,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <textarea
-        className={cn(textareaVariants({ uiVariant, uiSize, uiState }), className)}
+        className={cn(textareaVariants({ variant, size, state }), className)}
         ref={callbackRef}
         style={autoResize ? { height: textareaHeight } : undefined}
         onInput={autoResize ? adjustHeight : undefined}

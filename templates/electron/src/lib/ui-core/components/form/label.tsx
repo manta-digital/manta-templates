@@ -7,12 +7,12 @@ const labelVariants = cva(
   "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 transition-colors",
   {
     variants: {
-      uiSize: {
+      size: {
         sm: "text-xs",
         md: "text-sm",
         lg: "text-base",
       },
-      uiState: {
+      state: {
         default: "text-foreground",
         error: "text-destructive",
         success: "text-green-600",
@@ -20,8 +20,8 @@ const labelVariants = cva(
       }
     },
     defaultVariants: {
-      uiSize: "md",
-      uiState: "default",
+      size: "md",
+      state: "default",
     },
   }
 );
@@ -36,10 +36,10 @@ export interface LabelProps
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   LabelProps
->(({ className, uiSize, uiState, required, optional, children, ...props }, ref) => (
+>(({ className, size, state, required, optional, children, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={cn(labelVariants({ uiSize, uiState }), className)}
+    className={cn(labelVariants({ size, state }), className)}
     {...props}
   >
     {children}

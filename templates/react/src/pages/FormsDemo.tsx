@@ -58,11 +58,11 @@ export default function FormsDemo() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Ghost</label>
-                <Input variant="ghost" placeholder="Ghost input..." />
+                <Input uiVariant="ghost" placeholder="Ghost input..." />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Filled</label>
-                <Input variant="filled" placeholder="Filled input..." />
+                <Input uiVariant="filled" placeholder="Filled input..." />
               </div>
             </div>
           </section>
@@ -73,15 +73,15 @@ export default function FormsDemo() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Small</label>
-                <Input size="sm" placeholder="Small input..." />
+                <Input uiSize="sm" placeholder="Small input..." />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Medium (Default)</label>
-                <Input size="md" placeholder="Medium input..." />
+                <Input uiSize="md" placeholder="Medium input..." />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Large</label>
-                <Input size="lg" placeholder="Large input..." />
+                <Input uiSize="lg" placeholder="Large input..." />
               </div>
             </div>
           </section>
@@ -92,17 +92,17 @@ export default function FormsDemo() {
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Error State</label>
-                <Input state="error" placeholder="Error state..." />
+                <Input uiState="error" placeholder="Error state..." />
                 <p className="text-sm text-destructive">This field has an error</p>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Success State</label>
-                <Input state="success" placeholder="Success state..." />
+                <Input uiState="success" placeholder="Success state..." />
                 <p className="text-sm text-green-600">This field is valid</p>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Warning State</label>
-                <Input state="warning" placeholder="Warning state..." />
+                <Input uiState="warning" placeholder="Warning state..." />
                 <p className="text-sm text-yellow-600">This field needs attention</p>
               </div>
               <div className="space-y-2">
@@ -224,20 +224,20 @@ export default function FormsDemo() {
                 <Input placeholder="This field is optional..." />
               </div>
               <div className="space-y-2">
-                <Label state="error" required>Error State Label</Label>
-                <Input state="error" placeholder="Error input..." />
+                <Label uiState="error" required>Error State Label</Label>
+                <Input uiState="error" placeholder="Error input..." />
               </div>
               <div className="space-y-2">
-                <Label state="success">Success State Label</Label>
-                <Input state="success" placeholder="Success input..." />
+                <Label uiState="success">Success State Label</Label>
+                <Input uiState="success" placeholder="Success input..." />
               </div>
               <div className="space-y-2">
-                <Label size="sm">Small Label</Label>
-                <Input size="sm" placeholder="Small input..." />
+                <Label uiSize="sm">Small Label</Label>
+                <Input uiSize="sm" placeholder="Small input..." />
               </div>
               <div className="space-y-2">
-                <Label size="lg">Large Label</Label>
-                <Input size="lg" placeholder="Large input..." />
+                <Label uiSize="lg">Large Label</Label>
+                <Input uiSize="lg" placeholder="Large input..." />
               </div>
             </div>
           </section>
@@ -318,10 +318,10 @@ export default function FormsDemo() {
                   <Textarea placeholder="Enter your message..." />
                 </FormField>
                 <FormField label="Ghost Textarea">
-                  <Textarea variant="ghost" placeholder="Ghost textarea..." />
+                  <Textarea uiVariant="ghost" placeholder="Ghost textarea..." />
                 </FormField>
                 <FormField label="Filled Textarea">
-                  <Textarea variant="filled" placeholder="Filled textarea..." />
+                  <Textarea uiVariant="filled" placeholder="Filled textarea..." />
                 </FormField>
               </div>
             </div>
@@ -331,13 +331,13 @@ export default function FormsDemo() {
               <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
               <div className="space-y-4">
                 <FormField label="Small Textarea">
-                  <Textarea size="sm" placeholder="Small textarea..." />
+                  <Textarea uiSize="sm" placeholder="Small textarea..." />
                 </FormField>
                 <FormField label="Medium Textarea (Default)">
-                  <Textarea size="md" placeholder="Medium textarea..." />
+                  <Textarea uiSize="md" placeholder="Medium textarea..." />
                 </FormField>
                 <FormField label="Large Textarea">
-                  <Textarea size="lg" placeholder="Large textarea..." />
+                  <Textarea uiSize="lg" placeholder="Large textarea..." />
                 </FormField>
               </div>
             </div>
@@ -360,7 +360,7 @@ export default function FormsDemo() {
                   description="Message looks good!"
                 >
                   <Textarea 
-                    state="success"
+                    uiState="success"
                     placeholder="Success state..."
                     defaultValue="This is a perfect message."
                   />
@@ -370,7 +370,7 @@ export default function FormsDemo() {
                   description="Check your message length"
                 >
                   <Textarea 
-                    state="warning"
+                    uiState="warning"
                     placeholder="Warning state..."
                     defaultValue="This message might be too long."
                   />
@@ -510,15 +510,15 @@ export default function FormsDemo() {
               <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
               <div className="flex items-center gap-6">
                 <div className="flex items-center space-x-2">
-                  <Checkbox size="sm" defaultChecked />
+                  <Checkbox uiSize="sm" defaultChecked />
                   <label className="text-sm">Small</label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox size="md" defaultChecked />
+                  <Checkbox uiSize="md" defaultChecked />
                   <label className="text-sm">Medium (Default)</label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox size="lg" defaultChecked />
+                  <Checkbox uiSize="lg" defaultChecked />
                   <label className="text-sm">Large</label>
                 </div>
               </div>
@@ -529,11 +529,11 @@ export default function FormsDemo() {
               <h3 className="text-lg font-semibold mb-4">Variant Styles</h3>
               <div className="flex items-center gap-6">
                 <div className="flex items-center space-x-2">
-                  <Checkbox variant="default" defaultChecked />
+                  <Checkbox uiVariant="default" defaultChecked />
                   <label className="text-sm">Default</label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox variant="accent" defaultChecked />
+                  <Checkbox uiVariant="accent" defaultChecked />
                   <label className="text-sm">Accent</label>
                 </div>
               </div>
@@ -550,7 +550,7 @@ export default function FormsDemo() {
                 />
                 <Checkbox 
                   indeterminate 
-                  size="lg"
+                  uiSize="lg"
                   label="Bulk actions" 
                   description="Partially selected"
                 />
@@ -598,7 +598,7 @@ export default function FormsDemo() {
               <div className="grid gap-6 md:grid-cols-2">
                 <FormField label="Small Checkboxes" description="Compact size for dense interfaces">
                   <CheckboxGroup
-                    size="sm"
+                    uiSize="sm"
                     options={[
                       { value: "option1", label: "Option 1" },
                       { value: "option2", label: "Option 2" },
@@ -608,7 +608,7 @@ export default function FormsDemo() {
                 </FormField>
                 <FormField label="Large Checkboxes" description="Easier to tap on mobile">
                   <CheckboxGroup
-                    size="lg"
+                    uiSize="lg"
                     options={[
                       { value: "large1", label: "Large Option 1" },
                       { value: "large2", label: "Large Option 2" },
@@ -622,7 +622,7 @@ export default function FormsDemo() {
               <div className="mt-6">
                 <FormField label="Accent Variant" description="Using accent color theme">
                   <CheckboxGroup
-                    variant="accent"
+                    uiVariant="accent"
                     options={[
                       { value: "accent1", label: "Accent Option 1", description: "With description" },
                       { value: "accent2", label: "Accent Option 2" },
@@ -681,7 +681,7 @@ export default function FormsDemo() {
                     </FormField>
                     <Checkbox 
                       label="I agree to the Terms of Service and Privacy Policy" 
-                      size="sm"
+                      uiSize="sm"
                     />
                   </div>
                 </form>
@@ -727,7 +727,7 @@ export default function FormsDemo() {
               <div className="space-y-4">
                 <FormField label="Small Radio Group" description="Compact size">
                   <RadioGroup
-                    size="sm"
+                    uiSize="sm"
                     orientation="horizontal"
                     options={[
                       { value: "sm1", label: "Option 1" },
@@ -740,7 +740,7 @@ export default function FormsDemo() {
 
                 <FormField label="Medium Radio Group (Default)" description="Standard size">
                   <RadioGroup
-                    size="md"
+                    uiSize="md"
                     orientation="horizontal"
                     options={[
                       { value: "md1", label: "Option 1" },
@@ -753,7 +753,7 @@ export default function FormsDemo() {
 
                 <FormField label="Large Radio Group" description="Easier to tap on mobile">
                   <RadioGroup
-                    size="lg"
+                    uiSize="lg"
                     orientation="horizontal"
                     options={[
                       { value: "lg1", label: "Option 1" },
@@ -966,39 +966,39 @@ export default function FormsDemo() {
               <div className="space-y-4">
                 <FormField label="Small Select" description="Compact size">
                   <Select>
-                    <SelectTrigger size="sm">
+                    <SelectTrigger uiSize="sm">
                       <SelectValue placeholder="Select option (small)" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="option1" size="sm">Small Option 1</SelectItem>
-                      <SelectItem value="option2" size="sm">Small Option 2</SelectItem>
-                      <SelectItem value="option3" size="sm">Small Option 3</SelectItem>
+                      <SelectItem value="option1" uiSize="sm">Small Option 1</SelectItem>
+                      <SelectItem value="option2" uiSize="sm">Small Option 2</SelectItem>
+                      <SelectItem value="option3" uiSize="sm">Small Option 3</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormField>
 
                 <FormField label="Medium Select (Default)" description="Standard size">
                   <Select>
-                    <SelectTrigger size="md">
+                    <SelectTrigger uiSize="md">
                       <SelectValue placeholder="Select option (medium)" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="option1" size="md">Medium Option 1</SelectItem>
-                      <SelectItem value="option2" size="md">Medium Option 2</SelectItem>
-                      <SelectItem value="option3" size="md">Medium Option 3</SelectItem>
+                      <SelectItem value="option1" uiSize="md">Medium Option 1</SelectItem>
+                      <SelectItem value="option2" uiSize="md">Medium Option 2</SelectItem>
+                      <SelectItem value="option3" uiSize="md">Medium Option 3</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormField>
 
                 <FormField label="Large Select" description="Larger size for better accessibility">
                   <Select>
-                    <SelectTrigger size="lg">
+                    <SelectTrigger uiSize="lg">
                       <SelectValue placeholder="Select option (large)" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="option1" size="lg">Large Option 1</SelectItem>
-                      <SelectItem value="option2" size="lg">Large Option 2</SelectItem>
-                      <SelectItem value="option3" size="lg">Large Option 3</SelectItem>
+                      <SelectItem value="option1" uiSize="lg">Large Option 1</SelectItem>
+                      <SelectItem value="option2" uiSize="lg">Large Option 2</SelectItem>
+                      <SelectItem value="option3" uiSize="lg">Large Option 3</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormField>
@@ -1011,7 +1011,7 @@ export default function FormsDemo() {
               <div className="grid gap-6 md:grid-cols-3">
                 <FormField label="Default Variant">
                   <Select>
-                    <SelectTrigger variant="default">
+                    <SelectTrigger uiVariant="default">
                       <SelectValue placeholder="Default style" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1024,7 +1024,7 @@ export default function FormsDemo() {
 
                 <FormField label="Ghost Variant">
                   <Select>
-                    <SelectTrigger variant="ghost">
+                    <SelectTrigger uiVariant="ghost">
                       <SelectValue placeholder="Ghost style" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1037,7 +1037,7 @@ export default function FormsDemo() {
 
                 <FormField label="Filled Variant">
                   <Select>
-                    <SelectTrigger variant="filled">
+                    <SelectTrigger uiVariant="filled">
                       <SelectValue placeholder="Filled style" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1059,7 +1059,7 @@ export default function FormsDemo() {
                   error="Please select a valid option"
                 >
                   <Select>
-                    <SelectTrigger state="error">
+                    <SelectTrigger uiState="error">
                       <SelectValue placeholder="Select with error" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1074,7 +1074,7 @@ export default function FormsDemo() {
                   description="Great choice!"
                 >
                   <Select defaultValue="option1">
-                    <SelectTrigger state="success">
+                    <SelectTrigger uiState="success">
                       <SelectValue placeholder="Select with success" />
                     </SelectTrigger>
                     <SelectContent>
@@ -1089,7 +1089,7 @@ export default function FormsDemo() {
                   description="Please review your selection"
                 >
                   <Select>
-                    <SelectTrigger state="warning">
+                    <SelectTrigger uiState="warning">
                       <SelectValue placeholder="Select with warning" />
                     </SelectTrigger>
                     <SelectContent>

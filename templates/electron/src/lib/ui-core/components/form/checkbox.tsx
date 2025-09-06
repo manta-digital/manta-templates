@@ -8,19 +8,19 @@ const checkboxVariants = cva(
   "peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 transition-colors",
   {
     variants: {
-      uiSize: {
+      size: {
         sm: "h-3 w-3",
         md: "h-4 w-4",
         lg: "h-5 w-5",
       },
-      uiVariant: {
+      variant: {
         default: "border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
         accent: "border-border data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground data-[state=indeterminate]:bg-accent data-[state=indeterminate]:text-accent-foreground",
       },
     },
     defaultVariants: {
-      uiSize: "md",
-      uiVariant: "default",
+      size: "md",
+      variant: "default",
     },
   }
 );
@@ -29,14 +29,14 @@ const checkboxIndicatorVariants = cva(
   "flex items-center justify-center text-current",
   {
     variants: {
-      uiSize: {
+      size: {
         sm: "h-2.5 w-2.5",
         md: "h-3 w-3",
         lg: "h-3.5 w-3.5",
       },
     },
     defaultVariants: {
-      uiSize: "md",
+      size: "md",
     },
   }
 );
@@ -52,7 +52,7 @@ export interface CheckboxProps
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(({ className, uiSize, uiVariant, label, description, indeterminate, ...props }, ref) => {
+>(({ className, size, variant, label, description, indeterminate, ...props }, ref) => {
   const checkboxId = React.useId();
   const descriptionId = description ? `${checkboxId}-description` : undefined;
 
@@ -63,12 +63,12 @@ const Checkbox = React.forwardRef<
     <CheckboxPrimitive.Root
       ref={ref}
       id={checkboxId}
-      className={cn(checkboxVariants({ uiSize, uiVariant }), className)}
+      className={cn(checkboxVariants({ size, variant }), className)}
       checked={checked}
       aria-describedby={descriptionId}
       {...props}
     >
-      <CheckboxPrimitive.Indicator className={cn(checkboxIndicatorVariants({ uiSize }))}>
+      <CheckboxPrimitive.Indicator className={cn(checkboxIndicatorVariants({ size }))}>
         {indeterminate ? (
           <Minus className="h-full w-full" />
         ) : (
@@ -111,13 +111,13 @@ const checkboxGroupVariants = cva(
   "grid gap-2",
   {
     variants: {
-      uiOrientation: {
+      orientation: {
         vertical: "grid-cols-1",
         horizontal: "grid-flow-col auto-cols-max gap-4",
       },
     },
     defaultVariants: {
-      uiOrientation: "vertical",
+      orientation: "vertical",
     },
   }
 );
@@ -135,21 +135,21 @@ export interface CheckboxGroupProps
     description?: string;
     disabled?: boolean;
   }>;
-  uiSize?: "sm" | "md" | "lg";
-  uiVariant?: "default" | "accent";
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "accent";
 }
 
 const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
   ({ 
     className, 
-    uiOrientation, 
+    orientation, 
     value: controlledValue, 
     defaultValue = [], 
     onValueChange, 
     disabled = false,
     options,
-    uiSize = "md",
-    uiVariant = "default",
+    size = "md",
+    variant = "default",
     ...props 
   }, ref) => {
     const [internalValue, setInternalValue] = React.useState<string[]>(defaultValue);
@@ -170,15 +170,15 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
     return (
       <div 
         ref={ref}
-        className={cn(checkboxGroupVariants({ uiOrientation }), className)}
+        className={cn(checkboxGroupVariants({ orientation }), className)}
         role="group"
         {...props}
       >
         {options.map((option) => (
           <Checkbox
             key={option.value}
-            uiSize={uiSize}
-            uiVariant={uiVariant}
+            size={size}
+            variant={variant}
             label={option.label}
             description={option.description}
             disabled={disabled || option.disabled}

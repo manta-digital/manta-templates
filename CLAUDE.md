@@ -18,7 +18,7 @@
 - Filenames for project documents may use ` ` or `-` separators. Ignore case in all filenames, titles, and non-code content.
 - After completing a task or subtask AND verifying with the project manager, make sure it is checked off in the appropriate file(s).
 - Keep 'success summaries' concise and minimal -- they burn a lot of output tokens.
-- Do not check off tasks or print success summaries until task completion is verified with Project Manager.
+- If working in linux or MacOS, verify current directory with pwd before running file operations, specifically including any bash or build commands.
 
 ### MCP (Model Context Protocol)
 - Always use context7 (if available) to locate current relevant documentation for specific technologies or tools in use.

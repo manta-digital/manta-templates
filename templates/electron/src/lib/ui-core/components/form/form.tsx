@@ -1,0 +1,263 @@
+import * as React from "react";
+import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../../utils/cn";
+
+const formVariants = cva(
+  "space-y-6",
+  {
+    variants: {
+      spacing: {
+        compact: "space-y-3",
+        normal: "space-y-6", 
+        loose: "space-y-8",
+      },
+    },
+    defaultVariants: {
+      spacing: "normal",
+    },
+  }
+);
+
+export interface FormProps<TFieldValues extends FieldValues>
+  extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">,
+    VariantProps<typeof formVariants> {
+  schema?: z.ZodSchema<TFieldValues>;
+  defaultValues?: UseFormProps<TFieldValues>['defaultValues'];
+  mode?: UseFormProps<TFieldValues>['mode'];
+  onSubmit: (data: TFieldValues) => void | Promise<void>;
+  onError?: (errors: any) => void;
+  form?: UseFormReturn<TFieldValues>;
+}
+
+export interface FormFieldContextValue {
+  name: string;
+  formItemId: string;
+  formDescriptionId: string;
+  formMessageId: string;
+}
+
+export interface FormItemContextValue {
+  id: string;
+}
+
+const FormFieldContext = React.createContext<FormFieldContextValue | undefined>(undefined);
+const FormItemContext = React.createContext<FormItemContextValue | undefined>(undefined);
+
+export const useFormField = () => {
+  const fieldContext = React.useContext(FormFieldContext);
+  const itemContext = React.useContext(FormItemContext);
+
+  if (!fieldContext) {
+    throw new Error("useFormField should be used within <FormField>");
+  }
+
+  const { formItemId, formDescriptionId, formMessageId } = fieldContext;
+  const id = itemContext?.id || formItemId;
+
+  return {
+    id,
+    name: fieldContext.name,
+    formItemId,
+    formDescriptionId,
+    formMessageId,
+  };
+};
+
+function Form<TFieldValues extends FieldValues = FieldValues>({
+  schema,
+  defaultValues,
+  mode = "onSubmit",
+  onSubmit,
+  onError,
+  form: providedForm,
+  spacing,
+  className,
+  children,
+  ...props
+}: FormProps<TFieldValues>) {
+  const formMethods = useForm({
+    resolver: schema ? zodResolver(schema) as any : undefined,
+    defaultValues,
+    mode,
+  });
+
+  const form = providedForm || formMethods;
+
+  const handleSubmit = form.handleSubmit(onSubmit as any, onError);
+
+  return (
+    <FormProvider {...(form as any)}>
+      <form 
+        onSubmit={handleSubmit} 
+        className={cn(formVariants({ spacing }), className)}
+        {...props}
+      >
+        {children}
+      </form>
+    </FormProvider>
+  );
+}
+
+export interface FormControlFieldProps {
+  name: string;
+  children: (field: {
+    value: any;
+    onChange: (value: any) => void;
+    onBlur: (event?: any) => void;
+    name: string;
+    error?: string;
+    isDirty: boolean;
+    isTouched: boolean;
+  }) => React.ReactElement;
+}
+
+function FormControlField({ name, children }: FormControlFieldProps) {
+  const form = useFormContext();
+  
+  if (!form) {
+    throw new Error("FormControlField must be used within a Form component");
+  }
+
+  const id = React.useId();
+  const formItemId = `${id}-form-item`;
+  const formDescriptionId = `${id}-form-item-description`;
+  const formMessageId = `${id}-form-item-message`;
+
+  const fieldState = form.getFieldState(name);
+  const { ref, ...field } = form.register(name);
+
+  const contextValue: FormFieldContextValue = {
+    name,
+    formItemId,
+    formDescriptionId,
+    formMessageId,
+  };
+
+  const { onChange, onBlur, name: fieldName } = field;
+  const fieldValue = form.getValues(name);
+
+  return (
+    <FormFieldContext.Provider value={contextValue}>
+      {children({
+        value: fieldValue,
+        onChange,
+        onBlur: onBlur as any,
+        name: fieldName,
+        error: fieldState.error?.message,
+        isDirty: fieldState.isDirty,
+        isTouched: fieldState.isTouched,
+      })}
+    </FormFieldContext.Provider>
+  );
+}
+
+export interface FormItemProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+function FormItem({ className, ...props }: FormItemProps) {
+  const id = React.useId();
+  
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div className={cn("space-y-2", className)} {...props} />
+    </FormItemContext.Provider>
+  );
+}
+
+export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
+
+function FormLabel({ className, ...props }: FormLabelProps) {
+  const { formItemId } = useFormField();
+
+  return (
+    <label
+      className={cn(
+        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        className
+      )}
+      htmlFor={formItemId}
+      {...props}
+    />
+  );
+}
+
+export interface FormControlProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+function FormControl({ ...props }: FormControlProps) {
+  const { formItemId, formDescriptionId, formMessageId } = useFormField();
+
+  return (
+    <div
+      id={formItemId}
+      aria-describedby={`${formDescriptionId} ${formMessageId}`}
+      aria-invalid={false}
+      {...props}
+    />
+  );
+}
+
+export interface FormDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+
+function FormDescription({ className, ...props }: FormDescriptionProps) {
+  const { formDescriptionId } = useFormField();
+
+  return (
+    <p
+      id={formDescriptionId}
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
+}
+
+export interface FormMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+
+function FormMessage({ className, children, ...props }: FormMessageProps) {
+  const { formMessageId } = useFormField();
+
+  return (
+    <p
+      id={formMessageId}
+      className={cn("text-sm font-medium text-destructive", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+}
+
+// Higher-level wrapper that combines form management with validation
+export interface ValidatedFormProps<TFieldValues extends FieldValues>
+  extends Omit<FormProps<TFieldValues>, 'schema'> {
+  schema: z.ZodSchema<TFieldValues>;
+}
+
+function ValidatedForm<TFieldValues extends FieldValues = FieldValues>(
+  props: ValidatedFormProps<TFieldValues>
+) {
+  return <Form {...props} />;
+}
+
+Form.displayName = "Form";
+FormControlField.displayName = "FormControlField";
+FormItem.displayName = "FormItem";
+FormLabel.displayName = "FormLabel";
+FormControl.displayName = "FormControl";
+FormDescription.displayName = "FormDescription";
+FormMessage.displayName = "FormMessage";
+ValidatedForm.displayName = "ValidatedForm";
+
+export {
+  Form,
+  FormControlField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  ValidatedForm,
+  formVariants,
+  useFormField as useRHFFormField,
+};
