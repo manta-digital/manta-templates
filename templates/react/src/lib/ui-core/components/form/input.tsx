@@ -32,7 +32,7 @@ const inputVariants = cva(
 );
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -40,6 +40,13 @@ export interface InputProps
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, variant, size, state, leftIcon, rightIcon, ...props }, ref) => {
+    // Filter out React Hook Form props that shouldn't be passed to DOM
+    const { 
+      isDirty, 
+      isTouched, 
+      ...domProps 
+    } = props as any;
+    
     return (
       <div className="relative">
         {leftIcon && (
@@ -55,7 +62,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className
           )}
           ref={ref}
-          {...props}
+          {...domProps}
         />
         {rightIcon && (
           <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">

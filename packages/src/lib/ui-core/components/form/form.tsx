@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
+import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -78,18 +78,18 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   children,
   ...props
 }: FormProps<TFieldValues>) {
-  const formMethods = useForm<TFieldValues>({
-    resolver: schema ? zodResolver(schema) : undefined,
+  const formMethods = useForm({
+    resolver: schema ? zodResolver(schema) as any : undefined,
     defaultValues,
     mode,
   });
 
   const form = providedForm || formMethods;
 
-  const handleSubmit = form.handleSubmit(onSubmit, onError);
+  const handleSubmit = form.handleSubmit(onSubmit as any, onError);
 
   return (
-    <FormProvider {...form}>
+    <FormProvider {...(form as any)}>
       <form 
         onSubmit={handleSubmit} 
         className={cn(formVariants({ spacing }), className)}
@@ -106,7 +106,7 @@ export interface FormControlFieldProps {
   children: (field: {
     value: any;
     onChange: (value: any) => void;
-    onBlur: () => void;
+    onBlur: (event?: any) => void;
     name: string;
     error?: string;
     isDirty: boolean;
@@ -115,7 +115,7 @@ export interface FormControlFieldProps {
 }
 
 function FormControlField({ name, children }: FormControlFieldProps) {
-  const form = React.useContext(FormProvider as any);
+  const form = useFormContext();
   
   if (!form) {
     throw new Error("FormControlField must be used within a Form component");
@@ -136,10 +136,16 @@ function FormControlField({ name, children }: FormControlFieldProps) {
     formMessageId,
   };
 
+  const { onChange, onBlur, name: fieldName } = field;
+  const fieldValue = form.getValues(name);
+
   return (
     <FormFieldContext.Provider value={contextValue}>
       {children({
-        ...field,
+        value: fieldValue,
+        onChange,
+        onBlur: onBlur as any,
+        name: fieldName,
         error: fieldState.error?.message,
         isDirty: fieldState.isDirty,
         isTouched: fieldState.isTouched,

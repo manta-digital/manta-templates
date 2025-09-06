@@ -41,11 +41,26 @@ export interface TextareaProps
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, variant, size, state, autoResize, minRows = 3, maxRows, ...props }, ref) => {
+    // Filter out React Hook Form props that shouldn't be passed to DOM
+    const { 
+      isDirty, 
+      isTouched, 
+      ...domProps 
+    } = props as any;
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
     const [textareaHeight, setTextareaHeight] = React.useState<string | undefined>();
 
-    // Merge refs
-    React.useImperativeHandle(ref, () => textareaRef.current!);
+    // Callback ref that handles both internal ref and forwarded ref
+    const callbackRef = React.useCallback((node: HTMLTextAreaElement) => {
+      // Set internal ref for auto-resize
+      textareaRef.current = node;
+      // Forward to parent ref
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    }, [ref]);
 
     const adjustHeight = React.useCallback(() => {
       const textarea = textareaRef.current;
@@ -71,7 +86,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       if (autoResize) {
         adjustHeight();
       }
-    }, [props.value, adjustHeight, autoResize]);
+    }, [domProps.value, adjustHeight, autoResize]);
 
     // Adjust height on mount
     React.useEffect(() => {
@@ -83,10 +98,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         className={cn(textareaVariants({ variant, size, state }), className)}
-        ref={textareaRef}
+        ref={callbackRef}
         style={autoResize ? { height: textareaHeight } : undefined}
         onInput={autoResize ? adjustHeight : undefined}
-        {...props}
+        {...domProps}
       />
     );
   }

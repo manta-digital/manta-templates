@@ -1290,21 +1290,24 @@ export default function FormsDemo() {
                   <h4 className="text-lg font-semibold mb-4">Sign In</h4>
                   
                   <FormControlField name="email">
-                    {(field) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="email"
-                            placeholder="Enter your email"
-                            leftIcon={<Mail size={16} />}
-                            state={field.error ? "error" : "default"}
-                            {...field}
-                          />
-                        </FormControl>
-                        {field.error && <FormMessage>{field.error}</FormMessage>}
-                      </FormItem>
-                    )}
+                    {(field) => {
+                      const { isDirty, isTouched, ...fieldProps } = field;
+                      return (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="email"
+                              placeholder="Enter your email"
+                              leftIcon={<Mail size={16} />}
+                              state={field.error ? "error" : "default"}
+                              {...fieldProps}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      );
+                    }}
                   </FormControlField>
 
                   <FormControlField name="password">

@@ -45,6 +45,12 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     children,
     ...props 
   }, ref) => {
+    // Filter out React Hook Form props that shouldn't be passed to DOM
+    const { 
+      isDirty, 
+      isTouched, 
+      ...domProps 
+    } = props as any;
     // Generate unique IDs for ARIA relationships
     const fieldId = React.useId();
     const descriptionId = description ? `${fieldId}-description` : undefined;
@@ -61,11 +67,11 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
           errorId,
         ].filter(Boolean).join(" ") || undefined;
 
-        return React.cloneElement(child, {
-          id: htmlFor || child.props.id || fieldId,
+        const childProps = child.props as any;
+        return React.cloneElement(child as any, {
+          id: htmlFor || childProps.id || fieldId,
           "aria-describedby": ariaDescribedBy,
-          state: child.props.state || state,
-          ...child.props,
+          state: childProps.state || state,
         });
       }
       return child;
@@ -75,7 +81,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
       <div 
         ref={ref}
         className={cn(formFieldVariants({ spacing }), className)}
-        {...props}
+        {...domProps}
       >
         {label && (
           <Label 
@@ -83,7 +89,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
             required={required}
             optional={optional}
             size={labelSize}
-            state={state as any}
+            state={state}
           >
             {label}
           </Label>
