@@ -3,7 +3,7 @@ type: project
 title: React Template
 description: A modern React template built with Vite, featuring fast development, optimal build performance, and comprehensive component architecture.
 techStack: ["React", "Vite", "TypeScript", "Tailwind CSS"]
-image: "/image/blog/blog-sample-image.png"
+image: "/images/react-template.png"
 repoUrl: "https://github.com/manta-templates/react-template"
 liveUrl: "https://react-template.manta-templates.dev"
 features:

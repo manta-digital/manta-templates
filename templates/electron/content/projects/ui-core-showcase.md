@@ -3,7 +3,7 @@ type: project
 title: UI Core Showcase
 description: Comprehensive showcase of the ui-core component library, demonstrating framework-agnostic design patterns and theming capabilities.
 techStack: ["React", "TypeScript", "Tailwind CSS", "Storybook"]
-image: "/image/blog/blog-sample-image.png"
+image: "/images/projects/ui-core-showcase.png"
 repoUrl: "https://github.com/manta-templates/ui-core"
 liveUrl: "https://ui-core.manta-templates.dev"
 features:

@@ -1,3 +1,4 @@
+'use client';
 import { Send } from 'lucide-react';
 import * as z from 'zod';
 import { 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 import { BaseCard } from './BaseCard';
-
 // Social icon component types for dependency injection
 interface SocialIcons {
   github: React.ComponentType<any>;
