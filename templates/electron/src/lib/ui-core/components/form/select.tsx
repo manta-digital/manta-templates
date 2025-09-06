@@ -154,7 +154,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(selectContentVariants({ uiPosition }), className)}
-      position={uiPosition}
+      position={uiPosition || "popper"}
       {...props}
     >
       <SelectScrollUpButton />

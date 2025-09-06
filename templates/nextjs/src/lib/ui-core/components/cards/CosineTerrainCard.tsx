@@ -787,7 +787,7 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       });
       material.dispose();
     };
-  }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
   const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;
 

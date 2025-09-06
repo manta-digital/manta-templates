@@ -89,7 +89,7 @@ export interface RadioItemProps
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   RadioGroupProps
->(({ className, uiOrientation, options, uiSize = "md", uiState, children, ...props }, ref) => {
+>(({ className, uiOrientation, options, uiSize = "md", uiState, children, ...props }, ref) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   return (
     <RadioGroupPrimitive.Root
       className={cn(radioGroupVariants({ uiOrientation }), className)}

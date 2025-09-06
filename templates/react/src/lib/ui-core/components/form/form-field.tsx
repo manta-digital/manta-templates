@@ -47,9 +47,9 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
   }, ref) => {
     // Filter out React Hook Form props and ui props that shouldn't be passed to DOM
     const { 
-      isDirty, 
-      isTouched, 
-      uiSpacing: _uiSpacing,  // Extract but don't use (it's already in function params)
+      isDirty, // eslint-disable-line @typescript-eslint/no-unused-vars
+      isTouched, // eslint-disable-line @typescript-eslint/no-unused-vars
+      uiSpacing: _,  // Extract but don't use (it's already in function params) // eslint-disable-line @typescript-eslint/no-unused-vars
       ...domProps 
     } = props as any;
     // Generate unique IDs for ARIA relationships

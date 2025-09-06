@@ -151,7 +151,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
     options,
     uiSize = "md",
     uiVariant = "default",
-    uiState,
+    uiState, // eslint-disable-line @typescript-eslint/no-unused-vars
     ...props 
   }, ref) => {
     // Filter out ui props that shouldn't be passed to DOM (they're already extracted above)
