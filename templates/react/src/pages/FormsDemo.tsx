@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { z } from 'zod';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup, RadioGroup, RadioItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../lib/ui-core/components/form';
+import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup, RadioGroup, RadioItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Form, FormControlField, FormItem, FormLabel, FormControl, FormDescription, FormMessage, ValidatedForm } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -1258,6 +1259,400 @@ export default function FormsDemo() {
                     </FormField>
                   </div>
                 </form>
+              </div>
+            </div>
+          </section>
+
+          {/* Form Validation with React Hook Form */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Form Validation (React Hook Form + Zod)</h2>
+            
+            {/* Login Form Example */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Login Form</h3>
+              <div className="max-w-md">
+                <ValidatedForm
+                  schema={z.object({
+                    email: z.string().email('Please enter a valid email address'),
+                    password: z.string().min(6, 'Password must be at least 6 characters'),
+                    rememberMe: z.boolean().optional(),
+                  })}
+                  defaultValues={{
+                    email: '',
+                    password: '',
+                    rememberMe: false,
+                  }}
+                  onSubmit={(data) => {
+                    alert(`Login submitted with: ${JSON.stringify(data, null, 2)}`);
+                  }}
+                  className="p-6 border rounded-lg bg-card"
+                >
+                  <h4 className="text-lg font-semibold mb-4">Sign In</h4>
+                  
+                  <FormControlField name="email">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="email"
+                            placeholder="Enter your email"
+                            leftIcon={<Mail size={16} />}
+                            state={field.error ? "error" : "default"}
+                            {...field}
+                          />
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <FormControlField name="password">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="password"
+                            placeholder="Enter your password"
+                            leftIcon={<Lock size={16} />}
+                            state={field.error ? "error" : "default"}
+                            {...field}
+                          />
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <FormControlField name="rememberMe">
+                    {(field) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <Checkbox 
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            label="Remember me"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <button 
+                    type="submit"
+                    className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  >
+                    Sign In
+                  </button>
+                </ValidatedForm>
+              </div>
+            </div>
+
+            {/* Registration Form Example */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Registration Form</h3>
+              <div className="max-w-2xl">
+                <ValidatedForm
+                  schema={z.object({
+                    firstName: z.string().min(2, 'First name must be at least 2 characters'),
+                    lastName: z.string().min(2, 'Last name must be at least 2 characters'),
+                    email: z.string().email('Please enter a valid email address'),
+                    password: z.string().min(8, 'Password must be at least 8 characters')
+                      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+                      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+                      .regex(/[0-9]/, 'Password must contain at least one number'),
+                    confirmPassword: z.string(),
+                    country: z.string().min(1, 'Please select a country'),
+                    agreeToTerms: z.boolean().refine(val => val === true, 'You must agree to the terms'),
+                  }).refine(data => data.password === data.confirmPassword, {
+                    message: "Passwords don't match",
+                    path: ['confirmPassword'],
+                  })}
+                  defaultValues={{
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    country: '',
+                    agreeToTerms: false,
+                  }}
+                  onSubmit={(data) => {
+                    alert(`Registration submitted with: ${JSON.stringify(data, null, 2)}`);
+                  }}
+                  className="p-6 border rounded-lg bg-card"
+                  spacing="normal"
+                >
+                  <h4 className="text-lg font-semibold mb-4">Create Account</h4>
+                  
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FormControlField name="firstName">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>First Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="First name"
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+
+                    <FormControlField name="lastName">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>Last Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Last name"
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+                  </div>
+
+                  <FormControlField name="email">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="email"
+                            placeholder="Enter your email"
+                            leftIcon={<Mail size={16} />}
+                            state={field.error ? "error" : "default"}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>We'll never share your email with anyone else.</FormDescription>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FormControlField name="password">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>Password</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="password"
+                              placeholder="Create password"
+                              leftIcon={<Lock size={16} />}
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+
+                    <FormControlField name="confirmPassword">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>Confirm Password</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="password"
+                              placeholder="Confirm password"
+                              leftIcon={<Lock size={16} />}
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+                  </div>
+
+                  <FormControlField name="country">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Country</FormLabel>
+                        <FormControl>
+                          <Select value={field.value} onValueChange={field.onChange}>
+                            <SelectTrigger state={field.error ? "error" : "default"}>
+                              <SelectValue placeholder="Select your country" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="us">United States</SelectItem>
+                              <SelectItem value="uk">United Kingdom</SelectItem>
+                              <SelectItem value="ca">Canada</SelectItem>
+                              <SelectItem value="au">Australia</SelectItem>
+                              <SelectItem value="de">Germany</SelectItem>
+                              <SelectItem value="fr">France</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <FormControlField name="agreeToTerms">
+                    {(field) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <Checkbox 
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            label="I agree to the Terms of Service and Privacy Policy"
+                          />
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <button 
+                    type="submit"
+                    className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  >
+                    Create Account
+                  </button>
+                </ValidatedForm>
+              </div>
+            </div>
+
+            {/* Contact Form with Textarea */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Contact Form</h3>
+              <div className="max-w-2xl">
+                <ValidatedForm
+                  schema={z.object({
+                    name: z.string().min(2, 'Name must be at least 2 characters'),
+                    email: z.string().email('Please enter a valid email address'),
+                    subject: z.string().min(5, 'Subject must be at least 5 characters'),
+                    message: z.string().min(10, 'Message must be at least 10 characters'),
+                    priority: z.enum(['low', 'medium', 'high']),
+                  })}
+                  defaultValues={{
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: '',
+                    priority: 'medium',
+                  }}
+                  onSubmit={(data) => {
+                    alert(`Contact form submitted with: ${JSON.stringify(data, null, 2)}`);
+                  }}
+                  className="p-6 border rounded-lg bg-card"
+                >
+                  <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
+                  
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FormControlField name="name">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Your full name"
+                              leftIcon={<User size={16} />}
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+
+                    <FormControlField name="email">
+                      {(field) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="email"
+                              placeholder="your.email@example.com"
+                              leftIcon={<Mail size={16} />}
+                              state={field.error ? "error" : "default"}
+                              {...field}
+                            />
+                          </FormControl>
+                          {field.error && <FormMessage>{field.error}</FormMessage>}
+                        </FormItem>
+                      )}
+                    </FormControlField>
+                  </div>
+
+                  <FormControlField name="subject">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Subject</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="What's this about?"
+                            state={field.error ? "error" : "default"}
+                            {...field}
+                          />
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <FormControlField name="priority">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Priority</FormLabel>
+                        <FormControl>
+                          <Select value={field.value} onValueChange={field.onChange}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select priority" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="low">Low</SelectItem>
+                              <SelectItem value="medium">Medium</SelectItem>
+                              <SelectItem value="high">High</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <FormControlField name="message">
+                    {(field) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Tell us more about your inquiry..."
+                            autoResize
+                            minRows={4}
+                            maxRows={8}
+                            state={field.error ? "error" : "default"}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>Please provide as much detail as possible.</FormDescription>
+                        {field.error && <FormMessage>{field.error}</FormMessage>}
+                      </FormItem>
+                    )}
+                  </FormControlField>
+
+                  <button 
+                    type="submit"
+                    className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  >
+                    Send Message
+                  </button>
+                </ValidatedForm>
               </div>
             </div>
           </section>
