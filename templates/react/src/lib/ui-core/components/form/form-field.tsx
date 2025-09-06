@@ -7,14 +7,14 @@ const formFieldVariants = cva(
   "space-y-2",
   {
     variants: {
-      spacing: {
+      uiSpacing: {
         compact: "space-y-1",
         default: "space-y-2",
         loose: "space-y-3",
       },
     },
     defaultVariants: {
-      spacing: "default",
+      uiSpacing: "default",
     },
   }
 );
@@ -27,28 +27,29 @@ export interface FormFieldProps
   error?: string;
   required?: boolean;
   optional?: boolean;
-  labelSize?: "sm" | "md" | "lg";
+  labelUiSize?: "sm" | "md" | "lg";
   htmlFor?: string;
 }
 
 const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
   ({ 
     className, 
-    spacing,
+    uiSpacing,
     label, 
     description, 
     error, 
     required, 
     optional,
-    labelSize,
+    labelUiSize,
     htmlFor,
     children,
     ...props 
   }, ref) => {
-    // Filter out React Hook Form props that shouldn't be passed to DOM
+    // Filter out React Hook Form props and ui props that shouldn't be passed to DOM
     const { 
       isDirty, 
       isTouched, 
+      uiSpacing: _uiSpacing,  // Extract but don't use (it's already in function params)
       ...domProps 
     } = props as any;
     // Generate unique IDs for ARIA relationships
@@ -71,7 +72,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
         return React.cloneElement(child as any, {
           id: htmlFor || childProps.id || fieldId,
           "aria-describedby": ariaDescribedBy,
-          state: childProps.state || state,
+          uiState: childProps.uiState || state,
         });
       }
       return child;
@@ -80,7 +81,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     return (
       <div 
         ref={ref}
-        className={cn(formFieldVariants({ spacing }), className)}
+        className={cn(formFieldVariants({ uiSpacing }), className)}
         {...domProps}
       >
         {label && (
@@ -88,8 +89,8 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
             htmlFor={htmlFor || fieldId}
             required={required}
             optional={optional}
-            size={labelSize}
-            state={state}
+            uiSize={labelUiSize}
+            uiState={state}
           >
             {label}
           </Label>

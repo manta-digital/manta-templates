@@ -137,6 +137,7 @@ export interface CheckboxGroupProps
   }>;
   uiSize?: "sm" | "md" | "lg";
   uiVariant?: "default" | "accent";
+  uiState?: "default" | "error" | "success" | "warning";
 }
 
 const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
@@ -150,8 +151,11 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
     options,
     uiSize = "md",
     uiVariant = "default",
+    uiState,
     ...props 
   }, ref) => {
+    // Filter out ui props that shouldn't be passed to DOM (they're already extracted above)
+    const { ...domProps } = props;
     const [internalValue, setInternalValue] = React.useState<string[]>(defaultValue);
     const isControlled = controlledValue !== undefined;
     const value = isControlled ? controlledValue : internalValue;
@@ -172,7 +176,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(
         ref={ref}
         className={cn(checkboxGroupVariants({ uiOrientation }), className)}
         role="group"
-        {...props}
+        {...domProps}
       >
         {options.map((option) => (
           <Checkbox

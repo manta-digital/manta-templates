@@ -6,7 +6,7 @@ dependencies: ["@radix-ui/react-checkbox", "@radix-ui/react-radio-group", "@radi
 projectState: "Completed Radio, Select, and Form Provider Infrastructure"
 status: phase_2_completed
 
-lastUpdated: 2025-09-06T15:45:00Z
+lastUpdated: 2025-09-06T16:15:00Z
 phase2_completedAt: 2025-09-05
 phaseCompleted: 8
 ---
@@ -276,9 +276,9 @@ Replace all CVA variant prop names with "ui" prefixes to avoid HTML/Radix confli
 - [x] Update Checkbox: `size` → `uiSize`, `variant` → `uiVariant` (including CheckboxGroup orientation → `uiOrientation`)
 - [x] Update RadioGroup: `orientation` → `uiOrientation`, `size` → `uiSize`
 - [x] Update Select: `position` → `uiPosition`, `size` → `uiSize`, `variant` → `uiVariant`
-- [ ] Update FormField: `spacing` → `uiSpacing`
-- [ ] Remove all `Omit<>` type exclusions from interfaces
-- [ ] Update FormsDemo page to use new prop names
+- [x] Update FormField: `spacing` → `uiSpacing`
+- [x] Remove all `Omit<>` type exclusions from interfaces
+- [x] Update FormsDemo page to use new prop names
 - **Success**: All form components use ui-prefixed variants with no type conflicts
 
 ### Task 9.1: Copy to Packages Directory

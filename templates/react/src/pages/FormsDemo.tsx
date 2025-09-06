@@ -279,8 +279,8 @@ export default function FormsDemo() {
                   label="Full Name"
                   optional
                   description="This will be displayed on your profile"
-                  spacing="compact"
-                  labelSize="sm"
+                  uiSpacing="compact"
+                  labelUiSize="sm"
                 >
                   <Input
                     type="text"
@@ -294,7 +294,7 @@ export default function FormsDemo() {
                 <FormField
                   label="Search Query"
                   description="Search through all available content"
-                  spacing="loose"
+                  uiSpacing="loose"
                 >
                   <Input
                     type="search"
@@ -582,7 +582,7 @@ export default function FormsDemo() {
                 <h4 className="font-medium text-sm mb-3">Horizontal Group</h4>
                 <FormField label="Notification preferences">
                   <CheckboxGroup
-                    orientation="horizontal"
+                    uiOrientation="horizontal"
                     options={[
                       { value: "email", label: "Email" },
                       { value: "sms", label: "SMS" },
@@ -728,7 +728,7 @@ export default function FormsDemo() {
                 <FormField label="Small Radio Group" description="Compact size">
                   <RadioGroup
                     uiSize="sm"
-                    orientation="horizontal"
+                    uiOrientation="horizontal"
                     options={[
                       { value: "sm1", label: "Option 1" },
                       { value: "sm2", label: "Option 2" },
@@ -741,7 +741,7 @@ export default function FormsDemo() {
                 <FormField label="Medium Radio Group (Default)" description="Standard size">
                   <RadioGroup
                     uiSize="md"
-                    orientation="horizontal"
+                    uiOrientation="horizontal"
                     options={[
                       { value: "md1", label: "Option 1" },
                       { value: "md2", label: "Option 2" },
@@ -754,7 +754,7 @@ export default function FormsDemo() {
                 <FormField label="Large Radio Group" description="Easier to tap on mobile">
                   <RadioGroup
                     uiSize="lg"
-                    orientation="horizontal"
+                    uiOrientation="horizontal"
                     options={[
                       { value: "lg1", label: "Option 1" },
                       { value: "lg2", label: "Option 2" },
@@ -783,7 +783,7 @@ export default function FormsDemo() {
 
                 <FormField label="Horizontal Radio Group" description="Arranged horizontally">
                   <RadioGroup
-                    orientation="horizontal"
+                    uiOrientation="horizontal"
                     options={[
                       { value: "h1", label: "Horizontal 1" },
                       { value: "h2", label: "Horizontal 2" },
@@ -904,7 +904,7 @@ export default function FormsDemo() {
                       description="Choose your preferred interface theme"
                     >
                       <RadioGroup
-                        orientation="horizontal"
+                        uiOrientation="horizontal"
                         options={[
                           { value: "light", label: "Light" },
                           { value: "dark", label: "Dark" },
@@ -1300,7 +1300,7 @@ export default function FormsDemo() {
                               type="email"
                               placeholder="Enter your email"
                               leftIcon={<Mail size={16} />}
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...fieldProps}
                             />
                           </FormControl>
@@ -1319,7 +1319,7 @@ export default function FormsDemo() {
                             type="password"
                             placeholder="Enter your password"
                             leftIcon={<Lock size={16} />}
-                            state={field.error ? "error" : "default"}
+                            uiState={field.error ? "error" : "default"}
                             {...field}
                           />
                         </FormControl>
@@ -1385,7 +1385,7 @@ export default function FormsDemo() {
                     alert(`Registration submitted with: ${JSON.stringify(data, null, 2)}`);
                   }}
                   className="p-6 border rounded-lg bg-card"
-                  spacing="normal"
+                  uiSpacing="normal"
                 >
                   <h4 className="text-lg font-semibold mb-4">Create Account</h4>
                   
@@ -1397,7 +1397,7 @@ export default function FormsDemo() {
                           <FormControl>
                             <Input 
                               placeholder="First name"
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1413,7 +1413,7 @@ export default function FormsDemo() {
                           <FormControl>
                             <Input 
                               placeholder="Last name"
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1432,7 +1432,7 @@ export default function FormsDemo() {
                             type="email"
                             placeholder="Enter your email"
                             leftIcon={<Mail size={16} />}
-                            state={field.error ? "error" : "default"}
+                            uiState={field.error ? "error" : "default"}
                             {...field}
                           />
                         </FormControl>
@@ -1452,7 +1452,7 @@ export default function FormsDemo() {
                               type="password"
                               placeholder="Create password"
                               leftIcon={<Lock size={16} />}
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1470,7 +1470,7 @@ export default function FormsDemo() {
                               type="password"
                               placeholder="Confirm password"
                               leftIcon={<Lock size={16} />}
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1486,7 +1486,7 @@ export default function FormsDemo() {
                         <FormLabel>Country</FormLabel>
                         <FormControl>
                           <Select value={field.value} onValueChange={field.onChange}>
-                            <SelectTrigger state={field.error ? "error" : "default"}>
+                            <SelectTrigger uiState={field.error ? "error" : "default"}>
                               <SelectValue placeholder="Select your country" />
                             </SelectTrigger>
                             <SelectContent>
@@ -1564,7 +1564,7 @@ export default function FormsDemo() {
                             <Input 
                               placeholder="Your full name"
                               leftIcon={<User size={16} />}
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1582,7 +1582,7 @@ export default function FormsDemo() {
                               type="email"
                               placeholder="your.email@example.com"
                               leftIcon={<Mail size={16} />}
-                              state={field.error ? "error" : "default"}
+                              uiState={field.error ? "error" : "default"}
                               {...field}
                             />
                           </FormControl>
@@ -1599,7 +1599,7 @@ export default function FormsDemo() {
                         <FormControl>
                           <Input 
                             placeholder="What's this about?"
-                            state={field.error ? "error" : "default"}
+                            uiState={field.error ? "error" : "default"}
                             {...field}
                           />
                         </FormControl>
@@ -1639,7 +1639,7 @@ export default function FormsDemo() {
                             autoResize
                             minRows={4}
                             maxRows={8}
-                            state={field.error ? "error" : "default"}
+                            uiState={field.error ? "error" : "default"}
                             {...field}
                           />
                         </FormControl>

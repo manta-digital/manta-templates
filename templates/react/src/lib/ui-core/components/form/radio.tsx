@@ -76,6 +76,7 @@ export interface RadioGroupProps
     disabled?: boolean;
   }>;
   uiSize?: "sm" | "md" | "lg";
+  uiState?: "default" | "error" | "success" | "warning";
 }
 
 export interface RadioItemProps
@@ -88,7 +89,7 @@ export interface RadioItemProps
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   RadioGroupProps
->(({ className, uiOrientation, options, uiSize = "md", children, ...props }, ref) => {
+>(({ className, uiOrientation, options, uiSize = "md", uiState, children, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
       className={cn(radioGroupVariants({ uiOrientation }), className)}
