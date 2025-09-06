@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup } from '../lib/ui-core/components/form';
+import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup, RadioGroup, RadioItem } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -682,6 +682,236 @@ export default function FormsDemo() {
                       label="I agree to the Terms of Service and Privacy Policy" 
                       size="sm"
                     />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          {/* Radio Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Radio Component</h2>
+            
+            {/* Basic Radio Groups */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Basic Radio Groups</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField label="Choose your plan" description="Select one option">
+                  <RadioGroup
+                    options={[
+                      { value: "free", label: "Free", description: "Basic features only" },
+                      { value: "pro", label: "Pro", description: "$10/month - Full features" },
+                      { value: "enterprise", label: "Enterprise", description: "Custom pricing" },
+                    ]}
+                    defaultValue="free"
+                  />
+                </FormField>
+
+                <FormField label="Payment method" description="How would you like to pay?">
+                  <RadioGroup
+                    options={[
+                      { value: "card", label: "Credit Card" },
+                      { value: "paypal", label: "PayPal" },
+                      { value: "bank", label: "Bank Transfer" },
+                    ]}
+                    defaultValue="card"
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Size Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
+              <div className="space-y-4">
+                <FormField label="Small Radio Group" description="Compact size">
+                  <RadioGroup
+                    size="sm"
+                    orientation="horizontal"
+                    options={[
+                      { value: "sm1", label: "Option 1" },
+                      { value: "sm2", label: "Option 2" },
+                      { value: "sm3", label: "Option 3" },
+                    ]}
+                    defaultValue="sm1"
+                  />
+                </FormField>
+
+                <FormField label="Medium Radio Group (Default)" description="Standard size">
+                  <RadioGroup
+                    size="md"
+                    orientation="horizontal"
+                    options={[
+                      { value: "md1", label: "Option 1" },
+                      { value: "md2", label: "Option 2" },
+                      { value: "md3", label: "Option 3" },
+                    ]}
+                    defaultValue="md2"
+                  />
+                </FormField>
+
+                <FormField label="Large Radio Group" description="Easier to tap on mobile">
+                  <RadioGroup
+                    size="lg"
+                    orientation="horizontal"
+                    options={[
+                      { value: "lg1", label: "Option 1" },
+                      { value: "lg2", label: "Option 2" },
+                      { value: "lg3", label: "Option 3" },
+                    ]}
+                    defaultValue="lg3"
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Orientation */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Orientation</h3>
+              <div className="space-y-6">
+                <FormField label="Vertical Radio Group (Default)" description="Stacked vertically">
+                  <RadioGroup
+                    options={[
+                      { value: "v1", label: "Vertical Option 1", description: "First option with description" },
+                      { value: "v2", label: "Vertical Option 2", description: "Second option with description" },
+                      { value: "v3", label: "Vertical Option 3", description: "Third option with description" },
+                    ]}
+                    defaultValue="v2"
+                  />
+                </FormField>
+
+                <FormField label="Horizontal Radio Group" description="Arranged horizontally">
+                  <RadioGroup
+                    orientation="horizontal"
+                    options={[
+                      { value: "h1", label: "Horizontal 1" },
+                      { value: "h2", label: "Horizontal 2" },
+                      { value: "h3", label: "Horizontal 3" },
+                    ]}
+                    defaultValue="h1"
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Individual RadioItem Usage */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Individual RadioItem Components</h3>
+              <FormField label="Custom Radio Layout" description="Using individual RadioItem components">
+                <RadioGroup defaultValue="custom2">
+                  <RadioItem value="custom1" label="Custom Option 1" />
+                  <RadioItem value="custom2" label="Custom Option 2" description="With custom description" />
+                  <div className="flex items-center space-x-2">
+                    <RadioItem value="custom3" />
+                    <div>
+                      <label className="text-sm font-medium">Custom Layout Option</label>
+                      <p className="text-xs text-muted-foreground">Completely custom layout example</p>
+                    </div>
+                  </div>
+                </RadioGroup>
+              </FormField>
+            </div>
+
+            {/* Disabled States */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Disabled States</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField label="Disabled Options" description="Some options disabled">
+                  <RadioGroup
+                    options={[
+                      { value: "d1", label: "Available Option" },
+                      { value: "d2", label: "Disabled Option", disabled: true },
+                      { value: "d3", label: "Another Available Option" },
+                      { value: "d4", label: "Another Disabled Option", disabled: true },
+                    ]}
+                    defaultValue="d1"
+                  />
+                </FormField>
+
+                <FormField label="Completely Disabled Group" description="All options disabled">
+                  <RadioGroup
+                    disabled
+                    options={[
+                      { value: "disabled1", label: "Disabled Option 1" },
+                      { value: "disabled2", label: "Disabled Option 2" },
+                      { value: "disabled3", label: "Disabled Option 3" },
+                    ]}
+                    defaultValue="disabled2"
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Real-world Examples */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Real-world Examples</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-6">
+                    <FormField 
+                      label="Shipping Method" 
+                      required
+                      description="Choose your preferred shipping option"
+                    >
+                      <RadioGroup
+                        options={[
+                          { value: "standard", label: "Standard Shipping", description: "5-7 business days - Free" },
+                          { value: "express", label: "Express Shipping", description: "2-3 business days - $9.99" },
+                          { value: "overnight", label: "Overnight Shipping", description: "Next business day - $24.99" },
+                        ]}
+                        defaultValue="standard"
+                      />
+                    </FormField>
+
+                    <FormField 
+                      label="Notification Frequency" 
+                      description="How often would you like to receive notifications?"
+                    >
+                      <RadioGroup
+                        options={[
+                          { value: "immediately", label: "Immediately", description: "Get notified right away" },
+                          { value: "daily", label: "Daily Digest", description: "Once per day summary" },
+                          { value: "weekly", label: "Weekly Summary", description: "Weekly roundup" },
+                          { value: "never", label: "Never", description: "No notifications" },
+                        ]}
+                        defaultValue="daily"
+                      />
+                    </FormField>
+                  </div>
+                </form>
+
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-6">
+                    <FormField 
+                      label="Experience Level" 
+                      required
+                      description="What's your programming experience?"
+                    >
+                      <RadioGroup
+                        options={[
+                          { value: "beginner", label: "Beginner", description: "Less than 1 year" },
+                          { value: "intermediate", label: "Intermediate", description: "1-3 years" },
+                          { value: "advanced", label: "Advanced", description: "3-5 years" },
+                          { value: "expert", label: "Expert", description: "5+ years" },
+                        ]}
+                        defaultValue="intermediate"
+                      />
+                    </FormField>
+
+                    <FormField 
+                      label="Theme Preference" 
+                      description="Choose your preferred interface theme"
+                    >
+                      <RadioGroup
+                        orientation="horizontal"
+                        options={[
+                          { value: "light", label: "Light" },
+                          { value: "dark", label: "Dark" },
+                          { value: "system", label: "System" },
+                        ]}
+                        defaultValue="system"
+                      />
+                    </FormField>
                   </div>
                 </form>
               </div>
