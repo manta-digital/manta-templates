@@ -9,14 +9,14 @@ const formVariants = cva(
   "space-y-6",
   {
     variants: {
-      spacing: {
+      uiSpacing: {
         compact: "space-y-3",
         normal: "space-y-6", 
         loose: "space-y-8",
       },
     },
     defaultVariants: {
-      spacing: "normal",
+      uiSpacing: "normal",
     },
   }
 );
@@ -73,11 +73,13 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   onSubmit,
   onError,
   form: providedForm,
-  spacing,
+  uiSpacing,
   className,
   children,
   ...props
 }: FormProps<TFieldValues>) {
+  // Filter out ui props that shouldn't be passed to DOM
+  const { ...domProps } = props;
   const formMethods = useForm({
     resolver: schema ? zodResolver(schema) as any : undefined,
     defaultValues,
@@ -92,8 +94,8 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
     <FormProvider {...(form as any)}>
       <form 
         onSubmit={handleSubmit} 
-        className={cn(formVariants({ spacing }), className)}
-        {...props}
+        className={cn(formVariants({ uiSpacing }), className)}
+        {...domProps}
       >
         {children}
       </form>
