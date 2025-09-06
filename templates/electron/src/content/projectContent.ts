@@ -3,7 +3,7 @@ export const reactProjectContent = {
   description: "Standard React template with ui-core components working without injection",
   longDescription: "This template demonstrates how ui-core components work seamlessly in standard React environments using Vite for build tooling. No framework-specific injection required.",
   techStack: ["React 19", "Vite 5", "Tailwind 4", "TypeScript", "Framer Motion"],
-  image: "/images/react-template.png",
+  image: "/image/blog/blog-sample-image.png",
   demoUrl: "http://localhost:5173",
   repoUrl: "https://github.com/manta-digital/manta-templates/tree/main/templates/react",
   features: [
@@ -49,7 +49,7 @@ export const showcaseProjects = [
     title: "Video Components Demo",
     description: "StandardBackgroundVideo and StandardVideoPlayer in action",
     techStack: ["React", "HTML5 Video", "Autoplay Policies"],
-    image: "/images/video-demo.png",
+    image: "/image/blog/blog-sample-image.png",
     demoUrl: "/examples#video-components",
     category: "component-demo" as const
   },
@@ -57,7 +57,7 @@ export const showcaseProjects = [
     title: "Layout Components",
     description: "Container, GridLayout, BentoLayout working without injection",
     techStack: ["React", "Tailwind", "Responsive Design"],
-    image: "/images/layout-demo.png", 
+    image: "/image/blog/blog-sample-image.png", 
     demoUrl: "/examples#layouts",
     category: "component-demo" as const
   },

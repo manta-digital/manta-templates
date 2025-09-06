@@ -11,11 +11,8 @@
   "compilerOptions": {
     "paths": {
       "@/lib/*": [
-        "./lib/*"
+        "./src/lib/*"
       ]
     }
-  },
-  "exclude": [
-    "lib"
-  ]
+  }
 }

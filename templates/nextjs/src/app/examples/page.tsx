@@ -12,13 +12,22 @@ import {
   CardCarousel,
   CosineTerrainCard,
   TechnologyScroller,
-  VideoCard
+  VideoCard,
+  AboutCard
 } from '@/lib/ui-core';
+import { getContentBySlug } from '@/lib/content';
+import type { AboutContent } from '@/lib/ui-core/types/content';
+import { ContactForm } from '@/lib/ui-core/components/form';
 import { BackgroundVideoComponent } from '@/lib/ui-adapters/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ExamplesPage() {
+export default async function ExamplesPage() {
+  const aboutContent = await getContentBySlug<AboutContent>(
+    'about',
+    'sample-profile'
+  );
+
   return (
     <main className="min-h-screen p-6 pt-0 md:p-10 md:pt-0">
       <BentoLayout className={cn('max-w-7xl mx-auto')} gap={6} rowHeight="minmax(200px, auto)" columns="grid-cols-8">
@@ -124,12 +133,37 @@ export default function ExamplesPage() {
           />
         </GridItem>
 
-        {/* Quote */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
+        {/* Contact Form */}
+        <GridItem className="col-span-8 md:col-span-4">
+          <BaseCard className="h-full p-6">
+            <ContactForm 
+              className="max-w-none"
+              title="Contact Us"
+              description="Get in touch with our team"
+              submitText="Send Message"
+            />
+          </BaseCard>
         </GridItem>
 
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+        <GridItem className="col-span-8 row-span-2 md:col-span-4">
+            <GradientCard
+              className="h-full p-0 rounded-lg border-none [&>div:last-child]:h-full [&>div:last-child>div]:h-full [&>div:last-child>div]:p-0"
+              from="accent-9" to="accent-11"
+            >
+              {aboutContent && (
+                <AboutCard
+                  className="h-full bg-transparent text-white border-1 border-white/30"
+                  title={aboutContent.frontmatter.title}
+                  description={aboutContent.frontmatter.description}
+                  avatar={aboutContent.frontmatter.avatar}
+                  socials={aboutContent.frontmatter.socials}
+                  contentHtml={aboutContent.contentHtml}
+                />
+              )}
+            </GradientCard>
+          </GridItem>        
+
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-3">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
             <TechnologyScroller items={[
             { name: 'Next.js', svg: 'nextdotjs.svg', invertOnDark: true },
@@ -140,6 +174,11 @@ export default function ExamplesPage() {
           direction="left"
           />
           </BaseCard>
+        </GridItem>
+
+        {/* Quote */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-5">
+          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
         </GridItem>
 
       </BentoLayout>

@@ -2,7 +2,7 @@
 type: about
 title: John Developer
 description: Full-stack developer passionate about React and TypeScript
-avatar: /vite.svg
+avatar: /image/manta.png
 socials:
   - platform: github
     url: https://github.com/johndeveloper

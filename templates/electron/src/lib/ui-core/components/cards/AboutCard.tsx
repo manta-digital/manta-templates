@@ -72,7 +72,7 @@ export function AboutCard({
             src: avatar,
             alt: title || 'Profile',
             ...(ImageComponent !== 'img' && { width: 80, height: 80 }),
-            className: "w-full h-full object-cover dark:invert",
+            className: "w-full h-full object-cover",
             ...(ImageComponent === 'img' && { style: { width: '80px', height: '80px' } })
           })}
         </div>
