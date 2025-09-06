@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label, FormField, Textarea } from '../lib/ui-core/components/form';
+import { Input, Label, FormField, Textarea, Checkbox, CheckboxGroup } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -462,6 +462,227 @@ export default function FormsDemo() {
                       placeholder="Please describe the issue you're experiencing..."
                     />
                   </FormField>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          {/* Checkbox Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Checkbox Component</h2>
+            
+            {/* Basic Checkboxes */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Basic Checkboxes</h3>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="space-y-3">
+                  <h4 className="font-medium text-sm">Simple Checkboxes</h4>
+                  <Checkbox />
+                  <Checkbox defaultChecked />
+                  <Checkbox disabled />
+                  <Checkbox disabled defaultChecked />
+                </div>
+                <div className="space-y-3">
+                  <h4 className="font-medium text-sm">With Labels</h4>
+                  <Checkbox label="Accept terms" />
+                  <Checkbox label="Subscribe to newsletter" defaultChecked />
+                  <Checkbox label="Enable notifications" disabled />
+                  <Checkbox label="Remember me" disabled defaultChecked />
+                </div>
+                <div className="space-y-3">
+                  <h4 className="font-medium text-sm">With Descriptions</h4>
+                  <Checkbox 
+                    label="Marketing emails" 
+                    description="Receive updates about new products"
+                  />
+                  <Checkbox 
+                    label="Security alerts" 
+                    description="Important account notifications"
+                    defaultChecked
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Size Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center space-x-2">
+                  <Checkbox size="sm" defaultChecked />
+                  <label className="text-sm">Small</label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox size="md" defaultChecked />
+                  <label className="text-sm">Medium (Default)</label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox size="lg" defaultChecked />
+                  <label className="text-sm">Large</label>
+                </div>
+              </div>
+            </div>
+
+            {/* Variant Styles */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Variant Styles</h3>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center space-x-2">
+                  <Checkbox variant="default" defaultChecked />
+                  <label className="text-sm">Default</label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox variant="accent" defaultChecked />
+                  <label className="text-sm">Accent</label>
+                </div>
+              </div>
+            </div>
+
+            {/* Indeterminate State */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Indeterminate State</h3>
+              <div className="space-y-3">
+                <Checkbox 
+                  indeterminate 
+                  label="Select all items" 
+                  description="Some items are selected"
+                />
+                <Checkbox 
+                  indeterminate 
+                  size="lg"
+                  label="Bulk actions" 
+                  description="Partially selected"
+                />
+              </div>
+            </div>
+
+            {/* CheckboxGroup Examples */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">CheckboxGroup Component</h3>
+              
+              {/* Vertical Group */}
+              <div className="mb-6">
+                <h4 className="font-medium text-sm mb-3">Vertical Group (Default)</h4>
+                <FormField label="Select your interests" description="Choose all that apply">
+                  <CheckboxGroup
+                    options={[
+                      { value: "frontend", label: "Frontend Development", description: "React, Vue, Angular" },
+                      { value: "backend", label: "Backend Development", description: "Node.js, Python, Java" },
+                      { value: "mobile", label: "Mobile Development", description: "React Native, Flutter" },
+                      { value: "devops", label: "DevOps", description: "CI/CD, Docker, Kubernetes" },
+                    ]}
+                    defaultValue={["frontend", "backend"]}
+                  />
+                </FormField>
+              </div>
+
+              {/* Horizontal Group */}
+              <div className="mb-6">
+                <h4 className="font-medium text-sm mb-3">Horizontal Group</h4>
+                <FormField label="Notification preferences">
+                  <CheckboxGroup
+                    orientation="horizontal"
+                    options={[
+                      { value: "email", label: "Email" },
+                      { value: "sms", label: "SMS" },
+                      { value: "push", label: "Push notifications" },
+                      { value: "desktop", label: "Desktop alerts" },
+                    ]}
+                    defaultValue={["email", "push"]}
+                  />
+                </FormField>
+              </div>
+
+              {/* Different Sizes */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField label="Small Checkboxes" description="Compact size for dense interfaces">
+                  <CheckboxGroup
+                    size="sm"
+                    options={[
+                      { value: "option1", label: "Option 1" },
+                      { value: "option2", label: "Option 2" },
+                      { value: "option3", label: "Option 3" },
+                    ]}
+                  />
+                </FormField>
+                <FormField label="Large Checkboxes" description="Easier to tap on mobile">
+                  <CheckboxGroup
+                    size="lg"
+                    options={[
+                      { value: "large1", label: "Large Option 1" },
+                      { value: "large2", label: "Large Option 2" },
+                      { value: "large3", label: "Large Option 3" },
+                    ]}
+                  />
+                </FormField>
+              </div>
+
+              {/* Accent Variant */}
+              <div className="mt-6">
+                <FormField label="Accent Variant" description="Using accent color theme">
+                  <CheckboxGroup
+                    variant="accent"
+                    options={[
+                      { value: "accent1", label: "Accent Option 1", description: "With description" },
+                      { value: "accent2", label: "Accent Option 2" },
+                      { value: "accent3", label: "Accent Option 3", disabled: true },
+                    ]}
+                    defaultValue={["accent1"]}
+                  />
+                </FormField>
+              </div>
+
+              {/* Disabled Group */}
+              <div className="mt-6">
+                <FormField label="Disabled Group" description="All options are disabled">
+                  <CheckboxGroup
+                    disabled
+                    options={[
+                      { value: "disabled1", label: "Disabled Option 1" },
+                      { value: "disabled2", label: "Disabled Option 2" },
+                      { value: "disabled3", label: "Disabled Option 3" },
+                    ]}
+                    defaultValue={["disabled1", "disabled2"]}
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Real-world Examples */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Real-world Examples</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-4">
+                    <FormField label="Account Settings">
+                      <CheckboxGroup
+                        options={[
+                          { value: "2fa", label: "Two-factor authentication", description: "Add an extra layer of security" },
+                          { value: "marketing", label: "Marketing emails", description: "Product updates and promotions" },
+                          { value: "security", label: "Security notifications", description: "Login alerts and warnings" },
+                        ]}
+                        defaultValue={["2fa", "security"]}
+                      />
+                    </FormField>
+                  </div>
+                </form>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <div className="space-y-4">
+                    <FormField label="Privacy Settings">
+                      <CheckboxGroup
+                        options={[
+                          { value: "analytics", label: "Analytics cookies", description: "Help us improve the experience" },
+                          { value: "advertising", label: "Advertising cookies", description: "Personalized ads" },
+                          { value: "functional", label: "Functional cookies", description: "Essential for website function" },
+                        ]}
+                        defaultValue={["functional"]}
+                      />
+                    </FormField>
+                    <Checkbox 
+                      label="I agree to the Terms of Service and Privacy Policy" 
+                      size="sm"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
