@@ -5,9 +5,9 @@ lld_reference: ../slices/020-slice-forms-ui-1.md
 dependencies: ["@radix-ui/react-checkbox", "@radix-ui/react-radio-group", "@radix-ui/react-select", "@radix-ui/react-label", "react-hook-form", "zod"]
 projectState: "Adding themed form controls to all templates with semantic color integration"
 status: phase_2_completed
-lastUpdated: 2025-09-05
+lastUpdated: 2025-09-06
 phase2_completedAt: 2025-09-05
-phaseCompleted: 2
+phaseCompleted: 4
 ---
 
 # Task Breakdown: Forms UI Core Slice
@@ -103,27 +103,27 @@ Implementing core form controls (Input, Textarea, Checkbox, Radio, Select, Label
 ## Phase 4: Textarea Component (Effort: 2)
 
 ### Task 4.1: Implement Textarea Component
-- [ ] Create Textarea extending HTML textarea
-- [ ] Apply same CVA variants as Input component
-- [ ] Add same state variants (error, success, warning)
-- [ ] Apply consistent theme integration
-- [ ] Match Input component's border and focus styles
+- [x] Create Textarea extending HTML textarea
+- [x] Apply same CVA variants as Input component
+- [x] Add same state variants (error, success, warning)
+- [x] Apply consistent theme integration
+- [x] Match Input component's border and focus styles
 - **Success**: Textarea matches Input styling
 
 ### Task 4.2: Add Auto-Resize Functionality
-- [ ] Implement autoResize prop with useEffect hook
-- [ ] Add minRows and maxRows constraints
-- [ ] Calculate height based on scrollHeight
-- [ ] Handle content changes smoothly
-- [ ] Prevent layout shift during resize
+- [x] Implement autoResize prop with useEffect hook
+- [x] Add minRows and maxRows constraints
+- [x] Calculate height based on scrollHeight
+- [x] Handle content changes smoothly
+- [x] Prevent layout shift during resize
 - **Success**: Textarea resizes smoothly with content
 
 ### Task 4.3: Integrate Textarea in Demo
-- [ ] Add Textarea examples to forms-demo page
-- [ ] Test with FormField wrapper
-- [ ] Test auto-resize with various content
-- [ ] Verify theme integration
-- [ ] Test in both light and dark modes
+- [x] Add Textarea examples to forms-demo page
+- [x] Test with FormField wrapper
+- [x] Test auto-resize with various content
+- [x] Verify theme integration
+- [x] Test in both light and dark modes
 - **Success**: Textarea fully integrated with consistent behavior
 
 ## Phase 5: Checkbox Component (Effort: 3)

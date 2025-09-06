@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Search, Eye, EyeOff } from 'lucide-react';
-import { Input, Label, FormField } from '../lib/ui-core/components/form';
+import { Input, Label, FormField, Textarea } from '../lib/ui-core/components/form';
 import { useTheme } from '../lib/ui-core';
 import { useAvailableThemes } from '../lib/ui-core/hooks/useAvailableThemes';
 
@@ -302,6 +302,168 @@ export default function FormsDemo() {
                   />
                 </FormField>
               </form>
+            </div>
+          </section>
+
+          {/* Textarea Component Tests */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Textarea Component</h2>
+            
+            {/* Basic Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Textarea Variants</h3>
+              <div className="grid gap-6 md:grid-cols-3">
+                <FormField label="Default Textarea">
+                  <Textarea placeholder="Enter your message..." />
+                </FormField>
+                <FormField label="Ghost Textarea">
+                  <Textarea variant="ghost" placeholder="Ghost textarea..." />
+                </FormField>
+                <FormField label="Filled Textarea">
+                  <Textarea variant="filled" placeholder="Filled textarea..." />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Size Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Size Variants</h3>
+              <div className="space-y-4">
+                <FormField label="Small Textarea">
+                  <Textarea size="sm" placeholder="Small textarea..." />
+                </FormField>
+                <FormField label="Medium Textarea (Default)">
+                  <Textarea size="md" placeholder="Medium textarea..." />
+                </FormField>
+                <FormField label="Large Textarea">
+                  <Textarea size="lg" placeholder="Large textarea..." />
+                </FormField>
+              </div>
+            </div>
+
+            {/* State Variants */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">State Variants</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField 
+                  label="Error State"
+                  error="Message is too long"
+                >
+                  <Textarea 
+                    placeholder="This has an error..."
+                    defaultValue="This message is too long and exceeds the character limit."
+                  />
+                </FormField>
+                <FormField 
+                  label="Success State"
+                  description="Message looks good!"
+                >
+                  <Textarea 
+                    state="success"
+                    placeholder="Success state..."
+                    defaultValue="This is a perfect message."
+                  />
+                </FormField>
+                <FormField 
+                  label="Warning State"
+                  description="Check your message length"
+                >
+                  <Textarea 
+                    state="warning"
+                    placeholder="Warning state..."
+                    defaultValue="This message might be too long."
+                  />
+                </FormField>
+                <FormField label="Disabled">
+                  <Textarea 
+                    disabled 
+                    placeholder="Disabled textarea..."
+                    defaultValue="This textarea is disabled."
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Auto-resize Features */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Auto-resize Features</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <FormField 
+                  label="Auto-resize (No limits)"
+                  description="Type multiple lines to see it grow"
+                >
+                  <Textarea 
+                    autoResize
+                    placeholder="Start typing and add new lines to see auto-resize..."
+                  />
+                </FormField>
+                <FormField 
+                  label="Auto-resize with Max Rows"
+                  description="Maximum 6 rows, then scrolls"
+                >
+                  <Textarea 
+                    autoResize
+                    minRows={3}
+                    maxRows={6}
+                    placeholder="This textarea will grow up to 6 rows, then scroll..."
+                  />
+                </FormField>
+                <FormField 
+                  label="Auto-resize with Min Rows"
+                  description="Always at least 5 rows tall"
+                >
+                  <Textarea 
+                    autoResize
+                    minRows={5}
+                    placeholder="This textarea starts with 5 rows minimum..."
+                  />
+                </FormField>
+                <FormField 
+                  label="Fixed Height (No auto-resize)"
+                  description="Traditional fixed height textarea"
+                >
+                  <Textarea 
+                    placeholder="This textarea has a fixed height and will scroll when content overflows..."
+                    className="min-h-[120px]"
+                  />
+                </FormField>
+              </div>
+            </div>
+
+            {/* Real-world Examples */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-4">Real-world Examples</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <FormField 
+                    label="Feedback Message"
+                    required
+                    description="Please share your thoughts (max 500 characters)"
+                  >
+                    <Textarea 
+                      autoResize
+                      minRows={4}
+                      maxRows={8}
+                      placeholder="We'd love to hear your feedback..."
+                      maxLength={500}
+                    />
+                  </FormField>
+                </form>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <FormField 
+                    label="Support Ticket"
+                    required
+                    description="Describe your issue in detail"
+                  >
+                    <Textarea 
+                      autoResize
+                      minRows={3}
+                      maxRows={10}
+                      placeholder="Please describe the issue you're experiencing..."
+                    />
+                  </FormField>
+                </form>
+              </div>
             </div>
           </section>
 
