@@ -35,7 +35,23 @@ const radioItemVariants = cva(
 );
 
 const radioIndicatorVariants = cva(
-  "flex items-center justify-center",
+  "flex items-center justify-center h-full w-full",
+  {
+    variants: {
+      size: {
+        sm: "",
+        md: "", 
+        lg: "",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  }
+);
+
+const radioIndicatorDotVariants = cva(
+  "rounded-full bg-current",
   {
     variants: {
       size: {
@@ -107,7 +123,7 @@ const RadioItem = React.forwardRef<
         {...props}
       >
         <RadioGroupPrimitive.Indicator className={cn(radioIndicatorVariants({ size }))}>
-          <div className="h-full w-full rounded-full bg-current" />
+          <div className={cn(radioIndicatorDotVariants({ size }))} />
         </RadioGroupPrimitive.Indicator>
       </RadioGroupPrimitive.Item>
       {(label || description) && (
@@ -135,4 +151,4 @@ const RadioItem = React.forwardRef<
 RadioGroup.displayName = "RadioGroup";
 RadioItem.displayName = "RadioItem";
 
-export { RadioGroup, RadioItem, radioGroupVariants, radioItemVariants };
+export { RadioGroup, RadioItem, radioGroupVariants, radioItemVariants, radioIndicatorVariants, radioIndicatorDotVariants };
