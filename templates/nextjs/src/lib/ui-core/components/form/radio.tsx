@@ -7,13 +7,13 @@ const radioGroupVariants = cva(
   "grid gap-2",
   {
     variants: {
-      orientation: {
+      uiOrientation: {
         horizontal: "grid-flow-col auto-cols-max",
         vertical: "grid-flow-row",
       },
     },
     defaultVariants: {
-      orientation: "vertical",
+      uiOrientation: "vertical",
     },
   }
 );
@@ -22,14 +22,14 @@ const radioItemVariants = cva(
   "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
-      size: {
+      uiSize: {
         sm: "h-3 w-3",
         md: "h-4 w-4",
         lg: "h-5 w-5",
       },
     },
     defaultVariants: {
-      size: "md",
+      uiSize: "md",
     },
   }
 );
@@ -38,14 +38,14 @@ const radioIndicatorVariants = cva(
   "flex items-center justify-center h-full w-full",
   {
     variants: {
-      size: {
+      uiSize: {
         sm: "",
         md: "", 
         lg: "",
       },
     },
     defaultVariants: {
-      size: "md",
+      uiSize: "md",
     },
   }
 );
@@ -54,20 +54,20 @@ const radioIndicatorDotVariants = cva(
   "rounded-full bg-current",
   {
     variants: {
-      size: {
+      uiSize: {
         sm: "h-1.5 w-1.5",
         md: "h-2 w-2", 
         lg: "h-2.5 w-2.5",
       },
     },
     defaultVariants: {
-      size: "md",
+      uiSize: "md",
     },
   }
 );
 
 export interface RadioGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>, 'orientation'>,
+  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
     VariantProps<typeof radioGroupVariants> {
   options?: Array<{
     value: string;
@@ -75,7 +75,8 @@ export interface RadioGroupProps
     description?: string;
     disabled?: boolean;
   }>;
-  size?: "sm" | "md" | "lg";
+  uiSize?: "sm" | "md" | "lg";
+  uiState?: "default" | "error" | "success" | "warning";
 }
 
 export interface RadioItemProps
@@ -88,10 +89,10 @@ export interface RadioItemProps
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   RadioGroupProps
->(({ className, orientation, options, size = "md", children, ...props }, ref) => {
+>(({ className, uiOrientation, options, uiSize = "md", uiState, children, ...props }, ref) => { // eslint-disable-line @typescript-eslint/no-unused-vars
   return (
     <RadioGroupPrimitive.Root
-      className={cn(radioGroupVariants({ orientation }), className)}
+      className={cn(radioGroupVariants({ uiOrientation }), className)}
       {...props}
       ref={ref}
     >
@@ -100,7 +101,7 @@ const RadioGroup = React.forwardRef<
             <RadioItem
               key={option.value}
               value={option.value}
-              size={size}
+              uiSize={uiSize}
               label={option.label}
               description={option.description}
               disabled={option.disabled}
@@ -114,16 +115,16 @@ const RadioGroup = React.forwardRef<
 const RadioItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioItemProps
->(({ className, size, label, description, children, ...props }, ref) => {
+>(({ className, uiSize, label, description, children, ...props }, ref) => {
   const content = (
     <div className="flex items-center space-x-2">
       <RadioGroupPrimitive.Item
         ref={ref}
-        className={cn(radioItemVariants({ size }), className)}
+        className={cn(radioItemVariants({ uiSize }), className)}
         {...props}
       >
-        <RadioGroupPrimitive.Indicator className={cn(radioIndicatorVariants({ size }))}>
-          <div className={cn(radioIndicatorDotVariants({ size }))} />
+        <RadioGroupPrimitive.Indicator className={cn(radioIndicatorVariants({ uiSize }))}>
+          <div className={cn(radioIndicatorDotVariants({ uiSize }))} />
         </RadioGroupPrimitive.Indicator>
       </RadioGroupPrimitive.Item>
       {(label || description) && (

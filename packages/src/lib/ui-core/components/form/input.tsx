@@ -42,8 +42,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, uiVariant, uiSize, uiState, leftIcon, rightIcon, ...props }, ref) => {
     // Filter out React Hook Form props that shouldn't be passed to DOM
     const { 
-      isDirty, 
-      isTouched, 
+      isDirty, // eslint-disable-line @typescript-eslint/no-unused-vars
+      isTouched, // eslint-disable-line @typescript-eslint/no-unused-vars
       ...domProps 
     } = props as any;
     

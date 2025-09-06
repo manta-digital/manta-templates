@@ -43,8 +43,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, uiVariant, uiSize, uiState, autoResize, minRows = 3, maxRows, ...props }, ref) => {
     // Filter out React Hook Form props that shouldn't be passed to DOM
     const { 
-      isDirty, 
-      isTouched, 
+      isDirty, // eslint-disable-line @typescript-eslint/no-unused-vars
+      isTouched, // eslint-disable-line @typescript-eslint/no-unused-vars
       ...domProps 
     } = props as any;
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
