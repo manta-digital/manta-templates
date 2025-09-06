@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useForm, FormProvider, UseFormProps, UseFormReturn, FieldValues, useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import * as z from "zod";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
@@ -81,6 +81,7 @@ function Form<TFieldValues extends FieldValues = FieldValues>({
   // Filter out ui props that shouldn't be passed to DOM
   const { ...domProps } = props;
   const formMethods = useForm({
+    // @ts-expect-error - Known type incompatibility between @hookform/resolvers 5.2.1 and Zod v4
     resolver: schema ? zodResolver(schema) : undefined,
     defaultValues,
     mode,

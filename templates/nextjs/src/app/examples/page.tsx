@@ -124,6 +124,11 @@ export default function ExamplesPage() {
           />
         </GridItem>
 
+        {/* Quote */}
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
+          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
+        </GridItem>
+
         <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
             <TechnologyScroller items={[
@@ -137,10 +142,6 @@ export default function ExamplesPage() {
           </BaseCard>
         </GridItem>
 
-        {/* Quote */}
-        <GridItem className="col-span-8 md:col-span-8 lg:col-span-4">
-          <QuoteCard quote="Make the easy path the right path—semantic tokens everywhere." author="Manta Templates" />
-        </GridItem>
       </BentoLayout>
     </main>
   );
