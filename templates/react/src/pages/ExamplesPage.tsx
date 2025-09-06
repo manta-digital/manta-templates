@@ -162,18 +162,19 @@ export default function ExamplesPage() {
             materialColor="var(--color-accent-11)"
           />
         </GridItem>
-
-        {/* Quote */}
-        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4 h-full">
-          {quotes && quotes.length > 0 && (
-            <QuoteCard 
-              className="md:col-span-4 h-full"
-              quote={quotes[0].frontmatter.quote} 
-              author={quotes[0].frontmatter.author} 
-            />
-          )}
-        </GridItem>
         
+        {/* Contact Form */}
+        <GridItem className="col-span-8 md:col-span-4 lg:col-span-4 xl:col-span-4">
+          <BaseCard className="h-full p-6">
+            <ContactForm 
+              className="max-w-none"
+              title="Contact Us"
+              description="Get in touch with our team"
+              submitText="Send Message"
+            />
+          </BaseCard>
+        </GridItem>
+
         <GridItem className="col-span-8 row-span-2 md:col-span-4">
             <GradientCard
               className="h-full p-0 rounded-lg border-none [&>div:last-child]:h-full [&>div:last-child>div]:h-full [&>div:last-child>div]:p-0"
@@ -192,7 +193,7 @@ export default function ExamplesPage() {
             </GradientCard>
           </GridItem>
 
-          <GridItem className="col-span-8 md:col-span-8 lg:col-span-8">
+        <GridItem className="col-span-8 md:col-span-8 lg:col-span-8">
           <BaseCard className={cn('h-full w-full flex flex-col justify-center')}>
             {technologies && technologies.length > 0 && (
               <TechnologyScroller 
@@ -204,16 +205,15 @@ export default function ExamplesPage() {
           </BaseCard>
         </GridItem>
 
-        {/* Contact Form */}
-        <GridItem className="col-span-8 md:col-span-6 lg:col-span-4 xl:col-span-3">
-          <BaseCard className="h-full p-6">
-            <ContactForm 
-              className="max-w-none"
-              title="Contact Us"
-              description="Get in touch with our team"
-              submitText="Send Message"
+        {/* Quote */}
+        <GridItem className="col-span-8 md:col-span-8 h-full">
+          {quotes && quotes.length > 0 && (
+            <QuoteCard 
+              className="md:col-span-4 h-full"
+              quote={quotes[0].frontmatter.quote} 
+              author={quotes[0].frontmatter.author} 
             />
-          </BaseCard>
+          )}
         </GridItem>
 
       </BentoLayout>
