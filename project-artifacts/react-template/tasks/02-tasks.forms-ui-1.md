@@ -4,10 +4,10 @@ project: manta-templates
 lld_reference: ../slices/020-slice-forms-ui-1.md
 dependencies: ["@radix-ui/react-checkbox", "@radix-ui/react-radio-group", "@radix-ui/react-select", "@radix-ui/react-label", "react-hook-form", "zod"]
 projectState: "Completed Radio, Select, and Form Provider Infrastructure"
-status: phase_2_completed
+status: completed
 
 lastUpdated: 2025-09-06T16:45:00Z
-phase2_completedAt: 2025-09-05
+phase2_completedAt: 2025-09-06
 phaseCompleted: 8
 ---
 
@@ -290,19 +290,19 @@ Replace all CVA variant prop names with "ui" prefixes to avoid HTML/Radix confli
 - **Success**: Components in packages directory
 
 ### Task 9.2: Test in Next.js Template
-- [ ] Run `pnpm copy-packages:nextjs`
-- [ ] Create test page in Next.js template
-- [ ] Test SSR compatibility
-- [ ] Verify theme integration works
-- [ ] Test all components render correctly
+- [x] Run `pnpm copy-packages:nextjs`
+- [x] Create test page in Next.js template
+- [x] Test SSR compatibility
+- [x] Verify theme integration works
+- [x] Test all components render correctly
 - **Success**: Forms work in Next.js
 
 ### Task 9.3: Test in Electron Template
-- [ ] Run `pnpm copy-packages:electron`
-- [ ] Create test window with forms
-- [ ] Test native input behaviors
-- [ ] Verify theme switching works
-- [ ] Test keyboard navigation
+- [x] Run `pnpm copy-packages:electron`
+- [x] Create test window with forms
+- [x] Test native input behaviors
+- [x] Verify theme switching works
+- [x] Test keyboard navigation
 - **Success**: Forms work in Electron
 
 ## Phase 10: Documentation and Polish (Effort: 2)

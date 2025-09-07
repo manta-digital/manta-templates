@@ -71,12 +71,11 @@ High-Level Plan: Forms UI Slice for Manta Templates             │ │
 │ │                                                                 │ │
 │ │ packages/src/lib/ui-core/                                       │ │
 │ │ ├── components/                                                 │ │
-│ │ │   ├── ui/                                                     │ │
-│ │ │   │   ├── form/           # New form components               │ │
-│ │ │   │   │   ├── input.tsx                                       │ │
-│ │ │   │   │   ├── textarea.tsx                                    │ │
-│ │ │   │   │   ├── checkbox.tsx                                    │ │
-│ │ │   │   │   ├── radio.tsx                                       │ │
+│ │ │   │   form/           # New form components               │ │
+│ │ │   │   ├── input.tsx                                       │ │
+│ │ │   │   ├── textarea.tsx                                    │ │
+│ │ │   │   ├── checkbox.tsx                                    │ │
+│ │ │   │   ├── radio.tsx                                       │ │
 │ │ │   │   │   ├── select.tsx                                      │ │
 │ │ │   │   │   ├── form.tsx    # Form wrapper with validation      │ │
 │ │ │   │   │   └── index.ts                                        │ │
@@ -107,7 +106,7 @@ High-Level Plan: Forms UI Slice for Manta Templates             │ │
 │ │ 1. Work in templates/react/src/lib/ui-core for rapid iteration  │ │
 │ │ 2. Test with existing theme system and accent switching         │ │
 │ │ 3. Once stable, copy to packages/src/lib/ui-core                │ │
-│ │ 4. Run pnpm copy-packages:all to propagate to all templates     │ │
+│ │ 4. Run pnpm copy-packages {type} to propagate template {type}   │ │
 │ │ 5. Test in each template context (Next.js, React, Electron)     │ │
 │ │                                                                 │ │
 │ │ 7. Slice Breakdown                                              │ │
