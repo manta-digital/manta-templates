@@ -26,7 +26,7 @@ All components follow the established Radix primitives + CVA + semantic theming 
 ## Phase 1: Setup and Dependencies
 
 ### Dependency Installation
-- [ ] **Task 1.1**: Install required Radix dependencies in React template
+- [x] **Task 1.1**: Install required Radix dependencies in React template
   - Install `@radix-ui/react-tabs ^1.0.4`
   - Install `@radix-ui/react-tooltip ^1.0.7`
   - Update package.json dependencies
@@ -34,7 +34,7 @@ All components follow the established Radix primitives + CVA + semantic theming 
   - **Effort**: 1
 
 ### Directory Structure Setup  
-- [ ] **Task 1.2**: Create component directory structure in `templates/react/src/lib/ui-core/components/`
+- [x] **Task 1.2**: Create component directory structure in `templates/react/src/lib/ui-core/components/`
   - Create `navigation/` directory (all nav controls go here)
   - Create `data/` directory (all data controls go here)  
   - Verify `overlay/` directory exists (tooltip will go directly here)
