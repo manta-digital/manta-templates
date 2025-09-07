@@ -1,114 +1,103 @@
-# manta-templates
+# manta-templates 🏄‍♂️ v0.8.3
 
-> Modern starter templates with AI-assisted development workflows built-in. Ship faster with Next.js 15, Tailwind 4, and comprehensive project guides.
+> Card style UI templates for React, Electron, and Next.js.  Flexible, powerful, and *easy to use* Bento layout.  See examples at https://templates.manta.digital
 
----
+* Markdown-driven content (precompiled in React!).
+* Responsive and Mobile Friendly
+* Radix 3.0 Custom Themes built-in
+* Easily import from https://www.radix-ui.com/colors/custom. 
+* Themed Radix primitives keep everything lightweight.
 
-# manta-templates 🏄‍♂️ v0.7.1
 
-https://templates.manta.digital
+**New Features Available in v0.8.3** 
+* React and Electron Templates
+* Form Controls (more coming soon!)
 
-A **Next.js 15 template** that lets you spin up modern, AI-assisted project sites quickly.
-
-> **Note:** This project is in active development (v0.7.1). Expect breaking changes.
-
----
 
 ## 🚀 Quickstart
 
-### Standalone Template usage
+### Deploy your preferred Template
+If unsure, use React.  It's widely supported and easy to host.
 ```bash
-# 1. Grab only the Next.js starter
-pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-app
+
+# 1. Pull the React template
+pnpm dlx degit manta-digital/manta-templates/templates/react my-app
 cd my-app
 
-# 2. Install & pull public docs
+# 2. Install & pull AI Project Guide.
 pnpm install
 pnpm run setup-guides
 
-# 3. Spin up the dev server
+# 3. Build and run dev server
+pnpm build
 pnpm dev
 ```
 
-### Using the monorepo
+### Additional Templates
 ```bash
-# 1. Clone the monorepo
-git clone https://github.com/manta-digital/manta-templates.git
-cd manta-templates
+# Next.js
+pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-app
 
-# 2. Install dependencies
-pnpm install
+# Electron (uses React / Vite)
+pnpm dlx degit manta-digital/manta-templates/templates/electron my-app
 
-# 3. Import public guides (at monorepo root)
-pnpm sync-guides
-
-# 4. Bootstrap the Next.js starter
-cd templates/nextjs
-pnpm install
-pnpm setup-guides    # copies guides from monorepo into template
-pnpm dev             # launches the dev server
 ```
 
-*Astro and React-Native starters are coming soon under `templates/ast​ro` and `templates/react-native`.*
+## Available Cards & Controls
 
----
+### Cards
+* AboutCard:  profile detail card with avatar
+* AnimatedCard: configurable animations
+* ArticleCard: customizable to describe articles or projects
+* BaseCard: basic customizable card
+* BlogCard: use for blog posts or articles
+* BlogCardImage: an image based blog/article card
+* BlogIndexCard: list of blog articles with images
+* CosineTerrainCard: animated cosine surface z = f(x,y)
+* GradientCard: theme-aware gradient background, composable
+* ProjectCard: details and badges for displaying projects
+* QuoteCard: display a quote or statement
+* SidebarPostCard: small horizontal card with left image
+* ThreeJSCard: general purpose 3D rendering card
+* VideoCard: player style or background video
+
+### Layouts & Controls
+* Footer: available in compact and full.  
+* Header: with brand icon, links, and theme switches.
+* BrandMark: customizable brand mark for header
+* ColorSelector: allow user to select color themes
+* ThemeToggle: sun/moon light/dark control
+* TechnologyScroller: display configurable scrolling icons
+* ComingSoonOverlay: blur and mark with semi-transparency
+* CardCarousel: configurable slide carousel for cards
+* BentoLayout: responsive, flexible layout of GridItems
+
+### Form Controls
+* Basic form controls including Checkbox, Input, Label, 
+  Radio, Select, TextArea, Form Control and Form Field.
+* ContactForm: reusable contact form.
+
+
+Numerous optimizations were added to the React template specifically pre-compiling of all markdown content into HTML.  Components remain client-side without the extra load of processing and rendering the markdown on the client.
+
+
+Bug reports are welcome; expect some rough edges as we stabilize toward v1.0.
+
+## Documentation Still Needed:
+* Theme structure
+* Color customizations
+
 
 ## Guides Quickstart
-Running `pnpm setup-guides` gets you the ai-project-guide in `project-documentation/`.  Place any project-specific guides in a `private` subfolder.  Mimic structure of the parent folder (minus the `private` folder, lest you recurse infinitely).  Run `pnpm update-guides` to fetch any updates from ai-project-guide.  
+Running `pnpm setup-guides` gets you the ai-project-guide in `project-documents/`.  Place any project-specific guides in a `private` subfolder.  Mimic structure of the parent folder (minus the `private` folder, lest you recurse infinitely).  Run `pnpm update-guides` to fetch any updates from ai-project-guide.  
 
 ### Organization Private Guides
-You can also keep organization-wide private guides that you can easily use in multiple projects. Copy `env.example` to `.env` and set  `PRIVATE_GUIDES_URL=your-private-guides-repository`. Organization private guides will not overwrite project-specific guides.
+You can also keep organization-wide private guides that you can easily use in multiple projects. Copy `env.example` to `.env` and set  `PRIVATE_GUIDES_URL=your-private-guides-repository`. Organization private guides will not overwrite project-specific guides.  *Disclaimer: this feature has not been thoroughly tested.*
 
 ### Guides Homepage
 Guides repository is public and available at: https://github.com/ecorkran/ai-project-guide
 
 
-## Why it Exists and Where it's Going
-
-### Why it exists  
-I wanted one repo that handled the boring plumbing **and** baked in my AI project guides and useful workflows.  
-
-* **ai-project-guide** ↔️ pre-wired: generate detailed task lists, docs, or next steps with parameterized prompts.
-* **Tailwind 4** grid **Cards**: drop-in components for text, code, metrics, images—ready to customize.  
-* Clean Markdown content pipeline, Shiki code-highlighting, image optimization, dark/light theme toggle.
-
-### Where it's Going
-
-🎞️ Video, 3D, and chart cards (embed YouTube, Three.js, SciChart)
-🎨 Radix color themes & preset palettes
-📚 Astro static template
-
-Status · Early-Access (v0.7.1)
-Heads-up: v0.7.1 is an α-grade release—perfect for hacking, learning, and giving feedback, not for shipping critical production workloads.
-
-Known gaps: limited card types, no Radix theme switcher, inconsistent lint rules, limited support for markdown-driven content.
-
-Interfaces may change between minor versions.
-
-Bug reports are welcome; expect some rough edges as we stabilize toward v1.0.
-
----
-
-## 📂 Repository structure
-
-```
-manta-templates/
-├─ project-documents/      # Your curated project guides
-│   └─ private/            # Private docs (pulled only by you, when needed)
-│
-├─ templates/              # Application & site starter templates
-│   ├─ nextjs/             # Next.js 15 + Tailwind 4 + ShadCN
-│   └─ astro/              # (future) Astro Islands
-│
-├─ packages/               # Workspace packages
-│   └─ ui/                 # @manta/ui: shared React components (BentoGrid, etc.)
-│
-├─ pnpm-workspace.yaml     # pnpm workspace config
-├─ turbo.json              # Turborepo pipeline (build/lint/dev)
-└─ package.json            # Root scripts & dependencies
-```
-
----
 
 ## 🔧 Project Guides
 
@@ -152,25 +141,7 @@ For template users, this complexity is hidden - they just run `setup-guides` and
 
 ---
 
-## 📦 Publishing & Consumption
 
-* **Templates**:
-
-  ```bash
-  pnpm dlx degit manta-digital/manta-templates/templates/nextjs my-app
-  ```
-* **UI Kit** (`@manta/ui`):
-
-  * Lives in `packages/ui`.
-  * To publish to npm: in `packages/ui/package.json` set `"private": false`, then `cd packages/ui && npm publish --access public`.
-
----
-
-## 📋 Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md) for detailed release notes.
-
----
 
 ## 🤝 Contributing
 
@@ -179,16 +150,6 @@ Feel free to open issues if you find bugs or have suggestions—PRs are welcome 
 
 ---
 
-## ⚙️ Root `package.json` scripts
-
-```jsonc
-"scripts": {
-  // First-time or recurring import of public guides:
-  "sync-guides": "bash scripts/sync-guides.sh"
-}
-```
-
----
 
 ## 📝 License
 
