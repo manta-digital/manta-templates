@@ -46,40 +46,91 @@ All components follow the established Radix primitives + CVA + semantic theming 
 
 ### Tabs Root Component
 - [ ] **Task 2.1**: Create Tabs.tsx root container component
-  - Implement TabsProps interface with defaultValue, value, onValueChange, orientation, className, children
-  - Build on `@radix-ui/react-tabs` Root primitive
-  - Add CVA variants for orientation support
+  - [ ] **Task 2.1.1**: Define TabsProps interface
+    - Include defaultValue?: string
+    - Include value?: string 
+    - Include onValueChange?: (value: string) => void
+    - Include orientation?: 'horizontal' | 'vertical'
+    - Include className?: string
+    - Include children: React.ReactNode
+    - **Success**: TabsProps interface matches LLD specification exactly
+  - [ ] **Task 2.1.2**: Implement Radix Root primitive integration
+    - Import Root from `@radix-ui/react-tabs`
+    - Pass through value, defaultValue, onValueChange props
+    - Pass through orientation prop
+    - **Success**: Radix Root primitive properly configured
+  - [ ] **Task 2.1.3**: Add CVA variants for orientation
+    - Create cva() call with base classes
+    - Add horizontal and vertical orientation variants
+    - Apply className merging with cn() utility
+    - **Success**: Component supports both horizontal and vertical orientations
   - **Reference**: LLD Section 1 "Tabs Component" - Props Interface and Technical Approach
-  - **Success**: Tabs component renders and manages state correctly
+  - **Overall Success**: Tabs component renders and manages state correctly
   - **Effort**: 2
 
 ### TabsList Component  
 - [ ] **Task 2.2**: Create TabsList.tsx navigation list component
-  - Build on `@radix-ui/react-tabs` List primitive
-  - Add responsive overflow handling for mobile
-  - Implement semantic theming with neutral color scale
+  - [ ] **Task 2.2.1**: Implement Radix List primitive integration
+    - Import List from `@radix-ui/react-tabs`
+    - Set up basic component structure with forwardRef
+    - **Success**: TabsList integrates properly with Radix primitive
+  - [ ] **Task 2.2.2**: Add responsive overflow handling for mobile
+    - Add horizontal scroll behavior for narrow screens
+    - Use scrollbar-thin or scrollbar-none for clean appearance
+    - Ensure tab navigation remains accessible on mobile
+    - **Success**: Tabs scroll properly on mobile devices
+  - [ ] **Task 2.2.3**: Implement semantic theming with neutral color scale
+    - Apply neutral background colors (bg-neutral-1 or bg-neutral-2)
+    - Add subtle borders using border-neutral-6
+    - **Success**: TabsList follows established neutral theming pattern
   - **Reference**: LLD Section 1 "Tabs Component" - Component Structure
-  - **Success**: TabsList renders with proper overflow behavior
+  - **Overall Success**: TabsList renders with proper overflow behavior
   - **Effort**: 2
 
 ### TabsTrigger Component
 - [ ] **Task 2.3**: Create TabsTrigger.tsx individual tab button component  
-  - Implement TabsTriggerProps interface with value, disabled, className, children
-  - Build on `@radix-ui/react-tabs` Trigger primitive
-  - Apply styling strategy: Active `bg-accent-9` with `text-accent-12`, Inactive `text-neutral-11` with hover `text-neutral-12`
-  - Add underline indicator using `border-accent-9`
-  - Add focus states with `ring-accent-7`
-  - **Reference**: LLD Section 1 "Tabs Component" - Props Interface and Styling Strategy
-  - **Success**: TabsTrigger shows correct visual states for active/inactive/hover/focus
+  - [ ] **Task 2.3.1**: Define TabsTriggerProps interface
+    - Include value: string (required)
+    - Include disabled?: boolean
+    - Include className?: string
+    - Include children: React.ReactNode
+    - **Success**: TabsTriggerProps interface matches LLD specification
+  - [ ] **Task 2.3.2**: Implement Radix Trigger primitive integration
+    - Import Trigger from `@radix-ui/react-tabs`
+    - Pass through value prop (required for Radix)
+    - Handle disabled state properly
+    - **Success**: Radix Trigger primitive properly configured
+  - [ ] **Task 2.3.3**: Implement active/inactive styling strategy
+    - Active state: bg-accent-9 with text-accent-12
+    - Inactive state: text-neutral-11 with hover text-neutral-12
+    - Use data-state attribute from Radix for state detection
+    - **Success**: Active and inactive states display correctly
+  - [ ] **Task 2.3.4**: Add underline indicator and focus states
+    - Add underline indicator using border-accent-9 for active tabs
+    - Implement focus states with ring-accent-7
+    - Ensure focus is visible and meets accessibility standards
+    - **Success**: Visual indicators work for active, hover, and focus states
+  - **Reference**: LLD Section 1 "Tabs Component" - Props Interface and Styling Strategy  
+  - **Overall Success**: TabsTrigger shows correct visual states for active/inactive/hover/focus
   - **Effort**: 3
 
 ### TabsContent Component
 - [ ] **Task 2.4**: Create TabsContent.tsx panel content component
-  - Build on `@radix-ui/react-tabs` Content primitive
-  - Add proper ARIA labeling for accessibility
-  - Implement smooth transitions between panels
+  - [ ] **Task 2.4.1**: Implement Radix Content primitive integration
+    - Import Content from `@radix-ui/react-tabs`
+    - Set up value prop to match corresponding tab
+    - **Success**: TabsContent integrates properly with Radix primitive
+  - [ ] **Task 2.4.2**: Add proper ARIA labeling for accessibility
+    - Verify ARIA attributes are set by Radix (aria-labelledby, role="tabpanel")
+    - Add any additional accessibility enhancements if needed
+    - **Success**: Content panels are properly accessible to screen readers
+  - [ ] **Task 2.4.3**: Implement smooth transitions between panels
+    - Add CSS transitions for enter/exit animations
+    - Ensure transitions don't interfere with keyboard navigation
+    - Use semantic colors for any transition effects
+    - **Success**: Panel transitions are smooth and don't impact usability
   - **Reference**: LLD Section 1 "Tabs Component" - Component Structure
-  - **Success**: TabsContent displays correct panel based on active tab
+  - **Overall Success**: TabsContent displays correct panel based on active tab
   - **Effort**: 2
 
 ### Tabs Index and Integration
