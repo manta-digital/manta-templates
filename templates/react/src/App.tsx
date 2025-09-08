@@ -10,6 +10,7 @@ import LegalPage from './pages/LegalPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 import CookiesPage from './pages/CookiesPage'
+import Tier2Demo from './pages/Tier2Demo'
 
 function App() {
   // Theme persistence script equivalent to Next.js
@@ -40,6 +41,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/examples" element={<ExamplesPage />} />
+              <Route path="/tier2-demo" element={<Tier2Demo />} />
               <Route path="/legal" element={<LegalPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
