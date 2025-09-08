@@ -192,16 +192,16 @@ export default function Tier2Demo() {
               <TableHead sortable>Name</TableHead>
               <TableHead sortable>Email</TableHead>
               <TableHead>Role</TableHead>
-              <TableHead align="right">Status</TableHead>
+              <TableHead align="center">Status</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody striped hoverable>
+          <TableBody striped={true} hoverable={true}>
             <TableRow>
               <TableCell className="font-medium">Alice Johnson</TableCell>
               <TableCell>alice@example.com</TableCell>
               <TableCell>Developer</TableCell>
-              <TableCell align="right">
-                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+              <TableCell align="center">
+                <span className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full min-w-[60px] bg-green-100 text-green-800">
                   Active
                 </span>
               </TableCell>
@@ -210,8 +210,8 @@ export default function Tier2Demo() {
               <TableCell className="font-medium">Bob Smith</TableCell>
               <TableCell>bob@example.com</TableCell>
               <TableCell>Designer</TableCell>
-              <TableCell align="right">
-                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+              <TableCell align="center">
+                <span className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full min-w-[60px] bg-green-100 text-green-800">
                   Active
                 </span>
               </TableCell>
@@ -220,8 +220,8 @@ export default function Tier2Demo() {
               <TableCell className="font-medium">Carol Davis</TableCell>
               <TableCell>carol@example.com</TableCell>
               <TableCell>Manager</TableCell>
-              <TableCell align="right">
-                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+              <TableCell align="center">
+                <span className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full min-w-[60px] bg-yellow-100 text-yellow-800">
                   Away
                 </span>
               </TableCell>
@@ -230,8 +230,8 @@ export default function Tier2Demo() {
               <TableCell className="font-medium">David Wilson</TableCell>
               <TableCell>david@example.com</TableCell>
               <TableCell>Developer</TableCell>
-              <TableCell align="right">
-                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+              <TableCell align="center">
+                <span className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full min-w-[60px] bg-green-100 text-green-800">
                   Active
                 </span>
               </TableCell>
@@ -240,8 +240,8 @@ export default function Tier2Demo() {
               <TableCell className="font-medium">Eve Anderson</TableCell>
               <TableCell>eve@example.com</TableCell>
               <TableCell>QA Engineer</TableCell>
-              <TableCell align="right">
-                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">
+              <TableCell align="center">
+                <span className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full min-w-[60px] bg-red-100 text-red-800">
                   Offline
                 </span>
               </TableCell>
