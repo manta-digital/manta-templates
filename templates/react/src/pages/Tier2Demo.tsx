@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/ui-core/components/navigation/tabs';
 import { List, ListItem, ListHeader } from '../lib/ui-core/components/data/list';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../lib/ui-core/components/data/table';
 
 export default function Tier2Demo() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -177,6 +178,77 @@ export default function Tier2Demo() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Table Component Demo */}
+      <div className="rounded-sm border border-neutral-6 p-6">
+        <h2 className="text-xl font-semibold text-neutral-12 mb-4">Table Component</h2>
+        <p className="text-neutral-11 mb-4">
+          Demonstrating the Table component with striped rows, sortable headers, and semantic theming.
+        </p>
+        
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead sortable>Name</TableHead>
+              <TableHead sortable>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead align="right">Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody striped hoverable>
+            <TableRow>
+              <TableCell className="font-medium">Alice Johnson</TableCell>
+              <TableCell>alice@example.com</TableCell>
+              <TableCell>Developer</TableCell>
+              <TableCell align="right">
+                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                  Active
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Bob Smith</TableCell>
+              <TableCell>bob@example.com</TableCell>
+              <TableCell>Designer</TableCell>
+              <TableCell align="right">
+                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                  Active
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Carol Davis</TableCell>
+              <TableCell>carol@example.com</TableCell>
+              <TableCell>Manager</TableCell>
+              <TableCell align="right">
+                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+                  Away
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">David Wilson</TableCell>
+              <TableCell>david@example.com</TableCell>
+              <TableCell>Developer</TableCell>
+              <TableCell align="right">
+                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                  Active
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Eve Anderson</TableCell>
+              <TableCell>eve@example.com</TableCell>
+              <TableCell>QA Engineer</TableCell>
+              <TableCell align="right">
+                <span className="inline-flex px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">
+                  Offline
+                </span>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
