@@ -85,7 +85,7 @@ const tableBodyVariants = cva(
   {
     variants: {
       striped: {
-        true: "[&_tr:nth-child(odd)]:bg-neutral-1 [&_tr:nth-child(even)]:bg-transparent",
+        true: "[&_tr:nth-child(odd)]:bg-transparent [&_tr:nth-child(even)]:bg-accent-3",
         false: "",
       },
       hoverable: {
