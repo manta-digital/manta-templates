@@ -22,14 +22,14 @@ export default function Tier2Demo() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-3 px-[0.125rem]">
           <TabsTrigger value="tabs-demo">Tabs Demo</TabsTrigger>
           <TabsTrigger value="lists-demo">Lists Demo</TabsTrigger>
           <TabsTrigger value="interactive-demo">Interactive Demo</TabsTrigger>
         </TabsList>
 
         <TabsContent value="tabs-demo" className="space-y-4">
-          <div className="rounded-lg border border-neutral-6 p-6">
+          <div className="rounded-sm border border-neutral-6 p-6">
             <h2 className="text-xl font-semibold text-neutral-12 mb-4">Tabs Component</h2>
             <p className="text-neutral-11 mb-4">
               This demonstrates the Tabs component with horizontal orientation and semantic theming.
@@ -149,7 +149,7 @@ export default function Tier2Demo() {
               <div>
                 <h3 className="font-medium text-neutral-12 mb-3">Vertical Tabs</h3>
                 <Tabs defaultValue="vtab1" orientation="vertical" className="flex">
-                  <TabsList orientation="vertical" className="mr-4">
+                  <TabsList orientation="vertical" className="mr-4 py-0.5 px-0.5">
                     <TabsTrigger value="vtab1">Vertical 1</TabsTrigger>
                     <TabsTrigger value="vtab2">Vertical 2</TabsTrigger>
                     <TabsTrigger value="vtab3">Vertical 3</TabsTrigger>

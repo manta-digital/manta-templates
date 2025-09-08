@@ -46,7 +46,7 @@ Tabs.displayName = TabsPrimitive.Root.displayName;
 
 // Task 2.2: TabsList Component
 const tabsListVariants = cva(
-  "inline-flex items-center justify-center rounded-md bg-neutral-2 p-1 text-neutral-11 border border-neutral-6",
+  "inline-flex items-center justify-center rounded-sm bg-neutral-2 p-1 text-neutral-11 border border-neutral-6",
   {
     variants: {
       orientation: {
@@ -68,11 +68,10 @@ export interface TabsListProps
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
-  TabsListProps
->(({ className, orientation = "horizontal", ...props }, ref) => (
+  TabsListProps>(({ className, orientation = "horizontal", ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
-    className={cn(tabsListVariants({ orientation }), className)}
+    className={cn(tabsListVariants({ orientation }), "py-0", className)}
     {...props}
   />
 ));
@@ -81,7 +80,7 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 
 // Task 2.3: TabsTrigger Component
 const tabsTriggerVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-7 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap px-6 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-7 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       state: {
@@ -111,7 +110,7 @@ const TabsTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       tabsTriggerVariants({ state: "inactive" }),
-      "data-[state=active]:bg-accent-9 data-[state=active]:text-accent-12 data-[state=active]:border-b-2 data-[state=active]:border-accent-9 data-[state=active]:shadow-sm",
+      "rounded-[0.5rem] data-[state=active]:bg-accent-9 data-[state=active]:text-accent-12 data-[state=active]:border-b-2 data-[state=active]:border-accent-9 data-[state=active]:shadow-sm",
       className
     )}
     {...props}
