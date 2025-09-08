@@ -11,6 +11,7 @@ export * from './components/footers';
 export * from './components/overlays';
 export * from './components/form';
 export * from './components/navigation';
+export * from './components/data';
 
 // Utilities
 export * from './utils';
