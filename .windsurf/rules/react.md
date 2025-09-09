@@ -9,9 +9,9 @@ globs:
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind, and ShadCN are all available as needed.
+- React, Tailwind, and Radix primitives are all available as needed.
 - Use Tailwind for common UI components like textarea, button, etc.
-- If we are using ShadCN in the project already, use it.
+- If we are using Radix primitives in the project already, use them consistently.
 
 ## Next.js Structure
 - Use App Router in `app/`. Server components by default, `"use client"` for client logic.

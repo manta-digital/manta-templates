@@ -75,9 +75,9 @@
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind, and ShadCN are all available as needed.
+- React, Tailwind, and Radix are all available as needed.
 - Use Tailwind for common UI components like textarea, button, etc.
-- If we are using ShadCN in the project already, use it.
+- Use Radix primitives for complex interactive components with proper accessibility.
 
 ### Next.js Structure
 
@@ -222,7 +222,7 @@ When reviewing code, systematically answer these core questions.
 
 - In general there should be no tailwind.config.ts (or .js, etc). This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
 
-- If Radix is used, specifically Radix themes with ShadCN, you should evaluate against existing known issues with this combination and ensure we are not at risk.
+- Use Radix primitives directly for accessible, unstyled components. Style them with Tailwind and our semantic color system.
 
   
 ### Code Review Process

@@ -140,7 +140,7 @@ When working with AI Project Guide, provide input in a format like this, and you
   section: ,    # (when working with a section)
   subsection: , # (for subsections)
   framework: ,  # (main framework in use for example NextJS)
-  tools: ,      # (tools in use such as ShadCN, Tailwind, etc)
+  tools: ,      # (tools in use such as Radix, Tailwind, etc)
   apis: ,       # (any specific apis in use)
 }
 ```
@@ -194,7 +194,7 @@ The AI project guide system operates on three layers, designed to work together 
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.00-process, guide.ai-project.02-spec, Code Rules). |
 | **`framework-guides/`** | App-level runtimes or platforms that own the entire build/runtime cycle (Next.js, Astro, Flutter, Qt…).                       |
-| **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (SciChart, Three.js, Tailwind…).                                       |
+| **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (Radix, Three.js, Tailwind…).                                       |
 | **`api-guides/`** | External data or service endpoints accessed over HTTP/gRPC (USGS Water Services, ArcGIS, Alpha Vantage…).                     |
 | **`domain-guides/`** | Cross-cutting subject knowledge useful across many projects (game-development, hydrology, financial-visualisation…).          |
 | **`snippets/`** | Language-agnostic code fragments and quick copy-paste helpers.                                                                |

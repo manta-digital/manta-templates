@@ -13,7 +13,7 @@ Scope: Unify the color/theming system under `templates/nextjs/` without modifyin
   - Radix custom palettes and neutrals providing `--teal-*`, `--blue-*`, `--purple-*`, `--green-*`, `--mintteal-*`, alpha, and P3 variants.
   - Semantic alias layer mapping accent to Radix steps: `--color-accent-1..12`, including alpha, border, and card-specific aliases.
   - Card theming layer consuming the semantic aliases (`--card-*`).
-  - Shadcn base tokens (e.g., `--background`, `--foreground`, `--primary`, `--border`, etc.).
+  - Design system base tokens (e.g., `--background`, `--foreground`, `--primary`, `--border`, etc.).
   - Tailwind v4 utility classes still used with hard-coded colors (e.g., `text-teal-600`, `bg-teal-500`).
   - Mismatch found: Tailwind v4 classes expect `--color-teal-500` variables, while our `@theme` block defines `--color-teal-1..12`. This risks inconsistent colors where numeric Tailwind classes are used.
 

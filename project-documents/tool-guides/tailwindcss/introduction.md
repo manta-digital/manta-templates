@@ -247,7 +247,7 @@ Sources
 [24] Migration to v4 css based config · tailwindlabs tailwindcss - GitHub https://github.com/tailwindlabs/tailwindcss/discussions/13813
 [25] Framework guides - Installation - Tailwind CSS https://tailwindcss.com/docs/installation/framework-guides
 [26] Tailwind CSS v4: Implement in Next.js & Upgrade from v3 - YouTube https://www.youtube.com/watch?v=obAB6nSVj1E
-[27] Tailwind v4 - Shadcn UI https://ui.shadcn.com/docs/tailwind-v4
+[27] Tailwind v4 - Radix UI https://www.radix-ui.com/docs/styling/tailwind-css
 [28] A First Look at Setting Up Tailwind CSS v4.0 https://bryananthonio.com/blog/configuring-tailwind-css-v4/
 [29] next.js - Regarding no tailwind config in nextjs project - Stack Overflow https://stackoverflow.com/questions/79513980/regarding-no-tailwind-config-in-nextjs-project
 [30] Migrating to 4.0 · tailwindlabs tailwindcss · Discussion #15729 - GitHub https://github.com/tailwindlabs/tailwindcss/discussions/15729

@@ -126,7 +126,7 @@ When reviewing code, systematically answer these core questions.
 
 - In general there should be no tailwind.config.ts (or .js, etc). This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
 
-- If Radix is used, specifically Radix themes with ShadCN, you should evaluate against existing known issues with this combination and ensure we are not at risk.
+- If Radix is used with custom theming, you should evaluate against existing known issues and ensure we are not at risk of conflicts.
 
   
 ## Code Review Process

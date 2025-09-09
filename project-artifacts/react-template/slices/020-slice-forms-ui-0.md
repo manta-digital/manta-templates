@@ -6,7 +6,7 @@ feature: forms-ui
 status: in-progress
 dateUpdated: 2025-09-05
 dependencies: []
-currentProjectState: "We are going to support themed shadcn ui controls in all templates"
+currentProjectState: "We are going to support themed Radix UI controls in all templates"
 ---
 
 ## Overview
@@ -33,9 +33,9 @@ High-Level Plan: Forms UI Slice for Manta Templates             │ │
 │ │                                                                 │ │
 │ │ 1. Component Library Foundation                                 │ │
 │ │                                                                 │ │
-│ │ - Primary Choice: Shadcn/ui components as base                  │ │
-│ │ - Why: Already have button pattern established, uses same tech  │ │
-│ │ stack (Radix primitives, CVA, Tailwind)                         │ │
+│ │ - Primary Choice: Radix UI primitives as base                   │ │
+│ │ - Why: Direct use of Radix primitives with established patterns │ │
+│ │ using CVA and Tailwind for consistency                          │ │
 │ │ - Integration: Components will use existing semantic color      │ │
 │ │ system (--color-accent-*, --color-neutral-*)                    │ │
 │ │                                                                 │ │

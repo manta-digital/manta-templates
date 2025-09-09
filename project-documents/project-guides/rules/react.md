@@ -10,7 +10,7 @@ alwaysApply: false
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind 4, and ShadCN are all available as needed.
+- React, Tailwind 4, and Radix primitives are all available as needed.
 - Use Tailwind for common UI components like textarea, button, etc.
 
 ## Next.js Structure

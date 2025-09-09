@@ -1,4 +1,4 @@
-# Next.js Template (Tailwind v4 + shadcn/ui + Radix)
+# Next.js Template (Tailwind v4 + Radix)
 
 This template is designed to be approachable and flexible. Start simple, then stretch technically when you're ready.
 
@@ -134,7 +134,7 @@ Examples
 
 Have fun, keep it readable, and don’t be afraid to tinker. Small steps add up fast.
 
-# Manta Next 15 × Tailwind 4 × ShadCN Template
+# Manta Next 15 × Tailwind 4 × Radix Template
 
 > A **clean**, production-ready starter that lets you ship beautiful, content-driven sites **fast**.
 
@@ -170,7 +170,7 @@ Open [http://localhost:3000](http://localhost:3000) - you'll see a minimal start
 |-------|----------------------------|
 | **Next.js 15** (App Router) | Strict TS, Turbopack dev server, optimized images |
 | **Tailwind CSS v4** | Dark/Light mode, no config files needed |
-| **ShadCN UI + Radix** | Pre-wired, accessible components |
+| **Radix Primitives** | Pre-wired, accessible UI components |
 | **Layout Components** | Flexible grid system with examples |  
 | **Markdown Content** | Gray-matter frontmatter, code highlighting |
 | **Self-Contained** | All UI components embedded locally, no external UI deps |

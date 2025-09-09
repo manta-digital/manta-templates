@@ -74,7 +74,7 @@ Maps the active palette to semantic accent roles:
 ```
 
 #### shadcn.css - Design System Variables
-Defines the ShadCN design system semantic colors:
+Defines the design system semantic colors (originally based on ShadCN patterns):
 
 ```css
 :root {
@@ -240,20 +240,20 @@ Use the [Radix Custom Color Tool](https://radix-ui.com/colors/custom) to generat
 
 **Result**: ColorSelector automatically includes "🍌 Banana" in theme options
 
-#### ShadCN Integration Notes
+#### Design System Integration Notes
 
-**Important**: When you override `--gray-*` variables, ShadCN design system variables automatically update:
+**Important**: When you override `--gray-*` variables, design system variables automatically update:
 
 ```css
-/* ShadCN variables that use gray system */
+/* Design system variables that use gray system */
 --muted: var(--gray-2);           /* Updates when you override --gray-2 */
 --border: var(--gray-6);          /* Updates when you override --gray-6 */
 --muted-foreground: var(--gray-8); /* Updates when you override --gray-8 */
 ```
 
-This means when you use brown tones for your "gray" system in a theme, all ShadCN components (buttons, cards, inputs) automatically adapt to use brown tones instead of neutral grays. This is the intended behavior and creates cohesive theming across all components.
+This means when you use brown tones for your "gray" system in a theme, all UI components (buttons, cards, inputs) automatically adapt to use brown tones instead of neutral grays. This is the intended behavior and creates cohesive theming across all components.
 
-For more details on ShadCN color system integration, see: [ShadCN Colors Documentation](https://ui.shadcn.com/docs/theming)
+For more details on design system color integration, see our Radix theming documentation.
 
 ## File Organization
 
@@ -262,7 +262,7 @@ packages/ui-core/src/styles/
 ├── index.css           # Main entry point, imports everything
 ├── radixColors.css     # Raw color palettes (OKLCH values)
 ├── semanticColors.css  # Accent color mappings & palette switching
-├── shadcn.css          # ShadCN design system variables
+├── shadcn.css          # Design system semantic variables
 └── components.css      # Base styles, utilities, component styles
 ```
 
@@ -317,7 +317,7 @@ This allows using semantic colors in Tailwind classes:
 }
 ```
 
-**Option 2**: Override ShadCN variables
+**Option 2**: Override design system variables
 ```css
 :root {
   --card: oklch(0.98 0.01 180);  /* Slightly tinted cards */
@@ -351,7 +351,7 @@ This allows using semantic colors in Tailwind classes:
 This documentation describes the **target state** after migrating from the current split between `globals.css` (in template) and ui-core styles.
 
 ### What's Moving to UI-Core
-- **ShadCN color system** (background, foreground, card, primary, etc.)
+- **Design system color variables** (background, foreground, card, primary, etc.)
 - **Base layer styles** (*, body styling)
 - **Typography customizations** (.prose-lg, etc.)
 - **Gradient utilities**
