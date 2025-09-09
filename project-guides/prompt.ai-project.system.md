@@ -109,7 +109,7 @@ Avoid:
 - Extensive benchmarking tasks unless actually relevant to this effort.
 - Extensive or speculative risk items.  Include only if truly relevant.
 
-YAML Frontmatter Detils:
+YAML Frontmatter Details:
 ```yaml
 ---
 item: {item-name}
@@ -186,6 +186,9 @@ Your role is Senior AI. For each task:
 - If it would benefit from expansion or subdivision, enhance it.
 - If it's already appropriate, output it verbatim.
 - Ensure all tasks are accounted for.
+  
+Additionally:
+- Make sure that you do NOT use this expansion as a way to write code in a design and planning phase.  Expanded tasks should not look like writing code for the the tasks.  You may spec out interfaces or use minimal code examples where truly useful.  Evaluate carefully before doing so.
 
 After any expansion, review it against the original unexpanded task and ensure that your expansion is a detailed representation of the original task, not a reinterpretation or change of the original task.
 
