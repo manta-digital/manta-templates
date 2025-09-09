@@ -5,6 +5,18 @@ All notable changes to manta-templates will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Removed remaining ShadCN references from documentation and guides
+
+### Fixed  
+- Closed issue #52: Added form components and controls to ui-core
+- Closed issue #55: Made CosineTerrainCard theme-aware
+- Closed issue #60: Added React template to manta-templates
+- Closed issue #62: Fully supported footer content and legal in React template
+- Closed issue #68: Fixed forms bundling errors in NextJS template
+
 ## [0.8.3] - 2025-09-06
 
 ### Added
