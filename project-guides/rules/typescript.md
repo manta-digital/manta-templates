@@ -7,9 +7,14 @@ alwaysApply: false
 # TypeScript Rules
 
 ## TypeScript & Syntax
-
 - Strict mode. Avoid `any`.
 - Use optional chaining, union types (no enums).
+
+## Structure
+- Use `tsx` scripts for migrations.
+- Reusable logic in `src/lib/utils/shared.ts` or `src/lib/utils/server.ts`.
+- Shared types in `src/lib/types.ts`.
+
 
 ## tRPC Routers
 - **enabled**: as needed

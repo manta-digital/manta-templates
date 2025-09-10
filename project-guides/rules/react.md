@@ -1,5 +1,5 @@
 ---
-description: React and Next.js component rules, naming conventions, and best practices
+description: React and Typescript component rules, naming conventions, and best practices
 globs: ["**/*.tsx", "**/*.jsx", "**/*.ts", "**/*.js", "src/components/**/*", "app/**/*"]
 alwaysApply: false
 ---
@@ -10,13 +10,12 @@ alwaysApply: false
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind 4, and ShadCN are all available as needed.
-- Use Tailwind for common UI components like textarea, button, etc.
+- Use React, Tailwind 4, and Radix.  Do not use Shadcn
 
-## Next.js Structure
-- Use App Router in `app/`. Server components by default, `"use client"` for client logic.
-- NextAuth + Prisma for auth. `.env` for secrets.
+## React and Next.js Structure
+- Use App Router in `app/`. 
 - Skip auth unless and until it is needed.
+- Use `.env` for secrets.
 
 ## Icons
 - Prefer `lucide-react`; name icons in PascalCase.
@@ -35,5 +34,24 @@ alwaysApply: false
 - Use `eslint` unless directed otherwise.
 - Use `prettier` if working in languages it supports.
 
+## File & Folder Names
+- Routes in kebab-case (e.g. `app/dashboard/page.tsx`).
+- Sort imports (external → internal → sibling → styles).
+
+## Testing
+- Prefer vitest over jest
+
 ## Builds
+- use pnpm not npm
 - After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors.
+- If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
+
+## Next.js
+- Default to client components in server pages for Next.js
+- NextAuth + Prisma for auth.
+
+## Inngest / Background Jobs
+- **enabled**: false
+- Use `inngest.config.ts` for Inngest configuration.
+- Use `src/app/api/inngest/route.ts` for Inngest API route.
+- Use polling to update the UI when Inngest events are received, not trpc success response. 

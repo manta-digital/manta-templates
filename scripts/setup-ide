@@ -322,10 +322,21 @@ main() {
         fi
         
         local claude_file="$TARGET_ROOT/CLAUDE.md"
+        local claude_agents_dir="$TARGET_ROOT/.claude/agents"
         
         # Compile rules into CLAUDE.md
         if compile_claude_rules "$RULES_SOURCE_DIR" "$claude_file"; then
             echo ""
+            
+            # Copy agents if directory exists
+            if [ -d "$AGENTS_SOURCE_DIR" ]; then
+                mkdir -p "$claude_agents_dir"
+                print_status $GREEN "📁 Created directory: $claude_agents_dir"
+                print_status $BLUE "🤖 Copying agent files..."
+                copy_rules "$AGENTS_SOURCE_DIR" "$claude_agents_dir" false "agent"
+                echo ""
+            fi
+            
             print_status $GREEN "✅ Setup complete for Claude Code!"
             echo ""
             print_status $BLUE "💡 Claude Code setup notes:"
@@ -333,6 +344,9 @@ main() {
             echo "   • Contains all project rules in Claude-friendly format"
             echo "   • General Development Rules are listed first"
             echo "   • Additional rules organized by category"
+            if [ -d "$AGENTS_SOURCE_DIR" ]; then
+                echo "   • Agents copied to .claude/agents/ directory"
+            fi
             echo "   • Ready to use with Claude Code agent"
         else
             print_status $RED "❌ Failed to compile CLAUDE.md"
