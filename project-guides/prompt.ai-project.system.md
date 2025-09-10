@@ -229,6 +229,54 @@ Notes:
 ```
 
 
+##### Context Initialization
+*Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
+```markdown
+The following provides context on our current work in slice-based project {project}. Input may contain: { project, slice, task, issue, tool, note }.
+
+We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
+- Project: {project}
+- Current slice: {slice} (if applicable)
+- Phase: [specify current phase]
+
+Refer to the Resource Structure in `guide.ai-project.00-process` for locations of resources. Key project documents:
+- High-level design: private/project-guides/03-hld.{project}.md
+- Slice plan: private/project-guides/03-slices.{project}.md  
+- Current slice design: private/slices/nn-slice.{slice}.md (if working on a slice)
+- Current tasks: private/tasks/nn-tasks.{slice}.md (if in execution)
+
+**Directory Structure by Development Type:**
+- **Regular Development**: Use `project-documents/private/` for all project-specific files
+- **Monorepo Template Development**: Use `project-artifacts/` for project-specific files
+- The Project Manager should specify which mode is active
+
+If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
+
+{tool} information: [Project Manager will provide if relevant to current work]
+```
+
+##### Use 3rd Party Tool
+*Add the following to existing prompt when working with {tool}.*
+
+```markdown
+You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.  Use these tools proactively.
+
+1. Consult Overview: Start with the specific `AI Tool Overview 
+   [toolname].md` in the `project-documents/tool-
+   guides/{tool}` directory.
+2. Locate Docs: Scan the Overview for references to more detailed 
+   documentation (like local API files under `/documentation`, 
+   notes in `research-crumbs` or official web links).
+3. Search Docs: Search within those specific documentation sources 
+   first using `grep_search` or `codebase_search`.
+4. Additional documentation.  If you have a documentation tool available (ex: 
+   context7 MCP) use it for additional information.  Always use it if available 
+   and no specific tool guide is provided.
+5. Web Search Fallback: If the targeted search doesn't yield 
+   results, then search the web.
+```
+
+
 ##### Feature Design
 *Use this to create a feature file for a feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
 ```markdown
@@ -301,52 +349,6 @@ Skip LLD creation - go directly from description to implementable tasks. Each ta
 If the item is too complex for this approach, recommend creating a design file instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
 ```
 
-##### Model Change or Context Refresh 
-*Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
-```markdown
-The following provides context on our current work in slice-based project {project}. Input may contain: { project, slice, task, issue, tool, note }.
-
-We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
-- Project: {project}
-- Current slice: {slice} (if applicable)
-- Phase: [specify current phase]
-
-Refer to the Resource Structure in `guide.ai-project.00-process` for locations of resources. Key project documents:
-- High-level design: private/project-guides/03-hld.{project}.md
-- Slice plan: private/project-guides/03-slices.{project}.md  
-- Current slice design: private/slices/nn-slice.{slice}.md (if working on a slice)
-- Current tasks: private/tasks/nn-tasks.{slice}.md (if in execution)
-
-**Directory Structure by Development Type:**
-- **Regular Development**: Use `project-documents/private/` for all project-specific files
-- **Monorepo Template Development**: Use `project-artifacts/` for project-specific files
-- The Project Manager should specify which mode is active
-
-If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
-
-{tool} information: [Project Manager will provide if relevant to current work]
-```
-
-##### Use 3rd Party Tool
-*Add the following to existing prompt when working with {tool}.*
-
-```markdown
-You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.  Use these tools proactively.
-
-1. Consult Overview: Start with the specific `AI Tool Overview 
-   [toolname].md` in the `project-documents/tool-
-   guides/{tool}` directory.
-2. Locate Docs: Scan the Overview for references to more detailed 
-   documentation (like local API files under `/documentation`, 
-   notes in `research-crumbs` or official web links).
-3. Search Docs: Search within those specific documentation sources 
-   first using `grep_search` or `codebase_search`.
-4. Additional documentation.  If you have a documentation tool available (ex: 
-   context7 MCP) use it for additional information.  Always use it if available 
-   and no specific tool guide is provided.
-5. Web Search Fallback: If the targeted search doesn't yield 
-   results, then search the web.
-```
 
 ##### Summarize Context
 *Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.  Currently it appears that at best Claude will output the `[ ]` information into the new context.*
