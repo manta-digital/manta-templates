@@ -5,6 +5,7 @@ import { ReactHeader, ReactFooter } from './components'
 import { headerContent, footerContent } from './content'
 import HomePage from './pages/HomePage'
 import ExamplesPage from './pages/ExamplesPage'
+import FormsDemo from './pages/FormsDemo'
 import LegalPage from './pages/LegalPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
@@ -39,6 +40,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/examples" element={<ExamplesPage />} />
+              <Route path="/forms-demo" element={<FormsDemo />} />
               <Route path="/legal" element={<LegalPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />

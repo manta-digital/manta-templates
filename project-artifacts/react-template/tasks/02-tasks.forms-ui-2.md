@@ -466,10 +466,58 @@ All components follow the established Radix primitives + CVA + semantic theming 
   - **Success**: Existing components enhanced with Tier 2 functionality
   - **Effort**: 3
 
+## Phase 11: Additional Form Component Enhancements
+
+### Select Component Updates
+- [ ] **Task 11.1**: Enhance existing Select component with missing features
+  - Implement searchable functionality (searchable prop is defined but not implemented)
+  - Add emptyMessage display when no options match search
+  - Improve keyboard navigation for filtered results
+  - Add loading states for async option loading
+  - **Reference**: Existing Select component in form/select.tsx, GitHub issue #69
+  - **Success**: Select component supports searching and filtering options
+  - **Effort**: 3
+
+- [ ] **Task 11.2**: Add MultiSelect variant for multiple selection
+  - Create MultiSelect component extending current Select
+  - Implement chips/tags display for selected items
+  - Add remove individual selection functionality
+  - Support maxSelections prop for limiting choices
+  - **Reference**: GitHub issue #69 - MultiSelect Component requirements
+  - **Success**: MultiSelect component allows multiple selections with chip display
+  - **Effort**: 4
+
+- [ ] **Task 11.3**: Create Combobox component for searchable dropdown with creation
+  - Implement type-to-search with option filtering
+  - Add "create new option" capability when allowCreate is enabled
+  - Support async option loading with loadOptions prop
+  - Add debounced search input for performance
+  - **Reference**: GitHub issue #69 - Combobox Component requirements  
+  - **Success**: Combobox supports search, filtering, and option creation
+  - **Effort**: 4
+
+### Form Integration and Testing
+- [ ] **Task 11.4**: Update forms demo with enhanced Select components
+  - Add examples of searchable Select usage
+  - Add MultiSelect examples with various configurations
+  - Add Combobox examples with async loading simulation
+  - Test all components in forms-demo page
+  - **Reference**: Current FormsDemo component
+  - **Success**: All enhanced Select variants demonstrated in forms demo
+  - **Effort**: 2
+
+- [ ] **Task 11.5**: Package and distribute Select enhancements
+  - Copy enhanced Select components to packages/
+  - Run copy-packages to distribute to all templates
+  - Verify functionality across React, NextJS, Electron templates
+  - **Reference**: Established package distribution workflow
+  - **Success**: Enhanced Select components available in all templates
+  - **Effort**: 2
+
 ## Task Summary
 
-**Total Tasks**: 41 tasks across 10 phases
-**Estimated Total Effort**: 79 effort points
+**Total Tasks**: 46 tasks across 11 phases  
+**Estimated Total Effort**: 94 effort points
 **Critical Dependencies**: 
 - Radix UI dependencies installation (Task 1.1)
 - Directory structure setup (Task 1.2)
@@ -481,3 +529,4 @@ All components follow the established Radix primitives + CVA + semantic theming 
 - Phase 5 completion: DataTable provides advanced data management
 - Phase 8 completion: All templates have Tier 2 components
 - Phase 10 completion: Full integration and documentation complete
+- Phase 11 completion: Enhanced Select components with search and multi-select capabilities
