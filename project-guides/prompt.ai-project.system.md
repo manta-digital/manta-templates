@@ -27,7 +27,14 @@ This document contains prepared prompts useful in applying the `guide.ai-project
 }
 ```
 
-##### Project Kickoff
+##### Project Phase (Phase n)
+*Use to directly execute a phase without additional instructions needed. Also usable with traditional (non-slice-based) projects.*
+
+```
+Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
+```
+
+##### Concept Creation (Phase 1)
 ```markdown
 We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
@@ -36,13 +43,6 @@ The actual concept description as well as additional concept will be provided by
 To do this, we need to use the Project Guide together with information provided to create our concept document (Phase 1). If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  Otherwise, create the Project Concept document now.
 
 Note: when creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager.
-```
-
-##### Project Phase (Traditional)
-*Use to directly execute a phase without additional instructions needed. Also usable with traditional (non-slice-based) projects.*
-
-```
-Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
 ```
 
 ##### Spec Creation (Phase 2)
@@ -131,7 +131,7 @@ If framework or platform are specified, guide(s) for the framework(s) should be 
 Stop and request clarification if you need more information to complete the slice design.
 ```
 
-##### Slice | Feature Task Breakdown (Phase 5)
+##### Task Breakdown (Phase 5)
 *This should be usable for Slice or Feature task breakdown.*
 
 ```markdown
@@ -163,7 +163,7 @@ Each task must be completable by a junior AI with clear success criteria. If ins
 This is a project planning task, not a coding task.
 ```
 
-##### Slice | Feature Task Breakdown - Explicit Follow (Phase 5 - Extra)
+##### Task Breakdown - Explicit (Phase 5 - Extra)
 *Use this when you have a detailed slice design especially one containing code that may have been iterated on in order to solve complex or subtle design problems.  Add this to the regular Slice | Feature Task Breakdown*
 
 ```markdown
@@ -200,7 +200,7 @@ Output results by updating the existing task file. Success: All tasks have been 
 Note: This is a project planning task, not a coding task.
 ```
 
-##### Slice | Feature Implementation (Phase 7)
+##### Task Implementation (Phase 7)
 ```markdown
 We are working on {slice | feature} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
 
@@ -258,7 +258,7 @@ If you were previously assigned a role, continue in that role. If not, assume ro
 {tool} information: [Project Manager will provide if relevant to current work]
 ```
 
-##### Use 3rd Party Tool
+##### Tool Usage
 *Add the following to existing prompt when working with {tool}.*
 
 ```markdown
@@ -328,7 +328,7 @@ If you need more information about the feature requirements, stop and request fr
 ```
 
 
-##### Ad-Hoc Tasks (Feature | Maintenance)
+##### Ad-Hoc Tasks
 ```markdown
 Create tasks for {feature | maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
 
