@@ -33,9 +33,9 @@ We're starting work on a new project {project}.  We will use our curated AI Proj
 
 The actual concept description as well as additional concept will be provided by Project Manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
 
-To do this, we need to use the Project Guide together with information provided to create our concept document (Phase 1). If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  
+To do this, we need to use the Project Guide together with information provided to create our concept document (Phase 1). If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  Otherwise, create the Project Concept document now.
 
-When creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager.
+Note: when creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager.
 ```
 
 ##### Project Phase (Traditional)
@@ -52,7 +52,7 @@ We're working in our guide.ai-project.00-process, Phase 2: Spec Creation. Use `g
 Your role is Technical Fellow as described in the Process Guide. Work with the Project Manager to create `private/project-guides/02-spec.{project}.md`.
 
 Required inputs:
-- Approved concept document (01-concept.{project}.md)
+- Approved concept document (001-concept.{project}.md)
 - Technical stack and requirements from Project Manager
 - Any additional specific requirements
 
@@ -61,13 +61,16 @@ Focus on:
 - Top-level features and major workflows
 - Architectural considerations and system boundaries
 - Sample data and UI sketches (if applicable)
+  
+Caution:
+- Do not write code into the spec.
 
 Keep the spec concise and focused on coordination between components. If you need more information about requirements or cannot access referenced tools, stop and request from Project Manager.
 
 Note: This is a design and planning task, not a coding task.
 ```
 
-##### Slice Planning (Phase 3)
+	##### Slice Planning (Phase 3)
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 3: High-Level Design & Slice Planning.  Use `guide.ai-project.03-slice-planning` with the project concept and specification documents to break {project} into manageable vertical slices.
 
@@ -77,7 +80,7 @@ Your role is Technical Fellow as described in the Process Guide. Work with the P
 2. Identify foundation work, feature slices, and integration work
 3. Create the slice plan document (03-slices.{project}.md)
 
-Start with *at most 5* feature slices. Focus on slice independence and clear user value. If you have all required inputs and sufficient information, proceed with slice planning. If not, request required information from the Project Manager.
+Use enough slices to completely define the project.  Consider functional requirements only.  Ignore all non-functional requirements.  Avoid speculative risk projections.    When defining slices, focus on slice independence and clear user value. If you have all required inputs and sufficient information, proceed with slice planning. If not, request required information from the Project Manager.
 
 Note: This is a design and planning task, not a coding task.
 ```
@@ -245,9 +248,9 @@ Refer to the Resource Structure in `guide.ai-project.00-process` for locations o
 - Current slice design: private/slices/nn-slice.{slice}.md (if working on a slice)
 - Current tasks: private/tasks/nn-tasks.{slice}.md (if in execution)
 
-**Directory Structure by Development Type:**
-- **Regular Development**: Use `project-documents/private/` for all project-specific files
-- **Monorepo Template Development**: Use `project-artifacts/` for project-specific files
+Directory Structure by Development Type:
+- Regular Development: Use `project-documents/private/` for all project-specific files
+- Monorepo Template Development: Use `project-artifacts/` for project-specific files
 - The Project Manager should specify which mode is active
 
 If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
@@ -457,16 +460,16 @@ We need to create a Low-Level Design (LLD) for {feature/component} identified du
 
 Your role is Technical Fellow as described in the Process Guide. This LLD will bridge the gap between high-level understanding and implementable tasks.
 
-**Context:**
+Context:
 - Analysis document: `private/maintenance/nn-analysis.{project-name}{.subproject 
   or analysis topic?}` (or specify location)
 - Related task file: `private/tasks/nn-analysis{.subproject?}-{date}.md` (if 
   exists)
 - Current issue: {brief description of what analysis revealed}
 
-**Create LLD document at:** `private/features/nn-lld.{feature-name}.md`
+Create LLD document at: `private/features/nn-lld.{feature-name}.md`
 
-**Required YAML front matter:**
+Required YAML front matter:
 ```yaml
 ---
 layer: project
@@ -481,15 +484,15 @@ complexity: low|medium|high
 lastUpdated: YYYY-MM-DD
 ---
 
-**Guidelines for creating LLD:**
+Guidelines for creating LLD:
 
-**Cross-Reference Requirements:**
+Cross-Reference Requirements:
 
 - Update source analysis/task document to reference this LLD
 - Add back-reference in this LLD to triggering document
 - Note any slice designs or existing features this affects
 
-**Focus Areas:**
+Focus Areas:
 
 - Keep design concrete and implementation-ready
 - Include code examples or pseudocode where helpful
