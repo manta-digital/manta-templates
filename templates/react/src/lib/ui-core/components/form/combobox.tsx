@@ -107,7 +107,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       ...domProps 
     } = props as any;
 
-    // State for filtered options
+    // State for input value and filtered options
     const [inputValue, setInputValue] = React.useState("");
     
     // Filter options based on input value
@@ -121,19 +121,84 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       return options.find(option => option.value === value) || null;
     }, [options, value]);
 
-    // Basic component structure setup for useCombobox hook integration
-    // Note: Hook integration will be implemented in Task 3
+    // Clear function
+    const clearSelection = React.useCallback(() => {
+      onValueChange?.(null);
+      setInputValue("");
+    }, [onValueChange]);
+
+    // Configure and setup useCombobox hook
+    const {
+      isOpen,
+      getToggleButtonProps,
+      getLabelProps,
+      getMenuProps,
+      getInputProps,
+      highlightedIndex,
+      getItemProps,
+      selectedItem,
+      selectItem,
+      openMenu,
+      closeMenu,
+    } = useCombobox({
+      items: filteredOptions,
+      itemToString: (item) => item ? item.label : "",
+      selectedItem: selectedOption,
+      defaultSelectedItem: defaultValue ? options.find(opt => opt.value === defaultValue) || null : null,
+      
+      // Handle input value changes (for filtering)
+      onInputValueChange: ({ inputValue: newInputValue }) => {
+        if (searchable) {
+          setInputValue(newInputValue || "");
+        }
+      },
+      
+      // Handle selection changes
+      onSelectedItemChange: ({ selectedItem: newSelectedItem }) => {
+        onValueChange?.(newSelectedItem?.value || null);
+        if (newSelectedItem) {
+          setInputValue(searchable ? "" : newSelectedItem.label);
+        }
+      },
+      
+      // Handle state changes
+      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          case useCombobox.stateChangeTypes.ItemClick:
+            // Close menu on selection
+            closeMenu();
+            break;
+          case useCombobox.stateChangeTypes.InputBlur:
+            // Keep the input value if no selection made during filtering
+            if (!selectedOption && searchable) {
+              setInputValue("");
+            }
+            break;
+          default:
+            break;
+        }
+      },
+      
+      // Control open state
+      isOpen: undefined, // Let downshift control this
+      
+      // Input value for controlled behavior
+      inputValue: searchable ? inputValue : (selectedOption?.label || ""),
+    });
     
     return (
       <div ref={ref} className="relative" {...domProps}>
-        {/* Trigger component will be implemented in Task 4 */}
+        {/* Trigger component with hook props connected */}
         <div className={cn(comboBoxTriggerVariants({ uiVariant, uiSize, uiState }), className)}>
           <input
-            type="text"
-            className="flex-1 bg-transparent border-0 outline-none placeholder:text-muted-foreground"
-            placeholder={selectedOption ? selectedOption.label : placeholder}
-            disabled={disabled}
-            readOnly={!searchable}
+            {...getInputProps({
+              type: "text",
+              className: "flex-1 bg-transparent border-0 outline-none placeholder:text-muted-foreground",
+              placeholder: selectedOption && !searchable ? selectedOption.label : placeholder,
+              disabled: disabled,
+              readOnly: !searchable,
+            })}
           />
           <div className="flex items-center gap-1">
             {clearable && selectedOption && (
@@ -141,22 +206,62 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                 type="button"
                 className="inline-flex items-center justify-center w-4 h-4 rounded hover:bg-accent hover:text-accent-foreground"
                 disabled={disabled}
+                onClick={clearSelection}
               >
                 <X className="h-3 w-3" />
               </button>
             )}
             <button
-              type="button"
-              className="inline-flex items-center justify-center w-4 h-4"
-              disabled={disabled}
+              {...getToggleButtonProps({
+                type: "button",
+                className: "inline-flex items-center justify-center w-4 h-4",
+                disabled: disabled,
+              })}
             >
-              <ChevronDown className="h-4 w-4 opacity-50" />
+              {isOpen ? (
+                <ChevronUp className="h-4 w-4 opacity-50" />
+              ) : (
+                <ChevronDown className="h-4 w-4 opacity-50" />
+              )}
             </button>
           </div>
         </div>
         
-        {/* Content component will be implemented in Task 5 */}
-        {/* Items will be implemented in Task 6 */}
+        {/* Content component with hook props connected */}
+        {isOpen && (
+          <div 
+            {...getMenuProps({
+              className: cn(comboBoxContentVariants(), "absolute top-full mt-1 w-full"),
+            })}
+          >
+            {filteredOptions.length > 0 ? (
+              <div className="max-h-96 overflow-auto p-1">
+                {filteredOptions.map((option, index) => (
+                  <div
+                    key={option.value}
+                    {...getItemProps({
+                      item: option,
+                      index,
+                      className: cn(
+                        comboBoxItemVariants(),
+                        highlightedIndex === index && "bg-accent text-accent-foreground",
+                        selectedOption?.value === option.value && "bg-primary/10",
+                        option.disabled && "opacity-50 pointer-events-none"
+                      ),
+                      disabled: option.disabled,
+                    })}
+                  >
+                    {option.label}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="px-2 py-1.5 text-sm text-muted-foreground">
+                {emptyMessage}
+              </div>
+            )}
+          </div>
+        )}
         
         {/* Hidden input for form submission */}
         {name && (
