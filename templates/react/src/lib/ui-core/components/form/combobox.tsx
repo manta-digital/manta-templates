@@ -33,8 +33,14 @@ export interface ComboBoxProps
   emptyMessage?: string;
   filterFunction?: (inputValue: string, option: ComboBoxOption) => boolean;
   
-  // Form integration
+  // Form integration and accessibility
   name?: string;
+  id?: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
+  required?: boolean;
+  autoComplete?: string;
 }
 
 // CVA Variants following existing patterns
@@ -98,6 +104,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     emptyMessage = "No options found",
     filterFunction = defaultFilterFunction,
     name,
+    id,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
+    required = false,
+    autoComplete,
     ...props 
   }, ref) => {
     // Filter out React Hook Form props that shouldn't be passed to DOM
@@ -107,6 +119,11 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       ...domProps 
     } = props as any;
 
+    // Generate unique IDs for accessibility
+    const comboboxId = id || React.useId();
+    const listboxId = `${comboboxId}-listbox`;
+    const inputId = `${comboboxId}-input`;
+    
     // State for input value and filtered options
     const [inputValue, setInputValue] = React.useState("");
     
@@ -115,6 +132,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       if (!searchable || !inputValue) return options;
       return options.filter(option => filterFunction(inputValue, option));
     }, [options, inputValue, searchable, filterFunction]);
+    
+    // Announce filtered results for screen readers
+    const [announcement, setAnnouncement] = React.useState("");
 
     // Find selected option
     const selectedOption = React.useMemo(() => {
@@ -127,7 +147,21 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       setInputValue("");
     }, [onValueChange]);
 
-    // Configure and setup useCombobox hook
+    // Effect to announce filtered results for screen readers
+    React.useEffect(() => {
+      if (searchable && inputValue) {
+        const count = filteredOptions.length;
+        if (count === 0) {
+          setAnnouncement("No options found");
+        } else {
+          setAnnouncement(`${count} option${count === 1 ? '' : 's'} available`);
+        }
+      } else {
+        setAnnouncement("");
+      }
+    }, [filteredOptions.length, inputValue, searchable]);
+
+    // Configure and setup useCombobox hook with enhanced accessibility
     const {
       isOpen,
       getToggleButtonProps,
@@ -145,6 +179,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       itemToString: (item) => item ? item.label : "",
       selectedItem: selectedOption,
       defaultSelectedItem: defaultValue ? options.find(opt => opt.value === defaultValue) || null : null,
+      id: comboboxId,
       
       // Handle input value changes (for filtering)
       onInputValueChange: ({ inputValue: newInputValue }) => {
@@ -158,6 +193,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         onValueChange?.(newSelectedItem?.value || null);
         if (newSelectedItem) {
           setInputValue(searchable ? "" : newSelectedItem.label);
+          // Announce selection for screen readers
+          setAnnouncement(`Selected ${newSelectedItem.label}`);
         }
       },
       
@@ -175,6 +212,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
               setInputValue("");
             }
             break;
+          case useCombobox.stateChangeTypes.MenuKeyDownEscape:
+            // Announce menu closed
+            setAnnouncement("Options menu closed");
+            break;
           default:
             break;
         }
@@ -189,6 +230,16 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     
     return (
       <div ref={ref} className="relative" {...domProps}>
+        {/* Live region for screen reader announcements */}
+        <div 
+          aria-live="polite" 
+          aria-atomic="true" 
+          className="sr-only"
+          role="status"
+        >
+          {announcement}
+        </div>
+        
         {/* Trigger component with enhanced styling and accessibility */}
         <div 
           className={cn(
@@ -199,6 +250,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         >
           <input
             {...getInputProps({
+              id: inputId,
               type: "text",
               className: cn(
                 "flex-1 bg-transparent border-0 outline-none placeholder:text-muted-foreground",
@@ -208,7 +260,16 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
               placeholder: selectedOption && !searchable ? selectedOption.label : placeholder,
               disabled: disabled,
               readOnly: !searchable,
-              'aria-label': `ComboBox input${placeholder ? `, ${placeholder}` : ''}`,
+              required: required,
+              autoComplete: autoComplete,
+              'aria-label': ariaLabel || `ComboBox input${placeholder ? `, ${placeholder}` : ''}`,
+              'aria-labelledby': ariaLabelledBy,
+              'aria-describedby': ariaDescribedBy,
+              'aria-expanded': isOpen,
+              'aria-haspopup': 'listbox',
+              'aria-controls': isOpen ? listboxId : undefined,
+              'aria-autocomplete': searchable ? 'list' : 'none',
+              role: 'combobox',
             })}
           />
           <div className="flex items-center gap-1 ml-2">
@@ -255,6 +316,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         {isOpen && (
           <div 
             {...getMenuProps({
+              id: listboxId,
+              role: 'listbox',
+              'aria-label': 'Options list',
               className: cn(
                 comboBoxContentVariants(), 
                 "absolute top-full left-0 mt-1 w-full",
@@ -284,6 +348,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                     {...getItemProps({
                       item: option,
                       index,
+                      role: 'option',
+                      'aria-selected': selectedOption?.value === option.value,
+                      'aria-disabled': option.disabled,
                       className: cn(
                         comboBoxItemVariants(),
                         highlightedIndex === index && "bg-accent text-accent-foreground",
