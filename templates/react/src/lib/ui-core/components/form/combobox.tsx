@@ -189,24 +189,41 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     
     return (
       <div ref={ref} className="relative" {...domProps}>
-        {/* Trigger component with hook props connected */}
-        <div className={cn(comboBoxTriggerVariants({ uiVariant, uiSize, uiState }), className)}>
+        {/* Trigger component with enhanced styling and accessibility */}
+        <div 
+          className={cn(
+            comboBoxTriggerVariants({ uiVariant, uiSize, uiState }), 
+            disabled && "cursor-not-allowed",
+            className
+          )}
+        >
           <input
             {...getInputProps({
               type: "text",
-              className: "flex-1 bg-transparent border-0 outline-none placeholder:text-muted-foreground",
+              className: cn(
+                "flex-1 bg-transparent border-0 outline-none placeholder:text-muted-foreground",
+                "focus:placeholder:text-muted-foreground/70",
+                disabled && "cursor-not-allowed"
+              ),
               placeholder: selectedOption && !searchable ? selectedOption.label : placeholder,
               disabled: disabled,
               readOnly: !searchable,
+              'aria-label': `ComboBox input${placeholder ? `, ${placeholder}` : ''}`,
             })}
           />
-          <div className="flex items-center gap-1">
-            {clearable && selectedOption && (
+          <div className="flex items-center gap-1 ml-2">
+            {clearable && selectedOption && !disabled && (
               <button
                 type="button"
-                className="inline-flex items-center justify-center w-4 h-4 rounded hover:bg-accent hover:text-accent-foreground"
-                disabled={disabled}
+                className={cn(
+                  "inline-flex items-center justify-center rounded-sm",
+                  "h-4 w-4 text-muted-foreground hover:text-foreground",
+                  "hover:bg-accent transition-colors",
+                  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                )}
                 onClick={clearSelection}
+                aria-label="Clear selection"
+                tabIndex={-1} // Prevent tab focus, handled by input
               >
                 <X className="h-3 w-3" />
               </button>
@@ -214,14 +231,21 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
             <button
               {...getToggleButtonProps({
                 type: "button",
-                className: "inline-flex items-center justify-center w-4 h-4",
+                className: cn(
+                  "inline-flex items-center justify-center rounded-sm",
+                  "h-4 w-4 text-muted-foreground",
+                  "hover:text-foreground transition-colors",
+                  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                  disabled && "cursor-not-allowed opacity-50"
+                ),
                 disabled: disabled,
+                'aria-label': `${isOpen ? 'Close' : 'Open'} options menu`,
               })}
             >
               {isOpen ? (
-                <ChevronUp className="h-4 w-4 opacity-50" />
+                <ChevronUp className="h-4 w-4" />
               ) : (
-                <ChevronDown className="h-4 w-4 opacity-50" />
+                <ChevronDown className="h-4 w-4" />
               )}
             </button>
           </div>
