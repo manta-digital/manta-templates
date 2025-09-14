@@ -68,7 +68,7 @@ const comboBoxTriggerVariants = cva(
 );
 
 const comboBoxContentVariants = cva(
-  "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-background text-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+  "relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-background text-foreground shadow-lg animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-2"
 );
 
 const comboBoxItemVariants = cva(
@@ -251,15 +251,33 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
           </div>
         </div>
         
-        {/* Content component with hook props connected */}
+        {/* Enhanced Content component with improved positioning and animations */}
         {isOpen && (
           <div 
             {...getMenuProps({
-              className: cn(comboBoxContentVariants(), "absolute top-full mt-1 w-full"),
+              className: cn(
+                comboBoxContentVariants(), 
+                "absolute top-full left-0 mt-1 w-full",
+                "transform-gpu", // Hardware acceleration for smoother animations
+                "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2"
+              ),
+              style: {
+                // Ensure content doesn't overflow viewport
+                maxHeight: 'min(384px, calc(100vh - 100px))',
+              }
             })}
           >
             {filteredOptions.length > 0 ? (
-              <div className="max-h-96 overflow-auto p-1">
+              <div 
+                className={cn(
+                  "overflow-auto p-1 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent",
+                  "max-h-96"
+                )}
+                style={{
+                  // Custom scrollbar for better UX
+                  scrollbarWidth: 'thin',
+                }}
+              >
                 {filteredOptions.map((option, index) => (
                   <div
                     key={option.value}
@@ -269,19 +287,32 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                       className: cn(
                         comboBoxItemVariants(),
                         highlightedIndex === index && "bg-accent text-accent-foreground",
-                        selectedOption?.value === option.value && "bg-primary/10",
-                        option.disabled && "opacity-50 pointer-events-none"
+                        selectedOption?.value === option.value && "bg-primary/10 font-medium",
+                        option.disabled && "opacity-50 pointer-events-none cursor-not-allowed",
+                        "transition-colors duration-75" // Smooth hover transitions
                       ),
                       disabled: option.disabled,
                     })}
                   >
-                    {option.label}
+                    <span className="flex-1 truncate">{option.label}</span>
+                    {selectedOption?.value === option.value && (
+                      <span className="ml-2 text-primary" aria-hidden="true">✓</span>
+                    )}
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="px-2 py-1.5 text-sm text-muted-foreground">
-                {emptyMessage}
+              <div className={cn(
+                "flex items-center justify-center px-4 py-8",
+                "text-sm text-muted-foreground",
+                "min-h-[80px]" // Ensure adequate height for empty state
+              )}>
+                <div className="text-center">
+                  <div className="mb-1 text-muted-foreground/70">No options found</div>
+                  <div className="text-xs text-muted-foreground/50">
+                    {emptyMessage !== "No options found" ? emptyMessage : "Try adjusting your search"}
+                  </div>
+                </div>
               </div>
             )}
           </div>
