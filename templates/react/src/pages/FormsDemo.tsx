@@ -3,11 +3,18 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/ui-core/compone
 import { List, ListItem, ListHeader } from '../lib/ui-core/components/data/list';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../lib/ui-core/components/data/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../lib/ui-core/components/form/select';
+import { Checkbox, CheckboxGroup } from '../lib/ui-core/components/form/checkbox';
+import { RadioGroup, RadioItem } from '../lib/ui-core/components/form/radio';
 
 export default function FormsDemo() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState("tabs-demo");
   const [selectValue, setSelectValue] = useState<string>("");
+  
+  // Checkbox and Radio testing state
+  const [singleCheckbox, setSingleCheckbox] = useState(false);
+  const [checkboxGroupValue, setCheckboxGroupValue] = useState<string[]>([]);
+  const [radioValue, setRadioValue] = useState<string>("");
 
   const handleListItemClick = (value: string) => {
     setSelectedItems(prev => 
@@ -25,10 +32,11 @@ export default function FormsDemo() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 px-[0.125rem]">
+        <TabsList className="grid w-full grid-cols-4 px-[0.125rem]">
           <TabsTrigger value="tabs-demo">Tabs Demo</TabsTrigger>
           <TabsTrigger value="lists-demo">Lists Demo</TabsTrigger>
           <TabsTrigger value="interactive-demo">Interactive Demo</TabsTrigger>
+          <TabsTrigger value="form-controls">Form Controls</TabsTrigger>
         </TabsList>
 
         <TabsContent value="tabs-demo" className="space-y-4">
@@ -224,6 +232,123 @@ export default function FormsDemo() {
                   </div>
                 </Tabs>
               </div>
+            </div>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="form-controls" className="space-y-4">
+          <div className="rounded-lg border border-neutral-6 p-6">
+            <h2 className="text-xl font-semibold text-neutral-12 mb-4">Form Controls Test</h2>
+            <p className="text-neutral-11 mb-6">
+              Test checkbox and radio button label click functionality. Click on the labels to see if they properly toggle the controls.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Checkbox Testing */}
+              <div className="space-y-6">
+                <h3 className="font-medium text-neutral-12">Checkbox Testing</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Single Checkbox</h4>
+                    <Checkbox 
+                      checked={singleCheckbox}
+                      onCheckedChange={setSingleCheckbox}
+                      label="Click this label to toggle checkbox"
+                      description="This tests if clicking the label properly toggles the checkbox"
+                    />
+                    <p className="text-xs text-neutral-10 mt-2">
+                      Status: {singleCheckbox ? "Checked ✓" : "Unchecked ○"}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Checkbox Group</h4>
+                    <CheckboxGroup
+                      value={checkboxGroupValue}
+                      onValueChange={setCheckboxGroupValue}
+                      options={[
+                        { value: "option1", label: "Click this label for Option 1", description: "First option with clickable label" },
+                        { value: "option2", label: "Click this label for Option 2", description: "Second option with clickable label" },
+                        { value: "option3", label: "Click this label for Option 3" }
+                      ]}
+                    />
+                    <p className="text-xs text-neutral-10 mt-2">
+                      Selected: {checkboxGroupValue.length > 0 ? checkboxGroupValue.join(", ") : "None"}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Size Variants</h4>
+                    <div className="space-y-2">
+                      <Checkbox uiSize="sm" label="Small checkbox with clickable label" />
+                      <Checkbox uiSize="md" label="Medium checkbox with clickable label" />
+                      <Checkbox uiSize="lg" label="Large checkbox with clickable label" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Radio Button Testing */}
+              <div className="space-y-6">
+                <h3 className="font-medium text-neutral-12">Radio Button Testing</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Radio Group</h4>
+                    <RadioGroup 
+                      value={radioValue}
+                      onValueChange={setRadioValue}
+                      options={[
+                        { value: "radio1", label: "Click this label for Radio 1", description: "First radio option with clickable label" },
+                        { value: "radio2", label: "Click this label for Radio 2", description: "Second radio option with clickable label" },
+                        { value: "radio3", label: "Click this label for Radio 3" }
+                      ]}
+                    />
+                    <p className="text-xs text-neutral-10 mt-2">
+                      Selected: {radioValue || "None"}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Individual Radio Items</h4>
+                    <RadioGroup value={radioValue} onValueChange={setRadioValue}>
+                      <RadioItem value="individual1" label="Individual radio item 1" />
+                      <RadioItem value="individual2" label="Individual radio item 2" />
+                      <RadioItem value="individual3" label="Individual radio item 3" />
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Size Variants</h4>
+                    <RadioGroup>
+                      <RadioItem value="size1" uiSize="sm" label="Small radio with clickable label" />
+                      <RadioItem value="size2" uiSize="md" label="Medium radio with clickable label" />
+                      <RadioItem value="size3" uiSize="lg" label="Large radio with clickable label" />
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-neutral-11 mb-2">Horizontal Layout</h4>
+                    <RadioGroup uiOrientation="horizontal">
+                      <RadioItem value="horiz1" label="Option A" />
+                      <RadioItem value="horiz2" label="Option B" />
+                      <RadioItem value="horiz3" label="Option C" />
+                    </RadioGroup>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Testing Instructions</h4>
+              <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                <li>• Try clicking on the label text (not the checkbox/radio button itself)</li>
+                <li>• The checkbox or radio button should toggle when clicking its associated label</li>
+                <li>• Labels should have a pointer cursor when hovering</li>
+                <li>• This works due to the <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">htmlFor</code> attribute connecting labels to their controls</li>
+              </ul>
             </div>
           </div>
         </TabsContent>
