@@ -35,6 +35,11 @@ export interface ComboBoxProps
   emptyMessage?: string;
   filterFunction?: (inputValue: string, option: ComboBoxOption) => boolean;
   
+  // Custom value support for renaming
+  allowCustomValues?: boolean;
+  onInputValueChange?: (inputValue: string) => void;
+  customValueLabel?: string; // Label for custom value option (default: "Create: {inputValue}")
+  
   // Form integration and accessibility
   name?: string;
   id?: string;
@@ -105,6 +110,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     disabled = false,
     emptyMessage = "No options found",
     filterFunction = defaultFilterFunction,
+    allowCustomValues = false,
+    onInputValueChange,
+    customValueLabel,
     name,
     id,
     'aria-label': ariaLabel,
@@ -130,11 +138,26 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     // State for input value and filtered options
     const [inputValue, setInputValue] = React.useState("");
     
-    // Filter options based on input value
+    // Filter options based on input value and handle custom values
     const filteredOptions = React.useMemo(() => {
       if (!searchable || !inputValue) return options;
-      return options.filter(option => filterFunction(inputValue, option));
-    }, [options, inputValue, searchable, filterFunction]);
+      
+      const filtered = options.filter(option => filterFunction(inputValue, option));
+      
+      // Add custom value option if allowed and input doesn't match any existing option
+      if (allowCustomValues && inputValue.trim() && 
+          !options.some(option => option.value === inputValue || option.label === inputValue)) {
+        const customOption: ComboBoxOption = {
+          value: inputValue,
+          label: customValueLabel || `Create: "${inputValue}"`,
+          // Mark as custom for styling/identification
+          group: "__custom__"
+        };
+        return [customOption, ...filtered];
+      }
+      
+      return filtered;
+    }, [options, inputValue, searchable, filterFunction, allowCustomValues, customValueLabel]);
     
     // Announce filtered results for screen readers
     const [announcement, setAnnouncement] = React.useState("");
@@ -189,7 +212,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         if (searchable) {
           // Only update input value for actual user input, not programmatic changes
           if (type === useCombobox.stateChangeTypes.InputChange) {
-            setInputValue(newInputValue || "");
+            const cleanInputValue = newInputValue || "";
+            setInputValue(cleanInputValue);
+            // Call parent handler for custom value support/renaming
+            onInputValueChange?.(cleanInputValue);
           }
         }
       },
@@ -206,20 +232,33 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       },
       
       // Handle state changes
-      onStateChange: ({ type }) => {
+      onStateChange: ({ type, inputValue: stateInputValue }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
+            // Handle Enter key - create custom value if allowed and no item is highlighted
+            if (allowCustomValues && inputValue.trim() && highlightedIndex === -1) {
+              onValueChange?.(inputValue.trim());
+              setInputValue("");
+              closeMenu();
+              return;
+            }
+            // Fall through to normal selection handling
           case useCombobox.stateChangeTypes.ItemClick:
             // Close menu on selection
             closeMenu();
             break;
           case useCombobox.stateChangeTypes.InputBlur:
-          case useCombobox.stateChangeTypes.InputKeyDownEscape:
-            // Clear any active filter when losing focus or pressing escape
-            setInputValue("");
-            if (type === useCombobox.stateChangeTypes.InputKeyDownEscape) {
-              setAnnouncement("Options menu closed");
+            // For custom values, create the value on blur if input is not empty
+            if (allowCustomValues && inputValue.trim() && !selectedOption) {
+              onValueChange?.(inputValue.trim());
             }
+            // Clear filter but preserve selection display
+            setInputValue("");
+            break;
+          case useCombobox.stateChangeTypes.InputKeyDownEscape:
+            // Clear any active filter when pressing escape
+            setInputValue("");
+            setAnnouncement("Options menu closed");
             break;
           default:
             break;
@@ -353,31 +392,44 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                   scrollbarWidth: 'thin',
                 }}
               >
-                {filteredOptions.map((option, index) => (
-                  <div
-                    key={option.value}
-                    {...getItemProps({
-                      item: option,
-                      index,
-                      role: 'option',
-                      'aria-selected': selectedOption?.value === option.value,
-                      'aria-disabled': option.disabled,
-                      className: cn(
-                        comboBoxItemVariants(),
-                        highlightedIndex === index && "bg-accent text-accent-foreground",
-                        selectedOption?.value === option.value && "bg-primary/10 font-medium",
-                        option.disabled && "opacity-50 pointer-events-none cursor-not-allowed",
-                        "transition-colors duration-75" // Smooth hover transitions
-                      ),
-                      disabled: option.disabled,
-                    })}
-                  >
-                    <span className="flex-1 truncate">{option.label}</span>
-                    {selectedOption?.value === option.value && (
-                      <span className="ml-2 text-primary" aria-hidden="true">✓</span>
-                    )}
-                  </div>
-                ))}
+                {filteredOptions.map((option, index) => {
+                  const isCustomValue = option.group === "__custom__";
+                  return (
+                    <div
+                      key={option.value}
+                      {...getItemProps({
+                        item: option,
+                        index,
+                        role: 'option',
+                        'aria-selected': selectedOption?.value === option.value,
+                        'aria-disabled': option.disabled,
+                        className: cn(
+                          comboBoxItemVariants(),
+                          highlightedIndex === index && "bg-accent text-accent-foreground",
+                          selectedOption?.value === option.value && "bg-primary/10 font-medium",
+                          option.disabled && "opacity-50 pointer-events-none cursor-not-allowed",
+                          isCustomValue && "bg-blue-50 dark:bg-blue-950/30 border-l-2 border-l-blue-500",
+                          "transition-colors duration-75" // Smooth hover transitions
+                        ),
+                        disabled: option.disabled,
+                      })}
+                    >
+                      <span className="flex-1 truncate">
+                        {isCustomValue ? (
+                          <span className="flex items-center gap-2">
+                            <span className="text-blue-600 dark:text-blue-400">+</span>
+                            {option.label}
+                          </span>
+                        ) : (
+                          option.label
+                        )}
+                      </span>
+                      {selectedOption?.value === option.value && (
+                        <span className="ml-2 text-primary" aria-hidden="true">✓</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className={cn(

@@ -60,6 +60,14 @@ export default function ComboBoxTestPage() {
     country: '',
   });
 
+  // Custom value / renaming testing
+  const [renamingValue, setRenamingValue] = useState<string | null>(null);
+  const [tagValue, setTagValue] = useState<string | null>(null);
+  const [currentInputValue, setCurrentInputValue] = useState('');
+
+  // Dynamic options for renaming demo
+  const [dynamicFruits, setDynamicFruits] = useState([...fruits]);
+
   return (
     <div className="container mx-auto p-8 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8 text-center">ComboBox Component Test</h1>
@@ -396,6 +404,115 @@ export default function ComboBoxTestPage() {
             <pre className="text-xs mt-1">{JSON.stringify(formData, null, 2)}</pre>
           </div>
         </form>
+      </div>
+
+      {/* Custom Values / Renaming Test */}
+      <div className="mt-8 p-6 border rounded-lg">
+        <h2 className="text-xl font-semibold mb-4">Custom Values & Renaming Support</h2>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Basic Custom Values */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Basic Custom Values</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Tag Creator (allows custom values)
+                </label>
+                <ComboBox
+                  options={[
+                    { value: 'react', label: 'React' },
+                    { value: 'vue', label: 'Vue' },
+                    { value: 'angular', label: 'Angular' },
+                    { value: 'svelte', label: 'Svelte' },
+                  ]}
+                  value={tagValue}
+                  onValueChange={setTagValue}
+                  placeholder="Type or select a tag..."
+                  allowCustomValues={true}
+                  customValueLabel="Create tag"
+                  clearable
+                />
+                <p className="text-xs text-gray-600 mt-1">
+                  Current value: <span className="font-mono">{tagValue || 'null'}</span>
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  With Input Change Handler
+                </label>
+                <ComboBox
+                  options={countries}
+                  value={renamingValue}
+                  onValueChange={setRenamingValue}
+                  onInputValueChange={setCurrentInputValue}
+                  placeholder="Type new country or select existing..."
+                  allowCustomValues={true}
+                  customValueLabel={`Add "${currentInputValue}"`}
+                  clearable
+                />
+                <div className="text-xs text-gray-600 mt-1 space-y-1">
+                  <p>Selected: <span className="font-mono">{renamingValue || 'null'}</span></p>
+                  <p>Current input: <span className="font-mono">"{currentInputValue}"</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dynamic Options */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Dynamic Options (Renaming Demo)</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Fruit List (adds new fruits to list)
+                </label>
+                <ComboBox
+                  options={dynamicFruits}
+                  placeholder="Add or select fruit..."
+                  allowCustomValues={true}
+                  onValueChange={(value) => {
+                    if (value && !dynamicFruits.find(f => f.value === value)) {
+                      // Add new fruit to the list
+                      setDynamicFruits(prev => [
+                        ...prev,
+                        { value: value.toLowerCase(), label: value }
+                      ]);
+                    }
+                  }}
+                  clearable
+                />
+                <p className="text-xs text-gray-600 mt-1">
+                  Total fruits: {dynamicFruits.length}
+                </p>
+              </div>
+
+              <div className="p-3 bg-gray-50 rounded text-xs">
+                <strong>How to test:</strong>
+                <ul className="mt-1 space-y-1">
+                  <li>• Type a new value and press Enter</li>
+                  <li>• Type a new value and click away (blur)</li>
+                  <li>• Type a new value and click the "Create:" option</li>
+                  <li>• Notice the fruit gets added to the options list</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Advanced Features */}
+        <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
+          <h4 className="font-semibold mb-2">Renaming Features Added:</h4>
+          <ul className="text-sm space-y-1">
+            <li>• <strong>allowCustomValues:</strong> Enables creation of new values</li>
+            <li>• <strong>onInputValueChange:</strong> Callback for real-time input tracking</li>
+            <li>• <strong>customValueLabel:</strong> Customize the "Create:" option text</li>
+            <li>• <strong>Enter key:</strong> Creates custom value when no option is highlighted</li>
+            <li>• <strong>Blur event:</strong> Creates custom value when input loses focus</li>
+            <li>• <strong>Visual feedback:</strong> Custom values shown with blue styling and "+" icon</li>
+          </ul>
+        </div>
       </div>
 
       {/* Keyboard Navigation Instructions */}
