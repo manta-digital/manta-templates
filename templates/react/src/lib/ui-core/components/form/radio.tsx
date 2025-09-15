@@ -116,16 +116,11 @@ const RadioItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioItemProps
 >(({ className, uiSize, label, description, children, ...props }, ref) => {
-  const radioId = React.useId();
-  const descriptionId = description ? `${radioId}-description` : undefined;
-
   const content = (
     <div className="flex items-center space-x-2">
       <RadioGroupPrimitive.Item
         ref={ref}
-        id={radioId}
         className={cn(radioItemVariants({ uiSize }), className)}
-        aria-describedby={descriptionId}
         {...props}
       >
         <RadioGroupPrimitive.Indicator className={cn(radioIndicatorVariants({ uiSize }))}>
@@ -136,14 +131,14 @@ const RadioItem = React.forwardRef<
         <div className="grid gap-1.5 leading-none">
           {label && (
             <label
-              htmlFor={radioId}
+              htmlFor={props.value}
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
             >
               {label}
             </label>
           )}
           {description && (
-            <p id={descriptionId} className="text-xs text-muted-foreground">{description}</p>
+            <p className="text-xs text-muted-foreground">{description}</p>
           )}
         </div>
       )}

@@ -87,6 +87,13 @@ const Checkbox = React.forwardRef<
             <label
               htmlFor={checkboxId}
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+              onClick={(e) => {
+                // Fallback click handler for Electron compatibility
+                if (!props.disabled) {
+                  e.preventDefault();
+                  props.onCheckedChange?.(!props.checked);
+                }
+              }}
             >
               {label}
             </label>
