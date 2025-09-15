@@ -182,9 +182,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       id: comboboxId,
       
       // Handle input value changes (for filtering)
-      onInputValueChange: ({ inputValue: newInputValue }) => {
+      onInputValueChange: ({ inputValue: newInputValue, type }) => {
         if (searchable) {
-          setInputValue(newInputValue || "");
+          // Only update input value for actual user input, not programmatic changes
+          if (type === useCombobox.stateChangeTypes.InputChange) {
+            setInputValue(newInputValue || "");
+          }
         }
       },
       
@@ -192,14 +195,15 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       onSelectedItemChange: ({ selectedItem: newSelectedItem }) => {
         onValueChange?.(newSelectedItem?.value || null);
         if (newSelectedItem) {
-          setInputValue(searchable ? "" : newSelectedItem.label);
+          // Clear the filter input but preserve the selection display
+          setInputValue("");
           // Announce selection for screen readers
           setAnnouncement(`Selected ${newSelectedItem.label}`);
         }
       },
       
       // Handle state changes
-      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+      onStateChange: ({ type }) => {
         switch (type) {
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
@@ -207,14 +211,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
             closeMenu();
             break;
           case useCombobox.stateChangeTypes.InputBlur:
-            // Keep the input value if no selection made during filtering
-            if (!selectedOption && searchable) {
-              setInputValue("");
-            }
-            break;
           case useCombobox.stateChangeTypes.InputKeyDownEscape:
-            // Announce menu closed
-            setAnnouncement("Options menu closed");
+            // Clear any active filter when losing focus or pressing escape
+            setInputValue("");
+            if (type === useCombobox.stateChangeTypes.InputKeyDownEscape) {
+              setAnnouncement("Options menu closed");
+            }
             break;
           default:
             break;
@@ -225,7 +227,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       isOpen: undefined, // Let downshift control this
       
       // Input value for controlled behavior
-      inputValue: searchable ? inputValue : (selectedOption?.label || ""),
+      inputValue: searchable ? (inputValue || selectedOption?.label || "") : (selectedOption?.label || ""),
     });
     
     return (
@@ -265,6 +267,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
               'aria-label': ariaLabel || `ComboBox input${placeholder ? `, ${placeholder}` : ''}`,
               'aria-labelledby': ariaLabelledBy,
               'aria-describedby': ariaDescribedBy,
+              onClick: (e) => {
+                // Select all text when clicking on the input (if it has a value)
+                if (searchable && selectedOption && e.target instanceof HTMLInputElement) {
+                  e.target.select();
+                }
+              },
               'aria-expanded': isOpen,
               'aria-haspopup': 'listbox',
               'aria-controls': isOpen ? listboxId : undefined,

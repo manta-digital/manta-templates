@@ -39,9 +39,22 @@ const customFilter = (inputValue: string, option: ComboBoxOption): boolean => {
 
 export default function ComboBoxTestPage() {
   const [basicValue, setBasicValue] = useState<string | null>(null);
+  const [ghostValue, setGhostValue] = useState<string | null>(null);
+  const [filledValue, setFilledValue] = useState<string | null>(null);
+  const [smallValue, setSmallValue] = useState<string | null>(null);
+  const [mediumValue, setMediumValue] = useState<string | null>(null);
+  const [largeValue, setLargeValue] = useState<string | null>(null);
+  const [defaultStateValue, setDefaultStateValue] = useState<string | null>(null);
+  const [errorStateValue, setErrorStateValue] = useState<string | null>(null);
+  const [successStateValue, setSuccessStateValue] = useState<string | null>(null);
+  const [warningStateValue, setWarningStateValue] = useState<string | null>(null);
   const [clearableValue, setClearableValue] = useState<string | null>('apple');
   const [customFilterValue, setCustomFilterValue] = useState<string | null>(null);
   const [controlledValue, setControlledValue] = useState<string | null>('us');
+  const [disabledOptionsValue, setDisabledOptionsValue] = useState<string | null>(null);
+  const [nonSearchableValue, setNonSearchableValue] = useState<string | null>(null);
+  const [accessibleValue, setAccessibleValue] = useState<string | null>(null);
+  const [performanceValue, setPerformanceValue] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     fruit: '',
     country: '',
@@ -73,6 +86,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 5)}
               placeholder="Select a fruit..."
+              value={ghostValue}
+              onValueChange={setGhostValue}
               uiVariant="ghost"
             />
           </div>
@@ -82,6 +97,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 5)}
               placeholder="Select a fruit..."
+              value={filledValue}
+              onValueChange={setFilledValue}
               uiVariant="filled"
             />
           </div>
@@ -96,6 +113,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={countries.slice(0, 4)}
               placeholder="Select country..."
+              value={smallValue}
+              onValueChange={setSmallValue}
               uiSize="sm"
             />
           </div>
@@ -105,6 +124,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={countries.slice(0, 4)}
               placeholder="Select country..."
+              value={mediumValue}
+              onValueChange={setMediumValue}
               uiSize="md"
             />
           </div>
@@ -114,6 +135,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={countries.slice(0, 4)}
               placeholder="Select country..."
+              value={largeValue}
+              onValueChange={setLargeValue}
               uiSize="lg"
             />
           </div>
@@ -128,6 +151,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 4)}
               placeholder="Default state..."
+              value={defaultStateValue}
+              onValueChange={setDefaultStateValue}
               uiState="default"
             />
           </div>
@@ -137,6 +162,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 4)}
               placeholder="Error state..."
+              value={errorStateValue}
+              onValueChange={setErrorStateValue}
               uiState="error"
             />
           </div>
@@ -146,6 +173,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 4)}
               placeholder="Success state..."
+              value={successStateValue}
+              onValueChange={setSuccessStateValue}
               uiState="success"
             />
           </div>
@@ -155,6 +184,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 4)}
               placeholder="Warning state..."
+              value={warningStateValue}
+              onValueChange={setWarningStateValue}
               uiState="warning"
             />
           </div>
@@ -248,6 +279,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 7)}
               placeholder="Try selecting grape..."
+              value={disabledOptionsValue}
+              onValueChange={setDisabledOptionsValue}
             />
           </div>
           
@@ -258,6 +291,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={countries.slice(0, 4)}
               placeholder="Select country..."
+              value={nonSearchableValue}
+              onValueChange={setNonSearchableValue}
               searchable={false}
             />
           </div>
@@ -269,6 +304,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits.slice(0, 5)}
               placeholder="Accessible fruit selection..."
+              value={accessibleValue}
+              onValueChange={setAccessibleValue}
               aria-label="Choose your favorite fruit"
               aria-describedby="fruit-help"
             />
@@ -289,6 +326,8 @@ export default function ComboBoxTestPage() {
             <ComboBox
               options={fruits}
               placeholder="Search through all fruits..."
+              value={performanceValue}
+              onValueChange={setPerformanceValue}
               emptyMessage="No fruits found - try different search terms"
             />
             <p className="text-xs text-gray-500 mt-1">
