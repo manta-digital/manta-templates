@@ -1,4 +1,4 @@
-export type PresetKey = 'default' | 'mit';
+export type PresetKey = 'mit' | 'full';
 
 export const siteConfig = {
   site: {
@@ -17,9 +17,9 @@ export const siteConfig = {
   presets: {
     legal: 'full' as PresetKey,
   },
-  // Optional UI variants; can be expanded later (e.g., header variants)
+  // Optional UI variants; can be expanded later (e.g., header variants)  
   variants: {
-    footer: 'compact', // 'default' | 'compact'
+    footer: 'compact' as const,
   },
   // Optional copyright settings (e.g., "2022–2025"). If omitted, current year is used.
   copyright: {

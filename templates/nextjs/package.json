@@ -36,6 +36,7 @@
     "dev-ui": "cd ../../packages/ui-core && pnpm build && cd ../../templates/nextjs && pnpm dev"
   },
   "dependencies": {
+    "downshift": "^9.0.8",
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-checkbox": "^1.3.3",
