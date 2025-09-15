@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { useCombobox } from "downshift";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -120,7 +122,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     } = props as any;
 
     // Generate unique IDs for accessibility
-    const comboboxId = id || React.useId();
+    const generatedId = React.useId();
+    const comboboxId = id || generatedId;
     const listboxId = `${comboboxId}-listbox`;
     const inputId = `${comboboxId}-input`;
     

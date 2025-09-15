@@ -38,6 +38,14 @@ export {
   type SelectItemProps,
 } from "./select";
 export {
+  ComboBox,
+  comboBoxTriggerVariants,
+  comboBoxContentVariants,
+  comboBoxItemVariants,
+  type ComboBoxProps,
+  type ComboBoxOption,
+} from "./combobox";
+export {
   Form,
   FormControlField,
   FormItem,

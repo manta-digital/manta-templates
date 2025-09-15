@@ -201,6 +201,9 @@ importers:
       colord:
         specifier: ^2.9.3
         version: 2.9.3
+      downshift:
+        specifier: ^9.0.8
+        version: 9.0.10(react@19.1.1)
       framer-motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -364,6 +367,9 @@ importers:
       colord:
         specifier: ^2.9.3
         version: 2.9.3
+      downshift:
+        specifier: ^9.0.8
+        version: 9.0.10(react@19.1.1)
       framer-motion:
         specifier: ^12.23.0
         version: 12.23.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
