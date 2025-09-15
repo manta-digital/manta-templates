@@ -259,10 +259,8 @@ tools information: [Project Manager will provide if relevant to current work]
 ```
 
 ##### Tool Usage
-*Add the following to existing prompt when working with {tool}.*
-
 ```markdown
-You will need to consult specific knowledge for {tool}, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with {tool}.  Use these tools proactively.
+You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
 
 1. Consult Overview: Start with the specific `AI Tool Overview 
    [toolname].md` in the `project-documents/tool-
