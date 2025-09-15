@@ -70,7 +70,7 @@ Keep the spec concise and focused on coordination between components. If you nee
 Note: This is a design and planning task, not a coding task.
 ```
 
-	##### Slice Planning (Phase 3)
+##### Slice Planning (Phase 3)
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 3: High-Level Design & Slice Planning.  Use `guide.ai-project.03-slice-planning` with the project concept and specification documents to break {project} into manageable vertical slices.
 
@@ -235,7 +235,7 @@ Notes:
 ##### Context Initialization
 *Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
 ```markdown
-The following provides context on our current work in slice-based project {project}. Input may contain: { project, slice, task, issue, tool, note }.
+The following provides context on our current work in slice-based project {project}. 
 
 We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
 - Project: {project}
@@ -250,12 +250,12 @@ Refer to the Resource Structure in `guide.ai-project.00-process` for locations o
 
 Directory Structure by Development Type:
 - Regular Development: Use `project-documents/private/` for all project-specific files
-- Monorepo Template Development: Use `project-artifacts/` for project-specific files
+- Monorepo Template Development: Use `project-artifacts/{template}/` for project-specific files, for example `project-artifacts/template/react/`.
 - The Project Manager should specify which mode is active
 
 If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
 
-{tool} information: [Project Manager will provide if relevant to current work]
+tools information: [Project Manager will provide if relevant to current work]
 ```
 
 ##### Tool Usage
