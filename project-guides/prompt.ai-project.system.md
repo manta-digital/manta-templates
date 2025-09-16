@@ -239,19 +239,22 @@ The following provides context on our current work in slice-based project {proje
 
 We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
 - Project: {project}
-- Current slice: {slice} (if applicable)
-- Phase: [specify current phase]
+- Current slice: {slice}
+- Phase: [specify current phase if applicable]
+- if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
 
 Refer to the Resource Structure in `guide.ai-project.00-process` for locations of resources. Key project documents:
 - High-level design: private/project-guides/03-hld.{project}.md
-- Slice plan: private/project-guides/03-slices.{project}.md  
-- Current slice design: private/slices/nn-slice.{slice}.md (if working on a slice)
-- Current tasks: private/tasks/nn-tasks.{slice}.md (if in execution)
+- Slice plan: private/project-guides/03-slices.{project}.md
+- Current slice design: private/slices/{slice}.md
+- Current tasks: private/tasks/{sliceindex}-tasks.{slicename}.md
 
 Directory Structure by Development Type:
-- Regular Development: Use `project-documents/private/` for all project-specific files
-- Monorepo Template Development: Use `project-artifacts/{template}/` for project-specific files, for example `project-artifacts/template/react/`.
-- The Project Manager should specify which mode is active
+- Regular Development: Use `project-documents/private/` as shown above for all project-specific files.
+- Monorepo Template Development:`project-artifacts/{template}/` for project-specific files. For example:
+- `project-artifacts/{template}/slices/`
+- `project-artifacts/{template}/tasks/`
+- `project-artifacts/{template}/maintenance/`
 
 If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
 
