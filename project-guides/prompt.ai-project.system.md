@@ -260,11 +260,11 @@ tools information: [Project Manager will provide if relevant to current work]
 
 ##### Tool Usage
 ```markdown
-You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the tool-guides/{tool} directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
+You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
 
 1. Consult Overview: Start with the specific `AI Tool Overview 
    [toolname].md` in the `project-documents/tool-
-   guides/{tool}` directory.
+   guides/[tool]` directory.
 2. Locate Docs: Scan the Overview for references to more detailed 
    documentation (like local API files under `/documentation`, 
    notes in `research-crumbs` or official web links).
