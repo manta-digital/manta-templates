@@ -1,0 +1,15 @@
+# Environment variables
+*.env
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Obsidian workspace settings
+.obsidian/workspace
+.obsidian/workspace.json
