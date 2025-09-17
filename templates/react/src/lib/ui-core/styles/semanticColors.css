@@ -99,8 +99,8 @@
 .dark {
   --color-card-border: var(--color-accent-8);
   --color-card-border-hover: var(--color-accent-9);
-  --color-border-accent: var(--color-accent-8);
-  --color-border-accent-hover: var(--color-accent-9);
+  --color-border-accent: var(--color-accent-6);
+  --color-border-accent-hover: var(--color-accent-7);
 }
 
 /* Mintteal palette variant - your existing brand color */
