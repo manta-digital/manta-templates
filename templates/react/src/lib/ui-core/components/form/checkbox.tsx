@@ -80,20 +80,13 @@ const Checkbox = React.forwardRef<
 
   if (label || description) {
     return (
-      <div className="flex items-start space-x-2">
+      <div className="flex items-center space-x-2">
         {checkbox}
         <div className="grid gap-1.5 leading-none">
           {label && (
             <label
               htmlFor={checkboxId}
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-              onClick={(e) => {
-                // Fallback click handler for Electron compatibility
-                if (!props.disabled) {
-                  e.preventDefault();
-                  props.onCheckedChange?.(!props.checked);
-                }
-              }}
             >
               {label}
             </label>
