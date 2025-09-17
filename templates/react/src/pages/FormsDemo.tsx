@@ -40,7 +40,7 @@ export default function FormsDemo() {
         </TabsList>
 
         <TabsContent value="tabs-demo" className="space-y-4">
-          <div className="rounded-sm border border-neutral-6 p-6">
+          <div className="rounded-sm border p-6">
             <h2 className="text-xl font-semibold text-neutral-12 mb-4">Tabs Component</h2>
             <p className="text-neutral-11 mb-4">
               This demonstrates the Tabs component with horizontal orientation and semantic theming.

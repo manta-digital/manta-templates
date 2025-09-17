@@ -34,8 +34,6 @@
   --color-card-accent: var(--color-accent-9);
   --color-card-accent-subtle: var(--color-accent-3);
   --color-card-accent-emphasis: var(--color-accent-10);
-  --color-card-border: var(--color-accent-7);
-  --color-card-border-hover: var(--color-accent-8);
   --color-card-text-accent: var(--color-accent-11);
   --color-card-text-primary: var(--color-accent-12);
 
@@ -91,8 +89,10 @@
   --card-surface-text: var(--color-accent-12);
   
   /* Border colors for light mode */
-  --color-border-accent: var(--color-accent-7);
-  --color-border-accent-hover: var(--color-accent-8);
+  --color-card-border: var(--color-accent-7);
+  --color-card-border-hover: var(--color-accent-8);
+  --color-border-accent: var(--color-accent-6);
+  --color-border-accent-hover: var(--color-accent-7);
 }
 
 /* Dark-mode border tuning: use a slightly stronger step for borders */

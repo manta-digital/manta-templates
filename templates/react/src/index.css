@@ -19,6 +19,17 @@
 
 /* You can add template-specific styles below */
 
+/* Border color now defaults to accent-3 in packages - override here if needed */
+
+/* Optional: Form-specific border customization variables for advanced use */
+:root {
+  --form-border-color: var(--color-accent-3);      /* Default border color (accent-3) */
+  --form-border-focus: var(--color-ring);          /* Focused border color */
+  --form-border-error: var(--color-destructive);   /* Error state border */
+  --form-border-success: var(--color-green-500);   /* Success state border */
+  --form-border-warning: var(--color-yellow-500);  /* Warning state border */
+}
+
 /* ========================================
    FORM COMPONENT CUSTOMIZATION GUIDE
    ======================================== */
@@ -42,14 +53,17 @@
      --form-height-lg: 3rem;   // Large inputs (default)
    }
 
-   3. BORDER COLORS - Customize form border colors:
+   3. BORDER COLORS - Customize border colors globally:
    
    :root {
-     --form-border-color: var(--color-border);       // Default border color
-     --form-border-focus: var(--color-ring);         // Focused border color
-     --form-border-error: var(--color-destructive);  // Error state border
-     --form-border-success: var(--color-green-500);  // Success state border
-     --form-border-warning: var(--color-yellow-500); // Warning state border
+     --color-border: var(--color-accent-3);          // Changes ALL borders (forms, buttons, cards, etc.)
+   }
+   
+   Or for advanced form-specific control:
+   :root {
+     --form-border-color: var(--color-accent-3);     // Form-specific border color (not yet implemented)
+     --form-border-focus: var(--color-ring);         // Form focus border (not yet implemented)
+     --form-border-error: var(--color-destructive);  // Form error border (not yet implemented)
    }
 
    4. FOCUS RING - Customize focus appearance:
