@@ -1,6 +1,18 @@
 /* Form-specific styles for manta-templates */
 /* Integrates with existing semantic color system */
 
+/* 
+ * BORDER CONSISTENCY NOTE:
+ * All form components now use standardized border tokens:
+ * - Default: border-border (consistent across input, textarea, select, combobox, checkbox, radio)
+ * - Error: border-destructive  
+ * - Success: border-green-500
+ * - Warning: border-yellow-500
+ * 
+ * For easy global customization, see template-specific index.css
+ * which provides CSS variables for form styling.
+ */
+
 /* Form Control Base Styles */
 .form-control {
   /* Base form element styling */

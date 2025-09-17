@@ -42,7 +42,17 @@
      --form-height-lg: 3rem;   // Large inputs (default)
    }
 
-   3. FOCUS RING - Customize focus appearance:
+   3. BORDER COLORS - Customize form border colors:
+   
+   :root {
+     --form-border-color: var(--color-border);       // Default border color
+     --form-border-focus: var(--color-ring);         // Focused border color
+     --form-border-error: var(--color-destructive);  // Error state border
+     --form-border-success: var(--color-green-500);  // Success state border
+     --form-border-warning: var(--color-yellow-500); // Warning state border
+   }
+
+   4. FOCUS RING - Customize focus appearance:
    
    :root {
      --form-focus-width: 3px;     // Focus ring thickness
@@ -50,7 +60,7 @@
      --form-focus-color: var(--color-accent-a4); // Focus ring color
    }
 
-   4. DIRECT CSS OVERRIDES - Target form components directly:
+   5. DIRECT CSS OVERRIDES - Target form components directly:
    
    .form-control,
    [data-slot="input"],

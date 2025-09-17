@@ -3,6 +3,7 @@ project: manta-templates
 taskType: maintenance
 created: 2025-09-16
 lastUpdated: 2025-09-16
+status: complete
 ---
 
 # Maintenance Tasks
@@ -33,19 +34,19 @@ This creates visual inconsistency and makes global form styling difficult.
   - Update in packages first, then propagate via copy-packages
   - **Success**: All form elements use same border token
 
-- [ ] **Add CSS variables for form styling**
+- [x] **Add CSS variables for form styling**
   - Create `--form-border-color` CSS variable
   - Create focus, error, success state variables
   - Map Tailwind tokens to CSS variables
   - **Success**: Easy global form border customization available
 
-- [ ] **Test across templates**
+- [x] **Test across templates**
   - Verify consistency in React, NextJS, and Electron templates
   - Test form components in light/dark themes
   - Validate visual consistency across all form elements
   - **Success**: All templates show consistent form styling
 
-- [ ] **Update documentation**
+- [x] **Update documentation**
   - Document new CSS variables in project guides
   - Add form styling customization examples
   - **Success**: Clear guidance for customizing form appearance
