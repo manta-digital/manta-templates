@@ -142,6 +142,14 @@ export interface NavigationMenuTriggerProps {
   children?: ReactNode
   /** Additional CSS classes */
   className?: string
+  /** Trigger variant styling */
+  variant?: 'default' | 'ghost' | 'subtle'
+  /** Trigger size */
+  size?: 'sm' | 'default' | 'lg'
+  /** Whether to show dropdown indicator */
+  showIndicator?: boolean
+  /** Custom indicator icon name from lucide-react */
+  indicatorIcon?: string
 }
 
 /**

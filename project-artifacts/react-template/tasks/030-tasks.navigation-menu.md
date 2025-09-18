@@ -100,15 +100,15 @@ Creating a comprehensive navigation menu component that replaces the existing De
 
 #### Task 2.3: Implement NavigationMenuTrigger Component  
 **Effort**: 2/5
-- [ ] Develop in `templates/react/src/lib/ui-core/components/navigation/NavigationMenuTrigger.tsx`:
-  - [ ] Radix NavigationMenu.Trigger integration
-  - [ ] Dropdown indicator (ChevronDown icon)
-  - [ ] Hover and focus states
-  - [ ] CVA variants for trigger styling
-- [ ] Implement proper ARIA attributes
-- [ ] Add animation classes for smooth transitions
-- [ ] Support custom trigger content
-**Success Criteria**: Triggers work with dropdowns, proper accessibility, smooth animations
+- [x] Develop in `templates/react/src/lib/ui-core/components/navigation/NavigationMenuTrigger.tsx`:
+  - [x] Radix NavigationMenu.Trigger integration
+  - [x] Dropdown indicator (ChevronDown icon)
+  - [x] Hover and focus states
+  - [x] CVA variants for trigger styling
+- [x] Implement proper ARIA attributes
+- [x] Add animation classes for smooth transitions
+- [x] Support custom trigger content
+**Success Criteria**: Triggers work with dropdowns, proper accessibility, smooth animations ✓
 
 #### Task 2.4: Implement NavigationMenuContent Component
 **Effort**: 3/5
