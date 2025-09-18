@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
