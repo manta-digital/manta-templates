@@ -1,5 +1,8 @@
 import React from 'react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { NavigationMenuTriggerProps } from '../../types/navigation';
+import { cn } from '../../utils/cn';
+import { ChevronDown } from 'lucide-react';
 
 /**
  * Navigation Menu Trigger Component
@@ -12,17 +15,19 @@ export function NavigationMenuTrigger({
   children,
   className
 }: NavigationMenuTriggerProps) {
-  // Placeholder implementation
   return (
-    <button
-      className={className}
+    <NavigationMenu.Trigger
+      className={cn(
+        'flex items-center gap-1 px-3 py-2 text-accent-11 hover:text-accent-12 transition-colors rounded-md hover:bg-accent-3',
+        'data-[state=open]:text-accent-12 data-[state=open]:bg-accent-3',
+        className
+      )}
       onClick={onClick}
       data-testid="navigation-menu-trigger"
-      aria-expanded={active}
     >
       <span>{item.label}</span>
-      <span aria-hidden="true">▼</span>
+      <ChevronDown size={16} className="transition-transform data-[state=open]:rotate-180" aria-hidden="true" />
       {children}
-    </button>
+    </NavigationMenu.Trigger>
   );
 }
