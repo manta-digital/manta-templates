@@ -10,7 +10,16 @@ export * from './components/headers';
 export * from './components/footers';
 export * from './components/overlays';
 export * from './components/form';
-export * from './components/navigation';
+// Export navigation components explicitly to avoid NavigationMenuItem type conflict
+export {
+  EnhancedHeader,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  MobileMenu,
+  convertHeaderContent
+} from './components/navigation';
 export * from './components/data';
 
 // Utilities

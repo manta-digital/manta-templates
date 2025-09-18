@@ -9,9 +9,8 @@ export { NavigationMenuContent } from './NavigationMenuContent';
 export { NavigationMenuLink } from './NavigationMenuLink';
 export { MobileMenu } from './MobileMenu';
 
-// Re-export types and utilities for convenience
+// Re-export types and utilities for convenience (avoid NavigationMenuItem conflict)
 export type {
-  NavigationMenuItem as NavigationMenuItemType,
   EnhancedHeaderContent,
   EnhancedHeaderProps,
   NavigationContext,

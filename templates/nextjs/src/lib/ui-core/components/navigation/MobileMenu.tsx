@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { MobileMenuProps } from '../../types/navigation';
 import { cn } from '../../utils/cn';
