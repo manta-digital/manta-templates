@@ -1,5 +1,7 @@
 import React from 'react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { NavigationMenuLinkProps } from '../../types/navigation';
+import { cn } from '../../utils/cn';
 
 /**
  * Navigation Menu Link Component
@@ -14,19 +16,27 @@ export function NavigationMenuLink({
 }: NavigationMenuLinkProps) {
   const Link = LinkComponent || 'a';
   
-  // Placeholder implementation
   return (
-    <Link
-      href={item.href}
-      className={className}
-      onClick={onClick}
-      data-testid="navigation-menu-link"
-      data-active={active}
-      {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
-    >
-      {item.icon && <span className="icon">{item.icon}</span>}
-      <span>{item.label}</span>
-      {item.badge && <span className="badge">{item.badge}</span>}
-    </Link>
+    <NavigationMenu.Link asChild active={active}>
+      <Link
+        href={item.href}
+        className={cn(
+          'text-accent-11 hover:text-accent-12 transition-colors',
+          active && 'text-accent-12',
+          className
+        )}
+        onClick={onClick}
+        data-testid="navigation-menu-link"
+        {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
+      >
+        {item.icon && <span className="mr-2">{item.icon}</span>}
+        <span>{item.label}</span>
+        {item.badge && (
+          <span className="ml-2 px-2 py-1 text-xs bg-accent-9 text-accent-12 rounded-full">
+            {item.badge}
+          </span>
+        )}
+      </Link>
+    </NavigationMenu.Link>
   );
 }

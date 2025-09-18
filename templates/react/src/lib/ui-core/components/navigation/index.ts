@@ -9,7 +9,7 @@ export { NavigationMenuContent } from './NavigationMenuContent';
 export { NavigationMenuLink } from './NavigationMenuLink';
 export { MobileMenu } from './MobileMenu';
 
-// Re-export types for convenience
+// Re-export types and utilities for convenience
 export type {
   NavigationMenuItem as NavigationMenuItemType,
   EnhancedHeaderContent,
@@ -21,3 +21,5 @@ export type {
   NavigationMenuLinkProps,
   MobileMenuProps
 } from '../../types/navigation';
+
+export { convertHeaderContent } from '../../types/navigation';
