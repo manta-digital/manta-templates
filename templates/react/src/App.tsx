@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { ThemeProvider } from './lib/ui-core'
-import { ReactHeader, ReactFooter } from './components'
+import { ReactFooter } from './components'
+import { EnhancedHeader, convertHeaderContent } from './lib/ui-core/components/navigation'
 import { headerContent, footerContent } from './content';
 import { siteConfig } from './content/site.config';
 import HomePage from './pages/HomePage'
@@ -35,9 +36,13 @@ function App() {
         storageKey="ui-theme"
       >
         <div className="min-h-screen flex flex-col">
-          <ReactHeader
-            content={headerContent}
-            LinkComponent={Link}
+          <EnhancedHeader
+            content={convertHeaderContent(headerContent)}
+            LinkComponent={({ href, children, ...props }: any) => (
+              <Link to={href} {...props}>{children}</Link>
+            )}
+            navStyle="simple"
+            uiVariant="minimal"
           />
           <main className="flex-1">
             <Routes>
