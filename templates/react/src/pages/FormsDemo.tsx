@@ -253,7 +253,7 @@ export default function FormsDemo() {
                     <h4 className="text-sm font-medium text-neutral-11 mb-2">Single Checkbox</h4>
                     <Checkbox 
                       checked={singleCheckbox}
-                      onCheckedChange={setSingleCheckbox}
+                      onCheckedChange={(checked) => setSingleCheckbox(checked === true)}
                       label="Click this label to toggle checkbox"
                       description="This tests if clicking the label properly toggles the checkbox"
                     />
