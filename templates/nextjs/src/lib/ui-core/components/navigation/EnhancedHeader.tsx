@@ -81,7 +81,7 @@ export function EnhancedHeader({
     cta,
     showThemeToggle = true,
     showColorSelector = true,
-    mobileBreakpoint = 'lg'
+    mobileBreakpoint = 'sm'
   } = content;
 
   // Handle responsive behavior
@@ -112,9 +112,9 @@ export function EnhancedHeader({
           <ImgComponent src={logo} alt="Logo" width={36} height={36} className="h-auto dark:invert" />
         )
       ) : (
-        <BrandMark size={36} className="pt-1" />
+        <BrandMark size={36}/>
       )}
-      {title && <span className="font-semibold text-xl hidden sm:block">{title}</span>}
+      {title && <span className="font-semibold text-xl">{title}</span>}
     </AnchorComponent>
   );
 
@@ -122,7 +122,7 @@ export function EnhancedHeader({
     if (isMobile) return null;
     
     return (
-      <nav className="flex-1 flex justify-center">
+      <nav className="flex-1 flex justify-end mr-6">
         {navStyle === 'simple' ? (
           // Simple navigation like DefaultHeader
           <ul className="flex items-center space-x-6">
@@ -139,11 +139,11 @@ export function EnhancedHeader({
             ))}
           </ul>
         ) : (
-          // Enhanced navigation with dropdowns
-          <NavigationMenu.Root className="relative">
+          // Enhanced navigation with dropdowns - max 2 levels
+          <NavigationMenu.Root>
             <NavigationMenu.List className={navigationListVariants({ navStyle })}>
               {links.map((link, index) => (
-                <NavigationMenu.Item key={link.href || index}>
+                <NavigationMenu.Item key={link.href || index} className="relative">
                   <NavigationMenuItem
                     item={link}
                     LinkComponent={LinkComponent}
@@ -159,7 +159,7 @@ export function EnhancedHeader({
   };
 
   const renderControls = () => (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-3">
       {/* CTA Button */}
       {cta && !isMobile && (
         <AnchorComponent
@@ -201,7 +201,7 @@ export function EnhancedHeader({
   return (
     <>
       <header className={cn(headerVariants({ uiVariant, sticky }), "py-5", className)}>
-        <Container className="flex items-center">
+        <Container className="flex items-center justify-between w-full">
           {renderBrand()}
           {renderDesktopNavigation()}
           {renderControls()}

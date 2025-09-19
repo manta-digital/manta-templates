@@ -55,6 +55,7 @@ export function NavigationMenuItem({
   LinkComponent,
   active = false,
   level = 0,
+  maxLevel = 2,
   onClick,
   className
 }: NavigationMenuItemProps) {
@@ -107,8 +108,8 @@ export function NavigationMenuItem({
     );
   }
 
-  // If item has children, render as trigger with dropdown
-  if (item.children && item.children.length > 0) {
+  // If item has children and we haven't reached max level, render as trigger with dropdown
+  if (item.children && item.children.length > 0 && level < maxLevel) {
     return (
       <NavigationMenu.Item 
         className={cn(
@@ -132,6 +133,7 @@ export function NavigationMenuItem({
           items={item.children}
           LinkComponent={LinkComponent}
           level={level + 1}
+          maxLevel={maxLevel}
           onClose={onClick}
         />
       </NavigationMenu.Item>

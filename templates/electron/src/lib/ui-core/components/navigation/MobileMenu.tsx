@@ -26,7 +26,7 @@ export function MobileMenu({
       {item.href ? (
         <Link
           href={item.href}
-          className="block text-accent-11 hover:text-accent-12 py-2"
+          className="block text-accent-11 hover:text-accent-12 hover:bg-accent-3 py-2 px-3 rounded-sm transition-colors"
           onClick={onClose}
           {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
         >
@@ -52,7 +52,7 @@ export function MobileMenu({
     <>
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+        className="fixed inset-0 bg-black/50 z-30 lg:hidden"
         onClick={onClose}
       />
       
