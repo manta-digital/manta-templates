@@ -115,7 +115,7 @@ Creating a comprehensive navigation menu component that replaces the existing De
 - [ ] Develop in `templates/react/src/lib/ui-core/components/navigation/NavigationMenuContent.tsx`:
   - [ ] Radix NavigationMenu.Content integration
   - [ ] Viewport positioning and sizing
-  - [ ] Multi-level content support (3+ levels)
+  - [x] Multi-level content support (2 levels)
   - [ ] Content area variants (simple, grid, custom)
 - [ ] Implement smooth enter/exit animations
 - [ ] Add proper z-index management
@@ -197,18 +197,6 @@ Creating a comprehensive navigation menu component that replaces the existing De
 - [ ] Implement proper image optimization integration
 - [ ] Add brand hover effects
 **Success Criteria**: Brand section matches existing header, theme-aware, responsive
-
-#### Task 4.2: Integrate Theme Controls
-**Effort**: 2/5
-- [ ] Integrate existing ThemeToggle component:
-  - [ ] Proper positioning in navigation
-  - [ ] Consistent styling with navigation
-  - [ ] Mobile menu integration
-  - [ ] Optional show/hide functionality
-- [ ] Integrate existing ColorSelector component with same requirements
-- [ ] Ensure controls work in all navigation variants
-- [ ] Add proper spacing and alignment
-**Success Criteria**: Theme controls work identically to current header, all variants
 
 #### Task 4.3: Implement CTA Button Integration
 **Effort**: 2/5

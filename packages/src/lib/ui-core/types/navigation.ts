@@ -122,6 +122,8 @@ export interface NavigationMenuItemProps {
   active?: boolean
   /** Current nesting level (for styling) */
   level?: number
+  /** Maximum nesting level allowed */
+  maxLevel?: number
   /** Click handler */
   onClick?: () => void
   /** Additional CSS classes */
@@ -162,10 +164,16 @@ export interface NavigationMenuContentProps {
   LinkComponent?: ComponentType<any>
   /** Current nesting level */
   level?: number
+  /** Maximum nesting level allowed */
+  maxLevel?: number
   /** Close handler */
   onClose?: () => void
   /** Additional CSS classes */
   className?: string
+  /** Content area variant */
+  variant?: 'simple' | 'grid' | 'custom'
+  /** Maximum nesting depth to render */
+  maxDepth?: number
 }
 
 /**
