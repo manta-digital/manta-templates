@@ -118,49 +118,48 @@ export function EnhancedHeader({
     </AnchorComponent>
   );
 
-  const renderDesktopNavigation = () => (
-    <NavigationMenu.Root className="relative">
-      <NavigationMenu.List className={navigationListVariants({ navStyle })}>
-        {links.map((link, index) => (
-          <NavigationMenu.Item key={link.href || index}>
-            <NavigationMenuItem
-              item={link}
-              LinkComponent={LinkComponent}
-              level={0}
-            />
-          </NavigationMenu.Item>
-        ))}
-      </NavigationMenu.List>
-    </NavigationMenu.Root>
-  );
+  const renderDesktopNavigation = () => {
+    if (isMobile) return null;
+    
+    return (
+      <nav className="flex-1 flex justify-center">
+        {navStyle === 'simple' ? (
+          // Simple navigation like DefaultHeader
+          <ul className="flex items-center space-x-6">
+            {links.map((link) => (
+              <li key={link.href}>
+                <AnchorComponent 
+                  href={link.href} 
+                  className="text-accent-11 hover:text-accent-12"
+                  {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
+                >
+                  {link.label}
+                </AnchorComponent>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          // Enhanced navigation with dropdowns
+          <NavigationMenu.Root className="relative">
+            <NavigationMenu.List className={navigationListVariants({ navStyle })}>
+              {links.map((link, index) => (
+                <NavigationMenu.Item key={link.href || index}>
+                  <NavigationMenuItem
+                    item={link}
+                    LinkComponent={LinkComponent}
+                    level={0}
+                  />
+                </NavigationMenu.Item>
+              ))}
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        )}
+      </nav>
+    );
+  };
 
   const renderControls = () => (
-    <div className="flex items-center space-x-6">
-      {/* Desktop Navigation - hidden on mobile */}
-      {!isMobile && (
-        <nav>
-          {navStyle === 'simple' ? (
-            // Simple navigation like DefaultHeader
-            <ul className="flex items-center space-x-6">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <AnchorComponent 
-                    href={link.href} 
-                    className="text-accent-11 hover:text-accent-12"
-                    {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
-                  >
-                    {link.label}
-                  </AnchorComponent>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            // Enhanced navigation with dropdowns
-            renderDesktopNavigation()
-          )}
-        </nav>
-      )}
-      
+    <div className="flex items-center space-x-4">
       {/* CTA Button */}
       {cta && !isMobile && (
         <AnchorComponent
@@ -202,8 +201,9 @@ export function EnhancedHeader({
   return (
     <>
       <header className={cn(headerVariants({ uiVariant, sticky }), "py-5", className)}>
-        <Container className="flex items-center justify-between">
+        <Container className="flex items-center">
           {renderBrand()}
+          {renderDesktopNavigation()}
           {renderControls()}
         </Container>
       </header>
