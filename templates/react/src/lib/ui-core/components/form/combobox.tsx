@@ -34,9 +34,6 @@ export interface ComboBoxProps
   // Advanced
   emptyMessage?: string;
   filterFunction?: (inputValue: string, option: ComboBoxOption) => boolean;
-  allowCustomValues?: boolean;
-  customValueLabel?: string;
-  onInputValueChange?: (value: string) => void;
   
   // Form integration and accessibility
   name?: string;
@@ -117,12 +114,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     autoComplete,
     ...props 
   }, ref) => {
-    // Filter out React Hook Form props that shouldn't be passed to DOM
-    const { 
-      isDirty, // eslint-disable-line @typescript-eslint/no-unused-vars
-      isTouched, // eslint-disable-line @typescript-eslint/no-unused-vars
-      ...domProps 
-    } = props as any;
+    // Clean props for DOM usage
+    const { ...domProps } = props;
 
     // Generate unique IDs for accessibility
     const generatedId = React.useId();
@@ -139,9 +132,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       return options.filter(option => filterFunction(inputValue, option));
     }, [options, inputValue, searchable, filterFunction]);
     
-    // Announce filtered results for screen readers
-    const [announcement, setAnnouncement] = React.useState("");
-
     // Find selected option
     const selectedOption = React.useMemo(() => {
       return options.find(option => option.value === value) || null;
@@ -153,21 +143,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       setInputValue("");
     }, [onValueChange]);
 
-    // Effect to announce filtered results for screen readers
-    React.useEffect(() => {
-      if (searchable && inputValue) {
-        const count = filteredOptions.length;
-        if (count === 0) {
-          setAnnouncement("No options found");
-        } else {
-          setAnnouncement(`${count} option${count === 1 ? '' : 's'} available`);
-        }
-      } else {
-        setAnnouncement("");
-      }
-    }, [filteredOptions.length, inputValue, searchable]);
-
-    // Configure and setup useCombobox hook with enhanced accessibility
+    // Configure useCombobox hook
     const {
       isOpen,
       getToggleButtonProps,
@@ -189,11 +165,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       
       // Handle input value changes (for filtering)
       onInputValueChange: ({ inputValue: newInputValue, type }) => {
-        if (searchable) {
-          // Only update input value for actual user input, not programmatic changes
-          if (type === useCombobox.stateChangeTypes.InputChange) {
-            setInputValue(newInputValue || "");
-          }
+        if (searchable && type === useCombobox.stateChangeTypes.InputChange) {
+          setInputValue(newInputValue || "");
         }
       },
       
@@ -201,31 +174,15 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       onSelectedItemChange: ({ selectedItem: newSelectedItem }) => {
         onValueChange?.(newSelectedItem?.value || null);
         if (newSelectedItem) {
-          // Clear the filter input but preserve the selection display
           setInputValue("");
-          // Announce selection for screen readers
-          setAnnouncement(`Selected ${newSelectedItem.label}`);
         }
       },
       
       // Handle state changes
       onStateChange: ({ type }) => {
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          case useCombobox.stateChangeTypes.ItemClick:
-            // Close menu on selection
-            closeMenu();
-            break;
-          case useCombobox.stateChangeTypes.InputBlur:
-          case useCombobox.stateChangeTypes.InputKeyDownEscape:
-            // Clear any active filter when losing focus or pressing escape
-            setInputValue("");
-            if (type === useCombobox.stateChangeTypes.InputKeyDownEscape) {
-              setAnnouncement("Options menu closed");
-            }
-            break;
-          default:
-            break;
+        if (type === useCombobox.stateChangeTypes.InputBlur || 
+            type === useCombobox.stateChangeTypes.InputKeyDownEscape) {
+          setInputValue("");
         }
       },
       
@@ -238,17 +195,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     
     return (
       <div ref={ref} className="relative" {...domProps}>
-        {/* Live region for screen reader announcements */}
-        <div 
-          aria-live="polite" 
-          aria-atomic="true" 
-          className="sr-only"
-          role="status"
-        >
-          {announcement}
-        </div>
-        
-        {/* Trigger component with enhanced styling and accessibility */}
+        {/* Trigger component */}
         <div 
           className={cn(
             comboBoxTriggerVariants({ uiVariant, uiSize, uiState }), 
@@ -326,36 +273,20 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
           </div>
         </div>
         
-        {/* Enhanced Content component with improved positioning and animations */}
+        {/* Content dropdown */}
         {isOpen && (
           <div 
             {...getMenuProps({
               id: listboxId,
               role: 'listbox',
-              'aria-label': 'Options list',
               className: cn(
                 comboBoxContentVariants(), 
-                "absolute top-full left-0 mt-1 w-full",
-                "transform-gpu", // Hardware acceleration for smoother animations
-                "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2"
-              ),
-              style: {
-                // Ensure content doesn't overflow viewport
-                maxHeight: 'min(384px, calc(100vh - 100px))',
-              }
+                "absolute top-full left-0 mt-1 w-full max-h-96"
+              )
             })}
           >
             {filteredOptions.length > 0 ? (
-              <div 
-                className={cn(
-                  "overflow-auto p-1 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent",
-                  "max-h-96"
-                )}
-                style={{
-                  // Custom scrollbar for better UX
-                  scrollbarWidth: 'thin',
-                }}
-              >
+              <div className="overflow-auto p-1 max-h-96">
                 {filteredOptions.map((option, index) => (
                   <div
                     key={option.value}
@@ -369,8 +300,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                         comboBoxItemVariants(),
                         highlightedIndex === index && "bg-accent text-accent-foreground",
                         selectedOption?.value === option.value && "bg-primary/10 font-medium",
-                        option.disabled && "opacity-50 pointer-events-none cursor-not-allowed",
-                        "transition-colors duration-75" // Smooth hover transitions
+                        option.disabled && "opacity-50 pointer-events-none"
                       ),
                       disabled: option.disabled,
                     })}
@@ -383,17 +313,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                 ))}
               </div>
             ) : (
-              <div className={cn(
-                "flex items-center justify-center px-4 py-8",
-                "text-sm text-muted-foreground",
-                "min-h-[80px]" // Ensure adequate height for empty state
-              )}>
-                <div className="text-center">
-                  <div className="mb-1 text-muted-foreground/70">No options found</div>
-                  <div className="text-xs text-muted-foreground/50">
-                    {emptyMessage !== "No options found" ? emptyMessage : "Try adjusting your search"}
-                  </div>
-                </div>
+              <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+                {emptyMessage}
               </div>
             )}
           </div>

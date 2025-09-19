@@ -61,3 +61,47 @@ This creates visual inconsistency and makes global form styling difficult.
 - `packages/src/lib/ui-core/components/form/*.tsx`
 - CSS/theme files
 - All template instances after propagation
+
+## Task M002: ComboBox Simplification and Cleanup
+**Category**: Code Quality/Complexity Reduction  
+**Priority**: Medium  
+**Created**: 2025-09-19
+
+### Problem
+The ComboBox component has accumulated advanced features (editing, tagging, custom values) that don't work properly and add unnecessary complexity. The code is overly complex for basic dropdown selection needs.
+
+### Solution Tasks
+- [x] **Remove non-working advanced features**
+  - Remove `allowCustomValues` and related logic
+  - Remove tagging/editing functionality 
+  - Remove overly complex state management
+  - **Success**: ComboBox focused on core dropdown selection only
+
+- [x] **Simplify component structure**
+  - Reduce prop complexity and remove unused props
+  - Simplify internal state management
+  - Remove unnecessary accessibility overengineering
+  - **Success**: Cleaner, more maintainable component code
+
+- [x] **Evaluate Radix DropdownMenu alternative**
+  - Assess if Radix DropdownMenu primitives could replace ComboBox
+  - Compare complexity vs functionality trade-offs
+  - Document findings for future reference
+  - **Success**: Clear decision on ComboBox vs DropdownMenu approach
+  - **Findings**: DropdownMenu is for actions/menus, ComboBox is for searchable form inputs. Our Select component (already using Radix Select) is well-implemented. ComboBox needs simplification, not replacement. Consider separate DropdownMenu component for action menus in future.
+
+- [x] **Restore working functionality**
+  - Ensure basic dropdown selection works reliably
+  - Test searchable/filterable options
+  - Verify form integration works properly
+  - **Success**: ComboBox works consistently for intended use cases
+
+### Impact
+- Reduced code complexity and maintenance burden
+- More reliable dropdown functionality
+- Clearer component purpose and scope
+- Better developer experience
+
+### Files Affected
+- `packages/src/lib/ui-core/components/form/combobox.tsx`
+- Template instances after propagation
