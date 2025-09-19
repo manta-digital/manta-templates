@@ -53,8 +53,7 @@ const navigationMenuTriggerVariants = cva(
   }
 );
 
-export interface NavigationMenuTriggerVariants 
-  extends VariantProps<typeof navigationMenuTriggerVariants> {}
+export type NavigationMenuTriggerVariants = VariantProps<typeof navigationMenuTriggerVariants>
 
 /**
  * Navigation Menu Trigger Component

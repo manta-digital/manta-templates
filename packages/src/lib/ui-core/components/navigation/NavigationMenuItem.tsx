@@ -43,8 +43,7 @@ const navigationMenuItemVariants = cva(
   }
 );
 
-export interface NavigationMenuItemVariants 
-  extends VariantProps<typeof navigationMenuItemVariants> {}
+export type NavigationMenuItemVariants = VariantProps<typeof navigationMenuItemVariants>
 
 /**
  * Navigation Menu Item Component

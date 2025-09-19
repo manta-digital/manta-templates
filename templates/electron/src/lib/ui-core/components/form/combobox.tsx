@@ -34,6 +34,9 @@ export interface ComboBoxProps
   // Advanced
   emptyMessage?: string;
   filterFunction?: (inputValue: string, option: ComboBoxOption) => boolean;
+  allowCustomValues?: boolean;
+  customValueLabel?: string;
+  onInputValueChange?: (value: string) => void;
   
   // Form integration and accessibility
   name?: string;
