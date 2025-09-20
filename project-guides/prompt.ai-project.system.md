@@ -111,6 +111,7 @@ Avoid:
 - Time estimates in hours/days/etc.  You may use a 1-5 relative effort scale.
 - Extensive benchmarking tasks unless actually relevant to this effort.
 - Extensive or speculative risk items.  Include only if truly relevant.
+- Any substantial code writing.  This is a planning and process task.
 
 YAML Frontmatter Details:
 ```yaml
