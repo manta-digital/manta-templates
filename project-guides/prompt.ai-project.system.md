@@ -572,6 +572,11 @@ Let's analyze the following existing codebase and document our findings.  We wan
   use tailwind.config.ts/.js. 
 ```
 
+##### Custom Instruction
+*Used as a placeholder by context-builder app*
+```markdown
+Custom instructions apply.  See Additional Context for instruction prompt.
+```
 
 ***
 ### Experimental
