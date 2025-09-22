@@ -3,7 +3,7 @@ slice: navigation-menu
 project: manta-templates
 lldReference: project-artifacts/react-template/slices/030-slice.navigation-menu.md
 dependencies: []
-projectState: React template with existing header components and ui-core framework-agnostic architecture
+projectState: in-progress (additional tasks postponed)
 effort: 4/5
 lastUpdated: 2025-09-17
 ---
