@@ -175,10 +175,29 @@ export default function HeroTestPage() {
         <h2 className="text-lg font-semibold p-4">Fullscreen Image Hero</h2>
         <HeroSection
           content={{
-            ...imageBackgroundContent,
             title: 'Fullscreen Hero Experience',
             subtitle: 'Taking up the full viewport height',
-            description: 'Perfect for landing pages and impactful first impressions'
+            description: 'Perfect for landing pages and impactful first impressions',
+            primaryCTA: {
+              label: 'Get Started',
+              href: '/get-started',
+              variant: 'primary'
+            },
+            secondaryCTA: {
+              label: 'Learn More',
+              href: '/learn-more',
+              variant: 'outline'
+            },
+            background: {
+              type: 'image',
+              image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
+              position: 'center center',
+              size: 'cover'
+            },
+            overlay: {
+              opacity: 0.5,
+              color: '#000000'
+            }
           }}
           size="xl"
           variant="fullscreen"
