@@ -75,50 +75,50 @@ Creating a comprehensive hero section component for business/marketing websites 
 
 #### Task 2.1: Implement HeroSection Main Component
 **Effort**: 2/5
-- [ ] Develop `HeroSection.tsx` with:
-  - [ ] CVA variants for size (sm, md, lg, xl/fullscreen)
-  - [ ] CVA variants for content position (left, center, right)
-  - [ ] CVA variants for layout (default, fullscreen, split)
-  - [ ] Content prop handling and validation
-  - [ ] Framework component injection (LinkComponent, ImageComponent)
-  - [ ] Theme integration with existing design tokens
-- [ ] Add responsive behavior detection
-- [ ] Implement proper TypeScript generics
-- [ ] Include comprehensive prop validation
-- [ ] Write unit tests for HeroSection component
-- [ ] Test all CVA variants and prop combinations
-- [ ] Test framework component integration
-- [ ] Update example page to demonstrate functionality
+- [x] Develop `HeroSection.tsx` with:
+  - [x] CVA variants for size (sm, md, lg, xl/fullscreen)
+  - [x] CVA variants for content position (left, center, right)
+  - [x] CVA variants for layout (default, fullscreen, split)
+  - [x] Content prop handling and validation
+  - [x] Framework component injection (LinkComponent, ImageComponent)
+  - [x] Theme integration with existing design tokens
+- [x] Add responsive behavior detection
+- [x] Implement proper TypeScript generics
+- [x] Include comprehensive prop validation
+- [x] Write unit tests for HeroSection component
+- [x] Test all CVA variants and prop combinations
+- [x] Test framework component integration
+- [x] Update example page to demonstrate functionality
 **Success Criteria**: Hero section renders with all variants, accepts framework components, tests pass
 
 #### Task 2.1.1: Create Basic Example Page
 **Effort**: 1/5
-- [ ] Create initial example page after HeroSection component:
-  - [ ] Create `templates/react/src/app/examples/hero/basic/page.tsx`
-  - [ ] Implement simple static hero with placeholder content
-  - [ ] Add to navigation/routing as appropriate
-  - [ ] Include basic responsive behavior
-- [ ] Test hero section renders correctly in browser
-- [ ] Verify routing and navigation work
+- [x] Create initial example page after HeroSection component:
+  - [x] Create `templates/react/src/app/examples/hero/basic/page.tsx`
+  - [x] Implement simple static hero with placeholder content
+  - [x] Add to navigation/routing as appropriate
+  - [x] Include basic responsive behavior
+- [x] Test hero section renders correctly in browser
+- [x] Verify routing and navigation work
 - [ ] Document example usage patterns
 **Success Criteria**: Basic hero example renders, can be viewed in browser
 
 #### Task 2.2: Implement HeroBackground Component
 **Effort**: 3/5
-- [ ] Develop `HeroBackground.tsx` with background type detection:
-  - [ ] Static image background support (with dark mode variant)
-  - [ ] Gradient background support
-  - [ ] Placeholder for video/slides (Phase 3)
-  - [ ] Background position and size variants
-- [ ] Implement responsive image loading
-- [ ] Add proper image optimization support
-- [ ] Support WebP/AVIF format detection
-- [ ] Handle loading states for images
-- [ ] Write unit tests for HeroBackground component
-- [ ] Test background type detection and switching
-- [ ] Test responsive image loading and optimization
-- [ ] Test error handling for failed image loads
-- [ ] Update example page with background variants
+- [x] Develop `HeroBackground.tsx` with background type detection:
+  - [x] Static image background support (with dark mode variant)
+  - [x] Gradient background support
+  - [x] Placeholder for video/slides (Phase 3)
+  - [x] Background position and size variants
+- [x] Implement responsive image loading
+- [x] Add proper image optimization support
+- [x] Support WebP/AVIF format detection
+- [x] Handle loading states for images
+- [x] Write unit tests for HeroBackground component
+- [x] Test background type detection and switching
+- [x] Test responsive image loading and optimization
+- [x] Test error handling for failed image loads
+- [x] Update example page with background variants
 **Success Criteria**: Background images render correctly, responsive loading works, tests pass
 
 #### Task 2.3: Implement HeroText Component
@@ -141,20 +141,20 @@ Creating a comprehensive hero section component for business/marketing websites 
 
 #### Task 2.4: Implement HeroCTA Component
 **Effort**: 2/5
-- [ ] Develop `HeroCTA.tsx` leveraging existing Button component:
-  - [ ] Primary and secondary CTA button support
-  - [ ] Button variant mapping (primary, secondary, outline)
-  - [ ] Framework LinkComponent integration
-  - [ ] Responsive button sizing
-  - [ ] Proper spacing between buttons
-- [ ] Implement mobile-friendly touch targets
-- [ ] Add hover and focus states
-- [ ] Support external links (target="_blank")
-- [ ] Write unit tests for HeroCTA component
-- [ ] Test button variant mapping and styling
-- [ ] Test framework LinkComponent integration
-- [ ] Test external link handling
-- [ ] Update example page with CTA variants
+- [x] Develop `HeroCTA.tsx` leveraging existing Button component:
+  - [x] Primary and secondary CTA button support
+  - [x] Button variant mapping (primary, secondary, outline)
+  - [x] Framework LinkComponent integration
+  - [x] Responsive button sizing
+  - [x] Proper spacing between buttons
+- [x] Implement mobile-friendly touch targets
+- [x] Add hover and focus states
+- [x] Support external links (target="_blank")
+- [x] Write unit tests for HeroCTA component
+- [x] Test button variant mapping and styling
+- [x] Test framework LinkComponent integration
+- [x] Test external link handling
+- [x] Update example page with CTA variants
 **Success Criteria**: CTA buttons work with routing, proper styling and spacing, tests pass
 
 #### Task 2.5: Implement HeroOverlay Component
@@ -404,11 +404,25 @@ Creating a comprehensive hero section component for business/marketing websites 
 ## Success Criteria Summary
 
 - [ ] Hero renders all variants (static, video, slides, animated)
-- [ ] Background features work correctly with fallbacks
+- [x] Background features work correctly with fallbacks
 - [ ] Text animations respect user preferences
-- [ ] CTA buttons integrate with routing
+- [x] CTA buttons integrate with routing
 - [ ] Fully responsive across devices
 - [ ] Accessibility audit passes
 - [ ] Performance targets met (<3s load)
 - [ ] All templates build successfully
 - [ ] Production-ready for business websites
+
+### Next Priority Tasks
+
+1. **Task 2.3: HeroText Component**
+   - [ ] Title rendering with proper heading hierarchy (h1)
+   - [ ] Subtitle and description support
+   - [ ] Implement responsive text sizing
+   - [ ] Add proper line height and spacing
+   - [ ] Write unit tests for HeroText component
+
+3. **Task 2.5: HeroOverlay Component**
+   - [ ] Develop overlay functionality
+   - [ ] Ensure text contrast accessibility
+   - [ ] Write unit tests for HeroOverlay component

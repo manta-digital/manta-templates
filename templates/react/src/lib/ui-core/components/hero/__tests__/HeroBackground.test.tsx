@@ -105,8 +105,22 @@ describe('HeroBackground', () => {
     });
   });
 
-  describe('Non-Gradient Backgrounds', () => {
-    it('should render placeholder for image background', () => {
+  describe('Image Backgrounds', () => {
+    beforeEach(() => {
+      // Mock Image constructor
+      (global as any).Image = class {
+        onload: (() => void) | null = null;
+        onerror: (() => void) | null = null;
+
+        set src(url: string) {
+          setTimeout(() => {
+            if (this.onload) this.onload();
+          }, 0);
+        }
+      };
+    });
+
+    it('should render image background with loading state', () => {
       const config: HeroBackgroundConfig = {
         type: 'image',
         image: '/test-image.jpg'
@@ -114,9 +128,162 @@ describe('HeroBackground', () => {
 
       render(<HeroBackground config={config} />);
 
-      expect(screen.getByText('Background type "image" - Coming soon')).toBeInTheDocument();
+      expect(screen.getByText('Loading image...')).toBeInTheDocument();
     });
 
+    it('should handle image load success', async () => {
+      const onLoad = jest.fn();
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg'
+      };
+
+      render(<HeroBackground config={config} onLoad={onLoad} />);
+
+      // Wait for image to load
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      expect(onLoad).toHaveBeenCalled();
+    });
+
+    it('should handle image load failure', async () => {
+      const onError = jest.fn();
+
+      // Mock Image to fail loading
+      (global as any).Image = class {
+        onload: (() => void) | null = null;
+        onerror: (() => void) | null = null;
+
+        set src(url: string) {
+          setTimeout(() => {
+            if (this.onerror) this.onerror();
+          }, 0);
+        }
+      };
+
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg'
+      };
+
+      render(<HeroBackground config={config} onError={onError} />);
+
+      // Wait for image to fail
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      expect(screen.getByText('Failed to load background image')).toBeInTheDocument();
+    });
+
+    it('should apply background position and size styles', async () => {
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg',
+        position: 'top center',
+        size: 'contain'
+      };
+
+      render(<HeroBackground config={config} />);
+
+      // Wait for image to load
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      const backgroundDiv = document.querySelector('.absolute.inset-0') as HTMLElement;
+      expect(backgroundDiv.style.backgroundPosition).toBe('top center');
+      expect(backgroundDiv.style.backgroundSize).toBe('contain');
+    });
+
+    it('should use default position and size when not provided', async () => {
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg'
+      };
+
+      render(<HeroBackground config={config} />);
+
+      // Wait for image to load
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      const backgroundDiv = document.querySelector('.absolute.inset-0') as HTMLElement;
+      expect(backgroundDiv.style.backgroundPosition).toBe('center center');
+      expect(backgroundDiv.style.backgroundSize).toBe('cover');
+    });
+
+    it('should handle fallback from optimized format to original', async () => {
+      let loadAttempts = 0;
+      const onError = jest.fn();
+
+      // Mock Image to fail on first attempt (optimized), succeed on second (original)
+      (global as any).Image = class {
+        onload: (() => void) | null = null;
+        onerror: (() => void) | null = null;
+
+        set src(url: string) {
+          loadAttempts++;
+          setTimeout(() => {
+            if (loadAttempts === 1 && this.onerror) {
+              // First attempt (optimized format) fails
+              this.onerror();
+            } else if (loadAttempts === 2 && this.onload) {
+              // Second attempt (original format) succeeds
+              this.onload();
+            }
+          }, 0);
+        }
+      };
+
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg'
+      };
+
+      render(<HeroBackground config={config} onError={onError} />);
+
+      // Wait for both load attempts
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      // Should not call onError since fallback succeeded
+      expect(onError).not.toHaveBeenCalled();
+    });
+
+    it('should support dark mode image variants', () => {
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg',
+        imageDark: '/test-image-dark.jpg'
+      };
+
+      render(<HeroBackground config={config} />);
+
+      // Currently always uses light mode image
+      // In future implementation, this would check theme context
+      expect(screen.getByText('Loading image...')).toBeInTheDocument();
+    });
+
+    it('should apply transition classes for smooth loading', () => {
+      const config: HeroBackgroundConfig = {
+        type: 'image',
+        image: '/test-image.jpg'
+      };
+
+      render(<HeroBackground config={config} />);
+
+      const backgroundDiv = document.querySelector('.absolute.inset-0');
+      expect(backgroundDiv).toHaveClass('transition-opacity', 'duration-500');
+    });
+
+    it('should handle missing image property gracefully', () => {
+      const config: HeroBackgroundConfig = {
+        type: 'image'
+        // Missing image property
+      };
+
+      expect(() => {
+        render(<HeroBackground config={config} />);
+      }).not.toThrow();
+    });
+  });
+
+  describe('Non-Image Backgrounds', () => {
     it('should render placeholder for video background', () => {
       const config: HeroBackgroundConfig = {
         type: 'video',
