@@ -116,7 +116,7 @@ export const testHeroVariants = {
   gradient: createTestHeroContent({
     background: {
       type: 'gradient',
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      gradient: { from: 'accent-7', to: 'accent-10' },
     },
   }),
 };

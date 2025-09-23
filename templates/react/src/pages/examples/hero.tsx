@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { HeroSection } from '../../lib/ui-core/components/hero/HeroSection';
 import type { HeroContent } from '../../lib/ui-core/types/hero';
 
@@ -14,19 +13,29 @@ export default function HeroTestPage() {
     title: 'Simple Range Gradient',
     subtitle: 'Using range-based gradient (75/100)',
     description: 'This hero uses the same gradient system as GradientCard',
+    primaryCTA: {
+      label: 'Get Started',
+      href: '/get-started',
+      variant: 'primary'
+    },
+    secondaryCTA: {
+      label: 'Learn More',
+      href: '/learn-more',
+      variant: 'secondary'
+    },
     background: {
       type: 'gradient',
-      gradient: { range: 75 }
+      gradient: { from: 'accent-9', to: 'accent-8' }
     }
   };
 
   const advancedGradientContent: HeroContent = {
     title: 'Advanced Gradient',
     subtitle: 'Using from/to color scales',
-    description: 'Accent-7 to Accent-11 gradient for rich colors',
+    description: 'Accent-1 to Accent-8 gradient for rich colors',
     background: {
       type: 'gradient',
-      gradient: { from: 'accent-7', to: 'accent-11' }
+      gradient: { from: 'accent-1', to: 'accent-8' }
     }
   };
 

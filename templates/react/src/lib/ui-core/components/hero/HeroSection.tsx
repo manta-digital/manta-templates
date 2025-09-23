@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
-import { HeroSectionProps } from '../../types/hero';
+import { HeroSectionProps, HeroContent } from '../../types/hero';
 import { HeroBackground } from './HeroBackground';
 
 /**
@@ -24,13 +24,13 @@ export function HeroSection({
 }: HeroSectionProps) {
 
   // Default content if none provided
-  const defaultContent = {
+  const defaultContent: HeroContent = {
     title: 'Hero Section Placeholder',
     subtitle: 'This is a placeholder hero section',
     description: 'A simple hero section with gradient background',
     background: {
       type: 'gradient' as const,
-      gradient: { range: 50 }
+      gradient: { from: 'accent-7', to: 'accent-10' }
     }
   };
 
@@ -75,6 +75,28 @@ export function HeroSection({
               )}
               {heroContent.description && (
                 <p className="text-lg mb-8">{heroContent.description}</p>
+              )}
+              {(heroContent.primaryCTA || heroContent.secondaryCTA) && (
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  {heroContent.primaryCTA && (
+                    <a
+                      href={heroContent.primaryCTA.href}
+                      className="px-6 py-3 bg-white text-black font-medium rounded-md hover:bg-gray-100 transition-colors"
+                      {...(heroContent.primaryCTA.external && { target: "_blank", rel: "noopener noreferrer" })}
+                    >
+                      {heroContent.primaryCTA.label}
+                    </a>
+                  )}
+                  {heroContent.secondaryCTA && (
+                    <a
+                      href={heroContent.secondaryCTA.href}
+                      className="px-6 py-3 border border-white text-white font-medium rounded-md hover:bg-white hover:text-black transition-colors"
+                      {...(heroContent.secondaryCTA.external && { target: "_blank", rel: "noopener noreferrer" })}
+                    >
+                      {heroContent.secondaryCTA.label}
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           )}
