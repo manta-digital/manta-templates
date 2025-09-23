@@ -38,11 +38,11 @@ Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implem
 ```markdown
 We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
-The actual concept description as well as additional concept will be provided by Project Manager for injection into our process.  The first thing we need to do is to use our Project Guide together with the additional concept information to create documents tailored to our project.  We and our AI team members will use these to design, implement, and verify project tasks.
+The initial concept description will be provided by the project manager, ideally as a starter document in `project-guides/001-concept.{project}.md`.  Our goal is to refine this initial user-provided concept into the Refined Concept, which should be placed as instructed into the existing document.  The placeholder document should provide any needed details needed for this procedure.
 
-To do this, we need to use the Project Guide together with information provided to create our concept document (Phase 1). If any areas in the Concept guide need more information that is not provided, request from the Project Manager before continuing.  Otherwise, create the Project Concept document now.
+We will use the refined concept as a basis for creating the spec, which will later be refined into designs, slices, features, and tasks.  Use the Project Guide together with the user-provided concept to create the refined concept tailored to our project.
 
-Note: when creating these project documents, do not guess.  If information is missing or you cannot access it (Scichart, for example), stop and ask for clarification so we can proceed properly.  Pause here until you receive the project concept description from the Project Manager.
+When creating the refined concept, *ask questions* if any information is missing or unclear.  The guideline of do not assume or guess applies, but is even more important here at this early concept state.  Request any needed clarifications from the Project Manager.  If you do not find or receive the user-provided concept description, obtain from Project Manager before proceeding.
 ```
 
 ##### Spec Creation (Phase 2)
