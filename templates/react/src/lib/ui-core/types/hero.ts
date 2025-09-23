@@ -49,8 +49,17 @@ export interface HeroBackgroundConfig {
     duration?: number;
   }>;
 
-  /** CSS gradient background */
-  gradient?: string;
+  /** Gradient configuration - supports multiple formats */
+  gradient?: {
+    /** Simple gradient range from background to accent (0-100) */
+    range?: number;
+    /** Advanced gradient: color scale to start from */
+    from?: string;
+    /** Advanced gradient: color scale to end at */
+    to?: string;
+    /** Custom gradient definition (overrides other gradient props) */
+    custom?: string;
+  };
 
   /** Background position (CSS background-position values) */
   position?: string;
@@ -181,7 +190,7 @@ export type HeroTextSize = 'sm' | 'md' | 'lg';
  */
 export interface HeroSectionProps {
   /** Hero content configuration */
-  content: HeroContent;
+  content?: HeroContent;
 
   /** Hero size variant */
   size?: HeroSize;
