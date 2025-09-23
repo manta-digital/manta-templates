@@ -182,7 +182,7 @@ After creation of task list, you must review the entire list against the slice d
 
 ##### Slice Task Expansion (Phase 6)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
+We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.  Only enhance tasks that can truly benefit from it.  Many tasks may already be described with sufficient detail.
 
 Use `guide.ai-project.06-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
 
