@@ -10,7 +10,15 @@ export * from './components/headers';
 export * from './components/footers';
 export * from './components/overlays';
 export * from './components/form';
-export * from './components/hero';
+// Export hero components explicitly to avoid HeroContent naming conflict
+export {
+  HeroSection,
+  HeroBackground,
+  HeroContent as HeroContentComponent,
+  HeroText,
+  HeroCTA,
+  HeroOverlay
+} from './components/hero';
 // Export navigation components explicitly to avoid NavigationMenuItem type conflict
 export {
   EnhancedHeader,
