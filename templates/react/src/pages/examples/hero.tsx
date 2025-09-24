@@ -576,9 +576,9 @@ export default function HeroTestPage() {
         </p>
         <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-sm text-blue-800">
-            <strong>Note:</strong> Some browsers may block autoplay. If you don't see videos playing,
-            check your browser console for messages, or try interacting with the page first.
-            Videos should show poster images while loading, then transition to playing video.
+            <strong>Note:</strong> Some browsers may block autoplay. If you see a play button overlay,
+            click it to start video playback. Videos show poster images while loading, then transition to playing video.
+            All videos are muted for autoplay compatibility.
           </p>
         </div>
 
@@ -596,7 +596,8 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/movie.mp4',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+                  poster: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
@@ -636,12 +637,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                  poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  poster: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80'
                 },
                 position: 'center center',
                 size: 'cover'
@@ -671,12 +672,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/movie.mp4',
-                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80'
                 }
               },
               overlay: {
@@ -709,12 +710,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4',
-                  poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                  poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80'
                 }
               },
               overlay: {
@@ -742,12 +743,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80'
                 }
               },
               overlay: {
@@ -775,12 +776,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/movie.mp4',
-                  poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                  poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80'
                 },
                 position: 'top center',
                 size: 'cover'
@@ -820,12 +821,12 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+                  poster: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
                   muted: true,
-                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                  fallbackImage: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80'
                 }
               },
               overlay: {

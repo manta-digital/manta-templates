@@ -110,19 +110,16 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   // Video event handlers
   const handleVideoLoad = useCallback(() => {
-    console.log('Video loaded successfully');
     setVideoLoaded(true);
     setVideoError(false);
     onLoad?.();
   }, [onLoad]);
 
   const handleVideoCanPlay = useCallback(() => {
-    console.log('Video can play - showing video');
     setVideoCanPlay(true);
   }, []);
 
   const handleVideoError = useCallback(() => {
-    console.log('Video error occurred');
     setVideoError(true);
     setVideoLoaded(false);
 
@@ -197,10 +194,8 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
-        console.log('Video started playing successfully');
         setVideoPaused(false);
       }).catch((error) => {
-        console.log('Video autoplay was prevented or failed:', error.message);
         // Don't treat autoplay prevention as an error, just set paused state
         if (error.name === 'NotAllowedError') {
           setVideoPaused(true);
@@ -255,10 +250,9 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          console.log('Video started playing manually');
           setVideoPaused(false);
-        }).catch((error) => {
-          console.log('Manual video play failed:', error.message);
+        }).catch(() => {
+          // Manual play failed, keep paused state
         });
       }
     }
