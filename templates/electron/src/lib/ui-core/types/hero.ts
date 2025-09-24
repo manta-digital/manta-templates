@@ -183,7 +183,7 @@ export interface HeroFrameworkComponents {
 export type HeroSize = 'sm' | 'md' | 'lg' | 'xl';
 export type HeroContentPosition = 'left' | 'center' | 'right';
 export type HeroVariant = 'default' | 'fullscreen' | 'split';
-export type HeroTextSize = 'sm' | 'md' | 'lg';
+export type HeroTextSize = 'default' | 'sm' | 'md' | 'lg';
 
 /**
  * Main HeroSection component props
