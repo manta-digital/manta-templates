@@ -574,6 +574,43 @@ export default function HeroTestPage() {
         <p className="text-muted-foreground mb-6">
           Demonstrating video backgrounds with different configurations, optimizations, and fallbacks
         </p>
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-sm text-blue-800">
+            <strong>Note:</strong> Some browsers may block autoplay. If you don't see videos playing,
+            check your browser console for messages, or try interacting with the page first.
+            Videos should show poster images while loading, then transition to playing video.
+          </p>
+        </div>
+
+        {/* Simple Test Video */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Simple Test Video</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Basic video test with a very small, reliable video file.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Simple Video Test',
+              subtitle: 'Testing video playback',
+              description: 'This should show a small test video if video playback is working.',
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://www.w3schools.com/html/movie.mp4',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                }
+              },
+              overlay: {
+                opacity: 0.3,
+                color: '#000000'
+              }
+            }}
+            size="sm"
+            textSize="sm"
+          />
+        </div>
 
         {/* Basic Video Background */}
         <div className="mb-8">
@@ -599,7 +636,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,
@@ -634,7 +671,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+                  src: 'https://www.w3schools.com/html/movie.mp4',
                   poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,
@@ -672,7 +709,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4',
                   poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,
@@ -705,7 +742,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,
@@ -738,7 +775,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                  src: 'https://www.w3schools.com/html/movie.mp4',
                   poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,
@@ -783,7 +820,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
                   autoPlay: true,
                   loop: true,

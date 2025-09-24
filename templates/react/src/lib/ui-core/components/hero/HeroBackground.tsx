@@ -14,6 +14,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [videoCanPlay, setVideoCanPlay] = useState(false);
+  const [videoPaused, setVideoPaused] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Support for modern image formats
@@ -109,16 +110,19 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   // Video event handlers
   const handleVideoLoad = useCallback(() => {
+    console.log('Video loaded successfully');
     setVideoLoaded(true);
     setVideoError(false);
     onLoad?.();
   }, [onLoad]);
 
   const handleVideoCanPlay = useCallback(() => {
+    console.log('Video can play - showing video');
     setVideoCanPlay(true);
   }, []);
 
   const handleVideoError = useCallback(() => {
+    console.log('Video error occurred');
     setVideoError(true);
     setVideoLoaded(false);
 
@@ -167,6 +171,12 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     video.playsInline = true; // Important for iOS
     video.preload = 'metadata';
 
+    // Also set as attributes for better browser compatibility
+    video.setAttribute('autoplay', config.video.autoPlay ?? true ? 'autoplay' : '');
+    video.setAttribute('loop', config.video.loop ?? true ? 'loop' : '');
+    video.setAttribute('muted', config.video.muted ?? true ? 'muted' : '');
+    video.setAttribute('playsinline', 'playsinline');
+
     if (config.video.poster) {
       video.poster = config.video.poster;
     }
@@ -186,9 +196,17 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     // Try to play the video
     const playPromise = video.play();
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Auto-play was prevented, not necessarily an error
-        console.log('Video autoplay was prevented');
+      playPromise.then(() => {
+        console.log('Video started playing successfully');
+        setVideoPaused(false);
+      }).catch((error) => {
+        console.log('Video autoplay was prevented or failed:', error.message);
+        // Don't treat autoplay prevention as an error, just set paused state
+        if (error.name === 'NotAllowedError') {
+          setVideoPaused(true);
+        } else {
+          handleVideoError();
+        }
       });
     }
 
@@ -229,6 +247,22 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       observer.disconnect();
     };
   }, [config.type]);
+
+  // Manual video play handler
+  const handleManualPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Video started playing manually');
+          setVideoPaused(false);
+        }).catch((error) => {
+          console.log('Manual video play failed:', error.message);
+        });
+      }
+    }
+  }, []);
 
   // Effect to handle image loading
   useEffect(() => {
@@ -380,9 +414,13 @@ export function HeroBackground({ config, className, onLoad, onError, components 
           style={{
             objectPosition: config.position || 'center center',
           }}
+          autoPlay={config.video?.autoPlay ?? true}
+          loop={config.video?.loop ?? true}
+          muted={config.video?.muted ?? true}
           playsInline
           disablePictureInPicture
           controlsList="nodownload nofullscreen noremoteplayback"
+          preload="metadata"
         >
           Your browser does not support the video tag.
         </video>
@@ -435,6 +473,21 @@ export function HeroBackground({ config, className, onLoad, onError, components 
               backgroundRepeat: 'no-repeat',
             }}
           />
+        )}
+
+        {/* Manual play button when autoplay is blocked */}
+        {videoPaused && videoCanPlay && !videoError && (
+          <button
+            onClick={handleManualPlay}
+            className="absolute inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-colors duration-200 cursor-pointer group"
+            aria-label="Play video"
+          >
+            <div className="bg-white bg-opacity-90 rounded-full w-16 h-16 flex items-center justify-center group-hover:bg-opacity-100 transition-colors duration-200">
+              <svg className="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </button>
         )}
       </div>
     );
