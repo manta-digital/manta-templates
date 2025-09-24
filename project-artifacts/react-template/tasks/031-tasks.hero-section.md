@@ -123,20 +123,20 @@ Creating a comprehensive hero section component for business/marketing websites 
 
 #### Task 2.3: Implement HeroText Component
 **Effort**: 2/5
-- [ ] Develop `HeroText.tsx` with text content rendering:
-  - [ ] Title rendering with proper heading hierarchy (h1)
-  - [ ] Subtitle and description support
-  - [ ] CVA variants for text size (sm, md, lg)
-  - [ ] Basic fade-in animation support
-  - [ ] Text color variants for overlay contrast
-- [ ] Implement responsive text sizing
-- [ ] Add proper line height and spacing
-- [ ] Support HTML content in description
-- [ ] Write unit tests for HeroText component
-- [ ] Test text variants and responsive sizing
-- [ ] Test HTML content rendering and sanitization
-- [ ] Test animation integration
-- [ ] Update example page with text variants
+- [x] Develop `HeroText.tsx` with text content rendering:
+  - [x] Title rendering with proper heading hierarchy (h1)
+  - [x] Subtitle and description support
+  - [x] CVA variants for text size (sm, md, lg)
+  - [x] Basic fade-in animation support
+  - [x] Text color variants for overlay contrast
+- [x] Implement responsive text sizing
+- [x] Add proper line height and spacing
+- [x] Support HTML content in description
+- [x] Write unit tests for HeroText component
+- [x] Test text variants and responsive sizing
+- [x] Test HTML content rendering and sanitization
+- [x] Test animation integration
+- [x] Update example page with text variants
 **Success Criteria**: Text renders with proper hierarchy, responsive sizing works, tests pass
 
 #### Task 2.4: Implement HeroCTA Component
@@ -416,13 +416,6 @@ Creating a comprehensive hero section component for business/marketing websites 
 - [ ] Production-ready for business websites
 
 ### Next Priority Tasks
-
-1. **Task 2.3: HeroText Component**
-   - [ ] Title rendering with proper heading hierarchy (h1)
-   - [ ] Subtitle and description support
-   - [ ] Implement responsive text sizing
-   - [ ] Add proper line height and spacing
-   - [ ] Write unit tests for HeroText component
 
 3. **Task 2.5: HeroOverlay Component**
    - [ ] Develop overlay functionality

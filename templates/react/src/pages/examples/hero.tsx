@@ -204,6 +204,195 @@ export default function HeroTestPage() {
           contentPosition="center"
         />
       </div>
+
+      {/* HeroText Variants Section */}
+      <div className="mb-8 p-4">
+        <h2 className="text-xl font-bold mb-4">HeroText Component Variants</h2>
+        <p className="text-muted-foreground mb-6">
+          Demonstrating different text sizes, animations, and content configurations
+        </p>
+
+        {/* Small Text Size */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Small Text Size (sm)</h3>
+          <HeroSection
+            content={{
+              title: 'Small Hero Text',
+              subtitle: 'Compact text for secondary heroes',
+              description: 'Perfect for page sections that need less visual weight while maintaining hierarchy.',
+              background: {
+                type: 'gradient',
+                gradient: { from: 'accent-2', to: 'accent-4' }
+              }
+            }}
+            size="md"
+            textSize="sm"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Medium Text Size (Default) */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Medium Text Size (md) - Default</h3>
+          <HeroSection
+            content={{
+              title: 'Medium Hero Text',
+              subtitle: 'Balanced text sizing for most use cases',
+              description: 'The default text size provides excellent readability and visual impact for most hero sections.',
+              background: {
+                type: 'gradient',
+                gradient: { from: 'accent-3', to: 'accent-6' }
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Large Text Size */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Large Text Size (lg)</h3>
+          <HeroSection
+            content={{
+              title: 'Large Hero Text',
+              subtitle: 'Bold and impactful for primary heroes',
+              description: 'Large text size creates maximum visual impact for landing pages and primary marketing messages.',
+              background: {
+                type: 'gradient',
+                gradient: { from: 'accent-4', to: 'accent-8' }
+              }
+            }}
+            size="lg"
+            textSize="lg"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Animation Examples */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Text Animations</h3>
+
+          {/* Fade Animation */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Fade Animation</h4>
+            <HeroSection
+              content={{
+                title: 'Fade Animation Example',
+                subtitle: 'Smooth fade-in effect',
+                description: 'Text elements fade in smoothly when the component mounts.',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-1', to: 'accent-3' }
+                },
+                animations: {
+                  text: 'fade'
+                }
+              }}
+              size="sm"
+              textSize="sm"
+            />
+          </div>
+
+          {/* Slide Animation */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Slide Animation</h4>
+            <HeroSection
+              content={{
+                title: 'Slide Animation Example',
+                subtitle: 'Slide up from bottom effect',
+                description: 'Text elements slide up from the bottom with a smooth transition.',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-2', to: 'accent-5' }
+                },
+                animations: {
+                  text: 'slide'
+                }
+              }}
+              size="sm"
+              textSize="sm"
+            />
+          </div>
+
+          {/* Stagger Animation */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Stagger Animation</h4>
+            <HeroSection
+              content={{
+                title: 'Stagger Animation Example',
+                subtitle: 'Sequential element animation',
+                description: 'Text elements animate in sequence: title first, then subtitle, then description.',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-3', to: 'accent-7' }
+                },
+                animations: {
+                  text: 'stagger'
+                }
+              }}
+              size="sm"
+              textSize="sm"
+            />
+          </div>
+        </div>
+
+        {/* Content Variations */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Content Variations</h3>
+
+          {/* Title Only */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Title Only</h4>
+            <HeroSection
+              content={{
+                title: 'Minimalist Hero with Title Only',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-1', to: 'accent-2' }
+                }
+              }}
+              size="sm"
+              textSize="md"
+            />
+          </div>
+
+          {/* Title + Subtitle */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Title + Subtitle</h4>
+            <HeroSection
+              content={{
+                title: 'Hero with Title and Subtitle',
+                subtitle: 'Clean design with essential information',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-2', to: 'accent-4' }
+                }
+              }}
+              size="sm"
+              textSize="md"
+            />
+          </div>
+
+          {/* HTML Content */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">HTML Content in Description</h4>
+            <HeroSection
+              content={{
+                title: 'Rich HTML Content Support',
+                subtitle: 'Description with formatted text',
+                description: 'This description includes <strong>bold text</strong>, <em>italic text</em>, and even <a href="#" style="color: inherit; text-decoration: underline;">links</a> for rich content presentation.',
+                background: {
+                  type: 'gradient',
+                  gradient: { from: 'accent-4', to: 'accent-6' }
+                }
+              }}
+              size="sm"
+              textSize="md"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
