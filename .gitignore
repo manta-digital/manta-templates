@@ -13,3 +13,6 @@ Icon?
 # Obsidian workspace settings
 .obsidian/workspace
 .obsidian/workspace.json
+
+# Private documents (this is an unusual setting)
+project-documents/private
