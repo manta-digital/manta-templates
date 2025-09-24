@@ -567,6 +567,275 @@ export default function HeroTestPage() {
           />
         </div>
       </div>
+
+      {/* Video Background Examples Section */}
+      <div className="mb-8 p-4">
+        <h2 className="text-xl font-bold mb-4">Video Background Heroes</h2>
+        <p className="text-muted-foreground mb-6">
+          Demonstrating video backgrounds with different configurations, optimizations, and fallbacks
+        </p>
+
+        {/* Basic Video Background */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Basic Video Background</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            MP4 video with autoplay, loop, and muted attributes. Includes poster image and fallback.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Video Hero Experience',
+              subtitle: 'Engaging motion backgrounds',
+              description: 'Video backgrounds create dynamic, engaging hero sections that capture attention and enhance storytelling.',
+              primaryCTA: {
+                label: 'Watch Demo',
+                href: '/demo',
+                variant: 'primary'
+              },
+              secondaryCTA: {
+                label: 'Learn More',
+                href: '/learn-more',
+                variant: 'outline'
+              },
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop'
+                },
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.4,
+                color: '#000000'
+              }
+            }}
+            size="lg"
+            textSize="lg"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Video with Strong Overlay */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Video with Strong Overlay</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            High contrast overlay ensures text readability over motion backgrounds.
+          </p>
+          <HeroSection
+            content={{
+              title: 'High Contrast Video Hero',
+              subtitle: 'Maximum readability over motion',
+              description: 'Strong overlays ensure perfect text contrast even with dynamic video backgrounds.',
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                }
+              },
+              overlay: {
+                opacity: 0.7,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Video with Gradient Overlay */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Video with Gradient Overlay</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Sophisticated gradient overlay creates professional appearance over video.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Professional Video Presentation',
+              subtitle: 'Gradient overlay for sophistication',
+              description: 'Gradient overlays combine beautifully with video backgrounds for elegant, professional presentations.',
+              primaryCTA: {
+                label: 'Get Started',
+                href: '/start',
+                variant: 'primary'
+              },
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                  poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop'
+                }
+              },
+              overlay: {
+                opacity: 1.0,
+                gradient: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Mobile-Optimized Video */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Mobile-Optimized Video</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Automatically falls back to static image on mobile devices for better performance.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Mobile-Friendly Video Hero',
+              subtitle: 'Optimized for all devices',
+              description: 'Desktop users see the video background, while mobile users get an optimized static image for better performance and data usage.',
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
+                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                }
+              },
+              overlay: {
+                opacity: 0.5,
+                color: '#1a1a1a'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="right"
+          />
+        </div>
+
+        {/* Video with Custom Positioning */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Video with Custom Positioning</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Video background with custom object positioning for better focal point control.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Precisely Positioned Video',
+              subtitle: 'Control the focal point',
+              description: 'Custom positioning allows you to control which part of the video is visible and how it aligns within the hero section.',
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                  poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop'
+                },
+                position: 'top center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.3,
+                color: '#000000'
+              }
+            }}
+            size="sm"
+            textSize="sm"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Fullscreen Video Hero */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Fullscreen Video Hero</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Full viewport height video hero for maximum impact on landing pages.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Cinematic Video Experience',
+              subtitle: 'Full-screen impact',
+              description: 'Create unforgettable first impressions with full-screen video heroes that immediately engage your audience.',
+              primaryCTA: {
+                label: 'Experience Now',
+                href: '/experience',
+                variant: 'primary'
+              },
+              secondaryCTA: {
+                label: 'See Features',
+                href: '/features',
+                variant: 'outline'
+              },
+              background: {
+                type: 'video',
+                video: {
+                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop'
+                }
+              },
+              overlay: {
+                opacity: 0.6,
+                gradient: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%)'
+              }
+            }}
+            size="xl"
+            variant="fullscreen"
+            textSize="lg"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Video Error Handling Demo */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Video Error Handling</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Demonstrates graceful fallback when video fails to load (using intentionally broken video URL).
+          </p>
+          <HeroSection
+            content={{
+              title: 'Robust Error Handling',
+              subtitle: 'Graceful fallback system',
+              description: 'When videos fail to load, the system automatically falls back to static images ensuring your hero section always looks professional.',
+              background: {
+                type: 'video',
+                video: {
+                  src: '/nonexistent-video.mp4', // This will fail and trigger fallback
+                  poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
+                  autoPlay: true,
+                  loop: true,
+                  muted: true,
+                  fallbackImage: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop'
+                }
+              },
+              overlay: {
+                opacity: 0.5,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="center"
+          />
+        </div>
+      </div>
     </div>
   );
 }
