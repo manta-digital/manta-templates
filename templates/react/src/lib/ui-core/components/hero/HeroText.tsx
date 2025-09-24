@@ -11,6 +11,7 @@ const heroTextVariants = cva(
   {
     variants: {
       textSize: {
+        default: "max-w-2xl",
         sm: "max-w-md",
         md: "max-w-2xl",
         lg: "max-w-4xl",
@@ -24,7 +25,7 @@ const heroTextVariants = cva(
       }
     },
     defaultVariants: {
-      textSize: "md",
+      textSize: "default",
       animation: "none",
     }
   }
@@ -34,17 +35,18 @@ const heroTextVariants = cva(
  * CVA variants for hero title styling
  */
 const heroTitleVariants = cva(
-  "font-bold tracking-tight text-foreground",
+  "font-bold tracking-tight text-white drop-shadow-sm",
   {
     variants: {
       textSize: {
+        default: "text-4xl",
         sm: "text-3xl md:text-4xl",
         md: "text-4xl md:text-5xl lg:text-6xl",
         lg: "text-5xl md:text-6xl lg:text-7xl",
       }
     },
     defaultVariants: {
-      textSize: "md",
+      textSize: "default",
     }
   }
 );
@@ -53,17 +55,18 @@ const heroTitleVariants = cva(
  * CVA variants for hero subtitle styling
  */
 const heroSubtitleVariants = cva(
-  "font-medium text-muted-foreground",
+  "font-medium text-white/90 drop-shadow-sm",
   {
     variants: {
       textSize: {
+        default: "text-xl",
         sm: "text-lg md:text-xl",
         md: "text-xl md:text-2xl",
         lg: "text-2xl md:text-3xl",
       }
     },
     defaultVariants: {
-      textSize: "md",
+      textSize: "default",
     }
   }
 );
@@ -72,17 +75,18 @@ const heroSubtitleVariants = cva(
  * CVA variants for hero description styling
  */
 const heroDescriptionVariants = cva(
-  "text-muted-foreground leading-relaxed",
+  "text-white/80 leading-relaxed drop-shadow-sm",
   {
     variants: {
       textSize: {
+        default: "text-lg",
         sm: "text-base",
         md: "text-lg",
         lg: "text-xl",
       }
     },
     defaultVariants: {
-      textSize: "md",
+      textSize: "default",
     }
   }
 );
@@ -102,7 +106,7 @@ const heroDescriptionVariants = cva(
  */
 export function HeroText({
   content,
-  textSize = 'md',
+  textSize = 'default',
   animation = 'none',
   className
 }: HeroTextProps) {
@@ -113,17 +117,15 @@ export function HeroText({
   const finalAnimation = respectsReducedMotion ? 'none' : animation;
 
   return (
-    <div
-      className={cn(
-        heroTextVariants({ textSize, animation: finalAnimation }),
-        className
-      )}
-    >
+    <>
       {/* Title - Always h1 for proper heading hierarchy */}
       <h1
         className={cn(
           heroTitleVariants({ textSize }),
-          finalAnimation === 'stagger' && 'animate-delay-100'
+          "mb-4",
+          finalAnimation === 'fade' && 'animate-in fade-in-0 duration-1000',
+          finalAnimation === 'slide' && 'animate-in slide-in-from-bottom-4 duration-1000',
+          finalAnimation === 'stagger' && 'animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 animate-delay-100'
         )}
       >
         {content.title}
@@ -134,7 +136,10 @@ export function HeroText({
         <p
           className={cn(
             heroSubtitleVariants({ textSize }),
-            finalAnimation === 'stagger' && 'animate-delay-200'
+            "mb-6",
+            finalAnimation === 'fade' && 'animate-in fade-in-0 duration-1000',
+            finalAnimation === 'slide' && 'animate-in slide-in-from-bottom-4 duration-1000',
+            finalAnimation === 'stagger' && 'animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 animate-delay-200'
           )}
         >
           {content.subtitle}
@@ -146,12 +151,15 @@ export function HeroText({
         <div
           className={cn(
             heroDescriptionVariants({ textSize }),
-            finalAnimation === 'stagger' && 'animate-delay-300'
+            "mb-8",
+            finalAnimation === 'fade' && 'animate-in fade-in-0 duration-1000',
+            finalAnimation === 'slide' && 'animate-in slide-in-from-bottom-4 duration-1000',
+            finalAnimation === 'stagger' && 'animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 animate-delay-300'
           )}
           dangerouslySetInnerHTML={{ __html: content.description }}
         />
       )}
-    </div>
+    </>
   );
 }
 
