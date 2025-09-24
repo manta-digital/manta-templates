@@ -2,6 +2,7 @@ import React from 'react';
 import { cn } from '../../utils/cn';
 import { HeroSectionProps, HeroContent } from '../../types/hero';
 import { HeroBackground } from './HeroBackground';
+import { HeroText } from './HeroText';
 
 /**
  * Main hero section component wrapper
@@ -68,16 +69,24 @@ export function HeroSection({
       )}>
         <div className="container mx-auto px-4">
           {children || (
-            <div className="text-center text-white">
-              <h1 className="text-4xl font-bold mb-4">{heroContent.title}</h1>
-              {heroContent.subtitle && (
-                <p className="text-xl mb-6">{heroContent.subtitle}</p>
-              )}
-              {heroContent.description && (
-                <p className="text-lg mb-8">{heroContent.description}</p>
-              )}
+            <div className={cn(
+              'text-white',
+              contentPosition === 'left' && 'text-left',
+              contentPosition === 'center' && 'text-center',
+              contentPosition === 'right' && 'text-right',
+            )}>
+              <HeroText
+                content={{
+                  title: heroContent.title,
+                  subtitle: heroContent.subtitle,
+                  description: heroContent.description,
+                }}
+                textSize={textSize}
+                animation={heroContent.animations?.text}
+              />
+
               {(heroContent.primaryCTA || heroContent.secondaryCTA) && (
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
                   {heroContent.primaryCTA && (
                     <a
                       href={heroContent.primaryCTA.href}
