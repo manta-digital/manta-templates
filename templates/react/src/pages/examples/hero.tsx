@@ -596,7 +596,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -637,7 +637,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -672,7 +672,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                  src: 'https://www.w3schools.com/html/movie.mp4',
                   poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -710,7 +710,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -743,7 +743,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+                  src: 'https://www.w3schools.com/html/movie.mp4',
                   poster: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -776,7 +776,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
@@ -821,7 +821,7 @@ export default function HeroTestPage() {
               background: {
                 type: 'video',
                 video: {
-                  src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+                  src: 'https://www.w3schools.com/html/mov_bbb.mp4',
                   poster: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
                   autoPlay: true,
                   loop: true,
