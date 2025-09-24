@@ -185,7 +185,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
   return (
     <div className={cn('absolute inset-0 w-full h-full bg-gray-100', className)}>
       <div className="flex items-center justify-center h-full text-gray-500">
-        Background type "{config.type}" - Coming soon
+        Background type &quot;{config.type}&quot; - Coming soon
       </div>
     </div>
   );
