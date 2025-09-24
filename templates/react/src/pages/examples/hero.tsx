@@ -393,6 +393,180 @@ export default function HeroTestPage() {
           </div>
         </div>
       </div>
+
+      {/* HeroOverlay Variants Section */}
+      <div className="mb-8 p-4">
+        <h2 className="text-xl font-bold mb-4">HeroOverlay Component Variants</h2>
+        <p className="text-muted-foreground mb-6">
+          Demonstrating overlay effects for better text contrast over images and backgrounds
+        </p>
+
+        {/* Light overlay over image */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Light Overlay (20% opacity)</h3>
+          <HeroSection
+            content={{
+              title: 'Subtle Overlay Effect',
+              subtitle: 'Light darkening for minimal contrast',
+              description: 'A 20% black overlay provides subtle contrast without overwhelming the background image.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.2,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+
+        {/* Medium overlay over image */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Medium Overlay (50% opacity)</h3>
+          <HeroSection
+            content={{
+              title: 'Balanced Overlay Effect',
+              subtitle: 'Perfect balance of image and text visibility',
+              description: 'A 50% black overlay provides excellent text contrast while preserving background details.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.5,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+
+        {/* Strong overlay over image */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Strong Overlay (80% opacity)</h3>
+          <HeroSection
+            content={{
+              title: 'High Contrast Overlay',
+              subtitle: 'Maximum text readability',
+              description: 'An 80% black overlay ensures perfect text contrast, ideal for important messaging.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.8,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+
+        {/* Colored overlay */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Colored Overlay (Blue tint)</h3>
+          <HeroSection
+            content={{
+              title: 'Creative Colored Overlay',
+              subtitle: 'Brand-colored overlay effect',
+              description: 'A blue overlay creates a cohesive brand experience while maintaining text readability.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 0.6,
+                color: '#1e3a8a' // Blue-800
+              }
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+
+        {/* Gradient overlay */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Gradient Overlay</h3>
+          <HeroSection
+            content={{
+              title: 'Sophisticated Gradient Overlay',
+              subtitle: 'Professional gradient effect',
+              description: 'A gradient overlay from transparent to dark creates a sophisticated, professional appearance.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 1.0,
+                gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%)'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Radial gradient overlay (vignette effect) */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Vignette Overlay</h3>
+          <HeroSection
+            content={{
+              title: 'Cinematic Vignette Effect',
+              subtitle: 'Dramatic focus on center content',
+              description: 'A radial gradient overlay creates a cinematic vignette effect, drawing focus to the center.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              },
+              overlay: {
+                opacity: 1.0,
+                gradient: 'radial-gradient(circle, transparent 20%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 100%)'
+              }
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+
+        {/* No overlay comparison */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">No Overlay (Comparison)</h3>
+          <HeroSection
+            content={{
+              title: 'No Overlay Example',
+              subtitle: 'Text directly over image',
+              description: 'Without an overlay, text contrast depends entirely on the background image content.',
+              background: {
+                type: 'image',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                position: 'center center',
+                size: 'cover'
+              }
+              // No overlay specified
+            }}
+            size="md"
+            textSize="md"
+          />
+        </div>
+      </div>
     </div>
   );
 }

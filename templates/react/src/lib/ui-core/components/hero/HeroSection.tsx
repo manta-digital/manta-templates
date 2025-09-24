@@ -3,6 +3,7 @@ import { cn } from '../../utils/cn';
 import { HeroSectionProps, HeroContent } from '../../types/hero';
 import { HeroBackground } from './HeroBackground';
 import { HeroText } from './HeroText';
+import { HeroOverlay } from './HeroOverlay';
 
 /**
  * Main hero section component wrapper
@@ -59,6 +60,9 @@ export function HeroSection({
         onLoad={onLoad}
         onError={onError}
       />
+
+      {/* Overlay Layer */}
+      <HeroOverlay config={heroContent.overlay} />
 
       {/* Content Layer */}
       <div className={cn(
