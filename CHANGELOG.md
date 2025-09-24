@@ -8,33 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Hero Section Component System** - Complete framework-agnostic hero section implementation with multiple variants
-- **Image Background Support** - Advanced image optimization with WebP/AVIF detection, responsive loading, and error handling
-- **Gradient Background System** - Comprehensive gradient support with range-based and color-scale gradients
-- **Hero Component Architecture** - Modular design with HeroSection, HeroBackground, HeroText, HeroCTA, and HeroOverlay components
-- **Modern Image Optimization** - Automatic format detection, fallback mechanisms, and loading state management
-- **Framework Compatibility** - Next.js App Router support with proper client directives and TypeScript integration
+- **Hero Section Components** - Framework-agnostic hero system with image backgrounds, gradient support, WebP/AVIF optimization, and responsive loading states
 
 ### Changed
 - Removed remaining ShadCN references from documentation and guides
-- **Hero Examples Page** - Enhanced with comprehensive demonstrations of all hero variants and configurations
 
 ### Fixed
-- **Hero Background Dependencies** - Resolved gradientUtils missing dependency after copy-packages propagation
-- **Next.js Client Components** - Added 'use client' directives for components using React hooks
-- **TypeScript Export Conflicts** - Fixed HeroContent naming collision between component and interface exports
-- **ESLint Compliance** - Resolved unescaped entities errors in JSX content
+- Hero component build compatibility across React and Next.js templates
 - Closed issue #52: Added form components and controls to ui-core
 - Closed issue #55: Made CosineTerrainCard theme-aware
 - Closed issue #60: Added React template to manta-templates
 - Closed issue #62: Fully supported footer content and legal in React template
 - Closed issue #68: Fixed forms bundling errors in NextJS template
-
-### Technical Details
-- **Task 2.2 Complete**: HeroBackground component with production-ready image support
-- **Build Compatibility**: All templates (React, Next.js) build successfully with hero components
-- **Package Propagation**: Hero components properly copied to packages/ui-core for template distribution
-- **Test Coverage**: Comprehensive unit tests for hero functionality and error scenarios
 
 ## [0.8.3] - 2025-09-06
 
