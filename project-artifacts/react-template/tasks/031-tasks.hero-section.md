@@ -159,19 +159,19 @@ Creating a comprehensive hero section component for business/marketing websites 
 
 #### Task 2.5: Implement HeroOverlay Component
 **Effort**: 1/5
-- [ ] Develop `HeroOverlay.tsx` for background darkening:
-  - [ ] Configurable opacity levels
-  - [ ] Custom color support
-  - [ ] Gradient overlay options
-  - [ ] Z-index management
-- [ ] Ensure text contrast accessibility
-- [ ] Add smooth transitions
-- [ ] Support theme-aware overlays
-- [ ] Write unit tests for HeroOverlay component
-- [ ] Test opacity and color configurations
-- [ ] Test theme integration and contrast
-- [ ] Test z-index management
-- [ ] Update example page with overlay variants
+- [x] Develop `HeroOverlay.tsx` for background darkening:
+  - [x] Configurable opacity levels
+  - [x] Custom color support
+  - [x] Gradient overlay options
+  - [x] Z-index management
+- [x] Ensure text contrast accessibility
+- [x] Add smooth transitions
+- [x] Support theme-aware overlays
+- [x] Write unit tests for HeroOverlay component
+- [x] Test opacity and color configurations
+- [x] Test theme integration and contrast
+- [x] Test z-index management
+- [x] Update example page with overlay variants
 **Success Criteria**: Overlay provides proper contrast, configurable appearance, tests pass
 
 ### Phase 3: Advanced Background Features
@@ -237,13 +237,14 @@ Creating a comprehensive hero section component for business/marketing websites 
 - [ ] Create enhanced animations with Framer Motion:
   - [ ] Complex staggered animations
   - [ ] Spring-based animations
-  - [ ] Scroll-triggered animations
+  - [ ] Scroll-triggered animations (whileInView)
   - [ ] Custom animation curves
 - [ ] Make Framer Motion optional import
 - [ ] Provide CSS fallbacks
 - [ ] Document when to use which approach
 - [ ] Monitor bundle size impact
-**Success Criteria**: Advanced animations work when enabled, graceful fallback
+- [ ] **Fix viewport animation issue**: Current CSS animations trigger on mount, not when sections enter viewport. This breaks animations for hero sections used lower on pages. Use Framer Motion's `whileInView` to trigger animations when sections become visible during scroll.
+**Success Criteria**: Advanced animations work when enabled, graceful fallback, animations trigger on viewport entry
 
 ### Phase 5: Mobile Optimization
 
@@ -417,7 +418,7 @@ Creating a comprehensive hero section component for business/marketing websites 
 
 ### Next Priority Tasks
 
-3. **Task 2.5: HeroOverlay Component**
-   - [ ] Develop overlay functionality
-   - [ ] Ensure text contrast accessibility
-   - [ ] Write unit tests for HeroOverlay component
+3. **Task 2.5: HeroOverlay Component** ✓
+   - [x] Develop overlay functionality
+   - [x] Ensure text contrast accessibility
+   - [x] Write unit tests for HeroOverlay component
