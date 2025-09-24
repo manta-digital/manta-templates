@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Hero Section Components** - Framework-agnostic hero system with image backgrounds, gradient support, WebP/AVIF optimization, and responsive loading states
+- **Navigation Menu System** - Enhanced header with dropdown navigation using Radix UI
+- **ComboBox Component** - Advanced dropdown with filtering, custom values, and accessibility support
 
 ### Changed
 - Removed remaining ShadCN references from documentation and guides
