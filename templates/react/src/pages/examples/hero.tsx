@@ -922,7 +922,8 @@ export default function HeroTestPage() {
                   ],
                   transition: {
                     type: 'fade',
-                    duration: 800
+                    duration: 800,
+                    easing: 'ease-in-out'
                   },
                   navigation: {
                     showDots: true,
@@ -1166,6 +1167,155 @@ export default function HeroTestPage() {
             textSize="md"
             contentPosition="center"
           />
+        </div>
+
+        {/* Transition Effect Examples */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Transition Effects</h3>
+          <p className="text-sm text-muted-foreground mb-6">
+            Demonstrating different slide transition types for enhanced visual appeal.
+          </p>
+
+          {/* Slide Transition */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Slide Transition (Left/Right Movement)</h4>
+            <HeroSection
+              content={{
+                title: 'Slide Transition',
+                subtitle: 'Directional slide movement',
+                description: 'Slides move horizontally with direction awareness for forward and backward navigation.',
+                background: {
+                  type: 'slides',
+                  slides: {
+                    items: [
+                      {
+                        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
+                        duration: 4000
+                      },
+                      {
+                        image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                        duration: 4000
+                      },
+                      {
+                        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
+                        duration: 4000
+                      }
+                    ],
+                    transition: {
+                      type: 'slide',
+                      duration: 1000,
+                      easing: 'ease-out'
+                    },
+                    navigation: {
+                      showDots: true,
+                      showArrows: true,
+                      autoPlay: true,
+                      pauseOnHover: true
+                    }
+                  }
+                },
+                overlay: {
+                  opacity: 0.4,
+                  color: '#000000'
+                }
+              }}
+              size="md"
+              textSize="md"
+              contentPosition="center"
+            />
+          </div>
+
+          {/* Zoom Transition */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Zoom Transition (Scale Effects)</h4>
+            <HeroSection
+              content={{
+                title: 'Zoom Transition',
+                subtitle: 'Dynamic scale animations',
+                description: 'Images scale smoothly with zoom effects creating depth and movement.',
+                background: {
+                  type: 'slides',
+                  slides: {
+                    items: [
+                      {
+                        image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
+                        duration: 3500
+                      },
+                      {
+                        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
+                        duration: 3500
+                      },
+                      {
+                        image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                        duration: 3500
+                      }
+                    ],
+                    transition: {
+                      type: 'zoom',
+                      duration: 1200,
+                      easing: 'ease-in-out'
+                    },
+                    navigation: {
+                      showDots: true,
+                      showArrows: true,
+                      autoPlay: true
+                    }
+                  }
+                },
+                overlay: {
+                  opacity: 0.3,
+                  color: '#000000'
+                }
+              }}
+              size="md"
+              textSize="md"
+              contentPosition="left"
+            />
+          </div>
+
+          {/* Dissolve Transition */}
+          <div className="mb-6">
+            <h4 className="text-md font-medium mb-2">Dissolve Transition (Blur/Fade Effects)</h4>
+            <HeroSection
+              content={{
+                title: 'Dissolve Transition',
+                subtitle: 'Artistic blur and fade',
+                description: 'Sophisticated dissolve effects with blur and brightness adjustments create cinematic transitions.',
+                background: {
+                  type: 'slides',
+                  slides: {
+                    items: [
+                      {
+                        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
+                        duration: 5000
+                      },
+                      {
+                        image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
+                        duration: 5000
+                      }
+                    ],
+                    transition: {
+                      type: 'dissolve',
+                      duration: 1500,
+                      easing: 'ease-in-out'
+                    },
+                    navigation: {
+                      showDots: true,
+                      showArrows: false,
+                      autoPlay: true
+                    }
+                  }
+                },
+                overlay: {
+                  opacity: 0.2,
+                  gradient: 'radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)'
+                }
+              }}
+              size="md"
+              textSize="md"
+              contentPosition="center"
+            />
+          </div>
         </div>
       </div>
     </div>

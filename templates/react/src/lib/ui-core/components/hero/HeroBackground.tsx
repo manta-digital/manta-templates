@@ -5,6 +5,180 @@ import { cn } from '../../utils/cn';
 import { HeroBackgroundProps } from '../../types/hero';
 import { buildGradientClasses } from '../../utils/gradientUtils';
 
+// Slide Transition Component
+interface SlideTransitionContainerProps {
+  currentSlide: any;
+  previousSlide: any;
+  currentSlideLoaded: boolean;
+  previousSlideLoaded: boolean;
+  transitionType: 'fade' | 'slide' | 'zoom' | 'dissolve';
+  transitionDuration: number;
+  transitionEasing: string;
+  transitionDirection: 'forward' | 'backward';
+  isTransitioning: boolean;
+  backgroundPosition: string;
+  backgroundSize: string;
+}
+
+function SlideTransitionContainer({
+  currentSlide,
+  previousSlide,
+  currentSlideLoaded,
+  previousSlideLoaded,
+  transitionType,
+  transitionDuration,
+  transitionEasing,
+  transitionDirection,
+  isTransitioning,
+  backgroundPosition,
+  backgroundSize,
+}: SlideTransitionContainerProps) {
+
+  const baseSlideStyle = {
+    backgroundPosition,
+    backgroundSize,
+    backgroundRepeat: 'no-repeat' as const,
+  };
+
+  const transitionStyle = {
+    transition: `all ${transitionDuration}ms ${transitionEasing}`,
+  };
+
+  // Render transition based on type
+  switch (transitionType) {
+    case 'slide':
+      return (
+        <div className="absolute inset-0 w-full h-full">
+          {/* Previous slide */}
+          {previousSlide && isTransitioning && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${previousSlide.image})`,
+                transform: transitionDirection === 'forward'
+                  ? 'translateX(-100%)'
+                  : 'translateX(100%)',
+                opacity: previousSlideLoaded ? 1 : 0,
+              }}
+            />
+          )}
+          {/* Current slide */}
+          {currentSlide && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${currentSlide.image})`,
+                transform: isTransitioning
+                  ? 'translateX(0%)'
+                  : (transitionDirection === 'forward' ? 'translateX(100%)' : 'translateX(-100%)'),
+                opacity: currentSlideLoaded ? 1 : 0,
+              }}
+            />
+          )}
+        </div>
+      );
+
+    case 'zoom':
+      return (
+        <div className="absolute inset-0 w-full h-full">
+          {/* Previous slide */}
+          {previousSlide && isTransitioning && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${previousSlide.image})`,
+                transform: 'scale(0.9)',
+                opacity: previousSlideLoaded ? 0 : 0,
+              }}
+            />
+          )}
+          {/* Current slide */}
+          {currentSlide && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${currentSlide.image})`,
+                transform: isTransitioning ? 'scale(1)' : 'scale(1.1)',
+                opacity: currentSlideLoaded ? 1 : 0,
+              }}
+            />
+          )}
+        </div>
+      );
+
+    case 'dissolve':
+      return (
+        <div className="absolute inset-0 w-full h-full">
+          {/* Previous slide */}
+          {previousSlide && isTransitioning && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${previousSlide.image})`,
+                opacity: previousSlideLoaded ? 0.3 : 0,
+                filter: 'blur(2px) brightness(0.8)',
+              }}
+            />
+          )}
+          {/* Current slide */}
+          {currentSlide && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${currentSlide.image})`,
+                opacity: currentSlideLoaded ? 1 : 0,
+                filter: isTransitioning ? 'blur(0px) brightness(1)' : 'blur(1px) brightness(0.9)',
+              }}
+            />
+          )}
+        </div>
+      );
+
+    case 'fade':
+    default:
+      return (
+        <div className="absolute inset-0 w-full h-full">
+          {/* Previous slide */}
+          {previousSlide && isTransitioning && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${previousSlide.image})`,
+                opacity: previousSlideLoaded ? 0 : 0,
+              }}
+            />
+          )}
+          {/* Current slide */}
+          {currentSlide && (
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                ...baseSlideStyle,
+                ...transitionStyle,
+                backgroundImage: `url(${currentSlide.image})`,
+                opacity: currentSlideLoaded ? 1 : 0,
+              }}
+            />
+          )}
+        </div>
+      );
+  }
+}
+
 export function HeroBackground({ config, className, onLoad, onError, components }: HeroBackgroundProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -19,8 +193,11 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   // Slide-specific state
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [previousSlideIndex, setPreviousSlideIndex] = useState<number | null>(null);
   const [isSlideAutoPlaying, setIsSlideAutoPlaying] = useState(false);
   const [slideImagesLoaded, setSlideImagesLoaded] = useState<boolean[]>([]);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<'forward' | 'backward'>('forward');
   const slideAutoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Constants for slide management
@@ -78,6 +255,12 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   const totalSlides = slideItems.length;
   const maxSlideIndex = Math.max(0, totalSlides - 1);
+
+  // Motion preferences detection
+  const prefersReducedMotion = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
 
   // Optimize image URL based on format support
   const optimizedImageUrl = useMemo(() => {
@@ -284,9 +467,12 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     }
   }, []);
 
-  // Slide navigation functions (following CardCarousel patterns)
+  // Slide navigation functions with transition support
   const goToSlide = useCallback((index: number) => {
-    if (totalSlides === 0) return;
+    if (totalSlides === 0 || isTransitioning) return;
+
+    const newIndex = Math.max(0, Math.min(index, maxSlideIndex));
+    if (newIndex === currentSlideIndex) return;
 
     // Pause auto-play when manually navigating
     if (slideConfig?.navigation.autoPlay) {
@@ -301,57 +487,42 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       );
     }
 
-    // Set new slide index
-    const newIndex = Math.max(0, Math.min(index, maxSlideIndex));
+    // Start transition
+    setIsTransitioning(true);
+    setPreviousSlideIndex(currentSlideIndex);
+    setTransitionDirection(newIndex > currentSlideIndex ? 'forward' : 'backward');
     setCurrentSlideIndex(newIndex);
-  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex, currentSlideIndex]);
+
+    // End transition after duration
+    const transitionDuration = slideConfig?.transition.duration || 800;
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setPreviousSlideIndex(null);
+    }, transitionDuration);
+  }, [totalSlides, slideConfig?.navigation.autoPlay, slideConfig?.transition.duration, maxSlideIndex, currentSlideIndex, isTransitioning]);
 
   const nextSlide = useCallback(() => {
-    if (totalSlides === 0) return;
-
-    // Pause auto-play when manually navigating
-    if (slideConfig?.navigation.autoPlay) {
-      setIsSlideAutoPlaying(false);
-      if (slideAutoPlayTimeoutRef.current) {
-        clearTimeout(slideAutoPlayTimeoutRef.current);
-      }
-      slideAutoPlayTimeoutRef.current = setTimeout(
-        () => setIsSlideAutoPlaying(true),
-        SLIDE_AUTO_PLAY_RESUME_DELAY
-      );
-    }
-
-    setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
-  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
+    if (totalSlides === 0 || isTransitioning) return;
+    const nextIndex = currentSlideIndex >= maxSlideIndex ? 0 : currentSlideIndex + 1;
+    goToSlide(nextIndex);
+  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide]);
 
   const prevSlide = useCallback(() => {
-    if (totalSlides === 0) return;
+    if (totalSlides === 0 || isTransitioning) return;
+    const prevIndex = currentSlideIndex <= 0 ? maxSlideIndex : currentSlideIndex - 1;
+    goToSlide(prevIndex);
+  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide]);
 
-    // Pause auto-play when manually navigating
-    if (slideConfig?.navigation.autoPlay) {
-      setIsSlideAutoPlaying(false);
-      if (slideAutoPlayTimeoutRef.current) {
-        clearTimeout(slideAutoPlayTimeoutRef.current);
-      }
-      slideAutoPlayTimeoutRef.current = setTimeout(
-        () => setIsSlideAutoPlaying(true),
-        SLIDE_AUTO_PLAY_RESUME_DELAY
-      );
-    }
-
-    setCurrentSlideIndex((prev) => (prev <= 0 ? maxSlideIndex : prev - 1));
-  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
-
-  // Slide auto-play functionality (following existing video patterns)
+  // Slide auto-play functionality using transition system
   useEffect(() => {
-    if (config.type !== 'slides' || !isSlideAutoPlaying || totalSlides <= 1) return;
+    if (config.type !== 'slides' || !isSlideAutoPlaying || totalSlides <= 1 || isTransitioning) return;
 
     const interval = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
+      nextSlide();
     }, slideItems[currentSlideIndex]?.duration || 5000);
 
     return () => clearInterval(interval);
-  }, [config.type, isSlideAutoPlaying, totalSlides, maxSlideIndex, currentSlideIndex, slideItems]);
+  }, [config.type, isSlideAutoPlaying, totalSlides, currentSlideIndex, slideItems, nextSlide, isTransitioning]);
 
   // Initialize slide auto-play when slides are configured
   useEffect(() => {
@@ -641,29 +812,35 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     }
 
     const currentSlide = slideItems[currentSlideIndex];
+    const previousSlide = previousSlideIndex !== null ? slideItems[previousSlideIndex] : null;
     const currentSlideLoaded = slideImagesLoaded[currentSlideIndex];
+    const previousSlideLoaded = previousSlideIndex !== null ? slideImagesLoaded[previousSlideIndex] : false;
+
+    // Determine transition type (with reduced motion fallback)
+    const transitionType = prefersReducedMotion ? 'fade' : (slideConfig?.transition.type || 'fade');
+    const transitionDuration = slideConfig?.transition.duration || 800;
+    const transitionEasing = slideConfig?.transition.easing || 'ease-in-out';
 
     return (
       <div className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}>
-        {/* Current slide background */}
-        {currentSlide && (
-          <div
-            className={cn(
-              'absolute inset-0 w-full h-full transition-opacity duration-500',
-              currentSlideLoaded ? 'opacity-100' : 'opacity-0'
-            )}
-            style={{
-              backgroundImage: `url(${currentSlide.image})`,
-              backgroundPosition: config.position || 'center center',
-              backgroundSize: config.size || 'cover',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        )}
+        {/* Transition Container */}
+        <SlideTransitionContainer
+          currentSlide={currentSlide}
+          previousSlide={previousSlide}
+          currentSlideLoaded={currentSlideLoaded}
+          previousSlideLoaded={previousSlideLoaded}
+          transitionType={transitionType}
+          transitionDuration={transitionDuration}
+          transitionEasing={transitionEasing}
+          transitionDirection={transitionDirection}
+          isTransitioning={isTransitioning}
+          backgroundPosition={config.position || 'center center'}
+          backgroundSize={config.size || 'cover'}
+        />
 
         {/* Loading state for current slide */}
         {currentSlide && !currentSlideLoaded && (
-          <div className="absolute inset-0 bg-gray-100 animate-pulse">
+          <div className="absolute inset-0 bg-gray-100 animate-pulse z-30">
             <div className="flex items-center justify-center h-full text-gray-400">
               <div className="text-center">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400 mb-2"></div>
