@@ -191,18 +191,127 @@ Creating a comprehensive hero section component for business/marketing websites 
 **Success Criteria**: Video backgrounds play smoothly, proper fallbacks work
 
 #### Task 3.2: Implement Slide Background Support
-**Effort**: 3/5
-- [ ] Create slide functionality in `HeroBackground.tsx`:
-  - [ ] Multiple slide image support
-  - [ ] Automatic slide transitions
-  - [ ] Configurable transition duration
-  - [ ] Fade/slide transition effects
-  - [ ] Optional slide content (title/subtitle)
-- [ ] Implement slide navigation state
-- [ ] Add pause on hover functionality
-- [ ] Optimize image preloading for slides
-- [ ] Handle slide cycling logic
-**Success Criteria**: Slides transition smoothly, autoplay works, images preload
+**Effort**: 4/5
+- [ ] **Task 3.2.1: Analyze and Leverage Existing Carousel Infrastructure**
+  - [ ] Review existing `CardCarousel.tsx` component for reusable patterns
+  - [ ] Identify animation logic, state management, and breakpoint handling
+  - [ ] Document which patterns can be abstracted for hero slide functionality
+  - [ ] Assess useBreakpoint hook and useUniformHeight for potential reuse
+  - **Success**: Clear understanding of reusable carousel patterns documented
+
+- [ ] **Task 3.2.2: Extend Hero Types for Slide Configuration**
+  - [ ] Enhance `HeroBackgroundConfig.slides` interface in `types/hero.ts`
+  - [ ] Add slide transition configuration: `transitionType`, `duration`, `easing`
+  - [ ] Add navigation controls configuration: `showDots`, `showArrows`, `autoPlay`
+  - [ ] Add per-slide content override capability: `slideOverrides`
+  - [ ] Include accessibility options: `ariaLabels`, `slideAnnouncements`
+  ```typescript
+  slides?: {
+    items: Array<{
+      image: string;
+      imageDark?: string;
+      title?: string;
+      subtitle?: string;
+      duration?: number;
+      contentPosition?: HeroContentPosition;
+    }>;
+    transition: {
+      type: 'fade' | 'slide' | 'zoom' | 'dissolve';
+      duration: number;
+      easing?: string;
+    };
+    navigation: {
+      showDots?: boolean;
+      showArrows?: boolean;
+      autoPlay?: boolean;
+      pauseOnHover?: boolean;
+    };
+    accessibility?: {
+      slideAnnouncements?: boolean;
+      keyboardNavigation?: boolean;
+    };
+  };
+  ```
+  - **Success**: Complete type definitions support all slide functionality requirements
+
+- [ ] **Task 3.2.3: Implement Core Slide State Management**
+  - [ ] Add slide-specific state variables to `HeroBackground.tsx`:
+    1. `currentSlideIndex`, `isTransitioning`, `isPaused`
+    2. `slideImages` loading state tracking array
+    3. `transitionDirection` for directional animations
+  - [ ] Create slide management hooks following CardCarousel patterns:
+    1. `useSlideState` - manages current index and transition state
+    2. `useSlideTimer` - handles autoplay timing with pause/resume
+    3. `useSlidePreloader` - preloads next/previous slide images
+  - [ ] Implement slide cycling logic with wrap-around functionality
+  - [ ] Add transition state management to prevent rapid clicking/conflicts
+  - **Success**: Slide state management handles all edge cases (wrap-around, rapid navigation, preloading)
+
+- [ ] **Task 3.2.4: Build Slide Transition System**
+  - [ ] Create transition effect implementations using Framer Motion patterns:
+    1. Fade transition with opacity and optional scale
+    2. Slide transition with directional movement (left/right)
+    3. Zoom transition with scale and opacity combination
+    4. Dissolve transition with mask/clip-path effects
+  - [ ] Implement transition timing with configurable duration and easing
+  - [ ] Add transition direction awareness (forward/backward navigation)
+  - [ ] Ensure smooth transitions prevent visual glitches between slides
+  - [ ] Implement prefers-reduced-motion support with fallback to fade
+  - **Success**: All transition types work smoothly in both directions with accessibility support
+
+- [ ] **Task 3.2.5: Create Slide Navigation Controls**
+  - [ ] Build navigation dot indicator component:
+    1. Responsive dot sizing and spacing
+    2. Active/inactive visual states with smooth transitions
+    3. Click handlers for direct slide navigation
+    4. Keyboard navigation support (arrow keys, Enter)
+  - [ ] Build navigation arrow controls:
+    1. Previous/Next button components with appropriate icons
+    2. Hover and focus states for accessibility
+    3. Disabled states at first/last slide (if not looping)
+    4. Touch/swipe gesture support for mobile devices
+  - [ ] Integrate navigation with slide state management
+  - [ ] Add ARIA labels and roles for screen reader accessibility
+  - **Success**: Navigation controls provide full accessibility and responsive design
+
+- [ ] **Task 3.2.6: Implement Advanced Slide Features**
+  - [ ] Add per-slide content override functionality:
+    1. Allow slides to override main hero title/subtitle/CTAs
+    2. Support different content positioning per slide
+    3. Smooth text transitions synchronized with background transitions
+  - [ ] Implement pause-on-hover functionality for autoplay
+  - [ ] Add keyboard navigation support (arrow keys, space bar pause)
+  - [ ] Create slide progress indicator (optional linear progress bar)
+  - [ ] Optimize image preloading strategy: current + next + previous slides
+  - **Success**: Advanced features enhance user experience without compromising performance
+
+- [ ] **Task 3.2.7: Enhance TechnologyScroller for Generic Object Support**
+  - [ ] Abstract `TechnologyScroller` to `ObjectScroller` component:
+    1. Generic item interface: `{ id: string; title: string; image?: string; content?: ReactNode }`
+    2. Configurable item rendering function prop
+    3. Support for cards, logos, images, or custom content
+    4. Maintain backward compatibility with technology items
+  - [ ] Add scroll behavior configuration:
+    1. `scrollMode`: 'continuous' | 'discrete' | 'pause-on-hover'
+    2. `itemSpacing`, `containerHeight`, `itemSize` properties
+    3. Support for vertical scrolling direction
+  - [ ] Create specialized variants:
+    1. `CardScroller` for scrolling card components
+    2. `LogoScroller` for brand/technology logos (original behavior)
+    3. `TestimonialScroller` for scrolling testimonials or quotes
+  - [ ] Update animation performance and smooth transitions
+  - **Success**: Generic scroller supports multiple content types while maintaining smooth performance
+
+- [ ] **Task 3.2.8: Create Slide Background Examples**
+  - [ ] Build comprehensive slide examples in hero test page:
+    1. Basic image slideshow with fade transitions
+    2. Advanced slideshow with slide transitions and navigation
+    3. Content-rich slides with per-slide text overrides
+    4. Mobile-optimized slideshow with touch navigation
+  - [ ] Demonstrate different transition types in separate examples
+  - [ ] Show accessibility features: keyboard navigation, reduced motion
+  - [ ] Include performance comparison with static/video backgrounds
+  - **Success**: Examples demonstrate all slide functionality with clear documentation
 
 #### Task 3.3: Add Background Animation Effects
 **Effort**: 2/5
@@ -232,19 +341,92 @@ Creating a comprehensive hero section component for business/marketing websites 
 - [ ] Respect reduced motion preferences
 **Success Criteria**: Text animations work smoothly, accessibility compliant
 
-#### Task 4.2: Add Optional Framer Motion Support
-**Effort**: 2/5
-- [ ] Create enhanced animations with Framer Motion:
-  - [ ] Complex staggered animations
-  - [ ] Spring-based animations
-  - [ ] Scroll-triggered animations (whileInView)
-  - [ ] Custom animation curves
-- [ ] Make Framer Motion optional import
-- [ ] Provide CSS fallbacks
-- [ ] Document when to use which approach
-- [ ] Monitor bundle size impact
-- [ ] **Fix viewport animation issue**: Current CSS animations trigger on mount, not when sections enter viewport. This breaks animations for hero sections used lower on pages. Use Framer Motion's `whileInView` to trigger animations when sections become visible during scroll.
-**Success Criteria**: Advanced animations work when enabled, graceful fallback, animations trigger on viewport entry
+#### Task 4.2: Add Optional Framer Motion Support and Fix Viewport Animation Issues
+**Effort**: 3/5
+- [ ] **Task 4.2.1: Analyze Current Animation Trigger Problems**
+  - [ ] Audit existing CSS animations in `HeroText.tsx` and identify mount-triggered animations
+  - [ ] Document specific cases where hero sections appear lower on pages (e.g., second hero, multiple heroes)
+  - [ ] Test current animation behavior when hero components are below the fold
+  - [ ] Identify which animations should be viewport-triggered vs mount-triggered
+  - **Success**: Clear documentation of animation trigger issues and requirements
+
+- [ ] **Task 4.2.2: Implement Framer Motion Integration Architecture**
+  - [ ] Create optional Framer Motion integration pattern:
+    1. `useMotionPreference` hook to detect user reduced-motion preferences
+    2. `MotionConfig` wrapper for hero section animation settings
+    3. Conditional imports to avoid bundle bloat when not using motion
+  - [ ] Design fallback system: CSS animations → Framer Motion → No animation (reduced motion)
+  - [ ] Create animation configuration interface:
+  ```typescript
+  interface HeroAnimationConfig {
+    enabled: boolean;
+    triggerType: 'mount' | 'viewport' | 'scroll';
+    viewport?: {
+      threshold: number;
+      triggerOnce: boolean;
+      margin?: string;
+    };
+    fallback: 'css' | 'none';
+  }
+  ```
+  - **Success**: Architecture supports both CSS and Framer Motion with intelligent fallbacks
+
+- [ ] **Task 4.2.3: Build Viewport-Triggered Animation System**
+  - [ ] Implement `useViewportAnimation` hook using Intersection Observer:
+    1. Track hero section visibility with configurable thresholds
+    2. Support one-time vs repeated animation triggers
+    3. Handle viewport margins for earlier/later trigger points
+    4. Debounce rapid visibility changes to prevent animation conflicts
+  - [ ] Enhance `HeroText.tsx` with viewport awareness:
+    1. Replace mount-triggered CSS animations with viewport-triggered
+    2. Add Framer Motion `whileInView` implementation as enhanced option
+    3. Maintain existing animation types (fade, slide, stagger) with new triggers
+  - [ ] Create animation orchestration system for multiple hero components on same page
+  - **Success**: Animations trigger correctly when hero sections enter viewport
+
+- [ ] **Task 4.2.4: Implement Enhanced Framer Motion Animations**
+  - [ ] Create advanced animation variants using Framer Motion:
+    1. Spring-based animations with realistic physics (bounce, elastic)
+    2. Complex staggered animations for text elements with customizable delays
+    3. Scroll-linked animations that respond to scroll velocity and direction
+    4. Morphing animations for background transitions
+  - [ ] Build custom animation curves and timing functions:
+    1. Brand-specific easing curves for consistent feel
+    2. Adaptive timing based on content length and complexity
+    3. Performance-optimized animations using `transform` and `opacity`
+  - [ ] Add advanced interaction animations:
+    1. Magnetic hover effects for CTA buttons
+    2. Parallax text effects synchronized with background
+    3. Gesture-responsive animations for touch devices
+  - **Success**: Enhanced animations provide superior user experience when Framer Motion is available
+
+- [ ] **Task 4.2.5: Create Animation Performance Optimization**
+  - [ ] Implement smart animation loading:
+    1. Lazy load Framer Motion only when enhanced animations needed
+    2. Bundle splitting to avoid loading animation code for users with reduced motion
+    3. Progressive enhancement from CSS → Framer Motion
+  - [ ] Add performance monitoring:
+    1. Frame rate detection during animations
+    2. Fallback to simpler animations on low-performance devices
+    3. Memory usage tracking for complex animation sequences
+  - [ ] Optimize animation patterns:
+    1. Use `will-change` CSS property appropriately
+    2. Promote animated elements to new layer when needed
+    3. Clean up animation resources after completion
+  - **Success**: Animation performance is optimal across all devices and conditions
+
+- [ ] **Task 4.2.6: Build Animation Configuration Examples**
+  - [ ] Create comprehensive animation examples:
+    1. CSS-only animations for performance-critical scenarios
+    2. Framer Motion enhanced animations for premium experiences
+    3. Viewport-triggered animations for multiple heroes on same page
+    4. Reduced motion compliance demonstrations
+  - [ ] Document animation decision tree:
+    1. When to use CSS vs Framer Motion
+    2. Performance implications of different animation choices
+    3. Accessibility considerations and reduced motion handling
+  - [ ] Create animation debugging tools and guidelines
+  - **Success**: Clear guidance and examples for implementing hero animations in production
 
 ### Phase 5: Mobile Optimization
 
