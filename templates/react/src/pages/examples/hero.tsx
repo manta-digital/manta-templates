@@ -912,7 +912,7 @@ export default function HeroTestPage() {
                       duration: 4000
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
                       duration: 4000
                     },
                     {
@@ -980,7 +980,7 @@ export default function HeroTestPage() {
                       duration: 5000
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
                       title: 'Urban Exploration',
                       subtitle: 'Discover city landscapes',
                       duration: 5000
@@ -1027,7 +1027,7 @@ export default function HeroTestPage() {
                       image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80'
+                      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80'
                     },
                     {
                       image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80'
@@ -1078,7 +1078,7 @@ export default function HeroTestPage() {
                       duration: 2000
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
                       duration: 2000
                     },
                     {
@@ -1090,7 +1090,7 @@ export default function HeroTestPage() {
                       duration: 2000
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
+                      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
                       duration: 2000
                     }
                   ],

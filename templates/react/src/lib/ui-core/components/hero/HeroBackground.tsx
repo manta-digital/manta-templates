@@ -19,10 +19,8 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   // Slide-specific state
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [isSlideTransitioning, setIsSlideTransitioning] = useState(false);
   const [isSlideAutoPlaying, setIsSlideAutoPlaying] = useState(false);
   const [slideImagesLoaded, setSlideImagesLoaded] = useState<boolean[]>([]);
-  const [transitionDirection, setTransitionDirection] = useState<'forward' | 'backward'>('forward');
   const slideAutoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Constants for slide management
@@ -288,7 +286,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
   // Slide navigation functions (following CardCarousel patterns)
   const goToSlide = useCallback((index: number) => {
-    if (isSlideTransitioning || totalSlides === 0) return;
+    if (totalSlides === 0) return;
 
     // Pause auto-play when manually navigating
     if (slideConfig?.navigation.autoPlay) {
@@ -303,11 +301,10 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       );
     }
 
-    // Determine direction for transition
+    // Set new slide index
     const newIndex = Math.max(0, Math.min(index, maxSlideIndex));
-    setTransitionDirection(newIndex > currentSlideIndex ? 'forward' : 'backward');
     setCurrentSlideIndex(newIndex);
-  }, [isSlideTransitioning, totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex, currentSlideIndex]);
+  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex, currentSlideIndex]);
 
   const nextSlide = useCallback(() => {
     if (totalSlides === 0) return;
@@ -324,7 +321,6 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       );
     }
 
-    setTransitionDirection('forward');
     setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
   }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
 
@@ -343,7 +339,6 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       );
     }
 
-    setTransitionDirection('backward');
     setCurrentSlideIndex((prev) => (prev <= 0 ? maxSlideIndex : prev - 1));
   }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
 
@@ -353,7 +348,6 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
-      setTransitionDirection('forward');
     }, slideItems[currentSlideIndex]?.duration || 5000);
 
     return () => clearInterval(interval);
@@ -388,6 +382,15 @@ export function HeroBackground({ config, className, onLoad, onError, components 
           setSlideImagesLoaded((prev) => {
             const newState = [...prev];
             newState[index] = true;
+            return newState;
+          });
+        };
+        img.onerror = () => {
+          // Mark as "loaded" even on error so slide doesn't get stuck
+          console.warn(`Failed to load slide image: ${slide.image}`);
+          setSlideImagesLoaded((prev) => {
+            const newState = [...prev];
+            newState[index] = true; // Mark as loaded to prevent infinite loading
             return newState;
           });
         };
@@ -672,7 +675,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
 
         {/* Simple navigation dots */}
         {slideConfig?.navigation.showDots && totalSlides > 1 && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
             {slideItems.map((_, index) => (
               <button
                 key={index}
@@ -694,14 +697,14 @@ export function HeroBackground({ config, className, onLoad, onError, components 
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20"
               aria-label="Previous slide"
             >
               <span className="text-white text-lg">‹</span>
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20"
               aria-label="Next slide"
             >
               <span className="text-white text-lg">›</span>
