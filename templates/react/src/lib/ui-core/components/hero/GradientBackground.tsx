@@ -5,9 +5,9 @@ import { buildGradientClasses } from '../../utils/gradientUtils';
 interface GradientBackgroundProps {
   config: {
     gradient: {
-      range: string;
-      from: string;
-      to: string;
+      range?: number;
+      from?: string;
+      to?: string;
       custom?: string;
     };
   };

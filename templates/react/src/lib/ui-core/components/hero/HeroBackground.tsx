@@ -33,7 +33,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       }
       return (
         <GradientBackground
-          config={{ gradient: config.gradient }}
+          config={{ gradient: config.gradient! }}
           className={className}
         />
       );
