@@ -981,7 +981,7 @@ export default function HeroTestPage() {
                       duration: 5000
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
                       title: 'Urban Exploration',
                       subtitle: 'Discover city landscapes',
                       duration: 5000
