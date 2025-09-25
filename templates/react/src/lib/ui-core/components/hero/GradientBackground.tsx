@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 import { cn } from '../../utils/cn';
 import { buildGradientClasses } from '../../utils/gradientUtils';

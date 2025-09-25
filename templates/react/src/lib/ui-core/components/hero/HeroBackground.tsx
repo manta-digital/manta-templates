@@ -109,7 +109,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       return (
         <div className={cn('absolute inset-0 w-full h-full bg-gray-100', className)}>
           <div className="flex items-center justify-center h-full text-gray-500">
-            Background type "{config.type}" not supported
+            Background type &quot;{config.type}&quot; not supported
           </div>
         </div>
       );

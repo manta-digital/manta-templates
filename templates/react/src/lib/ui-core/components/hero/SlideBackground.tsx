@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { cn } from '../../utils/cn';
 import { useMotionPreferences } from './BackgroundFormatUtils';
