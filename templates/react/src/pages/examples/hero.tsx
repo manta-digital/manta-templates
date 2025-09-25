@@ -1202,7 +1202,7 @@ export default function HeroTestPage() {
                       }
                     ],
                     transition: {
-                      type: 'slide',
+                      type: 'fade',
                       duration: 1000,
                       easing: 'ease-out'
                     },

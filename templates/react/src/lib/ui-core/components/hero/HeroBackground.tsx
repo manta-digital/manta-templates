@@ -49,7 +49,7 @@ function SlideTransitionContainer({
     case 'slide':
       return (
         <div className="absolute inset-0 w-full h-full">
-          {/* Previous slide - starts at center, slides out */}
+          {/* Previous slide (slides out during transition) */}
           {previousSlide && isTransitioning && (
             <div
               className="absolute inset-0 w-full h-full"
@@ -58,14 +58,14 @@ function SlideTransitionContainer({
                 ...transitionStyle,
                 backgroundImage: `url(${previousSlide.image})`,
                 transform: transitionDirection === 'forward'
-                  ? 'translateX(-100%)'  // Slide out to left
-                  : 'translateX(100%)',  // Slide out to right
+                  ? 'translateX(-100%)'
+                  : 'translateX(100%)',
                 opacity: previousSlideLoaded ? 1 : 0,
                 zIndex: 1,
               }}
             />
           )}
-          {/* Current slide - starts off-screen, slides in to center */}
+          {/* Current slide (always visible, slides in during transition) */}
           {currentSlide && (
             <div
               className="absolute inset-0 w-full h-full"
@@ -73,13 +73,9 @@ function SlideTransitionContainer({
                 ...baseSlideStyle,
                 ...transitionStyle,
                 backgroundImage: `url(${currentSlide.image})`,
-                transform: isTransitioning
-                  ? 'translateX(0%)'     // Slide to center
-                  : (transitionDirection === 'forward'
-                      ? 'translateX(100%)'   // Start from right
-                      : 'translateX(-100%)'), // Start from left
+                transform: 'translateX(0%)', // Always at center
                 opacity: currentSlideLoaded ? 1 : 0,
-                zIndex: 2, // Above previous slide
+                zIndex: isTransitioning ? 2 : 1,
               }}
             />
           )}
