@@ -92,7 +92,7 @@ export function HeroBackground({ config, className, onLoad, onError, components 
   const optimizedVideoUrl = useMemo(() => {
     if (config.type !== 'video' || !config.video?.src) return null;
 
-    let videoUrl = config.video.src;
+    const videoUrl = config.video.src;
 
     // On mobile, try to use lower quality or fallback to image
     if (isMobile && config.video.fallbackImage) {
