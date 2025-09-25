@@ -874,6 +874,300 @@ export default function HeroTestPage() {
           />
         </div>
       </div>
+
+      {/* Slide Background Heroes Section */}
+      <div className="mb-8 p-4">
+        <h2 className="text-xl font-bold mb-4">Slide Background Heroes</h2>
+        <p className="text-muted-foreground mb-6">
+          Demonstrating slide carousel backgrounds with autoplay, navigation controls, and transitions
+        </p>
+
+        {/* Basic Slide Carousel */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Basic Slide Carousel</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Simple slide carousel with autoplay and dot navigation.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Dynamic Slide Backgrounds',
+              subtitle: 'Engaging visual storytelling',
+              description: 'Slide backgrounds create dynamic visual experiences that capture attention and enhance your message.',
+              primaryCTA: {
+                label: 'View Gallery',
+                href: '/gallery',
+                variant: 'primary'
+              },
+              secondaryCTA: {
+                label: 'Learn More',
+                href: '/learn-more',
+                variant: 'outline'
+              },
+              background: {
+                type: 'slides',
+                slides: {
+                  items: [
+                    {
+                      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
+                      duration: 4000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
+                      duration: 4000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
+                      duration: 4000
+                    }
+                  ],
+                  transition: {
+                    type: 'fade',
+                    duration: 800
+                  },
+                  navigation: {
+                    showDots: true,
+                    showArrows: true,
+                    autoPlay: true,
+                    pauseOnHover: true
+                  },
+                  accessibility: {
+                    slideAnnouncements: true,
+                    keyboardNavigation: true
+                  }
+                }
+              },
+              overlay: {
+                opacity: 0.4,
+                color: '#000000'
+              }
+            }}
+            size="lg"
+            textSize="lg"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Slides with Per-Slide Content */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Slides with Dynamic Content</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Each slide can override the main hero content with its own title and subtitle.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Default Hero Title',
+              subtitle: 'This appears when no slide override is set',
+              description: 'The description remains consistent across all slides, providing context.',
+              primaryCTA: {
+                label: 'Get Started',
+                href: '/start',
+                variant: 'primary'
+              },
+              background: {
+                type: 'slides',
+                slides: {
+                  items: [
+                    {
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                      title: 'Adventure Awaits',
+                      subtitle: 'Explore the great outdoors',
+                      duration: 5000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
+                      title: 'Peaceful Moments',
+                      subtitle: 'Find tranquility in nature',
+                      duration: 5000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
+                      title: 'Urban Exploration',
+                      subtitle: 'Discover city landscapes',
+                      duration: 5000
+                    }
+                  ],
+                  transition: {
+                    type: 'fade',
+                    duration: 1000
+                  },
+                  navigation: {
+                    showDots: true,
+                    showArrows: true,
+                    autoPlay: true
+                  }
+                }
+              },
+              overlay: {
+                opacity: 0.5,
+                color: '#000000'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Manual Navigation Only */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Manual Navigation</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Slides without autoplay - user controls the experience.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Control Your Journey',
+              subtitle: 'Navigate at your own pace',
+              description: 'Some experiences are better when you control the timing. Use the navigation controls to explore each slide.',
+              background: {
+                type: 'slides',
+                slides: {
+                  items: [
+                    {
+                      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80'
+                    }
+                  ],
+                  transition: {
+                    type: 'fade',
+                    duration: 600
+                  },
+                  navigation: {
+                    showDots: true,
+                    showArrows: true,
+                    autoPlay: false
+                  }
+                }
+              },
+              overlay: {
+                opacity: 0.6,
+                gradient: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%)'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="left"
+          />
+        </div>
+
+        {/* Fast Slideshow */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Fast Slideshow</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Quick slide transitions for dynamic energy.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Dynamic Energy',
+              subtitle: 'Fast-paced visual experience',
+              description: 'Quick transitions create energy and movement, perfect for highlighting multiple products or locations.',
+              background: {
+                type: 'slides',
+                slides: {
+                  items: [
+                    {
+                      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
+                      duration: 2000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1418065460487-3956c3bac438?w=1920&h=1080&fit=crop&q=80',
+                      duration: 2000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                      duration: 2000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
+                      duration: 2000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop&q=80',
+                      duration: 2000
+                    }
+                  ],
+                  transition: {
+                    type: 'fade',
+                    duration: 400
+                  },
+                  navigation: {
+                    showDots: true,
+                    showArrows: false,
+                    autoPlay: true,
+                    pauseOnHover: true
+                  }
+                }
+              },
+              overlay: {
+                opacity: 0.3,
+                color: '#000000'
+              }
+            }}
+            size="sm"
+            textSize="sm"
+            contentPosition="center"
+          />
+        </div>
+
+        {/* Minimal Slides (Dots Only) */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Minimal Navigation</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Clean interface with dot navigation only.
+          </p>
+          <HeroSection
+            content={{
+              title: 'Clean & Minimal',
+              subtitle: 'Distraction-free experience',
+              description: 'Sometimes less is more. Clean slide navigation keeps focus on your content.',
+              background: {
+                type: 'slides',
+                slides: {
+                  items: [
+                    {
+                      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop&q=80',
+                      duration: 6000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&h=1080&fit=crop&q=80',
+                      duration: 6000
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop&q=80',
+                      duration: 6000
+                    }
+                  ],
+                  transition: {
+                    type: 'fade',
+                    duration: 1200
+                  },
+                  navigation: {
+                    showDots: true,
+                    showArrows: false,
+                    autoPlay: true,
+                    pauseOnHover: true
+                  }
+                }
+              },
+              overlay: {
+                opacity: 0.5,
+                gradient: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%)'
+              }
+            }}
+            size="md"
+            textSize="md"
+            contentPosition="center"
+          />
+        </div>
+      </div>
     </div>
   );
 }

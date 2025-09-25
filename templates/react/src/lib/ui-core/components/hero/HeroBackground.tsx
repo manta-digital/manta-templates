@@ -17,6 +17,17 @@ export function HeroBackground({ config, className, onLoad, onError, components 
   const [videoPaused, setVideoPaused] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Slide-specific state
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isSlideTransitioning, setIsSlideTransitioning] = useState(false);
+  const [isSlideAutoPlaying, setIsSlideAutoPlaying] = useState(false);
+  const [slideImagesLoaded, setSlideImagesLoaded] = useState<boolean[]>([]);
+  const [transitionDirection, setTransitionDirection] = useState<'forward' | 'backward'>('forward');
+  const slideAutoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Constants for slide management
+  const SLIDE_AUTO_PLAY_RESUME_DELAY = 5000;
+
   // Support for modern image formats
   const supportsWebP = useMemo(() => {
     if (typeof window === 'undefined') return false;
@@ -52,6 +63,23 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     if (typeof window === 'undefined') return false;
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }, []);
+
+  // Slide management data (avoid using config.slides directly in effects to prevent re-render issues)
+  const slideItems = useMemo(() => {
+    return config.type === 'slides' && config.slides ? config.slides.items : [];
+  }, [config.type, config.slides]);
+
+  const slideConfig = useMemo(() => {
+    if (config.type !== 'slides' || !config.slides) return null;
+    return {
+      transition: config.slides.transition,
+      navigation: config.slides.navigation,
+      accessibility: config.slides.accessibility
+    };
+  }, [config.type, config.slides]);
+
+  const totalSlides = slideItems.length;
+  const maxSlideIndex = Math.max(0, totalSlides - 1);
 
   // Optimize image URL based on format support
   const optimizedImageUrl = useMemo(() => {
@@ -257,6 +285,116 @@ export function HeroBackground({ config, className, onLoad, onError, components 
       }
     }
   }, []);
+
+  // Slide navigation functions (following CardCarousel patterns)
+  const goToSlide = useCallback((index: number) => {
+    if (isSlideTransitioning || totalSlides === 0) return;
+
+    // Pause auto-play when manually navigating
+    if (slideConfig?.navigation.autoPlay) {
+      setIsSlideAutoPlaying(false);
+      if (slideAutoPlayTimeoutRef.current) {
+        clearTimeout(slideAutoPlayTimeoutRef.current);
+      }
+      // Resume auto-play after delay
+      slideAutoPlayTimeoutRef.current = setTimeout(
+        () => setIsSlideAutoPlaying(true),
+        SLIDE_AUTO_PLAY_RESUME_DELAY
+      );
+    }
+
+    // Determine direction for transition
+    const newIndex = Math.max(0, Math.min(index, maxSlideIndex));
+    setTransitionDirection(newIndex > currentSlideIndex ? 'forward' : 'backward');
+    setCurrentSlideIndex(newIndex);
+  }, [isSlideTransitioning, totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex, currentSlideIndex]);
+
+  const nextSlide = useCallback(() => {
+    if (totalSlides === 0) return;
+
+    // Pause auto-play when manually navigating
+    if (slideConfig?.navigation.autoPlay) {
+      setIsSlideAutoPlaying(false);
+      if (slideAutoPlayTimeoutRef.current) {
+        clearTimeout(slideAutoPlayTimeoutRef.current);
+      }
+      slideAutoPlayTimeoutRef.current = setTimeout(
+        () => setIsSlideAutoPlaying(true),
+        SLIDE_AUTO_PLAY_RESUME_DELAY
+      );
+    }
+
+    setTransitionDirection('forward');
+    setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
+  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
+
+  const prevSlide = useCallback(() => {
+    if (totalSlides === 0) return;
+
+    // Pause auto-play when manually navigating
+    if (slideConfig?.navigation.autoPlay) {
+      setIsSlideAutoPlaying(false);
+      if (slideAutoPlayTimeoutRef.current) {
+        clearTimeout(slideAutoPlayTimeoutRef.current);
+      }
+      slideAutoPlayTimeoutRef.current = setTimeout(
+        () => setIsSlideAutoPlaying(true),
+        SLIDE_AUTO_PLAY_RESUME_DELAY
+      );
+    }
+
+    setTransitionDirection('backward');
+    setCurrentSlideIndex((prev) => (prev <= 0 ? maxSlideIndex : prev - 1));
+  }, [totalSlides, slideConfig?.navigation.autoPlay, maxSlideIndex]);
+
+  // Slide auto-play functionality (following existing video patterns)
+  useEffect(() => {
+    if (config.type !== 'slides' || !isSlideAutoPlaying || totalSlides <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
+      setTransitionDirection('forward');
+    }, slideItems[currentSlideIndex]?.duration || 5000);
+
+    return () => clearInterval(interval);
+  }, [config.type, isSlideAutoPlaying, totalSlides, maxSlideIndex, currentSlideIndex, slideItems]);
+
+  // Initialize slide auto-play when slides are configured
+  useEffect(() => {
+    if (config.type === 'slides' && slideConfig?.navigation.autoPlay && totalSlides > 1) {
+      setIsSlideAutoPlaying(true);
+    }
+  }, [config.type, slideConfig?.navigation.autoPlay, totalSlides]);
+
+  // Slide image preloader
+  useEffect(() => {
+    if (config.type !== 'slides' || totalSlides === 0) return;
+
+    const loadedStates = new Array(totalSlides).fill(false);
+    setSlideImagesLoaded(loadedStates);
+
+    // Preload current slide and adjacent slides
+    const preloadIndexes = [
+      currentSlideIndex,
+      currentSlideIndex === maxSlideIndex ? 0 : currentSlideIndex + 1,
+      currentSlideIndex === 0 ? maxSlideIndex : currentSlideIndex - 1
+    ];
+
+    preloadIndexes.forEach((index) => {
+      const slide = slideItems[index];
+      if (slide) {
+        const img = new Image();
+        img.onload = () => {
+          setSlideImagesLoaded((prev) => {
+            const newState = [...prev];
+            newState[index] = true;
+            return newState;
+          });
+        };
+        img.src = slide.image;
+      }
+    });
+  }, [config.type, totalSlides, currentSlideIndex, maxSlideIndex, slideItems]);
 
   // Effect to handle image loading
   useEffect(() => {
@@ -487,11 +625,98 @@ export function HeroBackground({ config, className, onLoad, onError, components 
     );
   }
 
-  // Placeholder for other background types (slides)
+  // Handle slide backgrounds
+  if (config.type === 'slides') {
+    if (totalSlides === 0) {
+      return (
+        <div className={cn('absolute inset-0 w-full h-full bg-gray-100', className)}>
+          <div className="flex items-center justify-center h-full text-gray-500">
+            No slides configured
+          </div>
+        </div>
+      );
+    }
+
+    const currentSlide = slideItems[currentSlideIndex];
+    const currentSlideLoaded = slideImagesLoaded[currentSlideIndex];
+
+    return (
+      <div className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}>
+        {/* Current slide background */}
+        {currentSlide && (
+          <div
+            className={cn(
+              'absolute inset-0 w-full h-full transition-opacity duration-500',
+              currentSlideLoaded ? 'opacity-100' : 'opacity-0'
+            )}
+            style={{
+              backgroundImage: `url(${currentSlide.image})`,
+              backgroundPosition: config.position || 'center center',
+              backgroundSize: config.size || 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
+        )}
+
+        {/* Loading state for current slide */}
+        {currentSlide && !currentSlideLoaded && (
+          <div className="absolute inset-0 bg-gray-100 animate-pulse">
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <div className="text-center">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400 mb-2"></div>
+                <div className="text-sm">Loading slide...</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Simple navigation dots */}
+        {slideConfig?.navigation.showDots && totalSlides > 1 && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {slideItems.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={cn(
+                  'w-2 h-2 rounded-full transition-all duration-200',
+                  index === currentSlideIndex
+                    ? 'bg-white shadow-lg'
+                    : 'bg-white/50 hover:bg-white/70'
+                )}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Simple navigation arrows */}
+        {slideConfig?.navigation.showArrows && totalSlides > 1 && (
+          <>
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+              aria-label="Previous slide"
+            >
+              <span className="text-white text-lg">‹</span>
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+              aria-label="Next slide"
+            >
+              <span className="text-white text-lg">›</span>
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // Placeholder for other background types
   return (
     <div className={cn('absolute inset-0 w-full h-full bg-gray-100', className)}>
       <div className="flex items-center justify-center h-full text-gray-500">
-        Background type &quot;{config.type}&quot; - Coming soon
+        Background type &quot;{config.type}&quot; not supported
       </div>
     </div>
   );

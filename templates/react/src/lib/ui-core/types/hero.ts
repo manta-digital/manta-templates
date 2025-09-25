@@ -38,16 +38,50 @@ export interface HeroBackgroundConfig {
   };
 
   /** Slide carousel configuration */
-  slides?: Array<{
-    /** Slide background image */
-    image: string;
-    /** Optional slide-specific title */
-    title?: string;
-    /** Optional slide-specific subtitle */
-    subtitle?: string;
-    /** Slide display duration in milliseconds */
-    duration?: number;
-  }>;
+  slides?: {
+    /** Array of slide items */
+    items: Array<{
+      /** Slide background image (light mode) */
+      image: string;
+      /** Slide background image (dark mode) */
+      imageDark?: string;
+      /** Optional slide-specific title (overrides main hero title) */
+      title?: string;
+      /** Optional slide-specific subtitle (overrides main hero subtitle) */
+      subtitle?: string;
+      /** Slide display duration in milliseconds */
+      duration?: number;
+      /** Optional slide-specific content positioning */
+      contentPosition?: HeroContentPosition;
+    }>;
+    /** Transition configuration */
+    transition: {
+      /** Transition animation type */
+      type: 'fade' | 'slide' | 'zoom' | 'dissolve';
+      /** Transition duration in milliseconds */
+      duration: number;
+      /** CSS easing function */
+      easing?: string;
+    };
+    /** Navigation controls configuration */
+    navigation: {
+      /** Show dot indicators */
+      showDots?: boolean;
+      /** Show arrow navigation buttons */
+      showArrows?: boolean;
+      /** Enable automatic slide progression */
+      autoPlay?: boolean;
+      /** Pause autoplay on hover */
+      pauseOnHover?: boolean;
+    };
+    /** Accessibility configuration */
+    accessibility?: {
+      /** Announce slide changes to screen readers */
+      slideAnnouncements?: boolean;
+      /** Enable keyboard navigation (arrow keys, space) */
+      keyboardNavigation?: boolean;
+    };
+  };
 
   /** Gradient configuration - supports multiple formats */
   gradient?: {
