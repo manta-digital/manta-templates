@@ -259,7 +259,70 @@ Creating a comprehensive hero section component for business/marketing websites 
   - [x] Implement prefers-reduced-motion support with fallback to fade
   - **Success**: 3/4 transition types work smoothly with accessibility support ✓ (Slide transition moved to Issue #84)
 
-- [ ] **Task 3.2.5: Create Slide Navigation Controls**
+- [ ] **Task 3.2.5: REPLACED - Refactor HeroBackground Architecture (CRITICAL - 900 lines violates 300-line guideline)**
+
+  **PROBLEM**: HeroBackground.tsx has grown to 900 lines (3x over guideline) because it handles:
+  - Image backgrounds with format detection
+  - Video backgrounds with mobile fallbacks
+  - Slide backgrounds with complex transition system
+  - All loading states and error handling
+  - Format optimization (WebP/AVIF detection)
+
+  **SOLUTION**: Break into specialized, focused components following our architecture guidelines
+
+- [ ] **Task 3.2.5a: Extract Specialized Background Components**
+  - [ ] Create `ImageBackground.tsx` (~150 lines):
+    1. Handle static image backgrounds with format optimization
+    2. WebP/AVIF detection and fallbacks
+    3. Theme-aware image selection (light/dark variants)
+    4. Loading states and error handling
+    5. Responsive image optimization
+  - [ ] Create `VideoBackground.tsx` (~200 lines):
+    1. HTML5 video element with autoplay/loop/muted controls
+    2. Format detection (mp4, webm) and optimization
+    3. Mobile fallback to image/poster
+    4. Play/pause on visibility with Intersection Observer
+    5. Video loading states and error handling with graceful fallbacks
+  - [ ] Create `SlideBackground.tsx` (~200 lines):
+    1. Slide state management (currentIndex, transitions, preloading)
+    2. Image preloading for current + adjacent slides
+    3. Auto-play functionality with pause/resume logic
+    4. Integration with transition system
+  - [ ] Create `GradientBackground.tsx` (~50 lines):
+    1. Gradient generation using existing buildGradientClasses utility
+    2. Support for custom CSS gradients
+    3. Theme-aware gradient variants
+  - **Success**: Each background type has focused, maintainable component under 200 lines
+
+- [ ] **Task 3.2.5b: Extract Shared Background Utilities**
+  - [ ] Create `BackgroundFormatUtils.tsx`:
+    1. WebP/AVIF format detection logic
+    2. Video format detection (mp4/webm)
+    3. Mobile device detection
+    4. Reduced motion detection
+  - [ ] Create `BackgroundLoadingStates.tsx`:
+    1. Reusable loading spinner component
+    2. Error state display component
+    3. Consistent styling across all background types
+  - [ ] Create `SlideTransitionEngine.tsx`:
+    1. Extract SlideTransitionContainer component (lines 8-180)
+    2. All transition types: fade, slide, zoom, dissolve
+    3. Transition timing and easing configuration
+    4. Direction-aware transitions (forward/backward)
+  - **Success**: Shared utilities eliminate duplication and improve maintainability
+
+- [ ] **Task 3.2.5c: Refactor HeroBackground as Orchestrator**
+  - [ ] Reduce HeroBackground.tsx to orchestrator (~80 lines):
+    1. Background type detection and routing
+    2. Prop passing to specialized components
+    3. Common className and style handling
+    4. Error boundary for all background types
+  - [ ] Maintain exact same external API for backward compatibility
+  - [ ] Preserve all existing functionality while improving architecture
+  - [ ] Update component imports and exports in index.ts
+  - **Success**: HeroBackground under 100 lines, maintains API compatibility
+
+- [ ] **Task 3.2.5d: Create Slide Navigation Controls (Original Task)**
   - [ ] Build navigation dot indicator component:
     1. Responsive dot sizing and spacing
     2. Active/inactive visual states with smooth transitions
