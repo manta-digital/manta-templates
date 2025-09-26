@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Hero Section Components** - Framework-agnostic hero system with image backgrounds, gradient support, WebP/AVIF optimization, and responsive loading states
+- **Hero Slide Navigation** - Added comprehensive slide navigation with keyboard support, disabled states, and dot/arrow controls
 - **Navigation Menu System** - Enhanced header with dropdown navigation using Radix UI
 - **ComboBox Component** - Advanced dropdown with filtering, custom values, and accessibility support
+
+### Dependencies Added
+- **@use-gesture/react@^10.3.1** - Lightweight gesture library (~1-2KB gzipped) for future touch/swipe gesture support in hero slide navigation. Chosen for minimal bundle impact and comprehensive edge case handling.
 
 ### Changed
 - Removed remaining ShadCN references from documentation and guides

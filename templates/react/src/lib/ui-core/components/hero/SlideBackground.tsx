@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useDrag } from '@use-gesture/react';
 import { cn } from '../../utils/cn';
 import { useMotionPreferences } from './BackgroundFormatUtils';
 import { SlideTransitionEngine } from './SlideTransitionEngine';
@@ -103,15 +104,33 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
 
   const nextSlide = useCallback(() => {
     if (totalSlides === 0 || isTransitioning) return;
-    const nextIndex = currentSlideIndex >= maxSlideIndex ? 0 : currentSlideIndex + 1;
-    goToSlide(nextIndex);
-  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide]);
+
+    const shouldLoop = slideConfig?.navigation.loop ?? true;
+    if (currentSlideIndex >= maxSlideIndex) {
+      // At last slide
+      if (shouldLoop) {
+        goToSlide(0); // Go to first slide
+      }
+      // Don't go anywhere if not looping
+    } else {
+      goToSlide(currentSlideIndex + 1);
+    }
+  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide, slideConfig?.navigation.loop]);
 
   const prevSlide = useCallback(() => {
     if (totalSlides === 0 || isTransitioning) return;
-    const prevIndex = currentSlideIndex <= 0 ? maxSlideIndex : currentSlideIndex - 1;
-    goToSlide(prevIndex);
-  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide]);
+
+    const shouldLoop = slideConfig?.navigation.loop ?? true;
+    if (currentSlideIndex <= 0) {
+      // At first slide
+      if (shouldLoop) {
+        goToSlide(maxSlideIndex); // Go to last slide
+      }
+      // Don't go anywhere if not looping
+    } else {
+      goToSlide(currentSlideIndex - 1);
+    }
+  }, [totalSlides, currentSlideIndex, maxSlideIndex, isTransitioning, goToSlide, slideConfig?.navigation.loop]);
 
   // Slide auto-play functionality using transition system
   useEffect(() => {
@@ -130,6 +149,81 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
       setIsSlideAutoPlaying(true);
     }
   }, [slideConfig?.navigation.autoPlay, totalSlides]);
+
+  // Keyboard navigation support
+  useEffect(() => {
+    if (totalSlides <= 1) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only handle keys when slide controls are enabled
+      if (!slideConfig?.accessibility?.keyboardNavigation) return;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          prevSlide();
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          nextSlide();
+          break;
+        case 'Enter':
+        case ' ': // Space bar
+          event.preventDefault();
+          // Pause/resume autoplay
+          setIsSlideAutoPlaying(prev => !prev);
+          break;
+        case 'Home':
+          event.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          event.preventDefault();
+          goToSlide(maxSlideIndex);
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [totalSlides, slideConfig?.accessibility?.keyboardNavigation, prevSlide, nextSlide, goToSlide, maxSlideIndex]);
+
+  // Touch/swipe gesture support
+  const bind = useDrag(
+    ({ swipe: [swipeX], down, canceled }) => {
+      // Only process swipes when there are multiple slides and not currently transitioning
+      if (totalSlides <= 1 || isTransitioning || canceled) return;
+
+      // Handle horizontal swipes for slide navigation
+      if (swipeX !== 0) {
+        if (swipeX > 0) {
+          // Swiped right - go to previous slide
+          prevSlide();
+        } else if (swipeX < 0) {
+          // Swiped left - go to next slide
+          nextSlide();
+        }
+      }
+    },
+    {
+      // Configure swipe detection
+      swipe: {
+        distance: 50, // Minimum distance in pixels to trigger a swipe
+        velocity: 0.3, // Minimum velocity in pixels/ms
+        duration: 1000 // Maximum duration for swipe detection
+      },
+      // Prevent accidental scrolling during horizontal swipes
+      preventScroll: false, // Allow vertical scrolling
+      preventScrollAxis: 'x', // But prevent horizontal scrolling during gesture
+      // Touch event configuration
+      pointer: {
+        touch: true, // Enable touch events on touch devices
+      },
+      // Filter out taps to prevent accidental slide changes
+      filterTaps: true,
+      tapsThreshold: 10 // Pixel threshold for tap detection
+    }
+  );
 
   // Slide image preloader
   useEffect(() => {
@@ -191,7 +285,11 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
   const transitionEasing = slideConfig?.transition.easing || 'ease-in-out';
 
   return (
-    <div className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}>
+    <div
+      {...bind()}
+      className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}
+      style={{ touchAction: 'pan-y' }} // Allow vertical scrolling but capture horizontal gestures
+    >
       {/* Transition Container */}
       <SlideTransitionEngine
         currentSlide={currentSlide}
@@ -232,24 +330,44 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
       )}
 
       {/* Simple navigation arrows */}
-      {slideConfig?.navigation.showArrows && totalSlides > 1 && (
-        <>
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20"
-            aria-label="Previous slide"
-          >
-            <span className="text-white text-lg">‹</span>
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20"
-            aria-label="Next slide"
-          >
-            <span className="text-white text-lg">›</span>
-          </button>
-        </>
-      )}
+      {slideConfig?.navigation.showArrows && totalSlides > 1 && (() => {
+        const shouldLoop = slideConfig?.navigation.loop ?? true;
+        const isFirstSlide = currentSlideIndex <= 0;
+        const isLastSlide = currentSlideIndex >= maxSlideIndex;
+        const isPrevDisabled = !shouldLoop && isFirstSlide;
+        const isNextDisabled = !shouldLoop && isLastSlide;
+
+        return (
+          <>
+            <button
+              onClick={prevSlide}
+              disabled={isPrevDisabled}
+              className={cn(
+                "absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20",
+                isPrevDisabled
+                  ? "bg-white/10 cursor-not-allowed"
+                  : "bg-white/20 hover:bg-white/30 cursor-pointer"
+              )}
+              aria-label="Previous slide"
+            >
+              <span className={cn("text-lg", isPrevDisabled ? "text-white/40" : "text-white")}>‹</span>
+            </button>
+            <button
+              onClick={nextSlide}
+              disabled={isNextDisabled}
+              className={cn(
+                "absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-200 z-20",
+                isNextDisabled
+                  ? "bg-white/10 cursor-not-allowed"
+                  : "bg-white/20 hover:bg-white/30 cursor-pointer"
+              )}
+              aria-label="Next slide"
+            >
+              <span className={cn("text-lg", isNextDisabled ? "text-white/40" : "text-white")}>›</span>
+            </button>
+          </>
+        );
+      })()}
     </div>
   );
 }

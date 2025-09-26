@@ -73,6 +73,8 @@ export interface HeroBackgroundConfig {
       autoPlay?: boolean;
       /** Pause autoplay on hover */
       pauseOnHover?: boolean;
+      /** Whether slides should loop (default: true) */
+      loop?: boolean;
     };
     /** Accessibility configuration */
     accessibility?: {
