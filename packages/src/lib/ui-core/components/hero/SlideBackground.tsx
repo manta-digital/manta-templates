@@ -27,6 +27,7 @@ interface SlideBackgroundConfig {
     showArrows?: boolean;
     autoPlay?: boolean;
     pauseOnHover?: boolean;
+    loop?: boolean;
   };
   accessibility?: {
     slideAnnouncements?: boolean;
