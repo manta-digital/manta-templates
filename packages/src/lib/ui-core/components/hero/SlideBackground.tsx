@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useDrag } from '@use-gesture/react';
 import { cn } from '../../utils/cn';
 import { useMotionPreferences } from './BackgroundFormatUtils';
 import { SlideTransitionEngine } from './SlideTransitionEngine';
@@ -187,6 +188,43 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [totalSlides, slideConfig?.accessibility?.keyboardNavigation, prevSlide, nextSlide, goToSlide, maxSlideIndex]);
 
+  // Touch/swipe gesture support
+  const bind = useDrag(
+    ({ swipe: [swipeX], down, canceled }) => {
+      // Only process swipes when there are multiple slides and not currently transitioning
+      if (totalSlides <= 1 || isTransitioning || canceled) return;
+
+      // Handle horizontal swipes for slide navigation
+      if (swipeX !== 0) {
+        if (swipeX > 0) {
+          // Swiped right - go to previous slide
+          prevSlide();
+        } else if (swipeX < 0) {
+          // Swiped left - go to next slide
+          nextSlide();
+        }
+      }
+    },
+    {
+      // Configure swipe detection
+      swipe: {
+        distance: 50, // Minimum distance in pixels to trigger a swipe
+        velocity: 0.3, // Minimum velocity in pixels/ms
+        duration: 1000 // Maximum duration for swipe detection
+      },
+      // Prevent accidental scrolling during horizontal swipes
+      preventScroll: false, // Allow vertical scrolling
+      preventScrollAxis: 'x', // But prevent horizontal scrolling during gesture
+      // Touch event configuration
+      pointer: {
+        touch: true, // Enable touch events on touch devices
+      },
+      // Filter out taps to prevent accidental slide changes
+      filterTaps: true,
+      tapsThreshold: 10 // Pixel threshold for tap detection
+    }
+  );
+
   // Slide image preloader
   useEffect(() => {
     if (totalSlides === 0) return;
@@ -247,7 +285,11 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
   const transitionEasing = slideConfig?.transition.easing || 'ease-in-out';
 
   return (
-    <div className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}>
+    <div
+      {...bind()}
+      className={cn('absolute inset-0 w-full h-full overflow-hidden', className)}
+      style={{ touchAction: 'pan-y' }} // Allow vertical scrolling but capture horizontal gestures
+    >
       {/* Transition Container */}
       <SlideTransitionEngine
         currentSlide={currentSlide}
