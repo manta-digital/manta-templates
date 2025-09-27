@@ -25,7 +25,7 @@ export default defineConfig({
     build: {
       outDir: 'out/preload',
       rollupOptions: {
-        output: { format: 'es' }
+        output: { format: 'cjs' }
       }
     },
     resolve: {
@@ -40,7 +40,6 @@ export default defineConfig({
       outDir: 'out/renderer',
       rollupOptions: {
         input: { index: resolve(__dirname, 'index.html') },
-        external: ['rehype-pretty-code', 'remark', 'rehype-raw', 'rehype-sanitize', 'rehype-slug', 'rehype-autolink-headings', 'rehype-external-links', 'rehype-stringify'],
         output: {}
       }
     },

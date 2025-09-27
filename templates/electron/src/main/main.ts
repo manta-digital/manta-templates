@@ -22,7 +22,7 @@ function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: fileURLToPath(new URL('../preload/preload.mjs', import.meta.url)),
+      preload: fileURLToPath(new URL('../preload/preload.cjs', import.meta.url)),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: !process.env.ELECTRON_RENDERER_URL
@@ -55,7 +55,7 @@ function createWindow(): void {
   if (process.env.ELECTRON_RENDERER_URL) {
     win.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
-    win.loadFile(fileURLToPath(new URL('../../index.html', import.meta.url)))
+    win.loadFile(fileURLToPath(new URL('../renderer/index.html', import.meta.url)))
   }
 }
 
