@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **ComboBox Component** - Advanced dropdown with filtering, custom values, and accessibility support
 
 ### Dependencies Added
-- **@use-gesture/react@^10.3.1** - Lightweight gesture library (~1-2KB gzipped) for future touch/swipe gesture support in hero slide navigation. Chosen for minimal bundle impact and comprehensive edge case handling.
+- **@use-gesture/react@^10.3.1** - Lightweight gesture library (~1-2KB gzipped) enabling touch/swipe gesture support in hero slide navigation. Chosen for minimal bundle impact and comprehensive edge case handling. Now available in all templates (React, NextJS, Electron).
 
 ### Changed
 - Removed remaining ShadCN references from documentation and guides
