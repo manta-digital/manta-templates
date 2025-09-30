@@ -8,24 +8,69 @@ This document outlines standard naming conventions for project files and directo
 - Maintain a logical hierarchy with clear parent-child relationships
   - Example: `project-documents/code-reviews/`
 
-## Sequential Numbering Convention
+## Index Ranges and Semantic Structure
 
-For files that use sequential numbering (nn-prefix), follow these rules:
+The project uses 3-digit indices (000-999) with semantic range allocation:
+
+### Range Allocation
+- **000-009**: Core AI-project process guides
+  - Example: `guide.ai-project.000-process.md`, `guide.ai-project.001-concept.md`
+  - Matching project files: `private/project-guides/001-concept.{project}.md`
+
+- **010-049**: Reserved for future process extensions
+  - Available for new methodology guides
+  - Maintain consistent guide.ai-project.nnn-{name}.md pattern
+
+- **050-089**: Architecture and system design (40 slots)
+  - High-level designs (HLD)
+  - System architecture documents
+  - Technology selection and rationale
+  - Example: `private/project-guides/050-hld.{project}.md`
+
+- **090-099**: Specialized utility guides
+  - Example: `guide.ai-project.090-code-review.md`
+  - Example: `guide.ai-project.091-legacy-task-migration.md`
+
+- **100-799**: Active work items (700 slots)
+  - Slice design documents
+  - Task files
+  - User-created or user-initiated work
+  - Primary working range for project execution
+  - Example: `private/slices/100-slice.{name}.md`
+
+- **800-899**: Feature documents
+  - Standalone feature specifications
+  - Feature-specific design documents
+
+- **900-949**: Maintenance and operations
+  - Maintenance task lists
+  - Operational procedures
+  - Bug tracking and tech debt
+
+- **950-999**: System-reserved
+  - Internal tooling documentation
+  - System configuration files
+  - Reserved for framework use
 
 ### Number Ranges
-- **00**: System/core files (e.g., `00-process`)
-- **01-89**: Regular sequential content in chronological order
-- **90-98**: Special/reserved files (e.g., `90-code-review`, `91-legacy-migration`)
-- **99**: Maintenance files (e.g., `99-maintenance-tasks`)
+- **000-009**: Core process guides
+- **010-049**: Extended process documentation
+- **050-089**: Architecture documents
+- **090-099**: Specialized guides (code review, legacy migration, etc.)
+- **100-799**: Regular sequential content (slices, tasks, user work)
+- **800-899**: Feature files
+- **900-949**: Maintenance files
+- **950-999**: System-reserved files
 
 ### Numbering Rules
-- **Sequential within category**: Find the highest existing number in the same category and increment by 1
-- **Ignore reserved ranges**: If you have `01-tasks`, `02-tasks`, and `90-tasks`, the next task file is `03-tasks` (not `91-tasks`)
-- **Start at 01**: Begin regular sequences at 01, reserving 00 for system files
+- **Sequential within category**: Find the highest existing number in the same range category and increment by 1
+- **Range boundaries**: Respect range semantics when numbering new files
+- **Start appropriately**: Begin at the first number of the appropriate range (e.g., 100 for first slice)
 
 Examples:
-- Existing: `01-tasks.auth.md`, `02-tasks.dashboard.md`, `90-tasks.legacy.md`
-- Next task file: `03-tasks.reporting.md`
+- Existing: `100-tasks.auth.md`, `200-tasks.dashboard.md`, `900-tasks.maintenance.md`
+- Next regular task file: `300-tasks.reporting.md`
+- Architecture file: `050-hld.{project}.md`
 
 ## Document Naming
 
@@ -68,33 +113,33 @@ File naming schemes may contain sections such as `file-{nn}.project{.subproject?
 ### Slice Design Files
 Slice design documents follow this convention:
 ```
-nn-slice.{slice-name}.md
+nnn-slice.{slice-name}.md
 ```
 
 Where:
-- `nn` is a sequential index following the numbering rules above
+- `nnn` is a 3-digit sequential index following the numbering rules above (typically 100-799)
 - `{slice-name}` is the slice name in lowercase with spaces replaced by hyphens
 
 Examples:
-- `01-slice.user-authentication.md`
-- `02-slice.trading-dashboard.md`
-- `03-slice.portfolio-management.md`
+- `100-slice.user-authentication.md`
+- `200-slice.trading-dashboard.md`
+- `300-slice.portfolio-management.md`
 
 ### Task Files
 Task files should follow this convention:
 
 ```
-nn-tasks.{section-or-slice-name}.md
+nnn-tasks.{section-or-slice-name}.md
 ```
 
 Where:
-- `nn` is a sequential index following the numbering rules above
+- `nnn` is a 3-digit sequential index following the numbering rules above (typically 100-799 for active work, 900-949 for maintenance)
 - `{section-or-slice-name}` is the section or slice name in lowercase with special characters removed and spaces replaced with hyphens
 
 Examples:
-- `01-tasks.user-authentication.md` (slice-based)
-- `02-tasks.trading-dashboard.md` (slice-based)
-- `03-tasks.maintenance-fixes.md` (feature/maintenance)
+- `100-tasks.user-authentication.md` (slice-based)
+- `200-tasks.trading-dashboard.md` (slice-based)
+- `900-tasks.maintenance-fixes.md` (maintenance)
 
 ### Task File Structure
 Modern task files include:
@@ -108,7 +153,7 @@ Example structure:
 ---
 slice: user-authentication
 project: trading-app
-lld: private/slices/01-slice.user-authentication.md
+lld: private/slices/100-slice.user-authentication.md
 dependencies: [foundation-setup]
 projectState: foundation complete, database schema defined
 lastUpdated: 2025-08-18
@@ -151,14 +196,21 @@ lastUpdated: 2025-08-18
 Previously used patterns (now deprecated):
 - `tasks.[category].[component/feature].[additional-info].md`
 - `{section}-tasks-phase-4.md`
-- `nn-tasks-{section}.md`
+- `nn-tasks-{section}.md` (2-digit index, replaced by nnn-tasks pattern)
 - `tasks.code-review.{filename}.{date}.md` (still used for code review tasks)
 
 ## Feature Files
 Feature files should follow the same convention as slice files:
 ```
-nn-feature.{feature-name}.md
+nnn-feature.{feature-name}.md
 ```
+
+Where:
+- `nnn` is a 3-digit sequential index (typically 800-899 for features)
+
+Examples:
+- `800-feature.advanced-search.md`
+- `810-feature.export-functionality.md`
 
 ## Benefits
 This naming convention provides:
