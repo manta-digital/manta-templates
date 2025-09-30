@@ -60,7 +60,7 @@ const defaultIcons: SocialIcons = {
 export function AboutCard({ 
   title, 
   description, 
-  avatar = '/window.svg', 
+  avatar = 'window.svg', 
   socials = [], 
   contentHtml, 
   className,

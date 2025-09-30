@@ -22,7 +22,7 @@ interface TechnologyScrollerProps {
   className?: string;
   /** Whether to pause animation on hover */
   pauseOnHover?: boolean;
-  /** Base path for technology icons (defaults to '/assets/icons/tech/') */
+  /** Base path for technology icons (defaults to '/assets/icons/tech/' or configured via VITE_ASSET_BASE_PATH) */
   iconBasePath?: string;
   /** Image component for framework-specific optimization (e.g., Next.js Image) */
   ImageComponent?: React.ComponentType<any>;
@@ -42,7 +42,7 @@ const TechnologyScroller: React.FC<TechnologyScrollerProps> = ({
   direction = 'left',
   pauseOnHover = true,
   className,
-  iconBasePath = '/assets/icons/tech/',
+  iconBasePath = 'assets/icons/tech/',
   ImageComponent = 'img',
 }) => {
   const [isDark, setIsDark] = useState(false);

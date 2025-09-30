@@ -36,12 +36,16 @@ export default defineConfig({
   },
   renderer: defineViteConfig(() => ({
     root: '.',
+    base: './',
     build: {
       outDir: 'out/renderer',
       rollupOptions: {
         input: { index: resolve(__dirname, 'index.html') },
         output: {}
       }
+    },
+    define: {
+      '__ASSET_BASE_PATH__': '""'
     },
     resolve: {
       alias: {

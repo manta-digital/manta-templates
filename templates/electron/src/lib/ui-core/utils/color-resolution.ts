@@ -58,7 +58,7 @@ export function resolveThemeColor(
   if (color.startsWith('var(')) {
     const varName = color.slice(4, -1); // Remove 'var(' and ')'
     const cssValue = resolveCSSVariable(varName);
-    
+
     if (cssValue) {
       resolvedColor = cssValue;
     } else {

@@ -55,7 +55,7 @@ const BlogIndexCard: React.FC<BlogIndexCardProps> = ({
   title = 'More Great Articles',
   viewAllHref = '/blog',
   viewAllText = 'View All Posts',
-  defaultImageUrl = '/image/blog/blog-sample-image.png',
+  defaultImageUrl = 'image/blog/blog-sample-image.png',
   generatePostHref = (slug) => `/blog/${slug}`,
   ImageComponent = 'img',
   LinkComponent = 'a',
