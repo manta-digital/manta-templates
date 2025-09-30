@@ -7,11 +7,11 @@ audience:
   - ai
 ai description: Parameterized prompt library mapped to slice-based project phases.
 dependsOn:
-  - guide.ai-project.00-process.md
+  - guide.ai-project.000-process.md
 npmScriptsAiSupport: "!include ../snippets/npm-scripts.ai-support.json"
 ---
 ## Prompts
-This document contains prepared prompts useful in applying the `guide.ai-project.00-process` and performing additional supplemental tasks.
+This document contains prepared prompts useful in applying the `guide.ai-project.000-process` and performing additional supplemental tasks.
 ##### Project Object Model and Parameters
 ```python
 # input keys
@@ -31,12 +31,12 @@ This document contains prepared prompts useful in applying the `guide.ai-project
 *Use to directly execute a phase without additional instructions needed. Also usable with traditional (non-slice-based) projects.*
 
 ```
-Refer to the `guide.ai-project.00-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
+Refer to the `guide.ai-project.000-process`, and function as a Senior AI.  Implement the phase requested according to the respective procedures described in the guide.  Remember to follow the rules in `directory-structure` for any files or directories created.
 ```
 
 ##### Concept Creation (Phase 1)
 ```markdown
-We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.00-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
+We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.000-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
 The initial concept description will be provided by the project manager, ideally as a starter document in `project-guides/001-concept.{project}.md`.  Our goal is to refine this initial user-provided concept into the Refined Concept, which should be placed as instructed into the existing document.  The placeholder document should provide any needed details needed for this procedure.
 
@@ -47,7 +47,7 @@ When creating the refined concept, *ask questions* if any information is missing
 
 ##### Spec Creation (Phase 2)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 2: Spec Creation. Use `guide.ai-project.02-spec` with the approved concept document to create the project specification.
+We're working in our guide.ai-project.000-process, Phase 2: Spec Creation. Use `guide.ai-project.002-spec` with the approved concept document to create the project specification.
 
 Your role is Technical Fellow as described in the Process Guide. Work with the Project Manager to create `private/project-guides/02-spec.{project}.md`.
 
@@ -72,7 +72,7 @@ Note: This is a design and planning task, not a coding task.
 
 ##### Slice Planning (Phase 3)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 3: High-Level Design & Slice Planning.  Use `guide.ai-project.03-slice-planning` with the project concept and specification documents to break {project} into manageable vertical slices.
+We're working in our guide.ai-project.000-process, Phase 3: High-Level Design & Slice Planning.  Use `guide.ai-project.003-slice-planning` with the project concept and specification documents to break {project} into manageable vertical slices.
 
 Your role is Technical Fellow as described in the Process Guide. Work with the Project Manager to:
 
@@ -87,7 +87,7 @@ Note: This is a design and planning task, not a coding task.
 
 ##### Slice Design (Phase 4)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project} by following the instructions here. These instructions may be used for adding a new slice with provided description, or designing {slice} included in the project slice plan.
+We're working in our guide.ai-project.000-process, Phase 4: Slice Design (Low-Level Design). Create a detailed design for slice: {slice} in project {project} by following the instructions here. These instructions may be used for adding a new slice with provided description, or designing {slice} included in the project slice plan.
 
 Use the following inputs:
 1. The project high-level design (03-hld.{project}.md) if applicable.
@@ -136,7 +136,7 @@ Stop and request clarification if you need more information to complete the slic
 *This should be usable for Slice or Feature task breakdown.*
 
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.  Note that this request can be used for *slice* or *feature*, but only one will be applicable to a particular request.
+We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.  Note that this request can be used for *slice* or *feature*, but only one will be applicable to a particular request.
 
 Your role is Senior AI. Use exactly one of the following as input:
 1. The slice design document `private/slices/{nn}-slice.{slice}.md`.
@@ -181,9 +181,9 @@ After creation of task list, you must review the entire list against the slice d
 
 ##### Slice Task Expansion (Phase 6)
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.  Only enhance tasks that can truly benefit from it.  Many tasks may already be described with sufficient detail.
+We're working in our guide.ai-project.000-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.  Only enhance tasks that can truly benefit from it.  Many tasks may already be described with sufficient detail.
 
-Use `guide.ai-project.06-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
+Use `guide.ai-project.006-task-expansion` as your detailed guide for this phase. Work on the task file `private/tasks/nn-tasks.{slice}.md`.
 
 Your role is Senior AI. For each task:
 - If it would benefit from expansion or subdivision, enhance it.
@@ -202,7 +202,7 @@ Note: This is a project planning task, not a coding task.
 
 ##### Task Implementation (Phase 7)
 ```markdown
-We are working on {slice | feature} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
+We are working on {slice | feature} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.000-process`. 
 
 Your job is to complete the tasks in the `/project-documents/private/tasks/{nn}-tasks.{slice|feature}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the relevant provided rules (`rules/`, `CLAUDE.md`, etc).  Your role is "Senior AI". 
 
@@ -236,13 +236,13 @@ Notes:
 ```markdown
 The following provides context on our current work in slice-based project {project}. 
 
-We are using the slice-based methodology from `guide.ai-project.00-process`. Current work context:
+We are using the slice-based methodology from `guide.ai-project.000-process`. Current work context:
 - Project: {project}
 - Current slice: {slice}
 - Phase: [specify current phase if applicable]
 - if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
 
-Refer to the Resource Structure in `guide.ai-project.00-process` for locations of resources. Key project documents:
+Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Key project documents:
 - High-level design: private/project-guides/03-hld.{project}.md
 - Slice plan: private/project-guides/03-slices.{project}.md
 - Current slice design: private/slices/{slice}.md
@@ -286,7 +286,7 @@ You will need to consult specific knowledge for 3rd party tools, libraries, or p
 ```markdown
 We're adding a new feature to project {project}. Name this feature as described or, if creating from a github issue, create a concise but descriptive name from the issue title.
 
-Use relevant methodology from `guide.ai-project.00-process` to create the design for the feature.  Keep this concise and minimal.  Your role is Technical Fellow.
+Use relevant methodology from `guide.ai-project.000-process` to create the design for the feature.  Keep this concise and minimal.  Your role is Technical Fellow.
 
 The feature description should be provided by the Project Manager. Additionally consider the existing project context including.  
 
@@ -446,7 +446,7 @@ Process:
 
 *Create tasks based on codebase analysis.  While we don't yet have a generic analysis prompt, we do have the following modified task-creation prompt for use with analysis results.*
 ```markdown
-We're working in our guide.ai-project.00-process, Phase 5: Slice Task Breakdown. Convert the issues from {analysis-file} into granular, actionable tasks if they are not already.  Keep them in priority order (P0/P1/P2/P3). 
+We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown. Convert the issues from {analysis-file} into granular, actionable tasks if they are not already.  Keep them in priority order (P0/P1/P2/P3). 
 
 If the tasks are already sufficiently granular and in checklist format, you do not need to modify them. Note that each success criteria needs a checkbox.
 
@@ -457,7 +457,7 @@ Create task file at `private/tasks/nn-analysis{.subproject?}-{date}.md` with:
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
 4. Keep success criteria with their respective task
-5. Always use checklist format described in guide.ai-project.00-process under Task Files.
+5. Always use checklist format described in guide.ai-project.000-process under Task Files.
 
 For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
@@ -519,7 +519,7 @@ Note: This creates implementation-ready technical designs, not high-level planni
 ##### Analysis Task Implementation
 *Phase 7 Task Implementation customized for analysis files. *
 ```markdown
-We are working on the analysis file {analysis} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.00-process`. 
+We are working on the analysis file {analysis} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.000-process`. 
 
 Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nn-analysis.{project}{date-from-{analysis}}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
 
