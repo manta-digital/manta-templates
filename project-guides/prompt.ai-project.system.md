@@ -179,7 +179,6 @@ Note also that tasks may reference the relevant design document.  You do not nee
 After creation of task list, you must review the entire list against the slice design to ensure that these requirements are met.
 ```
 
-
 ##### Slice Task Expansion (Phase 6)
 ```markdown
 We're working in our guide.ai-project.00-process, Phase 6: Task Enhancement and Expansion. Enhance the tasks for slice {slice} in project {project} to improve the chances that our "junior" AI workers can complete assigned tasks on their own.  Only enhance tasks that can truly benefit from it.  Many tasks may already be described with sufficient detail.
@@ -232,7 +231,6 @@ Notes:
 - Do not guess, assume, or proceed without required files.
 ```
 
-
 ##### Context Initialization
 *Use this prompt when you need to switch models or refresh understanding in slice-based projects.*
 ```markdown
@@ -248,7 +246,7 @@ Refer to the Resource Structure in `guide.ai-project.00-process` for locations o
 - High-level design: private/project-guides/03-hld.{project}.md
 - Slice plan: private/project-guides/03-slices.{project}.md
 - Current slice design: private/slices/{slice}.md
-- Current tasks: private/tasks/{sliceindex}-tasks.{slicename}.md
+- Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md
 
 Directory Structure by Development Type:
 - Regular Development: Use `project-documents/private/` as shown above for all project-specific files.
@@ -257,9 +255,11 @@ Directory Structure by Development Type:
 - `project-artifacts/{template}/tasks/`
 - `project-artifacts/{template}/maintenance/`
 
-If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.
+If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.  
 
-tools information: [Project Manager will provide if relevant to current work]
+If tasks file is already present, it shold be your primary focus.  Slice design may be used to gain overview or as a source for generating tasks.  Once we have the tasks, we primarily work from those.
+
+If given an instruction similar to "process and stand by", make sure you understand all instructions, what files or architecture components are involved, and alert Project Manager to any missing, incomplete, or vague information preventing you from accurately carrying out your instructions.  Wait for confirmation from Project Manager before proceeding further.  This includes tools information, which should be provided by the Project Manager if relevant to current work.
 ```
 
 ##### Tool Usage
@@ -280,7 +280,6 @@ You will need to consult specific knowledge for 3rd party tools, libraries, or p
 5. Web Search Fallback: If the targeted search doesn't yield 
    results, then search the web.
 ```
-
 
 ##### Feature Design
 *Use this to create a feature file for a feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
@@ -329,7 +328,6 @@ Avoid:
 If you need more information about the feature requirements, stop and request from Project Manager.
 ```
 
-
 ##### Ad-Hoc Tasks
 ```markdown
 Create tasks for {feature | maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
@@ -354,7 +352,6 @@ Skip LLD creation - go directly from description to implementable tasks. Each ta
 If the item is too complex for this approach, recommend creating a design file instead. If you need more information about the requirements, stop and request from Project Manager.  Keep tasks focused and atomic.
 ```
 
-
 ##### Summarize Context
 *Use when nearing context limit, e.g. when facing imminent auto-compaction in Claude Code.  Make sure to include inside `[ ]` or Claude will ignore the instructions.  Currently it appears that at best Claude will output the `[ ]` information into the new context.*
 ```markdown
@@ -365,15 +362,28 @@ Perform the following items and add their output to the compacted context:
 * add the tag --COMPACTED-- after inserting this information. 
 ```
 
-##### Maintenance Item 
+##### Maintenance Task
 ```markdown
-Continue operating in your role as Senior AI. Add {item} to maintenance-tasks.md, following existing file format and markdown rules.
+Operate as a Senior AI.  Use the issue description provided, and add tasks to the maintenance file to address implementation of the issue or feature.  Add a new task to your maintenance file, which should be `900-tasks.maintenance` unless this is a special case with reason to deviate (it probably isn't).  This should be used for an item small enough to represent as a single main task.
 
-Current project context: {project}, slice-based development. If this maintenance item affects multiple slices or requires coordination, note this in the item description.
+Include:
+1. A new Task {n}
+2. A very brief overview of the task (you may modify if already present).
+3. Granular but concise subtasks following Phase 5 guidelines
+4. Organize so that subtasks can be completed sequentially.
+5. Optimize for early vertical slice testability.
+6. Use checklist format for all tasks.
 
-If item detail level is sufficient for immediate implementation, you may proceed after confirmation with Project Manager. If {item} requires more detailed planning (similar to a slice), expand according to project guides and confirm with Project Manager before implementation.
+Avoid:
+- Time estimates for subtasks.  If work is that complex, this is wrong format.
+- Benchmarking tasks unless actually relevant to this effort.
+- Risk items.  Include only if truly relevant.  Be skeptical here.
 
-Consider impact on current slice work and dependencies when planning implementation.
+For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+
+Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.
+
+This is a project planning task, not a coding task.
 ```
 
 ##### Perform Routine Maintenance 

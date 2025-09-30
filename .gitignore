@@ -1,6 +1,8 @@
 # Environment variables
 *.env
 
+private
+
 # macOS system files
 .DS_Store
 .AppleDouble
