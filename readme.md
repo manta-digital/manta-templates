@@ -72,13 +72,13 @@ Start by describing your project, ideally in a markdown file. Include goals, des
 #### 🚦 Initial Prompts – Phases 1 and 2
 After you describe your project and provide basic Input Parameters, paste the **Project Kickoff** prompt into your chat. If third-party tools are in use (they almost always are), additionally paste the **3rd Party Tools** prompt.
 
-This will generate `01-concept.{project}.md` in `private/project-guides/`, customized to your project. Once you’re happy with it, run the **Project Phase** prompt and specify **Phase 2** to produce `02-spec.{project}.md` in the same folder.
+This will generate `001-concept.{project}.md` in `private/project-guides/`, customized to your project. Once you’re happy with it, run the **Project Phase** prompt and specify **Phase 2** to produce `002-spec.{project}.md` in the same folder.
 
 At this point you’re ready to create tasks.
 
 
 #### 🔨 Creating & Expanding Tasks – Phases 3 and 4
-The `guide.ai-project.00-process` file instructs the AI on how to perform all project phases, including creating and expanding tasks. Use the **Project Phase** prompt again for **Phase 3**.  The guide will write the `03-tasks.{project}.md` file in `private/project-guides/`.
+The `guide.ai-project.000-process` file instructs the AI on how to perform all project phases, including creating and expanding tasks. Use the **Project Phase** prompt again for **Phase 3**.  The guide will write the `nnn-tasks.{project}.md` file in `private/project-guides/`.
 
 In general, letting the AI subdivide tasks as needed results in tasks that can be more easily implemented by the AI, with less need to be constantly in the middle.  
 
@@ -117,13 +117,13 @@ For major new features, or addressing architectural issues, use the Features pro
 ##### Feature Design
 Use the "Feature Design" prompt with your file and you will receive a `features/nn-feature.{feature}.md` file containing your feature's combined spec + low-level design as output.
 ##### Feature Tasks
-Now use the "Feature Tasks" prompt and it will add a new section of Phase 3 tasks to `03-tasks.{project}.md`.  These tasks will be consistent with the existing sections.
+Now use the "Feature Tasks" prompt and it will add a new section of Phase 3 tasks to `nnn-tasks.{project}.md`.  These tasks will be consistent with the existing sections.
 ##### Feature Expansion and Implementation
 Your feature tasks are now no different from the other tasks in the project.  Use the same prompts described above for Task Expansion and Implementation.
 
 
 #### 🎯 Ad-Hoc Items
-For addressing new features or issues not large enough to warrant their own spec, you can create task sections ad-hoc.  Just create a new section in `03-tasks.{project}.md` and describe your tasks.  You don't necessarily need the level of detail used by the AI in creating its Phase 3 tasks, but the more specific you are, the better the results will be.
+For addressing new features or issues not large enough to warrant their own spec, you can create task sections ad-hoc.  Just create a new section in `nnn-tasks.{project}.md` and describe your tasks.  You don't necessarily need the level of detail used by the AI in creating its Phase 3 tasks, but the more specific you are, the better the results will be.
 
 Now you can run the same Task Expansion and Task Implementation prompts on your new task section, with no special process required.
 
@@ -146,7 +146,7 @@ When working with AI Project Guide, provide input in a format like this, and you
 ```
 
 #### Core Files
-- **`project-guides/guide.ai-project.00-process.md`** - This is *the* core file that instructs your AI on the overall process.
+- **`project-guides/guide.ai-project.000-process.md`** - This is *the* core file that instructs your AI on the overall process.
 - **`project-guides/rules/`** - Use the `setup-ide` script to copy for your IDE, or copy manually if using other than Cursor and Windsurf.  
 
 #### TroubleShooting
@@ -192,7 +192,7 @@ The AI project guide system operates on three layers, designed to work together 
 
 | Folder | Look here when you need…                                                                                                      |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.00-process, guide.ai-project.02-spec, Code Rules). |
+| **`project-guides/`** | Process & methodology docs that apply to *every* project (e.g., guide.ai-project.000-process, guide.ai-project.002-spec, Code Rules). |
 | **`framework-guides/`** | App-level runtimes or platforms that own the entire build/runtime cycle (Next.js, Astro, Flutter, Qt…).                       |
 | **`tool-guides/`** | Importable libraries or UI kits you slot *into* an app (SciChart, Three.js, Tailwind…).                                       |
 | **`api-guides/`** | External data or service endpoints accessed over HTTP/gRPC (USGS Water Services, ArcGIS, Alpha Vantage…).                     |
@@ -266,8 +266,8 @@ private/
 ├── maintenance/         # maintenance tasks & outcomes 
 ├── features/            # feature definitions & specifications
 ├── project-guides/      # project-specific guide customizations
-│   ├── 01-concept.{project}.md # project concept documents
-│   ├── 02-spec.{project}.md    # project specifications
+│   ├── 001-concept.{project}.md # project concept documents
+│   ├── 002-spec.{project}.md    # project specifications
 │   └── 03-notes.{project}.md   # project-specific notes
 ├── tasks/               # task breakdowns & phase documents
 └── ui/                  # UI tasks & resources

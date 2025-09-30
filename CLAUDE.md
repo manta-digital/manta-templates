@@ -6,7 +6,7 @@
 - If the first item in a list or sublist is in this file `enabled: false`, ignore that section.
 
 ### Project Structure
-- Always refer to `guide.ai-project.00-process` and follow links as appropriate.
+- Always refer to `guide.ai-project.000-process` and follow links as appropriate.
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
 - Relevant 3rd party tool information is in `project-document/tool-guides`.
@@ -338,7 +338,7 @@ Transform review findings into actionable tasks in a separate file:
 Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
 
 #### Step 4: Task Processing
-Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.00-process`:
+Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.000-process`:
 
 1. **Phase 3: Granularity and Clarity**
 - Convert each review finding into clear, actionable tasks
