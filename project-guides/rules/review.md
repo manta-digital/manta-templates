@@ -174,7 +174,7 @@ Transform review findings into actionable tasks in a separate file:
 Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
 
 ### Step 4: Task Processing
-Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.00-process`:
+Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.000-process`:
 
 1. **Phase 3: Granularity and Clarity**
 - Convert each review finding into clear, actionable tasks

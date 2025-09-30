@@ -5,7 +5,7 @@ phaseName: meta
 guideRole: onboarding   # new role distinct from primary/support
 audience: [human]       # adjust if AI agents will parse it too
 description: What a new contributor should read & set up before Phase 1.
-dependsOn: [guide.ai-project.00-process.md]
+dependsOn: [guide.ai-project.000-process.md]
 ---
 Collection of notes I found useful as a human working with AIs.  AIs are free to read this too.
 

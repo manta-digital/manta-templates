@@ -4,13 +4,13 @@ This readme provides general information on project-guides including order in wh
 
 | Phase              | Primary guide                          | Quick link                                                                   |
 | ------------------ | -------------------------------------- | ---------------------------------------------------------------------------- |
-| 0 – Meta           | AI Project Process                     | [guide.ai-project.00-process.md](guide.ai-project.00-process.md)                   |
-| 1 – Concept        | Concept Guide                          | [guide.ai-project.01-concept.md](guide.ai-project.01-concept.md)                   |
-| 2 – Spec           | Spec Guide                             | [guide.ai-project.02-spec.md](guide.ai-project.02-spec.md)                         |
-| 3 – Slice Planning | Slice Planning Guide                   | [guide.ai-project.03-slice-planning.md](guide.ai-project.03-slice-planning.md)     |
-| 4 – Slice Design   | Slice Design Guide                     | [guide.ai-project.04-slice-design.md](guide.ai-project.04-slice-design.md)         |
+| 0 – Meta           | AI Project Process                     | [guide.ai-project.000-process.md](guide.ai-project.000-process.md)                   |
+| 1 – Concept        | Concept Guide                          | [guide.ai-project.001-concept.md](guide.ai-project.001-concept.md)                   |
+| 2 – Spec           | Spec Guide                             | [guide.ai-project.002-spec.md](guide.ai-project.002-spec.md)                         |
+| 3 – Slice Planning | Slice Planning Guide                   | [guide.ai-project.003-slice-planning.md](guide.ai-project.003-slice-planning.md)     |
+| 4 – Slice Design   | Slice Design Guide                     | [guide.ai-project.004-slice-design.md](guide.ai-project.004-slice-design.md)         |
 | 5 – Task Breakdown | _none (method lives in Process Guide)_ | –                                                                            |
-| 6 – Task Expansion | Task-Expansion Guide                   | [guide.ai-project.06-task-expansion.md](guide.ai-project.06-task-expansion.md)     |
+| 6 – Task Expansion | Task-Expansion Guide                   | [guide.ai-project.006-task-expansion.md](guide.ai-project.006-task-expansion.md)     |
 | 7 – Execution      | _none (method lives in Process Guide)_ | –                                                                            |
 | 8 – Integration    | _none (method lives in Process Guide)_ | –                                                                            |
 
@@ -18,8 +18,8 @@ This readme provides general information on project-guides including order in wh
 
 | Guide                    | Purpose                                  | Quick link                                                                   |
 | ------------------------ | ---------------------------------------- | ---------------------------------------------------------------------------- |
-| Code Review              | Systematic code review processes         | [guide.ai-project.90-code-review.md](guide.ai-project.90-code-review.md)           |
-| Legacy Task Migration    | Migrate old projects to slice-based     | [guide.ai-project.91-legacy-task-migration.md](guide.ai-project.91-legacy-task-migration.md) |
+| Code Review              | Systematic code review processes         | [guide.ai-project.090-code-review.md](guide.ai-project.090-code-review.md)           |
+| Legacy Task Migration    | Migrate old projects to slice-based     | [guide.ai-project.091-legacy-task-migration.md](guide.ai-project.091-legacy-task-migration.md) |
 
 ## Additional Resources
 

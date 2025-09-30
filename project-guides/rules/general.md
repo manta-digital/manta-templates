@@ -10,7 +10,7 @@ alwaysApply: true
 - If the first item in a list or sublist is in this file `enabled: false`, ignore that section.
 
 ## Project Structure
-- Always refer to `guide.ai-project.00-process` and follow links as appropriate.
+- Always refer to `guide.ai-project.000-process` and follow links as appropriate.
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
 - Relevant 3rd party tool information is in `project-document/tool-guides`.
