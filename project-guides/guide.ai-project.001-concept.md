@@ -5,9 +5,9 @@ phaseName: concept
 guideRole: primary
 audience: [human, ai]
 description: How to write a Phase 1 Concept document.
-dependsOn: [guide.ai-project.00-process.md]
+dependsOn: [guide.ai-project.000-process.md]
 ---
-This guide will assist us in creating a project concept, allowing us to describe projects using a consistent format and increasing our chances of completing them successfully.  This Concept is Phase 1 in our guide.ai-project.00-process.  If you do not have access to that guide, stop now and request it from the Project Manager.
+This guide will assist us in creating a project concept, allowing us to describe projects using a consistent format and increasing our chances of completing them successfully.  This Concept is Phase 1 in our guide.ai-project.000-process.  If you do not have access to that guide, stop now and request it from the Project Manager.
 
 #### High-Level Project Concept
 What are we making?  What makes it unique i.e. why are we making it?  Tell everyone why it's going to be great.  Where does it run?  Who uses it and how do they access it?  Are we creating the whole thing now, or does this concept apply to a particular component, layer, front-end/back-end, etc?
