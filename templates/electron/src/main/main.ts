@@ -60,6 +60,9 @@ function createWindow(): void {
   }
 }
 
+// Must register custom protocol before app is ready
+registerAppProtocol()
+
 app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
   
