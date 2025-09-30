@@ -6,17 +6,17 @@ guideRole: primary
 audience: [human, ai]
 description: Phase 6 playbook for turning slice task breakdowns into atomic subtasks.
 dependsOn:
-  - guide.ai-project.00-process.md
-  - guide.ai-project.02-spec.md
-  - guide.ai-project.03-slice-planning.md
+  - guide.ai-project.000-process.md
+  - guide.ai-project.002-spec.md
+  - guide.ai-project.003-slice-planning.md
 ---
 #### Summary
 This guide provides instructions and methodology for expanding and enhancing slice task breakdowns in order to create manageable lists to give to an (AI) working as a developer. This assignment is Phase 6 in `guide.ai-projects.00-process`, and will not be received (and cannot be started) until confirmation that the Slice Task Breakdown (Phase 5 Output) is available and approved by the Project Manager.
 
 #### Inputs and Outputs
 The inputs to this task are as follows:
-* guide.ai-project.00-process
-* guide.ai-project.06-task-expansion (this document)
+* guide.ai-project.000-process
+* guide.ai-project.006-task-expansion (this document)
 * {project} - spec (phase 2 output)
 * {project} - high-level design (phase 3 output)
 * {slice} - slice design (phase 4 output)

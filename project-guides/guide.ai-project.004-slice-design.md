@@ -6,9 +6,9 @@ guideRole: primary
 audience: [human, ai]
 description: Phase 4 playbook for creating detailed low-level designs for individual slices.
 dependsOn:
-  - guide.ai-project.00-process.md
-  - guide.ai-project.02-spec.md
-  - guide.ai-project.03-slice-planning.md
+  - guide.ai-project.000-process.md
+  - guide.ai-project.002-spec.md
+  - guide.ai-project.003-slice-planning.md
 ---
 
 #### Summary
@@ -16,11 +16,11 @@ This guide provides instructions for Phase 4: Slice Design (Low-Level Design). T
 
 #### Inputs and Outputs
 **Inputs:**
-* `guide.ai-project.00-process` (main process guide)
-* `guide.ai-project.04-slice-design` (this document)
-* Project specification (Phase 2 output): `private/project-guides/02-spec.{project}.md`
-* High-level design (Phase 3 output): `private/project-guides/03-hld.{project}.md`
-* Slice plan (Phase 3 output): `private/project-guides/03-slices.{project}.md`
+* `guide.ai-project.000-process` (main process guide)
+* `guide.ai-project.004-slice-design` (this document)
+* Project specification (Phase 2 output): `private/project-guides/002-spec.{project}.md`
+* High-level design (Phase 3 output): `private/project-guides/050-hld.{project}.md`
+* Slice plan (Phase 3 output): `private/project-guides/003-slices.{project}.md`
 * Relevant tool guides from `tool-guides/{tool}/`
 * Framework guides from `framework-guides/{framework}/`
 

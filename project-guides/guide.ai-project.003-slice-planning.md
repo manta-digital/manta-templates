@@ -6,8 +6,8 @@ guideRole: primary
 audience: [human, ai]
 description: Phase 3 playbook for breaking projects into manageable vertical slices.
 dependsOn:
-  - guide.ai-project.00-process.md
-  - guide.ai-project.02-spec.md
+  - guide.ai-project.000-process.md
+  - guide.ai-project.002-spec.md
 ---
 
 #### Summary
@@ -15,8 +15,8 @@ This guide provides instructions for Phase 3: High-Level Design & Slice Planning
 
 #### Inputs and Outputs
 **Inputs:**
-* `guide.ai-project.00-process` (this process guide)
-* `guide.ai-project.03-slice-planning` (this document)
+* `guide.ai-project.000-process` (this process guide)
+* `guide.ai-project.003-slice-planning` (this document)
 * Project concept document (Phase 1 output)
 * Project specification (Phase 2 output)
 * Any existing architecture documentation
