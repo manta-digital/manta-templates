@@ -132,7 +132,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
     - No runtime errors
   - **References**: Design lines 90-93
 
-- [ ] **Task 2.4: Implement Environment-Aware URL Loading**
+- [x] **Task 2.4: Implement Environment-Aware URL Loading**
   - **Effort**: 2
   - **Description**: Update createWindow() to load app:// in production, localhost in development
   - **Details**:

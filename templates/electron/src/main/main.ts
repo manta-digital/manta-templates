@@ -53,10 +53,18 @@ function createWindow(): void {
     return app.getVersion()
   })
 
+  // Load renderer based on environment
+  // Development: use Vite dev server at localhost:5173
+  // Production: use app:// protocol to load from packaged resources
   if (process.env.ELECTRON_RENDERER_URL) {
+    // Development mode with Vite dev server
     win.loadURL(process.env.ELECTRON_RENDERER_URL)
+  } else if (process.env.NODE_ENV === 'production') {
+    // Production mode with app:// protocol
+    win.loadURL('app://index.html')
   } else {
-    win.loadFile(fileURLToPath(new URL('../renderer/index.html', import.meta.url)))
+    // Fallback for production build testing without NODE_ENV
+    win.loadURL('app://index.html')
   }
 }
 
