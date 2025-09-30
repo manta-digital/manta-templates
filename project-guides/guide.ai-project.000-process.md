@@ -116,7 +116,7 @@ For an app example:
 6. **Phase 6: Task Enhancement and Expansion**
    - For the slice task breakdown, examine tasks to see if we can enhance or expand/subdivide them to improve the chances that our "junior" AI workers can complete assigned tasks on their own.
    - If a task would not benefit from expansion, output it verbatim.
-   - Use `guide.ai-project.06-task-expansion` for detailed guidance on this phase.
+   - Use `guide.ai-project.006-task-expansion` for detailed guidance on this phase.
    - Success: All tasks have been processed and either output as is, or enhanced and divided into further subtasks.
    - Outcome: _Ready-to-execute task list with sufficient detail for reliable completion._
 
@@ -193,21 +193,21 @@ The following structure should be present in every project.  Assume files are in
 ```markdown
 These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.  Synonyms (syn, aka (for also known as)) are provided as some older documentation may still reference by these names.
 
-* guide.ai-project.00-process (aka: AI Project Guide): this document.  Describes 
+* guide.ai-project.000-process (aka: AI Project Guide): this document.  Describes 
   roles and project phases.  Always start here.
-* guide.ai-project.01-concept (aka: AI Project Concept Guide): details on creating 
+* guide.ai-project.001-concept (aka: AI Project Concept Guide): details on creating 
   Project Concept documents.
-* guide.ai-project.02-spec (aka: AI Spec Guide): details on creating Project 
+* guide.ai-project.002-spec (aka: AI Spec Guide): details on creating Project 
   Specification (Spec) documents.
-* guide.ai-project.03-slice-planning: guidance on creating high-level design
+* guide.ai-project.003-slice-planning: guidance on creating high-level design
   and breaking projects into vertical slices.
-* guide.ai-project.04-slice-design: detailed guidance on creating low-level designs
+* guide.ai-project.004-slice-design: detailed guidance on creating low-level designs
   for individual slices.
 * guide.ai-project.06-task-expansion (aka: AI Task Expansion Guide): specific 
   guidance on task expansion for slice-based development.
-* guide.ai-project.90-code-review (aka: AI Code Review Guide): specific guidance for 
+* guide.ai-project.090-code-review (aka: AI Code Review Guide): specific guidance for 
   performing and responding to code reviews.
-* guide.ai-project.91-legacy-task-migration: guidance for migrating legacy projects
+* guide.ai-project.091-legacy-task-migration: guidance for migrating legacy projects
   to the slice-based methodology.
 * guide.ui-development.ai (aka: AI Development Guide - UI): specific guidance 
   pertaining to UI/UX tasks.
