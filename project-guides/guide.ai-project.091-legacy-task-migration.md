@@ -19,7 +19,7 @@ Please confirm you have access to:
 - `guide.ai-project.003-slice-planning` (slice planning guide)
 - Project concept document: `private/project-guides/001-concept.{project}.md`
 - Project spec document: `private/project-guides/002-spec.{project}.md`
-- Legacy task breakdown: `private/tasks/nnn-tasks.{project}.md` (or similar)
+- Legacy task breakdown: `private/tasks/nnnn-tasks.{project}.md` (or similar)
 - Current project state information from Project Manager
 
 If any of these are missing, stop and request them before proceeding.
@@ -64,25 +64,25 @@ Create `private/project-guides/003-slices.{project}.md` following the format in 
 - Plan implementation order accounting for current progress
 
 ### Step 5: Create Slice Designs
-For each identified slice, create `private/slices/nn-slice.{slice-name}.md`:
+For each identified slice, create `private/slices/nnn-slice.{slice-name}.md`:
 - Extract relevant information from legacy tasks
 - Add detailed technical decisions
 - Define slice boundaries and interfaces
 - Reference any existing implementation
 
 ### Step 6: Convert Tasks to Slice Format
-For each slice, create `private/tasks/nn-tasks.{slice-name}.md`:
+For each slice, create `private/tasks/nnn-tasks.{slice-name}.md`:
 - Extract relevant tasks from legacy breakdown
 - Add YAML front matter with context:
   ```yaml
   ---
   slice: {slice-name}
   project: {project}
-  lld: private/slices/nn-slice.{slice-name}.md
+  lld: private/slices/nnn-slice.{slice-name}.md
   dependencies: [list-of-prerequisite-slices]
   projectState: migrated from legacy format, [current state]
   lastUpdated: YYYY-MM-DD
-  migratedFrom: private/tasks/nnn-tasks.{project}.md
+  migratedFrom: private/tasks/nnnn-tasks.{project}.md
   ---
   ```
 - Add context summary explaining migration and current state
@@ -90,7 +90,7 @@ For each slice, create `private/tasks/nn-tasks.{slice-name}.md`:
 - Update task details to reference slice-specific context
 
 ### Step 7: Preserve Legacy Work
-- Rename legacy task file to `nnn-tasks.{project}.legacy.md`
+- Rename legacy task file to `nnnn-tasks.{project}.legacy.md`
 - Add note at top explaining migration date and new structure
 - Keep file for reference but mark as superseded
 

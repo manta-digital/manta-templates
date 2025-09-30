@@ -450,9 +450,9 @@ We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown
 
 If the tasks are already sufficiently granular and in checklist format, you do not need to modify them. Note that each success criteria needs a checkbox.
 
-Your role is Senior AI. Use the specified analysis document `private/maintenance/nn-analysis.{project-name}{.subproject?}.00.md` as input.  Note that subproject is optional (hence the ?).  Avoid adding extra `.` characters to filename if subproject is not present.
+Your role is Senior AI. Use the specified analysis document `private/maintenance/nnn-analysis.{project-name}{.subproject?}.00.md` as input.  Note that subproject is optional (hence the ?).  Avoid adding extra `.` characters to filename if subproject is not present.
 
-Create task file at `private/tasks/nn-analysis{.subproject?}-{date}.md` with:
+Create task file at `private/tasks/nnn-analysis{.subproject?}-{date}.md` with:
 1. YAML front matter including slice or subproject name, project, YYYYMMDD date, main analysis file reference, dependencies, and current project state
 2. Context summary section
 3. Granular tasks following Phase 5 guidelines
@@ -473,13 +473,13 @@ We need to create a Low-Level Design (LLD) for {feature/component} identified du
 Your role is Technical Fellow as described in the Process Guide. This LLD will bridge the gap between high-level understanding and implementable tasks.
 
 Context:
-- Analysis document: `private/maintenance/nn-analysis.{project-name}{.subproject 
+- Analysis document: `private/maintenance/nnn-analysis.{project-name}{.subproject 
   or analysis topic?}` (or specify location)
-- Related task file: `private/tasks/nn-analysis{.subproject?}-{date}.md` (if 
+- Related task file: `private/tasks/nnn-analysis{.subproject?}-{date}.md` (if 
   exists)
 - Current issue: {brief description of what analysis revealed}
 
-Create LLD document at: `private/features/nn-lld.{feature-name}.md`
+Create LLD document at: `private/features/nnn-lld.{feature-name}.md`
 
 Required YAML front matter:
 ```yaml
@@ -521,7 +521,7 @@ Note: This creates implementation-ready technical designs, not high-level planni
 ```markdown
 We are working on the analysis file {analysis} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.000-process`. 
 
-Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nn-analysis.{project}{date-from-{analysis}}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
+Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nnn-analysis.{project}{date-from-{analysis}}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
 
 The analysis overview is available at {analysis} for additional context.
 

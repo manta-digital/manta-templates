@@ -78,15 +78,15 @@ At this point you’re ready to create tasks.
 
 
 #### 🔨 Creating & Expanding Tasks – Phases 3 and 4
-The `guide.ai-project.000-process` file instructs the AI on how to perform all project phases, including creating and expanding tasks. Use the **Project Phase** prompt again for **Phase 3**.  The guide will write the `nnn-tasks.{project}.md` file in `private/project-guides/`.
+The `guide.ai-project.000-process` file instructs the AI on how to perform all project phases, including creating and expanding tasks. Use the **Project Phase** prompt again for **Phase 3**.  The guide will write the `nnnn-tasks.{project}.md` file in `private/project-guides/`.
 
 In general, letting the AI subdivide tasks as needed results in tasks that can be more easily implemented by the AI, with less need to be constantly in the middle.  
 
-Just run the "Task Expansion" prompt.  Make sure to provide a `{ section: section-name }` so the AI knows what tasks to focus on.  Tasks will be expanded as needed and written to `tasks/nn-tasks.{section}.md`, with nn starting at 01.  
+Just run the "Task Expansion" prompt.  Make sure to provide a `{ section: section-name }` so the AI knows what tasks to focus on.  Tasks will be expanded as needed and written to `tasks/nnn-tasks.{section}.md`, with nn starting at 01.  
 
 
 #### 💻 Implementing Tasks – Phase 5
-Once tasks are written to `tasks/nn-tasks.{section}.md`, you’re ready to implement them. You can pass the entire task file to an AI, but for complex cases it’s better to tackle **subsections** one at a time.  Just update `{ subsection: subsection-name }` as needed.
+Once tasks are written to `tasks/nnn-tasks.{section}.md`, you’re ready to implement them. You can pass the entire task file to an AI, but for complex cases it’s better to tackle **subsections** one at a time.  Just update `{ subsection: subsection-name }` as needed.
 
 Then run the **Task Implementation** prompt. You can have it process all tasks in a file or just a subsection.  For non-trivial cases, subsection generally provides higher quality results.
 
@@ -115,15 +115,15 @@ When starting a new chat for the project, remember to again provide the input pa
 #### ✨ Feature Development
 For major new features, or addressing architectural issues, use the Features prompts.  Features large enough to require this should be described in a short feature document, i.e. `project-documents/private/feature.{project}.{feature-name}.md`
 ##### Feature Design
-Use the "Feature Design" prompt with your file and you will receive a `features/nn-feature.{feature}.md` file containing your feature's combined spec + low-level design as output.
+Use the "Feature Design" prompt with your file and you will receive a `features/nnn-feature.{feature}.md` file containing your feature's combined spec + low-level design as output.
 ##### Feature Tasks
-Now use the "Feature Tasks" prompt and it will add a new section of Phase 3 tasks to `nnn-tasks.{project}.md`.  These tasks will be consistent with the existing sections.
+Now use the "Feature Tasks" prompt and it will add a new section of Phase 3 tasks to `nnnn-tasks.{project}.md`.  These tasks will be consistent with the existing sections.
 ##### Feature Expansion and Implementation
 Your feature tasks are now no different from the other tasks in the project.  Use the same prompts described above for Task Expansion and Implementation.
 
 
 #### 🎯 Ad-Hoc Items
-For addressing new features or issues not large enough to warrant their own spec, you can create task sections ad-hoc.  Just create a new section in `nnn-tasks.{project}.md` and describe your tasks.  You don't necessarily need the level of detail used by the AI in creating its Phase 3 tasks, but the more specific you are, the better the results will be.
+For addressing new features or issues not large enough to warrant their own spec, you can create task sections ad-hoc.  Just create a new section in `nnnn-tasks.{project}.md` and describe your tasks.  You don't necessarily need the level of detail used by the AI in creating its Phase 3 tasks, but the more specific you are, the better the results will be.
 
 Now you can run the same Task Expansion and Task Implementation prompts on your new task section, with no special process required.
 

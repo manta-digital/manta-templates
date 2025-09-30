@@ -13,7 +13,7 @@ This document describes our AI project planning methodology and structure. Proje
 
 #### Roles
 - Project Manager & Tech Lead: Typically a human. Oversees overall project direction, coordinates tasks, and makes key decisions.
-- Technical Fellow (AI) : A "senior" AI model (e.g., GPT o3, GPT-4.5) providing high-level
+- Technical Fellow (AI) : A "senior" AI model (e.g., GPT-5, Sonnet 4.5) providing high-level
   strategy, architecture ideas, brainstorming support.
 - Researcher (AI): A thinking or deep research AI (o3, o1 pro, Sonnet 4 Thinking, Grok3).
 - Senior AI (Agents): Specialized AI agents or tools (e.g., Claude Code,
@@ -60,12 +60,13 @@ For an app example:
    - Outcome: _A living doc with architectural overview and component integration strategy._
 
 3. **Phase 3: High-Level Design & Slice Planning**
-   - Convert the spec into logical vertical slices of functionality (start with 3-5 slices)
+   - Convert the spec into logical vertical slices of functionality.  Use enough slices to completely define the product.
    - Categorize work into three types:
      - **Foundation work** (must be done first, hard to slice - e.g., project setup, core architecture)
      - **Independent features** (can be sliced vertically - e.g., user auth, dashboard, reporting)
      - **Integration work** (happens after features are built - e.g., performance optimization, deployment)
    - Each slice should be as independent as possible and deliver meaningful user value
+   - Strive for early testability.  Build core features then expand.
    - Identify dependencies between slices and create implementation order
    - For complex projects, create lightweight "slice sketches" to identify potential conflicts
    - Technical Fellow AI should assist in identifying meaningful slice boundaries
@@ -78,21 +79,21 @@ For an app example:
    - Include specific technical decisions, data flows, and component interactions
    - Identify any cross-slice dependencies or conflicts
    - Create mockups or detailed specifications for UI components
-   - Save as `private/slices/nn-slice.{slice-name}.md` where nn is sequential (01, 02, etc.)
-   - Outcome: _Detailed design document for implementing this slice._
+   - Save as `private/slices/nnn-slice.{slice-name}.md.
+   - Outcome: _Detailed design document for implementing this slice.
 
 5. **Phase 5: Slice Task Breakdown**
    - Convert slice design into granular, actionable tasks
    - For each {tool} in use described in the design, ensure that you consult knowledge in `tool-guides/{tool}/`.  If not present search web if possible and alert Project Manager.
    - Only include tasks that can reasonably be completed by an AI. Do not include open-ended human-centric tasks such as SEO optimization.
    - If insufficient information is available to fully convert an item into tasks, _stop_ and request clarifying information before continuing.
-   - Save as `private/tasks/nn-tasks.{slice-name}.md` using existing task file naming conventions
+   - Save as `private/tasks/nnn-tasks.{slice-name}.md` using existing task file naming conventions
    - Include YAML front matter and context header:
      ```yaml
      ---
      slice: {slice-name}
      project: {project-name}
-     lld: private/slices/nn-slice.{slice-name}.md
+     lld: private/slices/nnn-slice.{slice-name}.md
      dependencies: [list-of-prerequisite-slices]
      projectState: brief description of current state
      lastUpdated: YYYY-MM-DD
@@ -174,13 +175,13 @@ The following structure should be present in every project.  Assume files are in
 ###### private subfolders
 ```markdown
 * private/: information customized to our current project.
-* private/slices/: slice-specific low-level designs (nn-slice.{slice-name}.md)
+* private/slices/: slice-specific low-level designs (nnn-slice.{slice-name}.md)
 * private/code-reviews: code review findings, task lists, and 
   resolutions.
 * private/maintenance:  maintenance item issue and resolution 
   tracking.
 * private/project-guides: project-specific guide customizations.
-* private/tasks: all task breakdown files (nn-tasks.{slice-name}.md or legacy files).
+* private/tasks: all task breakdown files (nnn-tasks.{slice-name}.md or legacy files).
 * private/ui: UI specific designs, tasks, and guidance for our 
   project.
 * private/ui/screenshots: supporting images for UI information.

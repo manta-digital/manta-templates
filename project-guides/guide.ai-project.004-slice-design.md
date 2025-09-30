@@ -25,7 +25,7 @@ This guide provides instructions for Phase 4: Slice Design (Low-Level Design). T
 * Framework guides from `framework-guides/{framework}/`
 
 **Output:**
-* Slice design document: `private/slices/nn-slice.{slice-name}.md`
+* Slice design document: `private/slices/nnn-slice.{slice-name}.md`
 
 #### Core Principles
 
