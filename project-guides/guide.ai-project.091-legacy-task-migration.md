@@ -1,7 +1,7 @@
 # Legacy Project Migration to Slice-Based Methodology
 
 ## Role and Context
-You are a Technical Fellow AI helping migrate an existing project from the legacy full-project approach to the new slice-based methodology described in `guide.ai-project.00-process`.
+You are a Technical Fellow AI helping migrate an existing project from the legacy full-project approach to the new slice-based methodology described in `guide.ai-project.000-process`.
 
 ## Current Situation
 The project has:
@@ -15,11 +15,11 @@ Transform the existing legacy task breakdown into the new slice-based structure 
 
 ## Required Inputs
 Please confirm you have access to:
-- `guide.ai-project.00-process` (updated with slice-based methodology)
-- `guide.ai-project.03-slice-planning` (slice planning guide)
-- Project concept document: `private/project-guides/01-concept.{project}.md`
-- Project spec document: `private/project-guides/02-spec.{project}.md`
-- Legacy task breakdown: `private/tasks/03-tasks.{project}.md` (or similar)
+- `guide.ai-project.000-process` (updated with slice-based methodology)
+- `guide.ai-project.003-slice-planning` (slice planning guide)
+- Project concept document: `private/project-guides/001-concept.{project}.md`
+- Project spec document: `private/project-guides/002-spec.{project}.md`
+- Legacy task breakdown: `private/tasks/nnn-tasks.{project}.md` (or similar)
 - Current project state information from Project Manager
 
 If any of these are missing, stop and request them before proceeding.
@@ -36,7 +36,7 @@ Review the existing task breakdown and understand:
 
 ### Step 2: Create High-Level Design
 Based on the existing spec and task breakdown, create:
-- `private/project-guides/03-hld.{project}.md` - High-level design document
+- `private/project-guides/050-hld.{project}.md` - High-level design document
 - Include architectural decisions already implied by the legacy tasks
 - Document the current system structure
 
@@ -58,7 +58,7 @@ Analyze the legacy task sections and convert them into proper slices:
 - Identify tasks that are cross-cutting or optimization-focused
 
 ### Step 4: Create Slice Plan
-Create `private/project-guides/03-slices.{project}.md` following the format in the slice planning guide:
+Create `private/project-guides/003-slices.{project}.md` following the format in the slice planning guide:
 - List foundation work (marking completed items)
 - Define feature slices with dependencies
 - Plan implementation order accounting for current progress
@@ -82,7 +82,7 @@ For each slice, create `private/tasks/nn-tasks.{slice-name}.md`:
   dependencies: [list-of-prerequisite-slices]
   projectState: migrated from legacy format, [current state]
   lastUpdated: YYYY-MM-DD
-  migratedFrom: private/tasks/03-tasks.{project}.md
+  migratedFrom: private/tasks/nnn-tasks.{project}.md
   ---
   ```
 - Add context summary explaining migration and current state
@@ -90,7 +90,7 @@ For each slice, create `private/tasks/nn-tasks.{slice-name}.md`:
 - Update task details to reference slice-specific context
 
 ### Step 7: Preserve Legacy Work
-- Rename legacy task file to `03-tasks.{project}.legacy.md`
+- Rename legacy task file to `nnn-tasks.{project}.legacy.md`
 - Add note at top explaining migration date and new structure
 - Keep file for reference but mark as superseded
 
