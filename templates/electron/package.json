@@ -14,10 +14,14 @@
     "postinstall": "echo 'Skipping native deps for template'",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "ai:dev": "pnpm run dev",
     "ai:build": "pnpm run build && pnpm run package",
     "ai:clean": "rm -rf out node_modules && pnpm install",
-    "ai:test": "pnpm run typecheck && pnpm run lint",
+    "ai:test": "pnpm run typecheck && pnpm run lint && pnpm run test:run",
     "ai:setup": "pnpm install && pnpm run typecheck",
     "setup-guides": "bash scripts/setup-guides.sh",
     "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
@@ -44,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^8.39.1",
     "@typescript-eslint/parser": "^8.39.1",
     "@vitejs/plugin-react": "^5.0.0",
+    "@vitest/ui": "^3.2.4",
     "electron": "^37.4.0",
     "electron-builder": "^26.0.12",
     "electron-vite": "^4.0.0",
@@ -67,7 +72,8 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "unist-util-visit": "^5.0.0",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
