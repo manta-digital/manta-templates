@@ -42,15 +42,17 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
   - Standalone feature specifications
   - Feature-specific design documents
 
-- **900-949**: Maintenance and operations
+- **900-949**: Code review tasks and analysis (50 slots)
+  - Code review task files
+  - Review analysis documents
+  - Code review follow-up work
+  - Example: `private/code-reviews/review.{component}.{date}.md`
+
+- **950-999**: Maintenance tasks (50 slots)
   - Maintenance task lists
   - Operational procedures
   - Bug tracking and tech debt
-
-- **950-999**: System-reserved
-  - Internal tooling documentation
-  - System configuration files
-  - Reserved for framework use
+  - Example: `950-tasks.maintenance.md`
 
 ### Number Ranges
 - **000-009**: Core process guides
@@ -59,8 +61,8 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
 - **090-099**: Specialized guides (code review, legacy migration, etc.)
 - **100-799**: Regular sequential content (slices, tasks, user work)
 - **800-899**: Feature files
-- **900-949**: Maintenance files
-- **950-999**: System-reserved files
+- **900-949**: Code review files
+- **950-999**: Maintenance files
 
 ### Numbering Rules
 - **Sequential within category**: Find the highest existing number in the same range category and increment by 1

@@ -75,8 +75,8 @@ Files use a 3-digit numbering system with semantic ranges:
 - **090-099**: Specialized guides (e.g., `090-code-review`, `091-legacy-task-migration`)
 - **100-799**: Active work items - slices and tasks (e.g., `100-slice`, `200-tasks`)
 - **800-899**: Feature documents
-- **900-949**: Maintenance (e.g., `900-tasks.maintenance`)
-- **950-999**: System-reserved
+- **900-949**: Code review tasks and analysis (e.g., `900-review.component.md`)
+- **950-999**: Maintenance tasks (e.g., `950-tasks.maintenance`)
 
 When creating new files, increment sequentially within the appropriate range category.
 
