@@ -38,10 +38,14 @@ export default defineConfig({
     root: '.',
     base: './',
     build: {
+      // Output renderer files to out/renderer for packaging
+      // These files will be served via app:// protocol in production
       outDir: 'out/renderer',
       rollupOptions: {
         input: { index: resolve(__dirname, 'index.html') },
-        output: {}
+        output: {
+          format: 'es'
+        }
       }
     },
     define: {
