@@ -103,6 +103,10 @@ app.whenReady().then(() => {
   
   Menu.setApplicationMenu(menu)
   // End of menu section - delete everything above this line to remove the menu
+
+  // Register app:// protocol handler for production builds
+  setupAppProtocolHandler()
+
   createWindow()
   
   // Basic CSP in production
