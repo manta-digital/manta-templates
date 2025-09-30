@@ -4,14 +4,14 @@ _This file is the canonical contract for where every guide, snippet, and asset l
 ```
 project-documents/
 ├── project-guides/          # project-process & meta-methodology
-│   ├── guide.ai-project.00-process.md      # main process guide
-│   ├── guide.ai-project.01-concept.md      # concept creation guide
-│   ├── guide.ai-project.02-spec.md         # specification guide
-│   ├── guide.ai-project.03-slice-planning.md # slice planning guide
-│   ├── guide.ai-project.04-slice-design.md # slice design guide
-│   ├── guide.ai-project.06-task-expansion.md # task expansion guide
-│   ├── guide.ai-project.90-code-review.md  # code review guide
-│   ├── guide.ai-project.91-legacy-task-migration.md # migration guide
+│   ├── guide.ai-project.000-process.md      # main process guide
+│   ├── guide.ai-project.001-concept.md      # concept creation guide
+│   ├── guide.ai-project.002-spec.md         # specification guide
+│   ├── guide.ai-project.003-slice-planning.md # slice planning guide
+│   ├── guide.ai-project.004-slice-design.md # slice design guide
+│   ├── guide.ai-project.006-task-expansion.md # task expansion guide
+│   ├── guide.ai-project.090-code-review.md  # code review guide
+│   ├── guide.ai-project.091-legacy-task-migration.md # migration guide
 │   ├── guide.ui-development.ai.md          # UI development guide
 │   ├── prompt.ai-project.system.md         # system prompts
 │   ├── prompt.code-review-crawler.md       # code review prompts
@@ -34,17 +34,17 @@ project-documents/
 │   ├── features/            # feature definitions & specifications
 │   ├── maintenance/         # maintenance tasks & outcomes
 │   ├── project-guides/      # project-specific guide customizations
-│   │   ├── 01-concept.{project}.md    # project concept documents
-│   │   ├── 02-spec.{project}.md       # project specifications
-│   │   ├── 03-hld.{project}.md        # high-level design
-│   │   └── 03-slices.{project}.md     # slice planning document
+│   │   ├── 001-concept.{project}.md    # project concept documents
+│   │   ├── 002-spec.{project}.md       # project specifications
+│   │   ├── 050-hld.{project}.md        # high-level design
+│   │   └── 003-slices.{project}.md     # slice planning document
 │   ├── slices/              # slice-specific low-level designs
-│   │   ├── 01-slice.{slice-name}.md   # individual slice designs
-│   │   └── 02-slice.{slice-name}.md   # additional slice designs
+│   │   ├── nnn-slice.{slice-name}.md   # individual slice designs
+│   │   └── nnn-slice.{slice-name}.md   # additional slice designs
 │   ├── tasks/               # task breakdowns for slices and features
-│   │   ├── 01-tasks.{slice-name}.md   # slice-based task files
-│   │   ├── 02-tasks.{slice-name}.md   # additional slice tasks
-│   │   └── 99-tasks.maintenance.md    # maintenance task files
+│   │   ├── nnn-tasks.{slice-name}.md   # slice-based task files
+│   │   ├── nnn-tasks.{slice-name}.md   # additional slice tasks
+│   │   └── 900-tasks.maintenance.md    # maintenance task files
 │   └── ui/                  # UI tasks & resources
 │       └── screenshots/     # mock-ups, design references
 └── README.md                # folder-local orientation (this file's sibling)
@@ -68,13 +68,17 @@ project-documents/
 
 ## Sequential File Numbering
 
-Files use a consistent numbering system:
-- **00**: System/core files (e.g., `00-process`)
-- **01-89**: Regular sequential content in chronological order
-- **90-98**: Special/reserved files (e.g., `90-code-review`)
-- **99**: Maintenance files (e.g., `99-tasks.maintenance`)
+Files use a 3-digit numbering system with semantic ranges:
+- **000-009**: Core process guides (e.g., `000-process`, `001-concept`)
+- **010-049**: Reserved for future process extensions
+- **050-089**: Architecture and system design (e.g., `050-hld`)
+- **090-099**: Specialized guides (e.g., `090-code-review`, `091-legacy-task-migration`)
+- **100-799**: Active work items - slices and tasks (e.g., `100-slice`, `200-tasks`)
+- **800-899**: Feature documents
+- **900-949**: Maintenance (e.g., `900-tasks.maintenance`)
+- **950-999**: System-reserved
 
-When creating new files, increment sequentially within the same category, ignoring reserved ranges.
+When creating new files, increment sequentially within the appropriate range category.
 
 ## Zero-ambiguity decision matrix
 
