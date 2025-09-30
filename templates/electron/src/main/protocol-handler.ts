@@ -66,17 +66,26 @@ export function registerAppProtocol(): void {
 export function setupAppProtocolHandler(): void {
   protocol.registerFileProtocol('app', (request, callback) => {
     try {
-      // Parse and decode the request URL
+      // Parse the request URL
       const url = new URL(request.url);
-      const pathname = decodeURIComponent(url.pathname);
+
+      // Combine hostname and pathname for custom protocol URLs
+      // For app://images/logo.png, hostname is 'images' and pathname is '/logo.png'
+      // We need to combine them to get the full path
+      // Decode both hostname and pathname to handle URL encoding
+      let requestPath =
+        decodeURIComponent(url.hostname) + decodeURIComponent(url.pathname);
+
+      // Handle root request
+      if (!requestPath || requestPath === '/') {
+        requestPath = '/index.html';
+      }
 
       // Calculate the root directory for renderer files in the packaged app
       const root = path.join(process.resourcesPath, 'renderer');
 
-      // Resolve the full file path, defaulting to index.html for root requests
-      const resolved = path.normalize(
-        path.join(root, pathname || '/index.html')
-      );
+      // Resolve the full file path
+      const resolved = path.normalize(path.join(root, requestPath));
 
       // Security check: prevent directory traversal attacks
       // Ensure the resolved path is within the renderer root directory
