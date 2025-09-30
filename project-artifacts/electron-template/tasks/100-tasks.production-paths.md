@@ -91,7 +91,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
 
 ### Phase 2: Main Process Integration
 
-- [ ] **Task 2.1: Import Protocol Handler in Main Process**
+- [x] **Task 2.1: Import Protocol Handler in Main Process**
   - **Effort**: 1
   - **Description**: Add protocol handler imports to main.ts
   - **Details**:

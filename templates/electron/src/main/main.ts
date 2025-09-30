@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
+import { registerAppProtocol, setupAppProtocolHandler } from './protocol-handler'
 
 function isAllowedUrl(target: string): boolean {
   try {
