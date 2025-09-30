@@ -109,8 +109,14 @@
   "build": {
     "appId": "com.electron-template.app",
     "files": [
-      "out/**",
-      "resources/**"
+      "out/main/**",
+      "out/preload/**"
+    ],
+    "extraResources": [
+      {
+        "from": "out/renderer",
+        "to": "renderer"
+      }
     ],
     "asar": true,
     "mac": {

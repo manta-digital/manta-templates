@@ -174,7 +174,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
     - TypeScript validates config
   - **References**: Design lines 112-123
 
-- [ ] **Task 3.2: Configure Electron Builder File Packaging**
+- [x] **Task 3.2: Configure Electron Builder File Packaging**
   - **Effort**: 2
   - **Description**: Update package.json build configuration to include renderer files
   - **Details**:
