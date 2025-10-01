@@ -116,9 +116,10 @@ Use as many slices as needed to fully capture the project's functionality and sc
 ##### Step 4: Plan Implementation Order
 Order slices by:
 1. **Dependencies:** Foundation work first, then slices in dependency order
-2. **Risk:** High-risk slices earlier to surface problems
-3. **User Value:** Most valuable features first within each risk tier
-4. **Technical Learning:** Slices that teach you about the domain/tech stack
+2. **Testability:** Strive for early vertical slice testability.  Core first then expand.
+3. **Risk:** High-risk slices earlier to surface problems
+4. **User Value:** Most valuable features first within each risk tier
+5. **Technical Learning:** Slices that teach you about the domain/tech stack
 
 ##### Step 5: Create Slice Sketches (Optional)
 For complex projects, create brief design sketches for each slice to identify potential conflicts:
