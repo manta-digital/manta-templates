@@ -61,10 +61,11 @@ function createWindow(): void {
     win.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else if (process.env.NODE_ENV === 'production') {
     // Production mode with app:// protocol
-    win.loadURL('app://index.html')
+    // Use app://./index.html to ensure relative URLs resolve correctly
+    win.loadURL('app://./index.html')
   } else {
     // Fallback for production build testing without NODE_ENV
-    win.loadURL('app://index.html')
+    win.loadURL('app://./index.html')
   }
 }
 

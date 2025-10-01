@@ -69,6 +69,11 @@ export function setupAppProtocolHandler(): void {
       // Parse the request URL
       const url = new URL(request.url);
 
+      // Debug logging
+      console.log('[Protocol Handler] Request:', request.url);
+      console.log('[Protocol Handler] Parsed - hostname:', url.hostname, 'pathname:', url.pathname);
+      console.log('[Protocol Handler] resourcesPath:', process.resourcesPath);
+
       // Combine hostname and pathname for custom protocol URLs
       // For app://images/logo.png, hostname is 'images' and pathname is '/logo.png'
       // For app://index.html, hostname is 'index.html' and pathname is ''
@@ -76,6 +81,13 @@ export function setupAppProtocolHandler(): void {
       // Decode both hostname and pathname to handle URL encoding
       let requestPath =
         decodeURIComponent(url.hostname) + decodeURIComponent(url.pathname);
+
+      console.log('[Protocol Handler] Initial requestPath:', requestPath);
+
+      // Remove trailing slash if present (e.g., "index.html/" -> "index.html")
+      if (requestPath.endsWith('/') && requestPath !== '/') {
+        requestPath = requestPath.slice(0, -1);
+      }
 
       // Handle root request or direct file at root (e.g., app://index.html)
       if (!requestPath || requestPath === '/' || requestPath === 'index.html') {
@@ -87,11 +99,16 @@ export function setupAppProtocolHandler(): void {
         requestPath = '/' + requestPath;
       }
 
+      console.log('[Protocol Handler] Final requestPath:', requestPath);
+
       // Calculate the root directory for renderer files in the packaged app
       const root = path.join(process.resourcesPath, 'renderer');
 
       // Resolve the full file path
       const resolved = path.normalize(path.join(root, requestPath));
+
+      console.log('[Protocol Handler] Root:', root);
+      console.log('[Protocol Handler] Resolved path:', resolved);
 
       // Security check: prevent directory traversal attacks
       // Ensure the resolved path is within the renderer root directory
