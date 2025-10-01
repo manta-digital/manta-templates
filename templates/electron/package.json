@@ -118,6 +118,8 @@
         "to": "renderer"
       }
     ],
+    "asarUnpack": [],
+    "npmRebuild": false,
     "asar": true,
     "mac": {
       "target": [
