@@ -1,16 +1,16 @@
 ---
 layer: project
 docType: tasks
-sliceIndex: 100
+sliceIndex: 105
 sliceName: production-paths
 project: manta-templates
 template: electron
-lldReference: project-artifacts/electron-template/slices/100-slice.production-paths.md
+lldReference: project-artifacts/electron-template/slices/105-slice.production-paths.md
 dependencies: []
 projectState: in-progress
 ---
 
-# Tasks: Slice 100 - Electron Production Paths
+# Tasks: Slice 105 - Electron Production Paths
 
 ## Context Summary
 
@@ -226,7 +226,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
 
 ### Phase 4: Testing and Validation
 
-- [ ] **Task 4.1: Manual Test - Development Build**
+- [x] **Task 4.1: Manual Test - Development Build**
   - **Effort**: 1
   - **Description**: Verify development build continues working with localhost
   - **Details**:
@@ -262,7 +262,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
     - No 404 or failed resource loads
   - **References**: Design lines 200-204
 
-- [ ] **Task 4.3: Manual Test - Routing and Deep Links**
+- [x] **Task 4.3: Manual Test - Routing and Deep Links**
   - **Effort**: 2
   - **Description**: Verify BrowserRouter navigation works in production
   - **Details**:
@@ -280,7 +280,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
     - No hash router fallback needed
   - **References**: Design lines 182-188, 200-204
 
-- [ ] **Task 4.4: Security Test - Path Traversal Prevention**
+- [x] **Task 4.4: Security Test - Path Traversal Prevention**
   - **Effort**: 2
   - **Description**: Test that protocol handler prevents directory traversal attacks
   - **Details**:
@@ -298,7 +298,7 @@ This task file implements the app:// protocol solution to fix file path resoluti
     - No security warnings in logs
   - **References**: Design lines 168-171, 208-209
 
-- [ ] **Task 4.5: Integration Test - Build Process Verification**
+- [x] **Task 4.5: Integration Test - Build Process Verification**
   - **Effort**: 2
   - **Description**: Verify complete build process creates correct package structure
   - **Details**:
@@ -451,8 +451,8 @@ This task file implements the app:// protocol solution to fix file path resoluti
   - **Description**: Mark slice as complete in project tracking
   - **Details**:
     - Update slice document YAML front matter to mark as complete
-    - Update project-artifacts/electron-template/tasks/100-tasks.production-paths.md to mark projectState as complete
-    - Check off slice in main project slice plan (03-slices.manta-templates.md)
+    - Update project-artifacts/electron-template/tasks/105-tasks.production-paths.md to mark projectState as complete
+    - Check off slice in main project slice plan (03-slices.electron-template.md)
     - Add completion date and any final notes
     - Commit all changes with clear commit message
     - Tag release if applicable

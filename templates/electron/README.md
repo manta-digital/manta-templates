@@ -153,6 +153,19 @@ The content system provides hot reload during development.
 
 ## 📦 Building & Distribution
 
+### Production URL Handling
+
+This template uses a custom `app://` protocol for production builds, ensuring proper asset loading and routing without hash-based URLs. **No special configuration required** - it works automatically:
+
+- **Development**: Uses `localhost:5173` with Vite dev server and hot reload
+- **Production**: Uses `app://` protocol for packaged apps with proper path resolution
+
+This approach provides:
+- ✅ Root-absolute URLs work correctly (`/assets/image.png`)
+- ✅ React Router with BrowserRouter (no `#` hashes needed)
+- ✅ Secure path handling with traversal attack prevention
+- ✅ Standard web development patterns
+
 ### Development Build
 ```bash
 pnpm build
@@ -164,9 +177,23 @@ Creates optimized bundles in `out/` directory.
 pnpm package
 ```
 Creates platform-specific distributables:
-- **macOS**: DMG file
-- **Windows**: NSIS installer
-- **Linux**: AppImage, deb, rpm (configurable)
+- **macOS**: DMG file in `dist/`
+- **Windows**: NSIS installer in `dist/`
+- **Linux**: AppImage, deb, rpm in `dist/` (configurable)
+
+### Testing Production Builds
+
+To test the packaged app locally (macOS example):
+```bash
+pnpm build
+pnpm package
+./dist/mac-arm64/electron-template.app/Contents/MacOS/electron-template
+```
+
+The app will launch with the `app://` protocol. Open DevTools (F12) and check:
+- Console: Should show no `ERR_FILE_NOT_FOUND` errors
+- Network tab: Should show `app://` URLs being loaded
+- Verify all assets, routing, and navigation work correctly
 
 ### Electron Builder Configuration
 The template includes `electron-builder` configuration in `package.json`:
@@ -193,10 +220,10 @@ Extend the main process (`src/main/main.ts`) to add:
 - Auto-updater
 
 ### Router Configuration
-Uses HashRouter for Electron compatibility:
+Uses BrowserRouter with custom app:// protocol:
 ```typescript
-import { HashRouter as Router } from 'react-router-dom'
-// Perfect for file:// protocol in Electron
+import { BrowserRouter as Router } from 'react-router-dom'
+// Works seamlessly with app:// protocol - no hash routing needed
 ```
 
 ### Security Configuration

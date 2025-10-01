@@ -1,7 +1,7 @@
 ---
 layer: project
 docType: slice
-sliceIndex: 100
+sliceIndex: 105
 sliceName: production-paths
 priority: P0
 effortLevel: 3
@@ -12,7 +12,7 @@ dependencies: []
 crossSliceDependencies: []
 ---
 
-# Slice 100: Electron Production Paths
+# Slice 105: Electron Production Paths
 
 ## Overview
 
