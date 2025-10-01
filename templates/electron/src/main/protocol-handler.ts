@@ -71,14 +71,20 @@ export function setupAppProtocolHandler(): void {
 
       // Combine hostname and pathname for custom protocol URLs
       // For app://images/logo.png, hostname is 'images' and pathname is '/logo.png'
+      // For app://index.html, hostname is 'index.html' and pathname is ''
       // We need to combine them to get the full path
       // Decode both hostname and pathname to handle URL encoding
       let requestPath =
         decodeURIComponent(url.hostname) + decodeURIComponent(url.pathname);
 
-      // Handle root request
-      if (!requestPath || requestPath === '/') {
+      // Handle root request or direct file at root (e.g., app://index.html)
+      if (!requestPath || requestPath === '/' || requestPath === 'index.html') {
         requestPath = '/index.html';
+      }
+
+      // Ensure path starts with / for proper joining
+      if (!requestPath.startsWith('/')) {
+        requestPath = '/' + requestPath;
       }
 
       // Calculate the root directory for renderer files in the packaged app
