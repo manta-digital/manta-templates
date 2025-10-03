@@ -46,4 +46,4 @@ alwaysApply: true
 - After all changes are made, ALWAYS build the project.
 - If available, git add and commit *from project root* at least once per task (not per child subitem)
 
-- Log warnings to `/project-documents/private/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point.   Note that this path is affected by `monorepo active` mode.
+- Log warnings to `/project-documents/private/tasks/950-tasks.maintenance.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. Note that this path is affected by `monorepo active` mode.

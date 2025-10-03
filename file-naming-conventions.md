@@ -38,15 +38,21 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
   - Primary working range for project execution
   - Example: `private/slices/100-slice.{name}.md`
 
-- **800-899**: Feature documents
-  - Standalone feature specifications
-  - Feature-specific design documents
+- **800-899**: Feature documents (100 slots)
+  - Features linked to slices via index number: `{sliceindex}-feature.{feature}.md`
+  - Example: `120-feature.remember-me.md` (extends slice 120)
+  - Example: `200-feature.widgets.md` (extends slice 200)
 
-- **900-949**: Code review tasks and analysis (50 slots)
+- **900-939**: Code review tasks (40 slots)
   - Code review task files
   - Review analysis documents
   - Code review follow-up work
-  - Example: `private/code-reviews/review.{component}.{date}.md`
+  - Example: `private/reviews/review.{component}.{date}.md`
+
+- **940-949**: Codebase analysis tasks (10 slots)
+  - Analysis performed when applying methodology to existing projects
+  - Investigative/diagnostic work on existing codebases
+  - Example: `940-analysis.dependency-audit.md`
 
 - **950-999**: Maintenance tasks (50 slots)
   - Maintenance task lists
@@ -60,8 +66,9 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
 - **050-089**: Architecture documents
 - **090-099**: Specialized guides (code review, legacy migration, etc.)
 - **100-799**: Regular sequential content (slices, tasks, user work)
-- **800-899**: Feature files
-- **900-949**: Code review files
+- **800-899**: Feature files (linked to slices via naming)
+- **900-939**: Code review files
+- **940-949**: Codebase analysis files
 - **950-999**: Maintenance files
 
 ### Numbering Rules
@@ -142,16 +149,61 @@ Examples:
 - `300-slice.portfolio-management.md`
 
 ## Feature Files
-Feature files should follow the same convention as slice files, but with "feature" instead of "slice":
+Feature files link to their parent slice via the index number (slice name is omitted to avoid redundancy):
 
 ```
-nnn-feature.{feature-name}.md
+{sliceindex}-feature.{feature-name}.md
+```
+
+Where:
+- `{sliceindex}` matches the parent slice's index number (creates the link)
+- `{feature-name}` describes the specific feature
+
+Examples:
+- `120-feature.remember-me.md` (extends 120-slice.auth.md)
+- `120-feature.oauth-providers.md` (extends 120-slice.auth.md)
+- `200-feature.widgets.md` (extends 200-slice.dashboard.md)
+
+## Feature Task Files
+Feature-specific task files follow the same pattern as feature files:
+
+```
+{sliceindex}-tasks.{feature-name}.md
 ```
 
 Examples:
-- `800-feature.advanced-search.md`
-- `810-feature.export-functionality.md`
+- `120-tasks.auth.md` (main slice tasks for 120-slice.auth.md)
+- `120-tasks.remember-me.md` (feature-specific tasks for 120-feature.remember-me.md)
+- `200-tasks.widgets.md` (feature-specific tasks for 200-feature.widgets.md)
 
+
+## File Size Limits and Splitting
+
+To maintain manageable file sizes and improve readability:
+
+### Size Guidelines
+- **Non-architecture files**: Target ~350 lines maximum
+- **Architecture files**: Allowed to grow larger as needed
+- **Trigger for splitting**: When a file exceeds limits by >33% (~465 lines for non-architecture files)
+
+### File Splitting Procedure
+When a file considerably overruns the size limit (>33% over):
+
+1. **First split**: Rename existing file from `{filename}.md` to `{filename}-1.md`
+2. **Create continuation**: Add new file `{filename}-2.md` for additional content
+3. **Subsequent splits**: Continue with `-3.md`, `-4.md`, etc. as needed
+
+### Examples
+- `120-tasks.auth.md` → exceeds 465 lines
+- Rename to: `120-tasks.auth-1.md`
+- Create: `120-tasks.auth-2.md`
+- If needed: `120-tasks.auth-3.md`
+
+### Rationale
+- Keeps files navigable and focused
+- Prevents overwhelming AI context windows
+- Maintains clear organization within the index system
+- Each continuation file still links to parent via index number
 
 ## Benefits
 This naming convention provides:
@@ -160,6 +212,7 @@ This naming convention provides:
 - Better compatibility with various systems
 - Consistent pattern for all project documentation
 - Logical grouping when viewing directory contents
+- Manageable file sizes through systematic splitting
 
 ## Legacy Files
 Existing files may follow different conventions. When updating or creating new versions of these files, convert to the new naming convention. Do not rename existing files solely for convention compliance unless part of a coordinated effort.

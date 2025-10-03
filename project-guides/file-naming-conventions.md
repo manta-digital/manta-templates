@@ -46,7 +46,7 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
   - Code review task files
   - Review analysis documents
   - Code review follow-up work
-  - Example: `private/code-reviews/review.{component}.{date}.md`
+  - Example: `private/reviews/900-review.{component}.{date}.md`
 
 - **950-999**: Maintenance tasks (50 slots)
   - Maintenance task lists

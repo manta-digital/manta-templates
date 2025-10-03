@@ -75,8 +75,8 @@ For each source file:
 ```
 project-documents/
 └── private/
-    └── code-reviews/
-        ├── reviews/
+    └── reviews/
+        ├── review-docs/
         │   ├── review.component.tsx.0101.md
         │   ├── review.utils.ts.0101.md
         │   └── ...

@@ -30,22 +30,28 @@ project-documents/
 ├── snippets/                # language-agnostic code or prompt templates
 │   └── npm-scripts.ai-support.json   # standard npm scripts
 ├── private/                 # project-specific customization, 1 project 1 repo.
-│   ├── code-reviews/        # review docs & follow-up actions
-│   ├── features/            # feature definitions & specifications
-│   ├── maintenance/         # maintenance tasks & outcomes
-│   ├── architecture/        # system architecture and high-level design
-│   │   └── 050-arch.hld-{project}.md   # high-level design
-│   ├── project-guides/      # project-specific guide customizations
+│   ├── project-guides/      # project-specific concept, spec, slice plan (000-099)
 │   │   ├── 001-concept.{project}.md    # project concept documents
 │   │   ├── 002-spec.{project}.md       # project specifications
 │   │   └── 003-slices.{project}.md     # slice planning document
-│   ├── slices/              # slice-specific low-level designs
+│   ├── architecture/        # system architecture and high-level design (050-089)
+│   │   └── 050-arch.hld-{project}.md   # high-level design
+│   ├── slices/              # slice-specific low-level designs (100-799)
 │   │   ├── nnn-slice.{slice-name}.md   # individual slice designs
 │   │   └── nnn-slice.{slice-name}.md   # additional slice designs
-│   ├── tasks/               # task breakdowns for slices and features
-│   │   ├── nnn-tasks.{slice-name}.md   # slice-based task files
-│   │   ├── nnn-tasks.{slice-name}.md   # additional slice tasks
-│   │   └── 900-tasks.maintenance.md    # maintenance task files
+│   ├── features/            # feature definitions linked to slices (100-799)
+│   │   ├── nnn-feature.{feature-name}.md   # features extending slices
+│   │   └── nnn-feature.{feature-name}.md   # additional features
+│   ├── tasks/               # all task files (100-999)
+│   │   ├── nnn-tasks.{slice-name}.md    # slice tasks
+│   │   ├── nnn-tasks.{feature-name}.md  # feature tasks
+│   │   ├── 900-tasks.{review-name}.md   # code review tasks
+│   │   ├── 940-tasks.{analysis-name}.md # analysis tasks
+│   │   └── 950-tasks.maintenance.md     # maintenance tasks
+│   ├── reviews/             # code review documents (900-939)
+│   │   └── 900-review.{component}.{date}.md
+│   ├── analysis/            # codebase analysis documents (940-949)
+│   │   └── 940-analysis.{topic}.md
 │   └── ui/                  # UI tasks & resources
 │       └── screenshots/     # mock-ups, design references
 └── README.md                # folder-local orientation (this file's sibling)
@@ -75,8 +81,9 @@ Files use a 3-digit numbering system with semantic ranges:
 - **050-089**: Architecture and system design (e.g., `050-arch.hld-{project}`)
 - **090-099**: Specialized guides (e.g., `090-code-review`, `091-legacy-task-migration`)
 - **100-799**: Active work items - slices and tasks (e.g., `100-slice`, `200-tasks`)
-- **800-899**: Feature documents
-- **900-949**: Code review tasks and analysis (e.g., `900-review.component.md`)
+- **800-899**: Feature documents (linked to slices via index: `{sliceindex}-feature.{feature}.md`)
+- **900-939**: Code review tasks (e.g., `900-review.component.md`)
+- **940-949**: Codebase analysis tasks (e.g., `940-analysis.dependency-audit.md`)
 - **950-999**: Maintenance tasks (e.g., `950-tasks.maintenance`)
 
 When creating new files, increment sequentially within the appropriate range category.

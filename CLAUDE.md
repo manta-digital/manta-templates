@@ -42,7 +42,7 @@
 - After all changes are made, ALWAYS build the project.
 - If available, git add and commit *from project root* at least once per task (not per child subitem)
 
-- Log warnings to `/project-documents/private/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point.   Note that this path is affected by `monorepo active` mode.
+- Log warnings to `/project-documents/private/tasks/950-tasks.maintenance.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. Note that this path is affected by `monorepo active` mode.
 
 ## Python Development Rules
 
@@ -191,7 +191,7 @@ This guide supports two distinct code review scenarios:
 The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
 
 ### Infrastructure Guidelines
-Place reviews into the private/code-reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+Place reviews into the private/reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
 
 #### For Directory Crawl Reviews
 Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.

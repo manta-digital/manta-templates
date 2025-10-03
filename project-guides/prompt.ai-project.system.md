@@ -97,7 +97,7 @@ Use the following inputs:
 
 Note: if you are using the slice plan, it must contain information on this slice.
 
-Create the slice design document at `private/slices/nnn-slice.{slice}.md` where nnn is the appropriate sequential number. Your role is Technical Fellow.
+Create the slice design document at `private/slices/{slice}.md`.  Your role is Technical Fellow.
 
 Include:
 - YAML frontmatter as described below.
@@ -115,7 +115,7 @@ Avoid:
 
 YAML Frontmatter Details:
 ---
-item: {item-name}
+item: {slice}
 project: {project}
 type: slice
 github: {url of github issue, if one is related}
@@ -138,7 +138,7 @@ We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown
 
 Your role is Senior AI. Use exactly one of the following as input:
 1. The slice design document `private/slices/{slice}.md`.
-2. The feature design document 'private/features/{nnn}-feature.{feature}.md'.
+2. The feature design document `private/features/{feature}.md`.
 
 Create task file at `private/tasks/{sliceindex}-tasks.{slicename}.md`.  
 
@@ -166,9 +166,40 @@ This is a project planning task, not a coding task.  Code segments should be min
 ```
 
 ##### Task Breakdown - Explicit (Phase 5 - Extra)
-*Use this when you have a detailed slice design especially one containing code that may have been iterated on in order to solve complex or subtle design problems.  Add this to the regular Slice | Feature Task Breakdown*
+*Use this when you have a detailed slice design especially one containing code that may have been iterated on in order to solve complex or subtle design problems.  This should be added to the regular task breakdown prompt.  Until that is properly supported by context-builder, we have duplicated the base task expansion prompt here.
 
 ```markdown
+We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown. Convert the design for {slice | feature} in project {project} into granular, actionable tasks.  Note that this request can be used for *slice* or *feature*, but only one will be applicable to a particular request.
+
+Your role is Senior AI. Use exactly one of the following as input:
+1. The slice design document `private/slices/{slice}.md`.
+2. The feature design document `private/features/{feature}.md`.
+
+Create task file at `private/tasks/{sliceindex}-tasks.{slicename}.md`.  
+
+Include:
+1. YAML front matter including slice name, project, LLD reference, dependencies, and current project state
+2. Context summary section
+3. Granular tasks following Phase 5 guidelines
+4. Create separate sub-tasks for each similar component.
+5. Organize so that tasks can be completed sequentially.
+6. Use checklist format for all task files.
+
+Avoid:
+- Time estimates in hours/days/etc.  You may use a 1-5 relative effort scale.
+- Extensive benchmarking tasks unless actually relevant to this effort.
+- Extensive or speculative risk items.  Include only if truly relevant.
+
+For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+
+Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.  Keep files to about 350 lines or less.  If considerably more space is needed modify files as detailed here.  Do not split a file if it's less than about 100 line overrun.
+1. rename current file nnn-tasks.[task section name]-1.md
+2. add new file nnn-tasks.[task-section-name]-2.md
+3. ...etc...
+
+This is a project planning task, not a coding task.  Code segments should be minimal and kept to only what is necessary to convey information.
+
+##### Important Additional Information
 Note that our slice design is intricate, detailed, and has been refined extensively in order to address complex and/or subtle issues.  The slice design contains code, and we *need* to use this code in our task planning.
 
 As you are planning tasks, proceed *carefully* through the slice design, creating tasks to accomplish the design *exactly* as presented.  Once you complete the task breakdown, review it in light of the slice design to ensure that:
@@ -209,7 +240,7 @@ Your job is to complete the tasks in the `/project-documents/private/tasks/{slic
 
 Use exactly one of the following (only one match should exist):
 - The slice design at `private/slices/{slice}.md`.
-- The feature design at `private/features/{sliceindex}-feature.{feature}.md`.
+- The feature design at `private/features/{feature}.md`.
 
 Always git commit at least once per task but ideally after every section of items containing a 'Success:' criteria.  For example, if a file contains Task 1.2, Task 1.2.1, commit after each task.  If 1.2.1 contains multiple checklists each with its own 'Success:' criteria, commit after any section containing Success.  STOP and confer with Project Manager after each task, unless directed otherwise 
 
@@ -267,42 +298,32 @@ If given an instruction similar to "process and stand by", make sure you underst
 ```markdown
 You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
 
-1. Consult Overview: Start with the specific `AI Tool Overview 
-   [toolname].md` in the `project-documents/tool-
-   guides/[tool]` directory.
-2. Locate Docs: Scan the Overview for references to more detailed 
-   documentation (like local API files under `/documentation`, 
-   notes in `research-crumbs` or official web links).
-3. Search Docs: Search within those specific documentation sources 
-   first using `grep_search` or `codebase_search`.
-4. Additional documentation.  If you have a documentation tool available (ex: 
-   context7 MCP) use it for additional information.  Always use it if available 
-   and no specific tool guide is provided.
-5. Web Search Fallback: If the targeted search doesn't yield 
-   results, then search the web.
+1. Consult Overview: Start with the specific `AI Tool Overview [toolname].md` in the `project-documents/tool-guides/[tool]` directory.
+2. Locate Docs: Scan the Overview for references to more detailed documentation (like local API files under `/documentation`, notes in `research-crumbs` or official web links).
+3. Search Docs: Search within those specific documentation sources first using `grep_search` or `codebase_search`.
+4. Additional documentation.  If you have a documentation tool available (ex: context7 MCP) use it for additional information.  Always use it if available and no specific tool guide is provided.
+5. Web Search Fallback: If the targeted search doesn't yield results, then search the web.
 ```
 
 ##### Feature Design
-*Use this to create a feature file for a feature that is too big to just run tasks for or "wing it", but doesn't represent a full vertical project slice.*
+*Use this to design a feature.  Features are horizontal sections that extend or modify slices.  They are for work that is too large or complex to be described with only a task or few, but that does not represent a vertical slice of functionality.*
+
 ```markdown
-We're adding a new feature to project {project}. Name this feature as described or, if creating from a github issue, create a concise but descriptive name from the issue title.
+We're adding a new feature to project {project}, modifying slice {slice}. Features are horizontal sections that extend or modify slices.  They are for work that is too large or complex to be described with only a task or few, but that does not represent a vertical slice of functionality.  Create a design for the feature.  
 
-Use relevant methodology from `guide.ai-project.000-process` to create the design for the feature.  Keep this concise and minimal.  Your role is Technical Fellow.
+Create or modify file at features/{slice-index}-feature.{slicename}.{featurename}.md, where we refer to {slice-index}-feature.{slicename}.{featurename} as the compound term {feature}. Note that an existing associated slice is required in order to create a feature. The {featurename} value should be provided by Project Manager or clearly contained in existing context.
 
-The feature description should be provided by the Project Manager. Additionally consider the existing project context including.
+Any needed high-level design (HLD) can be provided in an ## HLD section in the document.  Place detailed design in an ## LLD section in the document.  Keep it concise and minimal.  Use relevant methodology from `guide.ai-project.000-process` to create the design for the feature.  Your role is Technical Fellow.
 
-- High-level design (private/architecture/050-arch.hld-{project}.md)
-- Current project state
+The feature description should be provided by the Project Manager. Ideally it will be provided under a ## User-Provided Concept or similar heading in a feature file for you.  DO NOT overwrite any User-Provided (or PM-Provided) concept.  Preserve this information when you edit or re-create the file.
 
-Create:
-1. Add indexed section in tasks/91-adhoc-features.  Create file if needed.  
-2. Title the section {nn}-feature.{feature}.md.
-3. Concise feature design document (features/{nn}-feature.{feature}.md). 
+Expected Output:
+* Concise feature design document in features/{sliceindex}-feature.{featurename}.md.  Create if it doesn't already exist.  If file exists, edit existing file as described above.
 
-Add YAML FrontMatter to your created file:
+Add YAML FrontMatter to the relevant file if it is not present:
 ```yaml
 ---
-item: {item-name}
+item: {slicename}
 project: {project}
 type: feature
 github: {url of github issue, if one is related}
@@ -326,7 +347,7 @@ Avoid:
 3. Do not add a time estimate in hours/days etc.  You may use 1-5 relative 
    effort scale.
 
-If you need more information about the feature requirements, stop and request from Project Manager.
+If you need more information about the feature requirements, stop and request from Project Manager.  Note that this is a project and process task, NOT a coding task.  Any code samples should be minimal and limited to what is truly needed to provide the information.
 ```
 
 ##### Ad-Hoc Tasks
@@ -365,7 +386,7 @@ Perform the following items and add their output to the compacted context:
 
 ##### Maintenance Task
 ```markdown
-Operate as a Senior AI.  Use the issue description provided, and add tasks to the maintenance file to address implementation of the issue or feature.  Add a new task to your maintenance file, which should be `900-tasks.maintenance` unless there is reason to deviate (there normally isn't).  This should be used for an item small enough to represent as a single main task.
+Operate as a Senior AI.  Use the issue description provided, and add tasks to the maintenance file to address implementation of the issue or feature.  Add a new task to your maintenance file, which should be `tasks/900-tasks.maintenance` unless there is reason to deviate (there normally isn't).  This should be used for an item small enough to represent as a single main task.
 
 Include:
 1. A new Task {n}
@@ -389,15 +410,13 @@ This is a project planning task, not a coding task.
 
 ##### Perform Routine Maintenance 
 ```markdown
-Let's perform routine maintenance tasks while being mindful of our slice-based development approach. Examine file project-documents/private/maintenance/maintenance-tasks.md.
+We are performing routine maintenance by implementing solutions for incomplete tasks the maintenance task file.  Unless otherwise specified, use file `tasks/900-tasks.maintenance.md` and scan for incomplete tasks.  If given a particular section heading in the file, consider only that section.
 
 Work through maintenance items one at a time. For each item:
-- Assess impact on current slice work
-- Ensure fixes don't break slice boundaries or interfaces
-- Test that slice functionality still works after maintenance
-- Update maintenance-tasks.md when complete
-
-Stop after each item for Project Manager verification. Don't proceed to next items until current one is verified complete and doesn't interfere with slice development.
+- Determine if task can reasonably be solved without expansion or creating more detailed tasks.  Keep a list of anything requiring this additional detail and present it to the Project Manager after proceeding through all solvable items.
+- Implement solutions according to our project guidelines.  Ensure that you create unit tests for each solution, and that the tests pass before proceeding to the next item.  Create tests as you work through each item -- do not wait until the end and try to create them all.
+- Run regressions and existing tests to make sure maintenance fixes do not break any existing slices, slice boundaries, dependencies, or interfaces.
+- Update tasks and check off as you go.  Use a task-checker agent if one is configured.
 
 Current project: {project}
 Active slice work: {slice} (if applicable)
@@ -451,7 +470,7 @@ We're working in our guide.ai-project.000-process, Phase 5: Slice Task Breakdown
 
 If the tasks are already sufficiently granular and in checklist format, you do not need to modify them. Note that each success criteria needs a checkbox.
 
-Your role is Senior AI. Use the specified analysis document `private/maintenance/nnn-analysis.{project-name}{.subproject?}.00.md` as input.  Note that subproject is optional (hence the ?).  Avoid adding extra `.` characters to filename if subproject is not present.
+Your role is Senior AI. Use the specified analysis document `private/analysis/nnn-analysis.{project-name}{.subproject?}.md` as input. Note that subproject is optional (hence the ?). Avoid adding extra `.` characters to filename if subproject is not present.
 
 Create task file at `private/tasks/nnn-analysis{.subproject?}-{date}.md` with:
 1. YAML front matter including slice or subproject name, project, YYYYMMDD date, main analysis file reference, dependencies, and current project state
@@ -474,7 +493,7 @@ We need to create a Low-Level Design (LLD) for {feature/component} identified du
 Your role is Technical Fellow as described in the Process Guide. This LLD will bridge the gap between high-level understanding and implementable tasks.
 
 Context:
-- Analysis document: `private/maintenance/nnn-analysis.{project-name}{.subproject or analysis topic?}` (or specify location)
+- Analysis document: `private/analysis/nnn-analysis.{project-name}{.subproject or analysis topic?}` (or specify location)
 - Related task file: `private/tasks/nnn-analysis{.subproject?}-{date}.md` (if exists)
 - Current issue: {brief description of what analysis revealed}
 
@@ -485,7 +504,7 @@ Required YAML front matter:
 ---
 layer: project
 docType: lld
-feature: {feature-name}
+feature: {featurename}
 project: {project}
 triggeredBy: analysis|task-breakdown|architecture-review
 sourceDocument: {path-to-analysis-or-task-file}
@@ -540,45 +559,38 @@ Notes:
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
 ```markdown
-Let's analyze the following existing codebase and document our findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
+Analyze the following existing codebase and document your findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
-###### General
-* Document your findings in the project-documents/private/maintenance/codebase-
-  analysis.md. You will probably need to create this file.
-* Write in markdown format, following our rules for markdown output.  If you 
-  cannot find these rules, STOP and do not proceed until you request and receive 
-  them fro the Project Manager.
-* Document the codebase structure.  Also note presence of any project-documents 
-  or similar folders which probably contain information for us.
-* Document presence or average of tests, and an estimate of coverage if tests 
-  are present.
-* Identify technologies and frameworks in use.  If this is a JS app, does it use 
-  React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it 
-  use TailWind?  ShadCN?  Something else?
+###### Expected Output
+* Document your findings in `/private/analysis/nnn-analysis.codebase.md` where nnn starts at 940 (analysis range). You will probably need to create this file.
+* Write in markdown format, following our rules for markdown output.  
+
+###### General Guidelines
+* Document the codebase structure.  Also note presence of any project-documents or similar folders which probably contain information for us.
+* Document presence or average of tests, and an estimate of coverage if tests are present.
+* Identify technologies and frameworks in use.  
 * What package managers are in use?
 * Is there a DevOps pipeline indicated?
 * Analysis should be concise and relevant - no pontificating.
-* Add note in README as follows: Claude: please find code analysis details in 
-  {file mentioned above}.
+* Add note in README as follows: Claude: please find code analysis details in {file mentioned above}.
 
-###### NextJS
-* Perform standard analysis and identify basic environment -- confirm NextJS, 
-  identify common packages in use (Tailwind, ShadCN, etc) and any unusual 
-  packages or features.  
-* If auth is present, attempt to determine its structure and describe its 
-  methodology
+###### Front End
+* If this is a JS app, does it use React?  Vue?  Is it NextJS?  Is it typescript, javascript, or both?  Does it use TailWind?  ShadCN?  Something else?
+
+###### NextJS, React
+* Perform standard analysis and identify basic environment -- confirm NextJS, identify common packages in use (Tailwind, ShadCN, etc) and any unusual packages or features.  
+* If auth is present, attempt to determine its structure and describe its methodology
 * Is the project containerized?
-* If special scripts (ex: 'docker: {command}') are present, document them in the 
-  README.
+* If special scripts (ex: 'docker: {command}') are present, document them in the README.
 * Provide a description of the UI style, interactivity, etc
 * Document page structure.
+* What type of architecture is used to manage SSR vs CSR?
   
 ###### Tailwind
-* Is cn used instead of string operations with parameterized or variable   
-  classNames?
+* Is cn used instead of string operations with parameterized or variable   classNames?
 * Prefer Tailwind classes, there should not be custom CSS classes.
-* If this is Tailwind 4, are customizations correctly in CSS and no attempt to 
-  use tailwind.config.ts/.js. 
+* If this is Tailwind 4, are customizations correctly in CSS and no attempt to use tailwind.config.ts/.js.
+
 ```
 
 ##### Custom Instruction
