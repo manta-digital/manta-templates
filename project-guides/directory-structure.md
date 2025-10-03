@@ -33,10 +33,11 @@ project-documents/
 │   ├── code-reviews/        # review docs & follow-up actions
 │   ├── features/            # feature definitions & specifications
 │   ├── maintenance/         # maintenance tasks & outcomes
+│   ├── architecture/        # system architecture and high-level design
+│   │   └── 050-arch.hld-{project}.md   # high-level design
 │   ├── project-guides/      # project-specific guide customizations
 │   │   ├── 001-concept.{project}.md    # project concept documents
 │   │   ├── 002-spec.{project}.md       # project specifications
-│   │   ├── 050-hld.{project}.md        # high-level design
 │   │   └── 003-slices.{project}.md     # slice planning document
 │   ├── slices/              # slice-specific low-level designs
 │   │   ├── nnn-slice.{slice-name}.md   # individual slice designs
@@ -71,7 +72,7 @@ project-documents/
 Files use a 3-digit numbering system with semantic ranges:
 - **000-009**: Core process guides (e.g., `000-process`, `001-concept`)
 - **010-049**: Reserved for future process extensions
-- **050-089**: Architecture and system design (e.g., `050-hld`)
+- **050-089**: Architecture and system design (e.g., `050-arch.hld-{project}`)
 - **090-099**: Specialized guides (e.g., `090-code-review`, `091-legacy-task-migration`)
 - **100-799**: Active work items - slices and tasks (e.g., `100-slice`, `200-tasks`)
 - **800-899**: Feature documents

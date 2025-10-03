@@ -36,7 +36,7 @@ Review the existing task breakdown and understand:
 
 ### Step 2: Create High-Level Design
 Based on the existing spec and task breakdown, create:
-- `private/project-guides/050-hld.{project}.md` - High-level design document
+- `private/architecture/050-arch.hld-{project}.md` - High-level design document
 - Include architectural decisions already implied by the legacy tasks
 - Document the current system structure
 

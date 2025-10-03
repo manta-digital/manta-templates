@@ -25,7 +25,7 @@ The project uses 3-digit indices (000-999) with semantic range allocation:
   - High-level designs (HLD)
   - System architecture documents
   - Technology selection and rationale
-  - Example: `private/project-guides/050-hld.{project}.md`
+  - Example: `private/architecture/050-arch.hld-{project}.md`
 
 - **090-099**: Specialized utility guides
   - Example: `guide.ai-project.090-code-review.md`

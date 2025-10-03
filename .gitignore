@@ -1,7 +1,7 @@
 # Environment variables
 *.env
 
-private
+#private
 
 # macOS system files
 .DS_Store
