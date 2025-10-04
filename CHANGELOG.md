@@ -13,6 +13,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [0.8.0] - 2025-01-04
+
+### Added
+- **3-digit index system (nnn)**: Migrated from 2-digit (nn) to 3-digit (nnn) indexing with semantic range allocation
+  - **000-009**: Core process guides
+  - **010-049**: Extended process documentation
+  - **050-089**: Architecture and system design
+  - **090-099**: Specialized guides
+  - **100-799**: Active work (slices, tasks) - 700 slots for massive scalability
+  - **800-899**: Feature documents
+  - **900-939**: Code review tasks (40 slots)
+  - **940-949**: Codebase analysis tasks (10 slots)
+  - **950-999**: Maintenance tasks (50 slots)
+- **File size management**: Documented 350-line limit for non-architecture files with systematic splitting procedure
+- **Monorepo context initialization**: Separate dedicated prompt for monorepo vs standard project contexts
+
+### Changed
+- **HLD standardization**: Moved to `architecture/050-arch.hld-{project}.md` with consistent naming
+- **Directory structure**: Consolidated `maintenance/` into tasks, renamed `code-reviews/` to `reviews/`, ordered by workflow
+- **Simplified naming**: Removed redundant slice names from features - index number creates the link (DRY principle)
+- **Path consistency**: Standardized to `private/{subdir}/...` pattern for all project-specific files
+
+### Fixed
+- Updated analysis, maintenance, and feature prompts for consistency with new structure
+- Corrected path references, YAML fields, and various typos throughout documentation
+
 ## [0.7.0] - 2025-08-18
 
 ### Added

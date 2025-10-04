@@ -258,7 +258,7 @@ Notes:
 - Use the task-checker to manage lists if it is available to you.
 - Ignore case sensitivity in all file and directory names.
 - Use the directory-structure and file-naming-conventions guides.
-- If you are mising required information or referenced files, STOP and obtain 
+- If you are missing required information or referenced files, STOP and obtain
   from Project Manager (PM).
 - Do not guess, assume, or proceed without required files.
 ```
@@ -270,22 +270,19 @@ The following provides context on our current work in project {project}.
 
 We are using the slice-based methodology from `guide.ai-project.000-process`. Current work context:
 - Project: {project}
-- Current slice: {slice}
+- Slice: {slice}
+- Tasks: {task-file}
 - Phase: {development-phase}
 - if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
 
 Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Key project documents:
-- High-level design: private/architecture/050-arch.hld-{project}.md
-- Current slice design: private/slices/{slice}.md
+- Project Documents: `project-documents/private/`. 
+- Slice design: private/slices/{slice}.md
 - Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md
-*Note: legacy HLD location is: private/project-guide/050-hld.{project}.md*
 
-Directory Structure by Development Type:
-- Regular Development: Use `project-documents/private/` as shown above for all project-specific files.
-- Monorepo Template Development:`project-artifacts/{template}/` for project-specific files. For example:
-- `project-artifacts/{template}/slices/`
-- `project-artifacts/{template}/tasks/`
-- `project-artifacts/{template}/maintenance/`
+Concentrate on the most granular level available (e.g. tasks if present), and use the higher-level files as reference only if needed. 
+- Project HLD: private/architecture/050-arch.hld-{project}.md
+*Note: legacy HLD location is: private/project-guide/050-hld.{project}.md*
 
 If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.  
 
@@ -294,6 +291,36 @@ If tasks file is already present, it should be your primary focus.  Slice design
 If given an instruction similar to "process and stand by", make sure you understand all instructions, what files or architecture components are involved, and alert Project Manager to any missing, incomplete, or vague information preventing you from accurately carrying out your instructions.  Wait for confirmation from Project Manager before proceeding further.  
 ```
 
+##### Context Initialization - Monorepo
+*This is the monorepo version of the context initialization prompt.  This creates some duplication but it is sufficient and direct. *
+```markdown
+The following provides context on our current work in project {project}. 
+
+We are using the slice-based methodology from `guide.ai-project.000-process`. Current work context:
+- Project: {project}
+- Slice: {slice}
+- Tasks: {task-file}
+- Phase: {development-phase}
+- if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
+
+Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Key project documents and locations:
+- Project Documents: `project-artifacts/{project-type}/{project}` where project type == 'template' (only value in use 20251003), for example: `project-artifacts/template/react/`.  This is interpreted as the value of private/ wherever that is encountered.  For example if a prompt references: private/tasks/100-tasks.some-tasks, this would be interpreted as: project-artifacts/template/react/.  Alternately, it can be flattened on level to: project-artifacts/template-react/.  
+
+- Slice design: private/slices/{slice}.md maps to: project-artifacts/{project-type}-{project}/slices/{slice}.md
+- Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md --> synonym: {taskfile}, maps to: project-artifacts/{project-type}-{project}/tasks/{taskfile}.md
+
+Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Concentrate on the most granular level available (e.g. tasks if present), and use the higher-level files as reference only if needed.  Key project documents:
+- High-level design: private/architecture/050-arch.hld-{project}.md
+- Current slice design: private/slices/{slice}.md
+- Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md
+*Note: legacy HLD location is: private/project-guide/050-hld.{project}.md*
+
+If you were previously assigned a role, continue in that role. If not, assume role of Senior AI as defined in the Process Guide.  
+
+If tasks file is already present, it should be your primary focus.  Slice design may be used to gain overview or as a source for generating tasks.  Once we have the tasks, we primarily work from those.
+
+If given an instruction similar to "process and stand by", make sure you understand all instructions, what files or architecture components are involved, and alert Project Manager to any missing, incomplete, or vague information preventing you from accurately carrying out your instructions.  Wait for confirmation from Project Manager before proceeding further.  
+```
 ##### Tool Usage
 ```markdown
 You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
@@ -311,7 +338,7 @@ You will need to consult specific knowledge for 3rd party tools, libraries, or p
 ```markdown
 We're adding a new feature to project {project}, modifying slice {slice}. Features are horizontal sections that extend or modify slices.  They are for work that is too large or complex to be described with only a task or few, but that does not represent a vertical slice of functionality.  Create a design for the feature.  
 
-Create or modify file at features/{slice-index}-feature.{slicename}.{featurename}.md, where we refer to {slice-index}-feature.{slicename}.{featurename} as the compound term {feature}. Note that an existing associated slice is required in order to create a feature. The {featurename} value should be provided by Project Manager or clearly contained in existing context.
+Create or modify file at features/{sliceindex}-feature.{featurename}.md, where we refer to {sliceindex}-feature.{featurename} as the compound term {feature}. Note that an existing associated slice is required in order to create a feature. The {featurename} value should be provided by Project Manager or clearly contained in existing context.
 
 Any needed high-level design (HLD) can be provided in an ## HLD section in the document.  Place detailed design in an ## LLD section in the document.  Keep it concise and minimal.  Use relevant methodology from `guide.ai-project.000-process` to create the design for the feature.  Your role is Technical Fellow.
 
@@ -323,7 +350,7 @@ Expected Output:
 Add YAML FrontMatter to the relevant file if it is not present:
 ```yaml
 ---
-item: {slicename}
+item: {featurename}
 project: {project}
 type: feature
 github: {url of github issue, if one is related}
@@ -352,15 +379,15 @@ If you need more information about the feature requirements, stop and request fr
 
 ##### Ad-Hoc Tasks
 ```markdown
-Create tasks for {feature | maintenance item} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
+Create tasks for {feature|bugfix|maintenance-work} in project {project}. This is for smaller work items that need task breakdown but don't require full slice design.
 
-Your role is Senior AI. Analyze the {feature/maintenance item} and create a task file at `private/tasks/nnn-tasks.{item-name}.md` with:
+Your role is Senior AI. Analyze the work item and create a task file at `private/tasks/nnn-tasks.{item-name}.md` with:
 
 1. YAML front matter:
 ---
 item: {item-name}
 project: {project}
-type: feature|maintenance|bugfix tasks
+type: feature|maintenance|bugfix
 dependencies: [list-if-any]
 projectState: brief current state
 lastUpdated: YYYY-MM-DD
@@ -386,7 +413,7 @@ Perform the following items and add their output to the compacted context:
 
 ##### Maintenance Task
 ```markdown
-Operate as a Senior AI.  Use the issue description provided, and add tasks to the maintenance file to address implementation of the issue or feature.  Add a new task to your maintenance file, which should be `tasks/900-tasks.maintenance` unless there is reason to deviate (there normally isn't).  This should be used for an item small enough to represent as a single main task.
+Operate as a Senior AI. Use the issue description provided, and add tasks to the maintenance file to address implementation of the issue or feature. Add a new task to your maintenance file, which should be `tasks/950-tasks.maintenance.md` unless there is reason to deviate (there normally isn't). This should be used for an item small enough to represent as a single main task.
 
 Include:
 1. A new Task {n}
@@ -410,7 +437,7 @@ This is a project planning task, not a coding task.
 
 ##### Perform Routine Maintenance 
 ```markdown
-We are performing routine maintenance by implementing solutions for incomplete tasks the maintenance task file.  Unless otherwise specified, use file `tasks/900-tasks.maintenance.md` and scan for incomplete tasks.  If given a particular section heading in the file, consider only that section.
+We are performing routine maintenance by implementing solutions for incomplete tasks in the maintenance task file. Unless otherwise specified, use file `tasks/950-tasks.maintenance.md` and scan for incomplete tasks. If given a particular section heading in the file, consider only that section.
 
 Work through maintenance items one at a time. For each item:
 - Determine if task can reasonably be solved without expansion or creating more detailed tasks.  Keep a list of anything requiring this additional detail and present it to the Project Manager after proceeding through all solvable items.
@@ -441,10 +468,10 @@ Process:
 - P3 Low: Optimizations, nice-to-have improvements
 
 2. Create File and Document by Priority:
-- Create markdown file `maintenance/{nnn}-analysis.{project-name}
-  {.subproject?}-00.md`.  If this is the first such file created, {nnn} = "001".
-- Note that subproject is often not specified.  Do not add its term to the name 
-  if this is the case. 
+- Create markdown file `analysis/nnn-analysis.{project-name}{.subproject?}.md`
+  where nnn starts at 940 (analysis range).
+- Note that subproject is often not specified. Do not add its term to the name
+  if this is the case.
 - Divide file into Critical Issues (P0/P1) and Additional Issues(P2/P3)
 - Add concise documentation of each issue -- overview, context, conditions.  
 
@@ -537,9 +564,9 @@ Note: This creates implementation-ready technical designs, not high-level planni
 ##### Analysis Task Implementation
 *Phase 7 Task Implementation customized for analysis files. *
 ```markdown
-We are working on the analysis file {analysis} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.000-process`. 
+We are working on the analysis file {analysis} in project {project}, phase 7 of `project-guides/guide.ai-project.000-process`. 
 
-Your role is "Senior AI". Your job is to complete the tasks in the `/project-documents/private/tasks/nnn-analysis.{project}{date-from-{analysis}}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
+Your role is "Senior AI". Your job is to complete the tasks in the `private/tasks/nnn-analysis-{topic}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
 
 The analysis overview is available at {analysis} for additional context.
 
@@ -559,10 +586,20 @@ Notes:
 ##### Analyze Codebase
 *This is mostly specialized to front-end and web apps and should be moved to a specific guide.*
 ```markdown
-Analyze the following existing codebase and document your findings.  We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
+Purpose: Perform discovery analysis of existing codebase to:
+- Document system architecture and technology stack
+- Identify technical debt and improvement opportunities
+- Provide foundation for creating slices, features, or maintenance tasks
+- Create reference documentation for team members
+
+This is reconnaissance work - not goal-oriented development.
+
+Analyze the following existing codebase and document your findings. We want this to not only assist ourselves in updating and maintaining the codebase, but also to assist humans who may be working on the project.
 
 ###### Expected Output
-* Document your findings in `/private/analysis/nnn-analysis.codebase.md` where nnn starts at 940 (analysis range). You will probably need to create this file.
+* Document your findings in `private/analysis/nnn-analysis.{topic}.md` where:
+  - nnn starts at 940 (analysis range)
+  - {topic} describes the analysis focus (e.g., "initial-codebase", "dependency-audit", "architecture-review")
 * Write in markdown format, following our rules for markdown output.  
 
 ###### General Guidelines

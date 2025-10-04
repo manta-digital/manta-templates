@@ -53,7 +53,7 @@ These files provide platform-specific configurations while maintaining consisten
 
 **Traditional Development:**
 - Use for simple features or small projects
-- Follow Phases 1-2, then directly to legacy task breakdown
+- Follow Phases 1-2, then directly to task breakdown
 - Suitable for single-feature additions or maintenance work
 
 ### YAML front-matter schema for project-guides
