@@ -526,16 +526,16 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 10.1: Verify .gitignore
 **Effort**: 1/5
 
-- [ ] Ensure `.env` is in `.gitignore`
-- [ ] Ensure `.env.example` is NOT in `.gitignore`
-- [ ] **Success**: Secrets not committed to git
+- [x] Ensure `.env` is in `.gitignore`
+- [x] Ensure `.env.example` is NOT in `.gitignore`
+- [x] **Success**: Secrets not committed to git
 
 ### Task 10.2: Document Next Steps
 **Effort**: 1/5
 
-- [ ] Add comment in code noting: "Tokens in memory only - Slice 111 adds persistence"
-- [ ] Note that Windows/Linux support comes in Slice 114
-- [ ] **Success**: Clear what's MVP vs. future enhancements
+- [x] Add comment in code noting: "Tokens in memory only - Slice 111 adds persistence"
+- [x] Note that Windows/Linux support comes in Slice 114
+- [x] **Success**: Clear what's MVP vs. future enhancements
 
 ## Success Criteria Summary
 

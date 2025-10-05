@@ -2,6 +2,13 @@ import { shell } from 'electron'
 import { generatePKCEPair, generateState } from './pkce'
 import { auth0Config } from './auth0-config'
 
+/**
+ * Auth0 OAuth 2.0 + PKCE Client for Electron (Slice 110)
+ *
+ * Tokens stored in memory only - Slice 111 adds persistent encrypted storage
+ * macOS only - Windows/Linux support comes in Slice 114
+ */
+
 interface PendingAuth {
   state: string
   codeVerifier: string
@@ -17,7 +24,7 @@ interface TokenSet {
 
 class Auth0Client {
   private pendingAuth: PendingAuth | null = null
-  private tokens: TokenSet | null = null
+  private tokens: TokenSet | null = null // In-memory only - Slice 111 adds persistence
   private readonly STATE_TIMEOUT = 10 * 60 * 1000 // 10 minutes
   private readonly debug = process.env.NODE_ENV === 'development'
 

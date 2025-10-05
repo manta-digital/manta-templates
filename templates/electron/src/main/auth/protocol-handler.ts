@@ -1,6 +1,13 @@
 import { app, protocol } from 'electron'
 import { auth0Client } from './auth0-client'
 
+/**
+ * Auth Protocol Handler for OAuth Callbacks (Slice 110)
+ *
+ * macOS only - uses open-url event
+ * Windows/Linux support comes in Slice 114 (second-instance event)
+ */
+
 export function registerAuthProtocol() {
   // Must be called BEFORE app.ready
   protocol.registerSchemesAsPrivileged([
