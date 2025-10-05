@@ -105,14 +105,14 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 3.1: Implement Auth0 Config Module
 **Effort**: 2/5
 
-- [ ] Create file: `src/main/auth/auth0-config.ts`
-- [ ] Export `auth0Config` object with properties:
+- [x] Create file: `src/main/auth/auth0-config.ts`
+- [x] Export `auth0Config` object with properties:
   - `domain: process.env.AUTH0_DOMAIN!`
   - `clientId: process.env.AUTH0_CLIENT_ID!`
   - `audience: process.env.AUTH0_AUDIENCE` (optional)
   - `scope: 'openid profile email offline_access'`
   - `redirectUri: 'electronapp://callback'`
-- [ ] Add validation logic:
+- [x] Add validation logic:
   - Check if `domain` and `clientId` are present
   - If missing, log helpful error message with formatting:
     ```
@@ -121,7 +121,7 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
        See .env.example for required variables\n
     ```
   - Throw error: `Missing Auth0 configuration`
-- [ ] **Success**: Config loads from env vars with clear error if missing
+- [x] **Success**: Config loads from env vars with clear error if missing
 
 **Reference**: Exact implementation in slice design lines 186-206
 
