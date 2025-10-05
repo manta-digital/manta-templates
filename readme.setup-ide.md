@@ -33,8 +33,8 @@ If you prefer manual setup or need to troubleshoot the automated process:
 
 2. **Copy rule files:**
    ```bash
-   cp project-guides/rules/*.md .cursor/rules/
-   cp project-guides/agents/*.md .cursor/rules/
+   cp ai-project-guide/project-guides/rules/*.md .cursor/rules/
+   cp ai-project-guide/project-guides/agents/*.md .cursor/rules/
    ```
 
 3. **Rename files to .mdc extension:**
@@ -66,8 +66,8 @@ If you prefer manual setup or need to troubleshoot the automated process:
 
 2. **Copy rule files** (keep .md extension):
    ```bash
-   cp project-guides/rules/*.md .windsurf/rules/
-   cp project-guides/agents/*.md .windsurf/rules/
+   cp ai-project-guide/project-guides/rules/*.md .windsurf/rules/
+   cp ai-project-guide/project-guides/agents/*.md .windsurf/rules/
    ```
 
 3. **Verify frontmatter** (recommended):
@@ -84,7 +84,7 @@ If you prefer manual setup or need to troubleshoot the automated process:
 
 ## Available Rules
 
-### Core Rules (`project-guides/rules/`)
+### Core Rules (`ai-project-guide/project-guides/rules/`)
 - **general.md** - General coding rules and project structure guidelines
 - **react.md** - React and Next.js component rules and best practices
 - **typescript.md** - TypeScript syntax rules and typing standards
