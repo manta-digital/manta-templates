@@ -288,11 +288,11 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 5.1: Implement Protocol Registration
 **Effort**: 2/5
 
-- [ ] Create file: `src/main/auth/protocol-handler.ts`
-- [ ] Import dependencies:
+- [x] Create file: `src/main/auth/protocol-handler.ts`
+- [x] Import dependencies:
   - `app, protocol` from `electron`
   - `auth0Client` from `./auth0-client`
-- [ ] Implement `registerAuthProtocol()` function:
+- [x] Implement `registerAuthProtocol()` function:
   - Call `protocol.registerSchemesAsPrivileged()` with array:
     ```typescript
     [{
@@ -305,8 +305,8 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
       }
     }]
     ```
-- [ ] Export function
-- [ ] **Success**: Custom protocol registered with correct privileges
+- [x] Export function
+- [x] **Success**: Custom protocol registered with correct privileges
 
 **Reference**: Exact implementation in slice design lines 367-384
 
@@ -315,21 +315,21 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 5.2: Implement Protocol Handler Setup (macOS)
 **Effort**: 2/5
 
-- [ ] Implement `setupAuthProtocolHandler()` function
-- [ ] Check platform and register as default handler:
+- [x] Implement `setupAuthProtocolHandler()` function
+- [x] Check platform and register as default handler:
   ```typescript
   if (process.platform === 'darwin') {
     app.setAsDefaultProtocolClient('electronapp')
   }
   ```
-- [ ] Set up `open-url` event listener:
+- [x] Set up `open-url` event listener:
   - Listen for `app.on('open-url')`
   - Call `event.preventDefault()`
   - Check if URL starts with `electronapp://callback`
   - If yes, call `await auth0Client.handleCallback(url)` in try/catch
   - Log any errors to console
-- [ ] Export function
-- [ ] **Success**: Protocol handler intercepts callback URLs on macOS
+- [x] Export function
+- [x] **Success**: Protocol handler intercepts callback URLs on macOS
 
 **Reference**: Exact implementation in slice design lines 386-404
 
