@@ -2,16 +2,18 @@
 
 This guide explains how to set up AI project rules in your IDE (Cursor or Windsurf) for enhanced AI assistance.
 
+**Path Convention:** In this guide, `ai-project-guide/` refers to `{project-root}/project-documents/ai-project-guide/`.
+
 ## Quick Setup (Recommended)
 
-Use the automated setup script:
+Use the automated setup script from your project root:
 
 ```bash
 # For Cursor IDE
-./scripts/setup-ide cursor
+./project-documents/ai-project-guide/scripts/setup-ide cursor
 
-# For Windsurf IDE  
-./scripts/setup-ide windsurf
+# For Windsurf IDE
+./project-documents/ai-project-guide/scripts/setup-ide windsurf
 ```
 
 The script will:
@@ -33,8 +35,8 @@ If you prefer manual setup or need to troubleshoot the automated process:
 
 2. **Copy rule files:**
    ```bash
-   cp ai-project-guide/project-guides/rules/*.md .cursor/rules/
-   cp ai-project-guide/project-guides/agents/*.md .cursor/rules/
+   cp project-documents/ai-project-guide/project-guides/rules/*.md .cursor/rules/
+   cp project-documents/ai-project-guide/project-guides/agents/*.md .cursor/rules/
    ```
 
 3. **Rename files to .mdc extension:**
@@ -66,8 +68,8 @@ If you prefer manual setup or need to troubleshoot the automated process:
 
 2. **Copy rule files** (keep .md extension):
    ```bash
-   cp ai-project-guide/project-guides/rules/*.md .windsurf/rules/
-   cp ai-project-guide/project-guides/agents/*.md .windsurf/rules/
+   cp project-documents/ai-project-guide/project-guides/rules/*.md .windsurf/rules/
+   cp project-documents/ai-project-guide/project-guides/agents/*.md .windsurf/rules/
    ```
 
 3. **Verify frontmatter** (recommended):
@@ -145,7 +147,7 @@ globs: ["**/*.ts"]
 ### Script Permission Issues
 ```bash
 # Make script executable
-chmod +x scripts/setup-ide
+chmod +x project-documents/ai-project-guide/scripts/setup-ide
 ```
 
 ## Advanced Configuration
