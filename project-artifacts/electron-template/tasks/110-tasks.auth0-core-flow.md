@@ -340,9 +340,9 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 6.1: Create Auth IPC Bridge
 **Effort**: 2/5
 
-- [ ] Edit or create file: `src/preload/preload.ts`
-- [ ] Import `contextBridge, ipcRenderer` from `electron`
-- [ ] Expose auth APIs via `contextBridge.exposeInMainWorld`:
+- [x] Edit or create file: `src/preload/preload.ts`
+- [x] Import `contextBridge, ipcRenderer` from `electron`
+- [x] Expose auth APIs via `contextBridge.exposeInMainWorld`:
   ```typescript
   contextBridge.exposeInMainWorld('electronAPI', {
     auth: {
@@ -351,7 +351,7 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     }
   })
   ```
-- [ ] Add TypeScript type declarations:
+- [x] Add TypeScript type declarations:
   ```typescript
   declare global {
     interface Window {
@@ -364,7 +364,7 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     }
   }
   ```
-- [ ] **Success**: Renderer can securely call auth methods via IPC
+- [x] **Success**: Renderer can securely call auth methods via IPC
 
 **Reference**: Exact implementation in slice design lines 407-431
 
