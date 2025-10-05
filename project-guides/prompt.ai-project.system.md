@@ -38,7 +38,7 @@ Refer to the `guide.ai-project.000-process`, and function as a Senior AI.  Imple
 ```markdown
 We're starting work on a new project {project}.  We will use our curated AI Project Creation methods in `guide.ai-project.000-process` (can also be referred to as Project Guide or Process Guide) to assist us in designing and performing the work.  Your role as described in the Project Guide is Technical Fellow.
 
-The initial concept description will be provided by the project manager, ideally as a starter document in `project-guides/001-concept.{project}.md`.  Our goal is to refine this initial user-provided concept into the Refined Concept, which should be placed as instructed into the existing document.  The placeholder document should provide any needed details needed for this procedure.
+The initial concept description will be provided by the project manager, ideally as a starter document in `private/project-guides/001-concept.{project}.md`.  Our goal is to refine this initial user-provided concept into the Refined Concept, which should be placed as instructed into the existing document.  The placeholder document should provide any needed details needed for this procedure.
 
 We will use the refined concept as a basis for creating the spec, which will later be refined into designs, slices, features, and tasks.  Use the Project Guide together with the user-provided concept to create the refined concept tailored to our project.
 
@@ -93,7 +93,7 @@ Use the following inputs:
 1. The project high-level design (architecture/050-arch.hld-{project}.md) if applicable.
 2. One of the following (only one will be applicable):
 	1. Slice description provided with this request.
-	2. The project slice plan at `003-slices.{project}.md`.
+	2. The project slice plan at `private/project-guides/003-slices.{project}.md`.
 
 Note: if you are using the slice plan, it must contain information on this slice.
 
@@ -125,7 +125,7 @@ status: not started
 lastUpdated: YYYY-MM-DD
 ---
 
-If framework or platform are specified, guide(s) for the framework(s) should be provided in `/project-documents/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `/project-documents/tool-guides/{tool}/introduction.md`.
+If framework or platform are specified, guide(s) for the framework(s) should be provided in `ai-project-guide/framework-guides/{framework}/introduction.md`. If tools are specified, guide for each tool should be available at `ai-project-guide/tool-guides/{tool}/introduction.md`.
 
 Stop and request clarification if you need more information to complete the slice design.  This is a design and process task -- not a coding task!  Any code present should be minimal, and should provide essential information.
 ```
@@ -155,7 +155,7 @@ Avoid:
 - Extensive benchmarking tasks unless actually relevant to this effort.
 - Extensive or speculative risk items.  Include only if truly relevant.
 
-For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+For each {tool} in use, consult knowledge in `ai-project-guide/tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
 Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.  Keep files to about 350 lines or less.  If considerably more space is needed modify files as detailed here.  Do not split a file if it's less than about 100 line overrun.
 1. rename current file nnn-tasks.[task section name]-1.md
@@ -190,7 +190,7 @@ Avoid:
 - Extensive benchmarking tasks unless actually relevant to this effort.
 - Extensive or speculative risk items.  Include only if truly relevant.
 
-For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+For each {tool} in use, consult knowledge in `ai-project-guide/tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
 Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.  Keep files to about 350 lines or less.  If considerably more space is needed modify files as detailed here.  Do not split a file if it's less than about 100 line overrun.
 1. rename current file nnn-tasks.[task section name]-1.md
@@ -234,9 +234,9 @@ Note: This is a project planning task, not a coding task.
 
 ##### Task Implementation (Phase 7)
 ```markdown
-We are working on {slice | feature} in project {project}, phase 7 of `/project-documents/project-guides/guide.ai-project.000-process`. 
+We are working on {slice | feature} in project {project}, phase 7 of `ai-project-guide/project-guides/guide.ai-project.000-process`. 
 
-Your job is to complete the tasks in the `/project-documents/private/tasks/{sliceindex}-tasks.{slicename}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the relevant provided rules (`rules/`, `CLAUDE.md`, etc).  Your role is "Senior AI". 
+Your job is to complete the tasks in the `private/tasks/{sliceindex}-tasks.{slicename}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the relevant provided rules (`rules/`, `CLAUDE.md`, etc).  Your role is "Senior AI". 
 
 Use exactly one of the following (only one match should exist):
 - The slice design at `private/slices/{slice}.md`.
@@ -323,9 +323,9 @@ If given an instruction similar to "process and stand by", make sure you underst
 ```
 ##### Tool Usage
 ```markdown
-You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
+You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `ai-project-guide/tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
 
-1. Consult Overview: Start with the specific `AI Tool Overview [toolname].md` in the `project-documents/tool-guides/[tool]` directory.
+1. Consult Overview: Start with the specific `AI Tool Overview [toolname].md` in the `ai-project-guide/tool-guides/[tool]` directory.
 2. Locate Docs: Scan the Overview for references to more detailed documentation (like local API files under `/documentation`, notes in `research-crumbs` or official web links).
 3. Search Docs: Search within those specific documentation sources first using `grep_search` or `codebase_search`.
 4. Additional documentation.  If you have a documentation tool available (ex: context7 MCP) use it for additional information.  Always use it if available and no specific tool guide is provided.
@@ -368,11 +368,9 @@ Guidelines:
 2. Follow Phase 4 guidelines substituting 'feature' for 'slice' as needed.
 
 Avoid:
-1. Vague fluff about future performance testing or involved benchmarking, 
-   unless this is specifically relevant.  
+1. Vague fluff about future performance testing or involved benchmarking, unless this is specifically relevant.  
 2. Avoid vague or speculative Risk Items.
-3. Do not add a time estimate in hours/days etc.  You may use 1-5 relative 
-   effort scale.
+3. Do not add a time estimate in minutes/hours/days etc.  You may use 1-5 relative effort scale.
 
 If you need more information about the feature requirements, stop and request from Project Manager.  Note that this is a project and process task, NOT a coding task.  Any code samples should be minimal and limited to what is truly needed to provide the information.
 ```
@@ -428,7 +426,7 @@ Avoid:
 - Benchmarking tasks unless actually relevant to this effort.
 - Risk items.  Include only if truly relevant.  Be skeptical here.
 
-For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+For each {tool} in use, consult knowledge in `ai-project-guide/tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
 Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.
 
@@ -506,7 +504,7 @@ Create task file at `private/tasks/nnn-analysis{.subproject?}-{date}.md` with:
 4. Keep success criteria with their respective task
 5. Always use checklist format described in guide.ai-project.000-process under Task Files.
 
-For each {tool} in use, consult knowledge in `tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
+For each {tool} in use, consult knowledge in `ai-project-guide/tool-guides/{tool}/`. Follow all task creation guidelines from the Process Guide.
 
 Each task must be completable by a junior AI with clear success criteria. If insufficient information is available, stop and request clarifying information.
 
@@ -564,7 +562,7 @@ Note: This creates implementation-ready technical designs, not high-level planni
 ##### Analysis Task Implementation
 *Phase 7 Task Implementation customized for analysis files. *
 ```markdown
-We are working on the analysis file {analysis} in project {project}, phase 7 of `project-guides/guide.ai-project.000-process`. 
+We are working on the analysis file {analysis} in project {project}, phase 7 of `ai-project-guide/project-guides/guide.ai-project.000-process`. 
 
 Your role is "Senior AI". Your job is to complete the tasks in the `private/tasks/nnn-analysis-{topic}.md` file. Please work through the tasks, following the guidelines in our project guides, and using the rules in the rules/ directory.
 
