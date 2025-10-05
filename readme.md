@@ -19,39 +19,71 @@ The repository contains a comprehensive methodology for AI-assisted development,
 
 ## 🚀 Quick Start
 
-### Add to Existing Project
+### For Python, Go, Rust, or Any Project
+
+One command setup using our bootstrap script:
+
 ```bash
-# In your existing project root
-git subtree add --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
+# Bash version (recommended)
+curl -fsSL https://raw.githubusercontent.com/ecorkran/ai-project-guide/main/scripts/bootstrap.sh | bash
+
+# Or Python version
+curl -fsSL https://raw.githubusercontent.com/ecorkran/ai-project-guide/main/scripts/bootstrap.py | python3
 ```
 
-This gives you all guides integrated into your project. Delete folders you don't need. Perfect for the "my Python project needs structure" use case.
+This will:
+- Auto-initialize git repo if needed
+- Create `project-documents/private/` structure for your work
+- Add ai-project-guide as a git submodule at `project-documents/ai-project-guide/`
+- Provide clear next steps
+
+**Update guides later:**
+```bash
+git submodule update --remote project-documents/ai-project-guide
+```
+
+### For npm/pnpm Projects
+
+Add these scripts to your `package.json`:
+
+```json
+"scripts": {
+  "setup-guides": "mkdir -p project-documents/private/{architecture,slices,tasks,features,reviews,analysis} && git submodule add https://github.com/ecorkran/ai-project-guide.git project-documents/ai-project-guide && echo '# Keep private/ in version control' > project-documents/private/.gitkeep || echo 'Submodule already exists—run npm run update-guides to update.'",
+  "update-guides": "git submodule update --remote project-documents/ai-project-guide",
+  "setup-cursor": "project-documents/ai-project-guide/scripts/setup-ide cursor",
+  "setup-windsurf": "project-documents/ai-project-guide/scripts/setup-ide windsurf",
+  "setup-claude": "project-documents/ai-project-guide/scripts/setup-ide claude"
+}
+```
+
+Then run:
+```bash
+pnpm setup-guides    # Initial setup
+pnpm update-guides   # Update guides later
+```
 
 ### IDE Setup (Cursor/Windsurf/Claude)
+
 After adding the guides to your project, set up IDE rules for enhanced AI assistance:
 
 ```bash
-# Option 1: Direct script (run from project root)
-./project-documents/scripts/setup-ide cursor     # For Cursor IDE
-./project-documents/scripts/setup-ide windsurf   # For Windsurf IDE
-./project-documents/scripts/setup-ide claude     # For Claude Code agent
+# For npm/pnpm projects
+pnpm setup-cursor     # For Cursor IDE
+pnpm setup-windsurf   # For Windsurf IDE
+pnpm setup-claude     # For Claude Code agent
 
-# Option 2: npm scripts (recommended)
-npm run setup-cursor                              # For Cursor IDE  
-npm run setup-windsurf                            # For Windsurf IDE
-npm run setup-claude                              # For Claude Code agent
+# For other projects (run from project root)
+./project-documents/ai-project-guide/scripts/setup-ide cursor
+./project-documents/ai-project-guide/scripts/setup-ide windsurf
+./project-documents/ai-project-guide/scripts/setup-ide claude
 ```
 
 This copies all project rules to your IDE's configuration directory, handles file renaming (`.md` to `.mdc` for Cursor), generates `CLAUDE.md` for Claude Code, and validates frontmatter requirements.
 
-**💡 Pro tip:** Use the npm scripts to avoid directory confusion. The direct script will warn you if run from the wrong location.
-
 **📍 Important:** The script creates `.cursor/` and `.windsurf/` directories in your project root (not inside `project-documents/`). For Claude, it creates `CLAUDE.md` in your project root.
 
-**Manual setup:** See [IDE-Setup-Guide.md](IDE-Setup-Guide.md) for step-by-step instructions.
-
-
 ### Start with Full Template Instead
+
 For a complete template with easy setup scripts, use the full template from [manta-templates](https://github.com/manta-digital/manta-templates).  It makes the guides setup extremely easy.  Just Next.js for now, but more flexible options should be coming very soon.  See demo at https://templates.manta.digital.
 
 
@@ -212,11 +244,53 @@ All file and folder names follow our kebab-case pattern and document-type prefix
 
 ## 📦 Advanced Usage
 
-### Git Subtree (Recommended for ongoing updates)
-If you used the git subtree method above, you can update guides later:
+### Manual Git Submodule Setup
+If you prefer manual setup or need more control:
+
 ```bash
-git subtree pull --prefix=project-documents https://github.com/ecorkran/ai-project-guide.git main --squash
+# Create directory structure
+mkdir -p project-documents/private/{architecture,slices,tasks,features,reviews,analysis}
+
+# Add submodule
+git submodule add https://github.com/ecorkran/ai-project-guide.git project-documents/ai-project-guide
+
+# Create .gitkeep to track empty directories
+echo '# Keep private/ in version control' > project-documents/private/.gitkeep
+
+# Commit
+git add .
+git commit -m 'Add ai-project-guide'
 ```
+
+### Migrating from Git Subtree (Legacy)
+If you previously used git subtree, migrate to submodule:
+
+```bash
+# 1. Backup your work
+cp -r project-documents/private ~/backup-private
+
+# 2. Remove old subtree
+git rm -r project-documents
+git commit -m 'Remove subtree for migration to submodule'
+
+# 3. Restore your work
+git checkout HEAD~1 -- project-documents/private
+# Or restore from backup if needed:
+# cp -r ~/backup-private project-documents/private
+
+# 4. Add as submodule
+git submodule add https://github.com/ecorkran/ai-project-guide.git project-documents/ai-project-guide
+
+# 5. Commit
+git add .
+git commit -m 'Migrate to git submodule structure'
+```
+
+**Benefits of submodule over subtree:**
+- No merge conflicts between framework updates and your work
+- Simpler update process
+- Works universally (Python, Go, Rust, npm/pnpm, etc.)
+- Standard git workflow
 
 
 
