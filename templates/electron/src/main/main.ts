@@ -2,6 +2,8 @@ import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 import { registerAppProtocol, setupAppProtocolHandler } from './protocol-handler'
+import { registerAuthProtocol, setupAuthProtocolHandler } from './auth/protocol-handler'
+import { auth0Client } from './auth/auth0-client'
 
 function isAllowedUrl(target: string): boolean {
   try {
@@ -53,6 +55,15 @@ function createWindow(): void {
     return app.getVersion()
   })
 
+  // Auth IPC handlers
+  ipcMain.handle('auth:login', async () => {
+    await auth0Client.login()
+  })
+
+  ipcMain.handle('auth:get-tokens', () => {
+    return auth0Client.getTokens()
+  })
+
   // Load renderer based on environment
   // Development: use Vite dev server at localhost:5173
   // Production: use app:// protocol to load from packaged resources
@@ -69,12 +80,16 @@ function createWindow(): void {
   }
 }
 
-// Must register custom protocol before app is ready
+// Must register custom protocols before app is ready
 registerAppProtocol()
+registerAuthProtocol()
 
 app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
-  
+
+  // Set up auth protocol handler for macOS
+  setupAuthProtocolHandler()
+
   // Create minimal menu example (hidden by default with autoHideMenuBar: true)
   // Delete this entire menu section if you don't want a native menu
   const menu = Menu.buildFromTemplate([

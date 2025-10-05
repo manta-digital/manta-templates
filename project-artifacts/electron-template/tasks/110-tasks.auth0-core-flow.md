@@ -375,17 +375,17 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 7.1: Integrate Auth into Main Process
 **Effort**: 2/5
 
-- [ ] Edit file: `src/main/main.ts`
-- [ ] Add imports at top:
+- [x] Edit file: `src/main/main.ts`
+- [x] Add imports at top:
   ```typescript
   import { registerAuthProtocol, setupAuthProtocolHandler } from './auth/protocol-handler'
   import { auth0Client } from './auth/auth0-client'
   ```
-- [ ] Call `registerAuthProtocol()` BEFORE `app.whenReady()`
+- [x] Call `registerAuthProtocol()` BEFORE `app.whenReady()`
   - Add at top level, outside any functions
-- [ ] Inside `app.whenReady()` callback, add at top:
+- [x] Inside `app.whenReady()` callback, add at top:
   - Call `setupAuthProtocolHandler()`
-- [ ] Add IPC handlers inside `app.whenReady()`:
+- [x] Add IPC handlers inside `app.whenReady()`:
   ```typescript
   ipcMain.handle('auth:login', async () => {
     await auth0Client.login()
@@ -395,7 +395,7 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     return auth0Client.getTokens()
   })
   ```
-- [ ] **Success**: Main process wired up for auth
+- [x] **Success**: Main process wired up for auth
 
 **Reference**: Exact implementation in slice design lines 433-460
 
