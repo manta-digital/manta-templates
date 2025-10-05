@@ -26,7 +26,7 @@ cd my-app
 
 # 2. Install & pull AI Project Guide.
 pnpm install
-pnpm run setup-guides
+pnpm setup-guides
 
 # 3. Build and run dev server
 pnpm build
