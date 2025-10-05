@@ -73,19 +73,19 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 2.1: Implement PKCE Utilities
 **Effort**: 2/5
 
-- [ ] Create file: `src/main/auth/pkce.ts`
-- [ ] Implement `generatePKCEPair()` function:
+- [x] Create file: `src/main/auth/pkce.ts`
+- [x] Implement `generatePKCEPair()` function:
   - Generate 128-byte random verifier via `crypto.randomBytes(128)`
   - Encode verifier as base64url
   - Generate SHA-256 hash of verifier
   - Encode challenge as base64url
   - Return `{ verifier, challenge }`
-- [ ] Implement `generateState()` function:
+- [x] Implement `generateState()` function:
   - Generate 32-byte random state via `crypto.randomBytes(32)`
   - Encode as base64url
   - Return state string
-- [ ] Add TypeScript types for return values
-- [ ] **Success**: Functions generate cryptographically secure PKCE pair and state
+- [x] Add TypeScript types for return values
+- [x] **Success**: Functions generate cryptographically secure PKCE pair and state
 
 **Reference**: Exact implementation in slice design lines 164-184
 
