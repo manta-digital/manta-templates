@@ -132,36 +132,36 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 4.1: Create Auth0Client Class Structure
 **Effort**: 2/5
 
-- [ ] Create file: `src/main/auth/auth0-client.ts`
-- [ ] Import dependencies:
+- [x] Create file: `src/main/auth/auth0-client.ts`
+- [x] Import dependencies:
   - `shell` from `electron`
   - `generatePKCEPair`, `generateState` from `./pkce`
   - `auth0Config` from `./auth0-config`
-- [ ] Define `PendingAuth` interface:
+- [x] Define `PendingAuth` interface:
   - `state: string`
   - `codeVerifier: string`
   - `timestamp: number`
-- [ ] Define `TokenSet` interface:
+- [x] Define `TokenSet` interface:
   - `accessToken: string`
   - `refreshToken: string`
   - `idToken: string`
   - `expiresAt: number`
-- [ ] Create `Auth0Client` class with private properties:
+- [x] Create `Auth0Client` class with private properties:
   - `pendingAuth: PendingAuth | null = null`
   - `tokens: TokenSet | null = null`
   - `STATE_TIMEOUT = 10 * 60 * 1000` (10 minutes)
   - `debug = process.env.NODE_ENV === 'development'`
-- [ ] **Success**: Class structure ready for method implementation
+- [x] **Success**: Class structure ready for method implementation
 
 **Reference**: Slice design lines 208-232 for exact structure
 
 ### Task 4.2: Implement login() Method
 **Effort**: 3/5
 
-- [ ] Implement `async login(): Promise<void>` method
-- [ ] Generate PKCE pair: `const { verifier, challenge } = generatePKCEPair()`
-- [ ] Generate state: `const state = generateState()`
-- [ ] Store pending auth state:
+- [x] Implement `async login(): Promise<void>` method
+- [x] Generate PKCE pair: `const { verifier, challenge } = generatePKCEPair()`
+- [x] Generate state: `const state = generateState()`
+- [x] Store pending auth state:
   ```typescript
   this.pendingAuth = {
     state,
@@ -169,16 +169,16 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     timestamp: Date.now()
   }
   ```
-- [ ] Build authorization URL using `new URL()`:
+- [x] Build authorization URL using `new URL()`:
   - Base: `https://${auth0Config.domain}/authorize`
   - Set searchParams: `client_id`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `state`, `scope`
   - Conditionally add `audience` if present
-- [ ] Add debug logging (development only):
+- [x] Add debug logging (development only):
   - Log auth URL
   - Log state parameter
   - Log code challenge (first 20 chars + "...")
-- [ ] Call `shell.openExternal(authUrl.toString())`
-- [ ] **Success**: Login opens external browser with correct Auth0 URL
+- [x] Call `shell.openExternal(authUrl.toString())`
+- [x] **Success**: Login opens external browser with correct Auth0 URL
 
 **Reference**: Exact implementation in slice design lines 234-267
 
@@ -190,24 +190,24 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 4.3: Implement handleCallback() Method
 **Effort**: 3/5
 
-- [ ] Implement `async handleCallback(callbackUrl: string): Promise<void>`
-- [ ] Parse callback URL: `const url = new URL(callbackUrl)`
-- [ ] Check for Auth0 error response:
+- [x] Implement `async handleCallback(callbackUrl: string): Promise<void>`
+- [x] Parse callback URL: `const url = new URL(callbackUrl)`
+- [x] Check for Auth0 error response:
   - Extract `error` parameter
   - If present, extract `error_description`
   - Clear pending state: `this.pendingAuth = null`
   - Throw error with message: `Auth0 error: ${error} - ${errorDesc || 'Unknown error'}`
-- [ ] Extract code and state from URL:
+- [x] Extract code and state from URL:
   - `const code = url.searchParams.get('code')`
   - `const receivedState = url.searchParams.get('state')`
-- [ ] Verify state by calling `this.verifyState(receivedState)`
+- [x] Verify state by calling `this.verifyState(receivedState)`
   - If invalid, throw error: `Invalid state parameter - possible CSRF attack`
-- [ ] Verify code exists, throw error if missing
-- [ ] Exchange code for tokens: `await this.exchangeCodeForTokens(code, this.pendingAuth!.codeVerifier)`
-- [ ] Store tokens in memory: `this.tokens = tokens`
-- [ ] Clear pending state: `this.pendingAuth = null`
-- [ ] Log success message with token expiry
-- [ ] **Success**: Callback properly validates state and exchanges code for tokens
+- [x] Verify code exists, throw error if missing
+- [x] Exchange code for tokens: `await this.exchangeCodeForTokens(code, this.pendingAuth!.codeVerifier)`
+- [x] Store tokens in memory: `this.tokens = tokens`
+- [x] Clear pending state: `this.pendingAuth = null`
+- [x] Log success message with token expiry
+- [x] **Success**: Callback properly validates state and exchanges code for tokens
 
 **Reference**: Exact implementation in slice design lines 269-304
 
@@ -219,14 +219,14 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 4.4: Implement verifyState() Method
 **Effort**: 2/5
 
-- [ ] Implement `private verifyState(receivedState: string | null): boolean`
-- [ ] Check if pending auth exists and receivedState is not null
+- [x] Implement `private verifyState(receivedState: string | null): boolean`
+- [x] Check if pending auth exists and receivedState is not null
   - Return `false` if either is missing
-- [ ] Check timeout:
+- [x] Check timeout:
   - Calculate elapsed time: `Date.now() - this.pendingAuth.timestamp`
   - If elapsed > `STATE_TIMEOUT`, clear pending state and return `false`
-- [ ] Verify state matches: `return receivedState === this.pendingAuth.state`
-- [ ] **Success**: State verification prevents CSRF and replay attacks
+- [x] Verify state matches: `return receivedState === this.pendingAuth.state`
+- [x] **Success**: State verification prevents CSRF and replay attacks
 
 **Reference**: Exact implementation in slice design lines 306-320
 
@@ -235,8 +235,8 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 4.5: Implement exchangeCodeForTokens() Method
 **Effort**: 3/5
 
-- [ ] Implement `private async exchangeCodeForTokens(code: string, codeVerifier: string): Promise<TokenSet>`
-- [ ] Call Auth0 token endpoint:
+- [x] Implement `private async exchangeCodeForTokens(code: string, codeVerifier: string): Promise<TokenSet>`
+- [x] Call Auth0 token endpoint:
   - URL: `https://${auth0Config.domain}/oauth/token`
   - Method: POST
   - Headers: `{ 'Content-Type': 'application/json' }`
@@ -246,11 +246,11 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     - `code`
     - `code_verifier: codeVerifier`
     - `redirect_uri: auth0Config.redirectUri`
-- [ ] Handle error response:
+- [x] Handle error response:
   - Check `response.ok`
   - If not ok, get error text and throw with message
-- [ ] Parse JSON response: `const data = await response.json()`
-- [ ] Return TokenSet with defensive expiry calculation:
+- [x] Parse JSON response: `const data = await response.json()`
+- [x] Return TokenSet with defensive expiry calculation:
   ```typescript
   {
     accessToken: data.access_token,
@@ -259,7 +259,7 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
     expiresAt: Date.now() + ((data.expires_in || 3600) * 1000)
   }
   ```
-- [ ] **Success**: Code exchanged for tokens with proper error handling
+- [x] **Success**: Code exchanged for tokens with proper error handling
 
 **Reference**: Exact implementation in slice design lines 322-354
 
@@ -269,17 +269,17 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 4.6: Implement getTokens() Debug Method
 **Effort**: 1/5
 
-- [ ] Implement `getTokens(): TokenSet | null` method
-- [ ] Return `this.tokens`
-- [ ] **Success**: Debug method allows testing token retrieval
+- [x] Implement `getTokens(): TokenSet | null` method
+- [x] Return `this.tokens`
+- [x] **Success**: Debug method allows testing token retrieval
 
 **Reference**: Slice design lines 356-359
 
 ### Task 4.7: Export Auth0Client Singleton
 **Effort**: 1/5
 
-- [ ] At end of file, export singleton: `export const auth0Client = new Auth0Client()`
-- [ ] **Success**: Single instance available for import
+- [x] At end of file, export singleton: `export const auth0Client = new Auth0Client()`
+- [x] **Success**: Single instance available for import
 
 **Reference**: Slice design line 362
 
