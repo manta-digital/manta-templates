@@ -411,29 +411,29 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 
 **Note**: This is optional but highly recommended for easier testing
 
-- [ ] Create file: `src/renderer/TestAuth.tsx`
-- [ ] Import `useState` from `react`
-- [ ] Define `TokenSet` interface (matching main process)
-- [ ] Implement `TestAuth` functional component with state:
+- [x] Create file: `src/renderer/TestAuth.tsx`
+- [x] Import `useState` from `react`
+- [x] Define `TokenSet` interface (matching main process)
+- [x] Implement `TestAuth` functional component with state:
   - `tokens: TokenSet | null`
   - `loading: boolean`
-- [ ] Implement `handleLogin` function:
+- [x] Implement `handleLogin` function:
   - Set loading true
   - Call `await window.electronAPI.auth.login()`
   - Log "Login initiated - check browser"
   - Handle errors and log to console
   - Set loading false in finally block
-- [ ] Implement `handleGetTokens` function:
+- [x] Implement `handleGetTokens` function:
   - Call `await window.electronAPI.auth.getTokens()`
   - Set tokens in state
   - Handle errors
-- [ ] Render UI:
+- [x] Render UI:
   - Login button (disabled when loading)
   - Get Tokens button
   - Display tokens in formatted `<pre>` if present
   - Show expiry time
-- [ ] Export component
-- [ ] **Success**: Test UI component ready for use
+- [x] Export component
+- [x] **Success**: Test UI component ready for use
 
 **Reference**: Exact implementation in slice design lines 471-538
 
@@ -442,10 +442,10 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 8.2: Integrate Test UI into App (Optional)
 **Effort**: 1/5
 
-- [ ] Edit `src/App.tsx` or equivalent
-- [ ] Import `TestAuth` component
-- [ ] Add `<TestAuth />` to app render (e.g., in a dev-only route or section)
-- [ ] **Success**: Test UI visible in app for manual testing
+- [x] Edit `src/App.tsx` or equivalent
+- [x] Import `TestAuth` component
+- [x] Add `<TestAuth />` to app render (e.g., in a dev-only route or section)
+- [x] **Success**: Test UI visible in app for manual testing
 
 ## Phase 9: Testing & Validation
 
