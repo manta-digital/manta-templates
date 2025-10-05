@@ -60,19 +60,20 @@ project-documents/
 ## Task 2: Update Path References in Documentation
 
 ### 2.1 Search for Guide Path References
-- [ ] Run: `grep -r "project-guides/" --include="*.md"` and document findings
-- [ ] Run: `grep -r "tool-guides/" --include="*.md"` and document findings
-- [ ] Run: `grep -r "framework-guides/" --include="*.md"` and document findings
-- [ ] Create list of all files needing path updates
-- **Success:** Complete inventory of files with guide path references
+- [x] Run: `grep -r "project-guides/" --include="*.md"` and document findings
+- [x] Run: `grep -r "tool-guides/" --include="*.md"` and document findings
+- [x] Run: `grep -r "framework-guides/" --include="*.md"` and document findings
+- [x] Create list of all files needing path updates (17 files identified)
+- **Success:** ✅ Complete inventory of files with guide path references
 
 ### 2.2 Update Guide References in Core Files
-- [ ] Update `readme.md` - change installation instructions and guide references
-- [ ] Update `CLAUDE.md` - update any guide path references
-- [ ] Update `prompt.ai-project.system.md` - update guide references to `ai-project-guide/project-guides/...`
+- [x] Update `readme.md` - change installation instructions and guide references (done in Task 3)
+- [x] Update `CLAUDE.md` - update any guide path references
+- [x] Update `readme.setup-ide.md` - update manual setup paths with path convention note
+- [x] Update `prompt.ai-project.system.md` - all guide references updated, verified Context Init prompts correct
 - [ ] Update `file-naming-conventions.md` - update example paths if present
 - [ ] Update `directory-structure.md` - reflect new layout
-- **Success:** All core documentation references correct submodule paths
+- **Success:** All core documentation references correct submodule paths (in progress)
 
 ### 2.3 Update Guide References in project-guides/
 - [ ] Update `guide.ai-project.000-process.md` - cross-reference paths
