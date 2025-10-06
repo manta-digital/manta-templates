@@ -123,9 +123,59 @@ project-documents/
 - [x] Clarified npm vs non-npm workflows
 - **Success:** ✅ Quick reference reflects new structure
 
-## Task 4: Testing and Validation
+## Task 4: Consolidate and Update Setup Scripts
 
-### 4.1 Test npm/pnpm Project Setup
+### 4.1 Analyze Existing Template Scripts
+- [ ] Review current `setup-guides.sh` from template(s) (PM to provide source)
+- [ ] Review current `update-guides.sh` from template(s) (PM to provide source)
+- [ ] Document capabilities and features of existing scripts
+- [ ] Identify differences between template versions (if any)
+- [ ] Compare with bootstrap scripts already created
+- **Success:** Complete understanding of current script capabilities
+
+### 4.2 Evaluate Consolidation Feasibility
+- [ ] Determine if scripts can be unified and moved to ai-project-guide/scripts/
+- [ ] Identify any template-specific logic that must remain separate
+- [ ] Assess chicken-and-egg problem: how do fresh templates get the scripts initially?
+- [ ] Determine script distribution mechanism from monorepo to templates
+- [ ] Document pros/cons of consolidation vs keeping distributed
+- **Success:** Clear decision on script consolidation strategy
+
+### 4.3 Update Scripts for New Directory Structure
+- [ ] Update script paths to use `project-documents/ai-project-guide/` structure
+- [ ] Update `private/` subdirectory creation (architecture, slices, tasks, features, reviews, analysis)
+- [ ] Verify scripts create `.gitkeep` in private/ directory
+- [ ] Update any hardcoded paths or assumptions about structure
+- [ ] Ensure scripts handle both fresh install and already-installed cases
+- **Success:** Scripts work correctly with new submodule structure
+
+### 4.4 Update File Naming Patterns
+- [ ] Review scripts for any filename pattern assumptions
+- [ ] Update to use `nnn-` index patterns where applicable
+- [ ] Ensure consistency with `file-naming-conventions.md`
+- [ ] Update any date format patterns (MMDD vs YYYYMMDD)
+- **Success:** Scripts use current naming conventions
+
+### 4.5 Resolve Initial Bootstrap Problem
+- [ ] Document how templates initially get setup scripts
+- [ ] Determine if scripts are copied from ai-project-guide/scripts during template creation
+- [ ] Design solution for fresh template clones (before submodule exists)
+- [ ] Update npm scripts in snippet to handle bootstrap case
+- [ ] Test bootstrap flow: fresh template → pnpm setup-guides → working state
+- **Success:** Clear, working bootstrap mechanism documented and tested
+
+### 4.6 Implementation and Testing
+- [ ] Move/create consolidated scripts in ai-project-guide/scripts/ (if consolidating)
+- [ ] Update `snippets/npm-scripts.ai-support.json.md` with final script calls
+- [ ] Create any necessary wrapper or bootstrap logic
+- [ ] Document script distribution process for monorepo
+- [ ] Test scripts in isolation (outside of npm)
+- [ ] Test npm wrapper scripts
+- **Success:** Scripts consolidated (if feasible), updated, and tested
+
+## Task 5: Testing and Validation
+
+### 5.1 Test npm/pnpm Project Setup
 - [ ] Create test React/Next.js project
 - [ ] Run `pnpm setup-guides`
 - [ ] Verify directory structure created correctly
@@ -134,7 +184,7 @@ project-documents/
 - [ ] Verify guides update without affecting private files
 - **Success:** Full workflow works in npm project
 
-### 4.2 Test Non-npm Project Setup
+### 5.2 Test Non-npm Project Setup
 - [ ] Create test Python project
 - [ ] Manually set up structure per readme instructions
 - [ ] Test creating project documents in `private/`
@@ -142,14 +192,14 @@ project-documents/
 - [ ] Verify all prompts work correctly
 - **Success:** Full workflow works in Python project
 
-### 4.3 Test Monorepo Development
+### 5.3 Test Monorepo Development
 - [ ] Test in monorepo template development environment
 - [ ] Verify `project-artifacts/` pattern works unchanged
 - [ ] Test guide references resolve correctly
 - [ ] Verify no contamination of templates with dev documents
 - **Success:** Monorepo development workflow unaffected
 
-### 4.4 Validate All Prompts
+### 5.4 Validate All Prompts
 - [ ] Test Phase 1: Concept Creation prompt
 - [ ] Test Phase 2: Spec Creation prompt
 - [ ] Test Phase 3: Slice Planning prompt
@@ -161,9 +211,9 @@ project-documents/
 - [ ] Verify all guide references resolve correctly
 - **Success:** All prompts work with new structure
 
-## Task 5: Create Migration Documentation
+## Task 6: Create Migration Documentation
 
-### 5.1 Write Migration Guide Document
+### 6.1 Write Migration Guide Document
 - [ ] Create `docs/migration-submodule.md` or similar
 - [ ] Document prerequisites (git version, backup steps)
 - [ ] Provide step-by-step migration instructions
@@ -171,7 +221,7 @@ project-documents/
 - [ ] Add troubleshooting section
 - **Success:** Comprehensive migration guide available
 
-### 5.2 Create FAQ Document
+### 6.2 Create FAQ Document
 - [ ] Document "Why switch from subtree to submodule?"
 - [ ] Document "How do I update guides?"
 - [ ] Document "What if I have merge conflicts?"
@@ -179,7 +229,7 @@ project-documents/
 - [ ] Document "What changed with monorepo development?"
 - **Success:** Common questions answered
 
-### 5.3 Update CHANGELOG
+### 6.3 Update CHANGELOG
 - [ ] Add entry for version 0.9.0 or 1.0.0
 - [ ] Document breaking change: new directory structure
 - [ ] List migration steps briefly
@@ -187,9 +237,9 @@ project-documents/
 - [ ] Note benefits of new structure
 - **Success:** CHANGELOG reflects major version change
 
-## Task 6: Final Validation and Release
+## Task 7: Final Validation and Release
 
-### 6.1 Final Review
+### 7.1 Final Review
 - [ ] Review all changed files for consistency
 - [ ] Verify no broken links in documentation
 - [ ] Check all examples use correct paths
@@ -197,14 +247,14 @@ project-documents/
 - [ ] Review with team/users if applicable
 - **Success:** All changes reviewed and validated
 
-### 6.2 Version and Tag
+### 7.2 Version and Tag
 - [ ] Update version to 0.9.0 or 1.0.0 in package.json
 - [ ] Create git tag for release
 - [ ] Push tag to repository
 - [ ] Create GitHub release with migration notes
 - **Success:** Release tagged and published
 
-### 6.3 Communication
+### 7.3 Communication
 - [ ] Announce change to users (if applicable)
 - [ ] Provide migration support resources
 - [ ] Update any external documentation
