@@ -84,7 +84,7 @@ For an app example:
 
 5. **Phase 5: Slice Task Breakdown**
    - Convert slice design into granular, actionable tasks
-   - For each {tool} in use described in the design, ensure that you consult knowledge in `tool-guides/{tool}/`.  If not present search web if possible and alert Project Manager.
+   - For each {tool} in use described in the design, ensure that you consult knowledge in `ai-project-guide/tool-guides/{tool}/`.  If not present search web if possible and alert Project Manager.
    - Only include tasks that can reasonably be completed by an AI. Do not include open-ended human-centric tasks such as SEO optimization.
    - If insufficient information is available to fully convert an item into tasks, _stop_ and request clarifying information before continuing.
    - Save as `private/tasks/nnn-tasks.{slice-name}.md` using existing task file naming conventions
@@ -163,13 +163,15 @@ The following structure should be present in every project.  Assume files are in
 ```
 {project-root}/
 └── project-documents/
-    ├── project-guides/    # process & methodology (start here)
-    ├── framework-guides/  # app-level platforms (Next.js, Astro …)
-    ├── tool-guides/       # importable libs (SciChart, Three.js …)
-    ├── api-guides/        # external data endpoints (USGS, ArcGIS …)
-    ├── domain-guides/     # cross-cutting subject matter (hydrology …)
-    ├── snippets/          # reusable templates / code fragments
-    └── private/           # project-specific artifacts (tasks, UI, reviews)
+    ├── ai-project-guide/  # Git submodule (framework guides)
+    │   ├── project-guides/    # process & methodology (start here)
+    │   ├── framework-guides/  # app-level platforms (Next.js, Astro …)
+    │   ├── tool-guides/       # importable libs (SciChart, Three.js …)
+    │   ├── api-guides/        # external data endpoints (USGS, ArcGIS …)
+    │   ├── domain-guides/     # cross-cutting subject matter (hydrology …)
+    │   ├── snippets/          # copyable code/config examples
+    │   └── scripts/           # setup and utility scripts
+    └── private/               # Your project-specific work (parent repo)
 ```
 
 ###### private subfolders
@@ -192,7 +194,7 @@ The following structure should be present in every project.  Assume files are in
 
 ###### Project Guide Files
 ```markdown
-These files, shared by all of our projects, are contained in {project-root}/project-documents/project-guides/.  Synonyms (syn, aka (for also known as)) are provided as some older documentation may still reference by these names.
+These files, shared by all of our projects, are contained in {project-root}/project-documents/ai-project-guide/project-guides/.  Synonyms (syn, aka (for also known as)) are provided as some older documentation may still reference by these names.
 
 * guide.ai-project.000-process (aka: AI Project Guide): this document.  Describes 
   roles and project phases.  Always start here.
@@ -226,7 +228,7 @@ Additional Relevant in `project-documents/` Directory:
 
 ###### Tool Guide Files
 ```markdown
-These files provide knowledge on use of 3rd party tools, both in general and in specific {tool} subdirectories.  All documents for {tool} will be in the `tool-guides/{tool}/` subdirectory.  Always start with tool's introduction, which should be located at `tool-guides/{tool}/introduction.md`.  If you cannot locate this, confirm usage of the tool and presence of its documentation with the Project Manager before starting work.
+These files provide knowledge on use of 3rd party tools, both in general and in specific {tool} subdirectories.  All documents for {tool} will be in the `ai-project-guide/tool-guides/{tool}/` subdirectory.  Always start with tool's introduction, which should be located at `ai-project-guide/tool-guides/{tool}/introduction.md`.  If you cannot locate this, confirm usage of the tool and presence of its documentation with the Project Manager before starting work.
 
 * introduction (aka: AI Tool Overview - {tool}): Overall guidance for 
   {tool}.  Always start here.
