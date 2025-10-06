@@ -74,7 +74,7 @@ fi
 
 # Create directory structure
 print_info "Creating directory structure..." "$BLUE"
-mkdir -p project-documents/private/{architecture,slices,tasks,features,reviews,analysis}
+mkdir -p project-documents/private/{analysis,architecture,features,project-guides,reviews,slices,tasks}
 
 # Create .gitkeep
 echo "# Keep private/ in version control" > project-documents/private/.gitkeep

@@ -177,16 +177,13 @@ The following structure should be present in every project.  Assume files are in
 ###### private subfolders
 ```markdown
 * private/: information customized to our current project.
-* private/slices/: slice-specific low-level designs (nnn-slice.{slice-name}.md)
-* private/code-reviews: code review findings, task lists, and 
-  resolutions.
-* private/maintenance:  maintenance item issue and resolution 
-  tracking.
-* private/project-guides: project-specific guide customizations.
-* private/tasks: all task breakdown files (nnn-tasks.{slice-name}.md or legacy files).
-* private/ui: UI specific designs, tasks, and guidance for our 
-  project.
-* private/ui/screenshots: supporting images for UI information.
+* private/analysis/: analysis documents and research findings.
+* private/architecture/: high-level design documents (HLD).
+* private/features/: feature designs and specifications.
+* private/project-guides/: project-specific guide customizations.
+* private/reviews/: code review findings, task lists, and resolutions.
+* private/slices/: slice-specific low-level designs (nnn-slice.{slice-name}.md).
+* private/tasks/: all task breakdown files (nnn-tasks.{slice-name}.md or legacy files).
 ```
 
 > Each folder has its own `README.md` or `introduction.md` with deeper context.  

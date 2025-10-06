@@ -74,12 +74,13 @@ def main():
     print_status("💡", "Creating directory structure...", "0;34")
 
     subdirs = [
+        "analysis",
         "architecture",
-        "slices",
-        "tasks",
         "features",
+        "project-guides",
         "reviews",
-        "analysis"
+        "slices",
+        "tasks"
     ]
 
     private_dir = Path("project-documents/private")
