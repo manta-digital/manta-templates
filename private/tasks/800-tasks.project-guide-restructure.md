@@ -87,11 +87,11 @@ project-documents/
 - **Success:** ✅ All process guides reference correct paths
 
 ### 2.4 Update Monorepo-Specific References
-- [ ] Review monorepo context initialization prompt
-- [ ] Update guide references to `project-documents/ai-project-guide/...`
-- [ ] Verify `project-artifacts/` pattern remains unchanged
-- [ ] Test monorepo development workflow still works
-- **Success:** Monorepo development unaffected, uses correct guide paths
+- [x] Review monorepo context initialization prompt
+- [x] Update guide references to `ai-project-guide/project-guides/guide.ai-project.000-process`
+- [x] Verify `project-artifacts/` pattern remains unchanged (confirmed - private/ maps correctly)
+- [ ] Test monorepo development workflow still works (requires monorepo testing)
+- **Success:** ✅ Monorepo Context Init prompt updated, project-artifacts mapping preserved
 
 ## Task 3: Update readme.md Installation Instructions
 
