@@ -2,7 +2,7 @@
   "name": "manta-template-next",
   "version": "0.8.0",
   "private": false,
-  "description": "Opinionated Next 15 + Tailwind 4 + ShadCN starter with masonry & bento grids",
+  "description": "Next 15 + Tailwind 4 + Radix starter with masonry & bento grids",
   "author": "Erik Corkran",
   "license": "MIT",
   "repository": {
