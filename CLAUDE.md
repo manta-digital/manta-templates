@@ -2,103 +2,171 @@
 
 ## General Development Rules
 
+### Meta-Guide: Guide to the rules
+- If the first item in a list or sublist is in this file `enabled: false`, ignore that section.
+
 ### Project Structure
-- If the first item in a list or sublist is `enabled: false`, ignore that section.
-- Always refer to `guide.ai-project.00-process` and follow links as appropriate.
+- Always refer to `guide.ai-project.000-process` and follow links as appropriate.
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
 - General Project guidance is in `/project-documents/project-guides/`.
-- Relevant 3rd party tool and tech information is in `project-document/tool-guides`.
+- Relevant 3rd party tool information is in `project-document/tool-guides`.
 
 #### Project-Specific File Locations
-- **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files
-- **Monorepo Template Development** (working on templates or monorepo structure): Use `project-artifacts/` for project-specific files
-- **DEPRECATED**: `{template}/examples/our-project/` is no longer used - migrate to `project-artifacts/` for monorepo work
+- **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files.
+- **Monorepo Template Development** (monorepo active): Use `project-artifacts/` for project-specific files (use directly, e.g. `project-artifacts/` not `project-artifacts/private/`).
+- **DEPRECATED**: `{template}/examples/our-project/` is no longer used - migrate to `project-artifacts/` for monorepo work.
 
 ### General Guidelines (IMPORTANT)
-- Filenames for project documents may use ` ` or `-` separators. Ignore case in all filenames, titles, and non-code content.
-- After completing a task or subtask AND verifying with the project manager, make sure it is checked off in the appropriate file(s).
+- Filenames for project documents may use ` ` or `-` separators. Ignore case in all filenames, titles, and non-code content.  Reference `file-naming-conventions`.
+- Use checklist format for all task files.  Each item and subitem should have a `[ ]` "checkbox".
+- After completing a task or subtask, make sure it is checked off in the appropriate file(s).  Use the task-check subagent if available.
 - Keep 'success summaries' concise and minimal -- they burn a lot of output tokens.
-- If working in linux or MacOS, verify current directory with pwd before running file operations, specifically including any bash or build commands.
+* never include usernames, passwords, API keys, or similar sensitive information in any source code or comments.  At the very least it must be loaded from environment variables, and the .env used must be included in .gitignore.  If you find any code in violation of this, you must raise an issue with Project Manager.
 
 ### MCP (Model Context Protocol)
 - Always use context7 (if available) to locate current relevant documentation for specific technologies or tools in use.
 - Do not use smithery Toolbox (toolbox) for general tasks. Project manager will guide its use.
 
 ### Code Structure
+- Keep code short; commits semantic.
 - Keep source files to max 300 lines (excluding whitespace) when possible.
 - Keep functions & methods to max 50 lines (excluding whitespace) when possible.
 - Avoid hard-coded constants - declare a constant.
 - Avoid hard-coded and duplicated values -- factor them into common object(s).
 - Provide meaningful but concise comments in _relevant_ places.
 
-### Code Style
-- Use `eslint` unless directed otherwise.
-- Use `prettier` if working in languages it supports.
+### File and Shell Commands
+- When performing file or shell commands, always confirm your current location first.
 
-### File & Folder Names
-- Next.js routes in kebab-case (e.g. `app/dashboard/page.tsx`).
-- Shared types in `src/lib/types.ts`.
-- Sort imports (external → internal → sibling → styles).
+### Builds and Source Control
+- After all changes are made, ALWAYS build the project.
+- If available, git add and commit *from project root* at least once per task (not per child subitem)
 
+- Log warnings to `/project-documents/private/tasks/950-tasks.maintenance.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. Note that this path is affected by `monorepo active` mode.
 
-### Additional
-- Keep code short; commits semantic.
-- Reusable logic in `src/lib/utils/shared.ts` or `src/lib/utils/server.ts`.
-- Use `tsx` scripts for migrations.
+## Python Development Rules
 
-### Builds
-- After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors.
-- If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
-- Always run typescript check to ensure no typescript errors.
-- Log warnings to `/project-documents/private/maintenance/maintenance-tasks.md`. Write in raw markdown format, with each warning as a list item, using a checkbox in place of standard bullet point. 
+### Version & Type Hints
 
-## Database & Prisma Rules
+- Target Python 3.9+ exclusively (no 2.x or 3.7 compatibility)
+- Use built-in types: `list`, `dict`, `tuple`, not `List`, `Dict`, `Tuple`
+- Use `|` for union types: `str | None` not `Optional[str]` or `Union[str, None]`
+- Type hint all function signatures and class attributes
+- Use `from __future__ import annotations` when needed for forward references
 
-### Prisma
+### Code Style & Structure
 
-- **enabled**: as needed only (default: false)
-- Manage DB logic with Prisma in `prisma/schema.prisma`, `src/lib/db.ts`.
-- snake_case table → camelCase fields.
-- No raw SQL; run `npx prisma migrate dev`, never use `npx prisma db push`.
+- Follow PEP 8 with 88-character line length (Black formatter default)
+- Use descriptive variable names, avoid single letters except in comprehensions
+- Prefer f-strings over `.format()` or `%` formatting
+- Use pathlib.Path for file operations, not os.path
+- Dataclasses or Pydantic for data structures, avoid raw dicts for complex data
+- One class per file for models/services, group related utilities
 
-### Inngest / Background Jobs
+### Functions & Error Handling
 
-- **enabled**: false
-- Use `inngest.config.ts` for Inngest configuration.
-- Use `src/app/api/inngest/route.ts` for Inngest API route.
-- Use polling to update the UI when Inngest events are received, not trpc success response. 
+- Small, single-purpose functions (max 20 lines preferred)
+- Use early returns to reduce nesting
+- Explicit exception handling, avoid bare `except:`
+- Raise specific exceptions with meaningful messages
+- Use context managers (`with`) for resource management
+- Prefer `ValueError`, `TypeError` over generic `Exception`
+
+### Modern Python Patterns
+
+- Use `match/case` for complex conditionals (3.10+)
+- Walrus operator `:=` where it improves readability
+- Comprehensions over `map`/`filter` when clear
+- Generator expressions for memory efficiency
+- `itertools` and `functools` for functional patterns
+- Enum for constants, not module-level variables
+
+### Testing & Quality
+
+- Write tests alongside implementation
+- Use pytest, not unittest
+- Fixtures for test data and dependencies
+- Parametrize tests for multiple scenarios
+- Mock external dependencies at boundaries
+- Docstrings for public APIs (Google or NumPy style)
+- Type check with mypy or pyright in strict mode
+
+### Dependencies & Imports
+
+- Use poetry for complex projects, uv for simple ones
+- Pin direct dependencies, let tools resolve transitive ones
+- Group imports: standard library, third-party, local
+- Absolute imports for project modules
+- Avoid wildcard imports except in `__init__.py`
+
+### Async & Performance
+
+- Use `async`/`await` for I/O operations
+- asyncio or trio for concurrency, not threading
+- Profile before optimizing
+- functools.cache for expensive pure functions
+- Prefer built-in functions and comprehensions for speed
+
+### Security & Best Practices
+
+- Never hardcode secrets or credentials
+- Use environment variables or secret management
+- Validate all external input
+- Use parameterized queries for SQL
+- Keep dependencies updated
+- Use `secrets` module for tokens, not `random`
 
 ## React & Next.js Rules
 
 ### Components & Naming
-
 - Use functional components with `"use client"` if needed.
 - Name in PascalCase under `src/components/`.
 - Keep them small, typed with interfaces.
-- React, Tailwind, and Radix are all available as needed.
-- Use Tailwind for common UI components like textarea, button, etc.
-- Use Radix primitives for complex interactive components with proper accessibility.
+- Use React, Tailwind 4, and Radix.  Do not use Shadcn
 
-### Next.js Structure
-
-- Use App Router in `app/`. Server components by default, `"use client"` for client logic.
-- NextAuth + Prisma for auth. `.env` for secrets.
+### React and Next.js Structure
+- Use App Router in `app/`. 
 - Skip auth unless and until it is needed.
+- Use `.env` for secrets.
 
 ### Icons
-
 - Prefer `lucide-react`; name icons in PascalCase.
 - Custom icons in `src/components/icons`.
 
 ### Toast Notifications
-
 - Use `react-toastify` in client components.
 - `toast.success()`, `toast.error()`, etc.
 
 ### Tailwind Usage
-
-- Use Tailwind (mobile-first, dark mode with dark:(class)). Extend brand tokens in `tailwind.config.ts`.
+- Always use tailwind 4, never tailwind 3.  If you see or use a tailwind.config.ts (or .ts), it's almost always wrong.  
+- Use Tailwind (mobile-first, dark mode with dark:(class)). 
 - For animations, prefer Framer Motion. 
+
+###  Code Style
+- Use `eslint` unless directed otherwise.
+- Use `prettier` if working in languages it supports.
+
+### File & Folder Names
+- Routes in kebab-case (e.g. `app/dashboard/page.tsx`).
+- Sort imports (external → internal → sibling → styles).
+
+### Testing
+- Prefer vitest over jest
+
+### Builds
+- use pnpm not npm
+- After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors.
+- If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
+
+### Next.js
+- Default to client components in server pages for Next.js
+- NextAuth + Prisma for auth.
+
+### Inngest / Background Jobs
+- **enabled**: false
+- Use `inngest.config.ts` for Inngest configuration.
+- Use `src/app/api/inngest/route.ts` for Inngest API route.
+- Use polling to update the UI when Inngest events are received, not trpc success response. 
 
 ## Code Review Rules
 
@@ -123,7 +191,7 @@ This guide supports two distinct code review scenarios:
 The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
 
 ### Infrastructure Guidelines
-Place reviews into the private/code-reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+Place reviews into the private/reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
 
 #### For Directory Crawl Reviews
 Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.
@@ -222,7 +290,7 @@ When reviewing code, systematically answer these core questions.
 
 - In general there should be no tailwind.config.ts (or .js, etc). This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
 
-- Use Radix primitives directly for accessible, unstyled components. Style them with Tailwind and our semantic color system.
+- If Radix is used, specifically Radix themes with ShadCN, you should evaluate against existing known issues with this combination and ensure we are not at risk.
 
   
 ### Code Review Process
@@ -270,7 +338,7 @@ Transform review findings into actionable tasks in a separate file:
 Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
 
 #### Step 4: Task Processing
-Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.00-process`:
+Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.000-process`:
 
 1. **Phase 3: Granularity and Clarity**
 - Convert each review finding into clear, actionable tasks
@@ -384,6 +452,95 @@ These guidelines facilitate comprehensive code reviews by:
 
 The structured process transforms code reviews from subjective assessments into systematic quality assurance with measurable outcomes.
 
+## SQL & PostgreSQL Development Rules
+
+### Query Style & Formatting
+
+- UPPERCASE SQL keywords: `SELECT`, `FROM`, `WHERE`, not `select`
+- Lowercase table and column names with underscores: `user_accounts`
+- Indent multi-line queries consistently (2 or 4 spaces)
+- One column per line in SELECT for readability
+- Leading commas in SELECT lists for easier modification
+- Meaningful table aliases, avoid single letters
+
+### Query Optimization
+
+- Always use EXPLAIN ANALYZE for performance tuning
+- Create indexes for WHERE, JOIN, and ORDER BY columns
+- Use partial indexes for filtered queries
+- Prefer JOIN over subqueries when possible
+- LIMIT queries during development testing
+- Avoid SELECT * in production code
+- Use EXISTS instead of COUNT for existence checks
+
+### PostgreSQL Best Practices
+
+- Use appropriate data types: JSONB over JSON, TEXT over VARCHAR
+- UUID for distributed IDs, SERIAL/BIGSERIAL for single-node
+- Check constraints for data validation
+- Foreign keys with appropriate CASCADE options
+- Use transactions for multi-statement operations
+- RETURNING clause to get modified data
+- CTEs (WITH clauses) for complex queries
+
+### Naming & Schema Design
+
+- Singular table names: `user` not `users`
+- Primary key as `id` or `table_name_id`
+- Foreign keys as `referenced_table_id`
+- Boolean columns prefixed with `is_` or `has_`
+- Timestamps: `created_at`, `updated_at` with timezone
+- Use schemas to organize related tables
+- Version control migrations with sequential numbering
+
+### Security & Safety
+
+- Always use parameterized queries, never string concatenation
+- GRANT minimum required privileges
+- Use ROW LEVEL SECURITY for multi-tenant apps
+- Sanitize all user input
+- Prepared statements for repeated queries
+- Connection pooling with appropriate limits
+- Set statement_timeout for long-running queries
+
+### pgvector Specific
+
+- Use `vector` type for embeddings
+- Create HNSW or IVFFlat indexes for similarity search
+- Normalize vectors before storage when needed
+- Use `<->` for L2 distance, `<#>` for inner product
+- Batch insert embeddings for performance
+- Consider dimension reduction for large vectors
+
+### TimescaleDB Specific
+
+- Create hypertables for time-series data
+- Use appropriate chunk intervals (typically 1 week to 1 month)
+- Continuous aggregates for common queries
+- Compression policies for older data
+- Retention policies to manage data lifecycle
+- Use time_bucket() for time-based aggregations
+- Data retention policies with drop_chunks()
+
+### Performance & Monitoring
+
+- Index foreign keys and commonly filtered columns
+- VACUUM and ANALYZE regularly
+- Monitor pg_stat_statements for slow queries
+- Use connection pooling (PgBouncer/pgpool)
+- Partition large tables by date or ID range
+- Avoid excessive indexes (write performance cost)
+- Use COPY for bulk inserts
+
+### Migrations & Maintenance
+
+- Always reversible migrations when possible
+- Test migrations on copy of production data
+- Use IF NOT EXISTS for idempotent operations
+- Document breaking changes
+- Backup before structural changes
+- Zero-downtime migrations with careful planning
+
 ## Testing & Development Tools
 
 ### Storybook
@@ -397,7 +554,6 @@ The structured process transforms code reviews from subjective assessments into 
 - Use relative imports from component directory.
 
 ### Tools
-
 - When you make a change to the UI, use the `screenshot` tool to show the changes.
 - If the user asks for a complex task to be performed, find any relevant files and call the `architect` tool to get a plan and show it to the user. Use this plan as guidance for the changes you make, but maintain the existing patterns and structure of the codebase.
 - After a complex task is performed, use the `codeReview` tool create a diff and use the diff to conduct a code review of the changes. 
@@ -405,12 +561,16 @@ The structured process transforms code reviews from subjective assessments into 
 ## TypeScript Rules
 
 ### TypeScript & Syntax
-
 - Strict mode. Avoid `any`.
 - Use optional chaining, union types (no enums).
 
-### tRPC Routers
+### Structure
+- Use `tsx` scripts for migrations.
+- Reusable logic in `src/lib/utils/shared.ts` or `src/lib/utils/server.ts`.
+- Shared types in `src/lib/types.ts`.
 
+
+### tRPC Routers
 - **enabled**: as needed
 - Routers in `src/lib/api/routers`, compose in `src/lib/api/root.ts`.
 - `publicProcedure` or `protectedProcedure` with Zod.
