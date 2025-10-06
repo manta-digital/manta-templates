@@ -45,13 +45,13 @@ TARGET_ROOT="$PROJECT_ROOT"
 
 # Set source directories
 if [[ "$SCRIPT_DIR" == */ai-project-guide/scripts ]]; then
-    # We're in the source repository
+    # We're in the ai-project-guide source repository
     RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
     AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
 else
-    # We're in a project that includes ai-project-guide
-    RULES_SOURCE_DIR="$SCRIPT_DIR/../project-guides/rules"
-    AGENTS_SOURCE_DIR="$SCRIPT_DIR/../project-guides/agents"
+    # We're in a project that includes ai-project-guide as submodule
+    RULES_SOURCE_DIR="$PROJECT_ROOT/project-documents/ai-project-guide/project-guides/rules"
+    AGENTS_SOURCE_DIR="$PROJECT_ROOT/project-documents/ai-project-guide/project-guides/agents"
 fi
 
 # Function to check if we're in the right directory
