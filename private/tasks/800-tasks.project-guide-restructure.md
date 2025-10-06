@@ -72,7 +72,7 @@ project-documents/
 - [x] Update `readme.setup-ide.md` - update manual setup paths with path convention note
 - [x] Update `prompt.ai-project.system.md` - all guide references updated, verified Context Init prompts correct
 - [x] Update `file-naming-conventions.md` - already correct, uses private/ paths
-- [x] Update `directory-structure.md` - already correct, describes framework repo structure
+- [x] Update `directory-structure.md` - updated to show ai-project-guide/ and private/ as siblings, removed research-crumbs
 - **Success:** ✅ All core documentation references correct submodule paths
 
 ### 2.3 Update Guide References in project-guides/
