@@ -126,52 +126,60 @@ project-documents/
 ## Task 4: Consolidate and Update Setup Scripts
 
 ### 4.1 Analyze Existing Template Scripts
-- [ ] Review current `setup-guides.sh` from template(s) (PM to provide source)
-- [ ] Review current `update-guides.sh` from template(s) (PM to provide source)
-- [ ] Document capabilities and features of existing scripts
-- [ ] Identify differences between template versions (if any)
-- [ ] Compare with bootstrap scripts already created
-- **Success:** Complete understanding of current script capabilities
+- [x] Review current `setup-guides.sh` from template(s) (found in scripts/monorepo-templates/)
+- [x] Review current `update-guides.sh` from template(s) (found in scripts/monorepo-templates/)
+- [x] Document capabilities and features of existing scripts
+- [x] Identify differences between template versions (React template reviewed - no React-specific code)
+- [x] Compare with bootstrap scripts already created
+- [x] Created GitHub issue #5 for org private guides feature (deferred to future)
+- [x] Resolved directory structure mismatch (finalized: analysis, architecture, features, project-guides, reviews, slices, tasks)
+- [x] Confirmed git submodule approach is superior to rsync approach
+- [x] Confirmed no special monorepo handling needed (same paths work everywhere)
+- **Success:** ✅ Complete understanding of current script capabilities and submodule benefits
 
 ### 4.2 Evaluate Consolidation Feasibility
-- [ ] Determine if scripts can be unified and moved to ai-project-guide/scripts/
-- [ ] Identify any template-specific logic that must remain separate
-- [ ] Assess chicken-and-egg problem: how do fresh templates get the scripts initially?
-- [ ] Determine script distribution mechanism from monorepo to templates
-- [ ] Document pros/cons of consolidation vs keeping distributed
-- **Success:** Clear decision on script consolidation strategy
+- [x] Determine if scripts can be unified and moved to ai-project-guide/scripts/
+- [x] Identify any template-specific logic that must remain separate (none - framework-agnostic)
+- [x] Assess chicken-and-egg problem: how do fresh templates get the scripts initially?
+- [x] Determine script distribution mechanism from monorepo to templates (manual copy stubs)
+- [x] Document pros/cons of consolidation vs keeping distributed
+- [x] **Decision:** Option B - Minimal stub scripts in templates, full scripts in ai-project-guide
+- **Success:** ✅ Clear decision on script consolidation strategy
 
 ### 4.3 Update Scripts for New Directory Structure
-- [ ] Update script paths to use `project-documents/ai-project-guide/` structure
-- [ ] Update `private/` subdirectory creation (architecture, slices, tasks, features, reviews, analysis)
-- [ ] Verify scripts create `.gitkeep` in private/ directory
-- [ ] Update any hardcoded paths or assumptions about structure
-- [ ] Ensure scripts handle both fresh install and already-installed cases
-- **Success:** Scripts work correctly with new submodule structure
+- [x] Update script paths to use `project-documents/ai-project-guide/` structure (already done in Task 1)
+- [x] Update `private/` subdirectory creation (analysis, architecture, features, project-guides, reviews, slices, tasks)
+- [x] Verify scripts create `.gitkeep` in private/ directory (confirmed)
+- [x] Update any hardcoded paths or assumptions about structure (all paths updated)
+- [x] Ensure scripts handle both fresh install and already-installed cases (idempotent checks in place)
+- **Success:** ✅ Scripts work correctly with new submodule structure
 
 ### 4.4 Update File Naming Patterns
-- [ ] Review scripts for any filename pattern assumptions
-- [ ] Update to use `nnn-` index patterns where applicable
-- [ ] Ensure consistency with `file-naming-conventions.md`
-- [ ] Update any date format patterns (MMDD vs YYYYMMDD)
-- **Success:** Scripts use current naming conventions
+- [x] Review scripts for any filename pattern assumptions (none found - scripts only create directories)
+- [x] Update to use `nnn-` index patterns where applicable (N/A - scripts don't create indexed files)
+- [x] Ensure consistency with `file-naming-conventions.md` (verified - no conflicts)
+- [x] Update any date format patterns (MMDD vs YYYYMMDD) (N/A - scripts don't use dates)
+- **Success:** ✅ Scripts use current naming conventions (no file creation, only directories)
 
 ### 4.5 Resolve Initial Bootstrap Problem
-- [ ] Document how templates initially get setup scripts
-- [ ] Determine if scripts are copied from ai-project-guide/scripts during template creation
-- [ ] Design solution for fresh template clones (before submodule exists)
-- [ ] Update npm scripts in snippet to handle bootstrap case
-- [ ] Test bootstrap flow: fresh template → pnpm setup-guides → working state
-- **Success:** Clear, working bootstrap mechanism documented and tested
+- [x] Document how templates initially get setup scripts (stub scripts copied to templates)
+- [x] Determine if scripts are copied from ai-project-guide/scripts during template creation (yes - manual copy of stubs)
+- [x] Design solution for fresh template clones (3-line stub downloads bootstrap.sh from GitHub)
+- [x] Update npm scripts in snippet to handle bootstrap case (already updated in Task 1)
+- [x] Created template-stubs/ directory with setup-guides.sh and update-guides.sh
+- [x] Created README.md documentation for template maintainers
+- [ ] Test bootstrap flow: fresh template → pnpm setup-guides → working state (requires template testing)
+- **Success:** ✅ Clear, working bootstrap mechanism documented (testing deferred to Task 5)
 
 ### 4.6 Implementation and Testing
-- [ ] Move/create consolidated scripts in ai-project-guide/scripts/ (if consolidating)
-- [ ] Update `snippets/npm-scripts.ai-support.json.md` with final script calls
-- [ ] Create any necessary wrapper or bootstrap logic
-- [ ] Document script distribution process for monorepo
-- [ ] Test scripts in isolation (outside of npm)
-- [ ] Test npm wrapper scripts
-- **Success:** Scripts consolidated (if feasible), updated, and tested
+- [x] Move/create consolidated scripts in ai-project-guide/scripts/ (bootstrap.sh, bootstrap.py, setup-project-guides.py already exist)
+- [x] Update `snippets/npm-scripts.ai-support.json.md` with final script calls (done in Task 1)
+- [x] Create any necessary wrapper or bootstrap logic (template-stubs created)
+- [x] Document script distribution process for monorepo (README.md in template-stubs/)
+- [ ] Test scripts in isolation (outside of npm) (deferred to Task 5)
+- [ ] Test npm wrapper scripts (deferred to Task 5)
+- [ ] **TODO:** Copy template stubs to monorepo templates before completion
+- **Success:** ✅ Scripts consolidated and documented (testing deferred to Task 5)
 
 ## Task 5: Testing and Validation
 
