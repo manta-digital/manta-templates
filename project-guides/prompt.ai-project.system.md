@@ -326,7 +326,7 @@ If given an instruction similar to "process and stand by", make sure you underst
 You will need to consult specific knowledge for 3rd party tools, libraries, or packages, which should be available to you in the `ai-project-guide/tool-guides/[tool]/` directory for our curated knowledge.  Follow these steps when working with these tools, libraries, or packages.  Use proactively.
 
 1. Consult Overview: Start with the specific `AI Tool Overview [toolname].md` in the `ai-project-guide/tool-guides/[tool]` directory.
-2. Locate Docs: Scan the Overview for references to more detailed documentation (like local API files under `/documentation`, notes in `research-crumbs` or official web links).
+2. Locate Docs: Scan the Overview for references to more detailed documentation (like local API files under `/documentation`, reference notes, or official web links).
 3. Search Docs: Search within those specific documentation sources first using `grep_search` or `codebase_search`.
 4. Additional documentation.  If you have a documentation tool available (ex: context7 MCP) use it for additional information.  Always use it if available and no specific tool guide is provided.
 5. Web Search Fallback: If the targeted search doesn't yield results, then search the web.

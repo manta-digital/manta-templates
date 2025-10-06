@@ -1,48 +1,47 @@
-# Directory Structure — 2025-05-01 update  
+# Directory Structure — 2025-10-05 update
 _This file is the canonical contract for where every guide, snippet, and asset lives._
 
 ```
 project-documents/
-├── project-guides/          # project-process & meta-methodology
-│   └── …                    # (shared subtree)
-├── framework-guides/        # app-level runtimes & platforms
-│   └── nextjs/ …
-├── tool-guides/             # importable libraries / UI kits
-│   └── scichart/ …
-├── api-guides/              # external data / service endpoints
-│   └── usgs/ …
-├── domain-guides/           # cross-cutting subject knowledge
-│   └── hydrology/ …
-├── snippets/                # language-agnostic code or prompt templates
-│   └── prompt.ai-project.system.md   # process-wide prompts library
-├── private/                 # project-specific customization, 1 project 1 repo.
-│   ├── code-reviews/        # review docs & follow-up actions
-│   ├── features/            # feature definitions & specifications
-│   ├── maintenance/         # maintenance tasks & outcomes
-│   ├── project-guides/      # project-specific guide customizations
-│   │   ├── 01-concept.{project}.md # project concept documents
-│   │   ├── 02-spec.{project}.md    # project specifications
-│   │   └── 03-notes.{project}.md   # project-specific notes
-│   ├── tasks/               # task breakdowns & phase documents
-│   └── ui/                  # UI tasks & resources
-│       └── screenshots/     # mock-ups, design references└── README.md                # folder-local orientation (this file’s sibling)
+├── ai-project-guide/        # Git submodule (framework guides)
+│   ├── project-guides/      # project-process & meta-methodology
+│   ├── framework-guides/    # app-level runtimes & platforms
+│   │   └── nextjs/ …
+│   ├── tool-guides/         # importable libraries / UI kits
+│   │   └── scichart/ …
+│   ├── api-guides/          # external data / service endpoints
+│   │   └── usgs/ …
+│   ├── domain-guides/       # cross-cutting subject knowledge
+│   │   └── hydrology/ …
+│   ├── snippets/            # language-agnostic code or prompt templates
+│   └── scripts/             # setup and utility scripts
+└── private/                 # Your project-specific work (parent repo)
+    ├── architecture/        # high-level designs & system architecture
+    ├── code-reviews/        # review docs & follow-up actions
+    ├── features/            # feature definitions & specifications
+    ├── maintenance/         # maintenance tasks & outcomes
+    ├── analysis/            # codebase analysis results
+    ├── project-guides/      # project-specific guide customizations
+    │   ├── 001-concept.{project}.md # project concept documents
+    │   ├── 002-spec.{project}.md    # project specifications
+    │   └── 003-slices.{project}.md  # slice planning
+    ├── slices/              # slice design documents
+    ├── tasks/               # task breakdowns & phase documents
+    └── ui/                  # UI tasks & resources
+        └── screenshots/     # mock-ups, design references
 ```
-> **Note:**
-> _If_ a prompt template is tightly coupled to your AI-process phases (as with prompt.ai-project.system.md), keep it in **project-guides/**; ad-hoc language snippets still go to **snippets/**
-> 
-> **Directory Structure by Use Case (IMPORTANT):**   
-> 
-> **1. Regular Development** (standard template instance development):
-> - Use `project-documents/private/` for all project-specific files
-> - This is the standard path described throughout the AI Project Guide
-> 
-> **2. Monorepo Template Development** (working on templates themselves or other monorepo sections):
-> - Use `project-artifacts/` for project-specific files that would normally go in `private/`
-> - This maintains compatibility with existing tooling while working on the monorepo structure itself
-> 
-> **3. Legacy `{template}/examples/our-project/`**:
-> - **DEPRECATED**: No longer used
-> - Migrate any existing content to `project-artifacts/` for monorepo work
+> **Directory Structure by Use Case:**
+>
+> **1. Regular Development** (standard project development - most users):
+> - Your project work goes in `project-documents/private/`
+> - Framework guides are in `project-documents/ai-project-guide/` (git submodule)
+> - This is the standard structure shown above
+>
+> **2. Monorepo Template Development** (advanced - working on templates themselves):
+> - References to `private/` map to `project-artifacts/{template-name}/` instead
+> - Example: `private/tasks/` becomes `project-artifacts/react-template/tasks/`
+> - This prevents contaminating templates with development artifacts
+> - Framework guides location (`project-documents/ai-project-guide/`) remains the same
 
 ## Zero-ambiguity decision matrix
 
@@ -59,10 +58,9 @@ project-documents/
 
 #### Attachment policy
 Images will be moved to the `z-attachments` folder in Obsidian.  Obsidian will rewrite links automatically when you move files.
-#### Templates & snippets
-* **Prompt/code templates** that are part of the **process** live in  
-  `project-guides/` (e.g., `prompt.ai-project.system.md`).  
-* Ad-hoc language or tooling snippets that don’t belong to a phase go in `snippets/`.
+#### Snippets
+* Process-wide prompts: `project-guides/prompt.ai-project.system.md`
+* Ad-hoc code snippets and examples: `snippets/`
 ### Naming reminder
 Follow the pattern `[doc-type].[subject].[info].md`. See `file-naming-conventions.md` for full details.
 

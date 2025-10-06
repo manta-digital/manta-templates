@@ -236,8 +236,8 @@ These files provide knowledge on use of 3rd party tools, both in general and in 
   documentation files.
 * {tool}/documentation: documentation by tool authors, from web or download.  
   May be in alternate formats such as PDF.
-* {tool}/research-crumbs: specific knowledge items for {tool}.  often used to 
-  provide additional detail for a complex {tool} task.
+* {tool}/notes: specific knowledge items and reference notes for {tool}.
+  Often used to provide additional detail for complex {tool} tasks.
 ```
 
 ##### Task Files
