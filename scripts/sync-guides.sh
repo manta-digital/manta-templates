@@ -1,36 +1,61 @@
 #!/usr/bin/env bash
 set -e
 
-REMOTE_NAME=ai-guides
-REMOTE_URL=git@github.com:ecorkran/ai-project-guide.git
-BRANCH=main
-PREFIX=project-documents
+# AI Project Guide - Monorepo Sync Script
+# Updates the ai-project-guide submodule to latest version
 
-# Add the SSH remote once
-if ! git remote get-url "$REMOTE_NAME" >/dev/null 2>&1; then
-  git remote add "$REMOTE_NAME" "$REMOTE_URL"
-fi
+SUBMODULE_PATH="project-documents/ai-project-guide"
+REMOTE_URL="git@github.com:ecorkran/ai-project-guide.git"
+BRANCH="main"
 
-# Fetch the latest from your private guides repo
-git fetch "$REMOTE_NAME"
+echo "🔄 Syncing AI Project Guide in monorepo..."
+echo ""
 
-# Check if this is already a git subtree by looking for subtree merge commits
-if git log --grep="git-subtree-dir: $PREFIX" --oneline | grep -q "git-subtree-dir: $PREFIX" 2>/dev/null; then
-  # This is an existing subtree, pull updates
-  echo "📚 Updating existing git subtree..."
-  git subtree pull --prefix "$PREFIX" "$REMOTE_NAME" "$BRANCH" --squash
+# Check if submodule exists
+if [ -d "$SUBMODULE_PATH/.git" ] || [ -f "$SUBMODULE_PATH/.git" ]; then
+    # Submodule already exists - update it
+    echo "📚 Updating existing submodule at $SUBMODULE_PATH..."
+    git submodule update --remote "$SUBMODULE_PATH"
+    
+    # Show what changed
+    cd "$SUBMODULE_PATH"
+    LATEST_COMMIT=$(git log -1 --oneline)
+    echo ""
+    echo "✅ Updated to: $LATEST_COMMIT"
+    cd - > /dev/null
+    
 else
-  # Not a subtree yet - need to add it
-  echo "📚 Setting up git subtree for guides..."
-  if [ -d "$PREFIX" ]; then
-    # Directory exists but isn't a subtree - back it up and remove
-    echo "⚠️  Backing up existing $PREFIX directory..."
-    mv "$PREFIX" "${PREFIX}.backup.$(date +%s)"
-    # Stage the deletions so working tree is clean
-    git add "$PREFIX"
-    git commit -m "Remove old $PREFIX content before setting up git subtree"
-  fi
-  git subtree add --prefix "$PREFIX" "$REMOTE_NAME" "$BRANCH" --squash
+    # Check if we have old subtree content
+    if [ -d "$SUBMODULE_PATH" ]; then
+        echo "⚠️  Found existing project-documents/ directory (likely old subtree)"
+        echo "   This needs manual migration. Please:"
+        echo ""
+        echo "   1. Backup your project-documents/:"
+        echo "      cp -r project-documents project-documents.backup"
+        echo ""
+        echo "   2. Remove old subtree:"
+        echo "      git rm -r project-documents"
+        echo "      git commit -m 'Remove old subtree before adding submodule'"
+        echo ""
+        echo "   3. Add as submodule:"
+        echo "      git submodule add $REMOTE_URL $SUBMODULE_PATH"
+        echo "      git commit -m 'Add ai-project-guide as submodule'"
+        echo ""
+        exit 1
+    fi
+    
+    # No submodule and no directory - add fresh submodule
+    echo "📦 Adding ai-project-guide as submodule..."
+    git submodule add "$REMOTE_URL" "$SUBMODULE_PATH"
+    git submodule update --init --recursive
+    echo ""
+    echo "✅ Submodule added successfully"
 fi
 
+echo ""
 echo "✅ Project guides synchronized successfully"
+echo ""
+echo "💡 Template development notes:"
+echo "   - Guides are now in: $SUBMODULE_PATH/"
+echo "   - Templates reference same path as standalone projects"
+echo "   - No special monorepo handling needed!"
