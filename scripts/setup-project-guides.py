@@ -44,11 +44,24 @@ def print_status(icon, message, color_code=None):
 
 def setup_guides():
     """Set up ai-project-guide as a git submodule."""
+    import os
+
     print_status("🚀", "Setting up AI Project Guide...", "0;34")
     print()
 
-    # Get project root (current directory)
-    project_root = Path.cwd()
+    # Navigate to git repository root
+    result = run_command("git rev-parse --show-toplevel", check=False, capture_output=True)
+    if result and result.returncode == 0:
+        git_root = Path(result.stdout.strip())
+        current_dir = Path.cwd()
+        if current_dir != git_root:
+            print_status("💡", "Navigating to git repository root...", "0;34")
+            os.chdir(git_root)
+            print_status("✅", f"Working directory: {git_root}", "0;32")
+        project_root = git_root
+    else:
+        project_root = Path.cwd()
+
     project_docs = project_root / "project-documents"
     private_dir = project_docs / "private"
     submodule_dir = project_docs / "ai-project-guide"

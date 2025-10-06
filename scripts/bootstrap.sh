@@ -52,9 +52,21 @@ fi
 
 # Check if we're in a git repository
 if ! git rev-parse --git-dir &> /dev/null; then
-    print_warning "Not a git repository. Initializing..."
-    git init
-    print_success "Initialized git repository"
+    print_error "Not in a git repository"
+    echo ""
+    echo "Please run this from your project root and ensure it's a git repository:"
+    echo "  cd /path/to/your/project"
+    echo "  git init"
+    echo "  bash scripts/setup-guides.sh"
+    exit 1
+fi
+
+# Navigate to git repository root
+GIT_ROOT=$(git rev-parse --show-toplevel)
+if [ "$(pwd)" != "$GIT_ROOT" ]; then
+    print_info "Navigating to git repository root..." "$BLUE"
+    cd "$GIT_ROOT"
+    print_success "Working directory: $GIT_ROOT"
 fi
 
 print_info "Setting up AI Project Guide..." "$BLUE"

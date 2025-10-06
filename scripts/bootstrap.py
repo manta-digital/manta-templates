@@ -42,6 +42,7 @@ def print_status(icon, message, color_code=None):
 
 def main():
     """Bootstrap AI Project Guide setup."""
+    import os
 
     # Check git is available
     result = run_command("git --version", check=False, capture_output=True)
@@ -49,12 +50,26 @@ def main():
         print_status("❌", "Git is not installed. Please install git first.", "0;31")
         sys.exit(1)
 
-    # Check if we're in a git repository, if not initialize
+    # Check if we're in a git repository
     result = run_command("git rev-parse --git-dir", check=False, capture_output=True)
     if not result or result.returncode != 0:
-        print_status("⚠️", "Not a git repository. Initializing...", "1;33")
-        run_command("git init")
-        print_status("✅", "Initialized git repository", "0;32")
+        print_status("❌", "Not in a git repository", "0;31")
+        print()
+        print("Please run this from your project root and ensure it's a git repository:")
+        print("  cd /path/to/your/project")
+        print("  git init")
+        print("  python3 scripts/setup-guides.py")
+        sys.exit(1)
+
+    # Navigate to git repository root
+    result = run_command("git rev-parse --show-toplevel", check=False, capture_output=True)
+    if result and result.returncode == 0:
+        git_root = result.stdout.strip()
+        current_dir = os.getcwd()
+        if current_dir != git_root:
+            print_status("💡", "Navigating to git repository root...", "0;34")
+            os.chdir(git_root)
+            print_status("✅", f"Working directory: {git_root}", "0;32")
 
     print_status("💡", "Setting up AI Project Guide...", "0;34")
     print()
