@@ -32,19 +32,26 @@ This guide supports two distinct code review scenarios:
 The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
 
 ## Infrastructure Guidelines
-Place reviews into the private/reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+
+**File Locations:**
+- Review documents: `private/reviews/nnn-review.{name}.md` (range 900-939)
+- Task files: `private/tasks/nnn-tasks.code-review.{filename}.md` (same nnn as review)
+
+Note: The `private/` path may map to `project-artifacts/` in monorepo development. If unclear, confirm with Project Manager.
 
 ### For Directory Crawl Reviews
-Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.
+Use a single review document per review session with sequential index:
+- Format: `nnn-review.{project}.md` where nnn is 900-939
+- All task files from this session use the same `nnn`
+- Track all files reviewed (with and without issues)
+- Update status after each file for pause/resume capability
 
-This way you can keep tasks separated by file, without causing difficulty in file management, while keeping task files small enough that we can easily manage or even parallelize their implementation.
-
-Keep count of files processed and remaining to be processed. Update this after each file, ideally storing in the review.{project}.{YYYYMMDD-nn}.md file. Use a single such review file for the entire session. Continue to create and keep separate asks files for each file reviewed.
-
-For any file which generates no tasks, keep a list of such files in the aforementioned review document.
+**Example:** Review session 900
+- Review: `900-review.dashboard-components.md`
+- Tasks: `900-tasks.code-review.header.md`, `900-tasks.code-review.sidebar.md`
 
 ### For Single-File Reviews
-Create a simple review document named `review.{filename}.{YYYYMMDD}.md` and, if needed, a corresponding task file `tasks.code-review.{filename}.{YYYYMMDD}.md`.
+Use format: `nnn-review.{filename}.md` and `nnn-tasks.code-review.{filename}.md` if issues found.
 
 ## Code Review Questionnaire
 When reviewing code, systematically answer these core questions.  
@@ -139,10 +146,10 @@ When reviewing code, systematically answer these core questions.
 ### Step 1: Create Review Document
 
 #### For Single-File Reviews
-Create a review document named `review.{filename}.{YYYYMMDD}.md` in the appropriate directory.
+Create a review document named `nnn-review.{filename}.md` in `private/reviews/`, where `nnn` is in the 900-939 range.
 
 #### For Directory Crawl Reviews
-Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/private/code-reviews` directory.
+Create a review document following the naming convention `nnn-review.{project}.md` in the `private/reviews/` directory, where `nnn` is in the 900-939 range. Use the same `nnn` for all task files in this review session.
 
 All reviewed files should be present in either Files with Issues, or Files with No Issues sections. No file should be unaccounted for. Update this after reviewing each file. Additionally, keep track of how many files have been reviewed, and what the last filed review was, so this can be restarted at any time. Make sure to update the status (started, in-progress, complete). We need to be able to pause and resume this task without losing work or missing items.
 
@@ -172,11 +179,15 @@ Analyze the file systematically using the code review questionnaire. Group findi
 5. **Testing**: Missing or inadequate test coverage
 
 ### Step 3: Create Tasks from Review Findings
-Transform review findings into actionable tasks in a separate file:
-- **Single-File**: `tasks.code-review.{filename}.{YYYYMMDD}.md`
-- **Directory Crawl**: `tasks.code-review.{filename}.MMDD.md` in the `project-documents/code-reviews` directory
+Transform review findings into actionable tasks in `private/tasks/`:
+- Use format: `nnn-tasks.code-review.{filename}.md`
+- Use the **same nnn** as the review document for all files in the review session
+- Create one task file per reviewed file that has issues
+- Add the file to the appropriate list in the review document
 
-Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
+**Example:** Review session 900 examining multiple components:
+- Review doc: `900-review.dashboard-components.md`
+- Task files: `900-tasks.code-review.header.md`, `900-tasks.code-review.sidebar.md`, etc.
 
 ### Step 4: Task Processing
 Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.000-process`:
