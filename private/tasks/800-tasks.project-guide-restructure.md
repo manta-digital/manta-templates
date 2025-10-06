@@ -76,15 +76,15 @@ project-documents/
 - **Success:** ✅ All core documentation references correct submodule paths
 
 ### 2.3 Update Guide References in project-guides/
-- [ ] Update `guide.ai-project.000-process.md` - cross-reference paths
-- [ ] Update `guide.ai-project.001-concept.md` - guide references
-- [ ] Update `guide.ai-project.002-spec.md` - guide references
-- [ ] Update `guide.ai-project.003-slice-planning.md` - guide references
-- [ ] Update `guide.ai-project.004-slice-design.md` - guide references
-- [ ] Update `guide.ai-project.006-task-expansion.md` - guide references
-- [ ] Update `guide.ai-project.090-code-review.md` - guide references
-- [ ] Update `guide.ai-project.091-legacy-task-migration.md` - guide references
-- **Success:** All process guides reference correct paths
+- [x] Update `guide.ai-project.000-process.md` - updated structure diagram and all guide paths
+- [x] Update `guide.ai-project.001-concept.md` - updated output path, fixed filename to 001-
+- [x] Update `guide.ai-project.002-spec.md` - updated tool-guides path, fixed filename to 002-
+- [x] Update `guide.ai-project.003-slice-planning.md` - already correct, uses private/ paths
+- [x] Update `guide.ai-project.004-slice-design.md` - updated tool-guides and framework-guides paths
+- [x] Update `guide.ai-project.006-task-expansion.md` - already correct, no guide references
+- [x] Update `guide.ai-project.090-code-review.md` - already correct, no guide references
+- [x] Update `guide.ai-project.091-legacy-task-migration.md` - already correct, uses private/ paths
+- **Success:** ✅ All process guides reference correct paths
 
 ### 2.4 Update Monorepo-Specific References
 - [ ] Review monorepo context initialization prompt
