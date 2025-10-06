@@ -13,7 +13,7 @@ project-documents/
 │   │   └── usgs/ …
 │   ├── domain-guides/       # cross-cutting subject knowledge
 │   │   └── hydrology/ …
-│   ├── snippets/            # language-agnostic code or prompt templates
+│   ├── snippets/            # copyable code/config examples
 │   └── scripts/             # setup and utility scripts
 └── private/                 # Your project-specific work (parent repo)
     ├── architecture/        # high-level designs & system architecture
