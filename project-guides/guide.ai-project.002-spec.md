@@ -24,7 +24,7 @@ We will use this as a guide for creating a project spec.  We generally will not 
 - Usability Guidelines: User interface design principles and accessibility considerations.
 ##### 4. Technical Specifications
 - Technology Stack: Programming languages, frameworks, and tools to be used.
-- For any {tool} indicate whether specific knowledge is present in `tool-guides/{tool}`.
+- For any {tool} indicate whether specific knowledge is present in `ai-project-guide/tool-guides/{tool}`.
 - Integration Requirements: APIs or third-party systems that need to be integrated.
 - Hosting and Architecture: Details about server setup, hosting platforms, or cloud solutions.
 - Compatibility: Supported operating systems, browsers, or devices.
@@ -41,5 +41,5 @@ We will use this as a guide for creating a project spec.  We generally will not 
 - Supporting materials like diagrams, mockups, or interactive prototypes.
 
 ##### Output Location
-Save the completed specification document as `02-spec.{project}.md` in the `project-documents/private/project-guides/` directory, where `{project}` is your project name.
+Save the completed specification document as `002-spec.{project}.md` in the `private/project-guides/` directory, where `{project}` is your project name.
 
