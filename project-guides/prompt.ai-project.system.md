@@ -268,14 +268,14 @@ Notes:
 ```markdown
 The following provides context on our current work in project {project}. 
 
-We are using the slice-based methodology from `guide.ai-project.000-process`. Current work context:
+We are using the slice-based methodology from `ai-project-guide/project-guides/guide.ai-project.000-process`. Current work context:
 - Project: {project}
 - Slice: {slice}
 - Tasks: {task-file}
 - Phase: {development-phase}
 - if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
 
-Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Key project documents:
+Refer to the Resource Structure in `ai-project-guide/project-guides/guide.ai-project.000-process` for locations of resources. Key project documents:
 - Project Documents: `project-documents/private/`. 
 - Slice design: private/slices/{slice}.md
 - Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md
@@ -296,20 +296,20 @@ If given an instruction similar to "process and stand by", make sure you underst
 ```markdown
 The following provides context on our current work in project {project}. 
 
-We are using the slice-based methodology from `guide.ai-project.000-process`. Current work context:
+We are using the slice-based methodology from `ai-project-guide/project-guides/guide.ai-project.000-process`. Current work context:
 - Project: {project}
 - Slice: {slice}
 - Tasks: {task-file}
 - Phase: {development-phase}
 - if [slice] is provided it can be decomposed into [sliceindex]-slice.[slicename].md
 
-Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Key project documents and locations:
+Refer to the Resource Structure in `ai-project-guide/project-guides/guide.ai-project.000-process` for locations of resources. Key project documents and locations:
 - Project Documents: `project-artifacts/{project-type}/{project}` where project type == 'template' (only value in use 20251003), for example: `project-artifacts/template/react/`.  This is interpreted as the value of private/ wherever that is encountered.  For example if a prompt references: private/tasks/100-tasks.some-tasks, this would be interpreted as: project-artifacts/template/react/.  Alternately, it can be flattened on level to: project-artifacts/template-react/.  
 
 - Slice design: private/slices/{slice}.md maps to: project-artifacts/{project-type}-{project}/slices/{slice}.md
 - Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md --> synonym: {taskfile}, maps to: project-artifacts/{project-type}-{project}/tasks/{taskfile}.md
 
-Refer to the Resource Structure in `guide.ai-project.000-process` for locations of resources. Concentrate on the most granular level available (e.g. tasks if present), and use the higher-level files as reference only if needed.  Key project documents:
+Refer to the Resource Structure in `ai-project-guide/project-guides/guide.ai-project.000-process` for locations of resources. Concentrate on the most granular level available (e.g. tasks if present), and use the higher-level files as reference only if needed.  Key project documents:
 - High-level design: private/architecture/050-arch.hld-{project}.md
 - Current slice design: private/slices/{slice}.md
 - Tasks file: private/tasks/{sliceindex}-tasks.{slicename}.md
