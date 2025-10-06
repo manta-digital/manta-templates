@@ -71,9 +71,9 @@ project-documents/
 - [x] Update `CLAUDE.md` - update any guide path references
 - [x] Update `readme.setup-ide.md` - update manual setup paths with path convention note
 - [x] Update `prompt.ai-project.system.md` - all guide references updated, verified Context Init prompts correct
-- [ ] Update `file-naming-conventions.md` - update example paths if present
-- [ ] Update `directory-structure.md` - reflect new layout
-- **Success:** All core documentation references correct submodule paths (in progress)
+- [x] Update `file-naming-conventions.md` - already correct, uses private/ paths
+- [x] Update `directory-structure.md` - already correct, describes framework repo structure
+- **Success:** ✅ All core documentation references correct submodule paths
 
 ### 2.3 Update Guide References in project-guides/
 - [ ] Update `guide.ai-project.000-process.md` - cross-reference paths
