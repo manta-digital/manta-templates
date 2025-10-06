@@ -13,6 +13,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [0.9.0] - 2025-10-06
+
+### Changed
+- **Git submodule architecture**: Migrated from git subtree to git submodule for cleaner separation
+  - Framework guides now in `project-documents/ai-project-guide/` submodule
+  - User work stays in `project-documents/private/` (parent repo)
+  - Simplified updates: `git submodule update --remote`
+  - Works for npm and non-npm projects (Python, Go, Rust, etc.)
+- **Directory structure**: Finalized `private/` subdirectories
+  - Added: `project-guides/` for project-specific customizations
+  - Renamed: `code-reviews/` → `reviews/`
+  - Removed: `maintenance/` directory (use `950-tasks.maintenance.md` instead)
+  - Order: `analysis/, architecture/, features/, project-guides/, reviews/, slices/, tasks/`
+- **Bootstrap scripts**: Universal setup for any project type
+  - `bootstrap.sh` and `bootstrap.py` for one-command setup
+  - Template stub scripts download from GitHub (single source of truth)
+  - Auto-detects git repository root for safety
+
+### Added
+- **Template stub scripts** in `scripts/template-stubs/`
+  - Minimal 3-line stubs for templates
+  - Downloads full bootstrap scripts from ai-project-guide
+  - Preserves `npx degit` simplicity
+
+### Fixed
+- `setup-ide` script now uses correct submodule paths
+- Bootstrap scripts prevent running in wrong directory
+- All path references updated for submodule structure
+
 ## [0.8.0] - 2025-01-04
 
 ### Added
