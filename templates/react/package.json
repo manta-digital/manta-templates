@@ -9,10 +9,8 @@
     "build-with-tsc": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "setup-guides": "bash scripts/setup-guides.sh",
-    "setup-guides:private": "bash scripts/setup-guides.sh && bash scripts/setup-guides-private.sh",
-    "update-guides": "bash scripts/update-guides.sh",
-    "guides": "pnpm setup-guides"
+    "setup-guides": "curl -fsSL https://raw.githubusercontent.com/ecorkran/ai-project-guide/main/scripts/bootstrap.sh | bash",
+    "update-guides": "bash project-documents/ai-project-guide/scripts/template-stubs/update-guides.sh"  
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
