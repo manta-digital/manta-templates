@@ -8,8 +8,8 @@
 ### Project Structure
 - Always refer to `guide.ai-project.000-process` and follow links as appropriate.
 - For UI/UX tasks, always refer to `guide.ui-development.ai`.
-- General Project guidance is in `/project-documents/project-guides/`.
-- Relevant 3rd party tool information is in `project-document/tool-guides`.
+- General Project guidance is in `project-documents/ai-project-guide/project-guides/`.
+- Relevant 3rd party tool information is in `project-documents/ai-project-guide/tool-guides/`.
 
 #### Project-Specific File Locations
 - **Regular Development** (template instances): Use `project-documents/private/` for all project-specific files.
@@ -21,7 +21,8 @@
 - Use checklist format for all task files.  Each item and subitem should have a `[ ]` "checkbox".
 - After completing a task or subtask, make sure it is checked off in the appropriate file(s).  Use the task-check subagent if available.
 - Keep 'success summaries' concise and minimal -- they burn a lot of output tokens.
-* never include usernames, passwords, API keys, or similar sensitive information in any source code or comments.  At the very least it must be loaded from environment variables, and the .env used must be included in .gitignore.  If you find any code in violation of this, you must raise an issue with Project Manager.
+- **Preserve User-Provided Concept sections** - When editing project documents (concept, spec, feature, architecture, slice designs), NEVER modify or remove sections titled "## User-Provided Concept". These contain the human's original vision and must be preserved exactly as written. You may add new sections or edit AI-generated sections, but user concept sections are sacred.
+- never include usernames, passwords, API keys, or similar sensitive information in any source code or comments.  At the very least it must be loaded from environment variables, and the .env used must be included in .gitignore.  If you find any code in violation of this, you must raise an issue with Project Manager.
 
 ### MCP (Model Context Protocol)
 - Always use context7 (if available) to locate current relevant documentation for specific technologies or tools in use.
@@ -34,6 +35,7 @@
 - Avoid hard-coded constants - declare a constant.
 - Avoid hard-coded and duplicated values -- factor them into common object(s).
 - Provide meaningful but concise comments in _relevant_ places.
+- **Never use silent fallback values** - If a parameter/property fails to load, fail explicitly with an error or use an obviously-placeholder value (e.g., "ERROR: Failed to load", "MISSING_CONFIG"). Silent fallbacks that look like real data (e.g., `text || "some default text"`) make debugging nearly impossible. Use assertions, throw exceptions, or log errors instead.
 
 ### File and Shell Commands
 - When performing file or shell commands, always confirm your current location first.
@@ -119,201 +121,124 @@
 ## React & Next.js Rules
 
 ### Components & Naming
-- Use functional components with `"use client"` if needed.
-- Name in PascalCase under `src/components/`.
-- Keep them small, typed with interfaces.
-- Use React, Tailwind 4, and Radix.  Do not use Shadcn
+- Use functional components
+- Prefer **client components** (`"use client"`) for interactive UI - use server components only when specifically beneficial
+- Name in PascalCase under `src/components/`
+- Keep them small, typed with interfaces
+- Stack: React + Tailwind 4 + Radix primitives (no ShadCN)
 
 ### React and Next.js Structure
-- Use App Router in `app/`. 
-- Skip auth unless and until it is needed.
-- Use `.env` for secrets.
+- Use App Router in `app/` (works for both React and Next.js projects)
+- **Authentication**: Don't implement auth from scratch - use established providers (Auth0, Clerk, etc.) or consult with PM first
+- Use `.env` for secrets and configuration
+
+### State Management
+- **Local state**: Use React's built-in hooks (`useState`, `useReducer`, `useContext`)
+- **Global state**: For complex global state needs, consider Zustand or Jotai
+- **Server state**: Use TanStack Query (React Query) for API data fetching, caching, and synchronization
+
+### Forms
+- Use `react-hook-form` with Zod schema validation
+- Integrate with Radix form primitives for accessible form controls
+- Example pattern:
+  ```tsx
+  const schema = z.object({ email: z.string().email() });
+  const form = useForm({ resolver: zodResolver(schema) });
+  ```
 
 ### Icons
-- Prefer `lucide-react`; name icons in PascalCase.
-- Custom icons in `src/components/icons`.
+- Prefer `lucide-react`; name icons in PascalCase
+- Custom icons in `src/components/icons`
 
 ### Toast Notifications
-- Use `react-toastify` in client components.
+- Use `react-toastify` in client components
 - `toast.success()`, `toast.error()`, etc.
 
 ### Tailwind Usage
-- Always use tailwind 4, never tailwind 3.  If you see or use a tailwind.config.ts (or .ts), it's almost always wrong.  
-- Use Tailwind (mobile-first, dark mode with dark:(class)). 
-- For animations, prefer Framer Motion. 
+- **Always use Tailwind 4** - configure in `globals.css` using CSS variables and `@theme`
+- **Never use Tailwind 3** patterns or `tailwind.config.ts` / `tailwind.config.js` files
+- If a tailwind config file exists, there should be a very good reason it's not in `globals.css`
+- Use Tailwind utility classes (mobile-first, dark mode with `dark:` prefix)
+- For animations, prefer Framer Motion
 
-###  Code Style
-- Use `eslint` unless directed otherwise.
-- Use `prettier` if working in languages it supports.
+### Radix Primitives
+- Use Radix primitives directly for accessible, unstyled components
+- Style them with Tailwind and semantic color system
+- Do not use ShadCN - use raw Radix primitives instead
+
+### Code Style
+- Use `eslint` unless directed otherwise
+- Use `prettier` if working in languages it supports
 
 ### File & Folder Names
-- Routes in kebab-case (e.g. `app/dashboard/page.tsx`).
-- Sort imports (external → internal → sibling → styles).
+- Routes in kebab-case (e.g. `app/dashboard/page.tsx`)
+- Sort imports (external → internal → sibling → styles)
 
 ### Testing
-- Prefer vitest over jest
+- Prefer `vitest` over jest
 
 ### Builds
-- use pnpm not npm
-- After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors.
+- Use `pnpm` not `npm`
+- After all changes are made, ALWAYS build the project with `pnpm build`. Allow warnings, fix errors
 - If a `package.json` exists, ensure the AI-support script block from `snippets/npm-scripts.ai-support.json` is present before running `pnpm build`
-
-### Next.js
-- Default to client components in server pages for Next.js
-- NextAuth + Prisma for auth.
-
-### Inngest / Background Jobs
-- **enabled**: false
-- Use `inngest.config.ts` for Inngest configuration.
-- Use `src/app/api/inngest/route.ts` for Inngest API route.
-- Use polling to update the UI when Inngest events are received, not trpc success response. 
 
 ## Code Review Rules
 
-### Overview
-This document outlines the comprehensive process for conducting code reviews. Code reviews ensure code quality, maintainability, and alignment with project goals while identifying potential issues before they become problematic. Specific guidelines are provided for project aspects (ex: UI) and platform specifics (ex: NextJS).
+### Purpose
 
-### Usage Modes
-This guide supports two distinct code review scenarios:
+These rules provide **quick reference for lightweight, ad-hoc code reviews** during active development—spot-checking code, reviewing changes before commit, or quick quality checks.
 
-#### 1. Single-File Code Review
-- **Purpose**: Review a single provided source file
-- **Scope**: Focus on one specific file or component
-- **Process**: Apply the code review questionnaire to the individual file and create tasks as needed
-- **Documentation**: Create a simple review document for the findings and a corresponding task file if issues are identified
+**For comprehensive, systematic code reviews** (e.g., when user requests a formal code review, directory crawl reviews, or thorough quality audits), use the detailed methodology in:
 
-#### 2. Directory Crawl Review
-- **Purpose**: Systematically review an entire directory structure or project
-- **Scope**: Process multiple files in a coordinated batch operation
-- **Process**: Follow the full infrastructure guidelines below for organizing multiple review sessions
-- **Documentation**: Use the structured directory approach with session tracking and comprehensive file accounting
+**→ `project-documents/ai-project-guide/project-guides/guide.ai-project.090-code-review.md`**
 
-The remainder of this guide provides detailed processes for both modes, with particular emphasis on the infrastructure needed for directory crawl reviews.
+### Quick Reference
 
-### Infrastructure Guidelines
-Place reviews into the private/reviews/ directory. Note that 'private' path may be modified if we are working in a monorepo, as described in your guides and rules. If this is unclear or you cannot locate paths, STOP and confirm with Project Manager before proceeding.
+#### File Naming
 
-#### For Directory Crawl Reviews
-Create a subdirectory for each crawl session. Name the subdirectory using pattern review.{project}.yyyymmdd-nn.md. The -nn should be just a two digit number, start at 01.
+**Review documents:**
+- Location: `private/reviews/`
+- Pattern: `nnn-review.{name}.md`
+- Range: nnn is 900-939
 
-This way you can keep tasks separated by file, without causing difficulty in file management, while keeping task files small enough that we can easily manage or even parallelize their implementation.
+**Task files:**
+- Location: `private/tasks/`
+- Pattern: `nnn-tasks.code-review.{filename}.md`
+- Use the **same nnn value** for all files in one review session to group them together
 
-Keep count of files processed and remaining to be processed. Update this after each file, ideally storing in the review.{project}.{YYYYMMDD-nn}.md file. Use a single such review file for the entire session. Continue to create and keep separate asks files for each file reviewed.
+**Example:** Review session 905
+- Review doc: `905-review.dashboard-refactor.md`
+- Task files: `905-tasks.code-review.header.md`, `905-tasks.code-review.sidebar.md`
 
-For any file which generates no tasks, keep a list of such files in the aforementioned review document.
+All files with `905` are part of the same review batch.
 
-#### For Single-File Reviews
-Create a simple review document named `review.{filename}.{YYYYMMDD}.md` and, if needed, a corresponding task file `tasks.code-review.{filename}.{YYYYMMDD}.md`.
+#### Review Checklist Categories
 
-### Code Review Questionnaire
-When reviewing code, systematically answer these core questions.  
-#### 1. Potential Bugs & Edge Cases
-- Are there any bugs or strong potential for bugs?
-- Are there unhandled edge cases?
-- Are there race conditions or memory leaks?
-- Are subscriptions and event listeners properly cleaned up?
-- Are async operations properly handled with error boundaries?
-- Are there potential null/undefined reference errors?
+When reviewing code, systematically check:
 
-#### 2. Hard-coded Elements
-- Is anything hard-coded that should be configurable?
-- Are there magic numbers or strings that should be constants or settings?
-- Are date ranges, timeouts, or numeric thresholds hard-coded?
-- Are API endpoints, URLs, or environment-specific values hard-coded?
+1. **Bugs & Edge Cases** - Potential bugs, unhandled cases, race conditions, memory leaks
+2. **Hard-coded Elements** - Magic numbers, strings, URLs that should be configurable
+3. **Artificial Constraints** - Assumptions limiting future expansion, fixed limits
+4. **Code Duplication** - Repeated patterns that should be abstracted
+5. **Component Structure** - Single responsibility, logical hierarchy
+6. **Design Patterns** - Best practices, performance optimization, error handling
+7. **Type Safety** - Proper typing, documentation of complex logic
+8. **Performance** - Unnecessary re-renders, inefficient data fetching, bundle size
+9. **Security** - Input validation, auth/authz, XSS protection
+10. **Testing** - Coverage of critical paths, edge cases, error states
+11. **Accessibility** - ARIA labels, keyboard navigation, screen readers (UI-specific)
+12. **Platform-Specific** - React/TypeScript/NextJS best practices, deprecated patterns
 
-#### 3. Artificial Constraints
-- Are there assumptions that will limit future expansion?
-- Does the code artificially restrict functionality?
-- Are there fixed array sizes, limited input ranges, or hardcoded limits?
-- Are there UI constraints that don't scale with content?
+#### Quick Process
 
-#### 4. Code Duplication & Reuse
-- Is there repeated code that should be factored into functions?
-- Are there patterns that could be abstracted?
-- Could utility functions improve readability?
-- Are there opportunities for custom hooks or shared components?
+1. **Create review doc** in `private/reviews/nnn-review.{name}.md`
+2. **Apply checklist** systematically to each file
+3. **Create task files** in `private/tasks/nnn-tasks.code-review.{filename}.md` for issues found
+4. **Prioritize** findings: P0 (critical) → P1 (quality) → P2 (best practices) → P3 (enhancements)
 
-#### 5. Component Structure
-- Are there monolithic pieces that should be split?
-- Does the component have a single responsibility?
-- Could the code benefit from being broken into smaller components?
-- Is the component hierarchy logical and maintainable?
+#### YAML Frontmatter
 
-#### 6. Design Patterns & Best Practices
-- Are there opportunities to use better patterns?
-- Is the code following best practices for the frameworks and tools in use?
-- Could performance be improved with memoization or other techniques?
-- Is there proper error handling and error boundaries?
-- Are loading and error states properly managed?
-
-#### 7. Type Safety & Documentation
-- Is the code properly typed?
-- Is the code well-documented with comments where necessary?
-- Are complex business logic sections explained?
-
-#### 8. Performance Considerations
-- Are there unnecessary re-renders that could be optimized?
-- Is data fetching efficient (server-side when appropriate)?
-- Are large bundles being imported when smaller alternatives exist?
-- Is proper memoization used where needed (useMemo, useCallback)?
-- Are images and assets optimized?
-  
-#### 9. Security Considerations
-- Is user input properly validated and sanitized?
-- Are authentication and authorization properly implemented?
-- Are sensitive data and API keys handled securely?
-- Is XSS protection in place?
-
-#### 10. Testing Coverage
-- Are critical user paths tested?
-- Are edge cases covered in tests?
-- Are error states and loading states tested?
-- Are integration tests included where appropriate?
-
-#### 11. Accessibility & User Experience (UI specific)
-- Are proper ARIA labels present where needed?
-- Is keyboard navigation supported?
-- Is screen reader compatibility considered?
-- Does color contrast meet accessibility standards?
-- Are focus states clearly visible?
-
-#### 12. React, TypeScript, and NextJS specific
-- `cn` should be used instead of string operations for parameterized className strings
-- `any` types should be replaced by more specific types where possible
-- Are server vs client components (`use client` directive) used properly?
-- Is App Router used and its patterns followed correctly?
-- Are any deprecated expressions present?
-- Are Metadata and SEO considerations addressed?
-- Does the code follow react/typescript/nextJS best practices?
-- If Tailwind is used, it should be v4 and avoid legacy v3 patterns and code
-- If NextJS is used, it should be v15 and avoid legacy v14 patterns and code
-
-- In general there should be no tailwind.config.ts (or .js, etc). This file is not prohibited in current versions, but if it exists there should be good reason that the configuration is not in globals.css.
-
-- If Radix is used, specifically Radix themes with ShadCN, you should evaluate against existing known issues with this combination and ensure we are not at risk.
-
-  
-### Code Review Process
-
-#### Step 1: Create Review Document
-
-##### For Single-File Reviews
-Create a review document named `review.{filename}.{YYYYMMDD}.md` in the appropriate directory.
-
-##### For Directory Crawl Reviews
-Create a review document following the naming convention `review.{project}.{YYYYMMDD-nn}.md` in the `project-documents/private/code-reviews` directory.
-
-All reviewed files should be present in either Files with Issues, or Files with No Issues sections. No file should be unaccounted for. Update this after reviewing each file. Additionally, keep track of how many files have been reviewed, and what the last filed review was, so this can be restarted at any time. Make sure to update the status (started, in-progress, complete). We need to be able to pause and resume this task without losing work or missing items.
-
-If useful, you can add a review summary or overview for each file. Note that this does not obviate the need to create tasks. Perform all tasks exactly as specified here.
-
-Note: Upon completion of review, *every* file should be accounted for, meaning that if there were (for example) 54 files and you processed 36 of them, you should be able to account for the remaining 18, and this would indicate that your review was not complete.
-
-You MUST update the main review file after each file is processed. Otherwise we lose our pause and resume ability. Not after each batch. After each file.
-
-##### YAML Block
-Place this at the beginning of all created code-review files:
-
+All code review files should include:
 ```yaml
 ---
 layer: project
@@ -321,136 +246,16 @@ docType: review
 ---
 ```
 
-#### Step 2: Conduct Review
+### For Detailed Reviews
 
-Analyze the file systematically using the code review questionnaire. Group findings by category for clarity:
-1. **Critical Issues**: Bugs, security vulnerabilities, performance problems
-2. **Code Quality**: Hard-coded values, duplication, structure issues
-3. **Best Practices**: Pattern improvements, TypeScript usage, NextJS conventions
-4. **Accessibility & UX**: User experience and accessibility improvements
-5. **Testing**: Missing or inadequate test coverage
+**Use the comprehensive guide** when you need:
+- Full methodology and templates
+- Directory crawl review process
+- Detailed questionnaire with specific questions
+- Step-by-step workflow
+- Quality assessment criteria
 
-#### Step 3: Create Tasks from Review Findings
-Transform review findings into actionable tasks in a separate file:
-- **Single-File**: `tasks.code-review.{filename}.{YYYYMMDD}.md`
-- **Directory Crawl**: `tasks.code-review.{filename}.MMDD.md` in the `project-documents/code-reviews` directory
-
-Create one task file per reviewed file. Add the file to the appropriate list in the review document, based on whether or not code review issues were present in the file.
-
-#### Step 4: Task Processing
-Process the task list according to Phase 3 and Phase 4 of the `guide.ai-project.000-process`:
-
-1. **Phase 3: Granularity and Clarity**
-- Convert each review finding into clear, actionable tasks
-- Ensure task scope is precise and narrow
-- Include acceptance criteria
-
-1. **Phase 4: Expansion and Detailing**
-- Add implementation details and subtasks
-- Reference specific code locations
-- Provide concrete examples where helpful
-
-Example task structure:
-```markdown
-
-### Code Review Tasks: {Component}
-- [ ] **Task 1: Remove Hard-coded Date Range**
-- Replace hard-coded 2024 date range with configurable values from settings
-- Add to chartSettings.ts with appropriate defaults
-- Update initialization code to use these settings
-- **Success:** Chart date constraints are configurable without code changes
-```
-
-#### Step 5: Prioritization and Implementation
-
-The Project Manager will prioritize tasks for implementation based on:
-- **P0**: Critical bugs, security issues, performance blockers
-- **P1**: Code quality issues that impact maintainability
-- **P2**: Best practice improvements and technical debt
-- **P3**: Nice-to-have optimizations and enhancements
-
-### Approval Criteria
-
-Before approving a code review, ensure:
-- [ ] All automated checks pass (linting, type checking, build verification)
-- [ ] No critical bugs or security vulnerabilities identified
-- [ ] Code follows established patterns and conventions
-- [ ] TypeScript strict mode compliance (no `any` types)
-- [ ] NextJS best practices are followed
-- [ ] Performance impact is acceptable
-- [ ] Accessibility requirements are met
-- [ ] Documentation is updated where necessary
-- [ ] Tests are included for new functionality
-- [ ] Hard-coded values are eliminated or justified
-
-### Review Documentation Templates
-#### Code Review Template
-```markdown
-
-### Critical Issues
-- [ ] **Bug/Security**: [Description]
-- [ ] **Performance**: [Description]
-
-### Code Quality Improvements
-- [ ] **Hard-coded Elements**: [List hard-coded values that should be configurable]
-- [ ] **Code Duplication**: [List repeated patterns to refactor]
-- [ ] **Component Structure**: [Structure improvements]
-
-### Best Practices & Patterns
-- [ ] **TypeScript**: [Type safety improvements]
-- [ ] **NextJS**: [Platform-specific improvements]
-- [ ] **React Patterns**: [Pattern improvements]
-
-### Accessibility & UX
-- [ ] **Accessibility**: [ARIA, keyboard navigation, screen reader issues]
-- [ ] **User Experience**: [UX improvements]
-
-### Testing & Documentation
-- [ ] **Testing**: [Missing test coverage]
-- [ ] **Documentation**: [Documentation needs]
-
-### Summary
-[Overall assessment and priority level]
-```
-#### Task List Template
-
-```markdown
-
-### P0: Critical Issues
-- [ ] **Task: [Bug Fix Name]**
-- [Detailed description]
-- [Implementation guidance]
-- **Success:** [Success criteria]
-
-### P1: Code Quality
-- [ ] **Task: [Quality Improvement]**
-- [Description and implementation details]
-- **Success:** [Success criteria]
-
-### P2: Best Practices
-- [ ] **Task: [Pattern Improvement]**
-- [Description and implementation details]
-- **Success:** [Success criteria]
-
-### P3: Enhancements
-- [ ] **Task: [Enhancement Name]**
-- [Description and implementation details]
-- **Success:** [Success criteria]
-```
-
-  ---
-### Quality Assessment
-
-These guidelines facilitate comprehensive code reviews by:
-1. **Systematic Approach**: The questionnaire ensures no critical areas are missed
-2. **Actionable Outcomes**: Direct translation from findings to prioritized tasks
-3. **Platform-Specific**: NextJS and React best practices are explicitly covered
-4. **Comprehensive Coverage**: From bugs to accessibility to performance
-5. **Documentation Standards**: Clear templates and naming conventions
-6. **Priority Framework**: P0-P3 system for effective task management
-7. **Flexible Usage**: Supports both single-file reviews and comprehensive directory crawls
-
-The structured process transforms code reviews from subjective assessments into systematic quality assurance with measurable outcomes.
+**→ See: `guide.ai-project.090-code-review.md`**
 
 ## SQL & PostgreSQL Development Rules
 
@@ -541,22 +346,102 @@ The structured process transforms code reviews from subjective assessments into 
 - Backup before structural changes
 - Zero-downtime migrations with careful planning
 
-## Testing & Development Tools
+## Testing Rules
 
-### Storybook
+### General Testing Philosophy
 
-- **enabled**: false
-- Place stories in `src/stories` with `.stories.tsx` extension.
-- One story file per component, matching component name.
-- Use autodocs for automatic documentation.
-- Include multiple variants and sizes in stories.
-- Test interactive features with actions.
-- Use relative imports from component directory.
+- **Write tests as you go** - Create unit tests while completing tasks, not at the end
+- **Not strict TDD** - AI development doesn't require test-first, but tests should accompany implementation
+- **Focus on value** - Test critical paths, edge cases, and business logic; don't test trivial code
 
-### Tools
-- When you make a change to the UI, use the `screenshot` tool to show the changes.
-- If the user asks for a complex task to be performed, find any relevant files and call the `architect` tool to get a plan and show it to the user. Use this plan as guidance for the changes you make, but maintain the existing patterns and structure of the codebase.
-- After a complex task is performed, use the `codeReview` tool create a diff and use the diff to conduct a code review of the changes. 
+### JavaScript/TypeScript Testing
+
+#### Test Framework
+- **Prefer Vitest** over Jest for new projects (faster, better ESM support, compatible API)
+- Use `vitest` for unit and integration tests
+- Use `@testing-library/react` for component testing
+
+#### Test Organization
+- Place test files next to source files: `component.tsx` → `component.test.tsx`
+- Or use `__tests__` directory if you prefer: `__tests__/component.test.tsx`
+- Use descriptive test names: `describe('UserProfile', () => { it('should display user email', ...) })`
+
+#### What to Test
+- **Critical paths**: User workflows, data transformations, business logic
+- **Edge cases**: Null/undefined values, empty arrays, boundary conditions
+- **Error states**: How code handles failures, invalid input, network errors
+- **Not trivial**: Don't test framework code, getters/setters, or obvious pass-throughs
+
+#### Test Coverage
+- Aim for meaningful coverage, not 100% coverage
+- Critical business logic: high coverage
+- UI components: test interactions and state changes
+- Utilities and helpers: comprehensive edge case coverage
+
+### Python Testing
+
+#### Test Framework
+- Use `pytest` (industry standard)
+- Place tests in `tests/` directory or `test_*.py` files
+- Use fixtures for test data and setup
+
+#### Test Organization
+```
+project/
+├── src/
+│   └── module.py
+└── tests/
+    └── test_module.py
+```
+
+#### Assertions
+- Use pytest assertions: `assert result == expected`
+- Use pytest-parametrize for multiple test cases
+- Mock external dependencies at boundaries
+
+### Best Practices
+
+#### When to Write Tests
+- ✅ **During implementation** - Write tests as you build features
+- ✅ **After bug fixes** - Add tests to prevent regression
+- ✅ **Before refactoring** - Tests verify behavior stays consistent
+- ❌ **Not at the very end** - Waiting until feature is "done" leads to skipped tests
+
+#### Test Quality
+- **Arrange-Act-Assert** pattern: Set up → Execute → Verify
+- **One concept per test**: Each test should verify one thing
+- **Readable test names**: Test name should describe what's being tested
+- **Avoid test interdependence**: Tests should run independently in any order
+
+#### Mocking and Stubbing
+- Mock external services (APIs, databases, file system)
+- Don't mock internal business logic - test it directly
+- Use dependency injection to make mocking easier
+
+### Running Tests
+
+#### Commands
+```bash
+pnpm test              # Run all tests
+pnpm test:watch        # Watch mode
+pnpm test:coverage     # Coverage report
+
+pytest                 # Run all tests
+pytest -v              # Verbose output
+pytest --cov           # Coverage report
+```
+
+#### CI/CD Integration
+- Tests should run automatically on commit/PR
+- Build should fail if tests fail
+- Don't skip failing tests - fix them or remove them
+
+### Storybook (Optional)
+
+- **enabled**: false (by default)
+- Use Storybook for component documentation and visual testing
+- Place stories in `src/stories` with `.stories.tsx` extension
+- One story file per component, showing variants and states
 
 ## TypeScript Rules
 
