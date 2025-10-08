@@ -17,8 +17,12 @@ if [ -d "$SUBMODULE_PATH/.git" ] || [ -f "$SUBMODULE_PATH/.git" ]; then
     echo "📚 Updating existing submodule at $SUBMODULE_PATH..."
     git submodule update --remote "$SUBMODULE_PATH"
     
-    # Show what changed
     cd "$SUBMODULE_PATH"
+    git checkout "$BRANCH"
+    git pull origin "$BRANCH"
+    cd - > /dev/null
+
+    # Show what changed
     LATEST_COMMIT=$(git log -1 --oneline)
     echo ""
     echo "✅ Updated to: $LATEST_COMMIT"
