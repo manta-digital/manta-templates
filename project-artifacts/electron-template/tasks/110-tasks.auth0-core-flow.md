@@ -94,11 +94,11 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 ### Task 2.2: Test PKCE Generation (Optional)
 **Effort**: 1/5
 
-- [ ] Create simple test to verify PKCE pair generation
-- [ ] Verify verifier is base64url encoded (no +, /, = characters)
-- [ ] Verify challenge is SHA-256 hash of verifier
-- [ ] Verify state is 32 bytes encoded as base64url
-- [ ] **Success**: PKCE generation produces valid, secure values
+- [x] Create simple test to verify PKCE pair generation
+- [x] Verify verifier is base64url encoded (no +, /, = characters)
+- [x] Verify challenge is SHA-256 hash of verifier
+- [x] Verify state is 32 bytes encoded as base64url
+- [x] **Success**: PKCE generation produces valid, secure values
 
 ## Phase 3: Auth0 Configuration
 
