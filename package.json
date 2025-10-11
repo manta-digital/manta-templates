@@ -3,7 +3,7 @@
     "version": "0.8.0",
     "private": true,
     "scripts": {
-        "sync-guides": "bash ./scripts/sync-guides.sh",
+        "update-guides": "bash project-documents/ai-project-guide/scripts/template-stubs/update-guides.sh",
         "sync-template": "node scripts/sync-template.js",
         "copy-packages": "node scripts/copy-packages.js",
         "copy-packages:nextjs": "node scripts/copy-packages.js nextjs",
