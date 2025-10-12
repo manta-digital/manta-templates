@@ -1,16 +1,17 @@
 // Load .env file first before reading environment variables
 import { config } from 'dotenv'
 import { join } from 'node:path'
+import { authLogger } from './logger'
 
 const envPath = join(process.cwd(), '.env')
 config({ path: envPath })
 
 // Debug: Log environment variables at startup
-console.log('🔍 AUTH ENV DEBUG (after dotenv load):')
-console.log('  process.env.AUTH_ENABLED:', process.env.AUTH_ENABLED)
-console.log('  process.env.AUTH0_DOMAIN:', process.env.AUTH0_DOMAIN)
-console.log('  process.env.AUTH0_CLIENT_ID:', process.env.AUTH0_CLIENT_ID ? '***set***' : 'not set')
-console.log('  process.env.NODE_ENV:', process.env.NODE_ENV)
+authLogger.debug('AUTH ENV DEBUG (after dotenv load):')
+authLogger.debug('  process.env.AUTH_ENABLED:', process.env.AUTH_ENABLED)
+authLogger.debug('  process.env.AUTH0_DOMAIN:', process.env.AUTH0_DOMAIN)
+authLogger.debug('  process.env.AUTH0_CLIENT_ID:', process.env.AUTH0_CLIENT_ID ? '***set***' : 'not set')
+authLogger.debug('  process.env.NODE_ENV:', process.env.NODE_ENV)
 
 // Check if auth is enabled - use process.env (main process)
 export const isAuthEnabled = process.env.AUTH_ENABLED === 'true'
@@ -31,15 +32,15 @@ export const auth0Config = {
 // Validation with helpful error message - only if auth is enabled
 if (isAuthEnabled) {
   if (!auth0Config.domain || !auth0Config.clientId) {
-    console.error(
-      '\n❌ Auth0 Configuration Error:\n' +
+    authLogger.error(
+      '\nAuth0 Configuration Error:\n' +
       '   AUTH_ENABLED is true but AUTH0_DOMAIN and AUTH0_CLIENT_ID are not set in .env\n' +
       '   See .env.example for required variables\n' +
       '   Set AUTH_ENABLED=false to disable authentication\n'
     )
     throw new Error('Missing Auth0 configuration')
   }
-  console.log('✓ Auth0 authentication enabled')
+  authLogger.success('Auth0 authentication enabled')
 } else {
-  console.log('ℹ Auth0 authentication disabled (AUTH_ENABLED not set to true)')
+  authLogger.info('Auth0 authentication disabled (AUTH_ENABLED not set to true)')
 }

@@ -1,6 +1,7 @@
 import { shell } from 'electron'
 import { generatePKCEPair, generateState } from './pkce'
 import { auth0Config } from './auth0-config'
+import { authLogger } from './logger'
 
 /**
  * Auth0 OAuth 2.0 + PKCE Client for Electron (Slice 110)
@@ -26,7 +27,6 @@ class Auth0Client {
   private pendingAuth: PendingAuth | null = null
   private tokens: TokenSet | null = null // In-memory only - Slice 111 adds persistence
   private readonly STATE_TIMEOUT = 10 * 60 * 1000 // 10 minutes
-  private readonly debug = process.env.NODE_ENV === 'development'
 
   async login(): Promise<void> {
     const { verifier, challenge } = generatePKCEPair()
@@ -53,13 +53,12 @@ class Auth0Client {
       authUrl.searchParams.set('audience', auth0Config.audience)
     }
 
-    if (this.debug) {
-      console.log('🔐 Auth URL:', authUrl.toString())
-      console.log('📋 State:', state)
-      console.log('🔑 Code Challenge:', challenge.substring(0, 20) + '...')
-    }
+    // Log sensitive auth data (only in dev with AUTH_DEBUG)
+    authLogger.sensitive('Auth URL:', authUrl.toString())
+    authLogger.sensitive('State:', state)
+    authLogger.sensitive('Code Challenge:', challenge.substring(0, 20) + '...')
 
-    console.log('Opening auth URL in browser...')
+    authLogger.debug('Opening auth URL in browser...')
     await shell.openExternal(authUrl.toString())
   }
 
@@ -96,8 +95,8 @@ class Auth0Client {
     this.tokens = tokens
     this.pendingAuth = null
 
-    console.log('✅ Login successful! Tokens stored in memory.')
-    console.log('Token expiry:', new Date(tokens.expiresAt))
+    authLogger.success('Login successful! Tokens stored in memory.')
+    authLogger.success('Token expiry:', new Date(tokens.expiresAt))
   }
 
   private verifyState(receivedState: string | null): boolean {
