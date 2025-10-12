@@ -15,13 +15,20 @@ export function TestAuth() {
   const handleLogin = async () => {
     console.log('Login button clicked')
     console.log('window.electronAPI:', window.electronAPI)
+    console.log('window.electronAPI keys:', window.electronAPI ? Object.keys(window.electronAPI) : 'undefined')
     console.log('window.electronAPI.auth:', window.electronAPI?.auth)
+    console.log('window.electronAPI.auth keys:', window.electronAPI?.auth ? Object.keys(window.electronAPI.auth) : 'undefined')
+    console.log('window.electronAPI.auth.login type:', typeof window.electronAPI?.auth?.login)
 
     try {
       setError(null)
       setLoading(true)
 
       if (!window.electronAPI?.auth?.login) {
+        console.error('❌ Auth API check failed!')
+        console.error('  window.electronAPI exists?', !!window.electronAPI)
+        console.error('  window.electronAPI.auth exists?', !!window.electronAPI?.auth)
+        console.error('  window.electronAPI.auth.login exists?', !!window.electronAPI?.auth?.login)
         throw new Error('Auth API not available - is AUTH_ENABLED=true?')
       }
 

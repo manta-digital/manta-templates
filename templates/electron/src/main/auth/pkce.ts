@@ -1,8 +1,8 @@
 import crypto from 'crypto'
 
 export function generatePKCEPair(): { verifier: string; challenge: string } {
-  // Generate random verifier (128 bytes)
-  const verifier = crypto.randomBytes(128).toString('base64url')
+  // Generate random verifier (64 bytes = ~86 chars base64url, within 43-128 char limit)
+  const verifier = crypto.randomBytes(64).toString('base64url')
 
   // Generate SHA-256 challenge
   const hash = crypto.createHash('sha256')

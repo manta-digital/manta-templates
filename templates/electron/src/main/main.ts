@@ -1,7 +1,4 @@
-// Load environment variables FIRST before any other imports
-import { config } from 'dotenv'
-config() // Load .env file into process.env
-
+// Note: .env loading is handled in auth0-config.ts before it reads env vars
 import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
@@ -35,13 +32,17 @@ function isAllowedUrl(target: string): boolean {
 }
 
 function createWindow(): void {
+  const preloadPath = fileURLToPath(new URL('../preload/preload.cjs', import.meta.url))
+  console.log('🔍 Preload script path:', preloadPath)
+  console.log('🔍 Preload script exists:', require('fs').existsSync(preloadPath))
+
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: fileURLToPath(new URL('../preload/preload.cjs', import.meta.url)),
+      preload: preloadPath,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: !process.env.ELECTRON_RENDERER_URL

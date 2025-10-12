@@ -1,5 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
+console.log('🔍 PRELOAD SCRIPT IS RUNNING!')
+console.log('🔍 contextBridge available:', !!contextBridge)
+console.log('🔍 ipcRenderer available:', !!ipcRenderer)
+
 // TypeScript types for renderer
 interface TokenSet {
   accessToken: string
@@ -21,6 +25,8 @@ declare global {
   }
 }
 
+console.log('🔍 About to expose electronAPI to main world...')
+
 contextBridge.exposeInMainWorld('electronAPI', {
   ping: () => ipcRenderer.invoke('ping'),
   getAppVersion: () => ipcRenderer.invoke('get-app-version'),
@@ -29,3 +35,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getTokens: () => ipcRenderer.invoke('auth:get-tokens')
   }
 })
+
+console.log('✅ PRELOAD SCRIPT: electronAPI exposed successfully!')
