@@ -454,20 +454,20 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 
 **Prerequisites**: Auth0 app configured, env vars set
 
-- [ ] Start Electron app in development mode: `pnpm dev`
-- [ ] Open Electron DevTools (F12)
-- [ ] Click "Login with Auth0" button in Test UI
-- [ ] Verify external browser opens with Auth0 login page
-- [ ] Check console for debug logs (auth URL, state, challenge)
-- [ ] Complete authentication in browser
-- [ ] Verify app intercepts callback (check console logs)
-- [ ] Click "Get Tokens" button
-- [ ] Verify tokens display with:
+- [x] Start Electron app in development mode: `pnpm dev`
+- [x] Open Electron DevTools (F12)
+- [x] Click "Login with Auth0" button in Test UI
+- [x] Verify external browser opens with Auth0 login page
+- [x] Check console for debug logs (auth URL, state, challenge)
+- [x] Complete authentication in browser
+- [x] Verify app intercepts callback (check console logs)
+- [x] Click "Get Tokens" button
+- [x] Verify tokens display with:
   - `accessToken` present
   - `refreshToken` present
   - `idToken` present
   - `expiresAt` timestamp is future date
-- [ ] **Success**: Complete OAuth flow works end-to-end
+- [x] **Success**: Complete OAuth flow works end-to-end
 
 **Debugging**: If callback not intercepted, verify protocol registered in OS
 
