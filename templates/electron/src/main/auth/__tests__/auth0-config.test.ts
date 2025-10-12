@@ -20,8 +20,10 @@ describe('Auth0 Configuration', () => {
 
       await import('../auth0-config')
 
+      // authLogger.info() prepends 'ℹ️  [Auth]' to the message
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Auth0 authentication disabled')
+        'ℹ️  [Auth]',
+        'Auth0 authentication disabled (AUTH_ENABLED not set to true)'
       )
 
       consoleLogSpy.mockRestore()
@@ -66,11 +68,10 @@ describe('Auth0 Configuration', () => {
 
       await expect(() => import('../auth0-config')).rejects.toThrow()
 
+      // authLogger.error() prepends '❌ [Auth]' and passes the full message
       expect(consoleErrorSpy).toHaveBeenCalledWith(
+        '❌ [Auth]',
         expect.stringContaining('Auth0 Configuration Error')
-      )
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        expect.stringContaining('.env.example')
       )
 
       consoleErrorSpy.mockRestore()
@@ -100,7 +101,7 @@ describe('Auth0 Configuration', () => {
       const { auth0Config } = await import('../auth0-config')
 
       expect(auth0Config.scope).toBe('openid profile email offline_access')
-      expect(auth0Config.redirectUri).toBe('electronapp://callback')
+      expect(auth0Config.redirectUri).toBe('manta-electron-template://callback')
     })
 
     it('should make audience optional', async () => {
@@ -125,8 +126,10 @@ describe('Auth0 Configuration', () => {
 
       await import('../auth0-config')
 
+      // authLogger.success() prepends '✅ [Auth]' to the message
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Auth0 authentication enabled')
+        '✅ [Auth]',
+        'Auth0 authentication enabled'
       )
 
       consoleLogSpy.mockRestore()

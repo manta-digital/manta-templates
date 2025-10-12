@@ -56,10 +56,10 @@ describe('PKCE Utilities', () => {
     it('should generate verifier of appropriate length', () => {
       const { verifier } = generatePKCEPair()
 
-      // 128 bytes -> base64url encodes to roughly 171 characters
-      // (128 * 8 / 6 ≈ 170.67, rounded up)
-      expect(verifier.length).toBeGreaterThanOrEqual(170)
-      expect(verifier.length).toBeLessThanOrEqual(172)
+      // 64 bytes -> base64url encodes to roughly 86 characters
+      // (64 * 8 / 6 ≈ 85.33, rounded up)
+      expect(verifier.length).toBeGreaterThanOrEqual(85)
+      expect(verifier.length).toBeLessThanOrEqual(87)
     })
 
     it('should generate challenge of SHA-256 length', () => {
