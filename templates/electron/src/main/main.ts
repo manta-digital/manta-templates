@@ -2,8 +2,20 @@ import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 import { registerAppProtocol, setupAppProtocolHandler } from './protocol-handler'
-import { registerAuthProtocol, setupAuthProtocolHandler } from './auth/protocol-handler'
-import { auth0Client } from './auth/auth0-client'
+import { isAuthEnabled } from './auth/auth0-config'
+
+// Conditionally import auth modules only if enabled
+let registerAuthProtocol: (() => void) | undefined
+let setupAuthProtocolHandler: (() => void) | undefined
+let auth0Client: any
+
+if (isAuthEnabled) {
+  const authProtocol = await import('./auth/protocol-handler')
+  const authClient = await import('./auth/auth0-client')
+  registerAuthProtocol = authProtocol.registerAuthProtocol
+  setupAuthProtocolHandler = authProtocol.setupAuthProtocolHandler
+  auth0Client = authClient.auth0Client
+}
 
 function isAllowedUrl(target: string): boolean {
   try {
@@ -55,14 +67,25 @@ function createWindow(): void {
     return app.getVersion()
   })
 
-  // Auth IPC handlers
-  ipcMain.handle('auth:login', async () => {
-    await auth0Client.login()
-  })
+  // Auth IPC handlers (only if auth is enabled)
+  if (isAuthEnabled && auth0Client) {
+    ipcMain.handle('auth:login', async () => {
+      await auth0Client.login()
+    })
 
-  ipcMain.handle('auth:get-tokens', () => {
-    return auth0Client.getTokens()
-  })
+    ipcMain.handle('auth:get-tokens', () => {
+      return auth0Client.getTokens()
+    })
+  } else {
+    // Return disabled message if auth is not enabled
+    ipcMain.handle('auth:login', async () => {
+      throw new Error('Auth is not enabled. Set AUTH_ENABLED=true in .env')
+    })
+
+    ipcMain.handle('auth:get-tokens', () => {
+      return null
+    })
+  }
 
   // Load renderer based on environment
   // Development: use Vite dev server at localhost:5173
@@ -82,13 +105,17 @@ function createWindow(): void {
 
 // Must register custom protocols before app is ready
 registerAppProtocol()
-registerAuthProtocol()
+if (isAuthEnabled && registerAuthProtocol) {
+  registerAuthProtocol()
+}
 
 app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
 
-  // Set up auth protocol handler for macOS
-  setupAuthProtocolHandler()
+  // Set up auth protocol handler for macOS (only if auth enabled)
+  if (isAuthEnabled && setupAuthProtocolHandler) {
+    setupAuthProtocolHandler()
+  }
 
   // Create minimal menu example (hidden by default with autoHideMenuBar: true)
   // Delete this entire menu section if you don't want a native menu
