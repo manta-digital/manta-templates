@@ -136,13 +136,14 @@ export function TestAuth() {
             color: '#333'
           }}>Tokens (In Memory)</h3>
           <pre style={{
-            background: '#fff',
+            background: '#1e1e1e',
+            color: '#d4d4d4',
             padding: '15px',
             borderRadius: '6px',
             overflow: 'auto',
             fontSize: '13px',
             lineHeight: '1.5',
-            border: '1px solid #dee2e6'
+            border: '1px solid #3e3e3e'
           }}>
             {JSON.stringify(tokens, null, 2)}
           </pre>
