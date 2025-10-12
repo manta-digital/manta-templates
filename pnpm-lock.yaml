@@ -271,6 +271,9 @@ importers:
       '@vitest/ui':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4)
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       electron:
         specifier: ^37.4.0
         version: 37.4.0
@@ -3178,8 +3181,8 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
-  chromedriver@140.0.4:
-    resolution: {integrity: sha512-/NUoxYBNkJeoNj1B5ux3KxGShITlxJctkbApgVAa3ZC8EvCLKaBclwU3/IEj5MJHnBJzqOVDxs/eTyaF9k2fOg==}
+  chromedriver@141.0.2:
+    resolution: {integrity: sha512-MNtgzm5SjTtbHDXlpuXkQ7brxkOYTK+qDbnmr7UrurfuhqJfIkL+nnKo7hev/hR6sFL8mV8r5+1Kn51Mo9zsDg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -3482,6 +3485,10 @@ packages:
 
   dotenv@16.5.0:
     resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
+    engines: {node: '>=12'}
+
+  dotenv@17.2.3:
+    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
 
   downshift@9.0.10:
@@ -6561,7 +6568,7 @@ snapshots:
     dependencies:
       '@axe-core/webdriverjs': 4.10.2(selenium-webdriver@4.22.0)
       axe-core: 4.10.3
-      chromedriver: 140.0.4
+      chromedriver: 141.0.2
       colors: 1.4.0
       commander: 9.5.0
       dotenv: 16.5.0
@@ -9257,7 +9264,7 @@ snapshots:
 
   chownr@3.0.0: {}
 
-  chromedriver@140.0.4:
+  chromedriver@141.0.2:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.12.2
@@ -9538,6 +9545,8 @@ snapshots:
       dotenv: 16.5.0
 
   dotenv@16.5.0: {}
+
+  dotenv@17.2.3: {}
 
   downshift@9.0.10(react@19.1.1):
     dependencies:

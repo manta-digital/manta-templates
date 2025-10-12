@@ -24,7 +24,7 @@
     "ai:test": "pnpm run typecheck && pnpm run lint && pnpm run test:run",
     "ai:setup": "pnpm install && pnpm run typecheck",
     "setup-guides": "curl -fsSL https://raw.githubusercontent.com/ecorkran/ai-project-guide/main/scripts/bootstrap.sh | bash",
-    "update-guides": "bash project-documents/ai-project-guide/scripts/template-stubs/update-guides.sh"  
+    "update-guides": "bash project-documents/ai-project-guide/scripts/template-stubs/update-guides.sh"
   },
   "keywords": [
     "electron",
@@ -47,6 +47,7 @@
     "@typescript-eslint/parser": "^8.39.1",
     "@vitejs/plugin-react": "^5.0.0",
     "@vitest/ui": "^3.2.4",
+    "dotenv": "^17.2.3",
     "electron": "^37.4.0",
     "electron-builder": "^26.0.12",
     "electron-vite": "^4.0.0",

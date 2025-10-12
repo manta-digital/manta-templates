@@ -1,3 +1,7 @@
+// Load environment variables FIRST before any other imports
+import { config } from 'dotenv'
+config() // Load .env file into process.env
+
 import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'

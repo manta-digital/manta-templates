@@ -1,3 +1,10 @@
+// Debug: Log environment variables at startup
+console.log('🔍 AUTH ENV DEBUG:')
+console.log('  AUTH_ENABLED:', process.env.AUTH_ENABLED)
+console.log('  AUTH0_DOMAIN:', process.env.AUTH0_DOMAIN)
+console.log('  AUTH0_CLIENT_ID:', process.env.AUTH0_CLIENT_ID ? '***set***' : 'not set')
+console.log('  NODE_ENV:', process.env.NODE_ENV)
+
 // Check if auth is enabled
 export const isAuthEnabled = process.env.AUTH_ENABLED === 'true'
 
