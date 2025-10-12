@@ -7,8 +7,8 @@ slice: 110-slice.auth0-core-flow
 sliceDesign: project-artifacts/electron-template/slices/110-slice.auth0-core-flow.md
 dependencies: []
 projectState: Electron template base complete - no auth implemented
-status: complete
-lastUpdated: 2025-10-05
+status: in-progress
+lastUpdated: 2025-10-12
 ---
 
 # Tasks: Auth0 Core OAuth Flow (Slice 110)
@@ -536,6 +536,76 @@ Implementing Auth0 OAuth 2.0 + PKCE authentication for macOS only. This establis
 - [x] Add comment in code noting: "Tokens in memory only - Slice 111 adds persistence"
 - [x] Note that Windows/Linux support comes in Slice 114
 - [x] **Success**: Clear what's MVP vs. future enhancements
+
+## Phase 11: Logging Integration
+
+### Task 11.1: Integrate authLogger into Auth Files
+**Effort**: 2/5
+
+**Context**: The authLogger utility was created to provide environment-aware, security-conscious logging. This task integrates it into all auth files, replacing raw console statements with the structured logger.
+
+**Files to Modify**:
+- `src/main/auth/auth0-config.ts` (8 console statements)
+- `src/main/auth/protocol-handler.ts` (7 console statements)
+- `src/main/auth/auth0-client.ts` (6 console statements)
+
+**Logging Method Mapping**:
+- Debug logs (🔍, 🔑, 🔐, 📋) → `authLogger.debug()`
+- Info logs (ℹ️, general info) → `authLogger.info()`
+- Success logs (✓, ✅) → `authLogger.success()`
+- Error logs (❌) → `authLogger.error()`
+- Sensitive data (tokens, verifier, state) → `authLogger.sensitive()`
+
+**Implementation Steps**:
+
+- [ ] **auth0-config.ts Integration**:
+  - [ ] Import authLogger: `import { authLogger } from './logger'`
+  - [ ] Replace lines 9-13 (env debug) with `authLogger.debug()`
+  - [ ] Replace line 34 (error) with `authLogger.error()`
+  - [ ] Replace line 42 (enabled) with `authLogger.success()`
+  - [ ] Replace line 44 (disabled) with `authLogger.info()`
+  - [ ] **Success**: All 8 console statements replaced
+
+- [ ] **protocol-handler.ts Integration**:
+  - [ ] Import authLogger: `import { authLogger } from './logger'`
+  - [ ] Replace lines 31-32 (protocol registration) with `authLogger.debug()`
+  - [ ] Replace line 38 (received callback) with `authLogger.debug()`
+  - [ ] Replace line 42 (processing) with `authLogger.debug()`
+  - [ ] Replace line 44 (success) with `authLogger.success()`
+  - [ ] Replace line 46 (error) with `authLogger.error()`
+  - [ ] Replace line 51 (setup complete) with `authLogger.success()`
+  - [ ] **Success**: All 7 console statements replaced
+
+- [ ] **auth0-client.ts Integration**:
+  - [ ] Import authLogger: `import { authLogger } from './logger'`
+  - [ ] Replace lines 57-59 (auth URL, state, challenge) with `authLogger.sensitive()` for sensitive data
+  - [ ] Replace line 62 (opening browser) with `authLogger.debug()`
+  - [ ] Replace lines 99-100 (login success) with `authLogger.success()`
+  - [ ] **Success**: All 6 console statements replaced
+
+- [ ] **Testing**:
+  - [ ] Run `pnpm build` - verify no errors
+  - [ ] Test in development mode (`NODE_ENV=development`):
+    - [ ] Verify debug logs appear
+    - [ ] Verify sensitive logs appear with data
+    - [ ] Verify all logs prefixed with `[Auth]`
+  - [ ] Test in production mode (simulate):
+    - [ ] Set `NODE_ENV=production`
+    - [ ] Verify debug logs hidden
+    - [ ] Verify sensitive logs completely hidden
+    - [ ] Verify info/success/error logs still appear
+  - [ ] **Success**: Logs behave correctly in both environments
+
+- [ ] **Commit Changes**:
+  - [ ] Git add all modified auth files
+  - [ ] Commit with message: "feat(electron): integrate authLogger for environment-aware logging"
+  - [ ] **Success**: Changes committed
+
+**Security Benefits**:
+- ✅ Debug logs auto-disabled in production
+- ✅ Sensitive data (tokens, verifier, state) never logged in production
+- ✅ Consistent `[Auth]` prefix on all auth-related logs
+- ✅ `AUTH_DEBUG=true` env var enables prod debugging when needed
 
 ## Success Criteria Summary
 
