@@ -3,7 +3,7 @@ import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 import { registerAppProtocol, setupAppProtocolHandler } from './protocol-handler'
-import { isAuthEnabled } from './auth/auth0-config'
+import { isAuthEnabled, AUTH_PROTOCOL_SCHEME } from './auth/auth0-config'
 
 // Conditionally import auth modules only if enabled
 let registerAuthProtocol: (() => void) | undefined
@@ -106,6 +106,34 @@ function createWindow(): void {
     // Fallback for production build testing without NODE_ENV
     win.loadURL('app://./index.html')
   }
+}
+
+// Single instance lock - prevent multiple app instances
+// This is critical for auth callback handling
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock) {
+  // Another instance is already running, quit this one
+  app.quit()
+} else {
+  // We got the lock, set up second-instance handler for future attempts
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, focus our window instead
+    const allWindows = BrowserWindow.getAllWindows()
+    if (allWindows.length > 0) {
+      const mainWindow = allWindows[0]
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
+    }
+
+    // Check if the second instance was triggered by a protocol URL (auth callback)
+    // On macOS, the URL will be in the commandLine or will trigger open-url event
+    const url = commandLine.find(arg => arg.startsWith(`${AUTH_PROTOCOL_SCHEME}://`))
+    if (url) {
+      console.log('🔗 Protocol URL from second instance:', url)
+      // The open-url handler will process this
+    }
+  })
 }
 
 // Must register custom protocols before app is ready
