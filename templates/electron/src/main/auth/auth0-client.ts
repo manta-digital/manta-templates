@@ -6,8 +6,11 @@ import { authLogger } from './logger'
 /**
  * Auth0 OAuth 2.0 + PKCE Client for Electron (Slice 110)
  *
- * Tokens stored in memory only - Slice 111 adds persistent encrypted storage
- * macOS only - Windows/Linux support comes in Slice 114
+ * Features:
+ * - PKCE flow for secure authentication
+ * - Token expiry validation with 60s grace period
+ * - Tokens stored in memory only (Slice 111 adds persistent encrypted storage)
+ * - macOS only (Windows/Linux support comes in Slice 114)
  */
 
 interface PendingAuth {
@@ -27,6 +30,7 @@ class Auth0Client {
   private pendingAuth: PendingAuth | null = null
   private tokens: TokenSet | null = null // In-memory only - Slice 111 adds persistence
   private readonly STATE_TIMEOUT = 10 * 60 * 1000 // 10 minutes
+  private readonly TOKEN_GRACE_PERIOD = 60 * 1000 // 60 seconds
 
   async login(): Promise<void> {
     const { verifier, challenge } = generatePKCEPair()
@@ -149,9 +153,61 @@ class Auth0Client {
     }
   }
 
+  /**
+   * Get valid access token (internal use only)
+   *
+   * Validates token exists and hasn't expired. Uses grace period to prevent
+   * edge cases where token expires during API call.
+   *
+   * @throws {Error} If not authenticated or token expired
+   * @returns {string} Valid access token
+   *
+   * @example
+   * // In IPC handler or internal method
+   * try {
+   *   const token = this.getValidAccessToken()
+   *   // Use token for API call
+   * } catch (error) {
+   *   // Handle not authenticated or expired
+   * }
+   */
+  private getValidAccessToken(): string {
+    if (!this.tokens) {
+      throw new Error('Not authenticated - please login first')
+    }
+
+    // Check expiry with grace period
+    // Grace period prevents edge cases where token expires during API call
+    const now = Date.now()
+    const expiryWithGrace = this.tokens.expiresAt - this.TOKEN_GRACE_PERIOD
+
+    if (now >= expiryWithGrace) {
+      const expiryDate = new Date(this.tokens.expiresAt)
+      authLogger.warn('Access token expired at:', expiryDate)
+      // TODO (Slice 113): Implement automatic token refresh here
+      throw new Error('Session expired - please login again')
+    }
+
+    return this.tokens.accessToken
+  }
+
   // For debugging/testing
   getTokens(): TokenSet | null {
     return this.tokens
+  }
+
+  /**
+   * Check if user is authenticated with valid token
+   *
+   * @returns {boolean} True if authenticated with non-expired token
+   */
+  isAuthenticated(): boolean {
+    try {
+      this.getValidAccessToken()
+      return true
+    } catch {
+      return false
+    }
   }
 }
 
