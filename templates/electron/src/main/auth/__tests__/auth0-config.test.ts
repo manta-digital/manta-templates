@@ -101,7 +101,32 @@ describe('Auth0 Configuration', () => {
       const { auth0Config } = await import('../auth0-config')
 
       expect(auth0Config.scope).toBe('openid profile email offline_access')
-      expect(auth0Config.redirectUri).toBe('manta-electron-template://callback')
+      expect(auth0Config.redirectUri).toBe('electron-template-auth://callback')
+    })
+
+    it('should use custom protocol scheme from env var', async () => {
+      vi.stubEnv('AUTH_ENABLED', 'true')
+      vi.stubEnv('AUTH0_DOMAIN', 'test.auth0.com')
+      vi.stubEnv('AUTH0_CLIENT_ID', 'test-client-id')
+      vi.stubEnv('AUTH_PROTOCOL_SCHEME', 'my-custom-app-auth')
+      vi.resetModules()
+
+      const { auth0Config, AUTH_PROTOCOL_SCHEME } = await import('../auth0-config')
+
+      expect(AUTH_PROTOCOL_SCHEME).toBe('my-custom-app-auth')
+      expect(auth0Config.redirectUri).toBe('my-custom-app-auth://callback')
+    })
+
+    it('should fallback to default protocol scheme when not set', async () => {
+      vi.stubEnv('AUTH_ENABLED', 'true')
+      vi.stubEnv('AUTH0_DOMAIN', 'test.auth0.com')
+      vi.stubEnv('AUTH0_CLIENT_ID', 'test-client-id')
+      vi.stubEnv('AUTH_PROTOCOL_SCHEME', '')
+      vi.resetModules()
+
+      const { AUTH_PROTOCOL_SCHEME } = await import('../auth0-config')
+
+      expect(AUTH_PROTOCOL_SCHEME).toBe('electron-template-auth')
     })
 
     it('should make audience optional', async () => {

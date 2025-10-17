@@ -1,7 +1,8 @@
 import { shell } from 'electron'
 import { generatePKCEPair, generateState } from './pkce'
-import { auth0Config } from './auth0-config'
+import { auth0Config, getRedirectUri } from './auth0-config'
 import { authLogger } from './logger'
+import { startCallbackServer, stopCallbackServer } from './callback-server'
 
 /**
  * Auth0 OAuth 2.0 + PKCE Client for Electron (Slice 110)
@@ -33,6 +34,9 @@ class Auth0Client {
   private readonly TOKEN_GRACE_PERIOD = 60 * 1000 // 60 seconds
 
   async login(): Promise<void> {
+    // Start callback server on random port
+    await startCallbackServer()
+
     const { verifier, challenge } = generatePKCEPair()
     const state = generateState()
 
@@ -43,10 +47,11 @@ class Auth0Client {
       timestamp: Date.now()
     }
 
-    // Build authorization URL
+    // Build authorization URL with dynamic redirect URI
+    const redirectUri = getRedirectUri()
     const authUrl = new URL(`https://${auth0Config.domain}/authorize`)
     authUrl.searchParams.set('client_id', auth0Config.clientId)
-    authUrl.searchParams.set('redirect_uri', auth0Config.redirectUri)
+    authUrl.searchParams.set('redirect_uri', redirectUri)
     authUrl.searchParams.set('response_type', 'code')
     authUrl.searchParams.set('code_challenge', challenge)
     authUrl.searchParams.set('code_challenge_method', 'S256')
@@ -123,6 +128,7 @@ class Auth0Client {
     code: string,
     codeVerifier: string
   ): Promise<TokenSet> {
+    const redirectUri = getRedirectUri()
     const response = await fetch(
       `https://${auth0Config.domain}/oauth/token`,
       {
@@ -133,7 +139,7 @@ class Auth0Client {
           client_id: auth0Config.clientId,
           code,
           code_verifier: codeVerifier,
-          redirect_uri: auth0Config.redirectUri
+          redirect_uri: redirectUri
         })
       }
     )

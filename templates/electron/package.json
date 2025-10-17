@@ -115,6 +115,10 @@
       {
         "from": "out/renderer",
         "to": "renderer"
+      },
+      {
+        "from": ".env",
+        "to": ".env"
       }
     ],
     "asarUnpack": [],
