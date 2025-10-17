@@ -217,4 +217,89 @@ describe('Auth0Client', () => {
       expect(tokens?.expiresAt).toBeGreaterThan(Date.now())
     })
   })
+
+  describe('Token Expiry Validation', () => {
+    beforeEach(async () => {
+      // Setup: complete login flow to get tokens
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          access_token: 'test-access-token',
+          refresh_token: 'test-refresh-token',
+          id_token: 'test-id-token',
+          expires_in: 3600 // 1 hour
+        })
+      }) as any
+
+      await auth0Client.login()
+      const callbackUrl = 'electronapp://callback?code=test-code&state=test-state-789'
+      await auth0Client.handleCallback(callbackUrl)
+      vi.clearAllMocks()
+    })
+
+    it('should return true for authenticated user with valid token', () => {
+      expect(auth0Client.isAuthenticated()).toBe(true)
+    })
+
+    it('should return false when token is expired', () => {
+      // Mock Date.now() to simulate time passing
+      const realDateNow = Date.now.bind(global.Date)
+      const mockNow = realDateNow() + (2 * 60 * 60 * 1000) // 2 hours in future
+      global.Date.now = vi.fn(() => mockNow)
+
+      expect(auth0Client.isAuthenticated()).toBe(false)
+
+      // Restore
+      global.Date.now = realDateNow
+    })
+
+    it('should return true when token expires in 61 seconds (outside grace period)', () => {
+      // Mock Date.now() to simulate approaching expiry but still outside grace period
+      const tokens = auth0Client.getTokens()
+      const mockNow = tokens!.expiresAt - (61 * 1000) // 61 seconds before expiry
+
+      const realDateNow = Date.now.bind(global.Date)
+      global.Date.now = vi.fn(() => mockNow)
+
+      // Should still be valid (grace period is 60s, so 61s is still valid)
+      expect(auth0Client.isAuthenticated()).toBe(true)
+
+      global.Date.now = realDateNow
+    })
+
+    it('should return false when token expires in 59 seconds (within grace period)', () => {
+      // Mock Date.now() to simulate being within grace period
+      const tokens = auth0Client.getTokens()
+      const mockNow = tokens!.expiresAt - (59 * 1000) // 59 seconds before expiry
+
+      const realDateNow = Date.now.bind(global.Date)
+      global.Date.now = vi.fn(() => mockNow)
+
+      // Should be invalid (within 60s grace period)
+      expect(auth0Client.isAuthenticated()).toBe(false)
+
+      global.Date.now = realDateNow
+    })
+
+    it('should log warning when token is expired', async () => {
+      // Mock Date.now() and logger
+      const realDateNow = Date.now.bind(global.Date)
+      const mockNow = realDateNow() + (2 * 60 * 60 * 1000)
+      global.Date.now = vi.fn(() => mockNow)
+
+      // Import logger to spy on it
+      const loggerModule = await import('../logger')
+      const warnSpy = vi.spyOn(loggerModule.authLogger, 'warn')
+
+      auth0Client.isAuthenticated()
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        'Access token expired at:',
+        expect.any(Date)
+      )
+
+      global.Date.now = realDateNow
+      warnSpy.mockRestore()
+    })
+  })
 })
