@@ -1,5 +1,6 @@
 import { protocol } from 'electron';
 import path from 'node:path';
+import { APP_PROTOCOL_SCHEME } from './config/app-protocol';
 
 /**
  * Registers the app:// protocol with elevated privileges.
@@ -27,7 +28,7 @@ import path from 'node:path';
 export function registerAppProtocol(): void {
   protocol.registerSchemesAsPrivileged([
     {
-      scheme: 'app',
+      scheme: APP_PROTOCOL_SCHEME,
       privileges: {
         standard: true,
         secure: true,
@@ -64,7 +65,7 @@ export function registerAppProtocol(): void {
  * ```
  */
 export function setupAppProtocolHandler(): void {
-  protocol.registerFileProtocol('app', (request, callback) => {
+  protocol.registerFileProtocol(APP_PROTOCOL_SCHEME, (request, callback) => {
     try {
       // Parse the request URL
       const url = new URL(request.url);

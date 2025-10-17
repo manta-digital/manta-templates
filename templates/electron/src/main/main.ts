@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 import { registerAppProtocol, setupAppProtocolHandler } from './protocol-handler'
 import { isAuthEnabled, AUTH_PROTOCOL_SCHEME } from './auth/auth0-config'
+import { APP_PROTOCOL_SCHEME } from './config/app-protocol'
 
 // Conditionally import auth modules only if enabled
 let registerAuthProtocol: (() => void) | undefined
@@ -99,12 +100,12 @@ function createWindow(): void {
     // Development mode with Vite dev server
     win.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else if (process.env.NODE_ENV === 'production') {
-    // Production mode with app:// protocol
-    // Use app://./index.html to ensure relative URLs resolve correctly
-    win.loadURL('app://./index.html')
+    // Production mode with custom protocol
+    // Use protocol://./index.html to ensure relative URLs resolve correctly
+    win.loadURL(`${APP_PROTOCOL_SCHEME}://./index.html`)
   } else {
     // Fallback for production build testing without NODE_ENV
-    win.loadURL('app://./index.html')
+    win.loadURL(`${APP_PROTOCOL_SCHEME}://./index.html`)
   }
 }
 
