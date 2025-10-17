@@ -25,10 +25,10 @@ export async function startCallbackServer(): Promise<number> {
       reject(error)
     })
 
-    // Listen on fixed port 52847
+    // Listen on configured port (defaults to 52847)
     // Auth0 and Okta don't support RFC 8252 dynamic ports despite OAuth spec requiring it
-    // Using high port number to minimize conflicts
-    const AUTH_CALLBACK_PORT = 52847
+    // Each deployed app MUST use a different port - set AUTH_CALLBACK_PORT in .env
+    const AUTH_CALLBACK_PORT = parseInt(process.env.AUTH_CALLBACK_PORT || '52847', 10)
     server.listen(AUTH_CALLBACK_PORT, '127.0.0.1', () => {
       const address = server!.address()
       if (typeof address === 'object' && address !== null) {
