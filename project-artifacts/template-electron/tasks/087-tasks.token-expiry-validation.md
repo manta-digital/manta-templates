@@ -3,8 +3,9 @@ layer: project
 docType: tasks
 linkedIssue: 87
 priority: high
-status: in-progress
+status: complete
 lastUpdated: 2025-10-16
+completedDate: 2025-10-16
 ---
 
 # Tasks: Issue #87 - Token Expiry Validation
@@ -34,7 +35,7 @@ Add token expiry validation to Auth0Client to prevent API calls with expired tok
 
 ## Implementation Tasks
 
-### [ ] 1. Add Token Validation Constants
+### [x] 1. Add Token Validation Constants
 
 **File**: [src/main/auth/auth0-client.ts:29](../../../templates/electron/src/main/auth/auth0-client.ts#L29)
 
@@ -50,7 +51,7 @@ class Auth0Client {
 
 ---
 
-### [ ] 2. Add `getValidAccessToken()` Method
+### [x] 2. Add `getValidAccessToken()` Method
 
 **File**: [src/main/auth/auth0-client.ts:151](../../../templates/electron/src/main/auth/auth0-client.ts#L151)
 
@@ -111,7 +112,7 @@ Add new private method before `getTokens()`:
 
 ---
 
-### [ ] 3. Add `isAuthenticated()` Helper (Optional)
+### [x] 3. Add `isAuthenticated()` Helper (Optional)
 
 **File**: [src/main/auth/auth0-client.ts:170](../../../templates/electron/src/main/auth/auth0-client.ts#L170)
 
@@ -137,7 +138,7 @@ Add public helper method after `getTokens()`:
 
 ---
 
-### [ ] 4. Update Existing Tests
+### [x] 4. Update Existing Tests
 
 **File**: [src/main/auth/__tests__/auth0-client.test.ts:190](../../../templates/electron/src/main/auth/__tests__/auth0-client.test.ts#L190)
 
@@ -147,7 +148,7 @@ Update the `getTokens` describe block to add expiry tests.
 
 ---
 
-### [ ] 5. Add New Test Suite
+### [x] 5. Add New Test Suite
 
 **File**: [src/main/auth/__tests__/auth0-client.test.ts:220](../../../templates/electron/src/main/auth/__tests__/auth0-client.test.ts#L220)
 
@@ -293,14 +294,14 @@ export const auth0Client = new Auth0Client() // default instance
 
 Run tests to verify implementation:
 
-- [ ] `pnpm test` - All existing tests still pass
-- [ ] New tests cover:
-  - [ ] Valid token returns true
-  - [ ] No tokens returns false
-  - [ ] Expired token returns false
-  - [ ] Grace period boundary (61s = valid)
-  - [ ] Grace period boundary (59s = invalid)
-  - [ ] Warning logged on expiry
+- [x] `pnpm test` - All existing tests still pass (51/51 tests passing)
+- [x] New tests cover:
+  - [x] Valid token returns true
+  - [x] No tokens returns false
+  - [x] Expired token returns false
+  - [x] Grace period boundary (61s = valid)
+  - [x] Grace period boundary (59s = invalid)
+  - [x] Warning logged on expiry
 
 ---
 
@@ -372,21 +373,21 @@ private async getValidAccessTokenOrRefresh(): Promise<string> {
 
 ## Acceptance Criteria
 
-- [ ] `getValidAccessToken()` method added and working
-- [ ] Grace period constant defined and used
-- [ ] Clear error messages for different failure cases
-- [ ] Warning logged with expiry timestamp
-- [ ] `isAuthenticated()` helper method added
-- [ ] All existing tests still pass
-- [ ] New test suite covers all cases
-- [ ] Code documented with JSDoc comments
-- [ ] TODO comment added for Slice 113 integration
+- [x] `getValidAccessToken()` method added and working
+- [x] Grace period constant defined and used
+- [x] Clear error messages for different failure cases
+- [x] Warning logged with expiry timestamp
+- [x] `isAuthenticated()` helper method added
+- [x] All existing tests still pass (51/51 tests)
+- [x] New test suite covers all cases (5 new tests added)
+- [x] Code documented with JSDoc comments
+- [x] TODO comment added for Slice 113 integration
 
 ---
 
 ## Documentation Updates
 
-### [ ] Update Code Comments
+### [x] Update Code Comments
 
 In [auth0-client.ts:6-11](../../../templates/electron/src/main/auth/auth0-client.ts#L6-L11), update header comment:
 
