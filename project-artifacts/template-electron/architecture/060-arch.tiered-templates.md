@@ -2,10 +2,151 @@
 layer: project
 docType: architecture
 date: 2025-10-17
-status: proposed
+status: approved
+decision: separate-branches-with-license-keys
 ---
 
 # Architecture: Tiered Template Distribution (Free/Pro/Premium)
+
+## DECISION (2025-10-17)
+
+**Status**: ✅ APPROVED - Implementation in progress
+
+**Chosen Approach**: Separate Branches + License Key Distribution
+
+**Rationale**:
+- Simplicity over complexity for initial launch
+- Distribution via Lemon Squeezy license keys (not GitHub team access)
+- Can launch Pro tier within 3-5 days
+
+### Approved Tier Structure
+
+#### Free Tier (Public)
+**Price**: $0
+**Repository**: `github.com/manta-digital/manta-templates` (public, `main` branch)
+
+**Included**:
+- ✅ Electron base template
+- ✅ React template
+- ✅ Next.js template
+- ✅ UI components (Radix, Tailwind)
+- ✅ Basic routing, state management
+- ❌ NO auth
+- ❌ NO payments
+- ❌ NO advanced integrations
+
+#### Pro Tier (Private)
+**Price**: $149 (one-time, 1 year updates)
+**Repository**: `github.com/manta-digital/manta-templates-pro` (private, `pro` branch)
+**Distribution**: License key via Lemon Squeezy
+
+**Included**:
+- ✅ Everything in Free
+- ✅ **Auth providers**: Auth0 (working), Firebase, basic auth scaffold
+- ✅ **Email integration**: Resend, SendGrid, Postmark (contact forms, transactional emails)
+- ✅ **CAPTCHA protection**: Cloudflare Turnstile, reCAPTCHA v3, hCaptcha
+- ✅ **File uploads**: Uploadthing integration (images, documents, drag-drop)
+- ✅ **Lemon Squeezy integration** (checkout, webhooks, basic customer management)
+- ✅ **Pre-built forms**: Contact, signup, password reset (with validation)
+- ✅ **Rate limiting**: Upstash Redis (API protection, form spam prevention)
+- ✅ Comprehensive OAuth guides (Electron OAuth hell solved)
+- ✅ **All templates** (Electron, React, Next.js) - "Buy once, use everywhere"
+- ✅ 1 year of updates
+
+**Value Proposition**: "Production-ready auth + payments + email + forms in 5 minutes"
+
+#### Premium Tier (Future)
+**Price**: $299-399 (one-time, lifetime updates)
+**Repository**: TBD (private)
+**Distribution**: License key
+
+**Included**:
+- ✅ Everything in Pro
+- ✅ **Stripe integration** (full control, lower fees for scale)
+- ✅ **SMS/Phone verification**: Twilio integration (2FA, phone verification)
+- ✅ **Advanced file storage**: AWS S3 + CloudFront (scalable, cheap at scale)
+- ✅ **Deep Electron/Tauri integration** (custom protocols, all platform-specific pain solved)
+- ✅ **SciChart integration** (unique offering, high-value)
+- ✅ **Enterprise SSO** (Okta, Azure AD)
+- ✅ **All future auth providers** (Supabase, Stytch, etc.)
+- ✅ **Analytics**: Plausible, PostHog (privacy-focused, product analytics)
+- ✅ **Multi-tenant architecture** examples
+- ✅ **Full customer portal** (Lemon Squeezy advanced features)
+- ✅ **Webhook infrastructure** (pre-built handlers for common services)
+- ✅ Lifetime updates
+- ✅ Priority support
+
+**Value Proposition**: "Enterprise-ready, everything included, zero limitations"
+
+### Distribution Strategy: License Keys (APPROVED)
+
+**Method**: Lemon Squeezy auto-generates license keys on purchase
+
+**Customer Flow**:
+1. Customer purchases Pro tier ($149) on website
+2. Lemon Squeezy webhook fires
+3. Email sent with license key + setup instructions
+4. Customer uses CLI or manual setup:
+   ```bash
+   npx create-manta-app my-app --license MANTA-PRO-ABC123...
+   ```
+5. CLI validates key against API (Supabase backend)
+6. If valid → downloads template from private GitHub repo (temporary token)
+7. Customer has local copy, can modify freely
+
+**Why License Keys (vs GitHub Team Access)**:
+- ✅ Scalable - no manual user management
+- ✅ Revocable - deactivate on refund/chargeback
+- ✅ Trackable - analytics on template usage
+- ✅ Multi-template - same key works for Electron, React, Next.js
+- ✅ No GitHub requirement - customer doesn't need account
+- ✅ Future-proof - supports team licenses, feature gating
+- ❌ Requires API/database - Supabase free tier (acceptable tradeoff)
+
+**Technical Implementation**:
+- Lemon Squeezy: Payment processing + license key generation
+- Supabase: License key storage + validation API
+- GitHub API: Temporary token generation for repo download
+- Cloudflare Worker/Vercel Function: Webhook handler
+
+### Migration Notice (30 Days)
+
+**Landing page notice**:
+> "Auth was previously announced for the free tier. We've decided to move auth to the Pro tier to support ongoing development. If you were expecting free auth, please contact us within 30 days and we'll honor the original plan for you."
+
+**Estimated cost**: $0-150 (0-1 customers likely affected)
+
+### Launch Timeline
+
+**Target**: Pro tier launch within 5 days
+
+**Phase 1** (Day 1): Architecture finalization ✅
+- Finalize tier structure ✅
+- Update this document ✅
+- Create branch split plan ⬜
+
+**Phase 2** (Day 2): Lemon Squeezy integration (in current codebase)
+- Basic checkout component
+- Webhook handler
+- License key validation
+- Slice design: 120-slice.lemon-squeezy-basic
+
+**Phase 3** (Day 3): Branch split execution
+- Create `pro` branch from checkpoint
+- Strip auth/payments from `main` (Free tier)
+- Test both tiers build/run
+
+**Phase 4** (Day 4): Distribution setup
+- Create Lemon Squeezy product ($149)
+- Deploy webhook handler
+- Test purchase flow end-to-end
+
+**Phase 5** (Day 5): Marketing + launch
+- Update landing page (pricing table, 30-day notice)
+- Demo video (auth + payments working)
+- Soft launch announcement
+
+---
 
 ## Problem Statement
 
