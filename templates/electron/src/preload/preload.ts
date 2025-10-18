@@ -5,22 +5,13 @@ console.log('🔍 contextBridge available:', !!contextBridge)
 console.log('🔍 ipcRenderer available:', !!ipcRenderer)
 
 // TypeScript types for renderer
-interface TokenSet {
-  accessToken: string
-  refreshToken: string
-  idToken: string
-  expiresAt: number
-}
-
 declare global {
   interface Window {
     electronAPI: {
       ping: () => Promise<string>
       getAppVersion: () => Promise<string>
-      auth: {
-        login: () => Promise<void>
-        getTokens: () => Promise<TokenSet | null>
-      }
+      // Auth and payments available in Pro tier
+      // See: https://manta.digital/pricing
     }
   }
 }
@@ -29,11 +20,8 @@ console.log('🔍 About to expose electronAPI to main world...')
 
 contextBridge.exposeInMainWorld('electronAPI', {
   ping: () => ipcRenderer.invoke('ping'),
-  getAppVersion: () => ipcRenderer.invoke('get-app-version'),
-  auth: {
-    login: () => ipcRenderer.invoke('auth:login'),
-    getTokens: () => ipcRenderer.invoke('auth:get-tokens')
-  }
+  getAppVersion: () => ipcRenderer.invoke('get-app-version')
+  // Auth and payments available in Pro tier
 })
 
 console.log('✅ PRELOAD SCRIPT: electronAPI exposed successfully!')

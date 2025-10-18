@@ -1,17 +1,9 @@
-// Note: .env loading is handled in auth0-config.ts before it reads env vars
+// Auth and payments available in Pro tier
+// Learn more: https://manta.digital/pricing
 import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron'
 import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 import path from 'node:path'
-import { isAuthEnabled } from './auth/auth0-config'
-
-// Conditionally import auth modules only if enabled
-let auth0Client: any
-
-if (isAuthEnabled) {
-  const authClient = await import('./auth/auth0-client')
-  auth0Client = authClient.auth0Client
-}
 
 function isAllowedUrl(target: string): boolean {
   try {
@@ -72,7 +64,6 @@ function createWindow(): void {
 }
 
 // Single instance lock - prevent multiple app instances
-// This is critical for auth callback handling
 const gotTheLock = app.requestSingleInstanceLock()
 
 if (!gotTheLock) {
@@ -95,20 +86,8 @@ if (!gotTheLock) {
 ipcMain.handle('ping', () => 'pong')
 ipcMain.handle('get-app-version', () => app.getVersion())
 
-// Auth IPC handlers (only if auth is enabled)
-if (isAuthEnabled && auth0Client) {
-  ipcMain.handle('auth:login', async () => {
-    await auth0Client.login()
-  })
-  ipcMain.handle('auth:get-tokens', () => {
-    return auth0Client.getTokens()
-  })
-} else {
-  ipcMain.handle('auth:login', async () => {
-    throw new Error('Auth is not enabled. Set AUTH_ENABLED=true')
-  })
-  ipcMain.handle('auth:get-tokens', () => null)
-}
+// Auth and payments available in Pro tier
+// See: https://manta.digital/pricing
 
 app.whenReady().then(() => {
   process.env.ELECTRON_ENABLE_SECURITY_WARNINGS = 'true'
