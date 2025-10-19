@@ -10,7 +10,6 @@ import LegalPage from './pages/LegalPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 import CookiesPage from './pages/CookiesPage'
-import { TestAuth } from './renderer/TestAuth'
 
 function App() {
   // Theme persistence script equivalent to Next.js
@@ -42,7 +41,6 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/examples" element={<ExamplesPage />} />
               <Route path="/forms-demo" element={<FormsDemo />} />
-              <Route path="/test-auth" element={<TestAuth />} />
               <Route path="/legal" element={<LegalPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />

@@ -7,7 +7,6 @@ export const headerContent: HeaderContent = {
   title: 'Electron Template',
   links: [
     { href: '/', label: 'Home' },
-    { href: '/examples', label: 'Examples' },
-    { href: '/test-auth', label: 'Test Auth' }
+    { href: '/examples', label: 'Examples' }
   ]
 };
