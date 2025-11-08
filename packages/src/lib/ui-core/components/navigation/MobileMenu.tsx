@@ -14,8 +14,7 @@ export function MobileMenu({
   open,
   onClose,
   variant = 'drawer',
-  LinkComponent,
-  ImageComponent
+  LinkComponent
 }: MobileMenuProps) {
   if (!open) return null;
   

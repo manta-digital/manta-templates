@@ -1,35 +1,7 @@
 import React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { HeroTextProps } from '../../types/hero';
 import { cn } from '../../utils/cn';
-
-/**
- * CVA variants for hero text component styling
- */
-const heroTextVariants = cva(
-  "space-y-4 z-10 relative",
-  {
-    variants: {
-      textSize: {
-        default: "max-w-2xl",
-        sm: "max-w-md",
-        md: "max-w-2xl",
-        lg: "max-w-4xl",
-      },
-      animation: {
-        none: "",
-        fade: "animate-in fade-in-0 duration-1000",
-        slide: "animate-in slide-in-from-bottom-4 duration-1000",
-        typewriter: "animate-pulse", // Placeholder - actual typewriter will use JS animation
-        stagger: "animate-in fade-in-0 slide-in-from-bottom-4 duration-1000",
-      }
-    },
-    defaultVariants: {
-      textSize: "default",
-      animation: "none",
-    }
-  }
-);
 
 /**
  * CVA variants for hero title styling
@@ -107,8 +79,7 @@ const heroDescriptionVariants = cva(
 export function HeroText({
   content,
   textSize = 'default',
-  animation = 'none',
-  className
+  animation = 'none'
 }: HeroTextProps) {
   // Check for reduced motion preference
   const respectsReducedMotion = typeof window !== 'undefined'

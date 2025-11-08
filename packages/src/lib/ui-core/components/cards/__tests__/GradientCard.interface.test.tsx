@@ -12,9 +12,12 @@ describe('GradientCard Interface Tests', () => {
     const validRangeProps: GradientCardProps = {
       range: 50,
     };
-    
+
+    // Verify the prop is typed correctly
+    expect(validRangeProps.range).toBe(50);
+
     const validRangeValues: number[] = [0, 25, 50, 75, 100];
-    
+
     validRangeValues.forEach(range => {
       expect(() => {
         const props: GradientCardProps = { range };
@@ -30,6 +33,10 @@ describe('GradientCard Interface Tests', () => {
       from: 'accent-7',
       to: 'accent-10',
     };
+
+    // Verify the props are typed correctly
+    expect(validFromToProps.from).toBe('accent-7');
+    expect(validFromToProps.to).toBe('accent-10');
 
     const validColorScales = [
       'accent-1', 'accent-6', 'accent-12',
@@ -88,18 +95,11 @@ describe('GradientCard Interface Tests', () => {
   test('should render without errors with new props', () => {
     // Test that the component actually renders with new props
     expect(() => {
-      React.createElement(GradientCard, {
-        range: 75,
-        children: 'Test Content'
-      });
+      React.createElement(GradientCard, { range: 75 }, 'Test Content');
     }).not.toThrow();
 
     expect(() => {
-      React.createElement(GradientCard, {
-        from: 'accent-9',
-        to: 'accent-11', 
-        children: 'Test Content'
-      });
+      React.createElement(GradientCard, { from: 'accent-9', to: 'accent-11' }, 'Test Content');
     }).not.toThrow();
   });
 });

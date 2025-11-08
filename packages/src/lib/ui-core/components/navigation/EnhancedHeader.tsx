@@ -58,7 +58,6 @@ export function EnhancedHeader({
   content,
   LinkComponent,
   ImageComponent,
-  variant = 'default',
   navStyle = 'simple',
   uiVariant = 'minimal',
   sticky = false,

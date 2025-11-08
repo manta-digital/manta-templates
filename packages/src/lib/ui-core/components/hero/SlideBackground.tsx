@@ -44,7 +44,7 @@ interface SlideBackgroundProps {
   onError?: (error: Error) => void;
 }
 
-export function SlideBackground({ config, position, size, className, onLoad, onError }: SlideBackgroundProps) {
+export function SlideBackground({ config, position, size, className }: SlideBackgroundProps) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [previousSlideIndex, setPreviousSlideIndex] = useState<number | null>(null);
   const [isSlideAutoPlaying, setIsSlideAutoPlaying] = useState(false);
@@ -191,7 +191,7 @@ export function SlideBackground({ config, position, size, className, onLoad, onE
 
   // Touch/swipe gesture support
   const bind = useDrag(
-    ({ swipe: [swipeX], down, canceled }) => {
+    ({ swipe: [swipeX], canceled }) => {
       // Only process swipes when there are multiple slides and not currently transitioning
       if (totalSlides <= 1 || isTransitioning || canceled) return;
 

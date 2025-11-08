@@ -3,6 +3,14 @@
  * This tests the core functionality without module loading issues
  */
 
+import { fileURLToPath } from 'url';
+import path from 'path';
+import fs from 'fs';
+
+// ESM equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 console.log('🧪 Simple Token Functionality Test\n');
 
 // Test 1: Verify token replacement logic manually
@@ -10,19 +18,19 @@ console.log('1. Testing token replacement regex logic...');
 
 function testApplyTokens(content, tokens) {
   let processedContent = content;
-  
+
   for (const [key, value] of Object.entries(tokens)) {
     if (value === null || value === undefined) {
       console.warn(`Token '${key}' has null/undefined value, skipping replacement`);
       continue;
     }
-    
+
     // Same regex logic as our implementation
     const escapedKey = key.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
     const tokenRegex = new RegExp(`\\{\\{${escapedKey}\\}\\}`, 'g');
     processedContent = processedContent.replace(tokenRegex, String(value));
   }
-  
+
   return processedContent;
 }
 
@@ -54,10 +62,10 @@ try {
   console.log('---');
   console.log(result);
   console.log('---\n');
-  
+
   // Verify specific replacements
-  if (result.includes('https://example.com') && 
-      result.includes('John Doe') && 
+  if (result.includes('https://example.com') &&
+      result.includes('John Doe') &&
       result.includes('contact@example.com') &&
       result.includes('2025')) {
     console.log('✅ All expected tokens were replaced correctly');
@@ -83,7 +91,7 @@ function testBuildTokens(siteConfig) {
 
   const contacts = deriveContacts(siteConfig);
   const resolvedAuthorName = (siteConfig.author.name && siteConfig.author.name.trim()) || siteConfig.site.name;
-  
+
   const tokens = {
     'site.name': siteConfig.site.name || '',
     'site.url': siteConfig.site.url || '',
@@ -96,7 +104,7 @@ function testBuildTokens(siteConfig) {
   const currentYear = new Date().getFullYear().toString();
   const configuredYear = siteConfig.copyright?.year?.trim();
   const yearToUse = configuredYear || currentYear;
-  
+
   tokens['copyright.year'] = yearToUse;
   tokens['copyright.lastUpdated'] = yearToUse;
   tokens['copyright.holder'] = resolvedAuthorName || '';
@@ -130,7 +138,7 @@ try {
   Object.entries(generatedTokens).forEach(([key, value]) => {
     console.log(`  ${key}: ${value}`);
   });
-  
+
   // Verify key tokens
   if (generatedTokens['site.url'] === 'https://example.com' &&
       generatedTokens['author.name'] === 'John Doe' &&
@@ -149,18 +157,15 @@ try {
 console.log('\n3. Testing with actual legal content...');
 
 try {
-  const fs = require('fs');
-  const path = require('path');
-  
   const legalContentPath = path.join(__dirname, '../../../../../../templates/nextjs/src/content/presets/mit/legal/legal.md');
-  
+
   if (fs.existsSync(legalContentPath)) {
     const legalContent = fs.readFileSync(legalContentPath, 'utf8');
     console.log('✅ Found legal content file');
-    
+
     // Apply tokens to real content
     const processedLegal = testApplyTokens(legalContent, generatedTokens);
-    
+
     // Check that tokens were replaced
     if (!processedLegal.includes('{{copyright.lastUpdated}}') &&
         !processedLegal.includes('{{site.url}}') &&

@@ -777,9 +777,8 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       cancelAnimationFrame(frameId);
       window.removeEventListener('resize', onWindowResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      const mountNow = mountRef.current;
-      if (mountNow) {
-        mountNow.innerHTML = '';
+      if (mount) {
+        mount.innerHTML = '';
       }
       renderer.dispose();
       terrainTiles.forEach((tile) => {
@@ -787,6 +786,10 @@ const CosineTerrainCard: React.FC<CosineTerrainCardProps> = ({ className, varian
       });
       material.dispose();
     };
+    // Intentionally limited dependencies: This effect sets up the entire Three.js scene.
+    // Including all cfg.* dependencies would cause expensive scene recreation on every config change.
+    // Only re-run when colors or variant change (visual theme switches that require full rebuild).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flat.materialColor, flat.backgroundColor, variant, resolvedColors.timestamp]);
 
   const canvasElement = <div ref={mountRef} className={cn('w-full h-full', className)} />;

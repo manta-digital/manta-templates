@@ -3,12 +3,15 @@
  * Run with: node src/__tests__/tokenVerification.js
  */
 
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Import the built modules
-const { NextjsTokenProvider, buildTokens } = require('../dist/content/index.js');
-const { NextjsContentProvider } = require('../dist/content/index.js');
+import { NextjsTokenProvider, buildTokens, NextjsContentProvider } from '../dist/content/index.js';
+
+// ESM equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 console.log('🧪 Token Interpolation Verification Script\n');
 

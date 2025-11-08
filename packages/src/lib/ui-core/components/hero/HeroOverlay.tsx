@@ -1,5 +1,5 @@
 import React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { HeroOverlayProps } from '../../types/hero';
 import { cn } from '../../utils/cn';
 
