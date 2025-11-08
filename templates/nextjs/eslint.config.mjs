@@ -15,6 +15,20 @@ const eslintConfig = [
     ignores: ["lib/**/*"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/lib/ui-core/**/*.{ts,tsx}"],
+    rules: {
+      "@next/next/no-img-element": "off",
     },
   },
 ];
