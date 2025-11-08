@@ -7,7 +7,7 @@ import { HeroCTAProps } from '../../types/hero';
  * Renders primary and secondary CTA buttons with
  * framework routing integration.
  */
-export function HeroCTA(props: HeroCTAProps) {
+export function HeroCTA(_props: HeroCTAProps) {
   // TODO: Implement in Task 2.4
   return (
     <div className="hero-cta">

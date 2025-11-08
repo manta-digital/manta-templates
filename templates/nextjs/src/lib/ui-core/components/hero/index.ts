@@ -11,6 +11,7 @@ export { HeroContent } from './HeroContent';
 export { HeroText } from './HeroText';
 export { HeroCTA } from './HeroCTA';
 export { HeroOverlay } from './HeroOverlay';
+export { CosineHero } from './CosineHero';
 
 // Re-export hero types for convenience
 export type {
@@ -30,3 +31,5 @@ export type {
   HeroVariant,
   HeroTextSize,
 } from '../../types/hero';
+
+export type { CosineHeroProps } from '../../types/cosine-hero';

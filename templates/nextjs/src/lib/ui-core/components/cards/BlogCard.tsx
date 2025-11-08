@@ -23,7 +23,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
   author,
   className,
   ImageComponent,
-  LinkComponent,
   ...props
 }) => {
   const formattedDate = date ? formatDate(date) : null;

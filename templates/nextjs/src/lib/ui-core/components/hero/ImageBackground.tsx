@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { cn } from '../../utils/cn';
 import { useImageFormatSupport } from './BackgroundFormatUtils';
 import { optimizeImageUrl } from './BackgroundFormatUtils';

@@ -66,7 +66,7 @@ export abstract class BaseContentProvider<T = unknown> implements ContentProvide
    *   }
    * });
    */
-  async loadContent(slug: string, contentType: string, options?: { tokenConfig?: TokenConfig }): Promise<ContentData<T>> {
+  async loadContent(slug: string, contentType: string, _options?: { tokenConfig?: TokenConfig }): Promise<ContentData<T>> {
     const cacheKey = `${contentType}:${slug}`;
     
     // Check cache first

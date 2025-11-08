@@ -18,7 +18,7 @@ import { SlideBackground } from './SlideBackground';
  * - VideoBackground: Handles video backgrounds with mobile fallbacks
  * - SlideBackground: Handles slide backgrounds with transitions
  */
-export function HeroBackground({ config, className, onLoad, onError, components }: HeroBackgroundProps) {
+export function HeroBackground({ config, className, onLoad, onError }: HeroBackgroundProps) {
   // Handle different background types by routing to specialized components
   switch (config.type) {
     case 'gradient':

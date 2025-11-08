@@ -25,7 +25,6 @@ interface VideoBackgroundProps {
 }
 
 export function VideoBackground({ config, position, size, className, onLoad, onError }: VideoBackgroundProps) {
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [videoCanPlay, setVideoCanPlay] = useState(false);
   const [videoPaused, setVideoPaused] = useState(false);
@@ -45,7 +44,6 @@ export function VideoBackground({ config, position, size, className, onLoad, onE
 
   // Video event handlers
   const handleVideoLoad = useCallback(() => {
-    setVideoLoaded(true);
     setVideoError(false);
     onLoad?.();
   }, [onLoad]);
@@ -56,7 +54,6 @@ export function VideoBackground({ config, position, size, className, onLoad, onE
 
   const handleVideoError = useCallback(() => {
     setVideoError(true);
-    setVideoLoaded(false);
 
     // Try fallback to fallback image if video fails
     if (config.fallbackImage) {
@@ -84,7 +81,6 @@ export function VideoBackground({ config, position, size, className, onLoad, onE
     if (!video) return;
 
     // Reset video state
-    setVideoLoaded(false);
     setVideoError(false);
     setVideoCanPlay(false);
 
